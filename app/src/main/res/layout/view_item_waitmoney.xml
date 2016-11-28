@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dimen_25dp"
+    android:paddingRight="@dimen/dimen_25dp" >
+
+    <RelativeLayout
+        android:id="@+id/rl_qt0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dimen_30dp"
+        android:paddingTop="@dimen/dimen_30dp" >
+
+        <TextView
+            android:id="@+id/tv_qt00"
+            style="@style/orderlist_item_title_textStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="订单编号:" />
+
+        <ImageView
+            android:id="@+id/iv_qt02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_qt_phone"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_qt01"
+            style="@style/orderlist_item_content_textStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_15dp"
+            android:layout_toLeftOf="@id/iv_qt02"
+            android:layout_toRightOf="@id/tv_qt00"
+            android:text="xxx" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line" />
+
+    <RelativeLayout
+        android:id="@+id/rl_qt1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dimen_30dp"
+        android:paddingTop="@dimen/dimen_30dp" >
+
+        <TextView
+            android:id="@+id/tv_qt10"
+            style="@style/orderlist_item_title_textStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="经办人:" />
+
+        <ImageView
+            android:id="@+id/iv_qt12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_qt_phone"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_qt11"
+            style="@style/orderlist_item_content_textStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_15dp"
+            android:layout_toLeftOf="@id/iv_qt12"
+            android:layout_toRightOf="@id/tv_qt10"
+            android:text="2016-03-25" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line" />
+
+    <RelativeLayout
+        android:id="@+id/rl_qt2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dimen_30dp"
+        android:paddingTop="@dimen/dimen_30dp" >
+
+        <TextView
+            android:id="@+id/tv_qt20"
+            style="@style/orderlist_item_title_textStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="白事顾问：" />
+
+        <ImageView
+            android:id="@+id/iv_qt22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_qt_phone"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_qt21"
+            style="@style/orderlist_item_content_textStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_15dp"
+            android:layout_toLeftOf="@id/iv_qt22"
+            android:layout_toRightOf="@id/tv_qt20"
+            android:text="四川省成都市青羊区大石西路256号" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line" />
+
+    <RelativeLayout
+        android:id="@+id/rl_qt3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dimen_30dp"
+        android:paddingTop="@dimen/dimen_30dp" >
+
+        <TextView
+            android:id="@+id/tv_qt30"
+            style="@style/orderlist_item_title_textStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="治丧指导：" />
+
+        <ImageView
+            android:id="@+id/iv_qt32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_qt_phone"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_qt31"
+            style="@style/orderlist_item_content_textStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_15dp"
+            android:layout_toLeftOf="@id/iv_qt32"
+            android:layout_toRightOf="@id/tv_qt30"
+            android:text="备注信息" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="0dp"
+        android:paddingTop="@dimen/dimen_25dp" >
+
+        <FrameLayout
+            android:id="@+id/fl_executelist"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                style="@style/orderlist_item_btn_textStyle"
+                android:layout_width="@dimen/dimen_200dp"
+                android:layout_height="@dimen/dimen_60dp"
+                android:text="执行列表" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                style="@style/orderlist_item_btn_textStyle"
+                android:layout_width="@dimen/dimen_200dp"
+                android:layout_height="@dimen/dimen_60dp"
+                android:text="订单详情" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_pay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <TextView
+                style="@style/orderlist_item_btn_textStyle"
+                android:layout_width="@dimen/dimen_200dp"
+                android:layout_height="@dimen/dimen_60dp"
+                android:text="支付余款" />
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>

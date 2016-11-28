@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/shian_bj"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/view_head"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:id="@+id/fl_base"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+
+</LinearLayout>

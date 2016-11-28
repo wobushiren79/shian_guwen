@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">圆满人生</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="net_work_off">网络未连接</string>
+    <string name="neterror">网络未连接</string>
+    <string name="servererror">服务器异常</string>
+    <string name="seesionerror">访问已失效，请重新打开应用</string>
+    <string name="map">地图</string>
+
+    <string name="maptest_type">地图类型</string>
+    <string name="maptest_traffic">交通图</string>
+    <string-array name="ywlx">
+        <item>紧急</item>
+        <item>不紧急</item>
+    </string-array>
+    <string-array name="zsxy">
+        <item>佛教</item>
+        <item>基督教</item>
+        <item>道教</item>
+        <item>无信仰</item>
+        <item>其它</item>
+    </string-array>
+    <string-array name="zsfx">
+        <item>简办</item>
+        <item>常规</item>
+        <item>定制</item>
+        <item>其他</item>
+    </string-array>
+    <string-array name="szxz">
+        <item>健康</item>
+        <item>病危</item>
+        <item>去世</item>
+    </string-array>
+
+    <string-array name="gx">
+        <item>其他</item>
+        <item>母亲</item>
+        <item>父亲</item>
+        <item>哥哥</item>
+        <item>姐姐</item>
+        <item>弟弟</item>
+        <item>妹妹</item>
+        <item>儿子</item>
+        <item>女儿</item>
+        <item>孙子</item>
+        <item>孙女</item>
+    </string-array>
+
+    <string-array name="isgm">
+        <item>未购墓</item>
+        <item>已购墓</item>
+    </string-array>
+
+    <string-array name="gm_qk">
+        <item>单穴</item>
+        <item>双穴</item>
+        <item>双穴已葬一位</item>
+    </string-array>
+
+    <string-array name="pay_my">
+        <item>非常满意</item>
+        <item>比较满意</item>
+        <item>一般</item>
+        <item>很差</item>
+    </string-array>
+
+    <string-array name="pay_fp">
+        <item>纸质</item>
+        <item>电子</item>
+    </string-array>
+    <string name="cloud_search_tips"> \t\tLBS.云是百度地图针对LBS开发者推出的平台级服务。结合已有的地图API和SDK服务。通过开放服务端存储和计算能力,提供海量位置数据存储、检索、展示一体化解决方案。\n\n \t\t该服务对开发者免费开放。测试demo里写入了测试的ak。开发者可以使用测试ak查看 LBS.云检索的效果。如果开发者要使用自己的数据，请在申请ak后替换demo中的ak。\n\n \t\t如有任何关于LBS.云服务的问题,诸如如何申请ak、如何存储和检索数据等，请访问百度地图官方“LBS开放平台”。地址：http://lbsyun.baidu.com/ \n </string>
+    <string name="title_markercluster_desc">\t\t缩小地图，以显示标注物的聚合点 \n \t\t放大地图，显示Marker点 \n</string>
+    <string name="share_tip">\t\t短串分享是指，用户搜索查询后得到的每一个地理位置结果将会对应一条短串（短链接），用户可以通过短信、邮件或第三方分享组件（如微博、微信等）把短串分享给其他用户从而实现地理位置信息的分享。当其他用户收到分享的短串后，点击短串即可打开手机上的百度地图客户端或者手机浏览器进行查看。\n\n \t\t例如，用户搜索“百度大厦”后通过短信使用短串分享功能把该地点分享给好友，好友点击短信中的短串“http://j.map.baidu.com/XLCrk”后可以调起百度地图客户端或者手机浏览器查看“百度大厦”的地理位置信息。\n\n \t\t目前短串分享功能暂时开放了“POI搜索结果分享”、“反向地理编码结果分享”和"路线规划路线结果分享(包含步行、骑行、驾车、公交)"，日后会开放更多的功能，欢迎广大开发者使用短 </string>
+    <string name="texturemap_hint">\t\t名称：TextureMapView（实现地图由TextureView 渲染）\n\n \t\t前提：Android 4.0以上系统，并开启加速功能，才能使用TextureMapView \n\n \t\t用法：解决原MapView基于系统GLSurfaceView导致tabhost切换或滚动闪屏、白边等问题</string>
+    <string name="tileoverlay_online_urlhint">放入图片URL，点击在线</string>
+    <string name="hide_poiinfo">隐藏地图上的poi标注</string>
+</resources>

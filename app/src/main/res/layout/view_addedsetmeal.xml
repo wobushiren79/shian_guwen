@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_orders"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:background="@drawable/bg_setmeal"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_18dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_orders_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="@dimen/dimen_15dp"
+            android:drawableLeft="@drawable/icon_blue"
+            android:text="增值服务项目"
+            android:textColor="#000000"
+            android:textSize="@dimen/txtsize_36sp" />
+
+        <TextView
+            android:id="@+id/tv_additem"
+            android:layout_width="20dp"
+            android:layout_height="20dp" android:gravity="center"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="@dimen/dimen_25dp"
+            android:text="+"
+            android:textColor="#000000"
+            android:textSize="@dimen/txtsize_32sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/dimen_40dp"
+        android:layout_marginTop="@dimen/dimen_40dp"
+        android:background="@drawable/icon_arrow" />
+
+</LinearLayout>

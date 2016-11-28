@@ -1,0 +1,89 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+
+android {
+    signingConfigs {
+    }
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+    defaultConfig {
+        applicationId "com.shian.shianlife"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 4
+        versionName "1.2"
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            jniDebuggable false
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/ASL2.0'
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    useLibrary 'org.apache.http.legacy'
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.loopj.android:android-async-http:1.4.6'
+    apt 'com.jakewharton:butterknife:6.0.0'
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'org.codehaus.jackson:jackson-core-asl:1.9.11'
+    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.11'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    compile 'com.google.zxing:core:3.2.0'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.android.support:recyclerview-v7:23.0.1'
+    compile 'com.android.support:support-v4:23.0.1'
+    compile 'com.chosen.kf5sdk:kf5sdklibrary:1.3.1'
+    compile 'com.github.bumptech.glide:glide:3.6.1'
+    compile 'com.commit451:PhotoView:1.2.4'
+    compile 'com.isseiaoki:simplecropview:1.0.13'
+    compile files('libs/bugly_crash_release__2.1.5.jar')
+    compile files('libs/pushservice-5.0.0.66.jar')
+    compile project(':librarys:cptr')
+    compile project(':librarys:viewpagerTranform')
+    compile project(':librarys:viewpagerIndicator')
+    compile project(':librarys:cycleViewPager')
+    compile project(':librarys:dateTimerSelector')
+    compile project(':librarys:AndroidSwipeLayout')
+    compile project(':librarys:ImageSelector')
+    compile files('libs/butterknife-6.0.0.jar')
+    compile files('libs/xUtils-2.6.14.jar')
+    compile files('libs/httpmime-4.1.2.jar')
+    compile files('libs/IndoorscapeAlbumPlugin.jar')
+    compile files('libs/pushservice-5.2.0.12.jar')
+    compile files('libs/baidumapapi_base_v4_1_1.jar')
+    compile files('libs/baidumapapi_cloud_v4_1_1.jar')
+    compile files('libs/baidumapapi_map_v4_1_1.jar')
+    compile files('libs/baidumapapi_radar_v4_1_1.jar')
+    compile files('libs/baidumapapi_search_v4_1_1.jar')
+    compile files('libs/baidumapapi_util_v4_1_1.jar')
+//    compile 'com.google.android:multidex:0.1'
+
+
+}

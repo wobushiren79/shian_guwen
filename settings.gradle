@@ -1,0 +1,8 @@
+include ':app'
+include ':librarys:cptr'
+include ':librarys:viewpagerTranform'
+include ':librarys:viewpagerIndicator'
+include ':librarys:cycleViewPager'
+include ':librarys:dateTimerSelector'
+include ':librarys:AndroidSwipeLayout'
+include ':librarys:ImageSelector'

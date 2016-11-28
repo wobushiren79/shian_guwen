@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/tv_0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dimen_300dp"
+        android:text="支付成功！"
+        android:textColor="@color/text_green"
+        android:textSize="@dimen/dimen_60dp" />
+
+    <TextView
+        android:id="@+id/tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_0"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dimen_40dp"
+        android:text="支付订单流水号:0109212"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/dimen_40dp" />
+
+    <TextView android:layout_below="@+id/tv_1"
+        android:id="@+id/tv_edit_commit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/dimen_40dp"
+        android:background="@drawable/ic_home_reg"
+        android:gravity="center"
+        android:text="返回订单详情"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_40dp" />
+
+</RelativeLayout>

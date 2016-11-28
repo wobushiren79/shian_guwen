@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <RelativeLayout android:id="@+id/rl_top" android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp" >
+
+            <TextView
+                android:id="@+id/tv_customerdetail"
+                style="@style/orderlist_item_btn_textStyle"
+                android:layout_width="@dimen/dimen_200dp" android:drawableLeft="@drawable/ic_x_kfxq"
+                android:layout_height="@dimen/dimen_60dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/dimen_10dp"
+                android:text="客户详情" />
+        </RelativeLayout>
+
+        <com.shian.shianlife.common.view.editor.MainSetmealView
+            android:id="@+id/msv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:layout_marginRight="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_10dp" />
+
+        <com.shian.shianlife.common.view.editor.FuneralSetmealView
+            android:id="@+id/fsv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:layout_marginRight="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_40dp" />
+
+        <com.shian.shianlife.common.view.editor.CemeterySetmealView
+            android:id="@+id/csv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:layout_marginRight="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_40dp" />
+
+        <com.shian.shianlife.common.view.order.AddedSetmealView
+            android:id="@+id/asv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:layout_marginRight="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_40dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimen_25dp"
+            android:layout_marginTop="@dimen/dimen_35dp"
+            android:gravity="right"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="合计:"
+                android:textColor="@color/red"
+                android:textSize="@dimen/txtsize_42sp" />
+
+            <TextView
+                android:id="@+id/tv_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="￥0"
+                android:textColor="@color/red"
+                android:textSize="@dimen/txtsize_28sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_edit_commit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/dimen_40dp"
+            android:background="@drawable/ic_qrtj"
+            android:gravity="center"
+        
+            android:textColor="@color/white"
+            android:textSize="@dimen/txtsize_32sp" />
+    </LinearLayout>
+
+</ScrollView>

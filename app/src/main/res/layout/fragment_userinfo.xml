@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/dimen_30dp"
+            android:text="姓名:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_top_bg" />
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dip"
+            android:background="@drawable/user_down_line" />
+
+        <TextView android:id="@+id/tv_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/dimen_30dp"
+            android:text="联系方式:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_top_bg" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dip"
+            android:background="@drawable/user_down_line" />
+
+        <TextView android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/dimen_30dp"
+            android:text="服务区域:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_top_bg" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dip"
+            android:background="@drawable/user_down_line" />
+
+        <TextView android:id="@+id/tv_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/dimen_30dp"
+            android:text="持证上岗编号:"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_top_bg" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dip"
+            android:background="@drawable/user_down_line" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/dimen_30dp"
+            android:text="注：以上信息请联系客服人员进行修改"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/text_size_detail_list" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dip"
+            android:background="@drawable/user_down_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="@dimen/dimen_30dp"
+                android:text="邮箱地址:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_top_bg" />
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:padding="@dimen/dimen_30dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_top_bg" />
+        </LinearLayout>
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dip"
+            android:background="@drawable/user_down_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="@dimen/dimen_30dp"
+                android:text="个人介绍:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_top_bg" />
+
+            <EditText
+                android:id="@+id/et_js"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:padding="@dimen/dimen_30dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_top_bg" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_editorder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/dimen_40dp"
+            android:background="@drawable/ic_home_reg"
+            android:gravity="center"
+            android:text="保存"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_40dp" />
+    </LinearLayout>
+</ScrollView>

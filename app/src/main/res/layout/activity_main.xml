@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.shian.shianlife.activity.MainActivity" >
+
+    <FrameLayout
+        android:id="@+id/fl_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </FrameLayout>
+
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dimen_96dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dimen_20dp" >
+
+        <RadioButton
+            android:id="@+id/rb_main_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/ic_bar_home_selector"
+            android:gravity="center_horizontal"
+            android:textColor="@color/s_main_tab_text_color"
+            android:textSize="@dimen/txtsize_20sp" />
+
+        <RadioButton
+            android:id="@+id/rb_main_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/ic_bar_order_selector"
+            android:gravity="center_horizontal"
+            android:textColor="@color/s_main_tab_text_color"
+            android:textSize="@dimen/txtsize_20sp" />
+
+        <RadioButton
+            android:id="@+id/rb_main_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/ic_bar_my_selector"
+            android:gravity="center_horizontal"
+            android:textColor="@color/s_main_tab_text_color"
+            android:textSize="@dimen/txtsize_20sp" />
+    </RadioGroup>
+
+</LinearLayout>

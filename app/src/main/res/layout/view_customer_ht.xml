@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_10dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:text="合同编号:"
+                android:textSize="@dimen/text_size_top_bg" />
+
+            <EditText
+                android:id="@+id/et_ht_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_30dp"
+                android:layout_marginRight="@dimen/dimen_30dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_et_order"
+                android:padding="@dimen/dimen_10dp"
+                android:textSize="@dimen/text_size_top_bg" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_margin="@dimen/dimen_10dp"
+            android:background="@color/gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="@color/red" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:text="合同金额:"
+                android:textSize="@dimen/text_size_top_bg" />
+
+            <EditText
+                android:id="@+id/et_ht_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_30dp"
+                android:layout_marginRight="@dimen/dimen_30dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_et_order"
+                android:inputType="number"
+                android:padding="@dimen/dimen_10dp"
+                android:textSize="@dimen/text_size_top_bg" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="@color/red" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:text="合同附件:"
+                android:textSize="@dimen/text_size_top_bg" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_margin="@dimen/dimen_10dp"
+            android:background="@color/gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <com.shian.shianlife.common.view.customer.PicImageView
+                    android:id="@+id/btn_ht_pic_0"
+                    android:layout_width="@dimen/dimen_300dp"
+                    android:layout_height="@dimen/dimen_200dp"
+                    android:layout_margin="@dimen/dimen_20dp"
+                    android:background="@drawable/ic_ht_pic"
+                    android:gravity="center"
+                    android:tag="file1" />
+
+                <ProgressBar
+                    android:id="@+id/pb_ht_pic_0"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="@dimen/dimen_300dp"
+                    android:layout_height="@dimen/dimen_200dp"
+                    android:layout_margin="@dimen/dimen_20dp"
+                    android:max="100" android:progress="0"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <com.shian.shianlife.common.view.customer.PicImageView 
+                    android:id="@+id/btn_ht_pic_1"
+                    android:layout_width="@dimen/dimen_300dp"
+                    android:layout_height="@dimen/dimen_200dp"
+                    android:layout_margin="@dimen/dimen_20dp"
+                    android:background="@drawable/ic_ht_pic"
+                    android:gravity="center"
+                    android:tag="file2" />
+
+                <ProgressBar android:progress="0"
+                    android:id="@+id/pb_ht_pic_1"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="@dimen/dimen_300dp"
+                    android:layout_height="@dimen/dimen_200dp"
+                    android:layout_margin="@dimen/dimen_20dp"
+                    android:max="100"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <com.shian.shianlife.common.view.customer.PicImageView
+                    android:id="@+id/btn_ht_pic_2"
+                    android:layout_width="@dimen/dimen_300dp"
+                    android:layout_height="@dimen/dimen_200dp"
+                    android:layout_margin="@dimen/dimen_20dp"
+                    android:background="@drawable/ic_ht_pic"
+                    android:gravity="center"
+                    android:tag="file3" />
+
+                <ProgressBar android:progress="0"
+                    android:id="@+id/pb_ht_pic_2"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="@dimen/dimen_300dp"
+                    android:layout_height="@dimen/dimen_200dp"
+                    android:layout_margin="@dimen/dimen_20dp"
+                    android:max="100"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <com.shian.shianlife.common.view.customer.PicImageView
+                    android:id="@+id/btn_ht_pic_3"
+                    android:layout_width="@dimen/dimen_300dp"
+                    android:layout_height="@dimen/dimen_200dp"
+                    android:layout_margin="@dimen/dimen_20dp"
+                    android:background="@drawable/ic_ht_pic"
+                    android:gravity="center"
+                    android:tag="file4" />
+
+                <ProgressBar android:progress="0"
+                    android:id="@+id/pb_ht_pic_3"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="@dimen/dimen_300dp"
+                    android:layout_height="@dimen/dimen_200dp"
+                    android:layout_margin="@dimen/dimen_20dp"
+                    android:max="100"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_margin="@dimen/dimen_10dp"
+            android:background="@color/gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:text="备注:"
+                android:textSize="@dimen/text_size_top_bg" />
+
+            <EditText
+                android:id="@+id/et_ht_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_30dp"
+                android:layout_marginRight="@dimen/dimen_30dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_et_order"
+                android:padding="@dimen/dimen_10dp"
+                android:textSize="@dimen/text_size_top_bg" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_editorder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/dimen_40dp"
+            android:background="@drawable/ic_n_save"
+            android:gravity="center"
+
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_40dp" />
+    </LinearLayout>
+
+</ScrollView>

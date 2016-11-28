@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_neworder1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:background="@drawable/ic_home_reg"
+        android:gravity="center"
+        android:text="编辑订单"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_40dp" />
+
+    <TextView
+        android:id="@+id/tv_refund"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:background="@drawable/ic_home_reg"
+        android:gravity="center"
+        android:text="申请退款"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_40dp"
+        android:visibility="gone" />
+
+
+    <ListView
+        android:id="@+id/lv_swipe_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:choiceMode="singleChoice"
+        android:descendantFocusability="beforeDescendants"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:fadingEdge="none"
+        android:scrollbarStyle="outsideOverlay" />
+
+
+</LinearLayout>
