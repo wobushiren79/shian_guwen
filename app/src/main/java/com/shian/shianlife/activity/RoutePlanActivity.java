@@ -92,7 +92,7 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
     boolean isMapChlick = false;
     boolean isFirstShowText = true;
     boolean isUseNumPoint = false;//是否采用经纬定位
-    LatLng latLng=new LatLng(mapCenterlatitude,mapCenterlongitude);
+    LatLng latLng = new LatLng(mapCenterlatitude, mapCenterlongitude);
 
     EditText mETCity;
     EditText mETstrLocation;
@@ -142,7 +142,9 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
         mSearch = RoutePlanSearch.newInstance();
         mSearch.setOnGetRoutePlanResultListener(this);
         //初始线路
-        endNodeStr = getIntent().getStringExtra("RoutePlanLocation");
+
+        String endStr = getIntent().getStringExtra("RoutePlanLocation");
+        endNodeStr=endStr.replace("-","");
         Log.v("this", "endNode:" + endNodeStr);
         //设定中心点坐标
         LatLng cenpt = new LatLng(mapCenterlatitude, mapCenterlongitude);
@@ -504,7 +506,7 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
         if (isFirstShowText) {
             Toast.makeText(RoutePlanActivity.this, "抱歉，未找到终点，请自行在地图上点击设置终点位置", Toast.LENGTH_LONG).show();
             isFirstShowText = false;
-            isUseNumPoint = true;
+
         }
 
         isMapChlick = true;
@@ -923,6 +925,7 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
 
     @Override
     public boolean onMapPoiClick(MapPoi latLng) {
+        isUseNumPoint = true;
         if (isMapChlick) {
             //获取经纬度
             double latitude = latLng.getPosition().latitude;
@@ -931,7 +934,7 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
             Log.v("this", "latitude=" + latitude + ",longitude=" + longitude + ",locationName=" + locationName + " name=");
             endNodeStr = locationName;
             LatLng point = new LatLng(latitude, longitude);
-            this.latLng=point;
+            this.latLng = point;
             mBaidumap.clear();
             //构建Marker图标
             BitmapDescriptor bitmap = BitmapDescriptorFactory

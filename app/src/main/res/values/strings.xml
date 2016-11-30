@@ -9,6 +9,7 @@
     <string name="servererror">服务器异常</string>
     <string name="seesionerror">访问已失效，请重新打开应用</string>
     <string name="map">地图</string>
+    <string name="pdrlocation">派单人地址：</string>
 
     <string name="maptest_type">地图类型</string>
     <string name="maptest_traffic">交通图</string>

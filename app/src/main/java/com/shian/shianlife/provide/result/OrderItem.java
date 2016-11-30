@@ -24,7 +24,17 @@ public class OrderItem {
 	private String executorMobile;
 	private String url1;
 	private String url2;
+	private String pdrLocation;
+
 	List<HrGetCustomerContract.OrderContractAddition> additions;
+
+	public String getPdrLocation() {
+		return pdrLocation;
+	}
+
+	public void setPdrLocation(String pdrLocation) {
+		this.pdrLocation = pdrLocation;
+	}
 
 	public String getUrl1() {
 		return url1;

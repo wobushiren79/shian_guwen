@@ -340,7 +340,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
             // TODO Auto-generated method stub
             if (null != location
                     && location.getLocType() != BDLocation.TypeServerError) {
-                Log.e("tag", location.getAddrStr());
                 if (location.getAddrStr() == null) return;
                 location(location.getAddrStr());
                 AppContansts.LocalString = location.getAddrStr();

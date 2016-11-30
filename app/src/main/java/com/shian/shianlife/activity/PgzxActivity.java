@@ -55,6 +55,7 @@ public class PgzxActivity extends BaseActivity {
 
     TextView newOrder;
     int khxqType;
+
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
@@ -62,7 +63,7 @@ public class PgzxActivity extends BaseActivity {
 
         isShenhe = getIntent().getBooleanExtra("isShenhe", false);
         isShoukuan = getIntent().getBooleanExtra("isShoukuan", false);
-        khxqType=getIntent().getIntExtra("khxqtype",-1);
+        khxqType = getIntent().getIntExtra("khxqtype", -1);
 
         initView();
         initDate();
@@ -89,7 +90,7 @@ public class PgzxActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             Intent in = new Intent(PgzxActivity.this, EditOrderActivity.class);
-            in.putExtra("khxqtype",khxqType);
+            in.putExtra("khxqtype", khxqType);
             in.putExtra("orderId", getIntent().getLongExtra("orderId", 0));
             in.putExtra("consultId", getIntent().getLongExtra("consultId", 0));
             startActivity(in);
@@ -129,6 +130,7 @@ public class PgzxActivity extends BaseActivity {
                 LinearLayout llPic = (LinearLayout) view
                         .getView(R.id.ll_ht_pic);
                 LinearLayout remakell = (LinearLayout) view.getView(R.id.remakell);
+                LinearLayout pdrlocationll = (LinearLayout) view.getView(R.id.ll_pdrlocation);
                 final ImageView ivPic0 = (ImageView) view
                         .getView(R.id.btn_ht_pic_0);
                 final ImageView ivPic1 = (ImageView) view
@@ -147,6 +149,10 @@ public class PgzxActivity extends BaseActivity {
                 TextView name = (TextView) view.getView(R.id.tv_pgzx_name);
                 TextView ev = (TextView) view.getView(R.id.tv_pgzx_ev);
                 ImageView ivPhone = (ImageView) view.getView(R.id.iv_phone);
+
+                TextView tvPdrLocation = (TextView) view.getView(R.id.text_pdrlocation);
+                Button btnPdrLocation = (Button) view.getView(R.id.button_pdrlocation);
+
                 if (!isShenhe) {
                     llPic.setVisibility(View.VISIBLE);
                 } else {
@@ -407,6 +413,22 @@ public class PgzxActivity extends BaseActivity {
                         break;
                     case 4:
                         tv4.setText("正在执行");
+                        pdrlocationll.setVisibility(View.VISIBLE);
+                        if (templateItem.getPdrLocation() == null) {
+                            btnPdrLocation.setVisibility(View.GONE);
+                        } else {
+                            tvPdrLocation.setText(templateItem.getPdrLocation());
+                            btnPdrLocation.setOnClickListener(new OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Intent intent = new Intent(PgzxActivity.this, BaiduMapActivity.class);
+                                    intent.putExtra("pdrLocation",templateItem.getPdrLocation());
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+
+
                         break;
                     case 5:
                         if (templateItem.isHasComment()) {

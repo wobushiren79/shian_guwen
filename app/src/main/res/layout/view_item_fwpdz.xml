@@ -4,14 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="@dimen/dimen_25dp"
-    android:paddingRight="@dimen/dimen_25dp" >
+    android:paddingRight="@dimen/dimen_25dp">
 
     <RelativeLayout
         android:id="@+id/rl_qt0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/dimen_30dp"
-        android:paddingTop="@dimen/dimen_30dp" >
+        android:paddingTop="@dimen/dimen_30dp">
 
         <TextView
             android:id="@+id/tv_qt00"
@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/dimen_30dp"
-        android:paddingTop="@dimen/dimen_30dp" >
+        android:paddingTop="@dimen/dimen_30dp">
 
         <TextView
             android:id="@+id/tv_qt10"
@@ -93,7 +93,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/dimen_30dp"
-        android:paddingTop="@dimen/dimen_30dp" >
+        android:paddingTop="@dimen/dimen_30dp">
 
         <TextView
             android:id="@+id/tv_qt20"
@@ -129,12 +129,13 @@
         android:layout_height="0.5dp"
         android:background="@color/line" />
 
-    <RelativeLayout android:visibility="gone"
+    <RelativeLayout
         android:id="@+id/rl_qt3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/dimen_30dp"
-        android:paddingTop="@dimen/dimen_30dp" >
+        android:paddingTop="@dimen/dimen_30dp"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tv_qt30"
@@ -165,17 +166,18 @@
             android:text="备注信息" />
     </RelativeLayout>
 
-    <View android:visibility="gone"
+    <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/line" />
-    
+        android:background="@color/line"
+        android:visibility="gone" />
+
     <RelativeLayout
         android:id="@+id/rl_qt4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/dimen_30dp"
-        android:paddingTop="@dimen/dimen_30dp" >
+        android:paddingTop="@dimen/dimen_30dp">
 
         <TextView
             android:id="@+id/tv_qt40"
@@ -185,14 +187,22 @@
             android:layout_centerVertical="true"
             android:text="治丧地址：" />
 
-        <ImageView android:visibility="gone"
+        <ImageView
             android:id="@+id/iv_qt42"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_qt_phone"
-           />
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/button_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@string/map" />
 
         <TextView
             android:id="@+id/tv_qt41"
@@ -216,13 +226,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="0dp"
-        android:paddingTop="@dimen/dimen_25dp" >
+        android:paddingTop="@dimen/dimen_25dp">
 
         <FrameLayout
             android:id="@+id/fl_dispatch_execute"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <TextView
                 style="@style/orderlist_item_btn_textStyle"
@@ -235,7 +245,7 @@
             android:id="@+id/fl_over"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <TextView
                 style="@style/orderlist_item_btn_textStyle"
@@ -243,13 +253,14 @@
                 android:layout_height="@dimen/dimen_60dp"
                 android:text="结束派单" />
         </FrameLayout>
+
         <FrameLayout
             android:id="@+id/fl_kexq"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_10dp"
             android:layout_marginRight="@dimen/dimen_10dp"
-            android:layout_weight="1" >
+            android:layout_weight="1">
 
             <TextView
                 style="@style/orderlist_item_btn_textStyle"
