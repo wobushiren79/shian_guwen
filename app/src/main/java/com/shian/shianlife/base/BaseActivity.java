@@ -107,12 +107,13 @@ public class BaseActivity extends FragmentActivity {
         TextView tvHeadTitle = (TextView) findViewById(R.id.tv_head_title);
         ImageView ivHeadTitle = (ImageView) findViewById(R.id.iv_head_title);
         TextView tvHeadLocation = (TextView) findViewById(R.id.title_location);
-
+        ImageView logo= (ImageView) findViewById(R.id.logo);
         View tvHeadRight = findViewById(R.id.tv_head_right);
         if (!title.equals("title")) {
             tvHeadLocation.setVisibility(View.GONE);
             ivHeadTitle.setVisibility(View.GONE);
             tvHeadTitle.setVisibility(View.VISIBLE);
+            logo.setVisibility(View.GONE);
             tvHeadTitle.setText(title);
             tvHeadTitle.setBackgroundColor(getResources().getColor(
                     R.color.transparent));
@@ -133,6 +134,7 @@ public class BaseActivity extends FragmentActivity {
             });
 
         } else {
+            logo.setVisibility(View.VISIBLE);
             ivHeadTitle.setVisibility(View.GONE);
             tvHeadTitle.setVisibility(View.GONE);
         }

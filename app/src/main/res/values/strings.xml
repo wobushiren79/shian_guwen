@@ -13,6 +13,17 @@
 
     <string name="maptest_type">地图类型</string>
     <string name="maptest_traffic">交通图</string>
+    <string name="main_1">首页</string>
+    <string name="main_2">服务 · 订单</string>
+    <string name="main_3">我的</string>
+    <string name="sign">签到</string>
+    <string name="my_1">电话咨询</string>
+    <string name="my_2">在线咨询</string>
+    <string name="my_3">帮助中心</string>
+    <string name="my_4">意见留言</string>
+    <string name="my_5">设置</string>
+
+
     <string-array name="ywlx">
         <item>紧急</item>
         <item>不紧急</item>

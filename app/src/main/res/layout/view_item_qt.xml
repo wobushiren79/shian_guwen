@@ -54,9 +54,15 @@
             android:layout_marginRight="@dimen/dimen_50dp"
             android:layout_toLeftOf="@id/iv_qt02"
             android:text="xxx"
-            android:textColor="@color/red"
+            android:textColor="@color/blackgroundmain"
             android:textSize="@dimen/text_size_date_list" />
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/black3"
+        />
 
     <RelativeLayout
         android:id="@+id/rl_qt1"
@@ -64,14 +70,6 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/dimen_30dp"
         android:paddingTop="@dimen/dimen_30dp">
-
-        <TextView
-            android:id="@+id/tv_qt10"
-            style="@style/orderlist_item_title_textStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="洽谈时间:" />
 
         <ImageView
             android:id="@+id/iv_qt12"
@@ -89,15 +87,22 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dimen_15dp"
+            android:textColor="@color/black"
             android:layout_toLeftOf="@id/iv_qt12"
             android:layout_toRightOf="@id/tv_qt10"
             android:text="2016-03-25" />
+
+        <TextView
+            android:id="@+id/tv_qt10"
+            style="@style/orderlist_item_title_textStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="洽谈时间:"
+            android:layout_alignTop="@+id/tv_qt11"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/line" />
 
     <RelativeLayout
         android:id="@+id/rl_qt2"
@@ -132,6 +137,7 @@
 
         <TextView
             android:id="@+id/tv_qt21"
+            android:textColor="@color/black"
             style="@style/orderlist_item_content_textStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -142,10 +148,7 @@
             android:text="四川省成都市青羊区大石西路256号" />
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/line" />
+
 
     <RelativeLayout
         android:id="@+id/rl_qt3"
@@ -168,9 +171,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@color/sienna"
+            android:textColor="@color/text_color"
+            android:background="@color/chlickcolor"
             android:text="申请分配"
-            android:visibility="gone" />
+            />
 
         <ImageView
             android:id="@+id/iv_qt32p"
@@ -183,6 +187,7 @@
 
         <TextView
             android:id="@+id/tv_qt31"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -190,21 +195,21 @@
             android:layout_toLeftOf="@id/iv_qt32"
             android:layout_toRightOf="@id/tv_qt30"
             android:textSize="@dimen/txtsize_25sp"
-            android:textColor="@color/white"
             android:text="备注信息" />
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/line" />
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@drawable/bg_line" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="0dp"
-        android:paddingTop="@dimen/dimen_25dp">
+        android:paddingBottom="@dimen/dimen_25dp"
+        android:paddingTop="@dimen/dimen_25dp"
+        >
 
         <FrameLayout
             android:id="@+id/fl_accept"
@@ -217,6 +222,7 @@
             <TextView
                 style="@style/orderlist_item_btn_textStyle"
                 android:layout_width="@dimen/dimen_200dp"
+                android:background="@drawable/bg_button_yellow"
                 android:layout_height="@dimen/dimen_60dp"
                 android:text="接单" />
         </FrameLayout>
@@ -341,7 +347,8 @@
                 style="@style/orderlist_item_btn_textStyle"
                 android:layout_width="@dimen/dimen_200dp"
                 android:layout_height="@dimen/dimen_60dp"
-                android:text="订单详情" />
+                android:text="订单详情"
+                android:id="@+id/textView" />
         </FrameLayout>
 
         <FrameLayout

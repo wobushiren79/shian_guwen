@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl_head"
+
     android:layout_width="match_parent"
     android:layout_height="@dimen/dimen_100dp"
     android:orientation="horizontal"
     android:padding="@dimen/dimen_20dp">
 
-    <TextView
-        android:id="@+id/tv_head_left"
-        android:layout_width="@dimen/dimen_120dp"
-        android:layout_height="match_parent"
+    <ImageView
+        android:id="@+id/logo"
+        android:src="@drawable/logo"
+        android:layout_width="@dimen/dimen_50dp"
+        android:layout_alignBottom="@+id/tv_head_left"
         android:layout_centerVertical="true"
-        android:drawableLeft="@drawable/ic_home_location"
-        android:gravity="center"
-        android:text="成都"
-        android:textColor="@color/white" />
-
+        android:layout_height="@dimen/dimen_50dp" />
+    <!--android:drawableLeft="@drawable/ic_home_location"-->
     <ImageView
         android:id="@+id/iv_head_title"
         android:layout_width="wrap_content"
@@ -28,13 +27,13 @@
         android:visibility="gone" />
 
     <TextView
-        android:text="成都市"
-        android:textSize="@dimen/dimen_25dp"
-        android:layout_centerInParent="true"
-        android:textColor="@color/white"
         android:id="@+id/title_location"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="成都市"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_30dp" />
 
     <TextView
         android:id="@+id/tv_head_title"
@@ -54,7 +53,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:padding="5dp"
-        android:src="@drawable/ic_home_msg" />
+        android:src="@drawable/ic_home_msg_2" />
 
     <ImageView
         android:id="@+id/iv_msg"
@@ -64,5 +63,18 @@
         android:layout_alignParentTop="true"
         android:layout_marginRight="5dp"
         android:background="@drawable/ic_new_message" />
+
+    <TextView
+        android:id="@+id/tv_head_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="成都"
+        android:layout_marginLeft="@dimen/dimen_10dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_21dp"
+        android:layout_alignBottom="@+id/title_location"
+        android:layout_toRightOf="@+id/logo"
+        android:layout_toEndOf="@+id/logo" />
 
 </RelativeLayout>

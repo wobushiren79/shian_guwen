@@ -33,10 +33,13 @@
     <color name="search_hint">#ffcccccc</color>
     <color name="h_nov_text">#ff9434</color>
 
+    <color name="blackgroundmain">#467837</color>
+    <color name="chlickcolor">#f4dc5f</color>
+    <color name="main_blackground">#ECECEC</color>
     <!-- Dialog Color -->
     <color name="version_msg_color">#ff6699ff</color>
     <color name="message_color">#ffccccff</color>
-
+    <color name="text_color">#7b5237</color>
     <!-- ITEM BACKGROUND COLOR - STATE - PRESSED -->
     <color name="base_start_color_pressed">#fffcfcfc</color>
     <color name="base_end_color_pressed">#ffd7d7d7</color>

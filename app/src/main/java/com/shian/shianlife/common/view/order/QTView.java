@@ -349,7 +349,9 @@ public class QTView extends BaseOrderView {
                     tvq1.setText("经办人：");
                     tvq2.setText("客户姓名：");
                     tvq3.setText("治丧指导：");
-                    Log.v("this","经办人电话："+model.getAgentmanMobile()+" 经办人电话："+model.getAgentmanName());
+
+                    tvq0.setTextColor(getContext().getResources().getColor(R.color.blackgroundmain));
+                    tv_qt01.setTextColor(getContext().getResources().getColor(R.color.blackgroundmain));
 
                     Utils.call(ivq1, model.getAgentmanMobile());
                     Utils.call(ivq2, model.getCustomerMobile());
@@ -364,7 +366,7 @@ public class QTView extends BaseOrderView {
                         tvqfp.setVisibility(View.VISIBLE);
                         tvqfp.setEnabled(true);
                         tvqfp.setBackgroundColor(getResources().getColor(
-                                R.color.sienna));
+                                R.color.chlickcolor));
                         tvqfp.setOnClickListener(new OrderListBtnClick(model,
                                 aIndex));
 
@@ -384,6 +386,10 @@ public class QTView extends BaseOrderView {
                     ivq2.setVisibility(View.GONE);
                     tvqfp.setVisibility(View.GONE);
                     ivq3.setVisibility(View.GONE);
+
+                    tvq0.setTextColor(getContext().getResources().getColor(R.color.black));
+                    tv_qt01.setTextColor(getContext().getResources().getColor(R.color.black));
+
                     if (!TextUtils.isEmpty(promiseTime)) {
                         tv_qt11.setText(mDateFormat.format(new Date(Long
                                 .parseLong(model.getPromiseTime()))));
@@ -417,12 +423,15 @@ public class QTView extends BaseOrderView {
 
                     tvPay.setBackgroundColor(getResources().getColor(
                             R.color.gray_common));
+                    tvPay.setTextColor(getContext().getResources().getColor(R.color.white));
                     tvPay.setText("定金已支付");
                 } else {
-                    tvPay.setBackgroundResource(R.drawable.bg_orderlist_item_btn);
+                    tvPay.setBackgroundResource(R.drawable.bg_button_yellow);
+                    tvPay.setTextColor(getContext().getResources().getColor(R.color.text_color));
                     tvPay.setText("支付定金");
                     payFre.setEnabled(true);
                 }
+
                 if (model.getOrderId() != 0) {
                     payFre.setVisibility(View.VISIBLE);
                     create.setVisibility(View.GONE);
@@ -430,6 +439,7 @@ public class QTView extends BaseOrderView {
                 } else {
                     payFre.setVisibility(View.GONE);
                     create.setVisibility(View.VISIBLE);
+
                 }
 
                 if (model.getConsultStatus() == 4
@@ -466,10 +476,12 @@ public class QTView extends BaseOrderView {
                     }else{
                         close.setVisibility(View.GONE);
                     }
+                    if(model.getOrderId() == 0){
+                        close.setVisibility(View.VISIBLE);
+                    }
                 } else {
-                    close.setVisibility(View.GONE);
+                    close.setVisibility(View.VISIBLE);
                 }
-//                close.setVisibility(View.GONE);
 
                 if (model.isShowSwitch2waitService()) {
                     shift.setVisibility(View.VISIBLE);

@@ -44,7 +44,7 @@ public class UserCenterFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // TODO Auto-generated method stub
-        v = inflater.inflate(R.layout.fragment_usercenter, null, false);
+        v = inflater.inflate(R.layout.fragment_usercenter_2, null, false);
         ButterKnife.inject(this, v);
         return v;
     }
@@ -120,7 +120,7 @@ public class UserCenterFragment extends BaseFragment {
 //					}else{
                         tvList.get(2).append("/");
                     }
-                    tvList.get(2).setText(result.getRoles().get(i).getName());
+                    tvList.get(2).setText("角色："+result.getRoles().get(i).getName());
                     tvList.get(4).setText(result.getServiceSuccessSum() + "");
                     tvList.get(5).setText(result.getAvgSatis() + "");
                     v.findViewById(R.id.tv_user).setOnClickListener(new View.OnClickListener() {
