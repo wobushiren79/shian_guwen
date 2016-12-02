@@ -2,40 +2,44 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-     >
+    android:background="@drawable/login_blackgourd">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="@dimen/dimen_20dp" >
+        android:padding="@dimen/dimen_20dp">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_180dp"
-            android:background="@drawable/welcome" />
+            android:layout_marginTop="@dimen/dimen_100dp"
+            android:src="@drawable/login_log" />
 
         <EditText
             android:id="@+id/et_login_username"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_100dp"
-            android:layout_margin="@dimen/dimen_30dp"
-            android:background="@drawable/shape_et_login"
-            android:drawableLeft="@drawable/ic_login_username"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_40dp"
+            android:layout_marginRight="@dimen/dimen_40dp"
+            android:layout_marginTop="@dimen/dimen_80dp"
+            android:background="@drawable/login_ed_bk"
+            android:drawableLeft="@drawable/login_username"
             android:drawablePadding="@dimen/dimen_20dp"
-            android:hint="用户名"
+            android:hint="账号"
             android:padding="@dimen/dimen_20dp" />
 
         <EditText
             android:id="@+id/et_login_password"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_100dp"
-            android:layout_margin="@dimen/dimen_30dp"
-            android:background="@drawable/shape_et_login"
-            android:drawableLeft="@drawable/ic_login_password"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_marginLeft="@dimen/dimen_40dp"
+            android:layout_marginRight="@dimen/dimen_40dp"
+
+            android:background="@drawable/login_ed_bk"
+            android:drawableLeft="@drawable/login_password"
             android:drawablePadding="@dimen/dimen_20dp"
             android:hint="密码"
             android:padding="@dimen/dimen_20dp"
@@ -44,22 +48,31 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_40dp"
+            android:layout_marginRight="@dimen/dimen_40dp"
+            android:layout_marginTop="@dimen/dimen_56dp"
             android:gravity="center_horizontal"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <CheckBox
                 android:id="@+id/cb_login_re"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_gravity="left"
                 android:layout_marginRight="@dimen/dimen_100dp"
+                android:layout_weight="1"
+                android:buttonTint="@color/white"
                 android:text="记住密码"
                 android:textColor="@color/white"
                 android:textSize="@dimen/dimen_35dp" />
 
             <CheckBox
                 android:id="@+id/cb_login_auto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:buttonTint="@color/white"
                 android:text="自动登陆"
                 android:textColor="@color/white"
                 android:textSize="@dimen/dimen_35dp" />
@@ -68,21 +81,25 @@
         <TextView
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_30dp"
-            android:background="@drawable/ljdl"
+            android:layout_height="@dimen/dimen_70dp"
+            android:layout_marginBottom="@dimen/dimen_20dp"
+            android:layout_marginLeft="@dimen/dimen_40dp"
+            android:layout_marginRight="@dimen/dimen_40dp"
+            android:layout_marginTop="@dimen/dimen_40dp"
+            android:background="@drawable/login_button"
             android:gravity="center"
-            android:padding="@dimen/dimen_20dp"
-            android:textColor="@color/white"
+            android:text="登陆"
+            android:textColor="@color/text_color"
             android:textSize="@dimen/dimen_40dp" />
 
-        <ImageView
+        <TextView
             android:id="@+id/btn_login_web"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/wfjr"
             android:layout_gravity="center"
-             />
+            android:text="直接进入"
+            android:textColor="@color/gray_main_rb_bg_f"
+            android:textSize="@dimen/middle_text_size" />
     </LinearLayout>
 
 </ScrollView>

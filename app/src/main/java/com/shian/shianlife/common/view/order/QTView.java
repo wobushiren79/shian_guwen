@@ -478,9 +478,10 @@ public class QTView extends BaseOrderView {
                     }
                     if(model.getOrderId() == 0){
                         close.setVisibility(View.VISIBLE);
+                        close.setOnClickListener(clickListener);
                     }
                 } else {
-                    close.setVisibility(View.VISIBLE);
+                    close.setVisibility(View.GONE);
                 }
 
                 if (model.isShowSwitch2waitService()) {

@@ -19,7 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="订单编号:" />
+            android:text="订单编号:"
+            android:textColor="@color/blackgroundmain" />
 
         <ImageView
             android:id="@+id/iv_qt02"
@@ -39,7 +40,8 @@
             android:layout_marginLeft="@dimen/dimen_15dp"
             android:layout_toLeftOf="@id/iv_qt02"
             android:layout_toRightOf="@id/tv_qt00"
-            android:text="xxx" />
+            android:text="xxx"
+            android:textColor="@color/blackgroundmain" />
     </RelativeLayout>
 
     <View
@@ -83,10 +85,7 @@
             android:text="2016-03-25" />
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/line" />
+
 
     <RelativeLayout
         android:id="@+id/rl_qt2"
@@ -124,10 +123,7 @@
             android:text="四川省成都市青羊区大石西路256号" />
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/line" />
+
 
     <RelativeLayout
         android:id="@+id/rl_qt3"

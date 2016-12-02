@@ -42,7 +42,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
 
     private void initView() {
         RelativeLayout fl = new RelativeLayout(this);
-        fl.setBackgroundResource(R.drawable.zrjm);
+        fl.setBackgroundResource(R.drawable.loading);
         final ImageView iv = new ImageView(this);
         LayoutParams lap = new LayoutParams(LayoutParams.WRAP_CONTENT,
                 LayoutParams.WRAP_CONTENT);

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:background="@drawable/bg_dialog_tips"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_title"
@@ -14,28 +14,31 @@
         android:paddingLeft="@dimen/dimen_15dp"
         android:paddingRight="@dimen/dimen_15dp"
         android:text="结束洽谈后服务单将提交系统，请确认所填信息已经完善！"
-        android:textColor="#ec584e"
+        android:textColor="@color/blackgroundmain"
         android:textSize="@dimen/txtsize_27sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_btn1"
             style="@style/orderlist_item_btn_textStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/dialog_onchlick_state"
             android:text="继续洽谈" />
 
         <TextView
             android:id="@+id/tv_btn2"
+
             style="@style/orderlist_item_btn_textStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_20dp"
+            android:background="@drawable/dialog_onchlick_state"
             android:text="结束洽谈" />
     </LinearLayout>
 

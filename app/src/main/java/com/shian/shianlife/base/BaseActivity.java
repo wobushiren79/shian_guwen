@@ -105,6 +105,7 @@ public class BaseActivity extends FragmentActivity {
         findViewById(R.id.rl_head).setVisibility(View.VISIBLE);
         TextView tvHeadLeft = (TextView) findViewById(R.id.tv_head_left);
         TextView tvHeadTitle = (TextView) findViewById(R.id.tv_head_title);
+        TextView back= (TextView) findViewById(R.id.back);
         ImageView ivHeadTitle = (ImageView) findViewById(R.id.iv_head_title);
         TextView tvHeadLocation = (TextView) findViewById(R.id.title_location);
         ImageView logo= (ImageView) findViewById(R.id.logo);
@@ -112,28 +113,41 @@ public class BaseActivity extends FragmentActivity {
         if (!title.equals("title")) {
             tvHeadLocation.setVisibility(View.GONE);
             ivHeadTitle.setVisibility(View.GONE);
-            tvHeadTitle.setVisibility(View.VISIBLE);
             logo.setVisibility(View.GONE);
+            back.setVisibility(View.VISIBLE);
+            tvHeadLeft.setVisibility(View.GONE);
+
+            tvHeadTitle.setVisibility(View.VISIBLE);
             tvHeadTitle.setText(title);
             tvHeadTitle.setBackgroundColor(getResources().getColor(
                     R.color.transparent));
-            tvHeadLeft.setText("");
-            Drawable drawable = getResources().getDrawable(
-                    R.drawable.ic_back_default);
-            // / 这一步必须要做,否则不会显示.
-            drawable.setBounds(0, 0, drawable.getMinimumWidth(),
-                    drawable.getMinimumHeight());
-            tvHeadLeft.setCompoundDrawables(drawable, null, null, null);
-            // tvHeadLeft.setBackgroundResource(R.drawable.ic_back_default);
-            tvHeadLeft.setOnClickListener(new OnClickListener() {
 
+
+
+
+//            Drawable drawable = getResources().getDrawable(
+//                    R.drawable.ic_back_default);
+//            // / 这一步必须要做,否则不会显示.
+//            drawable.setBounds(0, 0, drawable.getMinimumWidth(),
+//                    drawable.getMinimumHeight());
+//            tvHeadLeft.setCompoundDrawables(null, drawable, null, null);
+//            // tvHeadLeft.setBackgroundResource(R.drawable.ic_back_default);
+//            tvHeadLeft.setOnClickListener(new OnClickListener() {
+//
+//                @Override
+//                public void onClick(View v) {
+//                    finish();
+//                }
+//            });
+
+            back.setOnClickListener(new OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View view) {
                     finish();
                 }
             });
-
         } else {
+            back.setVisibility(View.GONE);
             logo.setVisibility(View.VISIBLE);
             ivHeadTitle.setVisibility(View.GONE);
             tvHeadTitle.setVisibility(View.GONE);
