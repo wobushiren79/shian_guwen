@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.ZoomControls;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -55,7 +57,11 @@ public class BaiduMapActivity extends Activity {
         initView();
         //初始化地图
         initMap();
-
+//去掉百度图标
+        View child = mMapView.getChildAt(1);
+        if (child != null && (child instanceof ImageView || child instanceof ZoomControls)) {
+            child.setVisibility(View.INVISIBLE);
+        }
 
     }
 
@@ -72,7 +78,7 @@ public class BaiduMapActivity extends Activity {
 
     private void initMap() {
         mBaiduMap = mMapView.getMap();
-        setCenter(mapCenterlatitude,mapCenterlongitude);
+        setCenter(mapCenterlatitude, mapCenterlongitude);
         poiSearch = PoiSearch.newInstance();
         poiSearch.setOnGetPoiSearchResultListener(poiListener);
         poiSearch.searchInCity((new PoiCitySearchOption())
@@ -80,7 +86,7 @@ public class BaiduMapActivity extends Activity {
                 .keyword(locationPoint));
     }
 
-    private void setCenter(double latitude,double longitude) {
+    private void setCenter(double latitude, double longitude) {
         //设定中心点坐标
         LatLng cenpt = new LatLng(latitude, longitude);
         //定义地图状态
@@ -114,7 +120,7 @@ public class BaiduMapActivity extends Activity {
                     mBaiduMap.addOverlay(option);
 
                 }
-                setCenter(poiInfos.get(0).location.latitude,poiInfos.get(0).location.longitude);
+                setCenter(poiInfos.get(0).location.latitude, poiInfos.get(0).location.longitude);
             } else {
                 Toast.makeText(BaiduMapActivity.this, "没有找到派单人地址", Toast.LENGTH_LONG).show();
                 finish();
