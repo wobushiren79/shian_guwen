@@ -27,19 +27,21 @@
             android:layout_centerVertical="true"
             android:layout_margin="3dp"
             android:text="1111111111"
+            android:textColor="@color/blackgroundmain"
             android:textSize="@dimen/text_size_top_bg" />
 
         <TextView
+
             android:id="@+id/tv_msg_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_margin="3dp"
             android:ellipsize="end"
-            android:lines="2"
+            android:lines="3"
             android:text=""
-            android:textColor="@color/gray"
-            android:textSize="@dimen/text_size_detail_list" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_date_list" />
 
         <TextView
             android:id="@+id/tv_msg_date"
@@ -48,13 +50,13 @@
             android:layout_centerVertical="true"
             android:layout_margin="3dp"
             android:text=""
-            android:textColor="@color/gray"
+            android:textColor="@color/dkgray"
             android:textSize="@dimen/text_size_detail_list" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/gray" />
+            android:background="@color/dkgray" />
     </LinearLayout>
 
 </RelativeLayout>

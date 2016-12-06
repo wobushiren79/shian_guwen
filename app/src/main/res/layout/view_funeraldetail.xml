@@ -2,22 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_setmeal"
-    android:orientation="vertical" >
+
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_visitNum"
         style="@style/order_detail_projectTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="殡仪馆项目" />
+        android:text="殡仪馆项目"
+        android:textColor="@color/blackgroundmain" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginLeft="@dimen/dimen_5dp"
-        android:layout_marginRight="@dimen/dimen_5dp"
-        android:background="@color/gray_common" />
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/light_gray_item_shua_textcolor" />
 
     <TextView
         android:id="@+id/tv_setmealFuneralName"
@@ -26,17 +25,13 @@
         android:layout_height="wrap_content"
         android:text="套餐名称：" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginLeft="@dimen/dimen_5dp"
-        android:layout_marginRight="@dimen/dimen_5dp"
-        android:background="@color/gray_common" />
 
-    <LinearLayout android:id="@+id/ll_xx_2"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/ll_xx_2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:gravity="right"
+        android:orientation="horizontal">
 
         <TextView
             style="@style/order_detail_ctgTextStyle"
@@ -49,8 +44,13 @@
             style="@style/order_detail_ctgTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:text="￥"
-            android:textColor="#DC143C" />
+            android:textColor="@color/blackgroundmain" />
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_20dp"
+        android:background="@color/white" />
 </LinearLayout>

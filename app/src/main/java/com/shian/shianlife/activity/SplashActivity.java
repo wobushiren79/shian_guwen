@@ -157,9 +157,8 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
             params.setSystemType("2");
             params.setChannelId(channelId);
 
-
             RelativeLayout fl = new RelativeLayout(this);
-            fl.setBackgroundResource(R.drawable.zrjm);
+            fl.setBackgroundResource(R.drawable.loading);
             setContentView(fl);
             MHttpManagerFactory.getAccountManager().login(this, params,
                     new HttpResponseHandler<HrLoginResult>() {

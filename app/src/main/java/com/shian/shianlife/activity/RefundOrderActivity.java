@@ -1,6 +1,9 @@
 package com.shian.shianlife.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -69,6 +72,13 @@ public class RefundOrderActivity extends BaseActivity {
 		mAddedDetailView = new AddedDetailRefundView(this);
 		mPayInfoView = new PayInfoRefundView(this);
 		refundMoney=mPayInfoView.getreFundMoney();
+
+		TextView textView=new TextView(RefundOrderActivity.this);
+		textView.setBackgroundColor(Color.WHITE);
+		LinearLayout.LayoutParams textLayouparam=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) getResources().getDimension(R.dimen.dimen_20dp));
+		Log.v("this","size:"+ (int) getResources().getDimension(R.dimen.dimen_20dp));
+		textView.setLayoutParams(textLayouparam);
+		ll_parent.addView(textView);
 		ll_parent.addView(mMainDetailView);
 		ll_parent.addView(mFuneralDetailView);
 		ll_parent.addView(mCemeteryDetailView);
@@ -76,8 +86,6 @@ public class RefundOrderActivity extends BaseActivity {
 		ll_parent.addView(mPayInfoView);
 
 		getData();
-		
-
 	}
 
 	private void getData() {

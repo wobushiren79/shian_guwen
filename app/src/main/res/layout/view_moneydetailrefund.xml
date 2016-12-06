@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
-    android:background="@drawable/bg_setmeal"
     android:orientation="vertical">
 
 
@@ -25,10 +24,6 @@
                 android:layout_height="wrap_content"
                 android:text="总应收款：" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray_common" />
 
             <TextView
                 android:id="@+id/tv_prepayAmount"
@@ -38,10 +33,6 @@
                 android:layout_weight="1"
                 android:text="支付金额：" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray_common" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,20 +60,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+
                 android:text="应支付金额：" />
         </LinearLayout>
     </LinearLayout>
 
     <TextView
         android:id="@+id/tv_sure"
-        android:layout_width="@dimen/dimen_170dp"
-        android:layout_height="@dimen/dimen_80dp"
+        android:layout_width="@dimen/dimen_120dp"
+        android:layout_height="@dimen/dimen_40dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
         android:layout_marginTop="100dp"
-        android:background="@drawable/ic_home_reg"
+        android:background="@drawable/customdetail_detail"
         android:gravity="center"
         android:text="提交确认"
-        android:textColor="@color/white" />
+        android:textColor="@color/text_color" />
 
 </RelativeLayout>

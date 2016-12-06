@@ -38,7 +38,7 @@ public class FuneralDetailRefundView extends FrameLayout {
 	private void init() {
 		LinearLayout.LayoutParams mParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 				LinearLayout.LayoutParams.WRAP_CONTENT);
-		mParams.topMargin = getContext().getResources().getDimensionPixelSize(R.dimen.dimen_45dp);
+		mParams.topMargin = getContext().getResources().getDimensionPixelSize(R.dimen.dimen_1dp);
 		setLayoutParams(mParams);
 		parentLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_funeraldetail, null);
 		addView(parentLayout);

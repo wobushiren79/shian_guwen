@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="20dp"
-    android:background="@drawable/bg_setmeal"
     android:orientation="vertical">
 
     <LinearLayout
@@ -16,17 +15,16 @@
             style="@style/order_detail_projectTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="费用情况" />
+            android:text="费用情况"
+            android:textColor="@color/blackgroundmain" />
 
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginLeft="@dimen/dimen_5dp"
-        android:layout_marginRight="@dimen/dimen_5dp"
-        android:background="@color/gray_common" />
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/light_gray_item_shua_textcolor" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,202 +44,159 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="未知"
-            android:textColor="@android:color/holo_red_light" />
+            android:textColor="@color/blackgroundmain" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray_common" />
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/light_gray_item_shua_textcolor" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/order_detail_ctgTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="定金"
+            android:textSize="@dimen/txtsize_30sp" />
+
+        <TextView
+            android:id="@+id/tv_prepayAmount"
+            style="@style/order_detail_ctgTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="已支付：" />
+
+
+        <TextView
+            android:id="@+id/tv_prepayEndTime"
+            style="@style/order_detail_ctgTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="支付时间：" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             style="@style/order_detail_ctgTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="定\n金"
-            android:textColor="@android:color/holo_red_light" />
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:background="@color/gray_common" />
+            android:text="余款"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txtsize_30sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_prepayAmount"
+                android:id="@+id/tv_refundMoney"
                 style="@style/order_detail_ctgTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="已支付：" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray_common" />
-
-            <TextView
-                android:id="@+id/tv_prepayEndTime"
-                style="@style/order_detail_ctgTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="支付时间：" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray_common" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            style="@style/order_detail_ctgTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="余\n款"
-            android:textColor="@android:color/holo_red_light" />
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:background="@color/gray_common" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_refundMoney"
-                    style="@style/order_detail_ctgTextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="退款金额：" />
-
-                <TextView 
-                    android:id="@+id/tv_refund"
-                    style="@style/order_detail_projectTextStyle"
-                    android:layout_width="@dimen/dimen_180dp"
-                    android:layout_height="@dimen/dimen_80dp"
-                    android:layout_marginLeft="@dimen/dimen_250dp"
-                    android:background="@drawable/ic_home_reg"
-                    android:gravity="center"
-                    android:text="退款详情"
-                    android:textColor="@color/white" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray_common" />
+                android:layout_weight="1"
+                android:text="退款金额：" />
 
             <TextView
-                android:id="@+id/tv_restPayAmount"
-                style="@style/order_detail_ctgTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="应支付：" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray_common" />
-
-            <TextView
-                android:id="@+id/tv"
-                style="@style/order_detail_ctgTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="实际支付：" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray_common" />
-
-            <TextView
-                android:id="@+id/tv_restPayEndTime"
-                style="@style/order_detail_ctgTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="支付时间：" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray_common" />
-
-            <TextView
-                android:id="@+id/tv_restPayeeName"
-                style="@style/order_detail_ctgTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="余款收款员：" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray_common" />
-
-            <TextView
-                android:id="@+id/tv_restPayeePhone"
-                style="@style/order_detail_ctgTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="联系方式：" />
+                android:id="@+id/tv_refund"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_250dp"
+                android:background="@drawable/customdetail_detail"
+                android:gravity="center"
+                android:text="退款详情"
+                android:textColor="@color/text_color" />
         </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_restPayAmount"
+            style="@style/order_detail_ctgTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="应支付：" />
+
+
+        <TextView
+            android:id="@+id/tv"
+            style="@style/order_detail_ctgTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="实际支付：" />
+
+
+        <TextView
+            android:id="@+id/tv_restPayEndTime"
+            style="@style/order_detail_ctgTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="支付时间：" />
+
+
+        <TextView
+            android:id="@+id/tv_restPayeeName"
+            style="@style/order_detail_ctgTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="余款收款员：" />
+
+
+        <TextView
+            android:id="@+id/tv_restPayeePhone"
+            style="@style/order_detail_ctgTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="联系方式：" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/gray_common" />
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@drawable/bg_line" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@drawable/bg_line" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
             style="@style/order_detail_ctgTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="客\n户\n签\n字"
-            android:textColor="@android:color/holo_red_light" />
+            android:text="客户签字"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/txtsize_30sp" />
 
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:background="@color/gray_common" />
 
         <ImageView
             android:id="@+id/iv_signUrl"
