@@ -140,13 +140,18 @@
             android:layout_marginLeft="@dimen/dimen_10dp"
             android:textColor="@color/gray"
             android:textSize="@dimen/text_size_detail_list" />
+
         <Button
             android:id="@+id/button_pdrlocation"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_map_onclick"
+            android:drawableLeft="@drawable/button_map_icon"
+            android:padding="@dimen/dimen_5dp"
             android:text="@string/map"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            />
-
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/txtsize_20sp" />
     </LinearLayout>
 
     <LinearLayout
