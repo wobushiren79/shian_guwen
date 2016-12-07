@@ -8,55 +8,49 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/mass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dip"
-            android:layout_marginRight="2dip"
             android:onClick="searchButtonProcess"
             android:text="跨城交通"
             android:visibility="gone" />
 
         <Button
             android:id="@+id/drive"
+            style="@style/map_tabpager"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dip"
-            android:layout_marginRight="2dip"
             android:layout_weight="1"
             android:onClick="searchButtonProcess"
             android:text="驾车" />
+
         <Button
             android:id="@+id/transit"
+            style="@style/map_tabpager"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
-            android:layout_marginLeft="2dip"
-            android:layout_marginRight="2dip"
             android:layout_weight="1"
+            android:background="@drawable/base_tabpager_indicator_selected_2"
             android:onClick="searchButtonProcess"
             android:text="公交" />
 
         <Button
             android:id="@+id/walk"
+            style="@style/map_tabpager"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dip"
-            android:layout_marginRight="2dip"
             android:layout_weight="1"
             android:onClick="searchButtonProcess"
             android:text="步行" />
 
         <Button
             android:id="@+id/bike"
+            style="@style/map_tabpager"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="2dip"
-            android:layout_marginRight="2dip"
             android:layout_weight="1"
             android:onClick="searchButtonProcess"
             android:text="骑行" />
@@ -121,8 +115,8 @@
 
             <Button
                 android:id="@+id/pre"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="@dimen/dimen_180dp"
+                android:layout_height="@dimen/dimen_80dp"
                 android:layout_marginLeft="2dip"
                 android:layout_marginRight="2dip"
                 android:layout_weight="1.0"
@@ -131,8 +125,8 @@
 
             <Button
                 android:id="@+id/next"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="@dimen/dimen_180dp"
+                android:layout_height="@dimen/dimen_80dp"
                 android:layout_marginLeft="2dip"
                 android:layout_marginRight="2dip"
                 android:layout_weight="1.0"

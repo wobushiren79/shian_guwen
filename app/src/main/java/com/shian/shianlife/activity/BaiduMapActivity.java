@@ -68,10 +68,8 @@ public class BaiduMapActivity extends Activity {
     private void initView() {
 
         mMapView = (MapView) findViewById(R.id.bmapView);
-
         mTypeButton = (Button) findViewById(R.id.maptest_type);
         mTrafficButton = (Button) findViewById(R.id.maptest_traffic);
-
         mTypeButton.setOnClickListener(onClickListener);
         mTrafficButton.setOnClickListener(onClickListener);
     }

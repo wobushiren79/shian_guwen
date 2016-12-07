@@ -54,4 +54,23 @@
     <style name="Bubble.TextAppearance.Light" parent="Bubble.TextAppearance.Dark">
         <item name="android:textColor">#ffeeeeee</item>
     </style>
+
+    <style name="map_tabpager">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/base_tabpager_indicator_default_2</item>
+    </style>
+
+    <style name="CustomDialog" parent="android:style/Theme.Dialog">
+        <!--背景颜色及透明程度-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--是否有标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+
+        <item name="android:windowFrame">@null</item>
+
+    </style>
 </resources>
