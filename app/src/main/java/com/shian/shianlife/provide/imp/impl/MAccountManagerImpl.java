@@ -340,6 +340,14 @@ public class MAccountManagerImpl implements MAccountManager {
     }
 
     @Override
+    public void creatZhiFuBaoEwm(Context context, HpOrderIdParams params,
+                                 HttpResponseHandler<HrCommentResult> handler) {
+        // TODO Auto-generated method stub
+        excutor.requestPost(context, "/pay/alipay/createScanUrl",
+                HrCommentResult.class, params, handler);
+    }
+
+    @Override
     public void creatPosEwm(Context context, HpOrderIdParams params,
                             HttpResponseHandler<HrCommentResult> handler) {
         // TODO Auto-generated method stub

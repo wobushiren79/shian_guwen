@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/main_blackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
                 android:layout_gravity="center_horizontal"
                 android:padding="@dimen/dimen_30dp"
                 android:text="我的服务状态"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="@dimen/text_size_top_bg" />
 
             <View
@@ -28,10 +29,11 @@
                 android:layout_weight="1" />
 
             <RadioButton
-                android:id="@+id/rb1" android:checked="true"
+                android:id="@+id/rb1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:checked="true"
                 android:text="空闲" />
 
             <RadioButton
@@ -39,18 +41,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/dimen_20dp"
                 android:text="忙碌" />
         </RadioGroup>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.1dip"
-            android:background="@drawable/user_down_line" />
+            android:background="@color/gray_main_rb_bg_f" />
 
-        <LinearLayout android:visibility="gone"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -73,15 +77,17 @@
                 android:layout_gravity="center_vertical" />
         </LinearLayout>
 
-        <View android:visibility="gone"
+        <View
             android:layout_width="match_parent"
             android:layout_height="0.1dip"
-            android:background="@drawable/user_down_line" />
+            android:background="@drawable/user_down_line"
+            android:visibility="gone" />
 
-        <LinearLayout android:visibility="gone"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -104,10 +110,11 @@
                 android:layout_gravity="center_vertical" />
         </LinearLayout>
 
-        <View android:visibility="gone"
+        <View
             android:layout_width="match_parent"
             android:layout_height="0.1dip"
-            android:background="@drawable/user_down_line" />
+            android:background="@drawable/user_down_line"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -120,7 +127,7 @@
                 android:layout_gravity="center_horizontal"
                 android:padding="@dimen/dimen_30dp"
                 android:text="清楚缓存"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="@dimen/text_size_top_bg" />
 
             <View
@@ -133,12 +140,17 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/dimen_20dp"
                 android:background="@drawable/ic_home_reg"
                 android:gravity="center"
                 android:text="清除"
-                android:textColor="@color/white" />
+                android:textColor="@color/text_color" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dip"
+            android:background="@color/gray_main_rb_bg_f" />
     </LinearLayout>
 
 
@@ -149,10 +161,10 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:layout_margin="@dimen/dimen_40dp"
-        android:background="@drawable/ic_home_reg"
+        android:background="@drawable/dialog_chlick"
         android:gravity="center"
         android:text="退出账户"
-        android:textColor="@color/white"
+        android:textColor="@color/text_color"
         android:textSize="@dimen/dimen_40dp" />
 
 </RelativeLayout>

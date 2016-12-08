@@ -165,7 +165,6 @@ public class CustomDetailView extends FrameLayout {
 		in.putExtra("consultId", ((Activity) getContext()).getIntent()
 				.getLongExtra("consultId", 0));
 		getContext().startActivity(in);
-
 		if (onCallBack != null) {
 			onCallBack.watchCutomerDetail();
 		}

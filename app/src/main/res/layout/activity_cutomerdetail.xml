@@ -2,12 +2,19 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@color/main_blackground"
+    android:orientation="vertical">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_20dp"
+            android:background="@color/white" />
 
         <com.shian.shianlife.common.view.customerdetail.CustomerDeadInfoView
             android:id="@+id/cdiv"
@@ -15,11 +22,21 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_20dp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_20dp"
+            android:background="@color/white" />
+
         <com.shian.shianlife.common.view.customerdetail.ManagerDetailInfoView
             android:id="@+id/mdiv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_20dp"
+            android:background="@color/white" />
 
         <com.shian.shianlife.common.view.customerdetail.ContractDetailInfoView
             android:id="@+id/ctdiv"
@@ -27,11 +44,21 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_20dp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_20dp"
+            android:background="@color/white" />
+
         <com.shian.shianlife.common.view.customerdetail.FunneralDetailInfoView
             android:id="@+id/fdiv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_20dp"
+            android:background="@color/white" />
 
         <com.shian.shianlife.common.view.customerdetail.CemeteryDetailInfoView
             android:id="@+id/cediv"
@@ -39,11 +66,21 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_20dp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_20dp"
+            android:background="@color/white" />
+
         <com.shian.shianlife.common.view.customerdetail.PrereadyDetailInfoView
             android:id="@+id/pdiv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_20dp"
+            android:background="@color/white" />
 
         <com.shian.shianlife.common.view.customerdetail.TalkDetailInfoView
             android:id="@+id/tdiv"

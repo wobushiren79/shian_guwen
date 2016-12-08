@@ -17,10 +17,10 @@
 
     <TextView
         android:id="@+id/back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dimen_120dp"
+        android:layout_height="match_parent"
         android:layout_centerVertical="true"
-        android:background="@drawable/ic_back_default"
+        android:drawableLeft="@drawable/ic_back_default"
         android:visibility="gone" />
 
     <ImageView

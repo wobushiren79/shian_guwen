@@ -378,6 +378,14 @@ public interface MAccountManager extends HttpManager {
      * @param params
      * @param handler
      */
+    public void creatZhiFuBaoEwm(Context context, HpOrderIdParams params,
+                                 HttpResponseHandler<HrCommentResult> handler);
+
+    /**
+     * @param context
+     * @param params
+     * @param handler
+     */
     public void creatPosEwm(Context context, HpOrderIdParams params,
                             HttpResponseHandler<HrCommentResult> handler);
 

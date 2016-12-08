@@ -194,11 +194,15 @@
 
         <Button
             android:id="@+id/button_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="@dimen/dimen_50dp"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="@string/map" />
+            android:background="@drawable/button_map_onclick"
+            android:drawableLeft="@drawable/button_map_icon"
+            android:padding="@dimen/dimen_5dp"
+            android:text="@string/map"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/txtsize_20sp" />
 
         <TextView
             android:id="@+id/tv_qt41"

@@ -84,11 +84,11 @@
     </style>
 
     <style name="customer_detail_titleTextStyle" parent="@android:style/Widget.TextView">
-        <item name="android:drawableLeft">@drawable/icon_blue</item>
+
         <item name="android:drawablePadding">@dimen/dimen_10dp</item>
         <item name="android:paddingLeft">@dimen/dimen_20dp</item>
         <item name="android:paddingBottom">@dimen/dimen_15dp</item>
-        <item name="android:textColor">#75e8c1</item>
+        <item name="android:textColor">@color/blackgroundmain</item>
         <item name="android:textSize">@dimen/txtsize_32sp</item>
     </style>
 
