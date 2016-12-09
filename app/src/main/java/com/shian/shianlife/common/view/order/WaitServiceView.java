@@ -306,7 +306,7 @@ public class WaitServiceView extends BaseOrderView {
 
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    if (model.isHasPrepay()) {
+//                    if (model.isHasPrepay()) {
                         HpAcceptParams params = new HpAcceptParams();
                         params.setOrderId(model.getOrderId());
                         MHttpManagerFactory.getAccountManager().startService(getContext(),
@@ -331,10 +331,10 @@ public class WaitServiceView extends BaseOrderView {
 
                                     }
                                 });
-                    } else {
-                        dialog.cancel();
-                        Toast.makeText(getContext(), "定金未支付，不能开始执行", Toast.LENGTH_LONG).show();
-                    }
+//                    } else {
+//                        dialog.cancel();
+//                        Toast.makeText(getContext(), "定金未支付，不能开始执行", Toast.LENGTH_LONG).show();
+//                    }
 
                 }
             });

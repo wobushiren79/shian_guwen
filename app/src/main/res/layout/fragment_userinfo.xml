@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/main_blackground"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/main_blackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,13 +20,13 @@
             android:textSize="@dimen/text_size_top_bg" />
 
 
-
         <View
             android:layout_width="match_parent"
             android:layout_height="0.1dip"
             android:background="@drawable/user_down_line" />
 
-        <TextView android:id="@+id/tv_phone"
+        <TextView
+            android:id="@+id/tv_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -40,7 +40,8 @@
             android:layout_height="0.1dip"
             android:background="@drawable/user_down_line" />
 
-        <TextView android:id="@+id/tv_address"
+        <TextView
+            android:id="@+id/tv_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -54,7 +55,8 @@
             android:layout_height="0.1dip"
             android:background="@drawable/user_down_line" />
 
-        <TextView android:id="@+id/tv_no"
+        <TextView
+            android:id="@+id/tv_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -110,7 +112,6 @@
         </LinearLayout>
 
 
-
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dip"
@@ -150,14 +151,14 @@
 
         <TextView
             android:id="@+id/tv_editorder"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_gravity="bottom|center"
             android:layout_margin="@dimen/dimen_40dp"
             android:background="@drawable/ic_home_reg"
             android:gravity="center"
             android:text="保存"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
             android:textSize="@dimen/dimen_40dp" />
     </LinearLayout>
 </ScrollView>
