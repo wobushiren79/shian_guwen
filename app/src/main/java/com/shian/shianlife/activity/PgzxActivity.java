@@ -3,6 +3,7 @@ package com.shian.shianlife.activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -245,18 +246,24 @@ public class PgzxActivity extends BaseActivity {
                     }
                     btnSave.setVisibility(View.GONE);
                     if (templateItem.getItemStatus() != 5) {
-                        ev.setBackgroundColor(getResources().getColor(
-                                R.color.gray_common));
+//                        ev.setBackgroundColor(getResources().getColor(
+//                                R.color.gray_common));
+                        ev.setBackgroundResource(R.drawable.pdlbxq_1);
+                        ev.setTextColor(Color.WHITE);
                         ev.setEnabled(false);
                     } else {
                         if (templateItem.isHasComment()) {
                             ev.setEnabled(true);
-                            ev.setBackgroundColor(getResources().getColor(
-                                    R.color.orangeyellow));
+//                            ev.setBackgroundColor(getResources().getColor(
+//                                    R.color.orangeyellow));
+                            ev.setBackgroundResource(R.drawable.pdlbxq_2);
+                            ev.setTextColor(getResources().getColor(R.color.text_color));
                         } else {
-                            ev.setBackgroundColor(getResources().getColor(
-                                    R.color.gray_common));
+//                            ev.setBackgroundColor(getResources().getColor(
+//                                    R.color.gray_common));
+                            ev.setBackgroundResource(R.drawable.pdlbxq_1);
                             ev.setEnabled(false);
+                            ev.setTextColor(Color.WHITE);
                         }
                     }
                     ev.setText("审核");

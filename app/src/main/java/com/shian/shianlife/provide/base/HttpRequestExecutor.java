@@ -19,6 +19,7 @@ import com.shian.shianlife.activity.LoginActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.FilePathUtils;
 import com.shian.shianlife.common.utils.ObjectMapperFactory;
+import com.shian.shianlife.mapapi.CustomDialog;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import org.apache.http.Header;
@@ -54,8 +55,8 @@ public class HttpRequestExecutor {
 		httpClient.setTimeout(15000);
 
 	}
-
-	ProgressDialog pd = null;
+    CustomDialog pd=null;
+//	ProgressDialog pd = null;
 
 	/**
 	 * Post请求
@@ -86,10 +87,14 @@ public class HttpRequestExecutor {
 				pd = null;
 				getSession(context);
 			} else {
-				pd = new ProgressDialog(context);pd.setCancelable(false);
-				pd.setMessage("正在载入...");
-				pd.setIndeterminateDrawable(context.getResources().getDrawable(
-						R.drawable.spinner));
+				pd=new CustomDialog(context);
+				pd.setCancelable(false);
+
+//				pd = new ProgressDialog(context);
+//				pd.setCancelable(false);
+//				pd.setMessage("正在载入...");
+//				pd.setIndeterminateDrawable(context.getResources().getDrawable(
+//						R.drawable.spinner));
 				getSession(context);
 			}
 			Log.i("tag", "methed=" + C_sBaseUrl + "/" + method);

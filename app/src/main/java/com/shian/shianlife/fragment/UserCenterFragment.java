@@ -123,7 +123,7 @@ public class UserCenterFragment extends BaseFragment {
                     tvList.get(2).setText("角色："+result.getRoles().get(i).getName());
                     tvList.get(4).setText(result.getServiceSuccessSum() + "");
                     tvList.get(5).setText(result.getAvgSatis() + "");
-                    v.findViewById(R.id.tv_user).setOnClickListener(new View.OnClickListener() {
+                    v.findViewById(R.id.editor).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent in = new Intent(getActivity(), UserInfoActivity.class);

@@ -19,7 +19,6 @@
 
             <ImageView
                 android:id="@+id/iv_user_pic"
-
                 android:layout_width="@dimen/dimen_150dp"
                 android:layout_height="@dimen/dimen_150dp"
                 android:layout_centerInParent="true"
@@ -36,7 +35,6 @@
                     android:id="@+id/tv_user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:gravity="left"
                     android:text="姓名"
                     android:textColor="@color/blackgroundmain"

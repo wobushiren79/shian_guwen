@@ -18,6 +18,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.ButterKnife;
@@ -41,12 +42,13 @@ public class BaseActivity extends FragmentActivity {
     private PushReciver mPushReciver;
     protected boolean LOGFLAG = SaBaseApplication.LOGFLAG;
 
-
+    public LinearLayout mMain;
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.setContentView(R.layout.activity_base);
+        mMain= (LinearLayout) findViewById(R.id.mainll);
         flContent = (FrameLayout) findViewById(R.id.fl_base);
         ((SaBaseApplication) getApplicationContext()).addActivity(this);
 

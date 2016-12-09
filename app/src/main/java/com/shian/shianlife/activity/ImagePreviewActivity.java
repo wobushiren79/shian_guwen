@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.utils.FilePathUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -16,6 +17,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -56,6 +58,7 @@ public class ImagePreviewActivity extends BaseActivity implements OnLongClickLis
 		super.onCreate(savedInstanceState);
 		mImageView = new PinchImageView(this);
 		mImageView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
+		mMain.setBackgroundColor(getResources().getColor(R.color.main_blackground));
 		setContentView(mImageView);
 		setTitle("查看图片");
 		url = getIntent().getStringExtra("url");
