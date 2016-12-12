@@ -82,6 +82,7 @@ public class LoginActivity extends BaseActivity {
         params.setUsername(etUserName.getText().toString());
         params.setSystemType("2");
         params.setChannelId(SharePerfrenceUtils.getShareChannelId(this));
+        Log.v("this", SharePerfrenceUtils.getShareChannelId(this));
         MHttpManagerFactory.getAccountManager().login(this, params, new HttpResponseHandler<HrLoginResult>() {
 
             @Override

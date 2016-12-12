@@ -429,7 +429,7 @@ public class PgzxActivity extends BaseActivity {
                                 @Override
                                 public void onClick(View view) {
                                     Intent intent = new Intent(PgzxActivity.this, BaiduMapActivity.class);
-                                    intent.putExtra("pdrLocation",templateItem.getPdrLocation());
+                                    intent.putExtra("pdrLocation", templateItem.getPdrLocation());
                                     startActivity(intent);
                                 }
                             });
@@ -474,6 +474,7 @@ public class PgzxActivity extends BaseActivity {
                             tvNew.setEnabled(false);
                             tvNew.setBackgroundColor(getResources().getColor(
                                     R.color.gray_common));
+                            tvNew.setTextColor(Color.WHITE);
                         } else if (isShenhe || isShoukuan) {
                             tvNew.setVisibility(View.GONE);
                         }

@@ -137,6 +137,7 @@ public class HttpRequestExecutor {
 							// context.getString(R.string.servererror),
 							// context);
 							onError(response, s, context);
+							pd.cancel();
 						}
 					});
 		} catch (UnsupportedEncodingException e1) {
