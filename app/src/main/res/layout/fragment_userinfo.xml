@@ -76,7 +76,7 @@
             android:layout_gravity="center_horizontal"
             android:padding="@dimen/dimen_30dp"
             android:text="注：以上信息请联系客服人员进行修改"
-            android:textColor="@color/gray"
+            android:textColor="@color/red"
             android:textSize="@dimen/text_size_detail_list" />
 
         <View
