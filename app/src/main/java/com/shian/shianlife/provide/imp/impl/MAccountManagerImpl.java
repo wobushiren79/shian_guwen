@@ -26,6 +26,7 @@ import com.shian.shianlife.provide.params.HpSaveCustomerContract;
 import com.shian.shianlife.provide.params.HpSaveCustomerFuneral;
 import com.shian.shianlife.provide.params.HpSaveCustomerTalkParams;
 import com.shian.shianlife.provide.params.HpSaveCustomerUsageParams;
+import com.shian.shianlife.provide.params.HpTalkFailParams;
 import com.shian.shianlife.provide.result.HrAddConsultResult;
 import com.shian.shianlife.provide.result.HrCommentResult;
 import com.shian.shianlife.provide.result.HrConsultAgentman;
@@ -38,6 +39,7 @@ import com.shian.shianlife.provide.result.HrGetCustomerFuneral;
 import com.shian.shianlife.provide.result.HrGetCustomerPreready;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.provide.result.HrGetOrderNote;
+import com.shian.shianlife.provide.result.HrGetTalkFail;
 import com.shian.shianlife.provide.result.HrLoginResult;
 import com.shian.shianlife.provide.result.HrMessageList;
 import com.shian.shianlife.provide.result.HrOrderFeedback;
@@ -495,5 +497,18 @@ public class MAccountManagerImpl implements MAccountManager {
         excutor.requestPost(context, "user/changeCurAddress", Object.class, params,
                 handler);
     }
+
+    @Override
+    public void saveTalkFailData(Context context, HpTalkFailParams params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context, "customer/talkfail/save", Object.class, params,
+                handler);
+    }
+
+    @Override
+    public void getTalkFailData(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetTalkFail> handler) {
+        excutor.requestPost(context, "customer/talkfail/get", HrGetTalkFail.class, params,
+                handler);
+    }
+
 
 }

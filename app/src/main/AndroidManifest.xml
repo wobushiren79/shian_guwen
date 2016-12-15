@@ -52,6 +52,7 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -245,7 +246,15 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="cSdvjz7iT4TcRhIiRv2e6CERLuRXa9uY" />
 
-        <activity android:name=".activity.RoutePlanActivity"></activity>
+        <activity android:name=".activity.RoutePlanActivity" />
+        <activity
+            android:name=".activity.SaveTalkFailActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.updata.WSZDataActivity" />
+        <activity android:name=".activity.updata.JBRDataActivity" />
+        <activity android:name=".activity.updata.ContractDataActivity" />
+        <activity android:name=".activity.updata.TQZBDataActivity" />
+        <activity android:name=".activity.MapLocation"></activity>
     </application>
 
 </manifest>

@@ -16,6 +16,8 @@ public class OrderListModel {
 	String usageCurAddress;// 使用者当前所在地
 	String performerName;// 治丧指导，即：执行顾问
 	String talkerName;// 白事顾问，即：洽谈顾问
+
+	boolean showFirstTalk=true;//是否为第一次洽谈
 	boolean showEditOrder;// 是否显示[编辑订单]
 	boolean showOrderDetail;// 是否显示[订单详情]
 	boolean showFinishTalk;// 是否显示[结束洽谈]
@@ -44,6 +46,24 @@ public class OrderListModel {
 	int consultStatus;
 	String usageNote;
 	int financeStatus;
+
+	int step;//填写资料的步骤
+
+	public int getStep() {
+		return step;
+	}
+
+	public void setStep(int step) {
+		this.step = step;
+	}
+
+	public boolean isShowFirstTalk() {
+		return showFirstTalk;
+	}
+
+	public void setShowFirstTalk(boolean showFirstTalk) {
+		this.showFirstTalk = showFirstTalk;
+	}
 
 	public String getAgentmanMobile() {
 		return agentmanMobile;

@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_save_talk_fail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_blackground"
+    android:orientation="vertical"
+    tools:context="com.shian.shianlife.activity.SaveTalkFailActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_30dp"
+                android:text="往生者姓名:"
+                android:textColor="@color/gray_item_shua_textcolor"
+                android:textSize="@dimen/text_size_top_bg" />
+
+            <EditText
+                android:id="@+id/et_name"
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_60dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/et_bk1"
+                android:padding="@dimen/dimen_10dp"
+                android:textColor="@color/blackgroundmain"
+                android:textSize="@dimen/text_size_top_bg" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_30dp"
+                android:text="往生者现状:"
+                android:textColor="@color/gray_item_shua_textcolor"
+                android:textSize="@dimen/text_size_top_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/sp_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_60dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    android:layout_marginRight="@dimen/dimen_10dp"
+                    android:background="@drawable/et_bk1"
+                    android:textColor="@color/blackgroundmain"
+                    android:textSize="@dimen/text_size_detail_list" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_30dp"
+                android:text="往生者当前所在地:"
+                android:textColor="@color/gray_item_shua_textcolor"
+                android:textSize="@dimen/text_size_top_bg" />
+
+
+            <include
+                android:id="@+id/include_location"
+                layout="@layout/layout_mapcheck" />            <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/dimen_60dp"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:layout_marginLeft="@dimen/dimen_10dp"-->
+            <!--android:layout_marginRight="@dimen/dimen_10dp"-->
+            <!--android:background="@drawable/et_bk1"-->
+            <!--android:enabled="false"-->
+            <!--android:padding="@dimen/dimen_10dp"-->
+            <!--android:textColor="@color/blackgroundmain"-->
+            <!--android:textSize="@dimen/text_size_top_bg" />-->
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_30dp"
+                android:drawableLeft="@drawable/xingxing"
+                android:text="联系人是往生者的:"
+                android:textColor="@color/gray_item_shua_textcolor"
+                android:textSize="@dimen/text_size_top_bg" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/sp_relation"
+                    android:layout_width="@dimen/dimen_200dp"
+                    android:layout_height="@dimen/dimen_60dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/et_bk1"
+                    android:textColor="@color/blackgroundmain"
+                    android:textSize="@dimen/text_size_detail_list" />
+
+                <EditText
+                    android:id="@+id/et_relation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimen_60dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dimen_10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/et_bk1"
+                    android:hint="选择其他时填写"
+                    android:padding="@dimen/dimen_10dp"
+                    android:textColor="@color/blackgroundmain"
+                    android:textSize="@dimen/text_size_detail_list" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_30dp"
+                android:text="计划治丧地址:"
+                android:textColor="@color/gray_item_shua_textcolor"
+                android:textSize="@dimen/text_size_top_bg" />
+
+            <include
+                android:id="@+id/include_planlocation"
+                layout="@layout/layout_mapcheck" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_30dp"
+                android:text="计划治丧方案:"
+                android:textColor="@color/gray_item_shua_textcolor"
+                android:textSize="@dimen/text_size_top_bg" />
+
+            <Spinner
+                android:id="@+id/sp_planproject"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_60dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:background="@drawable/et_bk1"
+                android:textColor="@color/blackgroundmain"
+                android:textSize="@dimen/text_size_detail_list" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_30dp"
+
+                android:drawableLeft="@drawable/xingxing"
+                android:text="洽谈要点:"
+                android:textColor="@color/gray_item_shua_textcolor"
+                android:textSize="@dimen/text_size_top_bg" />
+
+            <EditText
+                android:id="@+id/et_remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_et_order"
+                android:lines="5"
+                android:padding="@dimen/dimen_10dp"
+                android:textColor="@color/blackgroundmain"
+                android:textSize="@dimen/text_size_top_bg" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_30dp"
+
+                android:drawableLeft="@drawable/xingxing"
+                android:text="洽谈结果:"
+                android:textColor="@color/gray_item_shua_textcolor"
+                android:textSize="@dimen/text_size_top_bg" />
+
+            <Spinner
+                android:id="@+id/sp_qtjg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_60dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:background="@drawable/et_bk1"
+                android:textColor="@color/blackgroundmain"
+                android:textSize="@dimen/text_size_detail_list" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/timell"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_30dp"
+                android:drawableLeft="@drawable/xingxing"
+                android:text="预约洽谈时间:"
+                android:textColor="@color/gray_item_shua_textcolor"
+                android:textSize="@dimen/text_size_top_bg" />
+
+            <TextView
+                android:id="@+id/et_talk_time"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_60dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_weight="1"
+                android:background="@drawable/et_bk1"
+                android:padding="@dimen/dimen_10dp"
+                android:textColor="@color/blackgroundmain"
+                android:textSize="@dimen/text_size_top_bg" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_70dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:background="@drawable/ic_home_reg"
+            android:gravity="center"
+            android:padding="@dimen/dimen_10dp"
+            android:text="确认提交，结束洽谈"
+            android:textColor="@color/text_color" />
+    </LinearLayout>
+
+</ScrollView>

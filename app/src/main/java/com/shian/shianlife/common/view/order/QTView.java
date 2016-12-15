@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,6 +36,10 @@ import com.shian.shianlife.activity.OrderDetailActivity;
 import com.shian.shianlife.activity.PayActivity;
 import com.shian.shianlife.activity.RefundActivity;
 import com.shian.shianlife.activity.RoutePlanActivity;
+import com.shian.shianlife.activity.SaveTalkFailActivity;
+import com.shian.shianlife.activity.updata.ContractDataActivity;
+import com.shian.shianlife.activity.updata.JBRDataActivity;
+import com.shian.shianlife.activity.updata.WSZDataActivity;
 import com.shian.shianlife.common.utils.TArrayListAdapter;
 import com.shian.shianlife.common.utils.TArrayListAdapter.IOnDrawViewEx;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -51,6 +56,8 @@ import com.shian.shianlife.provide.params.HpGetOrderListParams;
 import com.shian.shianlife.provide.params.HpOrderIdParams;
 import com.shian.shianlife.provide.params.HpRejectParams;
 import com.shian.shianlife.provide.result.HrGetOrderListResult;
+import com.shian.shianlife.provide.result.HrGetTalkFail;
+import com.shian.shianlife.view.TalkDataDialog;
 
 @SuppressLint("InflateParams")
 public class QTView extends BaseOrderView {
@@ -279,7 +286,7 @@ public class QTView extends BaseOrderView {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(getContext(), RoutePlanActivity.class);
-                        intent.putExtra("RoutePlanLocation",model.getCustomerAddress());
+                        intent.putExtra("RoutePlanLocation", model.getCustomerAddress());
                         getContext().startActivity(intent);
                     }
                 });
@@ -294,6 +301,8 @@ public class QTView extends BaseOrderView {
                 ImageView ivq2 = (ImageView) view.getView(R.id.iv_qt22);
                 ImageView ivq3 = (ImageView) view.getView(R.id.iv_qt32p);
                 TextView tv_qt02 = (TextView) view.getView(R.id.tv_qt02);
+                TextView tv_talkagain = (TextView) view.getView(R.id.tv_talkagain);
+
                 tv_qt02.setText("");
                 switch (model.getOrderStatus()) {
                     case 1:
@@ -470,13 +479,13 @@ public class QTView extends BaseOrderView {
                     edit.setVisibility(View.GONE);
                 }
                 if (model.isShowFinishTalk()) {
-                    if(model.isHasPrepay()){
+                    if (model.isHasPrepay()) {
                         close.setVisibility(View.VISIBLE);
                         close.setOnClickListener(clickListener);
-                    }else{
+                    } else {
                         close.setVisibility(View.GONE);
                     }
-                    if(model.getOrderId() == 0){
+                    if (model.getOrderId() == 0) {
                         close.setVisibility(View.VISIBLE);
                         close.setOnClickListener(clickListener);
                     }
@@ -494,6 +503,13 @@ public class QTView extends BaseOrderView {
                 ddxq.setOnClickListener(clickListener);
                 tk.setOnClickListener(clickListener);
                 // khxq.setOnClickListener(clickListener);
+                Log.v("this", "getOrderId():" + model.getOrderId());
+                if (model.getOrderId() == 0 && !model.isShowFirstTalk()) {
+                    tv_talkagain.setVisibility(VISIBLE);
+                    tv_talkagain.setOnClickListener(clickListener);
+                } else {
+                    tv_talkagain.setVisibility(GONE);
+                }
             }
         });
     }
@@ -550,6 +566,35 @@ public class QTView extends BaseOrderView {
                     in1.putExtra("consultId", model.getConsultId());
                     getContext().startActivity(in1);
                     break;
+                case R.id.tv_talkagain:
+                    //二次洽谈资料
+                    Log.v("this", "二次洽谈资料");
+                    HpConsultIdParams params = new HpConsultIdParams();
+                    params.setConsultId(model.getConsultId());
+                    MHttpManagerFactory.getAccountManager().getTalkFailData(getContext(),
+                            params, new HttpResponseHandler<HrGetTalkFail>() {
+
+                                @Override
+                                public void onSuccess(HrGetTalkFail result) {
+                                    // TODO Auto-generated method stub
+                                    TalkDataDialog dialog = new TalkDataDialog(getContext(), R.style.CustomDialog, result);
+                                    dialog.show();
+                                }
+
+                                @Override
+                                public void onStart() {
+                                    // TODO Auto-generated method stub
+
+                                }
+
+                                @Override
+                                public void onError(String message) {
+                                    // TODO Auto-generated method stub
+
+                                }
+                            });
+
+                    break;
             }
 
         }
@@ -585,7 +630,7 @@ public class QTView extends BaseOrderView {
          */
         private void edit() {
             Intent mIntent = new Intent(getContext(), EditOrderActivity.class);
-            mIntent.putExtra("khxqtype",0);
+            mIntent.putExtra("khxqtype", 0);
             mIntent.putExtra("consultId", model.getConsultId());
             mIntent.putExtra("orderId", model.getOrderId());
             getContext().startActivity(mIntent);
@@ -655,45 +700,88 @@ public class QTView extends BaseOrderView {
          * 结束洽谈
          */
         private void close() {
-            TipsDialog mDialog = new TipsDialog(getContext());
-            mDialog.setTitle("请确认客户信息已填写完善。");
-            mDialog.setTopButton("继续洽谈", new DialogInterface.OnClickListener() {
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            if (model.getOrderId() == 0) {
+                //未创建订单时
+                Log.v("this", "未创建订单时");
+                Log.v("this", "是否是第一次洽谈:" + model.isShowFirstTalk());
+                Intent intent = new Intent(getContext(), SaveTalkFailActivity.class);
+                intent.putExtra("SaveTalkFailActivity", model.getConsultId());
+                getContext().startActivity(intent);
+            } else {
+                //创建订单后
+                Log.v("this", "创建订单后");
+                Log.v("this", "step:" + model.getStep());
+                Intent intent = null;
+                switch (model.getStep()) {
+                    case 0:
+                        //未进行任何步骤
+                        intent = new Intent(getContext(), WSZDataActivity.class);
+                        intent.putExtra("consultId", model.getConsultId());
+                        break;
+                    case 1:
+                        //提交了往生者信息
+                        intent = new Intent(getContext(), JBRDataActivity.class);
+                        intent.putExtra("consultId", model.getConsultId());
+                        break;
+                    case 2:
+                        //提交了经办人信息
+                        intent = new Intent(getContext(), ContractDataActivity.class);
+                        intent.putExtra("consultId", model.getConsultId());
+                        break;
+                    case 3:
+                        //提交了预备信息资料
+                        intent = new Intent(getContext(), ContractDataActivity.class);
+                        intent.putExtra("consultId", model.getConsultId());
+                        break;
+                    case 4:
+                        //提交了合同
+                        break;
 
                 }
-            });
-            mDialog.setBottomButton("结束洽谈",
-                    new DialogInterface.OnClickListener() {
+                if (intent != null) {
+                    getContext().startActivity(intent);
+                }
+//                TipsDialog mDialog = new TipsDialog(getContext());
+//                mDialog.setTitle("请确认客户信息已填写完善。");
+//                mDialog.setTopButton("继续洽谈", new DialogInterface.OnClickListener() {
+//
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                    }
+//                });
+//                mDialog.setBottomButton("结束洽谈",
+//                        new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                HpConsultIdParams params = new HpConsultIdParams();
+//                                params.setConsultId(model.getConsultId());
+//                                MHttpManagerFactory.getAccountManager().talkFinish(
+//                                        getContext(), params,
+//                                        new HttpResponseHandler<Object>() {
+//
+//                                            @Override
+//                                            public void onStart() {
+//
+//                                            }
+//
+//                                            @Override
+//                                            public void onSuccess(Object result) {
+//                                                refresh();
+//
+//                                            }
+//
+//                                            @Override
+//                                            public void onError(String message) {
+//
+//                                            }
+//                                        });
+//                            }
+//                        });
+//                mDialog.show();
+            }
 
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            HpConsultIdParams params = new HpConsultIdParams();
-                            params.setConsultId(model.getConsultId());
-                            MHttpManagerFactory.getAccountManager().talkFinish(
-                                    getContext(), params,
-                                    new HttpResponseHandler<Object>() {
-
-                                        @Override
-                                        public void onStart() {
-
-                                        }
-
-                                        @Override
-                                        public void onSuccess(Object result) {
-                                            refresh();
-
-                                        }
-
-                                        @Override
-                                        public void onError(String message) {
-
-                                        }
-                                    });
-                        }
-                    });
-            mDialog.show();
 
         }
 

@@ -22,7 +22,37 @@ public class HpSaveCustomerUsageParams extends BaseHttpParams{
 	private String shoeSize;
 	private String height;
 	private String note;
+	private String cardId;
+	private String otherHealth;
+	private String clothesData;
+
+	public String getCardId() {
+		return cardId;
+	}
+
+	public void setCardId(String cardId) {
+		this.cardId = cardId;
+	}
+
+	public String getOtherHealth() {
+		return otherHealth;
+	}
+
+	public void setOtherHealth(String otherHealth) {
+		this.otherHealth = otherHealth;
+	}
+
+	public String getClothesData() {
+		return clothesData;
+	}
+
+	public void setClothesData(String clothesData) {
+		this.clothesData = clothesData;
+	}
+
 	private HpAddConsultParams.TalkAddress curAddress;
+
+
 
 	public long getConsultId() {
 		return consultId;
