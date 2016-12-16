@@ -1,13 +1,483 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_contract_data"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/main_blackground"
     tools:context="com.shian.shianlife.activity.updata.ContractDataActivity">
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_10dp">
+
+        <TextView
+            android:id="@+id/tv_contractId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="合同编号:"
+            android:textColor="@color/blackgroundmain" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="甲方（委托方）:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="xxx"
+                android:textColor="@color/blackgroundmain" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="乙方（服务单位）:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="四川世安生命文化有限责任公司"
+                android:textColor="@color/blackgroundmain" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="根据《中华人民共和国合同法》及有关法律法规的规定，结合殡葬服务的特点，甲、乙双方在遵循自愿、平等、公平、诚实信用原则的基础上，经双方协商一致，就殡葬服务有关事项达成如下协议：" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第一条 服务内容
+ 甲方委托乙方为本合同指定的被服务人员（以下简称被服务对象）的殡葬仪式提供相关服务。
+ 特别说明：本合同中“□”后内容为可选内容，双方可根据实际需求以划“√”方式选定适用，可多选。" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第二条基本情况
+1、被服务对象信息：" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="往生者姓名" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="性别" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="名族" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="身份证号" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="年龄" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="寿鞋鞋码" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2.委托方基本信息" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="经办人姓名" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="联系电话" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="邮箱地址" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="身份证号" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="经办人地址" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="经办人是往生者的" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3、乙方联系地址：成都市锦江区静沙南路29号，联系电话：028-966188。
+第三条 服务方式
+本合同签订之后按照合同约定时间，或在合同有效存续期间指定的事件（如被服务对象逝世）发生时应甲方的口头或书面通知，由乙方按照本合同约定向甲方提供殡葬服务。甲方签订本合同后，在乙方策划殡葬服务方案前，变更殡葬服务内容的，应由甲乙双方协商一致并签订书面补充协议。殡葬服务项目正处于执行或派单中的，甲方不得取消或变更该项服务。
+1、殡葬服务开始时间：以甲方通知确定的殡葬服务开始时间为准。" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2、治丧地址：" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="xxxx"
+                android:textColor="@color/blackgroundmain" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="第四条 殡葬服务项目" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xxxxx"
+            android:textColor="@color/blackgroundmain" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="殡葬服务的实施
+本合同签订后，殡葬服务按照经甲方签字确认的策划方案组织实施。
+1、策划方案为乙方智力成果，仅供甲方在本合同约定范围内使用。甲方不得擅自将策划方案用于合同约定以外的其他用途或提交给第三方使用。
+2、乙方应于双方另行约定的时间向甲方提交策划方案，并由甲方予以签字确认。
+第五条 服务项目费用及其支付
+[治丧方案+增值服务]" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1、依据乙方提供的治丧方案及价格明细表计算，各项殡葬服务费用合计为：" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xxxxxxxxxxxx"
+            android:textColor="@color/blackgroundmain" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2、本合同签订后当日，甲方应向乙方支付预付款：" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xxxxxxxxxxxx"
+            android:textColor="@color/blackgroundmain" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="定金和预付款可充抵殡葬服务费用。" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3、在签订本合同时，甲乙双方确定各项殡葬服务费用总额。本合同签订后甲乙双方约定新增加或取消服务项目的，相应费用应计入服务费用总额或从服务费用总额中扣除。
+[治丧方案+增值服务]" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4、甲方应在乙方结束各项服务后提供服务清单与付费凭证时，将剩余的服务费用款项" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="xxxx"
+                android:textColor="@color/blackgroundmain" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="元一次性向乙方支付完毕。" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/contract_1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="经办人：" />
+
+        <com.shian.shianlife.common.view.finger.DrawView
+            android:id="@+id/dv_pay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_200dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="乙方：四川世安生命文化有限责任公司" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="委托代理人：" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="xxxxxx"
+                android:textColor="@color/blackgroundmain" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="殡葬服务客户须知
+1、在业务服务期间，客户应当妥善维护现场租赁用品，若在服务结束后，出现了租赁物品遗失或损坏，客户应当照价赔偿。
+2、客户在治丧期间，应当妥善维护现场安全环境，严禁肆意产生明火，尽量减少纸钱、香烛的燃烧量。
+3、客户在治丧期间应当主动监督维护现场秩序安全，控制来访宾客人流量。
+4、在治丧现场搭设完毕后，应随同现场我方工作人员主动核查所有治丧现场的质量安全。
+5、开始服务后，客户应确定相关服务项目是否准确，所有服务项目开始派单后，客户不能再修改已派单的服务项目内容。
+6、服务开始后，为了保证服务的顺利进行，客户应积极配合工作人员处理相关服务事项。
+7、客户选择单项商品服务时，应估计准确的需求商品的数量，若最后未使用完相应的商品并退货，将会产生退货费。" />
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_back"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_home_reg"
+                android:gravity="center"
+                android:padding="@dimen/dimen_10dp"
+                android:text="返回修改经办人信息"
+                android:textColor="@color/text_color" />
+
+            <TextView
+                android:id="@+id/tv_next"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_weight="1"
+                android:background="@drawable/ic_home_reg"
+                android:gravity="center"
+                android:padding="@dimen/dimen_10dp"
+                android:text="继续填写预备信息资料"
+                android:textColor="@color/text_color" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_100dp"
+            android:layout_margin="@dimen/dimen_20dp"
+            android:background="@drawable/ic_home_reg"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:padding="@dimen/dimen_10dp"
+            android:text="本客户无预备资料，直接结束洽谈"
+            android:textColor="@color/blackgroundmain" />
+    </LinearLayout>
+</ScrollView>

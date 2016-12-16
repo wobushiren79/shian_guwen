@@ -718,21 +718,25 @@ public class QTView extends BaseOrderView {
                         //未进行任何步骤
                         intent = new Intent(getContext(), WSZDataActivity.class);
                         intent.putExtra("consultId", model.getConsultId());
+                        intent.putExtra("orderId", model.getOrderId());
                         break;
                     case 1:
                         //提交了往生者信息
                         intent = new Intent(getContext(), JBRDataActivity.class);
                         intent.putExtra("consultId", model.getConsultId());
+                        intent.putExtra("orderId", model.getOrderId());
                         break;
                     case 2:
                         //提交了经办人信息
                         intent = new Intent(getContext(), ContractDataActivity.class);
                         intent.putExtra("consultId", model.getConsultId());
+                        intent.putExtra("orderId", model.getOrderId());
                         break;
                     case 3:
                         //提交了预备信息资料
                         intent = new Intent(getContext(), ContractDataActivity.class);
                         intent.putExtra("consultId", model.getConsultId());
+                        intent.putExtra("orderId", model.getOrderId());
                         break;
                     case 4:
                         //提交了合同

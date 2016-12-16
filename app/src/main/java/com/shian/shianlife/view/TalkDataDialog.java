@@ -2,6 +2,7 @@ package com.shian.shianlife.view;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -45,6 +46,8 @@ public class TalkDataDialog extends Dialog {
         mTvRemark = (TextView) view.findViewById(R.id.tv_remark);
         mTvResult = (TextView) view.findViewById(R.id.tv_result);
         mTvResultTime = (TextView) view.findViewById(R.id.tv_resulttime);
+
+        Log.v("this","result.getDeadName()"+result.getDeadName());
 
         mTvName.setText(result.getDeadName());
         mTvHealth.setText(result.getHealth());

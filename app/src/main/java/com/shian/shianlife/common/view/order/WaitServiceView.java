@@ -19,6 +19,7 @@ import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper;
 import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper.OnSwipeRefreshListener;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.OrderDetailActivity;
+import com.shian.shianlife.activity.updata.WaitServiceDataActivity;
 import com.shian.shianlife.common.utils.TArrayListAdapter;
 import com.shian.shianlife.common.utils.TArrayListAdapter.IOnDrawViewEx;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -299,46 +300,50 @@ public class WaitServiceView extends BaseOrderView {
          */
         private void execute() {
             // TODO Auto-generated method stub
-            TipsDialog dialog = new TipsDialog(getContext());
-            dialog.setTitle("请确认使用者状态为已去世，开始执行任务后，客户服务将不可取消。");
-            dialog.setTopButton("未去世", null);
-            dialog.setBottomButton("确认去世", new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if (model.isHasPrepay()) {
-                        HpAcceptParams params = new HpAcceptParams();
-                        params.setOrderId(model.getOrderId());
-                        MHttpManagerFactory.getAccountManager().startService(getContext(),
-                                params, new HttpResponseHandler<Object>() {
-
-                                    @Override
-                                    public void onSuccess(Object result) {
-                                        // TODO Auto-generated method stub
-                                        ToastUtils.show(getContext(), "开始执行成功");
-                                        refresh();
-                                    }
-
-                                    @Override
-                                    public void onStart() {
-                                        // TODO Auto-generated method stub
-
-                                    }
-
-                                    @Override
-                                    public void onError(String message) {
-                                        // TODO Auto-generated method stub
-
-                                    }
-                                });
-                    } else {
-                        dialog.cancel();
-                        Toast.makeText(getContext(), "定金未支付，不能开始执行", Toast.LENGTH_LONG).show();
-                    }
-
-                }
-            });
-            dialog.show();
+            Intent intent = new Intent(getContext(), WaitServiceDataActivity.class);
+            intent.putExtra("orderId", model.getOrderId());
+            intent.putExtra("consultId", model.getConsultId());
+            getContext().startActivity(intent);
+//            TipsDialog dialog = new TipsDialog(getContext());
+//            dialog.setTitle("请确认使用者状态为已去世，开始执行任务后，客户服务将不可取消。");
+//            dialog.setTopButton("未去世", null);
+//            dialog.setBottomButton("确认去世", new DialogInterface.OnClickListener() {
+//
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    if (model.isHasPrepay()) {
+//                        HpAcceptParams params = new HpAcceptParams();
+//                        params.setOrderId(model.getOrderId());
+//                        MHttpManagerFactory.getAccountManager().startService(getContext(),
+//                                params, new HttpResponseHandler<Object>() {
+//
+//                                    @Override
+//                                    public void onSuccess(Object result) {
+//                                        // TODO Auto-generated method stub
+//                                        ToastUtils.show(getContext(), "开始执行成功");
+//                                        refresh();
+//                                    }
+//
+//                                    @Override
+//                                    public void onStart() {
+//                                        // TODO Auto-generated method stub
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void onError(String message) {
+//                                        // TODO Auto-generated method stub
+//
+//                                    }
+//                                });
+//                    } else {
+//                        dialog.cancel();
+//                        Toast.makeText(getContext(), "定金未支付，不能开始执行", Toast.LENGTH_LONG).show();
+//                    }
+//
+//                }
+//            });
+//            dialog.show();
 
         }
 

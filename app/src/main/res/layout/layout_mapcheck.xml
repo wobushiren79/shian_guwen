@@ -5,14 +5,16 @@
     android:layout_gravity="center_vertical"
     android:layout_marginLeft="@dimen/dimen_10dp"
     android:layout_marginRight="@dimen/dimen_10dp"
-    android:background="@drawable/et_bk1"
+
     android:orientation="horizontal">
 
-    <TextView
+    <EditText
+        android:background="@drawable/et_bk1"
         android:id="@+id/tv_map_text"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:singleLine="true"
         android:gravity="center"
         android:textColor="@color/blackgroundmain" />
 

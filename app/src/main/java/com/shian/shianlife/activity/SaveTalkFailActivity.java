@@ -51,11 +51,11 @@ public class SaveTalkFailActivity extends BaseActivity {
 
     ImageView mMapCheck;
     ImageView mSelect;
-    TextView mTVMapText;
+    EditText mTVMapText;
 
     ImageView mMapCheckPlan;
     ImageView mSelectPlan;
-    TextView mTVMapTextPlan;
+    EditText mTVMapTextPlan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,11 +92,11 @@ public class SaveTalkFailActivity extends BaseActivity {
 
         mMapCheck = (ImageView) mLocationLL.findViewById(R.id.iv_map);
         mSelect = (ImageView) mLocationLL.findViewById(R.id.iv_data);
-        mTVMapText = (TextView) mLocationLL.findViewById(R.id.tv_map_text);
+        mTVMapText = (EditText) mLocationLL.findViewById(R.id.tv_map_text);
 
         mMapCheckPlan = (ImageView) mPlanLocationLL.findViewById(R.id.iv_map);
         mSelectPlan = (ImageView) mPlanLocationLL.findViewById(R.id.iv_data);
-        mTVMapTextPlan = (TextView) mPlanLocationLL.findViewById(R.id.tv_map_text);
+        mTVMapTextPlan = (EditText) mPlanLocationLL.findViewById(R.id.tv_map_text);
 
         mTalkTime.setOnClickListener(onClickListener);
         mSubmit.setOnClickListener(onClickListener);
@@ -211,10 +211,10 @@ public class SaveTalkFailActivity extends BaseActivity {
         switch (resultCode) {
             case 1111:
                 String location = data.getStringExtra("location");
-                if (mapCheckNum==0){
+                if (mapCheckNum == 0) {
                     params.setLocation(location);
                     mTVMapText.setText(location);
-                }else if(mapCheckNum==1){
+                } else if (mapCheckNum == 1) {
                     params.setPlanLocation(location);
                     mTVMapTextPlan.setText(location);
                 }
@@ -266,13 +266,38 @@ public class SaveTalkFailActivity extends BaseActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         MHttpManagerFactory.getAccountManager().saveTalkFailData(SaveTalkFailActivity.this, params,
                                 new HttpResponseHandler<Object>() {
-
                                     @Override
                                     public void onSuccess(Object result) {
                                         // TODO Auto-generated method stub
-                                        Toast.makeText(SaveTalkFailActivity.this, "提交成功，结束洽谈", Toast.LENGTH_LONG).show();
-                                        OrderFragment.C_bOrder_isRefresh = true;
-                                        finish();
+                                        if (!params.isResult()) {
+                                            HpConsultIdParams params = new HpConsultIdParams();
+                                            params.setConsultId(ConsultId);
+                                            MHttpManagerFactory.getAccountManager().talkFinish(
+                                                    SaveTalkFailActivity.this, params,
+                                                    new HttpResponseHandler<Object>() {
+
+                                                        @Override
+                                                        public void onStart() {
+
+                                                        }
+
+                                                        @Override
+                                                        public void onSuccess(Object result) {
+                                                            Toast.makeText(SaveTalkFailActivity.this, "提交成功，结束洽谈", Toast.LENGTH_LONG).show();
+                                                            OrderFragment.C_bOrder_isRefresh = true;
+                                                            finish();
+                                                        }
+
+                                                        @Override
+                                                        public void onError(String message) {
+
+                                                        }
+                                                    });
+                                        }else{
+                                            Toast.makeText(SaveTalkFailActivity.this, "提交成功，结束洽谈", Toast.LENGTH_LONG).show();
+                                            OrderFragment.C_bOrder_isRefresh = true;
+                                            finish();
+                                        }
                                     }
 
                                     @Override

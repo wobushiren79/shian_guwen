@@ -1,186 +1,222 @@
 package com.shian.shianlife.provide.result;
 
 public class HrConsultUsageResult {
-	HrConsultUsageResults consultUsage;
+    HrConsultUsageResults consultUsage;
 
-	public HrConsultUsageResults getConsultUsage() {
-		return consultUsage;
-	}
+    public HrConsultUsageResults getConsultUsage() {
+        return consultUsage;
+    }
 
-	public void setConsultUsage(HrConsultUsageResults consultUsage) {
-		this.consultUsage = consultUsage;
-	}
+    public void setConsultUsage(HrConsultUsageResults consultUsage) {
+        this.consultUsage = consultUsage;
+    }
 
-	public class HrConsultUsageResults {
-		/**
-		 * "age":"string", "birthday":1461393773005, "consultId":11,
-		 * "curAddress":"string", "curAddressArea":11, "curAddressCity":11,
-		 * "curAddressProvince":11, "curAddressSuffix":"string",
-		 * "dieTime":1461393773005, "height":"string", "id":11,
-		 * "intimeReady":"string", "job":2, "name":"string", "note":"string",
-		 * "sex":2, "shoeSize":"string", "state":2, "will":"string"
-		 */
-		private String age;
-		private long birthday;
-		private String curAddress;
-		private int curAddressArea;
-		private int curAddressCity;
-		private int curAddressProvince;
-		private String curAddressSuffix;
-		private long dieTime;
-		private String height;
-		private long id;
-		private String intimeReady;
-		private int job;
-		private String name;
-		private String note;
-		private int sex;
-		private String shoeSize;
-		private String state;
-		private String will;
+    public class HrConsultUsageResults {
+        /**
+         * "age":"string", "birthday":1461393773005, "consultId":11,
+         * "curAddress":"string", "curAddressArea":11, "curAddressCity":11,
+         * "curAddressProvince":11, "curAddressSuffix":"string",
+         * "dieTime":1461393773005, "height":"string", "id":11,
+         * "intimeReady":"string", "job":2, "name":"string", "note":"string",
+         * "sex":2, "shoeSize":"string", "state":2, "will":"string"
+         */
+        private String age;
+        private long birthday;
+        private String curAddress;
+        private int curAddressArea;
+        private int curAddressCity;
+        private int curAddressProvince;
+        private String curAddressSuffix;
+        private long dieTime;
+        private String height;
+        private long id;
+        private String intimeReady;
+        private int job;
+        private String name;
+        private String note;
+        private int sex;
+        private String shoeSize;
+        private String state;
+        private String will;
 
-		public String getAge() {
-			return age;
-		}
+        private String cardId;//往生者身份证号码
+        private String otherHealth;//另一半信息
+        private String clothesData;//寿衣信息
+        private String location;//往生者地址
+        public String getCardId() {
+            return cardId;
+        }
 
-		public void setAge(String age) {
-			this.age = age;
-		}
+        public void setCardId(String cardId) {
+            this.cardId = cardId;
+        }
 
-		public long getBirthday() {
-			return birthday;
-		}
+        public String getOtherHealth() {
+            return otherHealth;
+        }
 
-		public void setBirthday(long birthday) {
-			this.birthday = birthday;
-		}
+        public void setOtherHealth(String otherHealth) {
+            this.otherHealth = otherHealth;
+        }
 
-		public String getCurAddress() {
-			return curAddress;
-		}
+        public String getClothesData() {
+            return clothesData;
+        }
 
-		public void setCurAddress(String curAddress) {
-			this.curAddress = curAddress;
-		}
+        public void setClothesData(String clothesData) {
+            this.clothesData = clothesData;
+        }
 
-		public int getCurAddressArea() {
-			return curAddressArea;
-		}
+        public String getAge() {
+            return age;
+        }
 
-		public void setCurAddressArea(int curAddressArea) {
-			this.curAddressArea = curAddressArea;
-		}
+        public void setAge(String age) {
+            this.age = age;
+        }
 
-		public int getCurAddressCity() {
-			return curAddressCity;
-		}
+        public long getBirthday() {
+            return birthday;
+        }
 
-		public void setCurAddressCity(int curAddressCity) {
-			this.curAddressCity = curAddressCity;
-		}
+        public String getLocation() {
+            return location;
+        }
 
-		public int getCurAddressProvince() {
-			return curAddressProvince;
-		}
+        public void setLocation(String location) {
+            this.location = location;
+        }
 
-		public void setCurAddressProvince(int curAddressProvince) {
-			this.curAddressProvince = curAddressProvince;
-		}
+        public void setBirthday(long birthday) {
+            this.birthday = birthday;
+        }
 
-		public String getCurAddressSuffix() {
-			return curAddressSuffix;
-		}
+        public String getCurAddress() {
+            return curAddress;
+        }
 
-		public void setCurAddressSuffix(String curAddressSuffix) {
-			this.curAddressSuffix = curAddressSuffix;
-		}
+        public void setCurAddress(String curAddress) {
+            this.curAddress = curAddress;
+        }
 
-		public long getDieTime() {
-			return dieTime;
-		}
+        public int getCurAddressArea() {
+            return curAddressArea;
+        }
 
-		public void setDieTime(long dieTime) {
-			this.dieTime = dieTime;
-		}
+        public void setCurAddressArea(int curAddressArea) {
+            this.curAddressArea = curAddressArea;
+        }
 
-		public String getHeight() {
-			return height;
-		}
+        public int getCurAddressCity() {
+            return curAddressCity;
+        }
 
-		public void setHeight(String height) {
-			this.height = height;
-		}
+        public void setCurAddressCity(int curAddressCity) {
+            this.curAddressCity = curAddressCity;
+        }
 
-		public long getId() {
-			return id;
-		}
+        public int getCurAddressProvince() {
+            return curAddressProvince;
+        }
 
-		public void setId(long id) {
-			this.id = id;
-		}
+        public void setCurAddressProvince(int curAddressProvince) {
+            this.curAddressProvince = curAddressProvince;
+        }
 
-		public String getIntimeReady() {
-			return intimeReady;
-		}
+        public String getCurAddressSuffix() {
+            return curAddressSuffix;
+        }
 
-		public void setIntimeReady(String intimeReady) {
-			this.intimeReady = intimeReady;
-		}
+        public void setCurAddressSuffix(String curAddressSuffix) {
+            this.curAddressSuffix = curAddressSuffix;
+        }
 
-		public int getJob() {
-			return job;
-		}
+        public long getDieTime() {
+            return dieTime;
+        }
 
-		public void setJob(int job) {
-			this.job = job;
-		}
+        public void setDieTime(long dieTime) {
+            this.dieTime = dieTime;
+        }
 
-		public String getName() {
-			return name;
-		}
+        public String getHeight() {
+            return height;
+        }
 
-		public void setName(String name) {
-			this.name = name;
-		}
+        public void setHeight(String height) {
+            this.height = height;
+        }
 
-		public String getNote() {
-			return note;
-		}
+        public long getId() {
+            return id;
+        }
 
-		public void setNote(String note) {
-			this.note = note;
-		}
+        public void setId(long id) {
+            this.id = id;
+        }
 
-		public int getSex() {
-			return sex;
-		}
+        public String getIntimeReady() {
+            return intimeReady;
+        }
 
-		public void setSex(int sex) {
-			this.sex = sex;
-		}
+        public void setIntimeReady(String intimeReady) {
+            this.intimeReady = intimeReady;
+        }
 
-		public String getShoeSize() {
-			return shoeSize;
-		}
+        public int getJob() {
+            return job;
+        }
 
-		public void setShoeSize(String shoeSize) {
-			this.shoeSize = shoeSize;
-		}
+        public void setJob(int job) {
+            this.job = job;
+        }
 
-		public String getState() {
-			return state;
-		}
+        public String getName() {
+            return name;
+        }
 
-		public void setState(String state) {
-			this.state = state;
-		}
+        public void setName(String name) {
+            this.name = name;
+        }
 
-		public String getWill() {
-			return will;
-		}
+        public String getNote() {
+            return note;
+        }
 
-		public void setWill(String will) {
-			this.will = will;
-		}
-	}
+        public void setNote(String note) {
+            this.note = note;
+        }
+
+        public int getSex() {
+            return sex;
+        }
+
+        public void setSex(int sex) {
+            this.sex = sex;
+        }
+
+        public String getShoeSize() {
+            return shoeSize;
+        }
+
+        public void setShoeSize(String shoeSize) {
+            this.shoeSize = shoeSize;
+        }
+
+        public String getState() {
+            return state;
+        }
+
+        public void setState(String state) {
+            this.state = state;
+        }
+
+        public String getWill() {
+            return will;
+        }
+
+        public void setWill(String will) {
+            this.will = will;
+        }
+    }
 }

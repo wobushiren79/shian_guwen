@@ -35,6 +35,7 @@ import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -54,7 +55,7 @@ public class WSZDataActivity extends BaseActivity {
 
     ImageView mIVMapCheck;
     ImageView mIVMapSelect;
-    TextView mTVMapText;
+    EditText mTVMapText;
 
     RadioButton mRBUn, mRBMan, mRBWoman, mRBSelect;
     List<RadioButton> rbList = new ArrayList<>();
@@ -96,7 +97,7 @@ public class WSZDataActivity extends BaseActivity {
 
         mIVMapCheck = (ImageView) findViewById(R.id.iv_map);
         mIVMapSelect = (ImageView) findViewById(R.id.iv_data);
-        mTVMapText = (TextView) findViewById(R.id.tv_map_text);
+        mTVMapText = (EditText) findViewById(R.id.tv_map_text);
 
         rbList.add(mRBUn);
         rbList.add(mRBMan);
@@ -126,7 +127,27 @@ public class WSZDataActivity extends BaseActivity {
                     public void onSuccess(HrConsultUsageResult result) {
                         // TODO Auto-generated method stub
 
+                        Log.v("this", "Name:" + result.getConsultUsage().getName());
+                        Log.v("this", "CardId:" + result.getConsultUsage().getCardId());
+                        Log.v("this", "Age:" + result.getConsultUsage().getAge());
+                        Log.v("this", "Sex:" + result.getConsultUsage().getSex());
+                        Log.v("this", "ShoeSize:" + result.getConsultUsage().getShoeSize());
+                        Log.v("this", "State:" + result.getConsultUsage().getState());
+                        Log.v("this", "Birthday:" + result.getConsultUsage().getBirthday());
+                        Log.v("this", "Location:" + result.getConsultUsage().getLocation());
+                        Log.v("this", "ClothesData:" + result.getConsultUsage().getClothesData());
+                        Log.v("this", "OtherHealth:" + result.getConsultUsage().getOtherHealth());
+                        Log.v("this", "Note:" + result.getConsultUsage().getNote());
 
+                        mETName.setText(result.getConsultUsage().getName());
+                        mETCardId.setText(result.getConsultUsage().getCardId());
+                        mETAge.setText(result.getConsultUsage().getAge());
+                        mETShoesSize.setText(result.getConsultUsage().getShoeSize());
+                        mTVBirthdayTime.setText(TransitionDate.DateToStr(new Date(
+                                        result.getConsultUsage().getBirthday()),
+                                "yyyy-MM-dd"));
+                        mTVMapText.setText(result.getConsultUsage().getLocation());
+                        mETRemark.setText(result.getConsultUsage().getNote());
                     }
 
                     @Override
@@ -213,10 +234,9 @@ public class WSZDataActivity extends BaseActivity {
                 String carid = mETCardId.getText().toString();
                 String age = mETAge.getText().toString();
                 String size = mETShoesSize.getText().toString();
-
-                String bz = mETRemark.getText().toString();
                 String birthd = mTVBirthdayTime.getText().toString();
-
+                String location = mTVMapText.getText().toString();
+                String bz = mETRemark.getText().toString();
 
                 if (TextUtils.isEmpty(name)) {
                     ToastUtils.show(WSZDataActivity.this, "往生者姓名不能为空");
@@ -243,14 +263,19 @@ public class WSZDataActivity extends BaseActivity {
                     ToastUtils.show(WSZDataActivity.this, "往生者生日不能为空");
                     return;
                 }
+                if (TextUtils.isEmpty(location)) {
+                    ToastUtils.show(WSZDataActivity.this, "地址不能为空");
+                    return;
+                }
+                params.setConsultId(getIntent().getLongExtra("consultId", 0));
                 params.setName(name);
                 params.setCardId(carid);
                 params.setAge(age);
                 params.setShoeSize(size);
                 params.setBirthday(TransitionDate.StrToDate(birthd, "yyyy-MM-dd")
                         .getTime());
-                params.setConsultId((WSZDataActivity.this).getIntent().getLongExtra(
-                        "consultId", 0));
+                params.setLocation(location);
+
                 params.setNote(bz);
 
                 Log.v("this", "Name:" + params.getName());
@@ -260,7 +285,7 @@ public class WSZDataActivity extends BaseActivity {
                 Log.v("this", "ShoeSize:" + params.getShoeSize());
                 Log.v("this", "State:" + params.getState());
                 Log.v("this", "Birthday:" + params.getBirthday());
-                Log.v("this", "Location:");
+                Log.v("this", "Location:" + params.getLocation());
                 Log.v("this", "ClothesData:" + params.getClothesData());
                 Log.v("this", "OtherHealth:" + params.getOtherHealth());
                 Log.v("this", "Note:" + params.getNote());

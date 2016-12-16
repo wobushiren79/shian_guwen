@@ -7,6 +7,7 @@ import com.shian.shianlife.provide.base.BaseHttpParams;
  */
 
 public class HpTalkFailParams extends BaseHttpParams {
+
     private String consultId;
     private String deadName;
     private String health;
@@ -17,6 +18,8 @@ public class HpTalkFailParams extends BaseHttpParams {
     private boolean result;
     private String resultTime;
     private String planLocation;
+
+
 
     public String getPlanLocation() {
         return planLocation;

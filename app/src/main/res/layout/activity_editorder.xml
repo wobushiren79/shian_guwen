@@ -2,28 +2,32 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none" >
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
-        <RelativeLayout android:id="@+id/rl_top" android:visibility="gone"
+        <RelativeLayout
+            android:id="@+id/rl_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingRight="10dp"
-            android:paddingTop="10dp" >
+            android:paddingTop="10dp"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tv_customerdetail"
                 style="@style/orderlist_item_btn_textStyle"
-                android:layout_width="@dimen/dimen_200dp" android:drawableLeft="@drawable/ic_x_kfxq"
+                android:layout_width="@dimen/dimen_200dp"
                 android:layout_height="@dimen/dimen_60dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_margin="@dimen/dimen_10dp"
-                android:text="客户详情" />
+                android:drawableLeft="@drawable/ic_x_kfxq"
+                android:text="客户详情"
+                android:visibility="gone" />
         </RelativeLayout>
 
         <com.shian.shianlife.common.view.editor.MainSetmealView
@@ -64,7 +68,7 @@
             android:layout_marginRight="@dimen/dimen_25dp"
             android:layout_marginTop="@dimen/dimen_35dp"
             android:gravity="right"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -92,7 +96,7 @@
             android:layout_margin="@dimen/dimen_40dp"
             android:background="@drawable/ic_qrtj"
             android:gravity="center"
-        
+
             android:textColor="@color/white"
             android:textSize="@dimen/txtsize_32sp" />
     </LinearLayout>

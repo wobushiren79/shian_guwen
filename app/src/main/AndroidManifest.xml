@@ -254,7 +254,8 @@
         <activity android:name=".activity.updata.JBRDataActivity" />
         <activity android:name=".activity.updata.ContractDataActivity" />
         <activity android:name=".activity.updata.TQZBDataActivity" />
-        <activity android:name=".activity.MapLocation"></activity>
+        <activity android:name=".activity.MapLocation" />
+        <activity android:name=".activity.updata.WaitServiceDataActivity"></activity>
     </application>
 
 </manifest>

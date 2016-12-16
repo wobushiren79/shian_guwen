@@ -22,9 +22,19 @@ public class HpSaveCustomerUsageParams extends BaseHttpParams{
 	private String shoeSize;
 	private String height;
 	private String note;
+
 	private String cardId;
 	private String otherHealth;
 	private String clothesData;
+  private String location;
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
 
 	public String getCardId() {
 		return cardId;

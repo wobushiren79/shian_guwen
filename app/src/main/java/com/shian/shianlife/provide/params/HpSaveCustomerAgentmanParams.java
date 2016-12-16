@@ -17,6 +17,43 @@ public class HpSaveCustomerAgentmanParams extends BaseHttpParams {
 	private String linkInfo;
 	private HpAddConsultParams.TalkAddress address;
 
+	private String location;
+	private String cardId;
+	private String email;
+	private String remark;
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getCardId() {
+		return cardId;
+	}
+
+	public void setCardId(String cardId) {
+		this.cardId = cardId;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
 	public long getConsultId() {
 		return consultId;
 	}
