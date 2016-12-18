@@ -47,7 +47,7 @@ public class OrderListModel {
 	String usageNote;
 	int financeStatus;
 
-	int step;//填写资料的步骤
+	int step=2;//填写资料的步骤
 
 	public int getStep() {
 		return step;

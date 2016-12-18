@@ -33,6 +33,7 @@ import com.shian.shianlife.provide.result.HrConsultCemetery;
 import com.shian.shianlife.provide.result.HrConsultFuneral;
 import com.shian.shianlife.provide.result.HrConsultUsageResult;
 import com.shian.shianlife.provide.result.HrGetComment;
+import com.shian.shianlife.provide.result.HrGetContractData;
 import com.shian.shianlife.provide.result.HrGetCustomerContract;
 import com.shian.shianlife.provide.result.HrGetCustomerFuneral;
 import com.shian.shianlife.provide.result.HrGetCustomerPreready;
@@ -511,4 +512,11 @@ public interface MAccountManager extends HttpManager {
     public void getTalkFailData(Context context,HpConsultIdParams params,
                                 HttpResponseHandler<HrGetTalkFail> handler);
 
+    /**
+     * 获取合同相关信息
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void getContractData(Context context,HpConsultIdParams params,HttpResponseHandler<HrGetContractData> handler);
 }

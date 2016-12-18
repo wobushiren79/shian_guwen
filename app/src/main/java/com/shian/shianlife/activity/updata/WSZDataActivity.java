@@ -230,93 +230,98 @@ public class WSZDataActivity extends BaseActivity {
             } else if (view == mIVMapSelect) {
 
             } else if (view == mTVNext) {
-                String name = mETName.getText().toString();
-                String carid = mETCardId.getText().toString();
-                String age = mETAge.getText().toString();
-                String size = mETShoesSize.getText().toString();
-                String birthd = mTVBirthdayTime.getText().toString();
-                String location = mTVMapText.getText().toString();
-                String bz = mETRemark.getText().toString();
-
-                if (TextUtils.isEmpty(name)) {
-                    ToastUtils.show(WSZDataActivity.this, "往生者姓名不能为空");
-                    return;
-                }
-                if (TextUtils.isEmpty(carid)) {
-                    ToastUtils.show(WSZDataActivity.this, "往生者身份证号码不能为空");
-                    return;
-                }
-                if (carid.getBytes().length != 18) {
-                    ToastUtils.show(WSZDataActivity.this, "往生者身份证号码不足18位");
-                    return;
-                }
-                if (TextUtils.isEmpty(age)) {
-                    ToastUtils.show(WSZDataActivity.this, "往生者年龄不能为空");
-                    return;
-                }
-                if (TextUtils.isEmpty(size)) {
-                    ToastUtils.show(WSZDataActivity.this, "往生者鞋码不能为空");
-                    return;
-                }
-
-                if (TextUtils.isEmpty(birthd)) {
-                    ToastUtils.show(WSZDataActivity.this, "往生者生日不能为空");
-                    return;
-                }
-                if (TextUtils.isEmpty(location)) {
-                    ToastUtils.show(WSZDataActivity.this, "地址不能为空");
-                    return;
-                }
-                params.setConsultId(getIntent().getLongExtra("consultId", 0));
-                params.setName(name);
-                params.setCardId(carid);
-                params.setAge(age);
-                params.setShoeSize(size);
-                params.setBirthday(TransitionDate.StrToDate(birthd, "yyyy-MM-dd")
-                        .getTime());
-                params.setLocation(location);
-
-                params.setNote(bz);
-
-                Log.v("this", "Name:" + params.getName());
-                Log.v("this", "CardId:" + params.getCardId());
-                Log.v("this", "Age:" + params.getAge());
-                Log.v("this", "Sex:" + params.getSex());
-                Log.v("this", "ShoeSize:" + params.getShoeSize());
-                Log.v("this", "State:" + params.getState());
-                Log.v("this", "Birthday:" + params.getBirthday());
-                Log.v("this", "Location:" + params.getLocation());
-                Log.v("this", "ClothesData:" + params.getClothesData());
-                Log.v("this", "OtherHealth:" + params.getOtherHealth());
-                Log.v("this", "Note:" + params.getNote());
-
-                MHttpManagerFactory.getAccountManager().saveCustomerUsage(WSZDataActivity.this,
-                        params, new HttpResponseHandler<Object>() {
-
-                            @Override
-                            public void onSuccess(Object result) {
-                                // TODO Auto-generated method stub
-                                ToastUtils.show(WSZDataActivity.this, "保存成功");
-                                Intent intent = new Intent(WSZDataActivity.this, JBRDataActivity.class);
-                                intent.putExtra("consultId", params.getConsultId());
-                                startActivity(intent);
-                            }
-
-                            @Override
-                            public void onStart() {
-                                // TODO Auto-generated method stub
-
-                            }
-
-                            @Override
-                            public void onError(String message) {
-                                // TODO Auto-generated method stub
-
-                            }
-                        });
+                upData();
             }
         }
     };
+
+    private void upData() {
+        String name = mETName.getText().toString();
+        String carid = mETCardId.getText().toString();
+        String age = mETAge.getText().toString();
+        String size = mETShoesSize.getText().toString();
+        String birthd = mTVBirthdayTime.getText().toString();
+        String location = mTVMapText.getText().toString();
+        String bz = mETRemark.getText().toString();
+
+        if (TextUtils.isEmpty(name)) {
+            ToastUtils.show(WSZDataActivity.this, "往生者姓名不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(carid)) {
+            ToastUtils.show(WSZDataActivity.this, "往生者身份证号码不能为空");
+            return;
+        }
+        if (carid.getBytes().length != 18) {
+            ToastUtils.show(WSZDataActivity.this, "往生者身份证号码不足18位");
+            return;
+        }
+        if (TextUtils.isEmpty(age)) {
+            ToastUtils.show(WSZDataActivity.this, "往生者年龄不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(size)) {
+            ToastUtils.show(WSZDataActivity.this, "往生者鞋码不能为空");
+            return;
+        }
+
+        if (TextUtils.isEmpty(birthd)) {
+            ToastUtils.show(WSZDataActivity.this, "往生者生日不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(location)) {
+            ToastUtils.show(WSZDataActivity.this, "地址不能为空");
+            return;
+        }
+        params.setConsultId(getIntent().getLongExtra("consultId", 0));
+        params.setName(name);
+        params.setCardId(carid);
+        params.setAge(age);
+        params.setShoeSize(size);
+        params.setBirthday(TransitionDate.StrToDate(birthd, "yyyy-MM-dd")
+                .getTime());
+        params.setLocation(location);
+
+        params.setNote(bz);
+
+        Log.v("this", "Name:" + params.getName());
+        Log.v("this", "CardId:" + params.getCardId());
+        Log.v("this", "Age:" + params.getAge());
+        Log.v("this", "Sex:" + params.getSex());
+        Log.v("this", "ShoeSize:" + params.getShoeSize());
+        Log.v("this", "State:" + params.getState());
+        Log.v("this", "Birthday:" + params.getBirthday());
+        Log.v("this", "Location:" + params.getLocation());
+        Log.v("this", "ClothesData:" + params.getClothesData());
+        Log.v("this", "OtherHealth:" + params.getOtherHealth());
+        Log.v("this", "Note:" + params.getNote());
+
+        MHttpManagerFactory.getAccountManager().saveCustomerUsage(WSZDataActivity.this,
+                params, new HttpResponseHandler<Object>() {
+
+                    @Override
+                    public void onSuccess(Object result) {
+                        // TODO Auto-generated method stub
+                        ToastUtils.show(WSZDataActivity.this, "保存成功");
+                        Intent intent = new Intent(WSZDataActivity.this, JBRDataActivity.class);
+                        intent.putExtra("consultId", params.getConsultId());
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    @Override
+                    public void onStart() {
+                        // TODO Auto-generated method stub
+
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
+    }
 
     private void setMapLocation() {
         //点击地图定位

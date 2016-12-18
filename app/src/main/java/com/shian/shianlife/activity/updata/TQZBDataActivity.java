@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,9 +46,13 @@ public class TQZBDataActivity extends BaseActivity {
     private long consultId;
     private long orderId;
 
-    @InjectView(R.id.et_yb_0)
     EditText et0;
-    @InjectViews({R.id.btn_yb_pic_0, R.id.btn_yb_pic_1, R.id.btn_yb_pic_2, R.id.btn_yb_pic_3})
+
+    PicImageView btn_yb_pic_0;
+    PicImageView btn_yb_pic_1;
+    PicImageView btn_yb_pic_2;
+    PicImageView btn_yb_pic_3;
+
     List<PicImageView> btnList;
 
 
@@ -56,11 +61,27 @@ public class TQZBDataActivity extends BaseActivity {
         super.onCreate(arg0);
         v = LayoutInflater.from(TQZBDataActivity.this).inflate(R.layout.activity_tqzbdata, null);
         setContentView(v);
-        ButterKnife.inject(this, v);
+
+        initView();
         setTitle("提前准备");
         consultId = getIntent().getLongExtra("consultId", 0);
         orderId = getIntent().getLongExtra("orderId", 0);
         initData();
+    }
+
+    private void initView() {
+        btn_yb_pic_0 = (PicImageView) findViewById(R.id.btn_yb_pic_0);
+        btn_yb_pic_1 = (PicImageView) findViewById(R.id.btn_yb_pic_1);
+        btn_yb_pic_2 = (PicImageView) findViewById(R.id.btn_yb_pic_2);
+        btn_yb_pic_3 = (PicImageView) findViewById(R.id.btn_yb_pic_3);
+
+        et0 = (EditText) findViewById(R.id.et_yb_0);
+
+        btnList = new ArrayList<>();
+        btnList.add(btn_yb_pic_0);
+        btnList.add(btn_yb_pic_1);
+        btnList.add(btn_yb_pic_2);
+        btnList.add(btn_yb_pic_3);
     }
 
     public void initData() {
@@ -107,6 +128,7 @@ public class TQZBDataActivity extends BaseActivity {
             }
         });
     }
+
 
     @OnClick({R.id.btn_yb_pic_0, R.id.btn_yb_pic_1, R.id.btn_yb_pic_2, R.id.btn_yb_pic_3})
     void btnPicClick(final PicImageView v) {
@@ -175,6 +197,7 @@ public class TQZBDataActivity extends BaseActivity {
     }
 
     private void uploadFile(final PicImageView ib, final String file, String path) {
+        Log.v("this", "file:" + file + " path:" + path);
         final ProgressBar pbVIew = (ProgressBar) ((ViewGroup) ib.getParent()).getChildAt(1);
         MHttpManagerFactory.getFileManager().upLoadFile(TQZBDataActivity.this, file, path,
                 new FileHttpResponseHandler<HrUploadFile>() {
@@ -188,6 +211,7 @@ public class TQZBDataActivity extends BaseActivity {
                         ib.setNewItem(add);
                         // addList.add(add);
                         pbVIew.setVisibility(View.GONE);
+
                     }
 
                     @Override
@@ -244,9 +268,9 @@ public class TQZBDataActivity extends BaseActivity {
     List<HpSaveCustomerContract.RemoveAddition> removeList = new ArrayList<HpSaveCustomerContract.RemoveAddition>();
 
 
-    @OnClick(R.id.back)
+    @OnClick(R.id.tv_backback)
     void back() {
-       finish();
+        finish();
     }
 
     @OnClick(R.id.tv_editorder)

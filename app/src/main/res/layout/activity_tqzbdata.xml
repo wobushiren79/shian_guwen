@@ -215,7 +215,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_back"
+                android:id="@+id/tv_backback"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
@@ -226,6 +226,7 @@
                 android:gravity="center"
                 android:padding="@dimen/dimen_10dp"
                 android:text="返回修改合同信息"
+                android:textSize="@dimen/txtsize_20sp"
                 android:textColor="@color/text_color" />
 
             <TextView
@@ -240,6 +241,7 @@
                 android:gravity="center"
                 android:padding="@dimen/dimen_10dp"
                 android:text="信息确认无误，结束洽谈"
+                android:textSize="@dimen/txtsize_20sp"
                 android:textColor="@color/blackgroundmain" />
         </LinearLayout>
 

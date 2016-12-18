@@ -130,8 +130,7 @@ public class CustomerHTView extends BaseCustomerView {
 			getContext().startActivity(in);
 		} else {
 			((BaseActivity) getContext()).showPhotoPicker();
-			((BaseActivity) getContext())
-					.setOnPhotoPickerListener(new OnPhotoPickerListener() {
+			((BaseActivity) getContext()).setOnPhotoPickerListener(new OnPhotoPickerListener() {
 
 						@Override
 						public void onPhoto(ArrayList<String> paths) {

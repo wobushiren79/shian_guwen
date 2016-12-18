@@ -732,13 +732,13 @@ public class QTView extends BaseOrderView {
                         intent.putExtra("consultId", model.getConsultId());
                         intent.putExtra("orderId", model.getOrderId());
                         break;
+//                    case 3:
+//                        //提交了预备信息资料
+//                        intent = new Intent(getContext(), ContractDataActivity.class);
+//                        intent.putExtra("consultId", model.getConsultId());
+//                        intent.putExtra("orderId", model.getOrderId());
+//                        break;
                     case 3:
-                        //提交了预备信息资料
-                        intent = new Intent(getContext(), ContractDataActivity.class);
-                        intent.putExtra("consultId", model.getConsultId());
-                        intent.putExtra("orderId", model.getOrderId());
-                        break;
-                    case 4:
                         //提交了合同
                         break;
 

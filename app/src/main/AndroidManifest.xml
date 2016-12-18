@@ -258,4 +258,5 @@
         <activity android:name=".activity.updata.WaitServiceDataActivity"></activity>
     </application>
 
+
 </manifest>

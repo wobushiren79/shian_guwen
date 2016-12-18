@@ -30,10 +30,19 @@ public class HrConsultAgentman {
 		private long id;
 		private String name;
 
+		private String zsLocation;
 		private String location;
 		private String cardId;
 		private String email;
 		private String remark;
+
+		public String getZsLocation() {
+			return zsLocation;
+		}
+
+		public void setZsLocation(String zsLocation) {
+			this.zsLocation = zsLocation;
+		}
 
 		public String getLocation() {
 			return location;

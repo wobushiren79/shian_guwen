@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_20dp"
+                android:layout_marginLeft="@dimen/dimen_10dp"
                 android:drawableLeft="@drawable/xingxing"
                 android:text="经办人是逝者的:"
                 android:textSize="@dimen/text_size_top_bg" />
@@ -110,7 +110,7 @@
             <EditText
                 android:id="@+id/et_jbr_2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dimen_60dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dimen_10dp"
                 android:layout_marginRight="@dimen/dimen_30dp"
@@ -118,7 +118,7 @@
                 android:background="@drawable/shape_et_order"
                 android:hint="选择其他时填写"
                 android:padding="@dimen/dimen_10dp"
-                android:textSize="@dimen/text_size_detail_list" />
+                android:textSize="@dimen/text_size_date_list" />
         </LinearLayout>
 
         <View
@@ -144,7 +144,33 @@
                 android:drawableLeft="@drawable/xingxing"
                 android:text="经办人地址:" />
 
-            <include layout="@layout/layout_mapcheck" />
+            <include
+                android:id="@+id/jbr_ll"
+                layout="@layout/layout_mapcheck" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:orientation="vertical">
+
+
+            <TextView
+
+                style="@style/edit_order_textStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:drawableLeft="@drawable/xingxing"
+                android:text="治丧地址:" />
+
+            <include
+                android:id="@+id/zs_ll"
+                layout="@layout/layout_mapcheck" />
         </LinearLayout>
 
 
@@ -274,6 +300,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_20dp"
             android:gravity="center"
+            android:layout_marginBottom="@dimen/dimen_20dp"
             android:orientation="horizontal"
             android:weightSum="2">
 

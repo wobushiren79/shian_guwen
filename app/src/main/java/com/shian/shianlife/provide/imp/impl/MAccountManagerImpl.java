@@ -34,6 +34,7 @@ import com.shian.shianlife.provide.result.HrConsultCemetery;
 import com.shian.shianlife.provide.result.HrConsultFuneral;
 import com.shian.shianlife.provide.result.HrConsultUsageResult;
 import com.shian.shianlife.provide.result.HrGetComment;
+import com.shian.shianlife.provide.result.HrGetContractData;
 import com.shian.shianlife.provide.result.HrGetCustomerContract;
 import com.shian.shianlife.provide.result.HrGetCustomerFuneral;
 import com.shian.shianlife.provide.result.HrGetCustomerPreready;
@@ -507,6 +508,12 @@ public class MAccountManagerImpl implements MAccountManager {
     @Override
     public void getTalkFailData(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetTalkFail> handler) {
         excutor.requestPost(context, "customer/talkfail/get", HrGetTalkFail.class, params,
+                handler);
+    }
+
+    @Override
+    public void getContractData(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetContractData> handler) {
+        excutor.requestPost(context, "customer/talk/contract/get", HrGetContractData.class, params,
                 handler);
     }
 

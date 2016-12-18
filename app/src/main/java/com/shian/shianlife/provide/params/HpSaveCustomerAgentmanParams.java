@@ -17,10 +17,19 @@ public class HpSaveCustomerAgentmanParams extends BaseHttpParams {
 	private String linkInfo;
 	private HpAddConsultParams.TalkAddress address;
 
+	private String zsLocation;
 	private String location;
 	private String cardId;
 	private String email;
 	private String remark;
+
+	public String getZsLocation() {
+		return zsLocation;
+	}
+
+	public void setZsLocation(String zsLocation) {
+		this.zsLocation = zsLocation;
+	}
 
 	public String getLocation() {
 		return location;
