@@ -9,19 +9,55 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+
+        <LinearLayout
+            android:id="@+id/ll_pgzx"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_20dp"
-            android:gravity="right"
-            android:text="我应该如何操作下面的服务步骤？"
-            android:textColor="@color/gray_item_shua_textcolor"
-            android:textSize="@dimen/txtsize_30sp" />
+            android:orientation="vertical"
+            android:visibility="gone">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_1dp"
-            android:background="@color/gray_item_shua_textcolor" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_20dp"
+                android:gravity="right"
+                android:text="我应该如何操作下面的服务步骤？"
+                android:textColor="@color/gray_item_shua_textcolor"
+                android:textSize="@dimen/txtsize_30sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:background="@color/gray_item_shua_textcolor" />
+
+            <com.shian.shianlife.view.PGZXLayoutView
+                android:id="@+id/pgzx_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>
+
+            <com.shian.shianlife.view.PGZXLayoutView
+                android:id="@+id/pgzx_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>
+
+            <com.shian.shianlife.view.PGZXLayoutView
+                android:id="@+id/pgzx_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>
+
+            <TextView
+                android:layout_marginTop="1dp"
+                android:id="@+id/tv_serviceover"
+                android:layout_width="@dimen/dimen_200dp"
+                android:layout_height="@dimen/dimen_60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/pgzx_select_3"
+                android:gravity="center"
+                android:text="结束已服务"
+                android:textColor="#999999"
+                android:visibility="gone" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,21 +90,22 @@
                 android:padding="@dimen/dimen_10dp"
                 android:text="结束派单"
                 android:textColor="@color/text_color"
-                android:textSize="@dimen/txtsize_32sp" />
+                android:textSize="@dimen/txtsize_32sp"
+                android:visibility="gone" />
         </LinearLayout>
 
 
         <TextView
             android:id="@+id/tv_refund"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dimen_250dp"
+            android:layout_height="@dimen/dimen_60dp"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/dimen_20dp"
             android:background="@drawable/ic_home_reg"
             android:gravity="center"
             android:text="申请退款"
             android:textColor="@color/text_color"
-            android:textSize="@dimen/dimen_40dp"
+            android:textSize="@dimen/txtsize_32sp"
             android:visibility="gone" />
 
 

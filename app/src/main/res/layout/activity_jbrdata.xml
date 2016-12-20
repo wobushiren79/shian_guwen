@@ -144,9 +144,10 @@
                 android:drawableLeft="@drawable/xingxing"
                 android:text="经办人地址:" />
 
-            <include
-                android:id="@+id/jbr_ll"
-                layout="@layout/layout_mapcheck" />
+            <com.shian.shianlife.view.MapSelectLayoutView
+                android:id="@+id/mapselect1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.shian.shianlife.view.MapSelectLayoutView>
         </LinearLayout>
 
 
@@ -168,9 +169,10 @@
                 android:drawableLeft="@drawable/xingxing"
                 android:text="治丧地址:" />
 
-            <include
-                android:id="@+id/zs_ll"
-                layout="@layout/layout_mapcheck" />
+            <com.shian.shianlife.view.MapSelectLayoutView
+                android:id="@+id/mapselect2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.shian.shianlife.view.MapSelectLayoutView>
         </LinearLayout>
 
 

@@ -463,19 +463,11 @@ public class QTView extends BaseOrderView {
                     payFre.setVisibility(View.VISIBLE);
                     create.setVisibility(View.GONE);
                     payFre.setOnClickListener(clickListener);
-                    FrameLayout.LayoutParams tvcloseLP = new FrameLayout.LayoutParams
-                            (getResources().getDimensionPixelSize(R.dimen.dimen_200dp), getResources().getDimensionPixelSize(R.dimen.dimen_60dp));
                     tvclose.setText("结束洽谈");
-                    tvclose.setPadding(0, 0, 0, 0);
-                    tvclose.setLayoutParams(tvcloseLP);
                 } else {
                     payFre.setVisibility(View.GONE);
                     create.setVisibility(View.VISIBLE);
-                    FrameLayout.LayoutParams tvcloseLP = new FrameLayout.LayoutParams
-                            (ViewGroup.LayoutParams.WRAP_CONTENT, getResources().getDimensionPixelSize(R.dimen.dimen_60dp));
                     tvclose.setText("洽谈失败，结束洽谈");
-                    tvclose.setPadding(getResources().getDimensionPixelOffset(R.dimen.dimen_10dp), 0, getResources().getDimensionPixelOffset(R.dimen.dimen_10dp), 0);
-                    tvclose.setLayoutParams(tvcloseLP);
                 }
 
                 if (model.getConsultStatus() == 4
@@ -532,29 +524,7 @@ public class QTView extends BaseOrderView {
                 } else {
                     tv_talkagain.setVisibility(GONE);
                 }
-                if (edit.getVisibility() == VISIBLE || close.getVisibility() == VISIBLE || payFre.getVisibility() == VISIBLE || shift.getVisibility() == VISIBLE) {
-                    int dp25 = getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_25dp);
-                    FrameLayout.LayoutParams tvLP = new FrameLayout.LayoutParams
-                            ((MainActivity.metrics.widthPixels - dp25 * 2) / 4, getResources().getDimensionPixelSize(R.dimen.dimen_60dp));
-                    tvLP.gravity = CENTER_IN_PARENT;
-                    tvedit.setLayoutParams(tvLP);
-                    tvwaitservice.setLayoutParams(tvLP);
-                    tvclose.setLayoutParams(tvLP);
-                    tvpay.setLayoutParams(tvLP);
 
-
-                } else {
-                    FrameLayout.LayoutParams tvcloseLP = new FrameLayout.LayoutParams
-                            (getResources().getDimensionPixelSize(R.dimen.dimen_200dp), getResources().getDimensionPixelSize(R.dimen.dimen_60dp));
-                    tvcloseLP.gravity = CENTER_IN_PARENT;
-
-                    tvedit.setLayoutParams(tvcloseLP);
-                    tvwaitservice.setLayoutParams(tvcloseLP);
-                    tvclose.setLayoutParams(tvcloseLP);
-                    tvpay.setLayoutParams(tvcloseLP);
-
-
-                }
             }
         });
     }

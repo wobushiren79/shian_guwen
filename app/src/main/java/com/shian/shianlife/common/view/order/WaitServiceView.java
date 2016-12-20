@@ -204,7 +204,12 @@ public class WaitServiceView extends BaseOrderView {
             tv_qt21.setText(model.getTalkerName());
             // 逝者所在地
             TextView tv_qt31 = (TextView) view.getView(R.id.tv_qt31);
-            tv_qt31.setText(model.getUsageCurAddress());
+            if (model.getUsageCurAddress() == null) {
+                tv_qt31.setText("");
+            } else {
+                tv_qt31.setText(model.getUsageCurAddress());
+            }
+
             TextView tv_qtbz = (TextView) view.getView(R.id.tv_qt_bz);
             ImageView ivPhone1 = (ImageView) view.getView(R.id.iv_qt12);
             ImageView ivPhone2 = (ImageView) view.getView(R.id.iv_qt22);

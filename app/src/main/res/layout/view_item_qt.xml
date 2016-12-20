@@ -27,17 +27,17 @@
             android:text="客户姓名:" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/tv_talkagain"
             android:layout_width="@dimen/dimen_120dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/text_color"
             android:layout_alignRight="@+id/tv_qt01"
             android:layout_centerVertical="true"
-            android:background="@drawable/ic_home_reg"
             android:layout_marginRight="@dimen/dimen_10dp"
-            android:text="再次洽谈" />
+            android:background="@drawable/ic_home_reg"
+            android:gravity="center"
+            android:text="再次洽谈"
+            android:textColor="@color/text_color"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/iv_qt02"
@@ -230,7 +230,7 @@
             android:id="@+id/fl_accept"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-             android:layout_gravity="center"
+            android:layout_gravity="center"
             android:layout_weight="1">
 
             <TextView
@@ -256,28 +256,12 @@
                 android:text="拒单" />
         </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/fl_create"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:visibility="gone">
-
-            <TextView
-                android:paddingLeft="@dimen/dimen_10dp"
-                android:paddingRight="@dimen/dimen_10dp"
-                style="@style/orderlist_item_btn_textStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/dimen_60dp"
-                android:text="洽谈成功，创建订单" />
-        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/fl_edit"
             android:layout_width="0dp"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1">
 
             <TextView
@@ -291,8 +275,8 @@
         <FrameLayout
             android:id="@+id/fl_tk"
             android:layout_width="0dp"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:visibility="gone">
 
@@ -306,8 +290,8 @@
         <FrameLayout
             android:id="@+id/fl_payfre"
             android:layout_width="0dp"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:visibility="gone">
 
@@ -319,36 +303,6 @@
                 android:text="支付定金" />
         </FrameLayout>
 
-        <FrameLayout
-            android:id="@+id/fl_close"
-            android:layout_width="0dp"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/tv_close"
-                style="@style/orderlist_item_btn_textStyle"
-                android:layout_width="@dimen/dimen_200dp"
-                android:layout_height="@dimen/dimen_60dp"
-                android:text="结束洽谈" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/fl_shift"
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/tv_waitservice"
-                style="@style/orderlist_item_btn_textStyle"
-                android:layout_width="@dimen/dimen_200dp"
-                android:layout_height="@dimen/dimen_60dp"
-                android:text="需要及时服务" />
-        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/fl_ddxq"
@@ -377,6 +331,63 @@
                 android:layout_width="@dimen/dimen_200dp"
                 android:layout_height="@dimen/dimen_60dp"
                 android:text="客户详情" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/fl_shift"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_waitservice"
+                style="@style/orderlist_item_btn_textStyle"
+                android:layout_width="@dimen/dimen_200dp"
+                android:layout_height="@dimen/dimen_60dp"
+                android:text="需要及时服务" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_create"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+        >
+
+            <TextView
+                style="@style/orderlist_item_btn_textStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_60dp"
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:paddingRight="@dimen/dimen_10dp"
+                android:text="洽谈成功，创建订单" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fl_close"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_close"
+                style="@style/orderlist_item_btn_textStyle"
+                android:layout_width="wrap_content"
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:paddingRight="@dimen/dimen_10dp"
+                android:layout_height="@dimen/dimen_60dp"
+                android:text="结束洽谈" />
         </FrameLayout>
     </LinearLayout>
 

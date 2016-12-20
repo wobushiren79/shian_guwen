@@ -57,6 +57,7 @@ public class WaitServiceDataActivity extends BaseActivity {
     }
 
     private void initData() {
+        Log.v("this","initData");
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId(consultId);
         MHttpManagerFactory.getAccountManager().getWaitServicePostData(WaitServiceDataActivity.this,
@@ -68,26 +69,27 @@ public class WaitServiceDataActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(HrGetWaitServicePostData result) {
+                        Log.v("this", "onSuccess");
 
-
-                        if (!result.getDeadLocation().equals("")) {
-                            listLocation.add(result.getDeadLocation());
-                        }
-                        if (!result.getDeadLocation().equals("")) {
-                            listLocation.add(result.getAgentmanLocation());
-                        }
-                        if (!result.getDeadLocation().equals("")) {
-                            listLocation.add(result.getDeadmanLocation());
-                        }
-                        if (!result.getDeadLocation().equals("")) {
-                            listLocation.add(result.getZsLocation());
-                        }
-
-                        Log.v("this", "DeadTime:" + result.getDeadTime());
                         Log.v("this", "DeadLocation:" + result.getDeadLocation());
+                        Log.v("this", "DeadTime:" + result.getDeadTime());
                         Log.v("this", "AgentmanLocation:" + result.getAgentmanLocation());
                         Log.v("this", "DeadmanLocation:" + result.getDeadmanLocation());
                         Log.v("this", "ZsLocation:" + result.getZsLocation());
+
+                        if (result.getDeadLocation()!=null) {
+                            listLocation.add(result.getDeadLocation());
+                        }
+                        if (result.getAgentmanLocation()!=null) {
+                            listLocation.add(result.getAgentmanLocation());
+                        }
+                        if (result.getDeadmanLocation()!=null) {
+                            listLocation.add(result.getDeadmanLocation());
+                        }
+                        if (result.getZsLocation()!=null) {
+                            listLocation.add(result.getZsLocation());
+                        }
+
 
                         mTVTime.setText(TransitionDate.DateToStr(new Date(
                                         result.getDeadTime()),
@@ -97,7 +99,7 @@ public class WaitServiceDataActivity extends BaseActivity {
 
                     @Override
                     public void onError(String message) {
-
+                        Log.v("this", "onError");
                     }
                 });
     }
@@ -129,6 +131,7 @@ public class WaitServiceDataActivity extends BaseActivity {
         mIVMapCheck.setOnClickListener(onClickListener);
         mTVNext.setOnClickListener(onClickListener);
         mTVBack.setOnClickListener(onClickListener);
+        mIVMapSelect.setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {

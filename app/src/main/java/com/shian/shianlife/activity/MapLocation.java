@@ -38,6 +38,7 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.mapapi.CustomDialog;
+import com.shian.shianlife.view.MapSelectLayoutView;
 
 import java.util.List;
 
@@ -48,16 +49,20 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
     private final static double mapCenterlatitude = 30.6634450000;
     private final static double mapCenterlongitude = 104.0722210000;
 
+
     PoiSearch poiSearch;
     String locationPoint = AppContansts.LOCAL_ADDRESS;
+
+
+    int numView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_location);
 
-//        String location = getIntent().getStringExtra("pdrLocation");
-//        locationPoint = location.replace("-", "");
+        numView = getIntent().getIntExtra("numView", 1);
+
         init();
         //初始化控件
         initView();
@@ -90,7 +95,7 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
         poiSearch = PoiSearch.newInstance();
         poiSearch.setOnGetPoiSearchResultListener(poiListener);
 
-        LatLng point = new LatLng(AppContansts.LOCAL_latitude,AppContansts.LOCAL_longitude);
+        LatLng point = new LatLng(AppContansts.LOCAL_latitude, AppContansts.LOCAL_longitude);
         //构建Marker图标
         BitmapDescriptor bitmap = BitmapDescriptorFactory
                 .fromResource(R.drawable.icon_marka);
@@ -185,20 +190,24 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
      */
     public void check(View view) {
         Log.v("this", "location:" + locationPoint);
-        Intent intent=new Intent();
-        intent.putExtra("location",locationPoint);
-        setResult(1111, intent);
+        Intent intent = new Intent(MapSelectLayoutView.THE_ACTION);
+        intent.putExtra("numView", numView);
+        intent.putExtra("location", locationPoint);
+        sendBroadcast(intent);
         finish();
+
     }
 
     @Override
     public void onMapClick(LatLng point) {
         mBaiduMap.hideInfoWindow();
     }
+
     CustomDialog customDialog;
+
     @Override
     public boolean onMapPoiClick(MapPoi latLng) {
-        customDialog=new CustomDialog(MapLocation.this);
+        customDialog = new CustomDialog(MapLocation.this);
         customDialog.show();
         //获取经纬度
         double latitude = latLng.getPosition().latitude;
@@ -217,20 +226,21 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
 
         // LatLng location; 点击事件得到的location
         GeoCoder geoCoder = GeoCoder.newInstance();
-        geoCoder.setOnGetGeoCodeResultListener(new OnGetGeoCoderResultListener(){
+        geoCoder.setOnGetGeoCodeResultListener(new OnGetGeoCoderResultListener() {
             @Override
             public void onGetGeoCodeResult(GeoCodeResult arg0) {
                 // TODO Auto-generated method stub
             }
+
             @Override
             public void onGetReverseGeoCodeResult(ReverseGeoCodeResult result) {
                 if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
                     return;
                 }
-                if(customDialog!=null){
+                if (customDialog != null) {
                     customDialog.cancel();
                 }
-                locationPoint =result.getAddress();
+                locationPoint = result.getAddress();
             }
         });
 // 反向地理解析

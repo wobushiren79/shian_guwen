@@ -49,7 +49,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.SplashActivity"
-            android:label="@string/app_name">
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -58,42 +60,111 @@
         </activity>
         <activity
             android:name=".activity.LoginActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
             android:name=".activity.MainActivity"
+            android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/StyledIndicators" />
-        <activity android:name=".activity.NewOrderActivity" />
-        <activity android:name=".activity.EditOrderActivity" />
-        <activity android:name=".activity.PayActivity" />
-        <activity android:name=".activity.PayEwmActivity" />
-        <activity android:name=".activity.PayFinishActivity" />
-        <activity android:name=".activity.PayShouActivity" />
+        <activity
+            android:name=".activity.NewOrderActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EditOrderActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PayActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PayEwmActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PayFinishActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PayShouActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.PgzxActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".activity.OrderDetailActivity" />
-        <activity android:name=".activity.EvaluateActivity" />
-        <activity android:name=".activity.AuditActivity" />
-        <activity android:name=".activity.CustomerDetailActivity" />
-        <activity android:name=".activity.SettingsActivity" />
-        <activity android:name=".activity.ImagePreviewActivity" />
-        <activity android:name=".activity.MessageDetailActviity" />
-        <activity android:name=".activity.BaiduMapActivity" />
+        <activity
+            android:name=".activity.OrderDetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.EvaluateActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AuditActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CustomerDetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ImagePreviewActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MessageDetailActviity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BaiduMapActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MessageListActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
             android:theme="@style/StyledIndicators" />
         <activity
             android:name=".activity.CustomerActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
             android:theme="@style/StyledIndicators" />
         <activity
             android:name=".activity.UserInfoActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
             android:theme="@style/StyledIndicators" />
-        <activity android:name=".activity.RefundOrderActivity" />
-        <activity android:name=".activity.WebActivity" />
-        <activity android:name="com.yongchun.library.view.ImageSelectorActivity" />
-        <activity android:name="com.yongchun.library.view.ImagePreviewActivity" />
-        <activity android:name="com.yongchun.library.view.ImageCropActivity" />
+        <activity
+            android:name=".activity.RefundOrderActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.WebActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yongchun.library.view.ImageSelectorActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yongchun.library.view.ImagePreviewActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yongchun.library.view.ImageCropActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.chosen.kf5sdk.ImageBrowerActivity"
             android:configChanges="orientation|screenSize"
@@ -246,17 +317,40 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="cSdvjz7iT4TcRhIiRv2e6CERLuRXa9uY" />
 
-        <activity android:name=".activity.RoutePlanActivity" />
+        <activity
+            android:name=".activity.RoutePlanActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SaveTalkFailActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".activity.updata.WSZDataActivity" />
-        <activity android:name=".activity.updata.JBRDataActivity" />
-        <activity android:name=".activity.updata.ContractDataActivity" />
-        <activity android:name=".activity.updata.TQZBDataActivity" />
-        <activity android:name=".activity.MapLocation" />
-        <activity android:name=".activity.updata.WaitServiceDataActivity"></activity>
+        <activity
+            android:name=".activity.updata.WSZDataActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.updata.JBRDataActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.updata.ContractDataActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.updata.TQZBDataActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MapLocation"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.updata.WaitServiceDataActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.sendorders.SendOrderActivity"></activity>
     </application>
-
 
 </manifest>

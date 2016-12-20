@@ -104,9 +104,11 @@
                 android:textSize="@dimen/text_size_top_bg" />
 
 
-            <include
-                android:id="@+id/include_location"
-                layout="@layout/layout_mapcheck" />            <!--<EditText-->
+            <!--<include-->
+            <!--android:id="@+id/include_location"-->
+            <!--layout="@layout/layout_mapcheck" />    -->
+
+            <!--<EditText-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="@dimen/dimen_60dp"-->
             <!--android:layout_gravity="center_vertical"-->
@@ -118,6 +120,10 @@
             <!--android:textColor="@color/blackgroundmain"-->
             <!--android:textSize="@dimen/text_size_top_bg" />-->
 
+            <com.shian.shianlife.view.MapSelectLayoutView
+                android:id="@+id/mapselect1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.shian.shianlife.view.MapSelectLayoutView>
 
         </LinearLayout>
 
@@ -189,11 +195,14 @@
                 android:textColor="@color/gray_item_shua_textcolor"
                 android:textSize="@dimen/text_size_top_bg" />
 
-            <include
-                android:id="@+id/include_planlocation"
-                layout="@layout/layout_mapcheck" />
+            <!--<include-->
+            <!--android:id="@+id/include_planlocation"-->
+            <!--layout="@layout/layout_mapcheck" />-->
 
-
+            <com.shian.shianlife.view.MapSelectLayoutView
+                android:id="@+id/mapselect2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.shian.shianlife.view.MapSelectLayoutView>
         </LinearLayout>
 
         <LinearLayout

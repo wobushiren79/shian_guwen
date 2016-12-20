@@ -89,15 +89,16 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_edit_commit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="@dimen/dimen_40dp"
-            android:background="@drawable/ic_qrtj"
-            android:gravity="center"
 
-            android:textColor="@color/white"
+            android:id="@+id/tv_edit_commit"
+            android:layout_width="@dimen/dimen_200dp"
+            android:layout_height="@dimen/dimen_60dp"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="@dimen/dimen_40dp"
+            android:background="@drawable/ic_home_reg"
+            android:gravity="center"
+            android:text="确认提交"
+            android:textColor="@color/text_color"
             android:textSize="@dimen/txtsize_32sp" />
     </LinearLayout>
 

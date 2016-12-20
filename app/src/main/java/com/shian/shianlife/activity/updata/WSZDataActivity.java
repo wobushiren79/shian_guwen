@@ -1,6 +1,8 @@
 package com.shian.shianlife.activity.updata;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.os.PersistableBundle;
@@ -32,6 +34,7 @@ import com.shian.shianlife.provide.params.HpConsultIdParams;
 
 import com.shian.shianlife.provide.params.HpSaveCustomerUsageParams;
 import com.shian.shianlife.provide.result.HrConsultUsageResult;
+import com.shian.shianlife.view.MapSelectLayoutView;
 import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 
 
@@ -54,9 +57,7 @@ public class WSZDataActivity extends BaseActivity {
     Spinner mSPClothes;
     Spinner mSPOtherHealth;
 
-    ImageView mIVMapCheck;
-    ImageView mIVMapSelect;
-    EditText mTVMapText;
+    MapSelectLayoutView mSelectLayoutView;
 
     RadioButton mRBUn, mRBMan, mRBWoman, mRBSelect;
     List<RadioButton> rbList = new ArrayList<>();
@@ -96,9 +97,8 @@ public class WSZDataActivity extends BaseActivity {
         mRBWoman = (RadioButton) findViewById(R.id.rb_sz_felman);
         mRBSelect = (RadioButton) findViewById(R.id.rb_sz_bm);
 
-        mIVMapCheck = (ImageView) findViewById(R.id.iv_map);
-        mIVMapSelect = (ImageView) findViewById(R.id.iv_data);
-        mTVMapText = (EditText) findViewById(R.id.tv_map_text);
+        mSelectLayoutView = (MapSelectLayoutView) findViewById(R.id.mapselect);
+        mSelectLayoutView.setData(1);
 
         rbList.add(mRBUn);
         rbList.add(mRBMan);
@@ -107,8 +107,7 @@ public class WSZDataActivity extends BaseActivity {
 
         mTVBirthdayTime.setOnClickListener(onClickListener);
         mTVNext.setOnClickListener(onClickListener);
-        mIVMapCheck.setOnClickListener(onClickListener);
-        mIVMapSelect.setOnClickListener(onClickListener);
+
     }
 
 
@@ -147,7 +146,7 @@ public class WSZDataActivity extends BaseActivity {
                         mTVBirthdayTime.setText(TransitionDate.DateToStr(new Date(
                                         result.getConsultUsage().getBirthday()),
                                 "yyyy-MM-dd"));
-                        mTVMapText.setText(result.getConsultUsage().getLocation());
+                        mSelectLayoutView.setLocation(result.getConsultUsage().getLocation());
                         mETRemark.setText(result.getConsultUsage().getNote());
                     }
 
@@ -226,10 +225,6 @@ public class WSZDataActivity extends BaseActivity {
         public void onClick(View view) {
             if (view == mTVBirthdayTime) {
                 setBirthdayTime();
-            } else if (view == mIVMapCheck) {
-                setMapLocation();
-            } else if (view == mIVMapSelect) {
-
             } else if (view == mTVNext) {
                 upData();
             }
@@ -242,7 +237,7 @@ public class WSZDataActivity extends BaseActivity {
         String age = mETAge.getText().toString();
         String size = mETShoesSize.getText().toString();
         String birthd = mTVBirthdayTime.getText().toString();
-        String location = mTVMapText.getText().toString();
+        String location = mSelectLayoutView.getLocation();
         String bz = mETRemark.getText().toString();
 
         if (TextUtils.isEmpty(name)) {
@@ -324,30 +319,11 @@ public class WSZDataActivity extends BaseActivity {
                 });
     }
 
-    private void setMapLocation() {
-        //点击地图定位
-        Intent intent = new Intent(WSZDataActivity.this, MapLocation.class);
-        startActivityForResult(intent, 1111);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (resultCode) {
-            case 1111:
-                String location = data.getStringExtra("location");
-//                    params.setCurAddress(location);
-                mTVMapText.setText(location);
-
-                break;
-            default:
-                break;
-        }
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        OrderFragment.C_bOrder_isRefresh=true;
+        OrderFragment.C_bOrder_isRefresh = true;
     }
 
     private void setBirthdayTime() {

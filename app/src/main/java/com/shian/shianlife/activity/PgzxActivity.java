@@ -28,6 +28,7 @@ import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.utils.ViewGropMap;
 import com.shian.shianlife.common.view.TipsDialog;
+import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.FileHttpResponseHandler;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
@@ -37,6 +38,7 @@ import com.shian.shianlife.provide.params.HpSaveCustomerContract.AddAddition;
 import com.shian.shianlife.provide.result.HrOrderItenList;
 import com.shian.shianlife.provide.result.HrUploadFile;
 import com.shian.shianlife.provide.result.OrderItem;
+import com.shian.shianlife.view.PGZXLayoutView;
 import com.shian.shianlife.view.ScrollListView;
 
 import java.util.ArrayList;
@@ -51,12 +53,24 @@ public class PgzxActivity extends BaseActivity {
     TextView tvRefund;
     private ScrollListView mListView;
     private TArrayListAdapter<OrderItem> adapter;
-
+    private LinearLayout LLPGZXState;
     boolean isShenhe;
     boolean isShoukuan;
 
     TextView newOrder;
+    TextView newOrder2;
     int khxqType;
+
+    int orderStatus = 0;
+
+    PGZXLayoutView mPgzxLayoutView1;
+    PGZXLayoutView mPgzxLayoutView2;
+    PGZXLayoutView mPgzxLayoutView3;
+
+    TextView mTVOver;
+
+    long orderId;
+    long consultId;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -71,10 +85,14 @@ public class PgzxActivity extends BaseActivity {
         initDate();
         getOrderList();
 
+
         if (isShenhe || isShoukuan) {
             setTitle("派单列表详情");
+            LLPGZXState.setVisibility(View.GONE);
             newOrder.setVisibility(View.GONE);
+            newOrder2.setVisibility(View.GONE);
         } else {
+            newOrder2.setVisibility(View.VISIBLE);
             setTitle("派工执行");
         }
     }
@@ -83,11 +101,26 @@ public class PgzxActivity extends BaseActivity {
         mListView = (ScrollListView) findViewById(R.id.lv_swipe_listview);
         adapter = new TArrayListAdapter<OrderItem>(this);
         newOrder = (TextView) findViewById(R.id.tv_neworder1);
-        newOrder.setOnClickListener(
-                newOrderClickListener);
+        newOrder2 = (TextView) findViewById(R.id.tv_neworder2);
+
+        LLPGZXState = (LinearLayout) findViewById(R.id.ll_pgzx);
+        mTVOver = (TextView) findViewById(R.id.tv_serviceover);
+        mPgzxLayoutView1 = (PGZXLayoutView) findViewById(R.id.pgzx_1);
+        mPgzxLayoutView2 = (PGZXLayoutView) findViewById(R.id.pgzx_2);
+        mPgzxLayoutView3 = (PGZXLayoutView) findViewById(R.id.pgzx_3);
+
+
+        newOrder.setOnClickListener(newOrderClickListener);
+        newOrder2.setOnClickListener(newOrder2ClickListener);
         tvRefund.setOnClickListener(reFundClick);
     }
 
+    private OnClickListener newOrder2ClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            over();
+        }
+    };
     private OnClickListener newOrderClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -109,10 +142,11 @@ public class PgzxActivity extends BaseActivity {
         }
     };
 
+
     private void initDate() {
         initAdapter();
-        mListView.setAdapter(adapter);
-        ScrollListView.setListViewHeightBasedOnChildren(mListView);
+        orderId = getIntent().getLongExtra("orderId", 0);
+        consultId = getIntent().getLongExtra("consultId", 0);
     }
 
     @Override
@@ -411,7 +445,6 @@ public class PgzxActivity extends BaseActivity {
                 switch (templateItem.getItemStatus()) {
                     case 1:
                         tv4.setText("派单");
-
                         break;
                     case 2:
                         tv4.setText("派单中");
@@ -462,6 +495,11 @@ public class PgzxActivity extends BaseActivity {
         });
     }
 
+    public void setLayout() {
+        mListView.setAdapter(adapter);
+        ScrollListView.setListViewHeightBasedOnChildren(mListView);
+    }
+
     private void getOrderList() {
         HpAcceptParams params = new HpAcceptParams();
         params.setOrderId(getIntent().getLongExtra("orderId", 0));
@@ -484,10 +522,15 @@ public class PgzxActivity extends BaseActivity {
                         } else {
                             tvRefund.setVisibility(View.GONE);
                         }
+
                         adapter.clear();
                         adapter.addListData(result.getItems());
+                        setLayout();
                         adapter.notifyDataSetChanged();
+                        orderStatus = result.getOrderHandleStatus();
+                        setState();
                     }
+
 
                     @Override
                     public void onStart() {
@@ -501,6 +544,55 @@ public class PgzxActivity extends BaseActivity {
 
                     }
                 });
+    }
+
+    private void setState() {
+        LLPGZXState.setVisibility(View.VISIBLE);
+        switch (orderStatus) {
+            case 0:
+                mPgzxLayoutView1.setType(0, 1, 0);
+                mPgzxLayoutView2.setType(0, 0, 1);
+                mPgzxLayoutView3.setType(1, 0, 2);
+                break;
+            case 1:
+                mPgzxLayoutView1.setType(0, 2, 0);
+                mPgzxLayoutView2.setType(0, 0, 1);
+                mPgzxLayoutView3.setType(1, 0, 2);
+                break;
+            case 2:
+                mPgzxLayoutView1.setType(0, 3, 0);
+                mPgzxLayoutView2.setType(0, 1, 1);
+                mPgzxLayoutView3.setType(1, 0, 2);
+                break;
+            case 3:
+                mPgzxLayoutView1.setType(0, 3, 0);
+                mPgzxLayoutView2.setType(0, 2, 1);
+                mPgzxLayoutView3.setType(1, 0, 2);
+                break;
+            case 4:
+                mPgzxLayoutView1.setType(0, 3, 0);
+                mPgzxLayoutView2.setType(0, 3, 1);
+                mPgzxLayoutView3.setType(1, 1, 2);
+                break;
+            case 5:
+                mPgzxLayoutView1.setType(0, 3, 0);
+                mPgzxLayoutView2.setType(0, 3, 1);
+                mPgzxLayoutView3.setType(1, 2, 2);
+                break;
+            case 6:
+                mPgzxLayoutView1.setType(0, 3, 0);
+                mPgzxLayoutView2.setType(0, 3, 1);
+                mPgzxLayoutView3.setType(1, 3, 2);
+                break;
+            case 7:
+                mPgzxLayoutView1.setType(0, 3, 0);
+                mPgzxLayoutView2.setType(0, 3, 1);
+                mPgzxLayoutView3.setType(1, 3, 2);
+                mTVOver.setTextColor(Color.parseColor("#333333"));
+                mTVOver.setVisibility(View.VISIBLE);
+                break;
+        }
+
     }
 
     void btnPicClick(final ImageView v, final OrderItem templateItem, final int dex) {
@@ -596,4 +688,45 @@ public class PgzxActivity extends BaseActivity {
                 });
     }
 
+    /**
+     * 结束派单
+     */
+    private void over() {
+        TipsDialog dialog = new TipsDialog(PgzxActivity.this);
+        dialog.setTitle("请确认客户无需其他服务，结束服务后将不能再编辑订单。");
+        dialog.setTopButton("继续服务", null);
+        dialog.setBottomButton("结束服务", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                HpAcceptParams params = new HpAcceptParams();
+                params.setOrderId(orderId);
+                MHttpManagerFactory.getAccountManager().endService(PgzxActivity.this, params,
+                        new HttpResponseHandler<Object>() {
+
+                            @Override
+                            public void onSuccess(Object result) {
+                                // TODO Auto-generated method stub
+                                ToastUtils.show(PgzxActivity.this, "结束派单成功");
+                                finish();
+                                OrderFragment.C_bOrder_isRefresh = true;
+                            }
+
+                            @Override
+                            public void onStart() {
+                                // TODO Auto-generated method stub
+
+                            }
+
+                            @Override
+                            public void onError(String message) {
+                                // TODO Auto-generated method stub
+
+                            }
+                        });
+
+            }
+        });
+        dialog.show();
+    }
 }

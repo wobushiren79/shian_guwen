@@ -304,7 +304,13 @@
                 android:textSize="@dimen/text_size_top_bg"
                 android:layout_marginLeft="@dimen/dimen_10dp"
                 android:text="逝者当前所在地:" />
-            <include layout="@layout/layout_mapcheck"/>
+
+            <!--<include layout="@layout/layout_mapcheck"/>-->
+
+            <com.shian.shianlife.view.MapSelectLayoutView
+                android:id="@+id/mapselect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.shian.shianlife.view.MapSelectLayoutView>
         </LinearLayout>
 
 

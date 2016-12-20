@@ -24,6 +24,7 @@ import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpTalkFailParams;
+import com.shian.shianlife.view.MapSelectLayoutView;
 import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 
 public class SaveTalkFailActivity extends BaseActivity {
@@ -44,18 +45,13 @@ public class SaveTalkFailActivity extends BaseActivity {
 
 
     LinearLayout mTimeLL;
-    LinearLayout mLocationLL;
-    LinearLayout mPlanLocationLL;
+
 
     HpTalkFailParams params;
 
-    ImageView mMapCheck;
-    ImageView mSelect;
-    EditText mTVMapText;
 
-    ImageView mMapCheckPlan;
-    ImageView mSelectPlan;
-    EditText mTVMapTextPlan;
+    MapSelectLayoutView mSelectLayoutView1;
+    MapSelectLayoutView mSelectLayoutView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,24 +82,18 @@ public class SaveTalkFailActivity extends BaseActivity {
         mSPQTJG = (Spinner) findViewById(R.id.sp_qtjg);
         mTimeLL = (LinearLayout) findViewById(R.id.timell);
         mETTime = (TextView) findViewById(R.id.et_talk_time);
-        mLocationLL = (LinearLayout) findViewById(R.id.include_location);
-        mPlanLocationLL = (LinearLayout) findViewById(R.id.include_planlocation);
 
 
-        mMapCheck = (ImageView) mLocationLL.findViewById(R.id.iv_map);
-        mSelect = (ImageView) mLocationLL.findViewById(R.id.iv_data);
-        mTVMapText = (EditText) mLocationLL.findViewById(R.id.tv_map_text);
+        mSelectLayoutView1 = (MapSelectLayoutView) findViewById(R.id.mapselect1);
+        mSelectLayoutView2 = (MapSelectLayoutView) findViewById(R.id.mapselect2);
 
-        mMapCheckPlan = (ImageView) mPlanLocationLL.findViewById(R.id.iv_map);
-        mSelectPlan = (ImageView) mPlanLocationLL.findViewById(R.id.iv_data);
-        mTVMapTextPlan = (EditText) mPlanLocationLL.findViewById(R.id.tv_map_text);
+        mSelectLayoutView1.setData(1);
+        mSelectLayoutView2.setData(2);
+
 
         mTalkTime.setOnClickListener(onClickListener);
         mSubmit.setOnClickListener(onClickListener);
-        mMapCheck.setOnClickListener(onClickListener);
-        mSelect.setOnClickListener(onClickListener);
-        mMapCheckPlan.setOnClickListener(onClickListener);
-        mSelectPlan.setOnClickListener(onClickListener);
+
 
         setSPText(0, "其他", mSPRelation);
         setSPText(1, "其他", mSPState);
@@ -175,54 +165,12 @@ public class SaveTalkFailActivity extends BaseActivity {
                         failTalk();
                     }
                 }
-            } else if (view == mMapCheck || view == mMapCheckPlan) {
-                if (view == mMapCheck) {
-                    mapCheckNum = 0;
-                } else if (view == mMapCheckPlan) {
-                    mapCheckNum = 1;
-                }
-                setMapLocation();
-            } else if (view == mSelect || view == mSelectPlan) {
-                if (view == mSelect) {
-                    mapSelectNum = 0;
-                } else if (view == mSelectPlan) {
-                    mapSelectNum = 1;
-                }
-                setSelect();
             }
+
         }
     };
 
-    int mapCheckNum = 0;
-    int mapSelectNum = 0;
 
-    private void setSelect() {
-        //下拉选择
-    }
-
-    private void setMapLocation() {
-        //点击地图定位
-        Intent intent = new Intent(SaveTalkFailActivity.this, MapLocation.class);
-        startActivityForResult(intent, 1111);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (resultCode) {
-            case 1111:
-                String location = data.getStringExtra("location");
-                if (mapCheckNum == 0) {
-                    params.setLocation(location);
-                    mTVMapText.setText(location);
-                } else if (mapCheckNum == 1) {
-                    params.setPlanLocation(location);
-                    mTVMapTextPlan.setText(location);
-                }
-                break;
-            default:
-                break;
-        }
-    }
 
     /**
      * 提交网络请求
@@ -293,7 +241,7 @@ public class SaveTalkFailActivity extends BaseActivity {
 
                                                         }
                                                     });
-                                        }else{
+                                        } else {
                                             Toast.makeText(SaveTalkFailActivity.this, "提交成功，结束洽谈", Toast.LENGTH_LONG).show();
                                             OrderFragment.C_bOrder_isRefresh = true;
                                             finish();

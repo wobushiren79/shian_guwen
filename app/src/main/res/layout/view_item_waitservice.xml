@@ -86,7 +86,6 @@
             android:text="2016-03-25" />
 
 
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -172,7 +171,7 @@
         android:layout_toLeftOf="@id/iv_qt32"
         android:layout_toRightOf="@id/tv_qt30"
         android:text="备注信息"
-        android:textColor="@color/gray"
+        android:textColor="@color/black"
         android:textSize="@dimen/dimen_30dp" />
 
     <View

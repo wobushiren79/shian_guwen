@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/dimen_10dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blackgroundmain"
+        android:textSize="@dimen/txtsize_30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_state_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pgzx_state_1_0" />
+
+            <Button
+                android:id="@+id/bt_state_1"
+                android:layout_width="@dimen/dimen_160dp"
+                android:layout_height="@dimen/dimen_60dp"
+                android:layout_gravity="center"
+                android:textSize="@dimen/txtsize_20sp"
+                android:background="@drawable/pgzx_select_0"
+                android:textColor="@color/gray_item_shua_textcolor" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_state_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pgzx_state_2_0" />
+
+            <Button
+                android:id="@+id/bt_state_2"
+                android:layout_width="@dimen/dimen_160dp"
+                android:layout_height="@dimen/dimen_60dp"
+                android:layout_gravity="center"
+                android:textSize="@dimen/txtsize_20sp"
+                android:background="@drawable/pgzx_select_0"
+                android:textColor="@color/gray_item_shua_textcolor" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_state_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pgzx_state_3_0" />
+
+            <Button
+                android:textSize="@dimen/txtsize_20sp"
+                android:id="@+id/bt_state_3"
+                android:layout_width="@dimen/dimen_160dp"
+                android:layout_height="@dimen/dimen_60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/pgzx_select_0"
+                android:textColor="@color/gray_item_shua_textcolor"
+               />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

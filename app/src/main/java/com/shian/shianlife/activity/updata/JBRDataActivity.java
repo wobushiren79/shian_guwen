@@ -27,6 +27,7 @@ import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpSaveCustomerAgentmanParams;
 import com.shian.shianlife.provide.result.HrConsultAgentman;
+import com.shian.shianlife.view.MapSelectLayoutView;
 
 
 public class JBRDataActivity extends BaseActivity {
@@ -40,18 +41,13 @@ public class JBRDataActivity extends BaseActivity {
 
     Spinner mSPRelation;
 
-    EditText mTVMapText;
-    EditText mTVMapZSText;
+
     TextView mTVBack;
     TextView mTVNext;
 
-    ImageView mIVMapSelect;
-    ImageView mIVMapCheck;
-    ImageView mIVMapZSSelect;
-    ImageView mIVMapZSCheck;
+    MapSelectLayoutView selectLayoutView1;
+    MapSelectLayoutView selectLayoutView2;
 
-    LinearLayout ZSLL;
-    LinearLayout JBRLL;
 
     long consultId;
     private HpSaveCustomerAgentmanParams params = new HpSaveCustomerAgentmanParams();
@@ -76,16 +72,12 @@ public class JBRDataActivity extends BaseActivity {
 
         mTVBack = (TextView) findViewById(R.id.tv_back);
         mTVNext = (TextView) findViewById(R.id.tv_next);
-        JBRLL = (LinearLayout) findViewById(R.id.jbr_ll);
-        ZSLL = (LinearLayout) findViewById(R.id.zs_ll);
 
-        mTVMapText = (EditText) JBRLL.findViewById(R.id.tv_map_text);
-        mIVMapCheck = (ImageView) JBRLL.findViewById(R.id.iv_map);
-        mIVMapSelect = (ImageView) JBRLL.findViewById(R.id.iv_data);
+        selectLayoutView1= (MapSelectLayoutView) findViewById(R.id.mapselect1);
+        selectLayoutView2= (MapSelectLayoutView) findViewById(R.id.mapselect2);
 
-        mTVMapZSText = (EditText) ZSLL.findViewById(R.id.tv_map_text);
-        mIVMapZSCheck = (ImageView) ZSLL.findViewById(R.id.iv_map);
-        mIVMapZSSelect = (ImageView) ZSLL.findViewById(R.id.iv_data);
+        selectLayoutView1.setData(1);
+        selectLayoutView2.setData(2);
 
         mSPRelation = (Spinner) findViewById(R.id.sp_jbr_0);
 
@@ -93,10 +85,7 @@ public class JBRDataActivity extends BaseActivity {
         mTVBack.setOnClickListener(onClickListener);
         mTVNext.setOnClickListener(onClickListener);
 
-        mIVMapCheck.setOnClickListener(onClickListener);
-        mIVMapSelect.setOnClickListener(onClickListener);
-        mIVMapZSCheck.setOnClickListener(onClickListener);
-        mIVMapZSSelect.setOnClickListener(onClickListener);
+
     }
 
     int mapCheckNum = 0;
@@ -108,42 +97,12 @@ public class JBRDataActivity extends BaseActivity {
                 toBack();
             } else if (view == mTVNext) {
                 upData();
-            } else if (view == mIVMapCheck || view == mIVMapZSCheck) {
-                if (view == mIVMapCheck) {
-                    mapCheckNum = 0;
-                } else if (view == mIVMapZSCheck) {
-                    mapCheckNum = 1;
-                }
-                setMapLocation();
             }
+
         }
     };
 
 
-    private void setMapLocation() {
-        //点击地图定位
-        Intent intent = new Intent(JBRDataActivity.this, MapLocation.class);
-        startActivityForResult(intent, 1111);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (resultCode) {
-            case 1111:
-                if (mapCheckNum == 0) {
-                    String location = data.getStringExtra("location");
-                    mTVMapText.setText(location);
-                } else if (mapCheckNum == 1) {
-                    String location = data.getStringExtra("location");
-                    mTVMapZSText.setText(location);
-                }
-
-
-                break;
-            default:
-                break;
-        }
-    }
 
 
     private void toBack() {
@@ -165,8 +124,8 @@ public class JBRDataActivity extends BaseActivity {
         //生成合同信息
         String name = mETJBRName.getText().toString();
         String phone = mETJBRPhone.getText().toString();
-        String location = mTVMapText.getText().toString();
-        String zsLocation = mTVMapZSText.getText().toString();
+        String location = selectLayoutView1.getLocation();
+        String zsLocation = selectLayoutView2.getLocation();
         String cardid = mETJBRCardId.getText().toString();
         String email = mETJBREmail.getText().toString();
         String remark = mETRemark.getText().toString();
@@ -278,8 +237,8 @@ public class JBRDataActivity extends BaseActivity {
                         mETJBRCardId.setText(result.getConsultAgentman().getCardId());
                         mETJBREmail.setText(result.getConsultAgentman().getEmail());
                         mETRemark.setText(result.getConsultAgentman().getRemark());
-                        mTVMapText.setText(result.getConsultAgentman().getLocation());
-                        mTVMapZSText.setText(result.getConsultAgentman().getZsLocation());
+                        selectLayoutView1.setLocation(result.getConsultAgentman().getLocation());
+                        selectLayoutView2.setLocation(result.getConsultAgentman().getZsLocation());
                     }
 
                     @Override
