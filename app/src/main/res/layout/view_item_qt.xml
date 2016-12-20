@@ -230,11 +230,11 @@
             android:id="@+id/fl_accept"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_marginRight="@dimen/dimen_10dp"
+             android:layout_gravity="center"
             android:layout_weight="1">
 
             <TextView
+
                 style="@style/orderlist_item_btn_textStyle"
                 android:layout_width="@dimen/dimen_200dp"
                 android:layout_height="@dimen/dimen_60dp"
@@ -246,8 +246,7 @@
             android:id="@+id/fl_refuse"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_gravity="center"
             android:layout_weight="1">
 
             <TextView
@@ -261,27 +260,28 @@
             android:id="@+id/fl_create"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_marginRight="@dimen/dimen_10dp"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:visibility="gone">
 
             <TextView
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:paddingRight="@dimen/dimen_10dp"
                 style="@style/orderlist_item_btn_textStyle"
-                android:layout_width="@dimen/dimen_200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/dimen_60dp"
-                android:text="创建订单" />
+                android:text="洽谈成功，创建订单" />
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/fl_edit"
             android:layout_width="0dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_marginRight="@dimen/dimen_10dp"
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/tv_edit"
                 style="@style/orderlist_item_btn_textStyle"
                 android:layout_width="@dimen/dimen_200dp"
                 android:layout_height="@dimen/dimen_60dp"
@@ -291,9 +291,8 @@
         <FrameLayout
             android:id="@+id/fl_tk"
             android:layout_width="0dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_marginRight="@dimen/dimen_10dp"
             android:layout_weight="1"
             android:visibility="gone">
 
@@ -307,13 +306,13 @@
         <FrameLayout
             android:id="@+id/fl_payfre"
             android:layout_width="0dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_marginRight="@dimen/dimen_10dp"
             android:layout_weight="1"
             android:visibility="gone">
 
             <TextView
+                android:id="@+id/tv_pay"
                 style="@style/orderlist_item_btn_textStyle"
                 android:layout_width="@dimen/dimen_200dp"
                 android:layout_height="@dimen/dimen_60dp"
@@ -323,12 +322,12 @@
         <FrameLayout
             android:id="@+id/fl_close"
             android:layout_width="0dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_marginRight="@dimen/dimen_10dp"
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/tv_close"
                 style="@style/orderlist_item_btn_textStyle"
                 android:layout_width="@dimen/dimen_200dp"
                 android:layout_height="@dimen/dimen_60dp"
@@ -337,25 +336,25 @@
 
         <FrameLayout
             android:id="@+id/fl_shift"
+            android:layout_gravity="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_marginRight="@dimen/dimen_10dp"
+
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/tv_waitservice"
                 style="@style/orderlist_item_btn_textStyle"
                 android:layout_width="@dimen/dimen_200dp"
                 android:layout_height="@dimen/dimen_60dp"
-                android:text="待转服务" />
+                android:text="需要及时服务" />
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/fl_ddxq"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_gravity="center"
             android:layout_weight="1">
 
             <TextView
@@ -369,8 +368,7 @@
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:visibility="gone">
 

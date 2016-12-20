@@ -20,12 +20,14 @@ import com.shian.shianlife.provide.params.HpReadMessage;
 import com.shian.shianlife.provide.params.HpRefundParams;
 import com.shian.shianlife.provide.params.HpRejectParams;
 import com.shian.shianlife.provide.params.HpSaveComment;
+import com.shian.shianlife.provide.params.HpSaveContractData;
 import com.shian.shianlife.provide.params.HpSaveCustomerAgentmanParams;
 import com.shian.shianlife.provide.params.HpSaveCustomerCemeteryParams;
 import com.shian.shianlife.provide.params.HpSaveCustomerContract;
 import com.shian.shianlife.provide.params.HpSaveCustomerFuneral;
 import com.shian.shianlife.provide.params.HpSaveCustomerTalkParams;
 import com.shian.shianlife.provide.params.HpSaveCustomerUsageParams;
+import com.shian.shianlife.provide.params.HpSaveWaitServicePostData;
 import com.shian.shianlife.provide.params.HpTalkFailParams;
 import com.shian.shianlife.provide.result.HrAddConsultResult;
 import com.shian.shianlife.provide.result.HrCommentResult;
@@ -41,6 +43,7 @@ import com.shian.shianlife.provide.result.HrGetCustomerPreready;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.provide.result.HrGetOrderNote;
 import com.shian.shianlife.provide.result.HrGetTalkFail;
+import com.shian.shianlife.provide.result.HrGetWaitServicePostData;
 import com.shian.shianlife.provide.result.HrLoginResult;
 import com.shian.shianlife.provide.result.HrMessageList;
 import com.shian.shianlife.provide.result.HrOrderFeedback;
@@ -60,7 +63,6 @@ public class MAccountManagerImpl implements MAccountManager {
 
     private MAccountManagerImpl() {
     }
-
 
 
     public static MAccountManager getInstance() {
@@ -514,6 +516,24 @@ public class MAccountManagerImpl implements MAccountManager {
     @Override
     public void getContractData(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetContractData> handler) {
         excutor.requestPost(context, "customer/talk/contract/get", HrGetContractData.class, params,
+                handler);
+    }
+
+    @Override
+    public void saveContractData(Context context, HpSaveContractData params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context, "customer/talk/contract/save", Object.class, params,
+                handler);
+    }
+
+    @Override
+    public void getWaitServicePostData(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetWaitServicePostData> handler) {
+        excutor.requestPost(context, "customer/funeral/wait/service/get", HrGetWaitServicePostData.class, params,
+                handler);
+    }
+
+    @Override
+    public void saveWaitServicePostData(Context context, HpSaveWaitServicePostData params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context, "customer/funeral/wait/service/save", Object.class, params,
                 handler);
     }
 

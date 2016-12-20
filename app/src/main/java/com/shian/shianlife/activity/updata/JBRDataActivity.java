@@ -21,6 +21,7 @@ import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.TransitionDate;
 import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
@@ -314,6 +315,11 @@ public class JBRDataActivity extends BaseActivity {
 
             }
         });
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        OrderFragment.C_bOrder_isRefresh=true;
     }
 
 }

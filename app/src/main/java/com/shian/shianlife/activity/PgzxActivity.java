@@ -37,6 +37,7 @@ import com.shian.shianlife.provide.params.HpSaveCustomerContract.AddAddition;
 import com.shian.shianlife.provide.result.HrOrderItenList;
 import com.shian.shianlife.provide.result.HrUploadFile;
 import com.shian.shianlife.provide.result.OrderItem;
+import com.shian.shianlife.view.ScrollListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class PgzxActivity extends BaseActivity {
     TextView tvNew;
     @InjectView(R.id.tv_refund)
     TextView tvRefund;
-    private ListView mListView;
+    private ScrollListView mListView;
     private TArrayListAdapter<OrderItem> adapter;
 
     boolean isShenhe;
@@ -79,7 +80,7 @@ public class PgzxActivity extends BaseActivity {
     }
 
     private void initView() {
-        mListView = (ListView) findViewById(R.id.lv_swipe_listview);
+        mListView = (ScrollListView) findViewById(R.id.lv_swipe_listview);
         adapter = new TArrayListAdapter<OrderItem>(this);
         newOrder = (TextView) findViewById(R.id.tv_neworder1);
         newOrder.setOnClickListener(
@@ -111,7 +112,7 @@ public class PgzxActivity extends BaseActivity {
     private void initDate() {
         initAdapter();
         mListView.setAdapter(adapter);
-
+        ScrollListView.setListViewHeightBasedOnChildren(mListView);
     }
 
     @Override

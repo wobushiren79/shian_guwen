@@ -7,9 +7,13 @@ import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -22,6 +26,7 @@ import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.view.customer.PicImageView;
 import com.shian.shianlife.common.view.finger.DrawView;
+import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.mapapi.CustomDialog;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.FileHttpResponseHandler;
@@ -29,11 +34,13 @@ import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.impl.OrderManagerImpl;
 import com.shian.shianlife.provide.imp.impl.ProductManagerImpl;
 import com.shian.shianlife.provide.model.CemeteryModel;
+import com.shian.shianlife.provide.model.ProductItemModel;
 import com.shian.shianlife.provide.model.ProjectItemModel;
 import com.shian.shianlife.provide.model.SetmealModel;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpGetOrderDetailParams;
 import com.shian.shianlife.provide.params.HpOrderIdParams;
+import com.shian.shianlife.provide.params.HpSaveContractData;
 import com.shian.shianlife.provide.params.HpSaveCustomerContract;
 import com.shian.shianlife.provide.result.HrConsultAgentman;
 import com.shian.shianlife.provide.result.HrGetCemeteryResult;
@@ -44,12 +51,16 @@ import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.provide.result.HrOrderFeedback;
 import com.shian.shianlife.provide.result.HrUploadFile;
 import com.shian.shianlife.view.ScreenShot;
+import com.shian.shianlife.view.ScrollListView;
 
 import java.util.List;
 
 public class ContractDataActivity extends BaseActivity {
 
     ScrollView theScrollView;
+
+    ScrollListView mLSMain;
+    ScrollListView mLSProject;
 
     TextView mTVNext;
     TextView mTVBack;
@@ -134,24 +145,25 @@ public class ContractDataActivity extends BaseActivity {
         mTVAgentManCardId = (TextView) findViewById(R.id.tv_agentmancardid);
         mTVAgentManLocation = (TextView) findViewById(R.id.tv_agentmanlocation);
         mTVAgentManRelation = (TextView) findViewById(R.id.tv_agentmanrelation);
-        mTVZSLocation= (TextView) findViewById(R.id.tv_zslocation);
-        mTVDLLocation= (TextView) findViewById(R.id.tv_dlman);
+        mTVZSLocation = (TextView) findViewById(R.id.tv_zslocation);
+        mTVDLLocation = (TextView) findViewById(R.id.tv_dlman);
 
+        mLSMain = (ScrollListView) findViewById(R.id.ls_main);
+        mLSProject = (ScrollListView) findViewById(R.id.ls_project);
 
         mTVNext.setOnClickListener(onClickListener);
         mTVBack.setOnClickListener(onClickListener);
         mTVComplete.setOnClickListener(onClickListener);
         dvPay.setOnClickListener(onClickListener);
+
+
     }
 
     private void initData() {
-
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-//        getMainSetmeals();
-        getMoney();
-//        getData();
-
-
+        getMainSetmeals();//获取套餐和项目数据
+        getMoney();//获取金额数据
+        getData();//获取基本数据
     }
 
     private void getData() {
@@ -200,7 +212,23 @@ public class ContractDataActivity extends BaseActivity {
 
                         mTVFirstName.setText(agentmanName);
                         mTVDeadName.setText(deadmanName);
-                        mTVDeadSex.setText(deadmanSex);
+                        String sDeadmanSex="";
+                        switch (deadmanSex){
+                            case "0":
+                                sDeadmanSex="未知";
+                                break;
+                            case "1":
+                                sDeadmanSex="男";
+                                break;
+                            case "2":
+                                sDeadmanSex="女";
+                                break;
+                            case "3":
+                                sDeadmanSex="保密";
+                                break;
+                        }
+
+                        mTVDeadSex.setText(sDeadmanSex);
                         mTVDeadState.setText(deadmanState);
                         mTVDeadCardId.setText(deadmanCardId);
                         mTVDeadAge.setText(deadmanAge);
@@ -286,10 +314,8 @@ public class ContractDataActivity extends BaseActivity {
             public void run() {
 //                String fName = ScreenShot.savePic(ScreenShot.compressImage(bitmap));
                 String fName = ScreenShot.savePic(bitmap);
-//                uploadFile(consultId + "", fName);
-                if (customDialog != null) {
-                    customDialog.cancel();
-                }
+                uploadFile(consultId + "", fName);
+
             }
         }.start();
 
@@ -303,11 +329,37 @@ public class ContractDataActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(HrUploadFile t) {
-                        ToastUtils.show(ContractDataActivity.this, "上传成功");
                         HpSaveCustomerContract.AddAddition add = new HpSaveCustomerContract.AddAddition();
                         add.setFileName(file);
                         add.setFileUrl(t.getNameMap().get(file).toString());
                         String FileUrl = AppContansts.OSSURL + add.getFileUrl();
+                        Log.v("this", "FileUrl:" + FileUrl);
+                        HpSaveContractData params = new HpSaveContractData();
+                        params.setPicUrl(FileUrl);
+                        params.setConsultId(consultId);
+                        MHttpManagerFactory.getAccountManager().saveContractData(ContractDataActivity.this, params,
+                                new HttpResponseHandler<Object>() {
+
+                                    @Override
+                                    public void onSuccess(Object result) {
+                                        // TODO Auto-generated method stub
+                                        ToastUtils.show(ContractDataActivity.this, "上传成功");
+                                        OrderFragment.C_bOrder_isRefresh = true;
+                                        finish();
+                                    }
+
+                                    @Override
+                                    public void onStart() {
+                                        // TODO Auto-generated method stub
+
+                                    }
+
+                                    @Override
+                                    public void onError(String message) {
+                                        // TODO Auto-generated method stub
+
+                                    }
+                                });
                     }
 
                     @Override
@@ -359,65 +411,35 @@ public class ContractDataActivity extends BaseActivity {
     private void getMainSetmeals() {
         ProductManagerImpl.getInstance().getMainSetmeal(this,
                 new HttpResponseHandler<HrGetMainSetmealResult>() {
-
                     @Override
                     public void onSuccess(HrGetMainSetmealResult result) {
                         mainSetmeals = result.getMains();
-                        getFuneralSetmeals();
-                    }
+                        if (mainSetmeals != null) {
+                            //设置布局
+                            mLSMain.setAdapter(mainAdapter);
+                            ScrollListView.setListViewHeightBasedOnChildren(mLSMain);
+                            mLSProject.setAdapter(projectAdapter);
+                            ScrollListView.setListViewHeightBasedOnChildren(mLSProject);
 
-                    @Override
-                    public void onStart() {
+                            Log.v("this", "mainSetmealsgetData !=null");
+                            TextView textView = new TextView(ContractDataActivity.this);
+                            textView.setText("方案名称：" + mainSetmeals.get(0).getName());
+                            textView.setTextColor(getResources().getColor(R.color.blackgroundmain));
+                            mLSMain.addHeaderView(textView);
 
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        System.out.println();
-                    }
-                });
-
-    }
-
-    /**
-     * 获取殡仪馆信息
-     */
-    protected void getFuneralSetmeals() {
-        ProductManagerImpl.getInstance().getFuneralsSetmeal(this,
-                new HttpResponseHandler<HrGetFuneralSetmealResult>() {
-
-                    @Override
-                    public void onSuccess(HrGetFuneralSetmealResult result) {
-                        funeralSetmeals = result.getFunerals();
-                        getCemeterys();
-                    }
-
-                    @Override
-                    public void onStart() {
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        System.out.println();
-                    }
-                });
-    }
-
-    /**
-     * 获取公墓信息
-     */
-    protected void getCemeterys() {
-        ProductManagerImpl.getInstance().getCemeteryResult(this,
-                new HttpResponseHandler<HrGetCemeteryResult>() {
-
-                    @Override
-                    public void onSuccess(HrGetCemeteryResult result) {
-                        cemeteries = result.getRetCemeteries();
-                        if (orderId != -1) {
-                            getOrderDetail();
+                            for (int i = 0; i < mainSetmeals.get(0).getCtgItems().size(); i++) {
+                                Log.v("this", "CtgItems：" + mainSetmeals.get(0).getCtgItems().get(i).getName());
+                                for (int f = 0; f < mainSetmeals.get(0).getCtgItems().get(i).getProductItems().size(); f++) {
+                                    Log.v("this", "ProductItems：" + mainSetmeals.get(0).getCtgItems().get(i).getProductItems().get(f).getName());
+                                }
+                            }
+                            mainAdapter.notifyDataSetChanged();
                         } else {
-//                            initOrderView();
+                            Log.v("this", "mainSetmealsgetData == null");
                         }
+//                        mLSMain.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,400));
+                        getOrderDetail();
+
                     }
 
                     @Override
@@ -432,6 +454,105 @@ public class ContractDataActivity extends BaseActivity {
                 });
 
     }
+
+
+    BaseAdapter mainAdapter = new BaseAdapter() {
+        @Override
+        public int getCount() {
+            if (mainSetmeals != null) {
+                Log.v("this", "size:" + mainSetmeals.get(0).getCtgItems().size());
+                return mainSetmeals.get(0).getCtgItems().size();
+            } else {
+                return 0;
+            }
+
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            ViewHolder holder;
+
+            if (view == null) {
+                view = LayoutInflater.from(ContractDataActivity.this).inflate(R.layout.layout_contract_item, null);
+                holder = new ViewHolder();
+                holder.name = (TextView) view.findViewById(R.id.tv_name);
+                holder.content = (ScrollListView) view.findViewById(R.id.tv_text);
+                view.setTag(holder);
+            } else {
+                holder = (ViewHolder) view.getTag();
+            }
+
+            String name = mainSetmeals.get(0).getCtgItems().get(i).getName();
+            holder.name.setText(name + "：");
+            holder.name.setTextColor(getResources().getColor(R.color.blackgroundmain));
+            final List<ProductItemModel> listContent = mainSetmeals.get(0).getCtgItems().get(i).getProductItems();
+            BaseAdapter baseAdapter = new BaseAdapter() {
+                @Override
+                public int getCount() {
+                    return listContent.size();
+                }
+
+                @Override
+                public Object getItem(int i) {
+                    return null;
+                }
+
+                @Override
+                public long getItemId(int i) {
+                    return 0;
+                }
+
+                @Override
+                public View getView(int p, View view, ViewGroup viewGroup) {
+                    TextView textView = new TextView(ContractDataActivity.this);
+                    textView.setTextColor(getResources().getColor(R.color.blackgroundmain));
+                    textView.setText(listContent.get(p).getName());
+                    return textView;
+                }
+            };
+            holder.content.setAdapter(baseAdapter);
+            ScrollListView.setListViewHeightBasedOnChildren(holder.content);
+
+            return view;
+        }
+
+        class ViewHolder {
+            TextView name;
+            ScrollListView content;
+        }
+    };
+
+    BaseAdapter projectAdapter = new BaseAdapter() {
+        @Override
+        public int getCount() {
+            return 0;
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            return null;
+        }
+    };
 
     /**
      * 获取订单详情
@@ -445,7 +566,6 @@ public class ContractDataActivity extends BaseActivity {
                     @Override
                     public void onSuccess(HrGetOrderDetailResult result) {
                         projectItems = result.getProjectItems();
-//                        initOrderView(result);
                     }
 
                     @Override

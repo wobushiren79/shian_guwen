@@ -19,12 +19,14 @@ import com.shian.shianlife.provide.params.HpReadMessage;
 import com.shian.shianlife.provide.params.HpRefundParams;
 import com.shian.shianlife.provide.params.HpRejectParams;
 import com.shian.shianlife.provide.params.HpSaveComment;
+import com.shian.shianlife.provide.params.HpSaveContractData;
 import com.shian.shianlife.provide.params.HpSaveCustomerAgentmanParams;
 import com.shian.shianlife.provide.params.HpSaveCustomerCemeteryParams;
 import com.shian.shianlife.provide.params.HpSaveCustomerContract;
 import com.shian.shianlife.provide.params.HpSaveCustomerFuneral;
 import com.shian.shianlife.provide.params.HpSaveCustomerTalkParams;
 import com.shian.shianlife.provide.params.HpSaveCustomerUsageParams;
+import com.shian.shianlife.provide.params.HpSaveWaitServicePostData;
 import com.shian.shianlife.provide.params.HpTalkFailParams;
 import com.shian.shianlife.provide.result.HrAddConsultResult;
 import com.shian.shianlife.provide.result.HrCommentResult;
@@ -40,6 +42,7 @@ import com.shian.shianlife.provide.result.HrGetCustomerPreready;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.provide.result.HrGetOrderNote;
 import com.shian.shianlife.provide.result.HrGetTalkFail;
+import com.shian.shianlife.provide.result.HrGetWaitServicePostData;
 import com.shian.shianlife.provide.result.HrLoginResult;
 import com.shian.shianlife.provide.result.HrMessageList;
 import com.shian.shianlife.provide.result.HrOrderFeedback;
@@ -499,24 +502,50 @@ public interface MAccountManager extends HttpManager {
     /**
      * 洽谈失败数据保存接口
      */
-    public void saveTalkFailData(Context context,
-                                 HpTalkFailParams params, HttpResponseHandler<Object> handler);
+    public void saveTalkFailData(Context context,HpTalkFailParams params, HttpResponseHandler<Object> handler);
 
 
     /**
      * 获取洽谈失败数据
+     *
      * @param context
      * @param params
      * @param handler
      */
-    public void getTalkFailData(Context context,HpConsultIdParams params,
+    public void getTalkFailData(Context context, HpConsultIdParams params,
                                 HttpResponseHandler<HrGetTalkFail> handler);
 
     /**
      * 获取合同相关信息
+     *
      * @param context
      * @param params
      * @param handler
      */
-    public void getContractData(Context context,HpConsultIdParams params,HttpResponseHandler<HrGetContractData> handler);
+    public void getContractData(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetContractData> handler);
+
+    /**
+     * 保存合同信息和截图
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void saveContractData(Context context, HpSaveContractData params, HttpResponseHandler<Object> handler);
+
+    /**
+     * 获取待服务提交信息
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public  void getWaitServicePostData(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetWaitServicePostData> handler);
+
+    /**
+     * 保存待服务提交信息
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public  void saveWaitServicePostData(Context context, HpSaveWaitServicePostData params, HttpResponseHandler<Object> handler);
 }

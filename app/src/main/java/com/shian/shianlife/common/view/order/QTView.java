@@ -13,10 +13,12 @@ import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -31,6 +33,7 @@ import com.shian.shianlife.activity.BaiduMapActivity;
 import com.shian.shianlife.activity.CustomerActivity;
 import com.shian.shianlife.activity.CustomerDetailActivity;
 import com.shian.shianlife.activity.EditOrderActivity;
+import com.shian.shianlife.activity.MainActivity;
 import com.shian.shianlife.activity.NewOrderActivity;
 import com.shian.shianlife.activity.OrderDetailActivity;
 import com.shian.shianlife.activity.PayActivity;
@@ -63,6 +66,7 @@ import com.shian.shianlife.view.TalkDataDialog;
 public class QTView extends BaseOrderView {
     private final String LOG_TGA = "QT_VIEW";
     private View v;
+
 
     private SwipeRefreshLayout mSryt;
     private ListView mListView;
@@ -296,6 +300,11 @@ public class QTView extends BaseOrderView {
                 TextView tvq2 = (TextView) view.getView(R.id.tv_qt20);
                 TextView tvq3 = (TextView) view.getView(R.id.tv_qt30);
                 TextView tvqfp = (TextView) view.getView(R.id.iv_qt32);
+                TextView tvclose = (TextView) view.getView(R.id.tv_close);
+                TextView tvedit = (TextView) view.getView(R.id.tv_edit);
+                TextView tvwaitservice = (TextView) view.getView(R.id.tv_waitservice);
+                TextView tvpay = (TextView) view.getView(R.id.tv_pay);
+
                 ImageView ivq0 = (ImageView) view.getView(R.id.iv_qt02);
                 ImageView ivq1 = (ImageView) view.getView(R.id.iv_qt12);
                 ImageView ivq2 = (ImageView) view.getView(R.id.iv_qt22);
@@ -427,6 +436,14 @@ public class QTView extends BaseOrderView {
                 View payFre = view.getView(R.id.fl_payfre);
                 View tk = view.getView(R.id.fl_tk);
                 TextView tvPay = ((TextView) ((ViewGroup) payFre).getChildAt(0));
+
+                if (model.isShowSwitch2waitService()) {
+                    shift.setVisibility(View.VISIBLE);
+                    shift.setOnClickListener(clickListener);
+                } else {
+                    shift.setVisibility(View.GONE);
+                }
+
                 if (model.isHasPrepay()) {
                     payFre.setEnabled(false);
 
@@ -435,6 +452,7 @@ public class QTView extends BaseOrderView {
                     tvPay.setTextColor(getContext().getResources().getColor(R.color.white));
                     tvPay.setText("定金已支付");
                 } else {
+                    shift.setVisibility(View.GONE);
                     tvPay.setBackgroundResource(R.drawable.bg_button_yellow);
                     tvPay.setTextColor(getContext().getResources().getColor(R.color.text_color));
                     tvPay.setText("支付定金");
@@ -445,10 +463,19 @@ public class QTView extends BaseOrderView {
                     payFre.setVisibility(View.VISIBLE);
                     create.setVisibility(View.GONE);
                     payFre.setOnClickListener(clickListener);
+                    FrameLayout.LayoutParams tvcloseLP = new FrameLayout.LayoutParams
+                            (getResources().getDimensionPixelSize(R.dimen.dimen_200dp), getResources().getDimensionPixelSize(R.dimen.dimen_60dp));
+                    tvclose.setText("结束洽谈");
+                    tvclose.setPadding(0, 0, 0, 0);
+                    tvclose.setLayoutParams(tvcloseLP);
                 } else {
                     payFre.setVisibility(View.GONE);
                     create.setVisibility(View.VISIBLE);
-
+                    FrameLayout.LayoutParams tvcloseLP = new FrameLayout.LayoutParams
+                            (ViewGroup.LayoutParams.WRAP_CONTENT, getResources().getDimensionPixelSize(R.dimen.dimen_60dp));
+                    tvclose.setText("洽谈失败，结束洽谈");
+                    tvclose.setPadding(getResources().getDimensionPixelOffset(R.dimen.dimen_10dp), 0, getResources().getDimensionPixelOffset(R.dimen.dimen_10dp), 0);
+                    tvclose.setLayoutParams(tvcloseLP);
                 }
 
                 if (model.getConsultStatus() == 4
@@ -493,12 +520,7 @@ public class QTView extends BaseOrderView {
                     close.setVisibility(View.GONE);
                 }
 
-                if (model.isShowSwitch2waitService()) {
-                    shift.setVisibility(View.VISIBLE);
-                    shift.setOnClickListener(clickListener);
-                } else {
-                    shift.setVisibility(View.GONE);
-                }
+
                 create.setOnClickListener(clickListener);
                 ddxq.setOnClickListener(clickListener);
                 tk.setOnClickListener(clickListener);
@@ -510,6 +532,29 @@ public class QTView extends BaseOrderView {
                 } else {
                     tv_talkagain.setVisibility(GONE);
                 }
+                if (edit.getVisibility() == VISIBLE || close.getVisibility() == VISIBLE || payFre.getVisibility() == VISIBLE || shift.getVisibility() == VISIBLE) {
+                    int dp25 = getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_25dp);
+                    FrameLayout.LayoutParams tvLP = new FrameLayout.LayoutParams
+                            ((MainActivity.metrics.widthPixels - dp25 * 2) / 4, getResources().getDimensionPixelSize(R.dimen.dimen_60dp));
+                    tvLP.gravity = CENTER_IN_PARENT;
+                    tvedit.setLayoutParams(tvLP);
+                    tvwaitservice.setLayoutParams(tvLP);
+                    tvclose.setLayoutParams(tvLP);
+                    tvpay.setLayoutParams(tvLP);
+
+
+                } else {
+                    FrameLayout.LayoutParams tvcloseLP = new FrameLayout.LayoutParams
+                            (getResources().getDimensionPixelSize(R.dimen.dimen_200dp), getResources().getDimensionPixelSize(R.dimen.dimen_60dp));
+                    tvcloseLP.gravity = CENTER_IN_PARENT;
+
+                    tvedit.setLayoutParams(tvcloseLP);
+                    tvwaitservice.setLayoutParams(tvcloseLP);
+                    tvclose.setLayoutParams(tvcloseLP);
+                    tvpay.setLayoutParams(tvcloseLP);
+
+
+                }
             }
         });
     }
@@ -518,6 +563,7 @@ public class QTView extends BaseOrderView {
 
         OrderListModel model;
         int position;
+
 
         public OrderListBtnClick(OrderListModel model, int position) {
             this.model = model;
@@ -668,10 +714,8 @@ public class QTView extends BaseOrderView {
                     MHttpManagerFactory.getAccountManager().switch2waitService(
                             getContext(), params,
                             new HttpResponseHandler<Object>() {
-
                                 @Override
                                 public void onStart() {
-
                                 }
 
                                 @Override
@@ -871,6 +915,10 @@ public class QTView extends BaseOrderView {
             getContext().startActivity(in);
         }
 
+
     }
 
+    public void setWH() {
+
+    }
 }

@@ -1,18 +1,36 @@
 package com.shian.shianlife.activity.updata;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.MapLocation;
 import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.common.utils.TransitionDate;
+import com.shian.shianlife.fragment.OrderFragment;
+import com.shian.shianlife.provide.MHttpManagerFactory;
+import com.shian.shianlife.provide.base.HttpResponseHandler;
+import com.shian.shianlife.provide.params.HpConsultIdParams;
+import com.shian.shianlife.provide.params.HpSaveWaitServicePostData;
+import com.shian.shianlife.provide.result.HrGetWaitServicePostData;
 import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 
-public class WaitServiceDataActivity extends BaseActivity {
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+public class WaitServiceDataActivity extends BaseActivity {
     TextView mTVNext;
     TextView mTVBack;
     TextView mTVTime;
@@ -24,6 +42,7 @@ public class WaitServiceDataActivity extends BaseActivity {
     long orderId;
     long consultId;
 
+    List<String> listLocation = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +53,53 @@ public class WaitServiceDataActivity extends BaseActivity {
         orderId = getIntent().getLongExtra("orderId", 0);
         consultId = getIntent().getLongExtra("consultId", 0);
         initView();
+        initData();
+    }
+
+    private void initData() {
+        HpConsultIdParams params = new HpConsultIdParams();
+        params.setConsultId(consultId);
+        MHttpManagerFactory.getAccountManager().getWaitServicePostData(WaitServiceDataActivity.this,
+                params, new HttpResponseHandler<HrGetWaitServicePostData>() {
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(HrGetWaitServicePostData result) {
+
+
+                        if (!result.getDeadLocation().equals("")) {
+                            listLocation.add(result.getDeadLocation());
+                        }
+                        if (!result.getDeadLocation().equals("")) {
+                            listLocation.add(result.getAgentmanLocation());
+                        }
+                        if (!result.getDeadLocation().equals("")) {
+                            listLocation.add(result.getDeadmanLocation());
+                        }
+                        if (!result.getDeadLocation().equals("")) {
+                            listLocation.add(result.getZsLocation());
+                        }
+
+                        Log.v("this", "DeadTime:" + result.getDeadTime());
+                        Log.v("this", "DeadLocation:" + result.getDeadLocation());
+                        Log.v("this", "AgentmanLocation:" + result.getAgentmanLocation());
+                        Log.v("this", "DeadmanLocation:" + result.getDeadmanLocation());
+                        Log.v("this", "ZsLocation:" + result.getZsLocation());
+
+                        mTVTime.setText(TransitionDate.DateToStr(new Date(
+                                        result.getDeadTime()),
+                                "yyyy-MM-dd"));
+                        mIVMapSelect.setOnClickListener(onClickListener);
+                    }
+
+                    @Override
+                    public void onError(String message) {
+
+                    }
+                });
     }
 
     private void setTimeDialog(final TextView v) {
@@ -60,8 +126,9 @@ public class WaitServiceDataActivity extends BaseActivity {
         mIVMapSelect = (ImageView) findViewById(R.id.iv_data);
 
         mTVTime.setOnClickListener(onClickListener);
-        mIVMapSelect.setOnClickListener(onClickListener);
         mIVMapCheck.setOnClickListener(onClickListener);
+        mTVNext.setOnClickListener(onClickListener);
+        mTVBack.setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -72,10 +139,86 @@ public class WaitServiceDataActivity extends BaseActivity {
             } else if (view == mIVMapCheck) {
                 setMapLocation();
             } else if (view == mIVMapSelect) {
-
+                setSelect();
+            } else if (view == mTVBack) {
+                finish();
+            } else if (view == mTVNext) {
+                setUpData();
             }
         }
     };
+
+    private void setUpData() {
+        String time = mTVTime.getText().toString();
+        String location = mTVMapText.getText().toString();
+
+        HpSaveWaitServicePostData params = new HpSaveWaitServicePostData();
+        params.setConsultId(consultId);
+        params.setDeadLocation(location);
+        params.setDeadTime(TransitionDate.StrToDate(time, "yyyy-MM-dd")
+                .getTime());
+        MHttpManagerFactory.getAccountManager().saveWaitServicePostData(WaitServiceDataActivity.this, params,
+                new HttpResponseHandler<Object>() {
+
+                    @Override
+                    public void onSuccess(Object result) {
+                        // TODO Auto-generated method stub
+                        Toast.makeText(WaitServiceDataActivity.this, "开始执行成功", Toast.LENGTH_LONG).show();
+                        OrderFragment.C_bOrder_isRefresh = true;
+                        finish();
+                    }
+
+                    @Override
+                    public void onStart() {
+                        // TODO Auto-generated method stub
+
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
+    }
+
+    private void setSelect() {
+        ListView textListView = new ListView(WaitServiceDataActivity.this);
+        textListView.setAdapter(new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return listLocation.size();
+            }
+
+            @Override
+            public Object getItem(int i) {
+                return null;
+            }
+
+            @Override
+            public long getItemId(int i) {
+                return 0;
+            }
+
+            @Override
+            public View getView(final int i, View view, ViewGroup viewGroup) {
+                TextView textView = new TextView(WaitServiceDataActivity.this);
+                textView.setText(listLocation.get(i));
+                textView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mTVMapText.setText(listLocation.get(i));
+                    }
+                });
+                return textView;
+            }
+        });
+        AlertDialog dialog = new AlertDialog.Builder(WaitServiceDataActivity.this)
+                .setTitle("请选择地址")
+                .setView(textListView)
+                .create();
+        dialog.show();
+    }
 
     private void setMapLocation() {
         //点击地图定位

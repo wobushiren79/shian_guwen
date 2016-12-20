@@ -154,7 +154,6 @@ public class OrderFragment extends BaseFragment {
 		for (String n : arrTitles) {
 			if (n.equals("洽谈")) {
 				QTView qtView = new QTView(getActivity());
-				mOrderView = qtView;
 				views.add(qtView);
 			} else if (n.equals("待服务")) {
 				WaitServiceView waitServiceView = new WaitServiceView(
