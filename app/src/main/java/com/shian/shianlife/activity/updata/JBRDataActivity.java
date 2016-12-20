@@ -29,6 +29,8 @@ import com.shian.shianlife.provide.params.HpSaveCustomerAgentmanParams;
 import com.shian.shianlife.provide.result.HrConsultAgentman;
 import com.shian.shianlife.view.MapSelectLayoutView;
 
+import java.util.ArrayList;
+
 
 public class JBRDataActivity extends BaseActivity {
 
@@ -76,8 +78,8 @@ public class JBRDataActivity extends BaseActivity {
         selectLayoutView1= (MapSelectLayoutView) findViewById(R.id.mapselect1);
         selectLayoutView2= (MapSelectLayoutView) findViewById(R.id.mapselect2);
 
-        selectLayoutView1.setData(1);
-        selectLayoutView2.setData(2);
+        selectLayoutView1.setData(1,new ArrayList<String>());
+        selectLayoutView2.setData(2,new ArrayList<String>());
 
         mSPRelation = (Spinner) findViewById(R.id.sp_jbr_0);
 

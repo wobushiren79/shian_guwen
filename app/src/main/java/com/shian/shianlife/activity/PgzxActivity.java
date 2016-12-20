@@ -61,7 +61,7 @@ public class PgzxActivity extends BaseActivity {
     TextView newOrder2;
     int khxqType;
 
-    int orderStatus = 0;
+    public int orderStatus = 0;
 
     PGZXLayoutView mPgzxLayoutView1;
     PGZXLayoutView mPgzxLayoutView2;

@@ -56,7 +56,10 @@
                 android:text="去世地址:"
                 android:textSize="@dimen/text_size_top_bg" />
 
-            <include layout="@layout/layout_mapcheck"></include>
+            <com.shian.shianlife.view.MapSelectLayoutView
+                android:id="@+id/mapselect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.shian.shianlife.view.MapSelectLayoutView>
         </LinearLayout>
 
         <TextView

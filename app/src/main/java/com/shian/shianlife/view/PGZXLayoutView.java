@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.PgzxActivity;
 import com.shian.shianlife.activity.sendorders.SendOrderActivity;
 
 /**
@@ -72,32 +73,44 @@ public class PGZXLayoutView extends LinearLayout {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getContext(), SendOrderActivity.class);
+
             String TITILENAME = "TitleName";
+            int step = 0;
             if (view == mBTState1) {
                 if (string == 0) {
                     intent.putExtra(TITILENAME, "处理临终现场");
+                    step = 0;
                 } else if (string == 1) {
+                    step = 2;
                     intent.putExtra(TITILENAME, "开始服务");
                 } else if (string == 2) {
+                    step = 4;
                     intent.putExtra(TITILENAME, "开始服务");
                 }
             } else if (view == mBTState2) {
                 if (string == 0) {
+                    step = 1;
                     intent.putExtra(TITILENAME, "治丧第一天现场服务");
                 } else if (string == 1) {
+                    step = 3;
                     intent.putExtra(TITILENAME, "出殡前服务");
                 } else if (string == 2) {
+                    step = 5;
                     intent.putExtra(TITILENAME, "出殡当天现场服务");
                 }
             } else if (view == mBTState3) {
                 if (string == 0) {
+                    step = 2;
                     intent.putExtra(TITILENAME, "结束治丧初期服务");
                 } else if (string == 1) {
+                    step = 4;
                     intent.putExtra(TITILENAME, "结束出殡前服务");
                 } else if (string == 2) {
+                    step = 6;
                     intent.putExtra(TITILENAME, "殡仪馆服务");
                 }
             }
+            intent.putExtra("step",step);
             getContext().startActivity(intent);
         }
     };

@@ -98,7 +98,7 @@ public class WSZDataActivity extends BaseActivity {
         mRBSelect = (RadioButton) findViewById(R.id.rb_sz_bm);
 
         mSelectLayoutView = (MapSelectLayoutView) findViewById(R.id.mapselect);
-        mSelectLayoutView.setData(1);
+        mSelectLayoutView.setData(1,new ArrayList<String>());
 
         rbList.add(mRBUn);
         rbList.add(mRBMan);

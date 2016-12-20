@@ -24,6 +24,7 @@ import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpSaveWaitServicePostData;
 import com.shian.shianlife.provide.result.HrGetWaitServicePostData;
+import com.shian.shianlife.view.MapSelectLayoutView;
 import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 
 import java.util.ArrayList;
@@ -35,12 +36,11 @@ public class WaitServiceDataActivity extends BaseActivity {
     TextView mTVBack;
     TextView mTVTime;
 
-    TextView mTVMapText;
-    ImageView mIVMapCheck;
-    ImageView mIVMapSelect;
 
     long orderId;
     long consultId;
+
+    MapSelectLayoutView mSelectLayoutView;
 
     List<String> listLocation = new ArrayList<>();
 
@@ -57,7 +57,7 @@ public class WaitServiceDataActivity extends BaseActivity {
     }
 
     private void initData() {
-        Log.v("this","initData");
+        Log.v("this", "initData");
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId(consultId);
         MHttpManagerFactory.getAccountManager().getWaitServicePostData(WaitServiceDataActivity.this,
@@ -77,24 +77,23 @@ public class WaitServiceDataActivity extends BaseActivity {
                         Log.v("this", "DeadmanLocation:" + result.getDeadmanLocation());
                         Log.v("this", "ZsLocation:" + result.getZsLocation());
 
-                        if (result.getDeadLocation()!=null) {
+                        if (result.getDeadLocation() != null) {
                             listLocation.add(result.getDeadLocation());
                         }
-                        if (result.getAgentmanLocation()!=null) {
+                        if (result.getAgentmanLocation() != null) {
                             listLocation.add(result.getAgentmanLocation());
                         }
-                        if (result.getDeadmanLocation()!=null) {
+                        if (result.getDeadmanLocation() != null) {
                             listLocation.add(result.getDeadmanLocation());
                         }
-                        if (result.getZsLocation()!=null) {
+                        if (result.getZsLocation() != null) {
                             listLocation.add(result.getZsLocation());
                         }
-
-
+                        mSelectLayoutView.setData(1, listLocation);
                         mTVTime.setText(TransitionDate.DateToStr(new Date(
                                         result.getDeadTime()),
                                 "yyyy-MM-dd"));
-                        mIVMapSelect.setOnClickListener(onClickListener);
+
                     }
 
                     @Override
@@ -123,15 +122,12 @@ public class WaitServiceDataActivity extends BaseActivity {
         mTVBack = (TextView) findViewById(R.id.tv_back);
         mTVTime = (TextView) findViewById(R.id.et_zs_0);
 
-        mTVMapText = (TextView) findViewById(R.id.tv_map_text);
-        mIVMapCheck = (ImageView) findViewById(R.id.iv_map);
-        mIVMapSelect = (ImageView) findViewById(R.id.iv_data);
+        mSelectLayoutView = (MapSelectLayoutView) findViewById(R.id.mapselect);
 
         mTVTime.setOnClickListener(onClickListener);
-        mIVMapCheck.setOnClickListener(onClickListener);
         mTVNext.setOnClickListener(onClickListener);
         mTVBack.setOnClickListener(onClickListener);
-        mIVMapSelect.setOnClickListener(onClickListener);
+
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -139,10 +135,6 @@ public class WaitServiceDataActivity extends BaseActivity {
         public void onClick(View view) {
             if (view == mTVTime) {
                 setTimeDialog(mTVTime);
-            } else if (view == mIVMapCheck) {
-                setMapLocation();
-            } else if (view == mIVMapSelect) {
-                setSelect();
             } else if (view == mTVBack) {
                 finish();
             } else if (view == mTVNext) {
@@ -153,7 +145,7 @@ public class WaitServiceDataActivity extends BaseActivity {
 
     private void setUpData() {
         String time = mTVTime.getText().toString();
-        String location = mTVMapText.getText().toString();
+        String location = mSelectLayoutView.getLocation();
 
         HpSaveWaitServicePostData params = new HpSaveWaitServicePostData();
         params.setConsultId(consultId);
@@ -185,61 +177,5 @@ public class WaitServiceDataActivity extends BaseActivity {
                 });
     }
 
-    private void setSelect() {
-        ListView textListView = new ListView(WaitServiceDataActivity.this);
-        textListView.setAdapter(new BaseAdapter() {
-            @Override
-            public int getCount() {
-                return listLocation.size();
-            }
 
-            @Override
-            public Object getItem(int i) {
-                return null;
-            }
-
-            @Override
-            public long getItemId(int i) {
-                return 0;
-            }
-
-            @Override
-            public View getView(final int i, View view, ViewGroup viewGroup) {
-                TextView textView = new TextView(WaitServiceDataActivity.this);
-                textView.setText(listLocation.get(i));
-                textView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mTVMapText.setText(listLocation.get(i));
-                    }
-                });
-                return textView;
-            }
-        });
-        AlertDialog dialog = new AlertDialog.Builder(WaitServiceDataActivity.this)
-                .setTitle("请选择地址")
-                .setView(textListView)
-                .create();
-        dialog.show();
-    }
-
-    private void setMapLocation() {
-        //点击地图定位
-        Intent intent = new Intent(WaitServiceDataActivity.this, MapLocation.class);
-        startActivityForResult(intent, 1111);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (resultCode) {
-            case 1111:
-                String location = data.getStringExtra("location");
-//                    params.setCurAddress(location);
-                mTVMapText.setText(location);
-
-                break;
-            default:
-                break;
-        }
-    }
 }

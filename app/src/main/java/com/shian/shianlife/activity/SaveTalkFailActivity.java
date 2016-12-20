@@ -27,6 +27,8 @@ import com.shian.shianlife.provide.params.HpTalkFailParams;
 import com.shian.shianlife.view.MapSelectLayoutView;
 import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 
+import java.util.ArrayList;
+
 public class SaveTalkFailActivity extends BaseActivity {
     Long ConsultId;
 
@@ -87,8 +89,8 @@ public class SaveTalkFailActivity extends BaseActivity {
         mSelectLayoutView1 = (MapSelectLayoutView) findViewById(R.id.mapselect1);
         mSelectLayoutView2 = (MapSelectLayoutView) findViewById(R.id.mapselect2);
 
-        mSelectLayoutView1.setData(1);
-        mSelectLayoutView2.setData(2);
+        mSelectLayoutView1.setData(1,new ArrayList<String>());
+        mSelectLayoutView2.setData(2,new ArrayList<String>());
 
 
         mTalkTime.setOnClickListener(onClickListener);

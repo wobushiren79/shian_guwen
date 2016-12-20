@@ -1,27 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_send_order"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_blackground"
     android:orientation="vertical"
     tools:context="com.shian.shianlife.activity.sendorders.SendOrderActivity">
 
     <LinearLayout
-        android:id="@+id/ll_head"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/ll_head_content"
+            android:id="@+id/ll_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/dimen_20dp">
+
+            <LinearLayout
+                android:id="@+id/ll_head_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
+            <Button
+                android:layout_width="@dimen/dimen_200dp"
+                android:layout_height="@dimen/dimen_60dp"
+                android:layout_gravity="right"
+                android:background="@drawable/ic_home_reg"
+                android:text="客户详情"
+                android:textColor="@color/text_color" />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/ll_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"></LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="测试" />
-</LinearLayout>
+
+</ScrollView>
