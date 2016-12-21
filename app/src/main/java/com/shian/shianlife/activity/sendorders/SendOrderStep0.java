@@ -32,7 +32,7 @@ public class SendOrderStep0 extends BaseSendOrder {
     List<String> listData = new ArrayList<>();
 
     public SendOrderStep0(Context context, long consultId) {
-        super(context, R.layout.layout_sendorder_one);
+        super(context, R.layout.layout_sendorder_0);
         this.context = context;
         this.consultId = consultId;
 

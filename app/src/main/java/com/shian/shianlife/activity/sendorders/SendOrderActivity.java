@@ -166,6 +166,8 @@ public class SendOrderActivity extends BaseActivity {
                 mLLCotent.addView(sendOrderStep0);
                 break;
             case 1:
+                SendOrderStep1 sendOrderStep1=new SendOrderStep1(SendOrderActivity.this,consultId);
+                mLLCotent.addView(sendOrderStep1);
                 break;
             case 2:
                 break;
