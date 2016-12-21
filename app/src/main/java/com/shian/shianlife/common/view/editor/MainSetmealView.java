@@ -69,8 +69,7 @@ public class MainSetmealView extends FrameLayout implements
 		ArrayAdapter<SetmealModel> province_adapter = new ArrayAdapter<SetmealModel>(
 				getContext(), android.R.layout.simple_spinner_item,
 				mainSetmeals);
-		province_adapter
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		province_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		sp.setAdapter(province_adapter);
 		sp.setOnItemSelectedListener(this);
 	}

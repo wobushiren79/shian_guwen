@@ -25,6 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"></LinearLayout>
+
             <Button
                 android:layout_width="@dimen/dimen_200dp"
                 android:layout_height="@dimen/dimen_60dp"
@@ -35,18 +36,47 @@
         </LinearLayout>
 
 
-
         <LinearLayout
             android:id="@+id/ll_checkbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/cb_allcheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="全选" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:background="@color/gray_item_shua_textcolor" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"></LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+
+        <Button
+            android:id="@+id/bt_submit"
+            android:layout_width="@dimen/dimen_200dp"
+            android:layout_height="@dimen/dimen_60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:background="@drawable/pgzx_select_1"
+            android:gravity="center"
+            android:text="提交保存"
+            android:textColor="@color/text_color"
+            android:visibility="gone" />
     </LinearLayout>
 
 

@@ -88,8 +88,8 @@ public class HttpRequestExecutor {
                 getSession(context);
             } else {
                 pd = new CustomDialog(context);
-                pd.setCancelable(false);
-
+//                pd.setCancelable(false);
+                pd.setCanceledOnTouchOutside(false);
 //				pd = new ProgressDialog(context);
 //				pd.setCancelable(false);
 //				pd.setMessage("正在载入...");
@@ -122,6 +122,9 @@ public class HttpRequestExecutor {
                                 if (pd != null && (context instanceof Activity) && !((Activity) context).isFinishing())
                                     pd.cancel();
                                 response(context, method, c, response, arg2);
+                            }
+                            if (pd != null) {
+                                pd.cancel();
                             }
 
                         }

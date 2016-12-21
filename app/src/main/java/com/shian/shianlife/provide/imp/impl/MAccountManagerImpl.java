@@ -27,6 +27,7 @@ import com.shian.shianlife.provide.params.HpSaveCustomerContract;
 import com.shian.shianlife.provide.params.HpSaveCustomerFuneral;
 import com.shian.shianlife.provide.params.HpSaveCustomerTalkParams;
 import com.shian.shianlife.provide.params.HpSaveCustomerUsageParams;
+import com.shian.shianlife.provide.params.HpSaveSendOrderDataOne;
 import com.shian.shianlife.provide.params.HpSaveWaitServicePostData;
 import com.shian.shianlife.provide.params.HpTalkFailParams;
 import com.shian.shianlife.provide.result.HrAddConsultResult;
@@ -42,6 +43,7 @@ import com.shian.shianlife.provide.result.HrGetCustomerFuneral;
 import com.shian.shianlife.provide.result.HrGetCustomerPreready;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.provide.result.HrGetOrderNote;
+import com.shian.shianlife.provide.result.HrGetSendOrderDataOne;
 import com.shian.shianlife.provide.result.HrGetTalkFail;
 import com.shian.shianlife.provide.result.HrGetWaitServicePostData;
 import com.shian.shianlife.provide.result.HrLoginResult;
@@ -534,6 +536,18 @@ public class MAccountManagerImpl implements MAccountManager {
     @Override
     public void saveWaitServicePostData(Context context, HpSaveWaitServicePostData params, HttpResponseHandler<Object> handler) {
         excutor.requestPost(context, "customer/funeral/wait/service/save", Object.class, params,
+                handler);
+    }
+
+    @Override
+    public void getSendOrderDataOne(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetSendOrderDataOne> handler) {
+        excutor.requestPost(context, "order/item/list/one/get", HrGetSendOrderDataOne.class, params,
+                handler);
+    }
+
+    @Override
+    public void saveSendOrderDataOne(Context context, HpSaveSendOrderDataOne params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context, "order/item/list/one/save", Object.class, params,
                 handler);
     }
 

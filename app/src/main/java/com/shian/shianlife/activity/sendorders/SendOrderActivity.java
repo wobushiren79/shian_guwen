@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -11,6 +14,10 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.activity.PgzxActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.view.order.ListFwpdzView;
+import com.shian.shianlife.provide.MHttpManagerFactory;
+import com.shian.shianlife.provide.base.HttpResponseHandler;
+import com.shian.shianlife.provide.params.HpConsultIdParams;
+import com.shian.shianlife.provide.result.HrGetSendOrderDataOne;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +25,14 @@ import java.util.List;
 public class SendOrderActivity extends BaseActivity {
 
     LinearLayout mLLHeadLayout;
+    LinearLayout mLLCheckBoxLayout;
+    LinearLayout mLLCotent;
+    Button mBTSubmit;
 
+    long orderId;
+    long consultId;
+
+    CheckBox mCBCheckAll;
     int step = 0;
     String[] headData1 = {"去世时间", "去世地点"};
     String[] headData2 = {"治丧地址"};
@@ -70,6 +84,10 @@ public class SendOrderActivity extends BaseActivity {
             "遗体火化，等候期间领取火化证",
             "领取骨灰"};
     List<String[]> listHeadData = new ArrayList<>();
+    List<String[]> listCheckData = new ArrayList<>();
+
+    List<View> listHeadView = new ArrayList<>();
+    List<CheckBox> listCheckBox = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +95,9 @@ public class SendOrderActivity extends BaseActivity {
         setContentView(R.layout.activity_send_order);
 
         step = getIntent().getIntExtra("step", 0);
+        orderId = getIntent().getLongExtra("orderId", 0);
+        consultId = getIntent().getLongExtra("consultId", 0);
+
         String title = getIntent().getStringExtra("TitleName");
         setTitle(title);
 
@@ -86,7 +107,15 @@ public class SendOrderActivity extends BaseActivity {
 
     private void initView() {
         mLLHeadLayout = (LinearLayout) findViewById(R.id.ll_head_content);
+        mLLCheckBoxLayout = (LinearLayout) findViewById(R.id.ll_checkbox);
+        mCBCheckAll = (CheckBox) findViewById(R.id.cb_allcheck);
+        mBTSubmit = (Button) findViewById(R.id.bt_submit);
+        mLLCotent = (LinearLayout) findViewById(R.id.ll_content);
+
+        mCBCheckAll.setOnClickListener(onClickListener);
+        mBTSubmit.setOnClickListener(onClickListener);
     }
+
 
     private void initData() {
         listHeadData.add(headData1);
@@ -97,14 +126,102 @@ public class SendOrderActivity extends BaseActivity {
         listHeadData.add(headData6);
         listHeadData.add(headData7);
 
+        listCheckData.add(checkData1);
+        listCheckData.add(checkData2);
+        listCheckData.add(checkData3);
+        listCheckData.add(checkData4);
+        listCheckData.add(checkData5);
+        listCheckData.add(checkData6);
+        listCheckData.add(checkData7);
+
         for (int i = 0; i < listHeadData.get(step).length; i++) {
             String firstName = listHeadData.get(step)[i];
             View view = LayoutInflater.from(SendOrderActivity.this).inflate(R.layout.layout_sendorder_head_item, null);
             TextView tvName = (TextView) view.findViewById(R.id.tv_name);
             tvName.setText(firstName + "：");
+            listHeadView.add(view);
             mLLHeadLayout.addView(view);
         }
+        for (int i = 0; i < listCheckData.get(step).length; i++) {
+            String checkText = listCheckData.get(step)[i];
+            CheckBox checkBox = new CheckBox(SendOrderActivity.this);
+            checkBox.setOnCheckedChangeListener(onCheckedChangeListListener);
+            checkBox.setText(checkText);
+            listCheckBox.add(checkBox);
+            mLLCheckBoxLayout.addView(checkBox);
+        }
 
-
+        switch (step) {
+            case 0:
+                SendOrderStep0 sendOrderStep0 = new SendOrderStep0(SendOrderActivity.this,consultId);
+                mLLCotent.addView(sendOrderStep0);
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+        }
     }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (view == mBTSubmit) {
+                finish();
+            } else if (view == mCBCheckAll) {
+                setCheckBoxAll();
+            }
+        }
+    };
+
+    private void setCheckBoxAll() {
+        if (mCBCheckAll.isChecked()) {
+
+            for (CheckBox box : listCheckBox) {
+                box.setChecked(true);
+            }
+            mBTSubmit.setVisibility(View.VISIBLE);
+        } else {
+
+            for (CheckBox box : listCheckBox) {
+                box.setChecked(false);
+            }
+            mBTSubmit.setVisibility(View.GONE);
+        }
+    }
+
+    CompoundButton.OnCheckedChangeListener onCheckedChangeListListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            if (b) {
+                boolean isAllCheck = true;
+                for (CheckBox box : listCheckBox) {
+                    if (!box.isChecked()) {
+                        isAllCheck = false;
+                        return;
+                    }
+                }
+                if (isAllCheck) {
+                    mBTSubmit.setVisibility(View.VISIBLE);
+                    mCBCheckAll.setChecked(true);
+                }
+            } else {
+                mBTSubmit.setVisibility(View.GONE);
+                mCBCheckAll.setChecked(false);
+            }
+
+        }
+    };
+
+
 }

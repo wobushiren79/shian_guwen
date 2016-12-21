@@ -33,7 +33,11 @@ import com.shian.shianlife.provide.base.FileHttpResponseHandler;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.impl.OrderManagerImpl;
 import com.shian.shianlife.provide.imp.impl.ProductManagerImpl;
+import com.shian.shianlife.provide.model.BordModel;
 import com.shian.shianlife.provide.model.CemeteryModel;
+import com.shian.shianlife.provide.model.OrderCtgItemModel;
+import com.shian.shianlife.provide.model.OrderProductItemModel;
+import com.shian.shianlife.provide.model.PayInfoModel;
 import com.shian.shianlife.provide.model.ProductItemModel;
 import com.shian.shianlife.provide.model.ProjectItemModel;
 import com.shian.shianlife.provide.model.SetmealModel;
@@ -53,6 +57,7 @@ import com.shian.shianlife.provide.result.HrUploadFile;
 import com.shian.shianlife.view.ScreenShot;
 import com.shian.shianlife.view.ScrollListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContractDataActivity extends BaseActivity {
@@ -97,11 +102,12 @@ public class ContractDataActivity extends BaseActivity {
     /**
      * 用户之前提交的订单详情内容
      */
-    List<ProjectItemModel> projectItems;
-
-    private List<SetmealModel> mainSetmeals;// 系统主套餐
-    private List<SetmealModel> funeralSetmeals;// 系统殡仪馆信息
-    private List<CemeteryModel> cemeteries;// 系统公墓信息
+    List<ProjectItemModel> projectItems = new ArrayList<>();
+    List<OrderCtgItemModel> projectDD = new ArrayList<>();
+    List<OrderCtgItemModel> ztcItems = new ArrayList<>();
+    List<SetmealModel> mainSetmeals = new ArrayList<>();// 系统主套餐
+    BordModel board;
+    PayInfoModel payInfo;
 
     CustomDialog customDialog;
 
@@ -161,8 +167,7 @@ public class ContractDataActivity extends BaseActivity {
 
     private void initData() {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        getMainSetmeals();//获取套餐和项目数据
-        getMoney();//获取金额数据
+        getMainSetmeals();//获取订单信息
         getData();//获取基本数据
     }
 
@@ -212,19 +217,19 @@ public class ContractDataActivity extends BaseActivity {
 
                         mTVFirstName.setText(agentmanName);
                         mTVDeadName.setText(deadmanName);
-                        String sDeadmanSex="";
-                        switch (deadmanSex){
+                        String sDeadmanSex = "";
+                        switch (deadmanSex) {
                             case "0":
-                                sDeadmanSex="未知";
+                                sDeadmanSex = "未知";
                                 break;
                             case "1":
-                                sDeadmanSex="男";
+                                sDeadmanSex = "男";
                                 break;
                             case "2":
-                                sDeadmanSex="女";
+                                sDeadmanSex = "女";
                                 break;
                             case "3":
-                                sDeadmanSex="保密";
+                                sDeadmanSex = "保密";
                                 break;
                         }
 
@@ -259,33 +264,6 @@ public class ContractDataActivity extends BaseActivity {
                 });
     }
 
-    private void getMoney() {
-        HpOrderIdParams params = new HpOrderIdParams();
-        params.setOrderId(getIntent().getLongExtra("orderId", 0));
-        MHttpManagerFactory.getAccountManager().getOrderFeedback(this, params,
-                new HttpResponseHandler<HrOrderFeedback>() {
-
-                    @Override
-                    public void onSuccess(HrOrderFeedback result) {
-                        // TODO Auto-generated method stub
-                        mTVFirstMoney.setText(result.getPrepayAmount() + "元");
-                        mTVAllMoney.setText(result.getTotalAmount() + "元");
-                        mTVLastMoney.setText(result.getRestAmount() + "元");
-                    }
-
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        // TODO Auto-generated method stub
-
-                    }
-                });
-    }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -405,63 +383,11 @@ public class ContractDataActivity extends BaseActivity {
     }
 
 
-    /**
-     * 获取套餐信息
-     */
-    private void getMainSetmeals() {
-        ProductManagerImpl.getInstance().getMainSetmeal(this,
-                new HttpResponseHandler<HrGetMainSetmealResult>() {
-                    @Override
-                    public void onSuccess(HrGetMainSetmealResult result) {
-                        mainSetmeals = result.getMains();
-                        if (mainSetmeals != null) {
-                            //设置布局
-                            mLSMain.setAdapter(mainAdapter);
-                            ScrollListView.setListViewHeightBasedOnChildren(mLSMain);
-                            mLSProject.setAdapter(projectAdapter);
-                            ScrollListView.setListViewHeightBasedOnChildren(mLSProject);
-
-                            Log.v("this", "mainSetmealsgetData !=null");
-                            TextView textView = new TextView(ContractDataActivity.this);
-                            textView.setText("方案名称：" + mainSetmeals.get(0).getName());
-                            textView.setTextColor(getResources().getColor(R.color.blackgroundmain));
-                            mLSMain.addHeaderView(textView);
-
-                            for (int i = 0; i < mainSetmeals.get(0).getCtgItems().size(); i++) {
-                                Log.v("this", "CtgItems：" + mainSetmeals.get(0).getCtgItems().get(i).getName());
-                                for (int f = 0; f < mainSetmeals.get(0).getCtgItems().get(i).getProductItems().size(); f++) {
-                                    Log.v("this", "ProductItems：" + mainSetmeals.get(0).getCtgItems().get(i).getProductItems().get(f).getName());
-                                }
-                            }
-                            mainAdapter.notifyDataSetChanged();
-                        } else {
-                            Log.v("this", "mainSetmealsgetData == null");
-                        }
-//                        mLSMain.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,400));
-                        getOrderDetail();
-
-                    }
-
-                    @Override
-                    public void onStart() {
-
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        System.out.println();
-                    }
-                });
-
-    }
-
-
     BaseAdapter mainAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
-            if (mainSetmeals != null) {
-                Log.v("this", "size:" + mainSetmeals.get(0).getCtgItems().size());
-                return mainSetmeals.get(0).getCtgItems().size();
+            if (ztcItems != null) {
+                return ztcItems.size();
             } else {
                 return 0;
             }
@@ -492,10 +418,10 @@ public class ContractDataActivity extends BaseActivity {
                 holder = (ViewHolder) view.getTag();
             }
 
-            String name = mainSetmeals.get(0).getCtgItems().get(i).getName();
+            String name = ztcItems.get(i).getName();
             holder.name.setText(name + "：");
             holder.name.setTextColor(getResources().getColor(R.color.blackgroundmain));
-            final List<ProductItemModel> listContent = mainSetmeals.get(0).getCtgItems().get(i).getProductItems();
+            final List<OrderProductItemModel> listContent = ztcItems.get(i).getProductItems();
             BaseAdapter baseAdapter = new BaseAdapter() {
                 @Override
                 public int getCount() {
@@ -535,7 +461,7 @@ public class ContractDataActivity extends BaseActivity {
     BaseAdapter projectAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
-            return 0;
+            return projectDD.size();
         }
 
         @Override
@@ -550,9 +476,62 @@ public class ContractDataActivity extends BaseActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            return null;
+            ViewHolder holder;
+            if (view == null) {
+                view = LayoutInflater.from(ContractDataActivity.this).inflate(R.layout.layout_contract_item_2, null);
+                holder = new ViewHolder();
+                holder.name = (TextView) view.findViewById(R.id.tv_name);
+                holder.money = (TextView) view.findViewById(R.id.tv_money);
+                holder.num = (TextView) view.findViewById(R.id.tv_num);
+                holder.all = (TextView) view.findViewById(R.id.tv_all);
+                holder.remark = (TextView) view.findViewById(R.id.tv_remark);
+                view.setTag(holder);
+            } else {
+                holder = (ViewHolder) view.getTag();
+            }
+
+                holder.name.setText(projectDD.get(i).getName());
+                holder.money.setText(projectDD.get(0).getProductItems().get(i).getPrice()+"");
+                holder.num.setText(projectDD.get(0).getProductItems().get(i).getNumber()+"");
+
+            return view;
+
+        }
+
+        class ViewHolder {
+            TextView name;
+            TextView money;
+            TextView num;
+            TextView all;
+            TextView remark;
         }
     };
+
+    /**
+     * 获取套餐信息
+     */
+    private void getMainSetmeals() {
+        ProductManagerImpl.getInstance().getMainSetmeal(this,
+                new HttpResponseHandler<HrGetMainSetmealResult>() {
+
+                    @Override
+                    public void onSuccess(HrGetMainSetmealResult result) {
+                        mainSetmeals = result.getMains();
+                        getOrderDetail();
+                    }
+
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        System.out.println();
+                    }
+                });
+
+    }
 
     /**
      * 获取订单详情
@@ -566,6 +545,45 @@ public class ContractDataActivity extends BaseActivity {
                     @Override
                     public void onSuccess(HrGetOrderDetailResult result) {
                         projectItems = result.getProjectItems();
+                        board = result.getBoard();
+                        payInfo = result.getPayInfo();
+
+                        mTVFirstMoney.setText(payInfo.getPrepayAmount() + "元");
+                        mTVAllMoney.setText(payInfo.getTotalAmount() + "元");
+                        mTVLastMoney.setText(payInfo.getRestPayAmount() + "元");
+
+
+                        for (int i = 0; i < mainSetmeals.size(); i++) {
+                            SetmealModel setmealModel = mainSetmeals.get(i);
+                            if (setmealModel.getId() == result.getBoard().getSetmealMainId()) {
+                                TextView textView = new TextView(ContractDataActivity.this);
+                                textView.setText("方案名称：" + mainSetmeals.get(i).getName());
+                                textView.setTextColor(getResources().getColor(R.color.blackgroundmain));
+                                mLSMain.addHeaderView(textView);
+                                break;
+                            }
+                        }
+
+                        for (int i = 0; i < projectItems.size(); i++) {
+                            if ("主套餐".equals(projectItems.get(i).getName())) {
+                                ztcItems = projectItems.get(i).getCtgItems();
+                            } else if("增值项目".equals(projectItems.get(i).getName())) {
+                                projectDD=projectItems.get(i).getCtgItems();
+                            }
+                        }
+
+                        if (projectDD.size() > 0) {
+                            TextView headTx = new TextView(ContractDataActivity.this);
+                            headTx.setText("增值服务");
+                            mLSProject.addHeaderView(headTx);
+                        }
+
+                        mLSMain.setAdapter(mainAdapter);
+                        mLSProject.setAdapter(projectAdapter);
+                        ScrollListView.setListViewHeightBasedOnChildren(mLSMain);
+                        ScrollListView.setListViewHeightBasedOnChildren(mLSProject);
+                        mainAdapter.notifyDataSetChanged();
+//                        projectAdapter.notifyDataSetChanged();
                     }
 
                     @Override

@@ -26,6 +26,7 @@ import com.shian.shianlife.provide.params.HpSaveCustomerContract;
 import com.shian.shianlife.provide.params.HpSaveCustomerFuneral;
 import com.shian.shianlife.provide.params.HpSaveCustomerTalkParams;
 import com.shian.shianlife.provide.params.HpSaveCustomerUsageParams;
+import com.shian.shianlife.provide.params.HpSaveSendOrderDataOne;
 import com.shian.shianlife.provide.params.HpSaveWaitServicePostData;
 import com.shian.shianlife.provide.params.HpTalkFailParams;
 import com.shian.shianlife.provide.result.HrAddConsultResult;
@@ -41,6 +42,7 @@ import com.shian.shianlife.provide.result.HrGetCustomerFuneral;
 import com.shian.shianlife.provide.result.HrGetCustomerPreready;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.provide.result.HrGetOrderNote;
+import com.shian.shianlife.provide.result.HrGetSendOrderDataOne;
 import com.shian.shianlife.provide.result.HrGetTalkFail;
 import com.shian.shianlife.provide.result.HrGetWaitServicePostData;
 import com.shian.shianlife.provide.result.HrLoginResult;
@@ -502,7 +504,7 @@ public interface MAccountManager extends HttpManager {
     /**
      * 洽谈失败数据保存接口
      */
-    public void saveTalkFailData(Context context,HpTalkFailParams params, HttpResponseHandler<Object> handler);
+    public void saveTalkFailData(Context context, HpTalkFailParams params, HttpResponseHandler<Object> handler);
 
 
     /**
@@ -535,17 +537,36 @@ public interface MAccountManager extends HttpManager {
 
     /**
      * 获取待服务提交信息
+     *
      * @param context
      * @param params
      * @param handler
      */
-    public  void getWaitServicePostData(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetWaitServicePostData> handler);
+    public void getWaitServicePostData(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetWaitServicePostData> handler);
 
     /**
      * 保存待服务提交信息
+     *
      * @param context
      * @param params
      * @param handler
      */
-    public  void saveWaitServicePostData(Context context, HpSaveWaitServicePostData params, HttpResponseHandler<Object> handler);
+    public void saveWaitServicePostData(Context context, HpSaveWaitServicePostData params, HttpResponseHandler<Object> handler);
+
+    /**
+     * 获取处理临终现场数据
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void getSendOrderDataOne(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetSendOrderDataOne> handler);
+
+    /**
+     * 保存处理临终现场数据
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void saveSendOrderDataOne(Context context, HpSaveSendOrderDataOne params, HttpResponseHandler<Object> handler);
 }

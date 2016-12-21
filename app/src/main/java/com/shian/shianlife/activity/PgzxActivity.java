@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -59,6 +60,12 @@ public class PgzxActivity extends BaseActivity {
 
     TextView newOrder;
     TextView newOrder2;
+
+    TextView mTVAllNum;
+    TextView mTVWaitNum;
+    TextView mTVPJNum;
+    TextView mTVShenHeNum;
+
     int khxqType;
 
     public int orderStatus = 0;
@@ -71,6 +78,11 @@ public class PgzxActivity extends BaseActivity {
 
     long orderId;
     long consultId;
+
+    int waitPDNum = 0;
+    int waitPJNum = 0;
+    int waitSHNum = 0;
+    int completeNum = 0;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -92,7 +104,7 @@ public class PgzxActivity extends BaseActivity {
             newOrder.setVisibility(View.GONE);
             newOrder2.setVisibility(View.GONE);
         } else {
-            newOrder2.setVisibility(View.VISIBLE);
+
             setTitle("派工执行");
         }
     }
@@ -109,6 +121,11 @@ public class PgzxActivity extends BaseActivity {
         mPgzxLayoutView2 = (PGZXLayoutView) findViewById(R.id.pgzx_2);
         mPgzxLayoutView3 = (PGZXLayoutView) findViewById(R.id.pgzx_3);
 
+
+        mTVAllNum = (TextView) findViewById(R.id.tv_allnum);
+        mTVWaitNum = (TextView) findViewById(R.id.tv_waitnum);
+        mTVPJNum = (TextView) findViewById(R.id.tv_pjnum);
+        mTVShenHeNum = (TextView) findViewById(R.id.tv_shenhenum);
 
         newOrder.setOnClickListener(newOrderClickListener);
         newOrder2.setOnClickListener(newOrder2ClickListener);
@@ -147,6 +164,10 @@ public class PgzxActivity extends BaseActivity {
         initAdapter();
         orderId = getIntent().getLongExtra("orderId", 0);
         consultId = getIntent().getLongExtra("consultId", 0);
+
+        mPgzxLayoutView1.setID(orderId, consultId);
+        mPgzxLayoutView2.setID(orderId, consultId);
+        mPgzxLayoutView3.setID(orderId, consultId);
     }
 
     @Override
@@ -417,6 +438,8 @@ public class PgzxActivity extends BaseActivity {
                                                                         getBaseContext(),
                                                                         "派单成功");
                                                                 tv4.setText("派单中");
+                                                                waitPDNum--;
+                                                                mTVWaitNum.setText(waitPDNum);
                                                                 templateItem.setItemStatus(2);
                                                             }
 
@@ -528,6 +551,8 @@ public class PgzxActivity extends BaseActivity {
                         setLayout();
                         adapter.notifyDataSetChanged();
                         orderStatus = result.getOrderHandleStatus();
+
+                        setNum(result);
                         setState();
                     }
 
@@ -544,6 +569,35 @@ public class PgzxActivity extends BaseActivity {
 
                     }
                 });
+    }
+
+    private void setNum(HrOrderItenList result) {
+        if (result.getItems() != null) {
+            List<OrderItem> listdata = result.getItems();
+            mTVAllNum.setText(listdata.size() + "");
+            for (int i = 0; i < listdata.size(); i++) {
+
+                int state = listdata.get(i).getItemStatus();
+                if (state == 1) {
+                    waitPDNum++;
+                } else if (state == 5) {
+                    if (!listdata.get(i).isHasComment()) {
+                        waitPJNum++;
+                    } else {
+                        waitSHNum++;
+                    }
+                } else if (state == 7 && listdata.get(i).isHasComment()) {
+                    completeNum++;
+                }
+            }
+            if (orderStatus == 7 && completeNum == result.getItems().size()) {
+                newOrder2.setVisibility(View.VISIBLE);
+            }
+            mTVPJNum.setText(waitPJNum + "");
+            mTVShenHeNum.setText(waitSHNum + "");
+            mTVWaitNum.setText(waitPDNum + "");
+        }
+        Log.v("this", "setNum over");
     }
 
     private void setState() {

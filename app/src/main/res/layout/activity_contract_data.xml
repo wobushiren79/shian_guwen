@@ -67,8 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="第一条 服务内容
- 甲方委托乙方为本合同指定的被服务人员（以下简称被服务对象）的殡葬仪式提供相关服务。
- 特别说明：本合同中“□”后内容为可选内容，双方可根据实际需求以划“√”方式选定适用，可多选。" />
+ 甲方委托乙方为本合同指定的被服务人员（以下简称被服务对象）的殡葬仪式提供相关服务。" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -94,13 +93,13 @@
                     android:text="往生者姓名" />
 
                 <TextView
-                    android:textColor="@color/blackgroundmain"
                     android:id="@+id/tv_deadmanname"
                     style="@style/TableText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/blackgroundmain" />
 
                 <TextView
                     style="@style/TableText"
@@ -110,13 +109,13 @@
                     android:text="性别" />
 
                 <TextView
-                    android:textColor="@color/blackgroundmain"
                     android:id="@+id/tv_deadmansex"
                     style="@style/TableText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/blackgroundmain" />
 
                 <TextView
                     style="@style/TableText"
@@ -126,13 +125,13 @@
                     android:text="状态" />
 
                 <TextView
-                    android:textColor="@color/blackgroundmain"
                     android:id="@+id/tv_deadmanstate"
                     style="@style/TableText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/blackgroundmain" />
             </TableRow>
 
             <TableRow
@@ -148,13 +147,13 @@
                     android:text="身份证号" />
 
                 <TextView
-                    android:textColor="@color/blackgroundmain"
                     android:id="@+id/tv_deadmancardid"
                     style="@style/TableText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/blackgroundmain" />
 
                 <TextView
                     style="@style/TableText"
@@ -164,13 +163,13 @@
                     android:text="年龄" />
 
                 <TextView
-                    android:textColor="@color/blackgroundmain"
                     android:id="@+id/tv_deadmanage"
                     style="@style/TableText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/blackgroundmain" />
 
                 <TextView
                     style="@style/TableText"
@@ -180,13 +179,13 @@
                     android:text="寿鞋鞋码" />
 
                 <TextView
-                    android:textColor="@color/blackgroundmain"
                     android:id="@+id/tv_deadmanshoes"
                     style="@style/TableText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/blackgroundmain" />
             </TableRow>
         </TableLayout>
 
@@ -213,13 +212,13 @@
                     android:text="经办人姓名" />
 
                 <TextView
-                    android:textColor="@color/blackgroundmain"
                     android:id="@+id/tv_agentmanname"
                     style="@style/TableText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/blackgroundmain" />
 
                 <TextView
                     style="@style/TableText"
@@ -229,13 +228,13 @@
                     android:text="联系电话" />
 
                 <TextView
-                    android:textColor="@color/blackgroundmain"
                     android:id="@+id/tv_agentmanphone"
                     style="@style/TableText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/blackgroundmain" />
 
                 <TextView
                     style="@style/TableText"
@@ -245,13 +244,13 @@
                     android:text="邮箱地址" />
 
                 <TextView
-                    android:textColor="@color/blackgroundmain"
                     android:id="@+id/tv_agentmanemail"
                     style="@style/TableText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/blackgroundmain" />
             </TableRow>
 
             <TableRow
@@ -267,13 +266,13 @@
                     android:text="身份证号" />
 
                 <TextView
-                    android:textColor="@color/blackgroundmain"
                     android:id="@+id/tv_agentmancardid"
                     style="@style/TableText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/blackgroundmain" />
 
                 <TextView
                     style="@style/TableText"
@@ -283,13 +282,13 @@
                     android:text="经办人地址" />
 
                 <TextView
-                    android:textColor="@color/blackgroundmain"
                     android:id="@+id/tv_agentmanlocation"
                     style="@style/TableText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/blackgroundmain" />
 
                 <TextView
                     style="@style/TableText"
@@ -299,13 +298,13 @@
                     android:text="经办人是往生者的" />
 
                 <TextView
-                    android:textColor="@color/blackgroundmain"
                     android:id="@+id/tv_agentmanrelation"
                     style="@style/TableText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/blackgroundmain" />
             </TableRow>
         </TableLayout>
 

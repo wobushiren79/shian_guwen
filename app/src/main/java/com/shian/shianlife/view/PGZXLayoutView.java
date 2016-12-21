@@ -40,6 +40,9 @@ public class PGZXLayoutView extends LinearLayout {
     int type = 0;
     int string = 0;
 
+    long orderId;
+    long consultId;
+
     public PGZXLayoutView(Context context) {
         super(context);
     }
@@ -47,6 +50,11 @@ public class PGZXLayoutView extends LinearLayout {
     public PGZXLayoutView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context);
+    }
+
+    public void setID(long orderId, long consultId) {
+        this.consultId = consultId;
+        this.orderId = orderId;
     }
 
     private void initView(Context context) {
@@ -73,7 +81,8 @@ public class PGZXLayoutView extends LinearLayout {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(getContext(), SendOrderActivity.class);
-
+            intent.putExtra("consultId", consultId);
+            intent.putExtra("orderId", orderId);
             String TITILENAME = "TitleName";
             int step = 0;
             if (view == mBTState1) {
@@ -110,7 +119,7 @@ public class PGZXLayoutView extends LinearLayout {
                     intent.putExtra(TITILENAME, "殡仪馆服务");
                 }
             }
-            intent.putExtra("step",step);
+            intent.putExtra("step", step);
             getContext().startActivity(intent);
         }
     };

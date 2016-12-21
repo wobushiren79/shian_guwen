@@ -57,7 +57,9 @@ public class CustomDialog extends Dialog {
 
     @Override
     public void cancel() {
-        rotateAnimation.cancel();
+        if (rotateAnimation != null) {
+            rotateAnimation.cancel();
+        }
         super.cancel();
     }
 }
