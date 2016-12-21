@@ -4,6 +4,10 @@
         "source": "D:\\Android\\Project\\new_shian\\librarys\\cycleViewPager\\res\\layout\\activity_main.xml"
     },
     {
+        "merged": "D:\\AndroidStudio\\Project\\shian_guwen\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
+        "source": "D:\\AndroidStudio\\Project\\shian_guwen\\librarys\\cycleViewPager\\res\\layout\\activity_main.xml"
+    },
+    {
         "merged": "D:\\AndroidStudio\\Project\\new_shian\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
         "source": "D:\\AndroidStudio\\Project\\new_shian\\librarys\\cycleViewPager\\res\\layout\\activity_main.xml"
     }
