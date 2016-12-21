@@ -1,5 +1,9 @@
 package com.shian.shianlife.activity.sendorders;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SendOrderActivity extends BaseActivity {
+    public static String UPDATA_ACTION = "SendOrderUpData";
 
     LinearLayout mLLHeadLayout;
     LinearLayout mLLCheckBoxLayout;
@@ -103,6 +108,10 @@ public class SendOrderActivity extends BaseActivity {
 
         initView();
         initData();
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(UPDATA_ACTION);
+        registerReceiver(getDataUp, filter);
     }
 
     private void initView() {
@@ -153,7 +162,7 @@ public class SendOrderActivity extends BaseActivity {
 
         switch (step) {
             case 0:
-                SendOrderStep0 sendOrderStep0 = new SendOrderStep0(SendOrderActivity.this,consultId);
+                SendOrderStep0 sendOrderStep0 = new SendOrderStep0(SendOrderActivity.this, consultId);
                 mLLCotent.addView(sendOrderStep0);
                 break;
             case 1:
@@ -224,4 +233,18 @@ public class SendOrderActivity extends BaseActivity {
     };
 
 
+    BroadcastReceiver getDataUp = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getExtras().containsKey("data")) {
+                ArrayList<String> data = intent.getStringArrayListExtra("data");
+                for (int i = 0; i < listHeadView.size(); i++) {
+                    View view = listHeadView.get(i);
+                    TextView content = (TextView) view.findViewById(R.id.tv_text);
+                    content.setText(data.get(i));
+                }
+
+            }
+        }
+    };
 }

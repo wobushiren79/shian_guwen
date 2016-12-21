@@ -3,6 +3,7 @@ package com.shian.shianlife.activity.updata;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -42,6 +43,7 @@ import com.shian.shianlife.provide.model.ProductItemModel;
 import com.shian.shianlife.provide.model.ProjectItemModel;
 import com.shian.shianlife.provide.model.SetmealModel;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
+import com.shian.shianlife.provide.params.HpGetGoodsListParams;
 import com.shian.shianlife.provide.params.HpGetOrderDetailParams;
 import com.shian.shianlife.provide.params.HpOrderIdParams;
 import com.shian.shianlife.provide.params.HpSaveContractData;
@@ -50,6 +52,7 @@ import com.shian.shianlife.provide.result.HrConsultAgentman;
 import com.shian.shianlife.provide.result.HrGetCemeteryResult;
 import com.shian.shianlife.provide.result.HrGetContractData;
 import com.shian.shianlife.provide.result.HrGetFuneralSetmealResult;
+import com.shian.shianlife.provide.result.HrGetGoodsListResult;
 import com.shian.shianlife.provide.result.HrGetMainSetmealResult;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.provide.result.HrOrderFeedback;
@@ -307,6 +310,9 @@ public class ContractDataActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(HrUploadFile t) {
+                        if (customDialog != null) {
+                            customDialog.cancel();
+                        }
                         HpSaveCustomerContract.AddAddition add = new HpSaveCustomerContract.AddAddition();
                         add.setFileName(file);
                         add.setFileUrl(t.getNameMap().get(file).toString());
@@ -324,6 +330,7 @@ public class ContractDataActivity extends BaseActivity {
                                         ToastUtils.show(ContractDataActivity.this, "上传成功");
                                         OrderFragment.C_bOrder_isRefresh = true;
                                         finish();
+
                                     }
 
                                     @Override
@@ -335,6 +342,7 @@ public class ContractDataActivity extends BaseActivity {
                                     @Override
                                     public void onError(String message) {
                                         // TODO Auto-generated method stub
+
 
                                     }
                                 });
@@ -353,7 +361,9 @@ public class ContractDataActivity extends BaseActivity {
 
                     @Override
                     public void onError(String message) {
-
+                        if (customDialog != null) {
+                            customDialog.cancel();
+                        }
                     }
                 });
     }
@@ -461,7 +471,7 @@ public class ContractDataActivity extends BaseActivity {
     BaseAdapter projectAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
-            return projectDD.size();
+            return projectDD.size() + 1;
         }
 
         @Override
@@ -489,10 +499,30 @@ public class ContractDataActivity extends BaseActivity {
             } else {
                 holder = (ViewHolder) view.getTag();
             }
+            if (i == 0) {
+                holder.name.setTextColor(Color.BLACK);
+                holder.money.setTextColor(Color.BLACK);
+                holder.num.setTextColor(Color.BLACK);
+                holder.remark.setTextColor(Color.BLACK);
+                holder.all.setTextColor(Color.BLACK);
+            } else {
+                OrderProductItemModel data = projectDD.get(i - 1).getProductItems().get(0);
+                String name = data.getName();
+                float price = data.getTotalPrice();
+                int num = data.getNumber();
+                holder.name.setText(name);
+                holder.money.setText(price + "");
+                holder.num.setText(num + "");
+                holder.all.setText((price * num) + "");
+                holder.remark.setText("");
 
-                holder.name.setText(projectDD.get(i).getName());
-                holder.money.setText(projectDD.get(0).getProductItems().get(i).getPrice()+"");
-                holder.num.setText(projectDD.get(0).getProductItems().get(i).getNumber()+"");
+                holder.name.setTextColor(getResources().getColor(R.color.blackgroundmain));
+                holder.money.setTextColor(getResources().getColor(R.color.blackgroundmain));
+                holder.num.setTextColor(getResources().getColor(R.color.blackgroundmain));
+                holder.remark.setTextColor(getResources().getColor(R.color.blackgroundmain));
+                holder.all.setTextColor(getResources().getColor(R.color.blackgroundmain));
+            }
+
 
             return view;
 
@@ -567,8 +597,8 @@ public class ContractDataActivity extends BaseActivity {
                         for (int i = 0; i < projectItems.size(); i++) {
                             if ("主套餐".equals(projectItems.get(i).getName())) {
                                 ztcItems = projectItems.get(i).getCtgItems();
-                            } else if("增值项目".equals(projectItems.get(i).getName())) {
-                                projectDD=projectItems.get(i).getCtgItems();
+                            } else if ("增值项目".equals(projectItems.get(i).getName())) {
+                                projectDD = projectItems.get(i).getCtgItems();
                             }
                         }
 
@@ -597,6 +627,5 @@ public class ContractDataActivity extends BaseActivity {
                     }
                 });
     }
-
 
 }

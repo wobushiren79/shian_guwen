@@ -115,7 +115,9 @@ public class HttpRequestExecutor {
                         public void onSuccess(int arg0, Header[] arg1,
                                               byte[] arg2) {
 //							setSession(arg1, context);
-
+                            if (pd != null) {
+                                pd.cancel();
+                            }
                             if ((context instanceof Activity)
                                     && !((Activity) context).isFinishing()
                                     || method.contains("doLogout")) {
@@ -123,15 +125,16 @@ public class HttpRequestExecutor {
                                     pd.cancel();
                                 response(context, method, c, response, arg2);
                             }
-                            if (pd != null) {
-                                pd.cancel();
-                            }
+
 
                         }
 
                         @Override
                         public void onFailure(int arg0, Header[] arg1,
                                               byte[] arg2, Throwable arg3) {
+                            if (pd != null) {
+                                pd.cancel();
+                            }
                             String s = arg3.getMessage();
                             if (s != null) {
                                 Log.e("tag", s);
@@ -140,15 +143,20 @@ public class HttpRequestExecutor {
                             // context.getString(R.string.servererror),
                             // context);
                             onError(response, s, context);
-                            if (pd != null) {
-                                pd.cancel();
-                            }
+
                         }
                     });
         } catch (UnsupportedEncodingException e1) {
             // onError(response, context.getString(R.string.servererror),
             // context);
+            if (pd != null) {
+                pd.cancel();
+            }
             onError(response, e1.getMessage(), context);
+        } finally {
+            if (pd != null) {
+                pd.cancel();
+            }
         }
     }
 
