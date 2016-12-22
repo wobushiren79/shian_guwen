@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/dimen_20dp"
     android:orientation="vertical">
 
     <TextView
@@ -12,11 +11,10 @@
         android:drawableLeft="@drawable/xingxing"
         android:layout_marginLeft="@dimen/dimen_20dp"
         android:layout_marginRight="@dimen/dimen_20dp"
-        android:text="治丧地址：" />
+        android:text="当前地址：" />
 
     <com.shian.shianlife.view.MapSelectLayoutView
         android:id="@+id/mapselect"
-        android:layout_marginTop="@dimen/dimen_10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></com.shian.shianlife.view.MapSelectLayoutView>
 </LinearLayout>

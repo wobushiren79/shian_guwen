@@ -1,8 +1,10 @@
 package com.shian.shianlife.activity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -55,6 +57,7 @@ public class PgzxActivity extends BaseActivity {
     private ScrollListView mListView;
     private TArrayListAdapter<OrderItem> adapter;
     private LinearLayout LLPGZXState;
+    private LinearLayout LLPDZT;
     boolean isShenhe;
     boolean isShoukuan;
 
@@ -84,6 +87,7 @@ public class PgzxActivity extends BaseActivity {
     int waitSHNum = 0;
     int completeNum = 0;
 
+    public static String PGZX_ACTION="PgzxActivity";
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
@@ -103,10 +107,15 @@ public class PgzxActivity extends BaseActivity {
             LLPGZXState.setVisibility(View.GONE);
             newOrder.setVisibility(View.GONE);
             newOrder2.setVisibility(View.GONE);
+            LLPDZT.setVisibility(View.GONE);
         } else {
-
             setTitle("派工执行");
         }
+
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(PGZX_ACTION);
+        registerReceiver(refresh, filter);
     }
 
     private void initView() {
@@ -114,7 +123,7 @@ public class PgzxActivity extends BaseActivity {
         adapter = new TArrayListAdapter<OrderItem>(this);
         newOrder = (TextView) findViewById(R.id.tv_neworder1);
         newOrder2 = (TextView) findViewById(R.id.tv_neworder2);
-
+        LLPDZT = (LinearLayout) findViewById(R.id.ll_data);
         LLPGZXState = (LinearLayout) findViewById(R.id.ll_pgzx);
         mTVOver = (TextView) findViewById(R.id.tv_serviceover);
         mPgzxLayoutView1 = (PGZXLayoutView) findViewById(R.id.pgzx_1);
@@ -176,6 +185,7 @@ public class PgzxActivity extends BaseActivity {
         super.onResume();
 
     }
+
 
     private void initAdapter() {
         adapter.setLayout(R.layout.view_item_pgzx);
@@ -439,7 +449,7 @@ public class PgzxActivity extends BaseActivity {
                                                                         "派单成功");
                                                                 tv4.setText("派单中");
                                                                 waitPDNum--;
-                                                                mTVWaitNum.setText(waitPDNum);
+                                                                mTVWaitNum.setText(waitPDNum + "");
                                                                 templateItem.setItemStatus(2);
                                                             }
 
@@ -601,7 +611,11 @@ public class PgzxActivity extends BaseActivity {
     }
 
     private void setState() {
-        LLPGZXState.setVisibility(View.VISIBLE);
+        if (isShenhe || isShoukuan) {
+        } else {
+            LLPGZXState.setVisibility(View.VISIBLE);
+            LLPDZT.setVisibility(View.VISIBLE);
+        }
         switch (orderStatus) {
             case 0:
                 mPgzxLayoutView1.setType(0, 1, 0);
@@ -783,4 +797,16 @@ public class PgzxActivity extends BaseActivity {
         });
         dialog.show();
     }
+
+    BroadcastReceiver refresh = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+         waitPDNum = 0;
+            waitPJNum = 0;
+          waitSHNum = 0;
+            completeNum = 0;
+            getOrderList();
+        }
+    };
 }

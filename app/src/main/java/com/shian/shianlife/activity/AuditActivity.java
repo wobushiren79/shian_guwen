@@ -115,7 +115,7 @@ public class AuditActivity extends BaseActivity {
 	}
 
 	private String getTime(long t) {
-		return TransitionDate.DateToStr(new Date(t), "yyyy-MM-dd HH:ss");
+		return TransitionDate.DateToStr(new Date(t),"yyyy-MM-dd HH:ss");
 	}
 
 	@OnClick({ R.id.tv_yse, R.id.tv_no })

@@ -34,7 +34,7 @@ public class CustomDialog extends Dialog {
         imageView.setImageResource(R.drawable.custom_dialog);
         super.setContentView(imageView);
 
-        this.setCancelable(false);
+        this.setCanceledOnTouchOutside(false);
         Window dialogWindow = this.getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         dialogWindow.setGravity(Gravity.CENTER);

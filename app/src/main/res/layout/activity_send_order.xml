@@ -71,6 +71,7 @@
             android:layout_width="@dimen/dimen_200dp"
             android:layout_height="@dimen/dimen_60dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dimen_30dp"
             android:layout_marginTop="@dimen/dimen_20dp"
             android:background="@drawable/pgzx_select_1"
             android:gravity="center"

@@ -26,7 +26,10 @@ import com.shian.shianlife.provide.params.HpSaveCustomerContract;
 import com.shian.shianlife.provide.params.HpSaveCustomerFuneral;
 import com.shian.shianlife.provide.params.HpSaveCustomerTalkParams;
 import com.shian.shianlife.provide.params.HpSaveCustomerUsageParams;
+import com.shian.shianlife.provide.params.HpSaveSendOrderDataFour;
 import com.shian.shianlife.provide.params.HpSaveSendOrderDataOne;
+import com.shian.shianlife.provide.params.HpSaveSendOrderDataThree;
+import com.shian.shianlife.provide.params.HpSaveSendOrderDataTwo;
 import com.shian.shianlife.provide.params.HpSaveWaitServicePostData;
 import com.shian.shianlife.provide.params.HpTalkFailParams;
 import com.shian.shianlife.provide.result.HrAddConsultResult;
@@ -42,7 +45,10 @@ import com.shian.shianlife.provide.result.HrGetCustomerFuneral;
 import com.shian.shianlife.provide.result.HrGetCustomerPreready;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.provide.result.HrGetOrderNote;
+import com.shian.shianlife.provide.result.HrGetSendOrderDataFour;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataOne;
+import com.shian.shianlife.provide.result.HrGetSendOrderDataThree;
+import com.shian.shianlife.provide.result.HrGetSendOrderDataTwo;
 import com.shian.shianlife.provide.result.HrGetTalkFail;
 import com.shian.shianlife.provide.result.HrGetWaitServicePostData;
 import com.shian.shianlife.provide.result.HrLoginResult;
@@ -564,9 +570,64 @@ public interface MAccountManager extends HttpManager {
 
     /**
      * 保存处理临终现场数据
+     *
      * @param context
      * @param params
      * @param handler
      */
     public void saveSendOrderDataOne(Context context, HpSaveSendOrderDataOne params, HttpResponseHandler<Object> handler);
+
+    /**
+     * 获取治丧初期数据
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void getSendOrderDataTwo(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetSendOrderDataTwo> handler);
+
+    /**
+     * 保存治丧初期数据
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void saveSendOrderDataTwo(Context context, HpSaveSendOrderDataTwo params, HttpResponseHandler<Object> handler);
+
+    /**
+     * 获取开始服务（出殡前）数据
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void getSendOrderDataThree(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetSendOrderDataThree> handler);
+
+    /**
+     * 保存开始服务（出殡前）数据
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void saveSendOrderDataThree(Context context, HpSaveSendOrderDataThree params, HttpResponseHandler<Object> handler);
+
+    /**
+     * 获取出殡前服务数据
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void getSendOrderDataFour(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetSendOrderDataFour> handler);
+
+    /**
+     * 保存出殡前服务数据
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void saveSendOrderDataFour(Context context, HpSaveSendOrderDataFour params, HttpResponseHandler<Object> handler);
 }

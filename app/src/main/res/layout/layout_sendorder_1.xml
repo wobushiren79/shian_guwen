@@ -13,11 +13,12 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:drawableLeft="@drawable/xingxing"
-            android:text="殡仪馆地址:" />
+            android:text="殡仪馆地址："
+            android:textColor="@color/blackgroundmain" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,15 +49,16 @@
         </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="@dimen/dimen_20dp"
             android:drawableLeft="@drawable/xingxing"
-            android:text="火化手续办理方式：" />
+            android:text="火化手续办理方式："
+            android:textColor="@color/blackgroundmain" />
 
         <Spinner
-
+            android:id="@+id/sp_fireway"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_60dp"
             android:layout_gravity="center_vertical"
@@ -65,15 +67,16 @@
             android:textSize="@dimen/text_size_detail_list" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="@dimen/dimen_20dp"
             android:drawableLeft="@drawable/xingxing"
-            android:text="交通方式：" />
+            android:text="交通方式："
+            android:textColor="@color/blackgroundmain" />
 
         <Spinner
-
+            android:id="@+id/sp_traffic_way"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_60dp"
             android:layout_gravity="center_vertical"
@@ -82,15 +85,16 @@
             android:textSize="@dimen/text_size_detail_list" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="@dimen/dimen_20dp"
             android:drawableLeft="@drawable/xingxing"
-            android:text="约定见面时间：" />
+            android:text="约定见面时间："
+            android:textColor="@color/blackgroundmain" />
 
         <TextView
-
+            android:id="@+id/tv_meettime"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_60dp"
             android:layout_gravity="center_vertical"
@@ -99,23 +103,61 @@
             android:textSize="@dimen/text_size_detail_list" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="@dimen/dimen_20dp"
             android:drawableLeft="@drawable/xingxing"
-            android:text="约定见面地点：" />
+            android:text="约定见面地点："
+            android:textColor="@color/blackgroundmain" />
 
         <com.shian.shianlife.view.MapSelectLayoutView
+            android:id="@+id/mapselect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></com.shian.shianlife.view.MapSelectLayoutView>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginTop="@dimen/dimen_20dp"
-            android:text="手续证件：" />
+            android:text="手续证件："
+            android:textColor="@color/blackgroundmain" />
+
+        <com.shian.shianlife.view.PicUpDataLayoutView
+            android:id="@+id/pic_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.shian.shianlife.view.PicUpDataLayoutView>
+
+        <com.shian.shianlife.view.PicUpDataLayoutView
+            android:id="@+id/pic_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.shian.shianlife.view.PicUpDataLayoutView>
+
+        <com.shian.shianlife.view.PicUpDataLayoutView
+            android:id="@+id/pic_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.shian.shianlife.view.PicUpDataLayoutView>
+
+        <com.shian.shianlife.view.PicUpDataLayoutView
+            android:id="@+id/pic_four"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.shian.shianlife.view.PicUpDataLayoutView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:text="备注："
+            android:textColor="@color/blackgroundmain" />
+
+        <EditText
+            android:id="@+id/et_remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_et_order"
+            android:padding="@dimen/dimen_10dp" />
     </LinearLayout>
 
 

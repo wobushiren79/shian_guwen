@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <CheckBox
+        android:id="@+id/cb_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.shian.shianlife.common.view.customer.PicImageView
+            android:id="@+id/btn_ht_pic_0"
+            android:layout_width="@dimen/dimen_200dp"
+            android:layout_height="@dimen/dimen_150dp"
+            android:layout_margin="@dimen/dimen_20dp"
+            android:background="@drawable/ic_ht_pic"
+            android:gravity="center"
+            android:tag="file1" />
+
+        <ProgressBar
+            android:id="@+id/pb_ht_pic_0"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="@dimen/dimen_200dp"
+            android:layout_height="@dimen/dimen_150dp"
+            android:layout_margin="@dimen/dimen_20dp"
+            android:max="100"
+            android:progress="0"
+            android:visibility="gone" />
+    </FrameLayout>
+</LinearLayout>

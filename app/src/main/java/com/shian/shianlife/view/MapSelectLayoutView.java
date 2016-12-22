@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -101,6 +103,11 @@ public class MapSelectLayoutView extends LinearLayout implements Serializable {
                 @Override
                 public View getView(final int position, View convertView, ViewGroup parent) {
                     TextView tvData = new TextView(getContext());
+                    AbsListView.LayoutParams layoutParams=new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                    tvData.setLayoutParams(layoutParams);
+                    tvData.setGravity(Gravity.CENTER);
+                    tvData.setPadding(20,20,20,20);
                     tvData.setText(listData.get(position));
                     tvData.setOnClickListener(new OnClickListener() {
                         @Override

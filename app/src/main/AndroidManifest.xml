@@ -350,7 +350,10 @@
             android:name=".activity.updata.WaitServiceDataActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.sendorders.SendOrderActivity"></activity>
+        <activity
+            android:name=".activity.sendorders.SendOrderActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

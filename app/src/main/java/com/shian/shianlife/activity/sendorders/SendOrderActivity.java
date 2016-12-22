@@ -94,6 +94,9 @@ public class SendOrderActivity extends BaseActivity {
     List<View> listHeadView = new ArrayList<>();
     List<CheckBox> listCheckBox = new ArrayList<>();
 
+
+    BaseSendOrder sendOrderStep;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,33 +165,37 @@ public class SendOrderActivity extends BaseActivity {
 
         switch (step) {
             case 0:
-                SendOrderStep0 sendOrderStep0 = new SendOrderStep0(SendOrderActivity.this, consultId);
-                mLLCotent.addView(sendOrderStep0);
+                sendOrderStep = new SendOrderStep0(SendOrderActivity.this, consultId);
                 break;
             case 1:
-                SendOrderStep1 sendOrderStep1=new SendOrderStep1(SendOrderActivity.this,consultId);
-                mLLCotent.addView(sendOrderStep1);
+                sendOrderStep = new SendOrderStep1(SendOrderActivity.this, consultId);
                 break;
             case 2:
+                sendOrderStep = new SendOrderStep2(SendOrderActivity.this, consultId);
                 break;
             case 3:
+                sendOrderStep = new SendOrderStep3(SendOrderActivity.this, consultId);
                 break;
             case 4:
+                sendOrderStep = new SendOrderStep4(SendOrderActivity.this, consultId);
                 break;
             case 5:
+                sendOrderStep = new SendOrderStep5(SendOrderActivity.this, consultId);
                 break;
             case 6:
+                sendOrderStep = new SendOrderStep6(SendOrderActivity.this, consultId);
                 break;
             case 7:
                 break;
         }
+        mLLCotent.addView(sendOrderStep);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             if (view == mBTSubmit) {
-                finish();
+                sendOrderStep.saveData();
             } else if (view == mCBCheckAll) {
                 setCheckBoxAll();
             }
@@ -246,6 +253,10 @@ public class SendOrderActivity extends BaseActivity {
                     content.setText(data.get(i));
                 }
 
+            }
+            if (intent.getExtras().containsKey("finsh")) {
+                sendBroadcast(new Intent(PgzxActivity.PGZX_ACTION));
+                finish();
             }
         }
     };

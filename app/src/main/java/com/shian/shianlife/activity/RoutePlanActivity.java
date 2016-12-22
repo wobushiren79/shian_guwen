@@ -137,6 +137,7 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
     List<Button> listButton = new ArrayList<>();
     CustomDialog dialog;
 
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -1233,6 +1234,9 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
             mSearch.destroy();
         }
         mMapView.onDestroy();
+        if (dialog != null) {
+            dialog.cancel();
+        }
         super.onDestroy();
     }
 

@@ -168,6 +168,9 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
         super.onDestroy();
         mMapView.onDestroy();
         poiSearch.destroy();
+        if(customDialog!=null){
+            customDialog.cancel();
+        }
     }
 
     @Override
