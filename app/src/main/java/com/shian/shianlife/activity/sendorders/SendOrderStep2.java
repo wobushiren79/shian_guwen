@@ -48,7 +48,7 @@ public class SendOrderStep2 extends BaseSendOrder {
 
             @Override
             public void onSuccess(Object result) {
-                ToastUtils.show(getContext(), "处理治丧第一天服务成功");
+                ToastUtils.show(getContext(), "处理开始出殡前服务成功");
                 Intent intent = new Intent(SendOrderActivity.UPDATA_ACTION);
                 intent.putExtra("finsh", 0);
                 getContext().sendBroadcast(intent);
@@ -93,9 +93,9 @@ public class SendOrderStep2 extends BaseSendOrder {
                 data.add(result.getMeetLocation());
                 data.add(result.getProcedureName());
                 data.add(result.getFirstDayRemark());
-
                 intent.putStringArrayListExtra("data", data);
                 getContext().sendBroadcast(intent);
+
                 if (result.getAgentmanLocation() != null) {
                     listData.add(result.getAgentmanLocation());
                 }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/dimen_20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/xingxing"
+            android:text="出殡车辆"
+            android:textColor="@color/blackgroundmain" />
+
+        <EditText
+            android:id="@+id/et_carnum"
+            android:layout_width="@dimen/dimen_200dp"
+            android:layout_height="@dimen/dimen_60dp"
+            android:background="@drawable/et_bk1"
+            android:gravity="center"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:text="辆"
+            android:textColor="@color/blackgroundmain" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/xingxing"
+            android:text="出殡人数"
+            android:textColor="@color/blackgroundmain" />
+
+        <EditText
+            android:id="@+id/et_personnum"
+            android:layout_width="@dimen/dimen_200dp"
+            android:layout_height="@dimen/dimen_60dp"
+            android:background="@drawable/et_bk1"
+            android:gravity="center"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:text="人"
+            android:textColor="@color/blackgroundmain" />
+    </LinearLayout>
+</LinearLayout>

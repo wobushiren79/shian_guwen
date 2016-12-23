@@ -27,8 +27,11 @@ import com.shian.shianlife.provide.params.HpSaveCustomerContract;
 import com.shian.shianlife.provide.params.HpSaveCustomerFuneral;
 import com.shian.shianlife.provide.params.HpSaveCustomerTalkParams;
 import com.shian.shianlife.provide.params.HpSaveCustomerUsageParams;
+import com.shian.shianlife.provide.params.HpSaveSendOrderDataFive;
 import com.shian.shianlife.provide.params.HpSaveSendOrderDataFour;
 import com.shian.shianlife.provide.params.HpSaveSendOrderDataOne;
+import com.shian.shianlife.provide.params.HpSaveSendOrderDataSeven;
+import com.shian.shianlife.provide.params.HpSaveSendOrderDataSix;
 import com.shian.shianlife.provide.params.HpSaveSendOrderDataThree;
 import com.shian.shianlife.provide.params.HpSaveSendOrderDataTwo;
 import com.shian.shianlife.provide.params.HpSaveWaitServicePostData;
@@ -46,8 +49,11 @@ import com.shian.shianlife.provide.result.HrGetCustomerFuneral;
 import com.shian.shianlife.provide.result.HrGetCustomerPreready;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.provide.result.HrGetOrderNote;
+import com.shian.shianlife.provide.result.HrGetSendOrderDataFive;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataFour;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataOne;
+import com.shian.shianlife.provide.result.HrGetSendOrderDataSeven;
+import com.shian.shianlife.provide.result.HrGetSendOrderDataSix;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataThree;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataTwo;
 import com.shian.shianlife.provide.result.HrGetTalkFail;
@@ -590,6 +596,42 @@ public class MAccountManagerImpl implements MAccountManager {
     @Override
     public void saveSendOrderDataFour(Context context, HpSaveSendOrderDataFour params, HttpResponseHandler<Object> handler) {
         excutor.requestPost(context, "order/item/list/four/save", Object.class, params,
+                handler);
+    }
+
+    @Override
+    public void getSendOrderDataFive(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetSendOrderDataFive> handler) {
+        excutor.requestPost(context, "order/item/list/five/get", HrGetSendOrderDataFive.class, params,
+                handler);
+    }
+
+    @Override
+    public void saveSendOrderDataFive(Context context, HpSaveSendOrderDataFive params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context, "order/item/list/five/save", Object.class, params,
+                handler);
+    }
+
+    @Override
+    public void getSendOrderDataSix(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetSendOrderDataSix> handler) {
+        excutor.requestPost(context, "order/item/list/six/get", HrGetSendOrderDataSix.class, params,
+                handler);
+    }
+
+    @Override
+    public void saveSendOrderDataSix(Context context, HpSaveSendOrderDataSix params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context, "order/item/list/six/save", Object.class, params,
+                handler);
+    }
+
+    @Override
+    public void getSendOrderDataSeven(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetSendOrderDataSeven> handler) {
+        excutor.requestPost(context, "order/item/list/seven/get", HrGetSendOrderDataSeven.class, params,
+                handler);
+    }
+
+    @Override
+    public void saveSendOrderDataSeven(Context context, HpSaveSendOrderDataSeven params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context, "order/item/list/seven/save", Object.class, params,
                 handler);
     }
 

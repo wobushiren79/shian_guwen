@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/dimen_20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/xingxing"
+        android:text="骨灰处理"
+        android:textColor="@color/blackgroundmain" />
+
+    <Spinner
+        android:id="@+id/sp_jbr_0"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/et_bk1"
+        android:textSize="@dimen/text_size_detail_list" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:drawableLeft="@drawable/xingxing"
+        android:text="安葬公墓名称"
+        android:textColor="@color/blackgroundmain" />
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60dp"
+        android:background="@drawable/et_bk1" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:drawableLeft="@drawable/xingxing"
+        android:text="往生者身份"
+        android:textColor="@color/blackgroundmain" />
+
+    <Spinner
+        android:id="@+id/sp_jbr_1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60dp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/et_bk1"
+        android:textSize="@dimen/text_size_detail_list" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:drawableLeft="@drawable/xingxing"
+        android:text="经办人身份"
+        android:textColor="@color/blackgroundmain" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/sp_jbr_2"
+            android:layout_width="@dimen/dimen_300dp"
+            android:layout_height="@dimen/dimen_60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:background="@drawable/et_bk1"
+            android:textSize="@dimen/text_size_detail_list" />
+
+        <EditText
+            android:id="@+id/et_agentmanid"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_et_order"
+            android:hint="选择其他时填写"
+            android:padding="@dimen/dimen_10dp"
+            android:textSize="@dimen/text_size_date_list" />
+    </LinearLayout>
+</LinearLayout>

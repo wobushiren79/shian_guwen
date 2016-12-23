@@ -40,7 +40,6 @@
                 android:layout_height="@dimen/dimen_60dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginRight="@dimen/dimen_30dp"
                 android:layout_weight="1"
                 android:background="@drawable/shape_et_order"
                 android:hint="选择其他时填写"
