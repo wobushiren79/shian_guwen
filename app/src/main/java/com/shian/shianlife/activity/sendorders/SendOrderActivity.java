@@ -1,5 +1,6 @@
 package com.shian.shianlife.activity.sendorders;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.CustomerDetailActivity;
 import com.shian.shianlife.activity.PgzxActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.view.order.ListFwpdzView;
@@ -33,7 +35,7 @@ public class SendOrderActivity extends BaseActivity {
     LinearLayout mLLCheckBoxLayout;
     LinearLayout mLLCotent;
     Button mBTSubmit;
-
+    Button mBTDetailes;
     long orderId;
     long consultId;
 
@@ -123,9 +125,10 @@ public class SendOrderActivity extends BaseActivity {
         mCBCheckAll = (CheckBox) findViewById(R.id.cb_allcheck);
         mBTSubmit = (Button) findViewById(R.id.bt_submit);
         mLLCotent = (LinearLayout) findViewById(R.id.ll_content);
-
+        mBTDetailes = (Button) findViewById(R.id.bt_detailes);
         mCBCheckAll.setOnClickListener(onClickListener);
         mBTSubmit.setOnClickListener(onClickListener);
+        mBTDetailes.setOnClickListener(onClickListener);
     }
 
 
@@ -198,9 +201,18 @@ public class SendOrderActivity extends BaseActivity {
                 sendOrderStep.saveData();
             } else if (view == mCBCheckAll) {
                 setCheckBoxAll();
+            } else if (view == mBTDetailes) {
+                getDetailes();
             }
         }
     };
+
+    private void getDetailes() {
+        Intent in = new Intent(SendOrderActivity.this, CustomerDetailActivity.class);
+        in.putExtra("orderId", orderId);
+        in.putExtra("consultId", consultId);
+        SendOrderActivity.this.startActivity(in);
+    }
 
     private void setCheckBoxAll() {
         if (mCBCheckAll.isChecked()) {
@@ -255,8 +267,12 @@ public class SendOrderActivity extends BaseActivity {
 
             }
             if (intent.getExtras().containsKey("finsh")) {
-                sendBroadcast(new Intent(PgzxActivity.PGZX_ACTION));
-                finish();
+                if (intent.getExtras().getInt("finsh") == 0) {
+                    sendBroadcast(new Intent(PgzxActivity.PGZX_ACTION));
+                    finish();
+                } else {
+                    finish();
+                }
             }
         }
     };

@@ -27,6 +27,7 @@
                 android:orientation="vertical"></LinearLayout>
 
             <Button
+                android:id="@+id/bt_detailes"
                 android:layout_width="@dimen/dimen_200dp"
                 android:layout_height="@dimen/dimen_60dp"
                 android:layout_gravity="right"

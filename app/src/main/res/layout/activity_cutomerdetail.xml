@@ -64,7 +64,8 @@
             android:id="@+id/cediv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20dp" />
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="match_parent"
@@ -86,7 +87,8 @@
             android:id="@+id/tdiv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20dp" />
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:visibility="gone" />
     </LinearLayout>
 
 </ScrollView>

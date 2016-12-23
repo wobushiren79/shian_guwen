@@ -144,9 +144,17 @@ public class WaitServiceDataActivity extends BaseActivity {
     };
 
     private void setUpData() {
+
         String time = mTVTime.getText().toString();
         String location = mSelectLayoutView.getLocation();
-
+        if (time.equals("")) {
+            ToastUtils.show(this, "去世时间不能为空");
+            return;
+        }
+        if (location.equals("")) {
+            ToastUtils.show(this, "去世地点不能为空");
+            return;
+        }
         HpSaveWaitServicePostData params = new HpSaveWaitServicePostData();
         params.setConsultId(consultId);
         params.setDeadLocation(location);

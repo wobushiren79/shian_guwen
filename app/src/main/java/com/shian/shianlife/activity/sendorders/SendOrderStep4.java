@@ -101,7 +101,9 @@ public class SendOrderStep4 extends BaseSendOrder {
 
             @Override
             public void onError(String message) {
-
+                Intent intent = new Intent(SendOrderActivity.UPDATA_ACTION);
+                intent.putExtra("finsh", 1);
+                getContext().sendBroadcast(intent);
             }
         });
     }

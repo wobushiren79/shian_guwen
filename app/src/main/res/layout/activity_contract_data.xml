@@ -521,7 +521,7 @@
             android:background="@drawable/ic_home_reg"
             android:gravity="center"
             android:padding="@dimen/dimen_10dp"
-            android:text="本客户无预备资料，直接结束洽谈"
+            android:text="提交合同，结束洽谈"
             android:textColor="@color/blackgroundmain" />
     </LinearLayout>
 </ScrollView>

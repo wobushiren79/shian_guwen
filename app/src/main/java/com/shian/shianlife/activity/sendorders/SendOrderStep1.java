@@ -295,7 +295,9 @@ public class SendOrderStep1 extends BaseSendOrder {
                     @Override
                     public void onError(String message) {
                         // TODO Auto-generated method stub
-
+                        Intent intent = new Intent(SendOrderActivity.UPDATA_ACTION);
+                        intent.putExtra("finsh", 1);
+                        getContext().sendBroadcast(intent);
                     }
                 });
     }

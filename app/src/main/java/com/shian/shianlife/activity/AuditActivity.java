@@ -144,6 +144,7 @@ public class AuditActivity extends BaseActivity {
 							public void onSuccess(Object result) {
 								// TODO Auto-generated method stub
 								ToastUtils.show(getBaseContext(), "操作成功");
+								sendBroadcast(new Intent(PgzxActivity.PGZX_ACTION));
 								finish();
 							}
 

@@ -52,6 +52,8 @@ public class JBRDataActivity extends BaseActivity {
 
 
     long consultId;
+    long orderId;
+
     private HpSaveCustomerAgentmanParams params = new HpSaveCustomerAgentmanParams();
 
     @Override
@@ -75,11 +77,11 @@ public class JBRDataActivity extends BaseActivity {
         mTVBack = (TextView) findViewById(R.id.tv_back);
         mTVNext = (TextView) findViewById(R.id.tv_next);
 
-        selectLayoutView1= (MapSelectLayoutView) findViewById(R.id.mapselect1);
-        selectLayoutView2= (MapSelectLayoutView) findViewById(R.id.mapselect2);
+        selectLayoutView1 = (MapSelectLayoutView) findViewById(R.id.mapselect1);
+        selectLayoutView2 = (MapSelectLayoutView) findViewById(R.id.mapselect2);
 
-        selectLayoutView1.setData(1,new ArrayList<String>());
-        selectLayoutView2.setData(2,new ArrayList<String>());
+        selectLayoutView1.setData(1, new ArrayList<String>());
+        selectLayoutView2.setData(2, new ArrayList<String>());
 
         mSPRelation = (Spinner) findViewById(R.id.sp_jbr_0);
 
@@ -105,11 +107,10 @@ public class JBRDataActivity extends BaseActivity {
     };
 
 
-
-
     private void toBack() {
         Intent intent = new Intent(JBRDataActivity.this, WSZDataActivity.class);
         intent.putExtra("consultId", consultId);
+        intent.putExtra("orderId", orderId);
         startActivity(intent);
         finish();
     }
@@ -194,6 +195,7 @@ public class JBRDataActivity extends BaseActivity {
                         ToastUtils.show(JBRDataActivity.this, "保存成功");
                         Intent intent = new Intent(JBRDataActivity.this, ContractDataActivity.class);
                         intent.putExtra("consultId", consultId);
+                        intent.putExtra("orderId", orderId);
                         startActivity(intent);
                         finish();
                     }
@@ -215,6 +217,7 @@ public class JBRDataActivity extends BaseActivity {
     public void initData() {
         setTitle("经办人信息");
         consultId = getIntent().getLongExtra("consultId", 0);
+        orderId = getIntent().getLongExtra("orderId", 0);
         initSp1("其他");
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId((JBRDataActivity.this).getIntent().getLongExtra("consultId", 0));
@@ -277,10 +280,11 @@ public class JBRDataActivity extends BaseActivity {
             }
         });
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        OrderFragment.C_bOrder_isRefresh=true;
+        OrderFragment.C_bOrder_isRefresh = true;
     }
 
 }

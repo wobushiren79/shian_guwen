@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         style="@style/customer_detail_titleTextStyle"
@@ -18,13 +18,13 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             style="@style/customer_detail_title2TextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="经办人：" />
+            android:text="姓名：" />
 
         <TextView
             android:id="@+id/tv_name"
@@ -35,17 +35,16 @@
     </LinearLayout>
 
 
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             style="@style/customer_detail_title2TextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="经办人电话：" />
+            android:text="联系电话：" />
 
         <TextView
             android:id="@+id/tv_linkInfo"
@@ -55,33 +54,10 @@
             android:text="未知" />
     </LinearLayout>
 
-
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            style="@style/customer_detail_title2TextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="出生日期：" />
-
-        <TextView
-            android:id="@+id/tv_birthday"
-            style="@style/customer_detail_contentTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="未知" />
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             style="@style/customer_detail_title2TextStyle"
@@ -97,12 +73,10 @@
             android:text="未知" />
     </LinearLayout>
 
-
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <TextView
             style="@style/customer_detail_title2TextStyle"
@@ -117,6 +91,84 @@
             android:layout_height="wrap_content"
             android:text="未知" />
     </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/customer_detail_title2TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="身份证号码：" />
+
+        <TextView
+            android:id="@+id/tv_cardid"
+            style="@style/customer_detail_contentTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未知" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/customer_detail_title2TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="邮箱地址：" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            style="@style/customer_detail_contentTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未知" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/customer_detail_title2TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="备注：" />
+
+        <TextView
+            android:id="@+id/tv_remark"
+            style="@style/customer_detail_contentTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            style="@style/customer_detail_title2TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="出生日期：" />
+
+        <TextView
+            android:id="@+id/tv_birthday"
+            style="@style/customer_detail_contentTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未知" />
+    </LinearLayout>
+
 
     <View
         android:layout_width="match_parent"

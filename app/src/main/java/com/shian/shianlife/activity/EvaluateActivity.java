@@ -132,6 +132,7 @@ public class EvaluateActivity extends BaseActivity {
 					public void onSuccess(Object result) {
 						// TODO Auto-generated method stub
 						ToastUtils.show(getBaseContext(), "提交成功");
+						sendBroadcast(new Intent(PgzxActivity.PGZX_ACTION));
 						finish();
 					}
 

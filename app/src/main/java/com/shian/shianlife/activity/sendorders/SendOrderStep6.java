@@ -127,7 +127,9 @@ public class SendOrderStep6 extends BaseSendOrder {
 
             @Override
             public void onError(String message) {
-
+                Intent intent = new Intent(SendOrderActivity.UPDATA_ACTION);
+                intent.putExtra("finsh", 1);
+                getContext().sendBroadcast(intent);
             }
         });
     }
@@ -146,6 +148,9 @@ public class SendOrderStep6 extends BaseSendOrder {
         mETAgentmanID = (EditText) findViewById(R.id.et_agentmanid);
         mETName = (EditText) findViewById(R.id.et_name);
 
+        initSp("其他",0);
+        initSp("其他",1);
+        initSp("其他",2);
     }
 
 

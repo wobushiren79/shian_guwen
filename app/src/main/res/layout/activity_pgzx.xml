@@ -9,55 +9,60 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/ll_pgzx"
+            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:layout_height="wrap_content">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_20dp"
-                android:gravity="right"
-                android:text="我应该如何操作下面的服务步骤？"
-                android:textColor="@color/gray_item_shua_textcolor"
-                android:textSize="@dimen/txtsize_30sp" />
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_1dp"
-                android:background="@color/gray_item_shua_textcolor" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_20dp"
+                    android:gravity="right"
+                    android:text="我应该如何操作下面的服务步骤？"
+                    android:textColor="@color/gray_item_shua_textcolor"
+                    android:textSize="@dimen/txtsize_30sp" />
 
-            <com.shian.shianlife.view.PGZXLayoutView
-                android:id="@+id/pgzx_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:background="@color/gray_item_shua_textcolor" />
 
-            <com.shian.shianlife.view.PGZXLayoutView
-                android:id="@+id/pgzx_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>
+                <com.shian.shianlife.view.PGZXLayoutView
+                    android:id="@+id/pgzx_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>
 
-            <com.shian.shianlife.view.PGZXLayoutView
-                android:id="@+id/pgzx_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>
+                <com.shian.shianlife.view.PGZXLayoutView
+                    android:id="@+id/pgzx_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>
 
-            <TextView
+                <com.shian.shianlife.view.PGZXLayoutView
+                    android:id="@+id/pgzx_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>
+
+
+            </LinearLayout>
+
+            <ImageView
                 android:id="@+id/tv_serviceover"
-                android:layout_width="@dimen/dimen_200dp"
-                android:layout_height="@dimen/dimen_60dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginTop="1dp"
-                android:background="@drawable/pgzx_select_3"
                 android:gravity="center"
-                android:text="结束已服务"
-                android:textColor="#999999"
+                android:src="@drawable/complete"
                 android:visibility="gone" />
-        </LinearLayout>
+        </FrameLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -113,8 +118,8 @@
             android:id="@+id/ll_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"

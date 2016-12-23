@@ -62,12 +62,19 @@ public class WSZDataActivity extends BaseActivity {
     RadioButton mRBUn, mRBMan, mRBWoman, mRBSelect;
     List<RadioButton> rbList = new ArrayList<>();
 
+
+    long consultId;
+    long orderId;
+
     private HpSaveCustomerUsageParams params = new HpSaveCustomerUsageParams();
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_wszdata);
+
+        consultId=getIntent().getLongExtra("consultId",0);
+        orderId=getIntent().getLongExtra("orderId",0);
 
         init();
         initView();
@@ -98,7 +105,7 @@ public class WSZDataActivity extends BaseActivity {
         mRBSelect = (RadioButton) findViewById(R.id.rb_sz_bm);
 
         mSelectLayoutView = (MapSelectLayoutView) findViewById(R.id.mapselect);
-        mSelectLayoutView.setData(1,new ArrayList<String>());
+        mSelectLayoutView.setData(1, new ArrayList<String>());
 
         rbList.add(mRBUn);
         rbList.add(mRBMan);
@@ -118,8 +125,7 @@ public class WSZDataActivity extends BaseActivity {
 
         setSexListener();
         HpConsultIdParams params = new HpConsultIdParams();
-        params.setConsultId((WSZDataActivity.this).getIntent().getLongExtra(
-                "consultId", 0));
+        params.setConsultId(consultId);
         MHttpManagerFactory.getAccountManager().getCustomerUsage(WSZDataActivity.this,
                 params, new HttpResponseHandler<HrConsultUsageResult>() {
 
@@ -269,7 +275,7 @@ public class WSZDataActivity extends BaseActivity {
             ToastUtils.show(WSZDataActivity.this, "地址不能为空");
             return;
         }
-        params.setConsultId(getIntent().getLongExtra("consultId", 0));
+        params.setConsultId(consultId);
         params.setName(name);
         params.setCardId(carid);
         params.setAge(age);
@@ -300,7 +306,8 @@ public class WSZDataActivity extends BaseActivity {
                         // TODO Auto-generated method stub
                         ToastUtils.show(WSZDataActivity.this, "保存成功");
                         Intent intent = new Intent(WSZDataActivity.this, JBRDataActivity.class);
-                        intent.putExtra("consultId", params.getConsultId());
+                        intent.putExtra("consultId", consultId);
+                        intent.putExtra("orderId",orderId);
                         startActivity(intent);
                         finish();
                     }

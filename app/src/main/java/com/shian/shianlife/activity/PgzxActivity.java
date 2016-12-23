@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -56,7 +57,7 @@ public class PgzxActivity extends BaseActivity {
     TextView tvRefund;
     private ScrollListView mListView;
     private TArrayListAdapter<OrderItem> adapter;
-    private LinearLayout LLPGZXState;
+    private FrameLayout LLPGZXState;
     private LinearLayout LLPDZT;
     boolean isShenhe;
     boolean isShoukuan;
@@ -77,7 +78,7 @@ public class PgzxActivity extends BaseActivity {
     PGZXLayoutView mPgzxLayoutView2;
     PGZXLayoutView mPgzxLayoutView3;
 
-    TextView mTVOver;
+    ImageView mTVOver;
 
     long orderId;
     long consultId;
@@ -124,8 +125,8 @@ public class PgzxActivity extends BaseActivity {
         newOrder = (TextView) findViewById(R.id.tv_neworder1);
         newOrder2 = (TextView) findViewById(R.id.tv_neworder2);
         LLPDZT = (LinearLayout) findViewById(R.id.ll_data);
-        LLPGZXState = (LinearLayout) findViewById(R.id.ll_pgzx);
-        mTVOver = (TextView) findViewById(R.id.tv_serviceover);
+        LLPGZXState = (FrameLayout) findViewById(R.id.ll_pgzx);
+        mTVOver = (ImageView) findViewById(R.id.tv_serviceover);
         mPgzxLayoutView1 = (PGZXLayoutView) findViewById(R.id.pgzx_1);
         mPgzxLayoutView2 = (PGZXLayoutView) findViewById(R.id.pgzx_2);
         mPgzxLayoutView3 = (PGZXLayoutView) findViewById(R.id.pgzx_3);
@@ -601,7 +602,11 @@ public class PgzxActivity extends BaseActivity {
                 }
             }
             if (orderStatus == 7 && completeNum == result.getItems().size()) {
-                newOrder2.setVisibility(View.VISIBLE);
+                if (isShenhe || isShoukuan) {
+                    newOrder2.setVisibility(View.GONE);
+                } else {
+                    newOrder2.setVisibility(View.VISIBLE);
+                }
             }
             mTVPJNum.setText(waitPJNum + "");
             mTVShenHeNum.setText(waitSHNum + "");
@@ -656,7 +661,6 @@ public class PgzxActivity extends BaseActivity {
                 mPgzxLayoutView1.setType(0, 3, 0);
                 mPgzxLayoutView2.setType(0, 3, 1);
                 mPgzxLayoutView3.setType(1, 3, 2);
-                mTVOver.setTextColor(Color.parseColor("#333333"));
                 mTVOver.setVisibility(View.VISIBLE);
                 break;
         }
