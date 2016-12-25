@@ -274,12 +274,12 @@ public class ContractDataActivity extends BaseActivity {
             if (view == mTVNext) {
                 Intent intent = new Intent(ContractDataActivity.this, TQZBDataActivity.class);
                 intent.putExtra("consultId", consultId);
-                intent.putExtra("orderId",orderId);
+                intent.putExtra("orderId", orderId);
                 startActivity(intent);
             } else if (view == mTVBack) {
                 Intent intent = new Intent(ContractDataActivity.this, JBRDataActivity.class);
                 intent.putExtra("consultId", consultId);
-                intent.putExtra("orderId",orderId);
+                intent.putExtra("orderId", orderId);
                 startActivity(intent);
                 finish();
             } else if (view == mTVComplete) {
@@ -292,11 +292,12 @@ public class ContractDataActivity extends BaseActivity {
 
     private void complete() {
         final Bitmap bitmap = ScreenShot.getBitmapByView(theScrollView);
+        final Bitmap bmp = Bitmap.createScaledBitmap(bitmap, metrics.widthPixels / 2, (bitmap.getHeight() * metrics.widthPixels / bitmap.getWidth()) / 2, true);
         new Thread() {
             @Override
             public void run() {
 //                String fName = ScreenShot.savePic(ScreenShot.compressImage(bitmap));
-                String fName = ScreenShot.savePic(bitmap);
+                String fName = ScreenShot.savePic(bmp);
                 uploadFile(consultId + "", fName);
 
             }
@@ -584,7 +585,7 @@ public class ContractDataActivity extends BaseActivity {
                         mTVFirstMoney.setText(payInfo.getPrepayAmount() + "元");
                         mTVAllMoney.setText(payInfo.getTotalAmount() + "元");
 //                        mTVLastMoney.setText(payInfo.getRestPayAmount() + "元");
-                        mTVLastMoney.setText((payInfo.getTotalAmount()-payInfo.getPrepayAmount()) + "元");
+                        mTVLastMoney.setText((payInfo.getTotalAmount() - payInfo.getPrepayAmount()) + "元");
 
                         for (int i = 0; i < mainSetmeals.size(); i++) {
                             SetmealModel setmealModel = mainSetmeals.get(i);
@@ -612,7 +613,7 @@ public class ContractDataActivity extends BaseActivity {
                         }
 
                         mLSMain.setAdapter(mainAdapter);
-                        if(projectDD.size()>0){
+                        if (projectDD.size() > 0) {
                             mLSProject.setAdapter(projectAdapter);
                         }
 

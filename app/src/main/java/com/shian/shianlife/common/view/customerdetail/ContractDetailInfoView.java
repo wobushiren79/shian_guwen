@@ -83,38 +83,38 @@ public class ContractDetailInfoView extends FrameLayout {
 
         PicassoUD.loadImage(getContext(), result.getContractUrl(), iv_data);
         url = result.getContractUrl();
-        OrderContract orderContract = result.getOrderContract();
-        tv_contractNo.setText(orderContract.getContractNo());
-        tv_contractAmount.setText(orderContract.getContractAmount());
-        List<OrderContractAddition> contractAdditions = result.getOrderContractAdditions();
-        LinearLayout.LayoutParams mLinearParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        mLinearParams.topMargin = getResources().getDimensionPixelOffset(R.dimen.dimen_10dp);
-        LinearLayout.LayoutParams mBtnParams = new LinearLayout.LayoutParams(0,
-                getResources().getDimensionPixelOffset(R.dimen.dimen_80dp));
-        mBtnParams.weight = 1;
-        mBtnParams.leftMargin = getResources().getDimensionPixelOffset(R.dimen.dimen_10dp);
-        mBtnParams.rightMargin = getResources().getDimensionPixelOffset(R.dimen.dimen_10dp);
-        mBtnParams.gravity = Gravity.CENTER_VERTICAL;
-        int position = 0;
-        int tmp = contractAdditions.size() % 3;
-        int line = tmp == 0 ? tmp : tmp + 1;
-        for (int i = 0; i < line; i++) {
-            LinearLayout mLinearLayout = new LinearLayout(getContext());
-            mLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
-            mLinearLayout.setLayoutParams(mLinearParams);
-            ll_fujian.addView(mLinearLayout);
-            for (int j = 0; j < 3; j++) {
-                if (position < contractAdditions.size()) {
-                    OrderContractAddition addition = contractAdditions.get(position);
-                    DownLoadView dv = new DownLoadView(getContext());
-                    dv.setLayoutParams(mBtnParams);
-                    dv.setFileUrl(AppContansts.OSSURL + addition.getFileUrl());
-                    mLinearLayout.addView(dv);
-                    position++;
-                }
-            }
-        }
+//        OrderContract orderContract = result.getOrderContract();
+//        tv_contractNo.setText(orderContract.getContractNo());
+//        tv_contractAmount.setText(orderContract.getContractAmount());
+//        List<OrderContractAddition> contractAdditions = result.getOrderContractAdditions();
+//        LinearLayout.LayoutParams mLinearParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+//                LinearLayout.LayoutParams.WRAP_CONTENT);
+//        mLinearParams.topMargin = getResources().getDimensionPixelOffset(R.dimen.dimen_10dp);
+//        LinearLayout.LayoutParams mBtnParams = new LinearLayout.LayoutParams(0,
+//                getResources().getDimensionPixelOffset(R.dimen.dimen_80dp));
+//        mBtnParams.weight = 1;
+//        mBtnParams.leftMargin = getResources().getDimensionPixelOffset(R.dimen.dimen_10dp);
+//        mBtnParams.rightMargin = getResources().getDimensionPixelOffset(R.dimen.dimen_10dp);
+//        mBtnParams.gravity = Gravity.CENTER_VERTICAL;
+//        int position = 0;
+//        int tmp = contractAdditions.size() % 3;
+//        int line = tmp == 0 ? tmp : tmp + 1;
+//        for (int i = 0; i < line; i++) {
+//            LinearLayout mLinearLayout = new LinearLayout(getContext());
+//            mLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
+//            mLinearLayout.setLayoutParams(mLinearParams);
+//            ll_fujian.addView(mLinearLayout);
+//            for (int j = 0; j < 3; j++) {
+//                if (position < contractAdditions.size()) {
+//                    OrderContractAddition addition = contractAdditions.get(position);
+//                    DownLoadView dv = new DownLoadView(getContext());
+//                    dv.setLayoutParams(mBtnParams);
+//                    dv.setFileUrl(AppContansts.OSSURL + addition.getFileUrl());
+//                    mLinearLayout.addView(dv);
+//                    position++;
+//                }
+//            }
+//        }
 
     }
 

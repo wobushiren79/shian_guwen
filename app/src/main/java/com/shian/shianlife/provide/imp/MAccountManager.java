@@ -34,6 +34,7 @@ import com.shian.shianlife.provide.params.HpSaveSendOrderDataSix;
 import com.shian.shianlife.provide.params.HpSaveSendOrderDataThree;
 import com.shian.shianlife.provide.params.HpSaveSendOrderDataTwo;
 import com.shian.shianlife.provide.params.HpSaveWaitServicePostData;
+import com.shian.shianlife.provide.params.HpSkuIdParams;
 import com.shian.shianlife.provide.params.HpTalkFailParams;
 import com.shian.shianlife.provide.result.HrAddConsultResult;
 import com.shian.shianlife.provide.result.HrCommentResult;
@@ -49,6 +50,7 @@ import com.shian.shianlife.provide.result.HrGetCustomerFuneralOther;
 import com.shian.shianlife.provide.result.HrGetCustomerPreready;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.provide.result.HrGetOrderNote;
+import com.shian.shianlife.provide.result.HrGetSKUDetails;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataFive;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataFour;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataOne;
@@ -700,4 +702,12 @@ public interface MAccountManager extends HttpManager {
      * @param handler
      */
     public void saveSendOrderDataSeven(Context context, HpSaveSendOrderDataSeven params, HttpResponseHandler<Object> handler);
+
+    /**
+     * 获取商品详情
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void getSKUDetails(Context context, HpSkuIdParams params, HttpResponseHandler<HrGetSKUDetails> handler);
 }

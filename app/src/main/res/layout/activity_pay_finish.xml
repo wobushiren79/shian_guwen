@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/tv_0"
@@ -24,16 +24,19 @@
         android:textColor="@color/gray"
         android:textSize="@dimen/dimen_40dp" />
 
-    <TextView android:layout_below="@+id/tv_1"
+    <TextView
         android:id="@+id/tv_edit_commit"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_below="@+id/tv_1"
+        android:layout_gravity="bottom|center"
         android:layout_margin="@dimen/dimen_40dp"
         android:background="@drawable/ic_home_reg"
         android:gravity="center"
+        android:padding="@dimen/dimen_10dp"
         android:text="返回订单详情"
-        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/text_color"
         android:textSize="@dimen/dimen_40dp" />
 
 </RelativeLayout>

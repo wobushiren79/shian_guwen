@@ -10,6 +10,7 @@ import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.utils.FilePathUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.view.PinchImageView;
+import com.shian.shianlife.view.ScreenShot;
 import com.squareup.picasso.Picasso;
 
 import android.annotation.TargetApi;
@@ -17,6 +18,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,9 +44,19 @@ public class ImagePreviewActivity extends BaseActivity implements OnLongClickLis
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 0:
-                    Log.v("this","1");
-                    Log.v("this","1"+mBitmap.toString());
-                    mImageView.setImageBitmap(mBitmap);
+                    Log.v("this", "1");
+                    Log.v("this", "1" + mBitmap.toString());
+                    Log.v("this", "mBitmap.getWidth:" + mBitmap.getWidth());
+                    Log.v("this", "metrics.widthPixels:" + metrics.widthPixels);
+                    Log.v("this", "h" + mBitmap.getHeight() * metrics.widthPixels / mBitmap.getWidth());
+                    if (mBitmap.getWidth() <metrics.widthPixels) {
+                        mImageView.setImageBitmap(mBitmap);
+                    } else {
+                        Bitmap bmp = Bitmap.createScaledBitmap(mBitmap, metrics.widthPixels/2, (mBitmap.getHeight() * metrics.widthPixels / mBitmap.getWidth())/2, true);
+                        mImageView.setImageBitmap(bmp);
+                    }
+//                    mImageView.setImageBitmap(bitmap);
+
                     mImageView.setVisibility(View.VISIBLE);
                     break;
                 case 1:
@@ -64,9 +76,10 @@ public class ImagePreviewActivity extends BaseActivity implements OnLongClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mImageView = new PinchImageView(this);
-     mImageView.setBackgroundResource(R.color.main_blackground);
-//        mImageView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
-        mImageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
+        mImageView.setBackgroundResource(R.color.viewfinder_mask);
+        mImageView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT));
+//        mImageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         mMain.setBackgroundColor(getResources().getColor(R.color.main_blackground));
         setContentView(mImageView);
         setTitle("查看图片");
@@ -126,6 +139,7 @@ public class ImagePreviewActivity extends BaseActivity implements OnLongClickLis
 
     protected void getBitmap() {
         try {
+
             mBitmap = Picasso.with(this).load(url).get();
             mHandler.sendEmptyMessage(0);
             mImageView.setOnLongClickListener(this);

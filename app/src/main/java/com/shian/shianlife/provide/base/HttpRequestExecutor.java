@@ -52,7 +52,6 @@ public class HttpRequestExecutor {
         headers[0] = new BasicHeader("systemType", "2");
         headers[1] = new BasicHeader("Content-Type", "application/json");
         httpClient.setTimeout(15000);
-
     }
 
     CustomDialog pd = null;
@@ -294,8 +293,7 @@ public class HttpRequestExecutor {
      */
     private <T> void onError(HttpResponseHandler<T> response, String error,
                              Context context) {
-        if (response != null
-                && ((context instanceof Activity) && !((Activity) context)
+        if (response != null && ((context instanceof Activity) && !((Activity) context)
                 .isFinishing()) && error != null) {
             if (showToast(context, error)) {
                 response.onError(error);

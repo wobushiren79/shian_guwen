@@ -40,6 +40,8 @@ import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpAcceptParams;
 import com.shian.shianlife.provide.params.HpSaveCustomerContract;
 import com.shian.shianlife.provide.params.HpSaveCustomerContract.AddAddition;
+import com.shian.shianlife.provide.params.HpSkuIdParams;
+import com.shian.shianlife.provide.result.HrGetSKUDetails;
 import com.shian.shianlife.provide.result.HrOrderItenList;
 import com.shian.shianlife.provide.result.HrUploadFile;
 import com.shian.shianlife.provide.result.OrderItem;
@@ -237,12 +239,34 @@ public class PgzxActivity extends BaseActivity {
                     @Override
                     public void onClick(View view) {
                         //获取商品详情
-                        AlertDialog dialog = new AlertDialog.Builder(PgzxActivity.this)
-                                .setTitle("商品详情")
-                                .setMessage("XXXXXXXXXXXXXXXXX")
-                                .setPositiveButton("确认", null)
-                                .create();
-                        dialog.show();
+                        HpSkuIdParams params = new HpSkuIdParams();
+                        params.setSkuId(templateItem.getId());
+                        MHttpManagerFactory.getAccountManager().getSKUDetails(PgzxActivity.this, params, new HttpResponseHandler<HrGetSKUDetails>() {
+                            @Override
+                            public void onStart() {
+
+                            }
+
+                            @Override
+                            public void onSuccess(HrGetSKUDetails result) {
+                                if (result.getDetails() != null || !result.getDetails().equals("")) {
+                                    AlertDialog dialog = new AlertDialog.Builder(PgzxActivity.this)
+                                            .setTitle("商品详情")
+                                            .setMessage(result.getDetails())
+                                            .setPositiveButton("确认", null)
+                                            .create();
+                                    dialog.show();
+                                } else {
+                                    ToastUtils.show(PgzxActivity.this, "没有商品详情数据");
+                                }
+                            }
+
+                            @Override
+                            public void onError(String message) {
+
+                            }
+                        });
+
                     }
                 });
 
