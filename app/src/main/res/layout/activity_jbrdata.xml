@@ -245,6 +245,7 @@
                 android:textSize="@dimen/text_size_top_bg" />
 
             <EditText
+                android:inputType="textEmailAddress"
                 android:id="@+id/et_jbr_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

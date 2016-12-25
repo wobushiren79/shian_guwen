@@ -77,14 +77,16 @@ public class SendOrderStep1 extends BaseSendOrder {
 
         mTVMeetTime.setOnClickListener(onClickListener);
 
-        picUpDataLayout1.setName("逝者身份证");
-        picUpDataLayout2.setName("逝者户口薄");
+        picUpDataLayout1.setName("往生者身份证");
+        picUpDataLayout2.setName("往生者户口薄");
         picUpDataLayout3.setName("经办人身份证");
         picUpDataLayout4.setName("死亡证明");
 
         initSp1("其他");
         initSp2("其他");
         initSp3("其他");
+
+        mSelectLayout.setData(1,new ArrayList<String>());
     }
 
 

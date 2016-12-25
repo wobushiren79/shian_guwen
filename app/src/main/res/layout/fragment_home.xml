@@ -1,24 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:background="@drawable/bg_main">-->
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:background="@drawable/bg_main">-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <WebView
+        android:id="@+id/web"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-<WebView
-    android:layout_width="match_parent" android:id="@+id/web"
-    android:layout_height="match_parent"></WebView>
+        android:layout_height="match_parent"></WebView>
 
     <Button
+        android:id="@+id/btn_back1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:text="返回" android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true" android:layout_margin="20dp" android:id="@+id/btn_back1"/>
-    <LinearLayout android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"
+        android:text="返回"
+        android:visibility="gone" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <cn.ifavor.cycleviewpager.view.CycleViewPager
             android:id="@+id/cvp_order"
@@ -244,6 +249,7 @@
                 android:layout_height="0.5dp"
                 android:background="@color/gray_common" />
         </LinearLayout>
-    </LinearLayout></RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
 
-<!--</ScrollView>-->
+    <!--</ScrollView>-->

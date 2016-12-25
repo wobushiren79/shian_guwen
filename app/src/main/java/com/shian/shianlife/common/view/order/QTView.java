@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -304,6 +305,8 @@ public class QTView extends BaseOrderView {
                 TextView tvedit = (TextView) view.getView(R.id.tv_edit);
                 TextView tvwaitservice = (TextView) view.getView(R.id.tv_waitservice);
                 TextView tvpay = (TextView) view.getView(R.id.tv_pay);
+                ImageView tishi = (ImageView) view.getView(R.id.iv_data);
+
 
                 ImageView ivq0 = (ImageView) view.getView(R.id.iv_qt02);
                 ImageView ivq1 = (ImageView) view.getView(R.id.iv_qt12);
@@ -312,7 +315,10 @@ public class QTView extends BaseOrderView {
                 TextView tv_qt02 = (TextView) view.getView(R.id.tv_qt02);
                 TextView tv_talkagain = (TextView) view.getView(R.id.tv_talkagain);
 
+
                 tv_qt02.setText("");
+
+
                 switch (model.getOrderStatus()) {
                     case 1:
                         tv_qt02.setText("未处理");
@@ -524,7 +530,7 @@ public class QTView extends BaseOrderView {
                 } else {
                     tv_talkagain.setVisibility(GONE);
                 }
-
+                tishi.setOnClickListener(clickListener);
             }
         });
     }
@@ -543,6 +549,9 @@ public class QTView extends BaseOrderView {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
+                case R.id.iv_data:
+                    tishi();
+                    break;
                 case R.id.fl_accept:
                     accept();
                     break;
@@ -613,6 +622,15 @@ public class QTView extends BaseOrderView {
                     break;
             }
 
+        }
+
+        private void tishi() {
+            AlertDialog dialog = new AlertDialog.Builder(getContext())
+                    .setTitle("提示")
+                    .setMessage("【需要及时服务】\n指已确认往生者逝世，需要立即派单开始服务。")
+                    .setPositiveButton("确认", null)
+                    .create();
+            dialog.show();
         }
 
         private void assignNotify() {

@@ -127,6 +127,7 @@ public class SendOrderStep2 extends BaseSendOrder {
     private void initView() {
         mapSelectLayoutView = (MapSelectLayoutView) findViewById(R.id.mapselect);
 
+        mapSelectLayoutView.setData(1,new ArrayList<String>());
         getData();
     }
 }

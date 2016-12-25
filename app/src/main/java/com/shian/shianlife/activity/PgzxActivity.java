@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -70,6 +71,9 @@ public class PgzxActivity extends BaseActivity {
     TextView mTVPJNum;
     TextView mTVShenHeNum;
 
+    TextView mTV1;
+    TextView mTV2;
+
     int khxqType;
 
     public int orderStatus = 0;
@@ -88,7 +92,8 @@ public class PgzxActivity extends BaseActivity {
     int waitSHNum = 0;
     int completeNum = 0;
 
-    public static String PGZX_ACTION="PgzxActivity";
+    public static String PGZX_ACTION = "PgzxActivity";
+
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
@@ -137,9 +142,15 @@ public class PgzxActivity extends BaseActivity {
         mTVPJNum = (TextView) findViewById(R.id.tv_pjnum);
         mTVShenHeNum = (TextView) findViewById(R.id.tv_shenhenum);
 
+
+        mTV1 = (TextView) findViewById(R.id.tv_1);
+        mTV2 = (TextView) findViewById(R.id.tv_btn2);
+
         newOrder.setOnClickListener(newOrderClickListener);
         newOrder2.setOnClickListener(newOrder2ClickListener);
         tvRefund.setOnClickListener(reFundClick);
+        mTV1.setOnClickListener(onClickListener);
+        mTV2.setOnClickListener(onClickListener);
     }
 
     private OnClickListener newOrder2ClickListener = new OnClickListener() {
@@ -217,9 +228,24 @@ public class PgzxActivity extends BaseActivity {
                 TextView name = (TextView) view.getView(R.id.tv_pgzx_name);
                 TextView ev = (TextView) view.getView(R.id.tv_pgzx_ev);
                 ImageView ivPhone = (ImageView) view.getView(R.id.iv_phone);
+                ImageView ivData = (ImageView) view.getView(R.id.iv_data);
 
                 TextView tvPdrLocation = (TextView) view.getView(R.id.text_pdrlocation);
                 Button btnPdrLocation = (Button) view.getView(R.id.button_pdrlocation);
+
+                ivData.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //获取商品详情
+                        AlertDialog dialog = new AlertDialog.Builder(PgzxActivity.this)
+                                .setTitle("商品详情")
+                                .setMessage("XXXXXXXXXXXXXXXXX")
+                                .setPositiveButton("确认", null)
+                                .create();
+                        dialog.show();
+                    }
+                });
+
 
                 if (!isShenhe) {
                     llPic.setVisibility(View.VISIBLE);
@@ -802,13 +828,33 @@ public class PgzxActivity extends BaseActivity {
         dialog.show();
     }
 
+    OnClickListener onClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (view == mTV1 || view == mTV2) {
+                String text = "";
+                if (mTV1 == view) {
+                    text = getString(R.string.tishi_1);
+                } else {
+                    text = getString(R.string.tishi_2);
+                }
+                AlertDialog dialog = new AlertDialog.Builder(PgzxActivity.this)
+                        .setTitle("提示")
+                        .setMessage(text)
+                        .setPositiveButton("确定", null)
+                        .create();
+                dialog.show();
+            }
+        }
+    };
+
     BroadcastReceiver refresh = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-         waitPDNum = 0;
+            waitPDNum = 0;
             waitPJNum = 0;
-          waitSHNum = 0;
+            waitSHNum = 0;
             completeNum = 0;
             getOrderList();
         }

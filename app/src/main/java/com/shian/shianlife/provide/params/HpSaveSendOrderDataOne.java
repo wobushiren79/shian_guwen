@@ -25,4 +25,5 @@ public class HpSaveSendOrderDataOne extends BaseHttpParams {
     public void setConsultId(long consultId) {
         this.consultId = consultId;
     }
+
 }

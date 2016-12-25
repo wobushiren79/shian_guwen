@@ -132,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="逝者性别:"
+                android:text="往生者性别:"
                 android:textSize="@dimen/text_size_top_bg" />
 
             <RadioButton
@@ -197,7 +197,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="逝者鞋码:"
+                android:text="往生者鞋码:"
                 android:textSize="@dimen/text_size_top_bg" />
 
             <EditText
@@ -233,7 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="逝者现状:"
+                android:text="往生者现状:"
                 android:textSize="@dimen/text_size_top_bg" />
 
             <Spinner
@@ -265,7 +265,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="逝者出生日期:"
+                android:text="往生者出生日期:"
                 android:textSize="@dimen/text_size_top_bg" />
 
             <TextView
@@ -303,7 +303,7 @@
                 android:layout_marginBottom="@dimen/dimen_10dp"
                 android:textSize="@dimen/text_size_top_bg"
                 android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="逝者当前所在地:" />
+                android:text="往生者当前所在地:" />
 
             <!--<include layout="@layout/layout_mapcheck"/>-->
 

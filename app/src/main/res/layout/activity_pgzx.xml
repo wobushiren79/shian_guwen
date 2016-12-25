@@ -11,9 +11,9 @@
 
         <FrameLayout
             android:id="@+id/ll_pgzx"
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -21,6 +21,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_20dp"
@@ -136,6 +137,7 @@
                 android:textColor="@color/blackgroundmain" />
 
             <TextView
+                android:id="@+id/tv_btn2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_10dp"

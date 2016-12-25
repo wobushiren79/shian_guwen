@@ -612,7 +612,10 @@ public class ContractDataActivity extends BaseActivity {
                         }
 
                         mLSMain.setAdapter(mainAdapter);
-                        mLSProject.setAdapter(projectAdapter);
+                        if(projectDD.size()>0){
+                            mLSProject.setAdapter(projectAdapter);
+                        }
+
                         ScrollListView.setListViewHeightBasedOnChildren(mLSMain);
                         ScrollListView.setListViewHeightBasedOnChildren(mLSProject);
                         mainAdapter.notifyDataSetChanged();

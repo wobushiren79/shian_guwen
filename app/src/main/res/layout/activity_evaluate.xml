@@ -181,7 +181,7 @@
                 android:layout_margin="@dimen/dimen_10dp"
                 android:layout_weight="1"
                 android:background="@drawable/shape_et_order"
-                android:text="老实，细心" />
+                android:text="细心" />
 
             <Button
                 android:id="@+id/btn_ev_1"
@@ -190,7 +190,7 @@
                 android:layout_margin="@dimen/dimen_10dp"
                 android:layout_weight="1"
                 android:background="@drawable/shape_et_order"
-                android:text="认真，负责" />
+                android:text="专业" />
 
             <Button
                 android:id="@+id/btn_ev_2"
@@ -199,7 +199,7 @@
                 android:layout_margin="@dimen/dimen_10dp"
                 android:layout_weight="1"
                 android:background="@drawable/shape_et_order"
-                android:text="善良，勇敢" />
+                android:text="态度好" />
         </LinearLayout>
 
         <LinearLayout
@@ -214,7 +214,7 @@
                 android:layout_margin="@dimen/dimen_10dp"
                 android:layout_weight="1"
                 android:background="@drawable/shape_et_order"
-                android:text="胆大，心细" />
+                android:text="满意" />
 
             <Button
                 android:id="@+id/btn_ev_4"
@@ -223,7 +223,7 @@
                 android:layout_margin="@dimen/dimen_10dp"
                 android:layout_weight="1"
                 android:background="@drawable/shape_et_order"
-                android:text="温柔，体贴" />
+                android:text="不规范" />
 
             <Button
                 android:id="@+id/btn_ev_5"
@@ -232,7 +232,7 @@
                 android:layout_margin="@dimen/dimen_10dp"
                 android:layout_weight="1"
                 android:background="@drawable/shape_et_order"
-                android:text="美丽，大方" />
+                android:text="待改进" />
         </LinearLayout>
 
         <TextView
@@ -253,10 +253,11 @@
             android:textSize="@dimen/text_size_top_bg" />
 
         <TextView
+
             android:id="@+id/tv_editorder"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_gravity="bottom|center"
             android:layout_margin="@dimen/dimen_40dp"
             android:background="@drawable/ic_home_reg"
             android:gravity="center"

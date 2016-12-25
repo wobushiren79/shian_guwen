@@ -45,6 +45,7 @@ import com.shian.shianlife.provide.result.HrGetComment;
 import com.shian.shianlife.provide.result.HrGetContractData;
 import com.shian.shianlife.provide.result.HrGetCustomerContract;
 import com.shian.shianlife.provide.result.HrGetCustomerFuneral;
+import com.shian.shianlife.provide.result.HrGetCustomerFuneralOther;
 import com.shian.shianlife.provide.result.HrGetCustomerPreready;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.provide.result.HrGetOrderNote;
@@ -286,7 +287,15 @@ public interface MAccountManager extends HttpManager {
      */
     public void getCustomerFuneral(Context context, HpOrderIdParams params,
                                    HttpResponseHandler<HrGetCustomerFuneral> handler);
-
+    /**
+     * 获取预备信息2
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void getCustomerFuneralOther(Context context, HpOrderIdParams params,
+                                   HttpResponseHandler<HrGetCustomerFuneralOther> handler);
     /**
      * 保存预备信息
      *

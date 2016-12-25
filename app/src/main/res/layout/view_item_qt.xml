@@ -354,6 +354,13 @@
                 android:layout_width="@dimen/dimen_200dp"
                 android:layout_height="@dimen/dimen_60dp"
                 android:text="需要及时服务" />
+
+            <ImageView
+                android:id="@+id/iv_data"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_gravity="right|center"
+                android:src="@drawable/tishi" />
         </FrameLayout>
 
         <FrameLayout
@@ -361,8 +368,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
-        >
+            android:layout_weight="1">
 
             <TextView
                 style="@style/orderlist_item_btn_textStyle"
@@ -384,9 +390,9 @@
                 android:id="@+id/tv_close"
                 style="@style/orderlist_item_btn_textStyle"
                 android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_60dp"
                 android:paddingLeft="@dimen/dimen_10dp"
                 android:paddingRight="@dimen/dimen_10dp"
-                android:layout_height="@dimen/dimen_60dp"
                 android:text="结束洽谈" />
         </FrameLayout>
     </LinearLayout>

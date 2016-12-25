@@ -46,6 +46,7 @@ import com.shian.shianlife.provide.result.HrGetComment;
 import com.shian.shianlife.provide.result.HrGetContractData;
 import com.shian.shianlife.provide.result.HrGetCustomerContract;
 import com.shian.shianlife.provide.result.HrGetCustomerFuneral;
+import com.shian.shianlife.provide.result.HrGetCustomerFuneralOther;
 import com.shian.shianlife.provide.result.HrGetCustomerPreready;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.provide.result.HrGetOrderNote;
@@ -292,6 +293,14 @@ public class MAccountManagerImpl implements MAccountManager {
         // TODO Auto-generated method stub
         excutor.requestPost(context, "customer/funeral/get",
                 HrGetCustomerFuneral.class, params, handler);
+    }
+
+    @Override
+    public void getCustomerFuneralOther(Context context, HpOrderIdParams params,
+                                   HttpResponseHandler<HrGetCustomerFuneralOther> handler) {
+        // TODO Auto-generated method stub
+        excutor.requestPost(context, "customer/funeral/get/other",
+                HrGetCustomerFuneralOther.class, params, handler);
     }
 
     @Override

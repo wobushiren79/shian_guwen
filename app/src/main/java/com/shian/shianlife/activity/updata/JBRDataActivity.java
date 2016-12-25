@@ -30,6 +30,7 @@ import com.shian.shianlife.provide.result.HrConsultAgentman;
 import com.shian.shianlife.view.MapSelectLayoutView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class JBRDataActivity extends BaseActivity {
@@ -80,8 +81,6 @@ public class JBRDataActivity extends BaseActivity {
         selectLayoutView1 = (MapSelectLayoutView) findViewById(R.id.mapselect1);
         selectLayoutView2 = (MapSelectLayoutView) findViewById(R.id.mapselect2);
 
-        selectLayoutView1.setData(1, new ArrayList<String>());
-        selectLayoutView2.setData(2, new ArrayList<String>());
 
         mSPRelation = (Spinner) findViewById(R.id.sp_jbr_0);
 
@@ -89,7 +88,8 @@ public class JBRDataActivity extends BaseActivity {
         mTVBack.setOnClickListener(onClickListener);
         mTVNext.setOnClickListener(onClickListener);
 
-
+        selectLayoutView1.setData(1,new ArrayList<String>());
+        selectLayoutView2.setData(2,new ArrayList<String>());
     }
 
     int mapCheckNum = 0;
@@ -163,6 +163,10 @@ public class JBRDataActivity extends BaseActivity {
         }
         if (TextUtils.isEmpty(email)) {
             ToastUtils.show(JBRDataActivity.this, "经办人邮箱不能为空");
+            return;
+        }
+        if(!Utils.isEmail(email)){
+            ToastUtils.show(JBRDataActivity.this, "经办人邮箱格式错误");
             return;
         }
         params.setConsultId((JBRDataActivity.this).getIntent().getLongExtra("consultId", 0));
@@ -244,6 +248,22 @@ public class JBRDataActivity extends BaseActivity {
                         mETRemark.setText(result.getConsultAgentman().getRemark());
                         selectLayoutView1.setLocation(result.getConsultAgentman().getLocation());
                         selectLayoutView2.setLocation(result.getConsultAgentman().getZsLocation());
+
+                        List<String> listLocationData = new ArrayList<String>();
+                        if (result.getConsultAgentman().getLocation() != null) {
+                            listLocationData.add(result.getConsultAgentman().getLocation());
+                        }
+                        if (result.getConsultAgentman().getZsLocation() != null) {
+                            listLocationData.add(result.getConsultAgentman().getZsLocation());
+                        }
+                        if (result.getConsultAgentman().getDeadLocation() != null) {
+                            listLocationData.add(result.getConsultAgentman().getDeadLocation());
+                        }
+                        if (result.getConsultAgentman().getDeadmanLocation() != null) {
+                            listLocationData.add(result.getConsultAgentman().getDeadmanLocation());
+                        }
+                        selectLayoutView1.setData(1, listLocationData);
+                        selectLayoutView1.setData(2, listLocationData);
                     }
 
                     @Override

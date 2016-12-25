@@ -73,8 +73,8 @@ public class WSZDataActivity extends BaseActivity {
         super.onCreate(arg0);
         setContentView(R.layout.activity_wszdata);
 
-        consultId=getIntent().getLongExtra("consultId",0);
-        orderId=getIntent().getLongExtra("orderId",0);
+        consultId = getIntent().getLongExtra("consultId", 0);
+        orderId = getIntent().getLongExtra("orderId", 0);
 
         init();
         initView();
@@ -105,7 +105,6 @@ public class WSZDataActivity extends BaseActivity {
         mRBSelect = (RadioButton) findViewById(R.id.rb_sz_bm);
 
         mSelectLayoutView = (MapSelectLayoutView) findViewById(R.id.mapselect);
-        mSelectLayoutView.setData(1, new ArrayList<String>());
 
         rbList.add(mRBUn);
         rbList.add(mRBMan);
@@ -114,7 +113,7 @@ public class WSZDataActivity extends BaseActivity {
 
         mTVBirthdayTime.setOnClickListener(onClickListener);
         mTVNext.setOnClickListener(onClickListener);
-
+        mSelectLayoutView.setData(1, new ArrayList<String>());
     }
 
 
@@ -145,6 +144,24 @@ public class WSZDataActivity extends BaseActivity {
                         Log.v("this", "OtherHealth:" + result.getConsultUsage().getOtherHealth());
                         Log.v("this", "Note:" + result.getConsultUsage().getNote());
 
+                        Log.v("this", "AgentmanLocation:" + result.getConsultUsage().getAgentmanLocation());
+                        Log.v("this", "ZsLocation:" + result.getConsultUsage().getZsLocation());
+                        Log.v("this", "DeadLocation:" + result.getConsultUsage().getDeadLocation());
+
+                        List<String> listLocationData = new ArrayList<String>();
+                        if (result.getConsultUsage().getAgentmanLocation() != null) {
+                            listLocationData.add(result.getConsultUsage().getAgentmanLocation());
+                        }
+                        if (result.getConsultUsage().getZsLocation() != null) {
+                            listLocationData.add(result.getConsultUsage().getZsLocation());
+                        }
+                        if (result.getConsultUsage().getDeadLocation() != null) {
+                            listLocationData.add(result.getConsultUsage().getDeadLocation());
+                        }
+                        if (result.getConsultUsage().getLocation() != null) {
+                            listLocationData.add(result.getConsultUsage().getLocation());
+                        }
+                        mSelectLayoutView.setData(1, listLocationData);
                         mETName.setText(result.getConsultUsage().getName());
                         mETCardId.setText(result.getConsultUsage().getCardId());
                         mETAge.setText(result.getConsultUsage().getAge());
@@ -307,7 +324,7 @@ public class WSZDataActivity extends BaseActivity {
                         ToastUtils.show(WSZDataActivity.this, "保存成功");
                         Intent intent = new Intent(WSZDataActivity.this, JBRDataActivity.class);
                         intent.putExtra("consultId", consultId);
-                        intent.putExtra("orderId",orderId);
+                        intent.putExtra("orderId", orderId);
                         startActivity(intent);
                         finish();
                     }

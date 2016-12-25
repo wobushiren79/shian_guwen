@@ -4,156 +4,165 @@ import java.util.List;
 
 public class HrGetCustomerContract {
 
-	/**
-	 * "orderContract":{ "id":8, "orderId":8, "contractNo":"string",
-	 * "contractAmount":0.69, "statusFlag":5, "serverCreateTime":1461396096733
-	 * }, "orderContractAdditions":[ { "id":8, "contractId":8,
-	 * "fileName":"string", "fileUrl":"string", "statusFlag":5,
-	 * "serverCreateTime":1461396096733 } ]
-	 */
-	List<OrderContractAddition> orderContractAdditions;
-	OrderContract orderContract;
+    /**
+     * "orderContract":{ "id":8, "orderId":8, "contractNo":"string",
+     * "contractAmount":0.69, "statusFlag":5, "serverCreateTime":1461396096733
+     * }, "orderContractAdditions":[ { "id":8, "contractId":8,
+     * "fileName":"string", "fileUrl":"string", "statusFlag":5,
+     * "serverCreateTime":1461396096733 } ]
+     */
+    List<OrderContractAddition> orderContractAdditions;
+    OrderContract orderContract;
+    private String contractUrl;//合同图片
 
-	public List<OrderContractAddition> getOrderContractAdditions() {
-		return orderContractAdditions;
-	}
+    public String getContractUrl() {
+        return contractUrl;
+    }
 
-	public void setOrderContractAdditions(
-			List<OrderContractAddition> orderContractAdditions) {
-		this.orderContractAdditions = orderContractAdditions;
-	}
+    public void setContractUrl(String contractUrl) {
+        this.contractUrl = contractUrl;
+    }
 
-	public OrderContract getOrderContract() {
-		return orderContract;
-	}
+    public List<OrderContractAddition> getOrderContractAdditions() {
+        return orderContractAdditions;
+    }
 
-	public void setOrderContract(OrderContract orderContract) {
-		this.orderContract = orderContract;
-	}
+    public void setOrderContractAdditions(
+            List<OrderContractAddition> orderContractAdditions) {
+        this.orderContractAdditions = orderContractAdditions;
+    }
 
-	public static class OrderContractAddition {
-		private long id;
-		private long contractId;
-		private String fileName;
-		private String fileUrl;
-		private int statusFlag;
-		private long serverCreateTime;
+    public OrderContract getOrderContract() {
+        return orderContract;
+    }
 
-		public long getId() {
-			return id;
-		}
+    public void setOrderContract(OrderContract orderContract) {
+        this.orderContract = orderContract;
+    }
 
-		public void setId(long id) {
-			this.id = id;
-		}
+    public static class OrderContractAddition {
+        private long id;
+        private long contractId;
+        private String fileName;
+        private String fileUrl;
+        private int statusFlag;
+        private long serverCreateTime;
 
-		public long getContractId() {
-			return contractId;
-		}
+        public long getId() {
+            return id;
+        }
 
-		public void setContractId(long contractId) {
-			this.contractId = contractId;
-		}
+        public void setId(long id) {
+            this.id = id;
+        }
 
-		public String getFileName() {
-			return fileName;
-		}
+        public long getContractId() {
+            return contractId;
+        }
 
-		public void setFileName(String fileName) {
-			this.fileName = fileName;
-		}
+        public void setContractId(long contractId) {
+            this.contractId = contractId;
+        }
 
-		public String getFileUrl() {
-			return fileUrl;
-		}
+        public String getFileName() {
+            return fileName;
+        }
 
-		public void setFileUrl(String fileUrl) {
-			this.fileUrl = fileUrl;
-		}
+        public void setFileName(String fileName) {
+            this.fileName = fileName;
+        }
 
-		public int getStatusFlag() {
-			return statusFlag;
-		}
+        public String getFileUrl() {
+            return fileUrl;
+        }
 
-		public void setStatusFlag(int statusFlag) {
-			this.statusFlag = statusFlag;
-		}
+        public void setFileUrl(String fileUrl) {
+            this.fileUrl = fileUrl;
+        }
 
-		public long getServerCreateTime() {
-			return serverCreateTime;
-		}
+        public int getStatusFlag() {
+            return statusFlag;
+        }
 
-		public void setServerCreateTime(long serverCreateTime) {
-			this.serverCreateTime = serverCreateTime;
-		}
+        public void setStatusFlag(int statusFlag) {
+            this.statusFlag = statusFlag;
+        }
 
-	}
+        public long getServerCreateTime() {
+            return serverCreateTime;
+        }
 
-	public static class OrderContract {
-		private long id;
-		private long orderId;
-		private String contractNo;
-		private String contractAmount;
-		private int statusFlag;
-		private long serverCreateTime;
-		private String note;
+        public void setServerCreateTime(long serverCreateTime) {
+            this.serverCreateTime = serverCreateTime;
+        }
 
-		
-		public String getNote() {
-			return note;
-		}
+    }
 
-		public void setNote(String note) {
-			this.note = note;
-		}
+    public static class OrderContract {
+        private long id;
+        private long orderId;
+        private String contractNo;
+        private String contractAmount;
+        private int statusFlag;
+        private long serverCreateTime;
+        private String note;
 
-		public long getId() {
-			return id;
-		}
 
-		public void setId(long id) {
-			this.id = id;
-		}
+        public String getNote() {
+            return note;
+        }
 
-		public long getOrderId() {
-			return orderId;
-		}
+        public void setNote(String note) {
+            this.note = note;
+        }
 
-		public void setOrderId(long orderId) {
-			this.orderId = orderId;
-		}
+        public long getId() {
+            return id;
+        }
 
-		public String getContractNo() {
-			return contractNo;
-		}
+        public void setId(long id) {
+            this.id = id;
+        }
 
-		public void setContractNo(String contractNo) {
-			this.contractNo = contractNo;
-		}
+        public long getOrderId() {
+            return orderId;
+        }
 
-		public String getContractAmount() {
-			return contractAmount;
-		}
+        public void setOrderId(long orderId) {
+            this.orderId = orderId;
+        }
 
-		public void setContractAmount(String contractAmount) {
-			this.contractAmount = contractAmount;
-		}
+        public String getContractNo() {
+            return contractNo;
+        }
 
-		public int getStatusFlag() {
-			return statusFlag;
-		}
+        public void setContractNo(String contractNo) {
+            this.contractNo = contractNo;
+        }
 
-		public void setStatusFlag(int statusFlag) {
-			this.statusFlag = statusFlag;
-		}
+        public String getContractAmount() {
+            return contractAmount;
+        }
 
-		public long getServerCreateTime() {
-			return serverCreateTime;
-		}
+        public void setContractAmount(String contractAmount) {
+            this.contractAmount = contractAmount;
+        }
 
-		public void setServerCreateTime(long serverCreateTime) {
-			this.serverCreateTime = serverCreateTime;
-		}
+        public int getStatusFlag() {
+            return statusFlag;
+        }
 
-	}
+        public void setStatusFlag(int statusFlag) {
+            this.statusFlag = statusFlag;
+        }
+
+        public long getServerCreateTime() {
+            return serverCreateTime;
+        }
+
+        public void setServerCreateTime(long serverCreateTime) {
+            this.serverCreateTime = serverCreateTime;
+        }
+
+    }
 }

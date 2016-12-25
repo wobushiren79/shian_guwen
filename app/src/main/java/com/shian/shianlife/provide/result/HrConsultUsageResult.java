@@ -43,6 +43,35 @@ public class HrConsultUsageResult {
         private String otherHealth;//另一半信息
         private String clothesData;//寿衣信息
         private String location;//往生者地址
+
+        private String deadLocation; //去世地址，String
+        private String agentmanLocation; //经办人地点，String
+        private String zsLocation; //治丧地址，String
+
+        public String getDeadLocation() {
+            return deadLocation;
+        }
+
+        public void setDeadLocation(String deadLocation) {
+            this.deadLocation = deadLocation;
+        }
+
+        public String getAgentmanLocation() {
+            return agentmanLocation;
+        }
+
+        public void setAgentmanLocation(String agentmanLocation) {
+            this.agentmanLocation = agentmanLocation;
+        }
+
+        public String getZsLocation() {
+            return zsLocation;
+        }
+
+        public void setZsLocation(String zsLocation) {
+            this.zsLocation = zsLocation;
+        }
+
         public String getCardId() {
             return cardId;
         }
