@@ -185,6 +185,7 @@ public class ListFwpdzView extends BaseOrderView {
                 tv_qt31.setText(model.getPayeeName());
                 // 治丧地址
                 TextView tv_qt41 = (TextView) view.getView(R.id.tv_qt41);
+                Log.v("this", "getFuneralAddress:" + model.getFuneralAddress());
                 tv_qt41.setText(model.getFuneralAddress());
                 View khxq = view.getView(R.id.fl_kexq);
                 ImageView ivPhone1 = (ImageView) view.getView(R.id.iv_qt12);
@@ -202,9 +203,9 @@ public class ListFwpdzView extends BaseOrderView {
                 // khxq.setVisibility(View.GONE);
                 //地图
                 View button_map = view.getView(R.id.button_map);
-                if(model.getFuneralAddress()==null){
+                if (model.getFuneralAddress() == null) {
                     button_map.setVisibility(GONE);
-                }else{
+                } else {
                     button_map.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {

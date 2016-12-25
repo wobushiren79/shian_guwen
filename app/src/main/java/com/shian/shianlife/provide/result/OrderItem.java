@@ -25,6 +25,15 @@ public class OrderItem {
 	private String url1;
 	private String url2;
 	private String pdrLocation;
+	private long skuId;
+
+	public long getSkuId() {
+		return skuId;
+	}
+
+	public void setSkuId(long skuId) {
+		this.skuId = skuId;
+	}
 
 	List<HrGetCustomerContract.OrderContractAddition> additions;
 

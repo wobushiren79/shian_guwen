@@ -240,7 +240,7 @@ public class PgzxActivity extends BaseActivity {
                     public void onClick(View view) {
                         //获取商品详情
                         HpSkuIdParams params = new HpSkuIdParams();
-                        params.setSkuId(templateItem.getId());
+                        params.setSkuId(templateItem.getSkuId());
                         MHttpManagerFactory.getAccountManager().getSKUDetails(PgzxActivity.this, params, new HttpResponseHandler<HrGetSKUDetails>() {
                             @Override
                             public void onStart() {
@@ -249,7 +249,8 @@ public class PgzxActivity extends BaseActivity {
 
                             @Override
                             public void onSuccess(HrGetSKUDetails result) {
-                                if (result.getDetails() != null || !result.getDetails().equals("")) {
+
+                                if (result.getDetails() != null && !result.getDetails().equals("")) {
                                     AlertDialog dialog = new AlertDialog.Builder(PgzxActivity.this)
                                             .setTitle("商品详情")
                                             .setMessage(result.getDetails())
