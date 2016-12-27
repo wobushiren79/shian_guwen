@@ -104,7 +104,7 @@
     <ImageView
         android:id="@+id/iv_data"
         android:layout_width="@dimen/dimen_100dp"
-        android:layout_height="@dimen/dimen_888dp" />
+        android:layout_height="@dimen/dimen_100dp" />
 
     <View
         android:layout_width="match_parent"

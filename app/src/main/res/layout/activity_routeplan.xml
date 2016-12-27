@@ -19,6 +19,16 @@
             android:visibility="gone" />
 
         <Button
+            android:id="@+id/back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:background="@drawable/base_tabpager_indicator_default_2"
+            android:text="返回"
+            android:textColor="@color/white" />
+
+        <Button
             android:id="@+id/drive"
             style="@style/map_tabpager"
             android:layout_width="0dp"
@@ -133,6 +143,7 @@
                 android:background="@drawable/next_"
                 android:onClick="nodeClick" />
         </LinearLayout>
+
     </RelativeLayout>
 
 </LinearLayout>

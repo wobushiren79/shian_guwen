@@ -168,8 +168,8 @@ public class CustomerDetailActivity extends BaseActivity {
 //                    }
 //                });
 
-        HpOrderIdParams params = new HpOrderIdParams();
-        params.setOrderId(orderId);
+        HpConsultIdParams params = new HpConsultIdParams();
+        params.setConsultId(consultId);
         MHttpManagerFactory.getAccountManager().getCustomerFuneralOther(this, params,
                 new HttpResponseHandler<HrGetCustomerFuneralOther>() {
 

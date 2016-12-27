@@ -296,7 +296,7 @@ public interface MAccountManager extends HttpManager {
      * @param params
      * @param handler
      */
-    public void getCustomerFuneralOther(Context context, HpOrderIdParams params,
+    public void getCustomerFuneralOther(Context context, HpConsultIdParams params,
                                    HttpResponseHandler<HrGetCustomerFuneralOther> handler);
     /**
      * 保存预备信息

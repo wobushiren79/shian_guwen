@@ -134,6 +134,8 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
     Button mTransit;
     Button mWalk;
     Button mBike;
+
+    Button mBack;
     List<Button> listButton = new ArrayList<>();
     CustomDialog dialog;
 
@@ -149,6 +151,14 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
         mTransit = (Button) findViewById(R.id.transit);
         mWalk = (Button) findViewById(R.id.walk);
         mBike = (Button) findViewById(R.id.bike);
+        mBack= (Button) findViewById(R.id.back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         listButton.add(mDrive);
         listButton.add(mTransit);
         listButton.add(mWalk);

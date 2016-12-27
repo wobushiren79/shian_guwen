@@ -122,7 +122,6 @@ public class ContractDataActivity extends BaseActivity {
         orderId = getIntent().getLongExtra("orderId", 0);
         setTitle("合同信息");
 
-
         initView();
         initData();
     }
@@ -291,7 +290,13 @@ public class ContractDataActivity extends BaseActivity {
     };
 
     private void complete() {
+        mTVNext.setVisibility(View.GONE);
+        mTVBack.setVisibility(View.GONE);
+        mTVComplete.setVisibility(View.GONE);
         final Bitmap bitmap = ScreenShot.getBitmapByView(theScrollView);
+        mTVNext.setVisibility(View.VISIBLE);
+        mTVBack.setVisibility(View.VISIBLE);
+        mTVComplete.setVisibility(View.VISIBLE);
         final Bitmap bmp = Bitmap.createScaledBitmap(bitmap, metrics.widthPixels / 2, (bitmap.getHeight() * metrics.widthPixels / bitmap.getWidth()) / 2, true);
         new Thread() {
             @Override

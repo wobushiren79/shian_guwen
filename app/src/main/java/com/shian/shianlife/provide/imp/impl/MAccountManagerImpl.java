@@ -298,7 +298,7 @@ public class MAccountManagerImpl implements MAccountManager {
     }
 
     @Override
-    public void getCustomerFuneralOther(Context context, HpOrderIdParams params,
+    public void getCustomerFuneralOther(Context context, HpConsultIdParams params,
                                    HttpResponseHandler<HrGetCustomerFuneralOther> handler) {
         // TODO Auto-generated method stub
         excutor.requestPost(context, "customer/funeral/get/other",

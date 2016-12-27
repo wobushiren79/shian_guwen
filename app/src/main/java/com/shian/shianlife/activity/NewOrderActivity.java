@@ -65,7 +65,6 @@ public class NewOrderActivity extends BaseActivity {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-
 			}
 		});
 	}

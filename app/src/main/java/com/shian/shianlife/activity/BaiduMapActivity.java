@@ -39,7 +39,7 @@ public class BaiduMapActivity extends Activity {
     private MapView mMapView;
     private Button mTypeButton;
     private Button mTrafficButton;
-
+    private Button mBack;
     private BaiduMap mBaiduMap;
     private final static double mapCenterlatitude = 30.6634450000;
     private final static double mapCenterlongitude = 104.0722210000;
@@ -72,6 +72,14 @@ public class BaiduMapActivity extends Activity {
         mTrafficButton = (Button) findViewById(R.id.maptest_traffic);
         mTypeButton.setOnClickListener(onClickListener);
         mTrafficButton.setOnClickListener(onClickListener);
+
+        mBack= (Button) findViewById(R.id.back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void initMap() {

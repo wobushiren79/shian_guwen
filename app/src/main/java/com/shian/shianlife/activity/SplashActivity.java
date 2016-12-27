@@ -5,6 +5,8 @@ import android.animation.Animator.AnimatorListener;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -29,11 +31,22 @@ import com.shian.shianlife.provide.result.HrLoginResult;
 
 public class SplashActivity extends BaseActivity implements OnPushListener {
     private static final String LOG_TAG = "SPLASH_ACTIVITY";
+    RelativeLayout fl;
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0) {
+                fl.setBackgroundResource(R.drawable.loading);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle arg0) {
-        if(LOGFLAG){
-            Log.v(LOG_TAG,"onCreate");
+        if (LOGFLAG) {
+            Log.v(LOG_TAG, "onCreate");
         }
         super.onCreate(arg0);
         initPush();
@@ -41,8 +54,8 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     }
 
     private void initView() {
-        RelativeLayout fl = new RelativeLayout(this);
-        fl.setBackgroundResource(R.drawable.loading);
+        fl = new RelativeLayout(this);
+        fl.setBackgroundResource(R.drawable.fabuhui);
         final ImageView iv = new ImageView(this);
         LayoutParams lap = new LayoutParams(LayoutParams.WRAP_CONTENT,
                 LayoutParams.WRAP_CONTENT);
@@ -56,7 +69,9 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(2500);
+                    Thread.sleep(4000);
+                    handler.obtainMessage(0).sendToTarget();
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -148,8 +163,8 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     private void initLogin(String channelId) {
         ShareLogin loginS = SharePerfrenceUtils.getLoginShare(this);
         if (loginS.isAutoLogin()) {
-            if(LOGFLAG){
-                Log.v(LOG_TAG,"isAutoLogin");
+            if (LOGFLAG) {
+                Log.v(LOG_TAG, "isAutoLogin");
             }
             HpLoginParams params = new HpLoginParams();
             params.setPassword(loginS.getPassword());
@@ -172,6 +187,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
                         public void onStart() {
 
                         }
+
                         @Override
                         public void onError(String message) {
 
@@ -179,8 +195,8 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
                     });
 
         } else {
-            if(LOGFLAG){
-                Log.v(LOG_TAG,"noAutoLogin");
+            if (LOGFLAG) {
+                Log.v(LOG_TAG, "noAutoLogin");
             }
             initView();
         }

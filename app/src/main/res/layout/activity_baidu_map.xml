@@ -6,12 +6,20 @@
     android:layout_height="match_parent"
     tools:context="com.shian.shianlife.activity.BaiduMapActivity">
 
+
+
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true" />
-
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/base_tabpager_indicator_default_2"
+        android:text="返回"
+        android:textColor="@color/white" />
     <ScrollView
         android:visibility="gone"
         android:id="@+id/testbutton"

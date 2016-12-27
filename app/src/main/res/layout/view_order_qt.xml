@@ -2,13 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl_order_qt0"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/dimen_40dp" >
+        android:padding="@dimen/dimen_40dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -16,19 +16,21 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dimen_100dp"
             android:text="什么订单也没有，\n赶快新建订单吧!"
-            android:textColor="@color/gray"
+            android:textColor="@color/text_color"
             android:textSize="@dimen/dimen_40dp" />
 
         <TextView
             android:id="@+id/tv_neworder"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/dimen_10dp"
             android:layout_marginBottom="@dimen/dimen_50dp"
             android:background="@drawable/ic_home_reg"
             android:gravity="center"
             android:text="马上新建"
-            android:textColor="@color/white"
+            android:textColor="@color/text_color"
             android:textSize="@dimen/dimen_40dp" />
     </RelativeLayout>
 
@@ -36,24 +38,26 @@
         android:id="@+id/ll_order_qt0"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/tv_neworder1"
-            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:padding="@dimen/dimen_10dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_40dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
             android:background="@drawable/ic_home_reg"
             android:gravity="center"
             android:text="+新建服务单"
-            android:textColor="@color/white"
-            android:textSize="@dimen/dimen_40dp" />
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/dimen_40dp"
+         />
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/sryt_swipe_listview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <ListView
                 android:id="@+id/lv_swipe_listview"
