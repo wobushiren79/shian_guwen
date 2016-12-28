@@ -46,7 +46,7 @@ public class HomeFragment extends BaseFragment {
                 webview.goBack();
             }
         });
-        webview.loadUrl("http://m.e-funeral.cn");
+        webview.loadUrl("http://m.e-funeral.cn/index.html");
         return v;
     }
 

@@ -128,7 +128,7 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.btn_login_web)
     void loginWeb(View v) {
         Intent in = new Intent(this, WebActivity.class);
-        in.putExtra("url", "http://m.e-funeral.cn");
+        in.putExtra("url", "http://m.e-funeral.cn/index.html");
         startActivity(in);
     }
 }
