@@ -30,6 +30,7 @@ import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.local.LocationService;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.fragment.HomeFragment;
 import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.fragment.UserCenterFragment;
@@ -60,6 +61,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     private HomeFragment homeFragment;
     private OrderFragment orderFragment;
     private UserCenterFragment userFragment;
+    private CemeteryFragment cemeteryFragment;//新增公墓服务界面
 
     //定位初始化
 //    public LocationClient mLocationClient = null;
@@ -68,9 +70,8 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-        if (LOGFLAG) {
-            Log.v(LOG_TAG, "onCreate");
-        }
+
+        Log.v("this","MainActivity onCreate");
         setContentView(R.layout.activity_main);
 
         initDate();
@@ -80,8 +81,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 //        initLocation();
 
     }
-
-
 
 
     @TargetApi(23)
@@ -170,7 +169,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                     @Override
                     public void onError(String message) {
                         // TODO Auto-generated method stub
-
                     }
                 });
     }
@@ -185,10 +183,21 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 transcation.replace(R.id.fl_main, homeFragment);
                 break;
             case R.id.rb_main_2:
-                if (orderFragment == null) {
-                    orderFragment = new OrderFragment();
+                int loginType = SharePerfrenceUtils.getLoginShare(this).getLoginType();
+                if (loginType == 0) {
+                    //普通账号
+                    if (orderFragment == null) {
+                        orderFragment = new OrderFragment();
+                    }
+                    transcation.replace(R.id.fl_main, orderFragment);
+                } else if (loginType == 1) {
+                    //公墓账号
+                    if (cemeteryFragment == null) {
+                        cemeteryFragment = new CemeteryFragment();
+                    }
+                    transcation.replace(R.id.fl_main, cemeteryFragment);
                 }
-                transcation.replace(R.id.fl_main, orderFragment);
+
                 break;
             case R.id.rb_main_3:
                 if (userFragment == null) {
@@ -348,17 +357,17 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 AppContansts.LOCAL_COUNTY = location.getAddress().district;
                 AppContansts.LOCAL_STREET = location.getAddress().street;
                 AppContansts.LOCAL_STREETNUM = location.getAddress().streetNumber;
-                AppContansts.LOCAL_ADDRESS= location.getAddress().address;
-                Log.v("this","location.getAddrStr():"+location.getAddrStr()
-                        +" province:"+location.getAddress().province
-                        +" city:"+location.getAddress().city
-                        +" street:"+location.getAddress().street
-                        +" streetNumber:"+location.getAddress().streetNumber
-                        +" city:"+location.getAddress().city
-                        );
-                AppContansts.LOCAL_latitude=location.getLatitude();
-                AppContansts.LOCAL_longitude=location.getLongitude();
-                setTitleLocation( AppContansts.LOCAL_STREET+ AppContansts.LOCAL_STREETNUM);
+                AppContansts.LOCAL_ADDRESS = location.getAddress().address;
+                Log.v("this", "location.getAddrStr():" + location.getAddrStr()
+                        + " province:" + location.getAddress().province
+                        + " city:" + location.getAddress().city
+                        + " street:" + location.getAddress().street
+                        + " streetNumber:" + location.getAddress().streetNumber
+                        + " city:" + location.getAddress().city
+                );
+                AppContansts.LOCAL_latitude = location.getLatitude();
+                AppContansts.LOCAL_longitude = location.getLongitude();
+                setTitleLocation(AppContansts.LOCAL_STREET + AppContansts.LOCAL_STREETNUM);
 
             }
         }

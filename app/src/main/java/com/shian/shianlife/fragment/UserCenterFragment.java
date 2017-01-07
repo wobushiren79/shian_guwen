@@ -69,6 +69,7 @@ public class UserCenterFragment extends BaseFragment {
         startActivityForResult(in, 101);
     }
 
+
     @OnClick(R.id.phone)
     void Phone(View v) {
         Utils.call(v, "4009679678");

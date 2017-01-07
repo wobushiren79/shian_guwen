@@ -50,6 +50,7 @@
                 android:id="@+id/iv_data"
                 android:layout_width="@dimen/dimen_40dp"
                 android:layout_height="@dimen/dimen_40dp"
+
                 android:src="@drawable/moreinfo" />
 
             <TextView

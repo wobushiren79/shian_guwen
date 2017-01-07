@@ -24,7 +24,9 @@ import com.shian.shianlife.common.push.Utils;
 import com.shian.shianlife.common.utils.JSONUtil;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils.ShareLogin;
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
+import com.shian.shianlife.provide.base.HttpRequestExecutor;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpLoginParams;
 import com.shian.shianlife.provide.result.HrLoginResult;
@@ -55,6 +57,8 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
 //		iv.setBackgroundResource(R.drawable.ic_splash_logo1);
         fl.addView(iv);
         setContentView(fl);
+
+
         new Thread(new Runnable() {
 
             @Override
@@ -117,6 +121,8 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
+
                 Intent in = new Intent(SplashActivity.this, MainActivity.class);
                 in.putExtra("loginData", JSONUtil.writeEntityToJSONString(result));
                 startActivity(in);
@@ -155,33 +161,72 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
             if (LOGFLAG) {
                 Log.v(LOG_TAG, "isAutoLogin");
             }
-            HpLoginParams params = new HpLoginParams();
-            params.setPassword(loginS.getPassword());
-            params.setUsername(loginS.getUsername());
-            params.setSystemType("2");
-            params.setChannelId(channelId);
 
-            RelativeLayout fl = new RelativeLayout(this);
-            fl.setBackgroundResource(R.drawable.loading);
-            setContentView(fl);
-            MHttpManagerFactory.getAccountManager().login(this, params,
-                    new HttpResponseHandler<HrLoginResult>() {
+            if (loginS.getLoginType() == 0) {
+                //登录状态为普通状态
+                HpLoginParams params = new HpLoginParams();
+                params.setPassword(loginS.getPassword());
+                params.setUsername(loginS.getUsername());
+                params.setSystemType("2");
+                params.setChannelId(channelId);
 
-                        @Override
-                        public void onSuccess(HrLoginResult result) {
-                            initView1(result);
-                        }
+                RelativeLayout fl = new RelativeLayout(this);
+                fl.setBackgroundResource(R.drawable.loading);
+                setContentView(fl);
+                MHttpManagerFactory.getAccountManager().login(this, params,
+                        new HttpResponseHandler<HrLoginResult>() {
 
-                        @Override
-                        public void onStart() {
+                            @Override
+                            public void onSuccess(HrLoginResult result) {
 
-                        }
+                                LoginActivity.cookie = result.getSessionId();
+                                HttpRequestExecutor.setSession(LoginActivity.cookie, SplashActivity.this);
+                                initView1(result);
+                            }
 
-                        @Override
-                        public void onError(String message) {
+                            @Override
+                            public void onStart() {
 
-                        }
-                    });
+                            }
+
+                            @Override
+                            public void onError(String message) {
+
+                            }
+                        });
+            } else if (loginS.getLoginType() == 1) {
+                //登录状态为公墓状态
+                HpLoginParams params = new HpLoginParams();
+                params.setPassword(loginS.getPassword());
+                params.setUsername(loginS.getUsername());
+                params.setSystemType("2");
+                params.setChannelId(channelId);
+
+                RelativeLayout fl = new RelativeLayout(this);
+                fl.setBackgroundResource(R.drawable.loading);
+                setContentView(fl);
+                MHttpManagerFactory.getAccountManager().login(this, params,
+                        new HttpResponseHandler<HrLoginResult>() {
+
+                            @Override
+                            public void onSuccess(HrLoginResult result) {
+                                LoginActivity.cookie = result.getSessionId();
+                                HttpRequestExecutor.setSession(LoginActivity.cookie, SplashActivity.this);
+                                initView1(result);
+                            }
+
+                            @Override
+                            public void onStart() {
+
+                            }
+
+                            @Override
+                            public void onError(String message) {
+
+                            }
+                        });
+            }
+
 
         } else {
             if (LOGFLAG) {
@@ -198,9 +243,9 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
 
                 PushConstants.LOGIN_TYPE_API_KEY,
                 Utils.getMetaValue(this, "api_key"));
+        Log.v("this", "api_key:" + Utils.getMetaValue(this, "api_key"));
         // Push: 如果想基于地理位置推送，可以打开支持地理位置的推送的开关
         // PushManager.enableLbs(getApplicationContext());
-
         // Push: 设置自定义的通知样式，具体API介绍见用户手册，如果想使用系统默认的可以不加这段代码
         // 请在通知推送界面中，高级设置->通知栏样式->自定义样式，选中并且填写值：1，
         // 与下方代码中 PushManager.setNotificationBuilder(this, 1, cBuilder)中的第二个参数对应

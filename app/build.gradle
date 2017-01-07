@@ -12,7 +12,7 @@ android {
         applicationId "com.shian.shianlife"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 6
+        versionCode 8
         versionName "1.4"
         multiDexEnabled true
     }

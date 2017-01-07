@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -34,13 +35,15 @@ public class LoginActivity extends BaseActivity {
     CheckBox cbRe;
     @InjectView(R.id.cb_login_auto)
     CheckBox cbAuto;
+    @InjectView(R.id.rb_state1)
+    RadioButton rbState1;
+    @InjectView(R.id.rb_state2)
+    RadioButton rbState2;
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-        if (LOGFLAG) {
-            Log.v(LOG_TAG, "onCreate");
-        }
+        Log.v("this","LoginActivity onCreate");
         setContentView(R.layout.activity_login);
         initView();
     }
@@ -55,8 +58,14 @@ public class LoginActivity extends BaseActivity {
 
         if (loginS.isAutoLogin()) {
             cbAuto.setChecked(true);
+            if (loginS.getLoginType() == 0) {
+                rbState1.setChecked(true);
+            } else if (loginS.getLoginType() == 1) {
+                rbState2.setChecked(true);
+            }
             login(loginS.getUsername(), loginS.getPassword());
         }
+
     }
 
     @OnClick(R.id.btn_login)
@@ -77,41 +86,81 @@ public class LoginActivity extends BaseActivity {
             ToastUtils.show(this, "消息推送正在初始化，请稍后。。。");
             return;
         }
-        HpLoginParams params = new HpLoginParams();
-        params.setPassword(etUserPassword.getText().toString());
-        params.setUsername(etUserName.getText().toString());
-        params.setSystemType("2");
-        params.setChannelId(SharePerfrenceUtils.getShareChannelId(this));
-        Log.v("this", SharePerfrenceUtils.getShareChannelId(this));
-        MHttpManagerFactory.getAccountManager().login(this, params, new HttpResponseHandler<HrLoginResult>() {
+        if (rbState1.isChecked()) {
+            //登录状态为普通类型
+            HpLoginParams params = new HpLoginParams();
+            params.setPassword(etUserPassword.getText().toString());
+            params.setUsername(etUserName.getText().toString());
+            params.setSystemType("2");
+            params.setChannelId(SharePerfrenceUtils.getShareChannelId(this));
+            Log.v("this", SharePerfrenceUtils.getShareChannelId(this));
+            MHttpManagerFactory.getAccountManager().login(this, params, new HttpResponseHandler<HrLoginResult>() {
 
-            @Override
-            public void onSuccess(HrLoginResult result) {
-                cookie = result.getSessionId();
-                HttpRequestExecutor.setSession(cookie, LoginActivity.this);
-                SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, cbRe.isChecked(),
-                        cbAuto.isChecked());
-                ToastUtils.show(getBaseContext(), "登陆成功");
-                Intent in = new Intent(LoginActivity.this, MainActivity.class);
-                String resultBack = JSONUtil.writeEntityToJSONString(result);
-                if (LOGFLAG) {
-                    Log.v(LOG_TAG, "resultBack:" + resultBack);
+                @Override
+                public void onSuccess(HrLoginResult result) {
+                    cookie = result.getSessionId();
+                    HttpRequestExecutor.setSession(cookie, LoginActivity.this);
+                    SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, cbRe.isChecked(),
+                            cbAuto.isChecked(), 0);
+                    ToastUtils.show(getBaseContext(), "登陆成功");
+                    Intent in = new Intent(LoginActivity.this, MainActivity.class);
+                    String resultBack = JSONUtil.writeEntityToJSONString(result);
+                    if (LOGFLAG) {
+                        Log.v(LOG_TAG, "resultBack:" + resultBack);
+                    }
+                    in.putExtra("loginData", resultBack);
+                    startActivity(in);
+                    finish();
                 }
-                in.putExtra("loginData", resultBack);
-                startActivity(in);
-                finish();
-            }
 
-            @Override
-            public void onStart() {
+                @Override
+                public void onStart() {
 
-            }
+                }
 
-            @Override
-            public void onError(String message) {
+                @Override
+                public void onError(String message) {
+                }
+            });
+        }
+        if (rbState2.isChecked()) {
+            //登录状态为公墓类型
+            HpLoginParams params = new HpLoginParams();
+            params.setPassword(etUserPassword.getText().toString());
+            params.setUsername(etUserName.getText().toString());
+            params.setSystemType("2");
+            params.setChannelId(SharePerfrenceUtils.getShareChannelId(this));
+            Log.v("this", SharePerfrenceUtils.getShareChannelId(this));
+            MHttpManagerFactory.getAccountManager().login(this, params, new HttpResponseHandler<HrLoginResult>() {
 
-            }
-        });
+                @Override
+                public void onSuccess(HrLoginResult result) {
+                    cookie = result.getSessionId();
+                    HttpRequestExecutor.setSession(cookie, LoginActivity.this);
+                    SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, cbRe.isChecked(),
+                            cbAuto.isChecked(), 1);
+                    ToastUtils.show(getBaseContext(), "登陆成功");
+                    Intent in = new Intent(LoginActivity.this, MainActivity.class);
+                    String resultBack = JSONUtil.writeEntityToJSONString(result);
+                    if (LOGFLAG) {
+                        Log.v(LOG_TAG, "resultBack:" + resultBack);
+                    }
+                    in.putExtra("loginData", resultBack);
+                    startActivity(in);
+                    finish();
+                }
+
+                @Override
+                public void onStart() {
+
+                }
+
+                @Override
+                public void onError(String message) {
+                }
+            });
+        }
+
 
     }
 
@@ -128,7 +177,7 @@ public class LoginActivity extends BaseActivity {
     @OnClick(R.id.btn_login_web)
     void loginWeb(View v) {
         Intent in = new Intent(this, WebActivity.class);
-        in.putExtra("url", "http://m.e-funeral.cn");
+        in.putExtra("url", "http://m.e-funeral.cn/index.html");
         startActivity(in);
     }
 }
