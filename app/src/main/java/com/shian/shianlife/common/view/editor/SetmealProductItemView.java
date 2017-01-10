@@ -210,4 +210,7 @@ public class SetmealProductItemView extends FrameLayout implements
 		public void onDelete(CreateOrderProductItemModel model);
 	}
 
+	public void setCantSub(){
+		tvSub.setClickable(false);
+	}
 }

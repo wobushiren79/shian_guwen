@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_cemetery_talk_fail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/cemetery_bc"
+    tools:context="com.shian.shianlife.activity.cemetery.CemeteryTalkFailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/dimen_25dp"
+            android:paddingLeft="@dimen/dimen_35dp"
+            android:paddingRight="@dimen/dimen_35dp"
+            android:paddingTop="@dimen/dimen_25dp">
+
+            <com.shian.shianlife.view.CetemeryTextSelectLayoutView
+                android:id="@+id/select_plantobuy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dimen_10dp"
+                android:paddingTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryTextSelectLayoutView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/dimen_10dp"
+                android:paddingTop="@dimen/dimen_10dp">
+
+                <TextView
+                    style="@style/cemetery_text_style_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="计划购买价位：" />
+
+                <EditText
+                    android:id="@+id/et_plantomoney"
+                    android:inputType="number"
+                    style="@style/cemetery_text_style_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimen_80dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_cemetery_item_et_1"
+                    android:padding="@dimen/dimen_20dp" />
+            </LinearLayout>
+
+            <com.shian.shianlife.view.CetemeryTextSelectLayoutView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dimen_10dp"
+                android:paddingTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryTextSelectLayoutView>
+
+            <com.shian.shianlife.view.CetemeryTextSelectLayoutView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dimen_10dp"
+                android:paddingTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryTextSelectLayoutView>
+
+            <com.shian.shianlife.view.MapSelectLayoutView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dimen_10dp"
+                android:paddingTop="@dimen/dimen_10dp"
+                android:tag="1"></com.shian.shianlife.view.MapSelectLayoutView>
+
+            <com.shian.shianlife.view.CetemeryTextSelectLayoutView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dimen_10dp"
+                android:paddingTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryTextSelectLayoutView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/dimen_10dp"
+                android:paddingTop="@dimen/dimen_10dp">
+
+                <TextView
+                    style="@style/cemetery_text_style_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="洽谈要点：" />
+
+                <EditText
+                    style="@style/cemetery_text_style_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimen_80dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_cemetery_item_et_1"
+                    android:padding="@dimen/dimen_20dp" />
+            </LinearLayout>
+
+            <com.shian.shianlife.view.CetemeryTextSelectLayoutView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dimen_10dp"
+                android:paddingTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryTextSelectLayoutView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dimen_10dp"
+                android:paddingTop="@dimen/dimen_10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_3dp"
+                    android:background="@drawable/cemetery_item_line" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/dimen_10dp"
+                    android:paddingTop="@dimen/dimen_10dp">
+
+                    <TextView
+                        style="@style/cemetery_text_style_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="交通工具：" />
+
+                    <EditText
+                        style="@style/cemetery_text_style_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dimen_80dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_cemetery_item_et_1"
+                        android:padding="@dimen/dimen_20dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/dimen_10dp"
+                    android:paddingTop="@dimen/dimen_10dp">
+
+                    <TextView
+                        style="@style/cemetery_text_style_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="预约时间：" />
+
+                    <TextView
+                        style="@style/cemetery_text_style_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dimen_80dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_cemetery_item_et_1"
+                        android:padding="@dimen/dimen_20dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/dimen_10dp"
+                    android:paddingTop="@dimen/dimen_10dp">
+
+                    <TextView
+                        style="@style/cemetery_text_style_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="人数：" />
+
+                    <TextView
+                        style="@style/cemetery_text_style_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dimen_80dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_cemetery_item_et_1"
+                        android:padding="@dimen/dimen_20dp" />
+                </LinearLayout>
+
+                <com.shian.shianlife.view.MapSelectLayoutView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/dimen_10dp"
+                    android:paddingTop="@dimen/dimen_10dp"
+                    android:tag="1"></com.shian.shianlife.view.MapSelectLayoutView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_3dp"
+                    android:background="@drawable/cemetery_item_line" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/dimen_10dp"
+                android:paddingTop="@dimen/dimen_10dp">
+
+                <TextView
+                    style="@style/cemetery_text_style_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="备注：" />
+
+                <EditText
+                    style="@style/cemetery_text_style_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_cemetery_item_et_1"
+                    android:padding="@dimen/dimen_20dp"
+                    android:text="" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginBottom="@dimen/dimen_50dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_3dp"
+            android:background="@drawable/cemetery_item_line" />
+
+        <Button
+            android:layout_marginBottom="@dimen/dimen_50dp"
+            style="@style/cemetery_button_style_1"
+            android:layout_width="@dimen/dimen_250dp"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_cemetery_item_button_1" />
+    </LinearLayout>
+</ScrollView>

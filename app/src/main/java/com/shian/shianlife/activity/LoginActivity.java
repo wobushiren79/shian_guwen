@@ -43,7 +43,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-        Log.v("this","LoginActivity onCreate");
         setContentView(R.layout.activity_login);
         initView();
     }
@@ -54,6 +53,12 @@ public class LoginActivity extends BaseActivity {
         if (loginS.isRemeberPassword()) {
             cbRe.setChecked(true);
             etUserPassword.setText(loginS.getPassword());
+            if (loginS.getLoginType() == 0) {
+                rbState1.setChecked(true);
+            } else if (loginS.getLoginType() == 1) {
+                rbState2.setChecked(true);
+            }
+
         }
 
         if (loginS.isAutoLogin()) {

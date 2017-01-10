@@ -38,23 +38,30 @@ public class MapSelectLayoutView extends LinearLayout implements Serializable {
     ImageView mMapSelect;
 
     int numView;
-    List<String> listData=new ArrayList<>();
+    List<String> listData = new ArrayList<>();
 
     public static String THE_ACTION = "MapLocationData";
 
     public MapSelectLayoutView(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public MapSelectLayoutView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initView(context);
-
-
+        initView();
     }
 
-    private void initView(Context context) {
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_mapcheck, this);
+
+    private void initView() {
+        View view;
+        String tag = (String) getTag();
+        if (tag == null) {
+            view = LayoutInflater.from(getContext()).inflate(R.layout.layout_mapcheck, this);
+        } else if (tag.equals("1")) {
+            view = LayoutInflater.from(getContext()).inflate(R.layout.layout_mapcheck_2, this);
+        } else {
+            view = LayoutInflater.from(getContext()).inflate(R.layout.layout_mapcheck_2, this);
+        }
         mMapText = (EditText) view.findViewById(R.id.tv_map_text);
         mMapData = (ImageView) view.findViewById(R.id.iv_data);
         mMapSelect = (ImageView) view.findViewById(R.id.iv_map);
@@ -62,6 +69,7 @@ public class MapSelectLayoutView extends LinearLayout implements Serializable {
         mMapSelect.setOnClickListener(onClickListener);
         mMapData.setOnClickListener(onClickListener);
     }
+
 
     OnClickListener onClickListener = new OnClickListener() {
         @Override
@@ -79,7 +87,7 @@ public class MapSelectLayoutView extends LinearLayout implements Serializable {
      */
     private void listCheck() {
         if (listData != null && listData.size() > 0) {
-            Log.v("this","listData.size()"+listData.size());
+            Log.v("this", "listData.size()" + listData.size());
             final AlertDialog dialog = new AlertDialog.Builder(getContext())
                     .setTitle("选择地址")
                     .create();
@@ -103,11 +111,11 @@ public class MapSelectLayoutView extends LinearLayout implements Serializable {
                 @Override
                 public View getView(final int position, View convertView, ViewGroup parent) {
                     TextView tvData = new TextView(getContext());
-                    AbsListView.LayoutParams layoutParams=new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
                     tvData.setLayoutParams(layoutParams);
                     tvData.setGravity(Gravity.CENTER);
-                    tvData.setPadding(20,20,20,20);
+                    tvData.setPadding(20, 20, 20, 20);
                     tvData.setText(listData.get(position));
                     tvData.setOnClickListener(new OnClickListener() {
                         @Override

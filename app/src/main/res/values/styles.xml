@@ -80,4 +80,34 @@
         <item name="android:layout_margin">@dimen/dimen_1dp</item>
         <item name="android:background">@color/white</item>
     </style>
+
+    <style name="cemetery_text_style_1">
+        <item name="android:textSize">@dimen/txtsize_30sp</item>
+        <item name="android:layout_marginTop">@dimen/dimen_20dp</item>
+        <item name="android:layout_marginBottom">@dimen/dimen_10dp</item>
+        <item name="android:textColor">@color/cemetery_textcolor</item>
+    </style>
+
+    <style name="cemetery_text_style_2">
+        <item name="android:layout_marginLeft">@dimen/dimen_20dp</item>
+        <item name="android:textSize">@dimen/txtsize_30sp</item>
+        <item name="android:layout_marginTop">@dimen/dimen_20dp</item>
+        <item name="android:layout_marginBottom">@dimen/dimen_10dp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="cemetery_button_style_1">
+        <item name="android:textSize">@dimen/txtsize_34sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="cemetery_text_style_3">
+        <item name="android:textSize">@dimen/txtsize_27sp</item>
+        <item name="android:textColor">@color/cemetery_textcolor</item>
+    </style>
+
+    <style name="cemetery_text_style_4">
+        <item name="android:textSize">@dimen/txtsize_30sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

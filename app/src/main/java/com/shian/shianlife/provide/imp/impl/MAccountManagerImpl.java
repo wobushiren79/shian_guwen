@@ -439,7 +439,6 @@ public class MAccountManagerImpl implements MAccountManager {
         // TODO Auto-generated method stub
         excutor.requestPost(context, "pay/cash", Object.class, params, handler);
     }
-
     @Override
     public void saveItemNote(Context context, HpSaveCustomerContract params,
                              HttpResponseHandler<Object> handler) {

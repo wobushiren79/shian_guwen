@@ -165,6 +165,7 @@ public class PgzxActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             Intent in = new Intent(PgzxActivity.this, EditOrderActivity.class);
+            in.putExtra("pgzx",1);
             in.putExtra("khxqtype", khxqType);
             in.putExtra("orderId", getIntent().getLongExtra("orderId", 0));
             in.putExtra("consultId", getIntent().getLongExtra("consultId", 0));

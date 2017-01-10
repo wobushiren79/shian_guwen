@@ -36,6 +36,7 @@
     <color name="blackgroundmain">#467837</color>
     <color name="chlickcolor">#f4dc5f</color>
     <color name="main_blackground">#ECECEC</color>
+    <color name="cemetery_textcolor">#83e69f</color>
     <!-- Dialog Color -->
     <color name="version_msg_color">#ff6699ff</color>
     <color name="message_color">#ffccccff</color>

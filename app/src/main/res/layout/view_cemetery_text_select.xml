@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/cemetery_text_style_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <Spinner
+
+            android:id="@+id/sp_content"
+            style="@style/cemetery_text_style_4"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_cemetery_item_et_2"
+            android:padding="@dimen/dimen_20dp" />
+
+        <ImageView
+            android:id="@+id/iv_select"
+            android:layout_width="@dimen/dimen_75dp"
+            android:layout_height="@dimen/dimen_80dp"
+            android:background="@drawable/bg_cemetery_item_et_3"
+            android:padding="@dimen/dimen_20dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bg_cemetery_item_select" />
+    </LinearLayout>
+</LinearLayout>
