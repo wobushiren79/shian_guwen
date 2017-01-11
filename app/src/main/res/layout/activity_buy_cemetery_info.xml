@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_buy_cemetery_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/cemetery_bc"
+    android:scrollbars="none"
+    tools:context="com.shian.shianlife.activity.cemetery.BuyCemeteryInfoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/dimen_25dp"
+            android:paddingLeft="@dimen/dimen_35dp"
+            android:paddingRight="@dimen/dimen_35dp"
+            android:paddingTop="@dimen/dimen_25dp">
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_3dp"
+            android:layout_marginBottom="@dimen/dimen_50dp"
+            android:background="@drawable/cemetery_item_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_50dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_cemeteryback"
+                style="@style/cemetery_button_style_1"
+                android:layout_width="@dimen/dimen_250dp"
+                android:layout_height="@dimen/dimen_80dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:background="@drawable/bg_cemetery_item_button_1" />
+
+            <Button
+                android:id="@+id/bt_cemeterynext"
+                style="@style/cemetery_button_style_1"
+                android:layout_width="@dimen/dimen_250dp"
+                android:layout_height="@dimen/dimen_80dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:background="@drawable/bg_cemetery_item_button_1" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

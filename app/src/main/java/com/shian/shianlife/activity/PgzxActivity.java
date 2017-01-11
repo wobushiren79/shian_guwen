@@ -113,7 +113,7 @@ public class PgzxActivity extends BaseActivity {
         if (isShenhe || isShoukuan) {
             setTitle("派单列表详情");
             LLPGZXState.setVisibility(View.GONE);
-            newOrder.setVisibility(View.GONE);
+//            newOrder.setVisibility(View.GONE);
             newOrder2.setVisibility(View.GONE);
             LLPDZT.setVisibility(View.GONE);
         } else {
@@ -595,13 +595,25 @@ public class PgzxActivity extends BaseActivity {
                     @Override
                     public void onSuccess(HrOrderItenList result) {
                         // TODO Auto-generated method stub
-                        if (!result.isCanEdit()) {
+
+                        if(result.getOrderHandleStatus()==7){
+                            tvNew.setVisibility(View.VISIBLE);
                             tvNew.setEnabled(false);
                             tvNew.setBackgroundColor(getResources().getColor(
                                     R.color.gray_common));
                             tvNew.setTextColor(Color.WHITE);
-                        } else if (isShenhe || isShoukuan) {
-                            tvNew.setVisibility(View.GONE);
+                        }else{
+                            if (!result.isCanEdit()) {
+                                tvNew.setEnabled(false);
+                                tvNew.setVisibility(View.VISIBLE);
+                                tvNew.setBackgroundColor(getResources().getColor(
+                                        R.color.gray_common));
+                                tvNew.setTextColor(Color.WHITE);
+                            } else if (isShenhe || isShoukuan) {
+                                tvNew.setVisibility(View.GONE);
+                            }else{
+                                tvNew.setVisibility(View.VISIBLE);
+                            }
                         }
                         if (result.isCanRefund() && !isShenhe && !isShoukuan) {
                             tvRefund.setVisibility(View.VISIBLE);

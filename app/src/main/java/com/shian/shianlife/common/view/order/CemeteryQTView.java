@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.cemetery.BuildNewOrderActivity;
+import com.shian.shianlife.activity.cemetery.BuyCemeteryInfoActivity;
 import com.shian.shianlife.activity.cemetery.CemeteryTalkFailActivity;
 import com.shian.shianlife.common.utils.Utils;
 
@@ -29,6 +30,7 @@ import com.shian.shianlife.common.utils.Utils;
 
 public class CemeteryQTView extends BaseOrderView {
     public static String BUILD_NEW_ORDER = "BuildNewOrder";//跳转到新建预约单状态（0，新建。1，查询详情）
+    public static String BUY_INFO = "BuyInfo";//跳转到定墓资料填写（0，购墓信息。1，使用者信息，2，经办人信息）
 
     RecyclerView mRecyclerView;
     SwipeRefreshLayout mRefreshLayout;
@@ -73,17 +75,34 @@ public class CemeteryQTView extends BaseOrderView {
         }
 
         @Override
-        public void onBindViewHolder(final RecyclerViewHolder holder, int position) {
+        public void onBindViewHolder(final RecyclerViewHolder holder, final int position) {
             OnClickListener onBTOnClickListener = new OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (view == holder.btUserInfo) {
+                        //查询洽谈信息
                         Intent intent = new Intent(getContext(), CemeteryTalkFailActivity.class);
                         intent.putExtra(BUILD_NEW_ORDER, 1);
                         getContext().startActivity(intent);
                     } else if (view == holder.btTalkFail) {
+                        //填写洽谈失败信息
                         Intent intent = new Intent(getContext(), CemeteryTalkFailActivity.class);
                         intent.putExtra(BUILD_NEW_ORDER, 0);
+                        getContext().startActivity(intent);
+                    } else if (view == holder.btSubmit) {
+                        //填写定墓信息
+                        Intent intent = new Intent(getContext(), BuyCemeteryInfoActivity.class);
+                        switch (0) {
+                            case 0:
+                                intent.putExtra(BUY_INFO, 0);
+                                break;
+                            case 1:
+                                intent.putExtra(BUY_INFO, 1);
+                                break;
+                            case 2:
+                                intent.putExtra(BUY_INFO, 2);
+                                break;
+                        }
                         getContext().startActivity(intent);
                     }
                 }
@@ -109,7 +128,7 @@ public class CemeteryQTView extends BaseOrderView {
 
             holder.btUserInfo.setOnClickListener(onBTOnClickListener);
             holder.btTalkFail.setOnClickListener(onBTOnClickListener);
-
+            holder.btSubmit.setOnClickListener(onBTOnClickListener);
 
         }
 
@@ -135,6 +154,7 @@ public class CemeteryQTView extends BaseOrderView {
 
             Button btUserInfo;
             Button btTalkFail;
+            Button btSubmit;
 
             public RecyclerViewHolder(View itemView) {
                 super(itemView);
@@ -153,6 +173,7 @@ public class CemeteryQTView extends BaseOrderView {
 
                 btUserInfo = (Button) itemView.findViewById(R.id.bt_userinfo);
                 btTalkFail = (Button) itemView.findViewById(R.id.bt_talkfail);
+                btSubmit = (Button) itemView.findViewById(R.id.bt_submit);
             }
         }
     }

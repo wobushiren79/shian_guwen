@@ -1,6 +1,8 @@
 package com.shian.shianlife.common.utils;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -76,7 +78,7 @@ public class Utils {
         return matcher.matches();
     }
 
-    public  static void timeSelect(Context context, final TextView textView) {
+    public static void timeSelect(Context context, final TextView textView) {
         DateTimeSelectorDialogBuilder dialog = DateTimeSelectorDialogBuilder
                 .getInstance(context);
         dialog.setShowHour(true);
@@ -89,5 +91,13 @@ public class Utils {
                 textView.setText(selectedDate);
             }
         });
+    }
+
+    public static List<String> stringsToList(String[] data) {
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < data.length; i++) {
+            list.add(data[i]);
+        }
+        return list;
     }
 }

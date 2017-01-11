@@ -9,14 +9,16 @@ import android.widget.TextView;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.utils.Utils;
-import com.shian.shianlife.common.view.order.CemeteryQTView;
 import com.shian.shianlife.view.CetemeryTextSelectLayoutView;
 import com.shian.shianlife.view.MapSelectLayoutView;
+import com.shian.shianlife.view.SelectData;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuildNewOrderActivity extends BaseActivity {
+
+
+public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextSelectLayoutView.onSelectedListener {
 
     CetemeryTextSelectLayoutView mCetemeryNameSelectLayout;
     CetemeryTextSelectLayoutView mTrafficeSelectLayout;
@@ -28,11 +30,8 @@ public class BuildNewOrderActivity extends BaseActivity {
     EditText mETPhone;
     EditText mETPersonNum;
 
-    String[] mCetemeryName = {"龙潭寺院山公墓", "青白江罗汉寺公墓", "温江大郎福寿园"
-            , "成华区石岭南苑", "金牛区皇恩寺公墓", "龙泉驿区长松寺公墓", "龙泉驿区金龙山公墓"
-            , "锦江区祝望山公墓", "蒲江红枫艺术陵园", "锦江区金莎陵园", "都江堰味江陵园"
-            , "龙泉驿区燃灯寺公墓", "龙泉驿区真武山公墓", "龙泉驿区金龙山公墓", "崇州白塔山公墓"};
-    String[] mTrafficeWay = {"自行", "需要派车"};
+    List<String> ctemeryNameList = new ArrayList<>();
+    List<String> trafficeWayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,18 +60,15 @@ public class BuildNewOrderActivity extends BaseActivity {
 
     private void initData() {
         setTitle("新建预约单");
-        List<String> ctemeryNameList = new ArrayList<>();
-        List<String> trafficeWayList = new ArrayList<>();
-        for (int i = 0; i < mCetemeryName.length; i++) {
-            ctemeryNameList.add(mCetemeryName[i]);
-        }
-        for (int i = 0; i < mTrafficeWay.length; i++) {
-            trafficeWayList.add(mTrafficeWay[i]);
-        }
+
+//        for (int i = 0; i < mCetemeryName.length; i++) {
+//            ctemeryNameList.add(mCetemeryName[i]);
+//        }
+        trafficeWayList=Utils.stringsToList(SelectData.CEMETERY_TRAFFICEWAY);
 
         selectLayoutView.setData(0, new ArrayList<String>());
-        mCetemeryNameSelectLayout.setData(ctemeryNameList);
-        mTrafficeSelectLayout.setData(trafficeWayList);
+        mCetemeryNameSelectLayout.setData(ctemeryNameList, 0, this);
+        mTrafficeSelectLayout.setData(trafficeWayList, 1, this);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -83,4 +79,14 @@ public class BuildNewOrderActivity extends BaseActivity {
             }
         }
     };
+
+    @Override
+    public void onItemSelected(View view, int i, long l, int num) {
+        switch (num) {
+            case 0:
+                break;
+            case 1:
+                break;
+        }
+    }
 }

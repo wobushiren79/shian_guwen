@@ -292,6 +292,7 @@ public class EditOrderActivity extends BaseActivity {
 
                         @Override
                         public void onSuccess(HrOderId result) {
+
                             OrderFragment.C_bOrder_isRefresh = true;
                             finish();
                         }
@@ -418,12 +419,7 @@ public class EditOrderActivity extends BaseActivity {
         }
         tv_total.setText(totalPrice + "");
 
-        if (pgzx == 1) {
-            mainSetmealView.setCantSub();
-            funeralSetmealView.setCantSub();
-            cemeterySetmealView.setCantSub();
-            addedSetmealView.setCantSub();
-        }
+
     }
 
     @OnClick(R.id.tv_customerdetail)

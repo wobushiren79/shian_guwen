@@ -174,15 +174,7 @@ public class AddedSetmealView extends FrameLayout {
 	}
 
 
-	//新添加：设置不能删减列表
-	List<AddedItemView> listAddedItemView = new ArrayList<>();
 
-	public void setCantSub() {
-		for (AddedItemView itemView : listAddedItemView) {
-			itemView.setCantSub();
-		}
-	}
-	//新添加：设置不能删减列表
 
 	/**
 	 * 添加一款产品
@@ -197,9 +189,7 @@ public class AddedSetmealView extends FrameLayout {
 		mProductItemModels.add(model);
 		final AddedItemView addedItemView = new AddedItemView(getContext(), productItems, addedCtgModel, model);
 
-		//新添加：设置不能删减列表
-		listAddedItemView.add(addedItemView);
-		//新添加：设置不能删减列表
+
 
 		addedItemView.setOnChangeListener(new OnChangeListener() {
 
@@ -311,10 +301,6 @@ public class AddedSetmealView extends FrameLayout {
 		model.setChange(true);
 		mProductItemModels.add(model);
 		final AddedItemView addedItemView = new AddedItemView(getContext(), productItems, mOrderCtgItemModel, model);
-
-		//新添加：设置不能删减列表
-		listAddedItemView.add(addedItemView);
-		//新添加：设置不能删减列表
 
 		addedItemView.setEnableEdit(mOrderProductItemModel.isCanEdit());
 		addedItemView.setOnChangeListener(new OnChangeListener() {

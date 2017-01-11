@@ -178,23 +178,11 @@ public class CemeterySetmealView extends FrameLayout implements OnItemSelectedLi
 	}
 
 
-	//新添加：设置不能删减列表
-	List<CemeterySetmealCtgItemView> listCemeterySetmealCtgItemView = new ArrayList<>();
-
-	public void setCantSub() {
-		for (CemeterySetmealCtgItemView itemView : listCemeterySetmealCtgItemView) {
-			itemView.setCantSub();
-		}
-	}
-	//新添加：设置不能删减列表
 
 	private void addCtgItemView(CtgItemModel ctgItemModel, List<ProductItemModel> productItems,
 			List<OrderProductItemModel> productItems2) {
 		CemeterySetmealCtgItemView mCtgItemView = new CemeterySetmealCtgItemView(getContext(), mProductItemModels);
 
-		//新添加：设置不能删减列表
-		listCemeterySetmealCtgItemView.add(mCtgItemView);
-		// 新添加：设置不能删减列表
 
 		mCtgItemView.setOrderId(orderId);
 		mCtgItemView.setCtgDate(ctgItemModel, productItems, productItems2);
@@ -215,9 +203,7 @@ public class CemeterySetmealView extends FrameLayout implements OnItemSelectedLi
 	private void addCtgItemView(CtgItemModel ctgItemModel, List<ProductItemModel> productItems) {
 		CemeterySetmealCtgItemView mCtgItemView = new CemeterySetmealCtgItemView(getContext(), mProductItemModels);
 
-		//新添加：设置不能删减列表
-		listCemeterySetmealCtgItemView.add(mCtgItemView);
-		// 新添加：设置不能删减列表
+
 
 		mCtgItemView.setCtgDate(ctgItemModel, productItems);
 		mCtgItemView.setOnCemeteryCtgChangeListener(new OnCemeteryCtgChangeListener() {

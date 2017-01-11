@@ -187,15 +187,8 @@ public class MainSetmealView extends FrameLayout implements
         isSp++;
     }
 
-    //新添加：设置不能删减列表
-    List<MainSetmealCtgItemView> listMainSetmealCtgItemView = new ArrayList<>();
 
-    public void setCantSub() {
-        for (MainSetmealCtgItemView itemView : listMainSetmealCtgItemView) {
-            itemView.setCantSub();
-        }
-    }
-    //新添加：设置不能删减列表
+
 
     private void addCtgItemView(CtgItemModel ctgItemModel,
                                 List<ProductItemModel> productItems,
@@ -203,9 +196,6 @@ public class MainSetmealView extends FrameLayout implements
         MainSetmealCtgItemView mCtgItemView = new MainSetmealCtgItemView(
                 getContext(), mProductItemModels);
 
-        //新添加：设置不能删减列表
-        listMainSetmealCtgItemView.add(mCtgItemView);
-        //新添加：设置不能删减列表
 
         mCtgItemView.setOrderId(orderId);
         mCtgItemView.setCtgDate(ctgItemModel, productItems, productItems2);
@@ -227,9 +217,7 @@ public class MainSetmealView extends FrameLayout implements
         MainSetmealCtgItemView mCtgItemView = new MainSetmealCtgItemView(
                 getContext(), mProductItemModels);
 
-        //新添加：设置不能删减列表
-        listMainSetmealCtgItemView.add(mCtgItemView);
-        //新添加：设置不能删减列表
+
 
         mCtgItemView.setCtgDate(ctgItemModel, productItems);
         mCtgItemView.setOnMainCtgChangeListener(new OnMainCtgChangeListener() {

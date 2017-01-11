@@ -165,23 +165,11 @@ public class FuneralSetmealView extends FrameLayout implements OnItemSelectedLis
 			onFuneralChangeListener.onFuneralChange();
 		}isSp++;
 	}
-	//新添加：设置不能删减列表
-	List<FuneralSetmealCtgItemView> listFuneralSetmealCtgItemView = new ArrayList<>();
 
-	public void setCantSub() {
-		for (FuneralSetmealCtgItemView itemView : listFuneralSetmealCtgItemView) {
-			itemView.setCantSub();
-		}
-	}
-	//新添加：设置不能删减列表
 
 	private void addCtgItemView(CtgItemModel ctgItemModel, List<ProductItemModel> productItems,
 			List<OrderProductItemModel> productItems2) {
 		FuneralSetmealCtgItemView mCtgItemView = new FuneralSetmealCtgItemView(getContext(), mProductItemModels);
-
-		//新添加：设置不能删减列表
-		listFuneralSetmealCtgItemView.add(mCtgItemView);
-		//新添加：设置不能删减列表
 
 		mCtgItemView.setOrderId(orderId);
 		mCtgItemView.setCtgDate(ctgItemModel, productItems,productItems2);
@@ -201,9 +189,7 @@ public class FuneralSetmealView extends FrameLayout implements OnItemSelectedLis
 	private void addCtgItemView(CtgItemModel ctgItemModel, List<ProductItemModel> productItems) {
 		FuneralSetmealCtgItemView mCtgItemView = new FuneralSetmealCtgItemView(getContext(), mProductItemModels);
 
-		//新添加：设置不能删减列表
-		listFuneralSetmealCtgItemView.add(mCtgItemView);
-		//新添加：设置不能删减列表
+
 
 		mCtgItemView.setCtgDate(ctgItemModel, productItems);
 		mCtgItemView.setOnFuneralCtgChangeListener(new OnFuneralCtgChangeListener() {

@@ -22,158 +22,143 @@ import android.widget.TextView;
 
 @SuppressLint("InflateParams")
 public class MainSetmealCtgItemView extends FrameLayout {
-	private View v;
+    private View v;
 
-	public MainSetmealCtgItemView(Context context, List<CreateOrderProductItemModel> mProductItemModels) {
-		super(context);
-		v = LayoutInflater.from(context).inflate(R.layout.view_oneorder, null);
-		addView(v);
-		initView();
-		this.mProductItemModels = mProductItemModels;
-	}
+    public MainSetmealCtgItemView(Context context, List<CreateOrderProductItemModel> mProductItemModels) {
+        super(context);
+        v = LayoutInflater.from(context).inflate(R.layout.view_oneorder, null);
+        addView(v);
+        initView();
+        this.mProductItemModels = mProductItemModels;
+    }
 
-	private TextView tvTitle;
-	private LinearLayout llOneOrder;
-	private Button btnAddOrder;
-	List<CreateOrderProductItemModel> mProductItemModels;
-	long orderId;
-	CtgItemModel mCtgItemModel;
-	
-	public void setOrderId(long orderId) {
-		this.orderId = orderId;
-	}
+    private TextView tvTitle;
+    private LinearLayout llOneOrder;
+    private Button btnAddOrder;
+    List<CreateOrderProductItemModel> mProductItemModels;
+    long orderId;
+    CtgItemModel mCtgItemModel;
 
-	private void initView() {
-		tvTitle = (TextView) v.findViewById(R.id.tv_one_title);
-		llOneOrder = (LinearLayout) v.findViewById(R.id.ll_oneorder);
-		btnAddOrder = (Button) v.findViewById(R.id.btn_addorder);
-		btnAddOrder.setOnClickListener(new OnClickListener() {
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
+    }
 
-			@Override
-			public void onClick(View arg0) {
-				addProductItem();
-			}
-		});
+    private void initView() {
+        tvTitle = (TextView) v.findViewById(R.id.tv_one_title);
+        llOneOrder = (LinearLayout) v.findViewById(R.id.ll_oneorder);
+        btnAddOrder = (Button) v.findViewById(R.id.btn_addorder);
+        btnAddOrder.setOnClickListener(new OnClickListener() {
 
-	}
+            @Override
+            public void onClick(View arg0) {
+                addProductItem();
+            }
+        });
 
-	protected void addProductItem() {
-		CreateOrderProductItemModel model = new CreateOrderProductItemModel();
-		model.setProjectId(1);
-		mProductItemModels.add(model);
-		final SetmealProductItemView mProductItemView = new SetmealProductItemView(getContext(), productItems, model);
+    }
 
-		//新添加：设置不能删减列表
-		listSetmealProductItemView.add(mProductItemView);
-		//新添加：设置不能删减列表
+    protected void addProductItem() {
+        CreateOrderProductItemModel model = new CreateOrderProductItemModel();
+        model.setProjectId(1);
+        mProductItemModels.add(model);
+        final SetmealProductItemView mProductItemView = new SetmealProductItemView(getContext(), productItems, model);
 
-		mProductItemView.setOnProductItemChangeListener(new OnProductItemChangeListener() {
+        mProductItemView.setOnProductItemChangeListener(new OnProductItemChangeListener() {
 
-			@Override
-			public void onProductItemChange(boolean isFirst) {
-				if (onMainCtgChangeListener != null) {
-					onMainCtgChangeListener.onMainCtgChange();
-				}
-			}
-		});
-		mProductItemView.setOnDeleteListener(new OnDeleteListener() {
+            @Override
+            public void onProductItemChange(boolean isFirst) {
+                if (onMainCtgChangeListener != null) {
+                    onMainCtgChangeListener.onMainCtgChange();
+                }
+            }
+        });
+        mProductItemView.setOnDeleteListener(new OnDeleteListener() {
 
-			@Override
-			public void onDelete(CreateOrderProductItemModel model) {
-				mProductItemModels.remove(model);
-				llOneOrder.removeView(mProductItemView);
-				if (onMainCtgChangeListener != null) {
-					onMainCtgChangeListener.onMainCtgChange();
-				}
-			}
-		});
-		llOneOrder.addView(mProductItemView);
-	}
+            @Override
+            public void onDelete(CreateOrderProductItemModel model) {
+                mProductItemModels.remove(model);
+                llOneOrder.removeView(mProductItemView);
+                if (onMainCtgChangeListener != null) {
+                    onMainCtgChangeListener.onMainCtgChange();
+                }
+            }
+        });
+        llOneOrder.addView(mProductItemView);
+    }
 
- //新添加：设置不能删减列表
-	public void setCantSub(){
-		for (SetmealProductItemView item:listSetmealProductItemView){
-			item.setCantSub();
-		}
-	}
-	List<SetmealProductItemView> listSetmealProductItemView=new ArrayList<>();
-//新添加：设置不能删减列表
 
-	private void addProductItem(OrderProductItemModel selectProductItem) {
-		final CreateOrderProductItemModel model = new CreateOrderProductItemModel();
-		model.setProjectId(1);
-		model.setCategoryId(mCtgItemModel.getId());
-		model.setNumber(selectProductItem.getNumber());
-		model.setPrice(selectProductItem.getPrice());
-		model.setSkuId(selectProductItem.getSkuId());
-		model.setTotalPrice(selectProductItem.getTotalPrice());
-		model.setId(selectProductItem.getId());
-		model.setStatusFlag(1);
-		model.setChange(true);
-		mProductItemModels.add(model);
-		final SetmealProductItemView mProductItemView = new SetmealProductItemView(getContext(), productItems, model);
+    private void addProductItem(OrderProductItemModel selectProductItem) {
+        final CreateOrderProductItemModel model = new CreateOrderProductItemModel();
+        model.setProjectId(1);
+        model.setCategoryId(mCtgItemModel.getId());
+        model.setNumber(selectProductItem.getNumber());
+        model.setPrice(selectProductItem.getPrice());
+        model.setSkuId(selectProductItem.getSkuId());
+        model.setTotalPrice(selectProductItem.getTotalPrice());
+        model.setId(selectProductItem.getId());
+        model.setStatusFlag(1);
+        model.setChange(true);
+        mProductItemModels.add(model);
+        final SetmealProductItemView mProductItemView = new SetmealProductItemView(getContext(), productItems, model);
 
-		//新添加：设置不能删减列表
-		listSetmealProductItemView.add(mProductItemView);
-		//新添加：设置不能删减列表
 
-		mProductItemView.setEnableEdit(selectProductItem.isCanEdit());
-		mProductItemView.setOnProductItemChangeListener(new OnProductItemChangeListener() {
+        mProductItemView.setEnableEdit(selectProductItem.isCanEdit());
+        mProductItemView.setOnProductItemChangeListener(new OnProductItemChangeListener() {
 
-			@Override
-			public void onProductItemChange(boolean isFirst) {
-				if(!isFirst){
-					model.setChange(false);
-				}
-				if (onMainCtgChangeListener != null) {
-					onMainCtgChangeListener.onMainCtgChange();
-				}
-			}
-		});
-		mProductItemView.setOnDeleteListener(new OnDeleteListener() {
+            @Override
+            public void onProductItemChange(boolean isFirst) {
+                if (!isFirst) {
+                    model.setChange(false);
+                }
+                if (onMainCtgChangeListener != null) {
+                    onMainCtgChangeListener.onMainCtgChange();
+                }
+            }
+        });
+        mProductItemView.setOnDeleteListener(new OnDeleteListener() {
 
-			@Override
-			public void onDelete(CreateOrderProductItemModel model) {
+            @Override
+            public void onDelete(CreateOrderProductItemModel model) {
 //				mProductItemModels.remove(model);
-				model.setChange(false);
-				model.setStatusFlag(2);
-				llOneOrder.removeView(mProductItemView);
-				if (onMainCtgChangeListener != null) {
-					onMainCtgChangeListener.onMainCtgChange();
-				}
-			}
-		});
-		llOneOrder.addView(mProductItemView);
+                model.setChange(false);
+                model.setStatusFlag(2);
+                llOneOrder.removeView(mProductItemView);
+                if (onMainCtgChangeListener != null) {
+                    onMainCtgChangeListener.onMainCtgChange();
+                }
+            }
+        });
+        llOneOrder.addView(mProductItemView);
 
-	}
+    }
 
-	private List<ProductItemModel> productItems;
+    private List<ProductItemModel> productItems;
 
-	public void setCtgDate(CtgItemModel ctgItemModel, List<ProductItemModel> productItems) {
-		this.productItems = productItems;
-		tvTitle.setText(ctgItemModel.getName());
-		mCtgItemModel = ctgItemModel;
-		
-	}
+    public void setCtgDate(CtgItemModel ctgItemModel, List<ProductItemModel> productItems) {
+        this.productItems = productItems;
+        tvTitle.setText(ctgItemModel.getName());
+        mCtgItemModel = ctgItemModel;
 
-	public void setCtgDate(CtgItemModel ctgItemModel, List<ProductItemModel> productItems,
-			List<OrderProductItemModel> productItems2) {
-		this.productItems = productItems;
-		tvTitle.setText(ctgItemModel.getName());
-		mCtgItemModel = ctgItemModel;
-		for (OrderProductItemModel selectProductItem : productItems2) {
-			addProductItem(selectProductItem);
-		}
-	}
+    }
 
-	OnMainCtgChangeListener onMainCtgChangeListener;
+    public void setCtgDate(CtgItemModel ctgItemModel, List<ProductItemModel> productItems,
+                           List<OrderProductItemModel> productItems2) {
+        this.productItems = productItems;
+        tvTitle.setText(ctgItemModel.getName());
+        mCtgItemModel = ctgItemModel;
+        for (OrderProductItemModel selectProductItem : productItems2) {
+            addProductItem(selectProductItem);
+        }
+    }
 
-	public void setOnMainCtgChangeListener(OnMainCtgChangeListener onMainCtgChangeListener) {
-		this.onMainCtgChangeListener = onMainCtgChangeListener;
-	}
+    OnMainCtgChangeListener onMainCtgChangeListener;
 
-	public interface OnMainCtgChangeListener {
-		public void onMainCtgChange();
-	}
+    public void setOnMainCtgChangeListener(OnMainCtgChangeListener onMainCtgChangeListener) {
+        this.onMainCtgChangeListener = onMainCtgChangeListener;
+    }
+
+    public interface OnMainCtgChangeListener {
+        public void onMainCtgChange();
+    }
 
 }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -37,6 +38,9 @@ public class CetemeryTextSelectLayoutView extends LinearLayout {
 
     List<String> data = new ArrayList<>();
 
+    onSelectedListener selectedListener;
+    int num = 0;
+
     public CetemeryTextSelectLayoutView(Context context) {
         this(context, null);
     }
@@ -51,15 +55,18 @@ public class CetemeryTextSelectLayoutView extends LinearLayout {
         mTVName.setText(name);
     }
 
-    public void setData(List<String> data) {
+    public void setData(List<String> data, int num, onSelectedListener selectedListener) {
         this.data = data;
 
         //适配器
-        adapter= new ArrayAdapter<String>(getContext(), R.layout.spinner_item_1, data);
+        adapter = new ArrayAdapter<String>(getContext(), R.layout.spinner_item_1, data);
         //设置样式
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //加载适配器
         mSPContent.setAdapter(adapter);
+
+        this.selectedListener = selectedListener;
+        this.num = num;
     }
 
     private void initView() {
@@ -70,15 +77,34 @@ public class CetemeryTextSelectLayoutView extends LinearLayout {
         mIVSelect = (ImageView) view.findViewById(R.id.iv_select);
 
         mIVSelect.setOnClickListener(onClickListener);
+        mSPContent.setOnItemSelectedListener(onItemSelectedListener);
+
+
     }
 
-
-    OnClickListener onClickListener=new OnClickListener() {
+    AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
-        public void onClick(View view) {
-             if(view==mIVSelect){
-                 mSPContent.performClick();
-             }
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            selectedListener.onItemSelected(view, i, l, num);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
         }
     };
+
+    OnClickListener onClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (view == mIVSelect) {
+                mSPContent.performClick();
+            }
+        }
+    };
+
+
+    public interface onSelectedListener {
+        void onItemSelected(View view, int i, long l, int num);
+    }
 }

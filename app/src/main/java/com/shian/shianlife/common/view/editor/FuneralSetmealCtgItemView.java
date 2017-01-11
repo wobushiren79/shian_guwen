@@ -57,15 +57,7 @@ public class FuneralSetmealCtgItemView extends FrameLayout {
 
 	}
 
-	//新添加：设置不能删减列表
-	List<SetmealProductItemView> listSetmealProductItemView = new ArrayList<>();
 
-	public void setCantSub() {
-		for (SetmealProductItemView itemView : listSetmealProductItemView) {
-			itemView.setCantSub();
-		}
-	}
-	//新添加：设置不能删减列表
 
 	protected void addProductItem() {
 		CreateOrderProductItemModel model = new CreateOrderProductItemModel();
@@ -73,9 +65,7 @@ public class FuneralSetmealCtgItemView extends FrameLayout {
 		mProductItemModels.add(model);
 		final SetmealProductItemView mProductItemView = new SetmealProductItemView(getContext(), productItems, model);
 
-		//新添加：设置不能删减列表
-		listSetmealProductItemView.add(mProductItemView);
-		//新添加：设置不能删减列表
+
 
 		mProductItemView.setOnProductItemChangeListener(new OnProductItemChangeListener() {
 
@@ -115,9 +105,7 @@ public class FuneralSetmealCtgItemView extends FrameLayout {
 		final SetmealProductItemView mProductItemView = new SetmealProductItemView(getContext(), productItems, model);
 
 
-		//新添加：设置不能删减列表
-		listSetmealProductItemView.add(mProductItemView);
-		//新添加：设置不能删减列表
+
 
 		mProductItemView.setEnableEdit(selectProductItem.isCanEdit());
 		mProductItemView.setOnProductItemChangeListener(new OnProductItemChangeListener() {

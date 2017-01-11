@@ -73,6 +73,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_neworder1"
                 android:layout_width="@dimen/dimen_250dp"
                 android:layout_height="@dimen/dimen_60dp"
