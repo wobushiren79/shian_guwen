@@ -126,7 +126,8 @@
             android:layout_marginTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryTextSelectLayoutView>
 
         <TextView
-            style="@style/cemetery_text_style_1"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            style="@style/cemetery_text_style_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="客户地址：" />
@@ -144,7 +145,7 @@
         android:layout_height="@dimen/dimen_3dp"
         android:layout_marginBottom="@dimen/dimen_50dp"
         android:layout_marginTop="@dimen/dimen_40dp"
-        android:background="@drawable/cemetery_item_line" />
+        android:background="@drawable/cemetery_item_line_2" />
 
     <Button
         style="@style/cemetery_button_style_1"

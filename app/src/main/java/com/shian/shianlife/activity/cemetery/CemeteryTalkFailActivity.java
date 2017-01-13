@@ -80,11 +80,11 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
 
         mBTSubmit = (Button) findViewById(R.id.bt_submit);
 
-        mSelectPlanToBuy.setName("计划购买墓型");
+        mSelectPlanToBuy.setName("计划购买墓型：");
         mSelectPlanToBuy.setData(planToBuyList, 0, this);
 
-        mSelectState1.setName("使用者1现状");
-        mSelectState2.setName("使用者2现状");
+        mSelectState1.setName("使用者1现状：");
+        mSelectState2.setName("使用者2现状：");
         mSelectState1.setData(stateList, 1, this);
         mSelectState2.setData(stateList, 2, this);
 
@@ -92,7 +92,7 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
         mSelectRelation.setName("联系人是使用者的：");
         mSelectRelation.setData(relationList, 3, this);
 
-        mSelectResult.setName("洽谈结果");
+        mSelectResult.setName("洽谈结果：");
         mSelectResult.setData(resultList, 4, this);
 
         mMapSelect1.setData(0, new ArrayList<String>());

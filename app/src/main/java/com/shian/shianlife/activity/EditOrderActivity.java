@@ -294,6 +294,9 @@ public class EditOrderActivity extends BaseActivity {
                         public void onSuccess(HrOderId result) {
 
                             OrderFragment.C_bOrder_isRefresh = true;
+                            if(pgzx==1){
+                                sendBroadcast(new Intent(PgzxActivity.PGZX_ACTION));
+                            }
                             finish();
                         }
 

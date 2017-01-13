@@ -7,6 +7,7 @@ import android.util.Log;
 import com.shian.shianlife.R;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.TransitionDate;
+import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
@@ -110,7 +111,6 @@ public class SendOrderStep4 extends BaseSendOrder {
 
     public SendOrderStep4(Context context, long consultId) {
         super(context, R.layout.layout_sendorder_4, consultId);
-
         initView();
         getData();
     }

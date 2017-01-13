@@ -101,7 +101,7 @@ public class CemeteryInfoView extends LinearLayout implements CetemeryTextSelect
         mSelectCemeteryType.setData(cemeteryTypeList, 5, this);
         mSelectCemeteryAttribute.setName("墓穴属性：");
         mSelectCemeteryAttribute.setData(cemeteryAttributeList, 6, this);
-        mSelectPayState.setName("支付情况");
+        mSelectPayState.setName("支付情况：");
         mSelectPayState.setData(payStateList, 7, this);
     }
 

@@ -7,10 +7,12 @@ import android.util.Log;
 import com.shian.shianlife.R;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.TransitionDate;
+import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpSaveSendOrderDataThree;
+import com.shian.shianlife.provide.params.HpSaveTime;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataThree;
 import com.shian.shianlife.view.MapSelectLayoutView;
 
@@ -48,7 +50,7 @@ public class SendOrderStep2 extends BaseSendOrder {
 
             @Override
             public void onSuccess(Object result) {
-                ToastUtils.show(getContext(), "处理开始出殡前服务成功");
+                ToastUtils.show(getContext(), "处理出殡前开始服务成功");
                 Intent intent = new Intent(SendOrderActivity.UPDATA_ACTION);
                 intent.putExtra("finsh", 0);
                 getContext().sendBroadcast(intent);
@@ -112,6 +114,8 @@ public class SendOrderStep2 extends BaseSendOrder {
                 if (result.getAfterLocation() != null) {
                     mapSelectLayoutView.setLocation(result.getAfterLocation());
                 }
+
+
             }
 
             @Override
@@ -126,8 +130,9 @@ public class SendOrderStep2 extends BaseSendOrder {
 
     private void initView() {
         mapSelectLayoutView = (MapSelectLayoutView) findViewById(R.id.mapselect);
+        mapSelectLayoutView.setData(1, new ArrayList<String>());
 
-        mapSelectLayoutView.setData(1,new ArrayList<String>());
         getData();
+
     }
 }
