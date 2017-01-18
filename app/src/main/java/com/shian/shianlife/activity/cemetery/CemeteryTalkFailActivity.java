@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTextSelectLayoutView.onSelectedListener {
     int inType = -1;
     LinearLayout mLLDetails;
@@ -105,6 +104,7 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
             mBTSubmit.setVisibility(View.VISIBLE);
         } else {
             mBTSubmit.setVisibility(View.GONE);
+            setStateShow();
         }
     }
 
@@ -151,4 +151,23 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
             }
         }
     };
+
+    public void setStateShow() {
+        mETPlanToMoney.setFocusable(false);
+        mETTalkPoint.setFocusable(false);
+        mETTrafficWay.setFocusable(false);
+        mETPersonNum.setFocusable(false);
+        mETRemark.setFocusable(false);
+
+        mTVTime.setClickable(false);
+
+        mSelectPlanToBuy.setStateShow();
+        mSelectState1.setStateShow();
+        mSelectState2.setStateShow();
+        mSelectRelation.setStateShow();
+        mSelectResult.setStateShow();
+
+         mMapSelect1.setStateShow();
+         mMapSelect2.setStateShow();
+    }
 }

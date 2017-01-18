@@ -30,6 +30,7 @@
                 android:layout_height="wrap_content"
                 android:text="客户姓名：" />
 
+
             <EditText
                 android:id="@+id/et_name"
                 style="@style/cemetery_text_style_4"
@@ -148,6 +149,8 @@
         android:background="@drawable/cemetery_item_line_2" />
 
     <Button
+        android:visibility="gone"
+        android:id="@+id/bt_submit"
         style="@style/cemetery_button_style_1"
         android:layout_width="@dimen/dimen_250dp"
         android:layout_height="@dimen/dimen_80dp"

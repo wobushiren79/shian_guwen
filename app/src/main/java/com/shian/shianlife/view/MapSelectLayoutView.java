@@ -178,4 +178,11 @@ public class MapSelectLayoutView extends LinearLayout implements Serializable {
     public MapSelectLayoutView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
+
+    public void setStateShow() {
+        mMapText.setFocusable(false);
+        mMapText.setBackgroundResource(R.drawable.bg_cemetery_item_et_1);
+        mMapData.setVisibility(GONE);
+        mMapSelect.setVisibility(GONE);
+    }
 }

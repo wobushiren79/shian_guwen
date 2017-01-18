@@ -108,6 +108,7 @@ public class QTView extends BaseOrderView {
         mListView = (ListView) v.findViewById(R.id.lv_swipe_listview);
         rl_order_qt0 = (RelativeLayout) v.findViewById(R.id.rl_order_qt0);
         ll_order_qt0 = (LinearLayout) v.findViewById(R.id.ll_order_qt0);
+
         mSryt.setColorSchemeColors(Color.BLUE);
         adapter = new TArrayListAdapter<OrderListModel>(getContext());
         v.findViewById(R.id.tv_neworder).setOnClickListener(

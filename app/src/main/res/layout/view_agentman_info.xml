@@ -18,6 +18,7 @@
             android:text="经办人姓名：" />
 
         <EditText
+            android:id="@+id/et_agentmanname"
             style="@style/cemetery_text_style_4"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_80dp"
@@ -41,6 +42,7 @@
             android:text="经办人联系电话：" />
 
         <EditText
+            android:id="@+id/et_agentmanphone"
             style="@style/cemetery_text_style_4"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_80dp"
@@ -51,6 +53,7 @@
     </LinearLayout>
 
     <com.shian.shianlife.view.CetemeryTextSelectLayoutView
+        android:id="@+id/select_relation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimen_10dp"
@@ -64,34 +67,13 @@
         android:text="经办人地址：" />
 
     <com.shian.shianlife.view.MapSelectLayoutView
+        android:id="@+id/mapselect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimen_10dp"
         android:layout_marginTop="@dimen/dimen_10dp"
         android:tag="1"></com.shian.shianlife.view.MapSelectLayoutView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="@dimen/dimen_10dp"
-        android:paddingTop="@dimen/dimen_10dp">
-
-        <TextView
-            style="@style/cemetery_text_style_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="经办人身份证：" />
-
-        <EditText
-            style="@style/cemetery_text_style_4"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimen_80dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_cemetery_item_et_1"
-            android:inputType="number"
-            android:padding="@dimen/dimen_20dp" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -107,6 +89,7 @@
             android:text="经办人身份证号：" />
 
         <EditText
+            android:id="@+id/et_agentmancardid"
             style="@style/cemetery_text_style_4"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_80dp"
@@ -130,6 +113,7 @@
             android:text="经办人邮箱地址：" />
 
         <EditText
+            android:id="@+id/et_agentemail"
             style="@style/cemetery_text_style_4"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_80dp"
@@ -153,12 +137,12 @@
             android:text="备注：" />
 
         <EditText
+            android:id="@+id/et_remark"
             style="@style/cemetery_text_style_4"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dimen_80dp"
             android:layout_weight="1"
             android:background="@drawable/bg_cemetery_item_et_1"
-
             android:padding="@dimen/dimen_20dp" />
     </LinearLayout>
 </LinearLayout>

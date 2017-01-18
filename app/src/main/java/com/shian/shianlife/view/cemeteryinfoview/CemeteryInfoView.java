@@ -74,9 +74,9 @@ public class CemeteryInfoView extends LinearLayout implements CetemeryTextSelect
         mETSaleToMoney = (EditText) view.findViewById(R.id.et_saletomoney);
         mETMoney = (EditText) view.findViewById(R.id.et_money);
         mETCemeteryMan = (EditText) view.findViewById(R.id.et_cemeteryperson);
-        mETFreeService= (EditText) view.findViewById(R.id.et_freeservice);
-        mETMyService= (EditText) view.findViewById(R.id.et_myservice);
-        mETRemark= (EditText) view.findViewById(R.id.et_remark);
+        mETFreeService = (EditText) view.findViewById(R.id.et_freeservice);
+        mETMyService = (EditText) view.findViewById(R.id.et_myservice);
+        mETRemark = (EditText) view.findViewById(R.id.et_remark);
 
         mSelectCemeteryName = (CetemeryTextSelectLayoutView) view.findViewById(R.id.select_cemeteryname);
         mSelectLocation1 = (CetemeryTextSelectLayoutView) view.findViewById(R.id.select_location_1);
@@ -108,5 +108,25 @@ public class CemeteryInfoView extends LinearLayout implements CetemeryTextSelect
     @Override
     public void onItemSelected(View view, int i, long l, int num) {
 
+    }
+
+    public void setStateShow() {
+        mETId.setFocusable(false);
+        mETPlanToMoney.setFocusable(false);
+        mETSaleToMoney.setFocusable(false);
+        mETMoney.setFocusable(false);
+        mETCemeteryMan.setFocusable(false);
+        mETFreeService.setFocusable(false);
+        mETMyService.setFocusable(false);
+        mETRemark.setFocusable(false);
+
+        mSelectCemeteryName.setStateShow();
+        mSelectLocation1.setStateShow();
+        mSelectLocation2.setStateShow();
+        mSelectLocation3.setStateShow();
+        mSelectLocation4.setStateShow();
+        mSelectCemeteryType.setStateShow();
+        mSelectCemeteryAttribute.setStateShow();
+        mSelectPayState.setStateShow();
     }
 }

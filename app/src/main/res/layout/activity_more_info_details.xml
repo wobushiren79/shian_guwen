@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_more_info_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/cemetery_bc"
+    tools:context="com.shian.shianlife.activity.cemetery.MoreInfoDetailsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_25dp"
+            android:layout_marginLeft="@dimen/dimen_35dp"
+            android:layout_marginRight="@dimen/dimen_35dp"
+            android:layout_marginTop="@dimen/dimen_25dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/cemetery_text_style_title_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="使用者信息" />
+
+            <com.shian.shianlife.view.cemeteryinfoview.DeadManInfoView
+                android:id="@+id/deadman_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.shian.shianlife.view.cemeteryinfoview.DeadManInfoView>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_3dp"
+            android:background="@drawable/cemetery_item_line_2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_25dp"
+            android:layout_marginLeft="@dimen/dimen_35dp"
+            android:layout_marginRight="@dimen/dimen_35dp"
+            android:layout_marginTop="@dimen/dimen_25dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/cemetery_text_style_title_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="经办人信息" />
+
+            <com.shian.shianlife.view.cemeteryinfoview.AgentManInfoView
+                android:id="@+id/agentman_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.shian.shianlife.view.cemeteryinfoview.AgentManInfoView>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

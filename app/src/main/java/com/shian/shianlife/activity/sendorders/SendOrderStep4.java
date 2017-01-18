@@ -44,7 +44,7 @@ public class SendOrderStep4 extends BaseSendOrder {
 
             @Override
             public void onSuccess(Object result) {
-                ToastUtils.show(getContext(), "处理开始出殡当天服务成功");
+                ToastUtils.show(getContext(), "处理开始出殡当天开始服务成功");
                 Intent intent = new Intent(SendOrderActivity.UPDATA_ACTION);
                 intent.putExtra("finsh", 0);
                 getContext().sendBroadcast(intent);

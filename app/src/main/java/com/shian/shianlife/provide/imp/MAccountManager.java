@@ -2,7 +2,6 @@ package com.shian.shianlife.provide.imp;
 
 import android.content.Context;
 
-import com.shian.shianlife.provide.base.BaseHttpParams;
 import com.shian.shianlife.provide.base.HttpManager;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpAcceptParams;
@@ -18,6 +17,7 @@ import com.shian.shianlife.provide.params.HpPageParams;
 import com.shian.shianlife.provide.params.HpReadMessage;
 import com.shian.shianlife.provide.params.HpRefundParams;
 import com.shian.shianlife.provide.params.HpRejectParams;
+import com.shian.shianlife.provide.params.HpSaveCemeteryBuildData;
 import com.shian.shianlife.provide.params.HpSaveComment;
 import com.shian.shianlife.provide.params.HpSaveContractData;
 import com.shian.shianlife.provide.params.HpSaveCustomerAgentmanParams;
@@ -33,7 +33,6 @@ import com.shian.shianlife.provide.params.HpSaveSendOrderDataSeven;
 import com.shian.shianlife.provide.params.HpSaveSendOrderDataSix;
 import com.shian.shianlife.provide.params.HpSaveSendOrderDataThree;
 import com.shian.shianlife.provide.params.HpSaveSendOrderDataTwo;
-import com.shian.shianlife.provide.params.HpSaveTime;
 import com.shian.shianlife.provide.params.HpSaveWaitServicePostData;
 import com.shian.shianlife.provide.params.HpSkuIdParams;
 import com.shian.shianlife.provide.params.HpTalkFailParams;
@@ -43,6 +42,7 @@ import com.shian.shianlife.provide.result.HrConsultAgentman;
 import com.shian.shianlife.provide.result.HrConsultCemetery;
 import com.shian.shianlife.provide.result.HrConsultFuneral;
 import com.shian.shianlife.provide.result.HrConsultUsageResult;
+import com.shian.shianlife.provide.result.HrGetCemeteryBuildData;
 import com.shian.shianlife.provide.result.HrGetComment;
 import com.shian.shianlife.provide.result.HrGetContractData;
 import com.shian.shianlife.provide.result.HrGetCustomerContract;
@@ -76,6 +76,9 @@ import com.shian.shianlife.provide.result.HrUserInfo;
  */
 public interface MAccountManager extends HttpManager {
     public void login(Context context, HpLoginParams params,
+                      HttpResponseHandler<HrLoginResult> handler);
+
+    public void loginCemetery(Context context, HpLoginParams params,
                       HttpResponseHandler<HrLoginResult> handler);
 
     public void loginout(Context context,
@@ -711,6 +714,24 @@ public interface MAccountManager extends HttpManager {
      * @param handler
      */
     public void getSKUDetails(Context context, HpSkuIdParams params, HttpResponseHandler<HrGetSKUDetails> handler);
+
+
+    /**
+     * 获取公墓预约单信息
+     *
+     * @param context
+     * @param handler
+     */
+    public void getCemeteryBuildData(Context context, HttpResponseHandler<HrGetCemeteryBuildData> handler);
+
+    /**
+     * 保存公墓预约单信息
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void saveCemeteryBuildData(Context context, HpSaveCemeteryBuildData params, HttpResponseHandler<Object> handler);
 
 
 }

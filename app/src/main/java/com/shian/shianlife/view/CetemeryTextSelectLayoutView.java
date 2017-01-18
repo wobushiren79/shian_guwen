@@ -30,7 +30,6 @@ import java.util.List;
 
 public class CetemeryTextSelectLayoutView extends LinearLayout {
     private View view;
-
     TextView mTVName;
     Spinner mSPContent;
     ImageView mIVSelect;
@@ -40,6 +39,7 @@ public class CetemeryTextSelectLayoutView extends LinearLayout {
 
     onSelectedListener selectedListener;
     int num = 0;
+    int selectNum = 0;
 
     public CetemeryTextSelectLayoutView(Context context) {
         this(context, null);
@@ -86,6 +86,7 @@ public class CetemeryTextSelectLayoutView extends LinearLayout {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
             selectedListener.onItemSelected(view, i, l, num);
+            selectNum = i;
         }
 
         @Override
@@ -93,6 +94,10 @@ public class CetemeryTextSelectLayoutView extends LinearLayout {
 
         }
     };
+
+    public String getSelectedData() {
+        return  data.get(selectNum);
+    }
 
     OnClickListener onClickListener = new OnClickListener() {
         @Override
@@ -103,6 +108,12 @@ public class CetemeryTextSelectLayoutView extends LinearLayout {
         }
     };
 
+
+    public void setStateShow() {
+        mSPContent.setEnabled(false);
+        mSPContent.setBackgroundResource(R.drawable.bg_cemetery_item_et_1);
+        mIVSelect.setVisibility(GONE);
+    }
 
     public interface onSelectedListener {
         void onItemSelected(View view, int i, long l, int num);

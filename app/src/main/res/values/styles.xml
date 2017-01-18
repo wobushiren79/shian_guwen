@@ -111,7 +111,10 @@
         <item name="android:textSize">@dimen/txtsize_30sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
-
+    <style name="cemetery_text_style_title_1">
+        <item name="android:textSize">@dimen/txtsize_33sp</item>
+        <item name="android:textColor">@color/cemetery_titlecolor</item>
+    </style>
     <style name="cemetery_text_style_3_nonecessary">
         <item name="android:textSize">@dimen/txtsize_27sp</item>
         <item name="android:textColor">@color/cemetery_textcolor</item>

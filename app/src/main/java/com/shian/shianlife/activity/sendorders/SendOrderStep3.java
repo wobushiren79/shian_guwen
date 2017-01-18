@@ -115,7 +115,7 @@ public class SendOrderStep3 extends BaseSendOrder {
 
             @Override
             public void onSuccess(Object result) {
-                ToastUtils.show(getContext(), "处理出殡现场服务成功");
+                ToastUtils.show(getContext(), "处理出殡前服务成功");
                 Intent intent = new Intent(SendOrderActivity.UPDATA_ACTION);
                 intent.putExtra("finsh", 0);
                 getContext().sendBroadcast(intent);

@@ -205,7 +205,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
                 RelativeLayout fl = new RelativeLayout(this);
                 fl.setBackgroundResource(R.drawable.loading);
                 setContentView(fl);
-                MHttpManagerFactory.getAccountManager().login(this, params,
+                MHttpManagerFactory.getAccountManager().loginCemetery(this, params,
                         new HttpResponseHandler<HrLoginResult>() {
 
                             @Override
@@ -239,6 +239,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     private void initPush() {
         Resources resource = this.getResources();
         String pkgName = this.getPackageName();
+
         PushManager.startWork(getApplicationContext(),
 
                 PushConstants.LOGIN_TYPE_API_KEY,

@@ -1,20 +1,21 @@
 package com.shian.shianlife.provide.result;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HrLoginResult {
 	private String sessionId;
 	private String lastAccessTime;
 	private String startTimestamp;
-	private List<Integer> roleIds;
+	private ArrayList<Integer> roleIds;
 
 	
 
-	public List<Integer> getRoleIds() {
+	public ArrayList<Integer> getRoleIds() {
 		return roleIds;
 	}
 
-	public void setRoleIds(List<Integer> roleIds) {
+	public void setRoleIds(ArrayList<Integer> roleIds) {
 		this.roleIds = roleIds;
 	}
 

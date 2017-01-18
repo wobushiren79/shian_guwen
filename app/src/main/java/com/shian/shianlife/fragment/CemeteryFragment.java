@@ -55,6 +55,7 @@ public class CemeteryFragment extends BaseFragment {
     private List<View> views;
 
     public static boolean C_bOrder_isRefresh;
+    private HrLoginResult mLoginResult;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -136,16 +137,53 @@ public class CemeteryFragment extends BaseFragment {
 
 
     private void initStates() {
+        boolean qtb = false;
+        boolean shb = false;
+        boolean fwb = false;
         arrTitles.clear();
-        arrTitles.add("洽谈");
-        arrTitles.add("售后");
-        arrTitles.add("服务结束");
+        mLoginResult = JSONUtil.parseJSONString(getActivity().getIntent()
+                .getStringExtra("loginData"), HrLoginResult.class);
+        for (int role : mLoginResult.getRoleIds()) {
+            switch (role) {
+                case 0:
+                    if (!qtb) {
+                        arrTitles.add("洽谈");
+                    }
+                    if (!shb) {
+                        arrTitles.add("售后");
+                    }
+                    break;
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+                    if (!qtb) {
+                        arrTitles.add("洽谈");
+                    }
+                    break;
+                case 4:
+                    if (!shb) {
+                        arrTitles.add("售后");
+                    }
+                    break;
+            }
+            if (!fwb) {
+                arrTitles.add("服务结束");
+            }
+        }
+
     }
 
     private void initPagerAdapter(List<View> views) {
         for (String n : arrTitles) {
             if (n.equals("洽谈")) {
                 CemeteryQTView qtView = new CemeteryQTView(getActivity());
+                if(mLoginResult!=null){
+                    qtView.setRoles(mLoginResult.getRoleIds());
+                }
                 views.add(qtView);
             } else if (n.equals("售后")) {
                 CemeterySHView waitServiceView = new CemeterySHView(getActivity());

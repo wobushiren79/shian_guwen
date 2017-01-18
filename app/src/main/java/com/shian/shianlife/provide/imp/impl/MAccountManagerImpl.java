@@ -19,6 +19,7 @@ import com.shian.shianlife.provide.params.HpPageParams;
 import com.shian.shianlife.provide.params.HpReadMessage;
 import com.shian.shianlife.provide.params.HpRefundParams;
 import com.shian.shianlife.provide.params.HpRejectParams;
+import com.shian.shianlife.provide.params.HpSaveCemeteryBuildData;
 import com.shian.shianlife.provide.params.HpSaveComment;
 import com.shian.shianlife.provide.params.HpSaveContractData;
 import com.shian.shianlife.provide.params.HpSaveCustomerAgentmanParams;
@@ -44,6 +45,7 @@ import com.shian.shianlife.provide.result.HrConsultAgentman;
 import com.shian.shianlife.provide.result.HrConsultCemetery;
 import com.shian.shianlife.provide.result.HrConsultFuneral;
 import com.shian.shianlife.provide.result.HrConsultUsageResult;
+import com.shian.shianlife.provide.result.HrGetCemeteryBuildData;
 import com.shian.shianlife.provide.result.HrGetComment;
 import com.shian.shianlife.provide.result.HrGetContractData;
 import com.shian.shianlife.provide.result.HrGetCustomerContract;
@@ -95,6 +97,13 @@ public class MAccountManagerImpl implements MAccountManager {
                       HttpResponseHandler<HrLoginResult> handler) {
         // TODO Auto-generated method stub
         excutor.requestPost(context, "doLogin", HrLoginResult.class, params,
+                handler);
+    }
+
+    @Override
+    public void loginCemetery(Context context, HpLoginParams params, HttpResponseHandler<HrLoginResult> handler) {
+        // TODO Auto-generated method stub
+        excutor.requestPost(context, "doLogin/cemetery", HrLoginResult.class, params,
                 handler);
     }
 
@@ -300,7 +309,7 @@ public class MAccountManagerImpl implements MAccountManager {
 
     @Override
     public void getCustomerFuneralOther(Context context, HpConsultIdParams params,
-                                   HttpResponseHandler<HrGetCustomerFuneralOther> handler) {
+                                        HttpResponseHandler<HrGetCustomerFuneralOther> handler) {
         // TODO Auto-generated method stub
         excutor.requestPost(context, "customer/funeral/get/other",
                 HrGetCustomerFuneralOther.class, params, handler);
@@ -440,6 +449,7 @@ public class MAccountManagerImpl implements MAccountManager {
         // TODO Auto-generated method stub
         excutor.requestPost(context, "pay/cash", Object.class, params, handler);
     }
+
     @Override
     public void saveItemNote(Context context, HpSaveCustomerContract params,
                              HttpResponseHandler<Object> handler) {
@@ -652,6 +662,17 @@ public class MAccountManagerImpl implements MAccountManager {
                 handler);
     }
 
+    @Override
+    public void getCemeteryBuildData(Context context, HttpResponseHandler<HrGetCemeteryBuildData> handler) {
+        excutor.requestPost(context, "cemetery/build/get", HrGetCemeteryBuildData.class, new BaseHttpParams(),
+                handler);
+    }
+
+    @Override
+    public void saveCemeteryBuildData(Context context, HpSaveCemeteryBuildData params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context, "cemetery/build/save", Object.class, params,
+                handler);
+    }
 
 
 }
