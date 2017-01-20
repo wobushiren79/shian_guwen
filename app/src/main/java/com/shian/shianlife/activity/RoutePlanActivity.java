@@ -101,7 +101,7 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
     boolean useDefaultIcon = false;
     private TextView popupText = null; // 泡泡view
     boolean isMapChlick = false;
-    boolean isFirstShowText = true;
+//    boolean isFirstShowText = true;
     boolean isUseNumPoint = false;//是否采用经纬定位
     LatLng latLng = new LatLng(mapCenterlatitude, mapCenterlongitude);
 
@@ -237,6 +237,10 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
         // 设置起终点信息，对于tranist search 来说，城市名无意义
 
         LatLng latLngStart = new LatLng(AppContansts.LOCAL_latitude, AppContansts.LOCAL_longitude);
+        Log.v("this",AppContansts.LOCAL_latitude+" "+AppContansts.LOCAL_longitude);
+        Log.v("this","city:"+routeCity);
+        Log.v("this","endNodeStr:"+endNodeStr);
+
         //        PlanNode stNode = PlanNode.withCityNameAndPlaceName(routeCity, startNodeStr);
         PlanNode stNode = PlanNode.withLocation(latLngStart);
         PlanNode enNode;
@@ -441,13 +445,16 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
      * @param suggestAddrInfo
      */
     private void choicePoint(SuggestAddrInfo suggestAddrInfo) {
+
         if (suggestAddrInfo.getSuggestStartNode() != null) {
+            Log.v("this", "startNode!=null");
             for (PoiInfo poiInfo : suggestAddrInfo.getSuggestStartNode()) {
                 Log.v(LOG_TAG, "Point start");
                 Log.v(LOG_TAG, "startPoint name:" + poiInfo.name);
             }
         }
         if (suggestAddrInfo.getSuggestEndNode() != null) {
+            Log.v("this", "EndNode!=null");
             for (PoiInfo poiInfo : suggestAddrInfo.getSuggestEndNode()) {
                 Log.v(LOG_TAG, "Point end");
                 Log.v(LOG_TAG, "endPoint name:" + poiInfo.name);
@@ -457,6 +464,7 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
     }
 
     private void choicePointDialog(final SuggestAddrInfo suggestAddrInfo) {
+        isUseNumPoint=true;
         final Dialog choiceDialog = new Dialog(RoutePlanActivity.this, R.style.CustomDialog);
 
         View view = LayoutInflater.from(RoutePlanActivity.this).inflate(R.layout.dialog_choicepoint_2, null);
@@ -468,7 +476,7 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
         String endName;
 
         List<PoiInfo> listStartInfo = suggestAddrInfo.getSuggestStartNode();
-        List<PoiInfo> listEndInfo = suggestAddrInfo.getSuggestEndNode();
+        final List<PoiInfo> listEndInfo = suggestAddrInfo.getSuggestEndNode();
 
         List<String> strListData = new ArrayList<>();
         List<String> endListData = new ArrayList<>();
@@ -489,6 +497,8 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
             endName = endNodeStr;
         } else {
             endName = listEndInfo.get(0).name;
+            endNodeStr=listEndInfo.get(0).name;
+            latLng=listEndInfo.get(0).location;
             for (int i = 0; i < listEndInfo.size(); i++) {
                 endListData.add(listEndInfo.get(i).name);
             }
@@ -595,8 +605,9 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
                             groupArray.set(0, childArray.get(i).get(i1));
                         } else {
                             groupArray.set(1, childArray.get(i).get(i1));
+                            endNodeStr= childArray.get(i).get(i1);
+                            latLng=listEndInfo.get(i1).location;
                         }
-
                         expandableListView.collapseGroup(i);
                     }
                 });
@@ -772,11 +783,11 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
 //    }
 
     private void noFindPoint() {
-        if (isFirstShowText) {
+//        if (isFirstShowText) {
             Toast.makeText(RoutePlanActivity.this, "抱歉，未找到终点，请自行在地图上点击设置终点位置", Toast.LENGTH_LONG).show();
-            isFirstShowText = false;
-
-        }
+//            isFirstShowText = false;
+//
+//        }
         isMapChlick = true;
     }
 
@@ -846,17 +857,22 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
 
     @Override
     public void onGetTransitRouteResult(TransitRouteResult result) {
+
+
         dialogCancel();
         if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+            Log.v("this","noFindPoint");
             noFindPoint();
         }
         if (result.error == SearchResult.ERRORNO.AMBIGUOUS_ROURE_ADDR) {
             // 起终点或途经点地址有岐义，通过以下接口获取建议查询信息
+            Log.v("this","choicePoint");
             SuggestAddrInfo suggestAddrInfo = result.getSuggestAddrInfo();
             choicePoint(suggestAddrInfo);
             return;
         }
         if (result.error == SearchResult.ERRORNO.NO_ERROR) {
+            Log.v("this","noerror");
             nodeIndex = -1;
             mBtnPre.setVisibility(View.VISIBLE);
             mBtnNext.setVisibility(View.VISIBLE);

@@ -206,6 +206,7 @@ public class ListFwpdzView extends BaseOrderView {
                 if (model.getFuneralAddress() == null) {
                     button_map.setVisibility(GONE);
                 } else {
+                    button_map.setVisibility(VISIBLE);
                     button_map.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
