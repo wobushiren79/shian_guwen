@@ -13,6 +13,7 @@ import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.view.order.CemeteryQTView;
+import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
@@ -42,7 +43,6 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
     List<String> ctemeryNameList = new ArrayList<>();
     List<String> trafficeWayList = new ArrayList<>();
 
-    ArrayList<Integer> rolesList = new ArrayList<>();
 
     boolean rolesBuild = false;
     boolean rolesTalk = false;
@@ -73,18 +73,21 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         mTrafficeSelectLayout.setName("交通方式：");
 
         mTVTime.setOnClickListener(onClickListener);
+        mBTSubmit.setOnClickListener(onClickListener);
     }
 
     private void initData() {
         setTitle("新建预约单");
-
-        rolesList = getIntent().getIntegerArrayListExtra(CemeteryQTView.ROLES_INFO);
         trafficeWayList = Utils.stringsToList(SelectData.CEMETERY_TRAFFICEWAY);
 
         selectLayoutView.setData(0, new ArrayList<String>());
-        mCetemeryNameSelectLayout.setData(ctemeryNameList, 0, this);
         mTrafficeSelectLayout.setData(trafficeWayList, 1, this);
 
+        setRoles();
+        getData();
+    }
+
+    private void getData() {
         MHttpManagerFactory.getAccountManager().getCemeteryBuildData(BuildNewOrderActivity.this, new HttpResponseHandler<HrGetCemeteryBuildData>() {
             @Override
             public void onStart() {
@@ -95,6 +98,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
             public void onSuccess(HrGetCemeteryBuildData result) {
                 if (result != null) {
                     ctemeryNameList = result.getCemeteryLocationList();
+                    mCetemeryNameSelectLayout.setData(ctemeryNameList, 0, BuildNewOrderActivity.this);
                 }
 
             }
@@ -104,16 +108,19 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
 
             }
         });
+    }
+
+    private void setRoles() {
         //赋予权限
-        for (int i = 0; i < rolesList.size(); i++) {
-            if (rolesList.get(i) == 0) {
+        for (int i = 0; i < CemeteryFragment.LOGIN_ROLES_LIST.size(); i++) {
+            if (CemeteryFragment.LOGIN_ROLES_LIST.get(i) == 0) {
                 rolesBuild = true;
                 rolesTalk = true;
             }
-            if (rolesList.get(i) == 2) {
+            if (CemeteryFragment.LOGIN_ROLES_LIST.get(i) == 2) {
                 rolesBuild = true;
             }
-            if (rolesList.get(i) == 3) {
+            if (CemeteryFragment.LOGIN_ROLES_LIST.get(i) == 3) {
                 rolesTalk = true;
             }
         }
@@ -145,6 +152,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         String dataTraffic = mTrafficeSelectLayout.getSelectedData();
         String dataPersonNum = mETPersonNum.getText().toString();
         String dataUserLocation = selectLayoutView.getLocation();
+
         if (dataName.isEmpty()) {
             ToastUtils.show(BuildNewOrderActivity.this, "客户姓名不能为空");
             return;
@@ -157,22 +165,23 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
             ToastUtils.show(BuildNewOrderActivity.this, "预约时间不能为空");
             return;
         }
+        if (dataPersonNum.isEmpty()) {
+            ToastUtils.show(BuildNewOrderActivity.this, "参观人数不能为空");
+            return;
+        }
         if (dataLocation.isEmpty()) {
-            ToastUtils.show(BuildNewOrderActivity.this, "预约地址不能为空");
+            ToastUtils.show(BuildNewOrderActivity.this, "预约参观公墓不能为空");
             return;
         }
         if (dataTraffic.isEmpty()) {
             ToastUtils.show(BuildNewOrderActivity.this, "交通方式不能为空");
             return;
         }
-        if (dataPersonNum.isEmpty()) {
-            ToastUtils.show(BuildNewOrderActivity.this, "参观人数不能为空");
-            return;
-        }
         if (dataUserLocation.isEmpty()) {
             ToastUtils.show(BuildNewOrderActivity.this, "客户地址不能为空");
             return;
         }
+
 
         if (rolesBuild && rolesTalk) {
             params.setSubmitType(1);
@@ -204,7 +213,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
 
             @Override
             public void onSuccess(Object result) {
-
+                finish();
             }
 
             @Override
@@ -227,4 +236,6 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
                 break;
         }
     }
+
+
 }

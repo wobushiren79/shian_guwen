@@ -5,10 +5,10 @@ package com.shian.shianlife.view;
  */
 
 public class SelectData {
-    //    public static String[] mCetemeryName = {"龙潭寺院山公墓", "青白江罗汉寺公墓", "温江大郎福寿园"
-//            , "成华区石岭南苑", "金牛区皇恩寺公墓", "龙泉驿区长松寺公墓", "龙泉驿区金龙山公墓"
-//            , "锦江区祝望山公墓", "蒲江红枫艺术陵园", "锦江区金莎陵园", "都江堰味江陵园"
-//            , "龙泉驿区燃灯寺公墓", "龙泉驿区真武山公墓", "龙泉驿区金龙山公墓", "崇州白塔山公墓"};
+    public static String[] CEMETERY_NAME= {"龙潭寺院山公墓", "青白江罗汉寺公墓", "温江大郎福寿园"
+            , "成华区石岭南苑", "金牛区皇恩寺公墓", "龙泉驿区长松寺公墓", "龙泉驿区金龙山公墓"
+            , "锦江区祝望山公墓", "蒲江红枫艺术陵园", "锦江区金莎陵园", "都江堰味江陵园"
+            , "龙泉驿区燃灯寺公墓", "龙泉驿区真武山公墓", "龙泉驿区金龙山公墓", "崇州白塔山公墓"};
     public final static String[] CEMETERY_TRAFFICEWAY = {"自行", "需要派车"};
     public final static String[] CEMETERY_TYPE = {"中式双位", "西式双位", "单穴", "壁葬", "草坪葬", "树葬", "其它葬式", "艺术葬"};
     public final static String[] CEMETERY_STATE = {"健康", "病危", "逝世"};

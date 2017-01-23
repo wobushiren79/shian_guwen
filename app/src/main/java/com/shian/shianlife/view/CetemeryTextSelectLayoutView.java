@@ -96,7 +96,12 @@ public class CetemeryTextSelectLayoutView extends LinearLayout {
     };
 
     public String getSelectedData() {
-        return  data.get(selectNum);
+        if (data.size() <= 0) {
+            return "";
+        } else {
+            return data.get(selectNum);
+        }
+
     }
 
     OnClickListener onClickListener = new OnClickListener() {

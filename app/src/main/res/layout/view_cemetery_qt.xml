@@ -16,14 +16,14 @@
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout
-        android:visibility="gone"
         android:id="@+id/ll_build_new"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/dimen_32dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="@dimen/dimen_100dp"
@@ -34,10 +34,10 @@
             android:src="@drawable/cemetery_build_new" />
 
         <TextView
-            android:layout_marginBottom="@dimen/dimen_40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dimen_40dp"
             android:gravity="center"
             android:text="新建服务单"
             android:textColor="@color/cemetery_textcolor" />

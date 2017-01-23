@@ -664,13 +664,13 @@ public class MAccountManagerImpl implements MAccountManager {
 
     @Override
     public void getCemeteryBuildData(Context context, HttpResponseHandler<HrGetCemeteryBuildData> handler) {
-        excutor.requestPost(context, "cemetery/build/get", HrGetCemeteryBuildData.class, new BaseHttpParams(),
+        excutor.requestPost(context, "cemetery/bespeak/build/get", HrGetCemeteryBuildData.class, new BaseHttpParams(),
                 handler);
     }
 
     @Override
     public void saveCemeteryBuildData(Context context, HpSaveCemeteryBuildData params, HttpResponseHandler<Object> handler) {
-        excutor.requestPost(context, "cemetery/build/save", Object.class, params,
+        excutor.requestPost(context, "cemetery/bespeak/build/save", Object.class, params,
                 handler);
     }
 

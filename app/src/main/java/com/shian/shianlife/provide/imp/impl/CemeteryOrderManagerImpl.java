@@ -17,7 +17,7 @@ public class CemeteryOrderManagerImpl implements CemeteryOrderManager {
     private static volatile CemeteryOrderManagerImpl manager;
 
     private HttpRequestExecutor excutor;
-    private String[] getOrderListMethod = { "cemetery/list/talk", "cemetery/list/afterMarket", "cemetery/list/afterMarket" };
+    private String[] getOrderListMethod = { "cemetery/ordered/list/talk", "cemetery/ordered/list/afterMarket", "cemetery/ordered/list/afterMarket" };
 
     private CemeteryOrderManagerImpl() {
         excutor = new HttpRequestExecutor();

@@ -57,6 +57,9 @@ public class CemeteryFragment extends BaseFragment {
     public static boolean C_bOrder_isRefresh;
     private HrLoginResult mLoginResult;
 
+    public static ArrayList<Integer> LOGIN_ROLES_LIST = new ArrayList<>();//权限信息 角色列表(0,超级管理员，1客服，2新建，3洽谈，4售后)
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -140,9 +143,15 @@ public class CemeteryFragment extends BaseFragment {
         boolean qtb = false;
         boolean shb = false;
         boolean fwb = false;
+
         arrTitles.clear();
         mLoginResult = JSONUtil.parseJSONString(getActivity().getIntent()
                 .getStringExtra("loginData"), HrLoginResult.class);
+
+        if (mLoginResult.getRoleIds() != null) {
+            LOGIN_ROLES_LIST = mLoginResult.getRoleIds();
+        }
+
         for (int role : mLoginResult.getRoleIds()) {
             switch (role) {
                 case 0:
@@ -181,9 +190,6 @@ public class CemeteryFragment extends BaseFragment {
         for (String n : arrTitles) {
             if (n.equals("洽谈")) {
                 CemeteryQTView qtView = new CemeteryQTView(getActivity());
-                if(mLoginResult!=null){
-                    qtView.setRoles(mLoginResult.getRoleIds());
-                }
                 views.add(qtView);
             } else if (n.equals("售后")) {
                 CemeterySHView waitServiceView = new CemeterySHView(getActivity());
