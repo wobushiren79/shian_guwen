@@ -2,6 +2,7 @@ package com.shian.shianlife.activity;
 
 import android.app.Notification;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -68,7 +69,9 @@ public class SettingsActivity extends BaseActivity {
                                 PushManager.startWork(getApplicationContext(),
                                         PushConstants.LOGIN_TYPE_API_KEY,
                                         Utils.getMetaValue(SettingsActivity.this, "api_key"));
-                                setResult(1010);
+                                Intent intent=new Intent(SettingsActivity.this,MainActivity.class);
+                                intent.putExtra("Settings",0);
+                                setResult(1010,intent);
                                 finish();
                             }
 
@@ -82,6 +85,55 @@ public class SettingsActivity extends BaseActivity {
                             public void onError(String message) {
                                 // TODO Auto-generated method stub
 
+                            }
+                        });
+            }
+        });
+        mDialog.setBottomButton("否", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        mDialog.show();
+    }
+
+
+    @OnClick(R.id.tv_change)
+    void changeState(View v) {
+        TipsDialog mDialog = new TipsDialog(this);
+        mDialog.setTitle("是否切换账号状态");
+        mDialog.setTopButton("是", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                MHttpManagerFactory.getAccountManager().loginout(
+                        getBaseContext(), new HttpResponseHandler<Object>() {
+
+                            @Override
+                            public void onSuccess(Object result) {
+                                // TODO Auto-generated method stub
+                                Log.v("this","onsuccess");
+                                SharePerfrenceUtils.setShareAutoLogin(
+                                        getBaseContext(), false);
+                                PushManager.startWork(getApplicationContext(),
+                                        PushConstants.LOGIN_TYPE_API_KEY,
+                                        Utils.getMetaValue(SettingsActivity.this, "api_key"));
+                                Intent intent=new Intent(SettingsActivity.this,MainActivity.class);
+                                intent.putExtra("Settings",1);
+                                setResult(1010,intent);
+                                finish();
+                            }
+
+                            @Override
+                            public void onStart() {
+                                // TODO Auto-generated method stub
+
+                            }
+
+                            @Override
+                            public void onError(String message) {
+                                // TODO Auto-generated method stub
                             }
                         });
             }

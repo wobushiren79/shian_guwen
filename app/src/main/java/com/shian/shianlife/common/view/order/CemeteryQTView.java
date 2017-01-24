@@ -151,7 +151,6 @@ public class CemeteryQTView extends BaseOrderView {
 
     class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerViewHolder> {
 
-
         @Override
         public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             RecyclerViewHolder recyclerViewHolder = new RecyclerViewHolder(

@@ -70,8 +70,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-
-        Log.v("this","MainActivity onCreate");
         setContentView(R.layout.activity_main);
 
         initDate();
@@ -273,7 +271,9 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 1010) {
+            int state=data.getIntExtra("Settings",-1);
             Intent in = new Intent(this, LoginActivity.class);
+            in.putExtra("loginStateChange",state);
             startActivity(in);
             finish();
         }

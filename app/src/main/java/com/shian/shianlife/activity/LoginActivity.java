@@ -40,15 +40,36 @@ public class LoginActivity extends BaseActivity {
     @InjectView(R.id.rb_state2)
     RadioButton rbState2;
 
+    ShareLogin loginS;
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_login);
         initView();
+        changeState();
+    }
+
+    //切换账号处理
+    private void changeState() {
+        Log.v("this","changeState");
+        int isChange= getIntent().getIntExtra("loginStateChange",-1);
+        Log.v("this","ischange:"+isChange);
+        if(isChange==1){
+            Log.v("this","changeState0");
+            int loginType=loginS.getLoginType();
+            if(loginType==0){
+                rbState2.setChecked(true);
+            }else if(loginType==1){
+                rbState1.setChecked(true);
+            }
+            String username = etUserName.getText().toString();
+            String password = etUserPassword.getText().toString();
+            login(username, password);
+        }
     }
 
     private void initView() {
-        ShareLogin loginS = SharePerfrenceUtils.getLoginShare(this);
+        loginS = SharePerfrenceUtils.getLoginShare(this);
         etUserName.setText(loginS.getUsername());
         if (loginS.isRemeberPassword()) {
             cbRe.setChecked(true);
@@ -77,7 +98,6 @@ public class LoginActivity extends BaseActivity {
     void loginClick(View v) {
         String username = etUserName.getText().toString();
         String password = etUserPassword.getText().toString();
-
         login(username, password);
     }
 

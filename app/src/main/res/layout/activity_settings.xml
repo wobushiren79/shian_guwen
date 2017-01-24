@@ -153,10 +153,24 @@
             android:background="@color/gray_main_rb_bg_f" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_change"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_editorder"
+        android:layout_gravity="bottom"
+        android:background="@drawable/dialog_chlick"
+        android:gravity="center"
+        android:text="切换账号"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/dimen_40dp" />
+
 
     <TextView
+        android:layout_centerHorizontal="true"
         android:id="@+id/tv_editorder"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
