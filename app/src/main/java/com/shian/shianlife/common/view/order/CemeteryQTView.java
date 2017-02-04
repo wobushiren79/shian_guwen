@@ -27,6 +27,7 @@ import com.shian.shianlife.activity.cemetery.BuildNewOrderActivity;
 import com.shian.shianlife.activity.cemetery.BuyCemeteryInfoActivity;
 import com.shian.shianlife.activity.cemetery.CemeteryTalkFailActivity;
 import com.shian.shianlife.activity.cemetery.InfoDetailsActivity;
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
@@ -114,7 +115,7 @@ public class CemeteryQTView extends BaseOrderView {
 
             @Override
             public void onError(String message) {
-
+                ToastUtils.show(getContext(),"获取列表失败");
             }
         });
     }
@@ -196,11 +197,11 @@ public class CemeteryQTView extends BaseOrderView {
             };
 
 
-            if (data.getConsultStatus() == 1) {
+            if (data.getBespeakStatus() == 1) {
                 holder.llStateAccept.setVisibility(VISIBLE);
                 holder.llStateTalk.setVisibility(GONE);
                 holder.llDetailes.setVisibility(GONE);
-            } else if (data.getConsultStatus() == 2 || data.getConsultStatus() == 3) {
+            } else if (data.getBespeakStatus() == 2 || data.getBespeakStatus() == 3) {
                 holder.llStateAccept.setVisibility(GONE);
                 holder.llStateTalk.setVisibility(VISIBLE);
                 holder.llDetailes.setVisibility(GONE);
@@ -217,7 +218,7 @@ public class CemeteryQTView extends BaseOrderView {
                 @Override
                 public int getCount() {
                     contentList.clear();
-                    if (data.getConsultStatus() == 1) {
+                    if (data.getBespeakStatus() == 1) {
                         nameStrings = CEMETERY_LISTTYPE_1;
                         contentList.add(data.getCustomerName());
                         contentList.add(data.getCustomerMobile());
@@ -225,7 +226,7 @@ public class CemeteryQTView extends BaseOrderView {
                         contentList.add(data.getPlanCemeteryLocation());
                         contentList.add(data.getCustomerLocation());
                         return CEMETERY_LISTTYPE_1.length;
-                    } else if (data.getConsultStatus() == 2 || data.getConsultStatus() == 3) {
+                    } else if (data.getBespeakStatus() == 2 || data.getBespeakStatus() == 3) {
                         nameStrings = CEMETERY_LISTTYPE_2;
                         contentList.add(data.getCustomerName());
                         contentList.add(data.getCustomerMobile());

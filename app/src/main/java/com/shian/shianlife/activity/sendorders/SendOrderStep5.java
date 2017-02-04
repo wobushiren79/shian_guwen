@@ -84,7 +84,6 @@ public class SendOrderStep5 extends BaseSendOrder {
                 Log.v("this", "getFuneralCarNum" + result.getFuneralCarNum());
                 Log.v("this", "getFuneralPersonNum" + result.getFuneralPersonNum());
 
-
                 Intent intent = new Intent(SendOrderActivity.UPDATA_ACTION);
                 ArrayList<String> data = new ArrayList<String>();
                 data.add(result.getFuneralLocation() + "");

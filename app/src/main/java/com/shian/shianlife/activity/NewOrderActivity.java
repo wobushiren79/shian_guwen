@@ -10,6 +10,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import butterknife.InjectView;
 import butterknife.OnClick;
 
@@ -49,7 +51,6 @@ public class NewOrderActivity extends BaseActivity {
 	}
 
 	private void initView() {
-		// lbsView.setETVisiable(View.GONE);
 		lbsView.setLocalParams(0, 0, 0);
 		ArrayAdapter<CharSequence> province_adapter = ArrayAdapter.createFromResource(this, R.array.ywlx,
 				android.R.layout.simple_spinner_item);

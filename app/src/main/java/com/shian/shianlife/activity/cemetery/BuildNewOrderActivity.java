@@ -213,6 +213,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
 
             @Override
             public void onSuccess(Object result) {
+                ToastUtils.show(BuildNewOrderActivity.this,"创建成功");
                 finish();
             }
 

@@ -5,8 +5,8 @@ package com.shian.shianlife.provide.model;
  */
 
 public class CemeteryOrderModel {
-    private long consultId;//	咨询ID
-    private Integer consultStatus;//咨询状态:1：未接单，2：已接单，3：洽谈失败（未购墓），4：洽谈成功（购墓），5，服务结束
+    private long bespeakId;//	咨询ID
+    private Integer bespeakStatus;//咨询状态:1：未接单，2：已接单，3：洽谈失败（未购墓），4：洽谈成功（购墓），5，服务结束
     private Integer talkFailResult;//"洽谈失败的结果：1.未洽谈，2洽谈失败，3，预约2次洽谈"
     private String customerName;//客户姓名
     private String promiseTime;//	预约时间
@@ -23,10 +23,32 @@ public class CemeteryOrderModel {
     private String detailsLocation;//		园区详细地址
 
     private Integer infoStatus;//资料填写状态：0，未填写信息。1，填写了购墓订单，2.填写了使用者信息，3填写了经办人信息
-    private long consultAssignId;//咨询指派ID
+    private long bespeakAssignId;//咨询指派ID
     private boolean isEdit;//是否可编辑（true:可以编辑 false：不可编辑 ）
 
+    public long getBespeakId() {
+        return bespeakId;
+    }
 
+    public void setBespeakId(long bespeakId) {
+        this.bespeakId = bespeakId;
+    }
+
+    public Integer getBespeakStatus() {
+        return bespeakStatus;
+    }
+
+    public void setBespeakStatus(Integer bespeakStatus) {
+        this.bespeakStatus = bespeakStatus;
+    }
+
+    public long getBespeakAssignId() {
+        return bespeakAssignId;
+    }
+
+    public void setBespeakAssignId(long bespeakAssignId) {
+        this.bespeakAssignId = bespeakAssignId;
+    }
 
     public String getAgentmanName() {
         return agentmanName;
@@ -84,21 +106,7 @@ public class CemeteryOrderModel {
         this.detailsLocation = detailsLocation;
     }
 
-    public long getConsultId() {
-        return consultId;
-    }
 
-    public void setConsultId(long consultId) {
-        this.consultId = consultId;
-    }
-
-    public Integer getConsultStatus() {
-        return consultStatus;
-    }
-
-    public void setConsultStatus(Integer consultStatus) {
-        this.consultStatus = consultStatus;
-    }
 
     public Integer getTalkFailResult() {
         return talkFailResult;
@@ -157,13 +165,7 @@ public class CemeteryOrderModel {
         this.infoStatus = infoStatus;
     }
 
-    public long getConsultAssignId() {
-        return consultAssignId;
-    }
 
-    public void setConsultAssignId(long consultAssignId) {
-        this.consultAssignId = consultAssignId;
-    }
 
     public boolean isEdit() {
         return isEdit;

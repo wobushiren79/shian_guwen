@@ -77,7 +77,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         initIM();
         initPermission();
 //        initLocation();
-
     }
 
 
@@ -241,8 +240,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 ToastUtils.show(this, "再按一次返回桌面");
             }
         }
-
-
     }
 
     private void exitApp() {

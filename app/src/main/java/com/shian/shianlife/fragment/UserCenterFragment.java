@@ -122,6 +122,7 @@ public class UserCenterFragment extends BaseFragment {
                         tvList.get(2).append("/");
                     }
                     tvList.get(2).setText("角色："+result.getRoles().get(i).getName());
+                    tvList.get(3).setText("服务区域："+result.getServiceArea());
                     tvList.get(4).setText(result.getServiceSuccessSum() + "");
                     tvList.get(5).setText(result.getAvgSatis() + "");
                     v.findViewById(R.id.editor).setOnClickListener(new View.OnClickListener() {
