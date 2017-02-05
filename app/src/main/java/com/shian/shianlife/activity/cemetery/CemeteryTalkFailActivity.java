@@ -13,6 +13,10 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.view.order.CemeteryQTView;
+import com.shian.shianlife.provide.MHttpManagerFactory;
+import com.shian.shianlife.provide.base.HttpResponseHandler;
+import com.shian.shianlife.provide.params.HpConsultIdParams;
+import com.shian.shianlife.provide.result.HrGetCemeteryTalkData;
 import com.shian.shianlife.view.CetemeryTextSelectLayoutView;
 import com.shian.shianlife.view.MapSelectLayoutView;
 import com.shian.shianlife.view.SelectData;
@@ -23,6 +27,7 @@ import java.util.List;
 
 public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTextSelectLayoutView.onSelectedListener {
     int inType = -1;
+    long beSpeakId = -1;
     LinearLayout mLLDetails;
 
     EditText mETPlanToMoney;
@@ -56,6 +61,46 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
 
         initData();
         initView();
+        getData();
+    }
+
+    /**
+     * 获取数据
+     */
+    private void getData() {
+        HpConsultIdParams params = new HpConsultIdParams();
+        params.setConsultId(beSpeakId);
+        MHttpManagerFactory.getAccountManager().getCemeteryTalkInfo(CemeteryTalkFailActivity.this, params, new HttpResponseHandler<HrGetCemeteryTalkData>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(HrGetCemeteryTalkData result) {
+                Log.v("this","getPlanBuyCemetery:"+result.getPlanBuyCemetery());
+                Log.v("this","getPlanBuyCemetery:"+result.getPlanBuyMoney());
+                Log.v("this","getPlanBuyCemetery:"+result.getUserOneState());
+                Log.v("this","getPlanBuyCemetery:"+result.getUserTwoState());
+                Log.v("this","getPlanBuyCemetery:"+result.getAshLocation());
+                Log.v("this","getPlanBuyCemetery:"+result.getRelation());
+                Log.v("this","getPlanBuyCemetery:"+result.getTalkPoint());
+                Log.v("this","getPlanBuyCemetery:"+result.isTalkResult());
+                Log.v("this","getPlanBuyCemetery:"+result.getOrderTime());
+                Log.v("this","getPlanBuyCemetery:"+result.getPersonNum());
+                Log.v("this","getPlanBuyCemetery:"+result.getTrafficWay());
+                Log.v("this","getPlanBuyCemetery:"+result.getOrderLocation());
+                Log.v("this","getPlanBuyCemetery:"+result.getRemark());
+
+
+
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
     }
 
     private void initView() {
@@ -102,6 +147,7 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
 
         if (inType == 0) {
             mBTSubmit.setVisibility(View.VISIBLE);
+            mBTSubmit.setText("结束洽谈");
         } else {
             mBTSubmit.setVisibility(View.GONE);
             setStateShow();
@@ -109,11 +155,10 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
     }
 
     private void initData() {
-        inType = getIntent().getIntExtra(CemeteryQTView.BUILD_NEW_ORDER, -1);
+        inType = getIntent().getIntExtra(CemeteryQTView.TALK_INFO_STATE, -1);
+        beSpeakId = getIntent().getLongExtra(CemeteryQTView.TALK_INFO_ID, -1);
         setTitle("洽谈信息");
         Log.v("this", "inType:" + inType);
-
-
         planToBuyList = Utils.stringsToList(SelectData.CEMETERY_TYPE);
         stateList = Utils.stringsToList(SelectData.CEMETERY_STATE);
         relationList = Utils.stringsToList(SelectData.CEMETERY_RELATION);
@@ -167,7 +212,7 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
         mSelectRelation.setStateShow();
         mSelectResult.setStateShow();
 
-         mMapSelect1.setStateShow();
-         mMapSelect2.setStateShow();
+        mMapSelect1.setStateShow();
+        mMapSelect2.setStateShow();
     }
 }

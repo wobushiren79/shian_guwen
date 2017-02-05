@@ -8,9 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseFragment;
 import com.shian.shianlife.common.utils.JSONUtil;
@@ -160,7 +157,9 @@ public class CemeteryFragment extends BaseFragment {
 
                     break;
                 case 2:
-
+                    if (!qtb) {
+                        arrTitles.add("洽谈");
+                    }
                     break;
                 case 3:
                     if (!qtb) {

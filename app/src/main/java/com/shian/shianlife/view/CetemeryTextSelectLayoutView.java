@@ -120,6 +120,15 @@ public class CetemeryTextSelectLayoutView extends LinearLayout {
         mIVSelect.setVisibility(GONE);
     }
 
+    public void setString(String name) {
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).equals(name)) {
+                mSPContent.setSelection(i);
+                break;
+            }
+        }
+    }
+
     public interface onSelectedListener {
         void onItemSelected(View view, int i, long l, int num);
     }

@@ -127,7 +127,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
 
         if (rolesTalk && rolesBuild) {
             mBTSubmit.setText("进入洽谈");
-        } else if (rolesTalk && !rolesBuild) {
+        } else if (!rolesTalk && rolesBuild) {
             mBTSubmit.setText("提交");
         }
         mBTSubmit.setVisibility(View.VISIBLE);
@@ -194,7 +194,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         params.setPlanCemeteryLocation(dataLocation);
         params.setTrafficWay(dataTraffic);
         params.setPersonNum(dataPersonNum);
-        params.setCustomer(dataUserLocation);
+        params.setCustomerLocation(dataUserLocation);
 
         Log.v("this", "CustomerName" + dataName);
         Log.v("this", "CustomerMobile" + dataPhone);
@@ -214,6 +214,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
             @Override
             public void onSuccess(Object result) {
                 ToastUtils.show(BuildNewOrderActivity.this,"创建成功");
+                CemeteryFragment.C_bOrder_isRefresh=true;
                 finish();
             }
 

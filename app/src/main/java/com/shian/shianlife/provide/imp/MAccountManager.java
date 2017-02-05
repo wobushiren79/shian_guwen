@@ -18,6 +18,7 @@ import com.shian.shianlife.provide.params.HpReadMessage;
 import com.shian.shianlife.provide.params.HpRefundParams;
 import com.shian.shianlife.provide.params.HpRejectParams;
 import com.shian.shianlife.provide.params.HpSaveCemeteryBuildData;
+import com.shian.shianlife.provide.params.HpSaveCemeteryTalkData;
 import com.shian.shianlife.provide.params.HpSaveComment;
 import com.shian.shianlife.provide.params.HpSaveContractData;
 import com.shian.shianlife.provide.params.HpSaveCustomerAgentmanParams;
@@ -43,6 +44,7 @@ import com.shian.shianlife.provide.result.HrConsultCemetery;
 import com.shian.shianlife.provide.result.HrConsultFuneral;
 import com.shian.shianlife.provide.result.HrConsultUsageResult;
 import com.shian.shianlife.provide.result.HrGetCemeteryBuildData;
+import com.shian.shianlife.provide.result.HrGetCemeteryTalkData;
 import com.shian.shianlife.provide.result.HrGetComment;
 import com.shian.shianlife.provide.result.HrGetContractData;
 import com.shian.shianlife.provide.result.HrGetCustomerContract;
@@ -733,5 +735,42 @@ public interface MAccountManager extends HttpManager {
      */
     public void saveCemeteryBuildData(Context context, HpSaveCemeteryBuildData params, HttpResponseHandler<Object> handler);
 
+    /**
+     * 公墓系统接单
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void acceptCemetery(Context context, HpAcceptParams params,
+                       HttpResponseHandler<Object> handler);
+
+
+    /**
+     * 公墓系统拒单
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void rejectCemetery(Context context, HpRejectParams params,
+                       HttpResponseHandler<Object> handler);
+
+    /**
+     * 获取公墓洽谈信息
+     *
+     * @param context
+     * @param handler
+     */
+    public void getCemeteryTalkInfo(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetCemeteryTalkData> handler);
+
+    /**
+     * 保存公墓洽谈信息
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void saveCemeteryTalkInfo(Context context, HpSaveCemeteryTalkData params, HttpResponseHandler<Object> handler);
 
 }

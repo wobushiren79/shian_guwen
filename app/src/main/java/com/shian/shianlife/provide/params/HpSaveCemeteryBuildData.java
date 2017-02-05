@@ -13,7 +13,7 @@ public class HpSaveCemeteryBuildData extends BaseHttpParams {
     private String planCemeteryLocation; //	预约地点（预约参观公墓）
     private String trafficWay; //交通方式
     private String personNum;  //参观人数
-    private String customer;  //客户地址
+    private String customerLocation;  //客户地址
     private String customerMobile;  //联系电话（客户电话）
 
 
@@ -65,12 +65,12 @@ public class HpSaveCemeteryBuildData extends BaseHttpParams {
         this.personNum = personNum;
     }
 
-    public String getCustomer() {
-        return customer;
+    public String getCustomerLocation() {
+        return customerLocation;
     }
 
-    public void setCustomer(String customer) {
-        this.customer = customer;
+    public void setCustomerLocation(String customerLocation) {
+        this.customerLocation = customerLocation;
     }
 
     public String getCustomerMobile() {
