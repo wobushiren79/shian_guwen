@@ -110,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_20dp"
 
-                    android:text="星级："
+                    android:text="服务区域："
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_date_list" />
             </LinearLayout>
@@ -128,7 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="96"
+                    android:text=""
                     android:textColor="@color/blackgroundmain"
                     android:textSize="@dimen/text_size_detail_list" />
 
@@ -163,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="96"
+                    android:text=""
                     android:textColor="@color/blackgroundmain"
                     android:textSize="@dimen/text_size_detail_list" />
 

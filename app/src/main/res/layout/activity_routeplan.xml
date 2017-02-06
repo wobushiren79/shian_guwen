@@ -43,11 +43,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/base_tabpager_indicator_selected_2"
+
             android:onClick="searchButtonProcess"
             android:text="公交" />
 
         <Button
+            android:background="@drawable/base_tabpager_indicator_selected_2"
             android:id="@+id/walk"
             style="@style/map_tabpager"
             android:layout_width="0dp"

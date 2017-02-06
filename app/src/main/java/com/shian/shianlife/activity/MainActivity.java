@@ -39,6 +39,7 @@ import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.result.HrCommentResult;
+import com.shian.shianlife.service.PushService;
 
 import org.support.v4.annotation.NonNull;
 
@@ -77,6 +78,12 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         initIM();
         initPermission();
 //        initLocation();
+        startPushService();
+    }
+
+    private void startPushService() {
+        Intent intent=new Intent(MainActivity.this, PushService.class);
+        startService(intent);
     }
 
 

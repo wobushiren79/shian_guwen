@@ -2,6 +2,7 @@ package com.shian.shianlife.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,6 +129,7 @@ public class UserCenterFragment extends BaseFragment {
                     v.findViewById(R.id.editor).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            Log.v("this","set");
                             Intent in = new Intent(getActivity(), UserInfoActivity.class);
                             in.putExtra("data", JSONUtil.writeEntityToJSONString(result));
                             getActivity().startActivity(in);

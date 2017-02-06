@@ -214,7 +214,7 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
     }
 
     /**
-     * 发起路线规划搜索示例
+     * 发起路线规划搜索
      *
      * @param v
      */
@@ -251,16 +251,18 @@ public class RoutePlanActivity extends Activity implements BaiduMap.OnMapClickLi
         }
         // 实际使用中请对起点终点城市进行正确的设定
         if (v == null) {
-            mSearch.transitSearch((new TransitRoutePlanOption())
-                    .from(stNode).city(routeCity).to(enNode));
-            nowSearchType = 2;
+//            mSearch.transitSearch((new TransitRoutePlanOption())
+//                    .from(stNode).city(routeCity).to(enNode));
+//            nowSearchType = 2;
+            mSearch.walkingSearch((new WalkingRoutePlanOption())
+                    .from(stNode).to(enNode));
+            nowSearchType = 3;
         } else if (v.getId() == R.id.mass) {
             PlanNode stMassNode = PlanNode.withCityNameAndPlaceName("北京", "天安门");
             PlanNode enMassNode = PlanNode.withCityNameAndPlaceName("上海", "东方明珠");
             mSearch.masstransitSearch(new MassTransitRoutePlanOption().from(stMassNode).to(enMassNode));
             nowSearchType = 0;
         } else if (v.getId() == R.id.drive) {
-
             mSearch.drivingSearch((new DrivingRoutePlanOption())
                     .from(stNode).to(enNode));
             nowSearchType = 1;

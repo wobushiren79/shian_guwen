@@ -86,14 +86,29 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
                 Log.v("this","getPlanBuyCemetery:"+result.getRelation());
                 Log.v("this","getPlanBuyCemetery:"+result.getTalkPoint());
                 Log.v("this","getPlanBuyCemetery:"+result.isTalkResult());
+                Log.v("this","getPlanBuyCemetery:"+result.getTrafficWay());
                 Log.v("this","getPlanBuyCemetery:"+result.getOrderTime());
                 Log.v("this","getPlanBuyCemetery:"+result.getPersonNum());
-                Log.v("this","getPlanBuyCemetery:"+result.getTrafficWay());
                 Log.v("this","getPlanBuyCemetery:"+result.getOrderLocation());
                 Log.v("this","getPlanBuyCemetery:"+result.getRemark());
 
-
-
+                mSelectPlanToBuy.setString(result.getPlanBuyCemetery());
+                mETPlanToMoney.setText(result.getPlanBuyMoney()+"");
+                mSelectState1.setString(result.getUserOneState());
+                mSelectState2.setString(result.getUserTwoState());
+                mMapSelect1.setLocation(result.getAshLocation());
+                mSelectRelation.setString(result.getRelation());
+                mETTalkPoint.setText(result.getTalkPoint());
+                if(result.isTalkResult()){
+                    mSelectResult.setName("预约二次洽谈");
+                }else{
+                    mSelectResult.setName("未预约");
+                }
+                mETTrafficWay.setText(result.getTrafficWay());
+                mTVTime.setText(result.getOrderTime());
+                mETPersonNum.setText(result.getPersonNum());
+                mMapSelect2.setLocation(result.getOrderLocation());
+                mETRemark.setText(result.getRemark());
             }
 
             @Override
@@ -152,6 +167,7 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
             mBTSubmit.setVisibility(View.GONE);
             setStateShow();
         }
+
     }
 
     private void initData() {

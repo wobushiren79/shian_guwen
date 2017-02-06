@@ -259,23 +259,21 @@ public class CemeteryQTView extends BaseOrderView {
                     holder.llStateAccept.setVisibility(VISIBLE);
                     holder.llStateTalk.setVisibility(GONE);
                     holder.llDetailes.setVisibility(GONE);
-
-                    nameStrings = CEMETERY_LISTTYPE_1;
-                    contentList.add(data.getCustomerName());
-                    contentList.add(data.getCustomerMobile());
-                    contentList.add(data.getCustomerLocation());
-                    contentList.add(data.getPromiseTime());
-                    contentList.add(data.getPlanCemeteryLocation());
-                    holder.itemlayout_6.setVisibility(GONE);
-                    holder.itemlayout_7.setVisibility(GONE);
-                    holder.tv_line_5.setVisibility(GONE);
-                    holder.tv_line_6.setVisibility(GONE);
                 }else{
                     holder.llStateAccept.setVisibility(GONE);
                     holder.llStateTalk.setVisibility(GONE);
                     holder.llDetailes.setVisibility(GONE);
                 }
-
+                nameStrings = CEMETERY_LISTTYPE_1;
+                contentList.add(data.getCustomerName());
+                contentList.add(data.getCustomerMobile());
+                contentList.add(data.getCustomerLocation());
+                contentList.add(data.getPromiseTime());
+                contentList.add(data.getPlanCemeteryLocation());
+                holder.itemlayout_6.setVisibility(GONE);
+                holder.itemlayout_7.setVisibility(GONE);
+                holder.tv_line_5.setVisibility(GONE);
+                holder.tv_line_6.setVisibility(GONE);
 
             } else if (data.getBespeakStatus() == 2 || data.getBespeakStatus() == 3) {
                 holder.llStateAccept.setVisibility(GONE);
