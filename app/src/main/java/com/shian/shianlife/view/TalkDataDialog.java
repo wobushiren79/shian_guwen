@@ -47,8 +47,6 @@ public class TalkDataDialog extends Dialog {
         mTvResult = (TextView) view.findViewById(R.id.tv_result);
         mTvResultTime = (TextView) view.findViewById(R.id.tv_resulttime);
 
-        Log.v("this","result.getDeadName()"+result.getDeadName());
-
         mTvName.setText(result.getDeadName());
         mTvHealth.setText(result.getHealth());
         mTvLocation.setText(result.getLocation());

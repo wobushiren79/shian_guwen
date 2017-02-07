@@ -82,10 +82,10 @@ public class SendOrderStep6 extends BaseSendOrder {
 
             @Override
             public void onSuccess(HrGetSendOrderDataSeven result) {
-                Log.v("this", "getAshDeal" + result.getAshDeal());
-                Log.v("this", "getCemeteryName" + result.getCemeteryName());
-                Log.v("this", "getDeadmanIdentity" + result.getDeadmanIdentity());
-                Log.v("this", "getAgentmanIdentity" + result.getAgentmanIdentity());
+                Utils.LogVPrint("getAshDeal" + result.getAshDeal());
+                Utils.LogVPrint("getCemeteryName" + result.getCemeteryName());
+                Utils.LogVPrint("getDeadmanIdentity" + result.getDeadmanIdentity());
+                Utils.LogVPrint("getAgentmanIdentity" + result.getAgentmanIdentity());
 
                 if (result.getCemeteryName() != null) {
                     mETName.setText(result.getCemeteryName());
@@ -148,9 +148,9 @@ public class SendOrderStep6 extends BaseSendOrder {
         mETAgentmanID = (EditText) findViewById(R.id.et_agentmanid);
         mETName = (EditText) findViewById(R.id.et_name);
 
-        initSp("其他",0);
-        initSp("其他",1);
-        initSp("其他",2);
+        initSp("其他", 0);
+        initSp("其他", 1);
+        initSp("其他", 2);
     }
 
 

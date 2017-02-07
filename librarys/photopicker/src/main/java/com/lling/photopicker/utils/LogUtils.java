@@ -5,7 +5,7 @@ import android.util.Log;
 /**
  * @Class: LogUtils
  * @Description: 日志处理类
- * @author: lling(www.liuling123.com)
+ * @author:
  * @Date: 2015/11/4
  */
 public class LogUtils {

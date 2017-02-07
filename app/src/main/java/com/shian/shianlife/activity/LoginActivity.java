@@ -41,6 +41,7 @@ public class LoginActivity extends BaseActivity {
     RadioButton rbState2;
 
     ShareLogin loginS;
+
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
@@ -51,15 +52,12 @@ public class LoginActivity extends BaseActivity {
 
     //切换账号处理
     private void changeState() {
-        Log.v("this","changeState");
-        int isChange= getIntent().getIntExtra("loginStateChange",-1);
-        Log.v("this","ischange:"+isChange);
-        if(isChange==1){
-            Log.v("this","changeState0");
-            int loginType=loginS.getLoginType();
-            if(loginType==0){
+        int isChange = getIntent().getIntExtra("loginStateChange", -1);
+        if (isChange == 1) {
+            int loginType = loginS.getLoginType();
+            if (loginType == 0) {
                 rbState2.setChecked(true);
-            }else if(loginType==1){
+            } else if (loginType == 1) {
                 rbState1.setChecked(true);
             }
             String username = etUserName.getText().toString();
@@ -118,7 +116,6 @@ public class LoginActivity extends BaseActivity {
             params.setUsername(etUserName.getText().toString());
             params.setSystemType("2");
             params.setChannelId(SharePerfrenceUtils.getShareChannelId(this));
-            Log.v("this", SharePerfrenceUtils.getShareChannelId(this));
             MHttpManagerFactory.getAccountManager().login(this, params, new HttpResponseHandler<HrLoginResult>() {
 
                 @Override
@@ -130,9 +127,6 @@ public class LoginActivity extends BaseActivity {
                     ToastUtils.show(getBaseContext(), "登陆成功");
                     Intent in = new Intent(LoginActivity.this, MainActivity.class);
                     String resultBack = JSONUtil.writeEntityToJSONString(result);
-                    if (LOGFLAG) {
-                        Log.v(LOG_TAG, "resultBack:" + resultBack);
-                    }
                     in.putExtra("loginData", resultBack);
                     startActivity(in);
                     finish();
@@ -155,7 +149,7 @@ public class LoginActivity extends BaseActivity {
             params.setUsername(etUserName.getText().toString());
             params.setSystemType("2");
             params.setChannelId(SharePerfrenceUtils.getShareChannelId(this));
-            Log.v("this", SharePerfrenceUtils.getShareChannelId(this));
+
             MHttpManagerFactory.getAccountManager().loginCemetery(this, params, new HttpResponseHandler<HrLoginResult>() {
 
                 @Override
@@ -167,9 +161,7 @@ public class LoginActivity extends BaseActivity {
                     ToastUtils.show(getBaseContext(), "登陆成功");
                     Intent in = new Intent(LoginActivity.this, MainActivity.class);
                     String resultBack = JSONUtil.writeEntityToJSONString(result);
-                    if (LOGFLAG) {
-                        Log.v(LOG_TAG, "resultBack:" + resultBack);
-                    }
+
                     in.putExtra("loginData", resultBack);
                     startActivity(in);
                     finish();

@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
+import com.lidroid.xutils.util.LogUtils;
 
 /**
  * Created by Administrator on 2017/1/16.
@@ -15,17 +16,17 @@ import com.baidu.android.pushservice.PushManager;
 public class MyPushReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.v("this", "onReceive");
+
         if (Intent.ACTION_USER_PRESENT.equals(intent.getAction())) {
-            Log.v("this", "ACTION_USER_PRESENT:");
+            com.shian.shianlife.common.utils.Utils.LogVPrint("ACTION_USER_PRESENT");
             startUploadService(context);
         }
         if (Intent.ACTION_PACKAGE_RESTARTED.equals(intent.getAction())) {
-            Log.v("this", "ACTION_PACKAGE_RESTARTED:");
+            com.shian.shianlife.common.utils.Utils.LogVPrint("ACTION_PACKAGE_RESTARTED");
             startUploadService(context);
         }
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-            Log.v("this", "ACTION_BOOT_COMPLETED:");
+            com.shian.shianlife.common.utils.Utils.LogVPrint("ACTION_BOOT_COMPLETED");
             startUploadService(context);
         }
     }

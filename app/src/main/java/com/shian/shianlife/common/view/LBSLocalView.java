@@ -619,7 +619,6 @@ public class LBSLocalView extends FrameLayout {
 		// long arg3) {
 		// cityId = city_spinner.getSelectedItemPosition();// 得到city的id
 		// strCity = city_spinner.getSelectedItem().toString();// 得到city的内容
-		// Log.v("test", "city: " + city_spinner.getSelectedItem().toString()//
 		// 输出测试一下
 		// + cityId.toString());
 		// if (strProvince.equals(strCity))

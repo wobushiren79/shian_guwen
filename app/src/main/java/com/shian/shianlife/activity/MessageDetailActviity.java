@@ -44,9 +44,6 @@ public class MessageDetailActviity extends BaseActivity {
                 .setText(Utils.getDateUtils(message.getServerCreateTime()));
         tvList.get(2).setText(message.getBody());
         boolean isB = getIntent().getBooleanExtra("isBroadcast", false);
-        if (LOGFLAG) {
-            Log.v(LOG_TGA, "isBroadcast:" + isB);
-        }
         if (!isB) {
             MHttpManagerFactory.getAccountManager().getMessageCount(this,
                     new HttpResponseHandler<HrCommentResult>() {

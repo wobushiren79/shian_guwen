@@ -8,6 +8,7 @@ import android.widget.EditText;
 import com.shian.shianlife.R;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.TransitionDate;
+import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
@@ -75,14 +76,17 @@ public class SendOrderStep5 extends BaseSendOrder {
 
             @Override
             public void onSuccess(HrGetSendOrderDataSix result) {
-                Log.v("this", "getFuneralLocation" + result.getFuneralLocation());
-                Log.v("this", "getCrematorName" + result.getCrematorName());
-                Log.v("this", "getBodiesPark" + result.getBodiesPark());
-                Log.v("this", "getFireTime" + result.getFireTime());
-                Log.v("this", "getBodiesByeTime" + result.getBodiesByeTime());
-                Log.v("this", "getFuneralTime" + result.getFuneralTime());
-                Log.v("this", "getFuneralCarNum" + result.getFuneralCarNum());
-                Log.v("this", "getFuneralPersonNum" + result.getFuneralPersonNum());
+                Utils.LogVPrint("getFuneralLocation" + result.getFuneralLocation());
+                Utils.LogVPrint("getCrematorName" + result.getCrematorName());
+                Utils.LogVPrint("getBodiesPark" + result.getBodiesPark());
+                Utils.LogVPrint("getFuneralLocation" + result.getFuneralLocation());
+                Utils.LogVPrint("getFireTime" + result.getFireTime());
+                Utils.LogVPrint("getBodiesByeTime" + result.getBodiesByeTime());
+                Utils.LogVPrint("getFuneralTime" + result.getFuneralTime());
+                Utils.LogVPrint("getFuneralLocation" + result.getFuneralLocation());
+                Utils.LogVPrint("getFuneralCarNum" + result.getFuneralCarNum());
+                Utils.LogVPrint("getFuneralPersonNum" + result.getFuneralPersonNum());
+
 
                 Intent intent = new Intent(SendOrderActivity.UPDATA_ACTION);
                 ArrayList<String> data = new ArrayList<String>();

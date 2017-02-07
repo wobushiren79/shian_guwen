@@ -76,7 +76,6 @@ public class RefundOrderActivity extends BaseActivity {
 		TextView textView=new TextView(RefundOrderActivity.this);
 		textView.setBackgroundColor(Color.WHITE);
 		LinearLayout.LayoutParams textLayouparam=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) getResources().getDimension(R.dimen.dimen_20dp));
-		Log.v("this","size:"+ (int) getResources().getDimension(R.dimen.dimen_20dp));
 		textView.setLayoutParams(textLayouparam);
 		ll_parent.addView(textView);
 		ll_parent.addView(mMainDetailView);

@@ -57,7 +57,7 @@ public class PushService extends Service {
             Intent nfIntent = new Intent(this, MainActivity.class);
             builder.setContentIntent(PendingIntent.getActivity(this, 0, nfIntent, 0)) // 设置PendingIntent
                     .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.mipmap.ic_launcher)) // 设置下拉列表中的图标(大图标)
-                    .setContentTitle("消息通知") // 设置下拉列表里的标题
+                    .setContentTitle("圆满人生") // 设置下拉列表里的标题
                     .setSmallIcon(R.mipmap.ic_launcher) // 设置状态栏内的小图标
                     .setContentText("已开启消息通知") // 设置上下文内容
                     .setWhen(System.currentTimeMillis()); // 设置该通知发生的时间

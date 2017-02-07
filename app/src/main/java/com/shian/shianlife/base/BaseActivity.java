@@ -104,7 +104,6 @@ public class BaseActivity extends FragmentActivity {
     public void setTitleLocation(String titleLocation) {
         TextView tvHeadLocation = (TextView) findViewById(R.id.title_location);
             tvHeadLocation.setText(titleLocation);
-
     }
 
     public void setTitle(String title) {
@@ -127,10 +126,6 @@ public class BaseActivity extends FragmentActivity {
             tvHeadTitle.setText(title);
             tvHeadTitle.setBackgroundColor(getResources().getColor(
                     R.color.transparent));
-
-
-
-
 //            Drawable drawable = getResources().getDrawable(
 //                    R.drawable.ic_back_default);
 //            // / 这一步必须要做,否则不会显示.
@@ -181,6 +176,7 @@ public class BaseActivity extends FragmentActivity {
 
     @Override
     protected void onDestroy() {
+
         ImageLoader.getInstance().clearMemoryCache();
         super.onDestroy();
         ((SaBaseApplication) getApplicationContext()).removeActivity(this);

@@ -154,7 +154,7 @@ public class MessageListView extends FrameLayout {
                             // TODO Auto-generated method stub
                             Intent in = new Intent(getContext(),
                                     MessageDetailActviity.class);
-                            Log.v(LOG_TAG, JSONUtil.writeEntityToJSONString(model));
+                            Utils.LogVPrint(JSONUtil.writeEntityToJSONString(model));
                             in.putExtra("message",
                                     JSONUtil.writeEntityToJSONString(model));
                             getContext().startActivity(in);

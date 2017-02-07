@@ -67,7 +67,6 @@ public class SaveTalkFailActivity extends BaseActivity {
     private void init() {
         setTitle("洽谈信息");
         ConsultId = getIntent().getLongExtra("SaveTalkFailActivity", -1);
-        Log.v("this", "ConsultId:" + ConsultId);
 
         params = new HpTalkFailParams();
     }
@@ -191,14 +190,14 @@ public class SaveTalkFailActivity extends BaseActivity {
 
         params.setResultTime(mTalkTime.getText().toString());
 
-        Log.v("this", "ConsultId:" + params.getConsultId());
-        Log.v("this", "Relation:" + params.getRelation());
-        Log.v("this", "Name:" + params.getDeadName());
-        Log.v("this", "Health:" + params.getHealth());
-        Log.v("this", "Project:" + params.getProject());
-        Log.v("this", "Remark:" + params.getRemark());
-        Log.v("this", "Result:" + params.isResult());
-        Log.v("this", "Time:" + params.getResultTime());
+        Utils.LogVPrint( "ConsultId:" + params.getConsultId());
+        Utils.LogVPrint( "Relation:" + params.getRelation());
+        Utils.LogVPrint( "Name:" + params.getDeadName());
+        Utils.LogVPrint( "Health:" + params.getHealth());
+        Utils.LogVPrint( "Project:" + params.getProject());
+        Utils.LogVPrint("Remark:" + params.getRemark());
+        Utils.LogVPrint( "Result:" + params.isResult());
+        Utils.LogVPrint(  "Time:" + params.getResultTime());
 
 
         TipsDialog mDialog = new TipsDialog(SaveTalkFailActivity.this);
@@ -273,7 +272,6 @@ public class SaveTalkFailActivity extends BaseActivity {
      * 设置洽谈时间
      */
     private void setTime() {
-        Log.v("this", "DateTimeSelectorDialogBuilder");
         //设置二次洽谈时间
         DateTimeSelectorDialogBuilder dialog = DateTimeSelectorDialogBuilder
                 .getInstance(SaveTalkFailActivity.this);

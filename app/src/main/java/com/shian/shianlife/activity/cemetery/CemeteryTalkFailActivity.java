@@ -11,11 +11,14 @@ import android.widget.TextView;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.view.order.CemeteryQTView;
+import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
+import com.shian.shianlife.provide.params.HpSaveCemeteryTalkData;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkData;
 import com.shian.shianlife.view.CetemeryTextSelectLayoutView;
 import com.shian.shianlife.view.MapSelectLayoutView;
@@ -78,30 +81,31 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
 
             @Override
             public void onSuccess(HrGetCemeteryTalkData result) {
-                Log.v("this","getPlanBuyCemetery:"+result.getPlanBuyCemetery());
-                Log.v("this","getPlanBuyCemetery:"+result.getPlanBuyMoney());
-                Log.v("this","getPlanBuyCemetery:"+result.getUserOneState());
-                Log.v("this","getPlanBuyCemetery:"+result.getUserTwoState());
-                Log.v("this","getPlanBuyCemetery:"+result.getAshLocation());
-                Log.v("this","getPlanBuyCemetery:"+result.getRelation());
-                Log.v("this","getPlanBuyCemetery:"+result.getTalkPoint());
-                Log.v("this","getPlanBuyCemetery:"+result.isTalkResult());
-                Log.v("this","getPlanBuyCemetery:"+result.getTrafficWay());
-                Log.v("this","getPlanBuyCemetery:"+result.getOrderTime());
-                Log.v("this","getPlanBuyCemetery:"+result.getPersonNum());
-                Log.v("this","getPlanBuyCemetery:"+result.getOrderLocation());
-                Log.v("this","getPlanBuyCemetery:"+result.getRemark());
+                Utils.LogVPrint( "getPlanBuyCemetery:" + result.getPlanBuyCemetery());
+                Utils.LogVPrint( "getPlanBuyMoney:" + result.getPlanBuyMoney());
+                Utils.LogVPrint( "getUserOneState:" + result.getUserOneState());
+                Utils.LogVPrint( "getUserTwoState:" + result.getUserTwoState());
+                Utils.LogVPrint( "getAshLocation:" + result.getAshLocation());
+                Utils.LogVPrint( "getRelation:" + result.getRelation());
+                Utils.LogVPrint( "getTalkPoint:" + result.getTalkPoint());
+                Utils.LogVPrint( "isTalkResult:" + result.isTalkResult());
+                Utils.LogVPrint( "getTrafficWay:" + result.getTrafficWay());
+                Utils.LogVPrint( "getOrderTime:" + result.getOrderTime());
+                Utils.LogVPrint( "getPersonNum:" + result.getPersonNum());
+                Utils.LogVPrint( "getOrderLocation:" + result.getOrderLocation());
+                Utils.LogVPrint( "getRemark:" + result.getRemark());
+
 
                 mSelectPlanToBuy.setString(result.getPlanBuyCemetery());
-                mETPlanToMoney.setText(result.getPlanBuyMoney()+"");
+                mETPlanToMoney.setText(result.getPlanBuyMoney() + "");
                 mSelectState1.setString(result.getUserOneState());
                 mSelectState2.setString(result.getUserTwoState());
                 mMapSelect1.setLocation(result.getAshLocation());
                 mSelectRelation.setString(result.getRelation());
                 mETTalkPoint.setText(result.getTalkPoint());
-                if(result.isTalkResult()){
+                if (result.isTalkResult()) {
                     mSelectResult.setName("预约二次洽谈");
-                }else{
+                } else {
                     mSelectResult.setName("未预约");
                 }
                 mETTrafficWay.setText(result.getTrafficWay());
@@ -114,6 +118,115 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
             @Override
             public void onError(String message) {
 
+            }
+        });
+    }
+
+    /**
+     * 保存数据
+     */
+    private void saveData() {
+        HpSaveCemeteryTalkData params = new HpSaveCemeteryTalkData();
+        params.setBespeakId(beSpeakId);
+        params.setPlanBuyCemetery(mSelectPlanToBuy.getSelectedData());
+        params.setPlanBuyMoney(mETPlanToMoney.getText().toString());
+        params.setUserOneState(mSelectState1.getSelectedData());
+        params.setUserTwoState(mSelectState2.getSelectedData());
+        params.setAshLocation(mMapSelect1.getLocation());
+        params.setRelation(mSelectRelation.getSelectedData());
+        params.setTalkPoint(mETTalkPoint.getText().toString());
+        if (mSelectResult.getSelectedData().equals("预约二次洽谈")) {
+            params.setTalkResult(true);
+        } else {
+            params.setTalkResult(false);
+        }
+        params.setRemark(mETRemark.getText().toString());
+
+
+        if (params.getBespeakId() == -1) {
+            ToastUtils.show(CemeteryTalkFailActivity.this, "数据获取异常，请重新加载预订单");
+            return;
+        }
+        if (params.getPlanBuyCemetery().isEmpty()) {
+            ToastUtils.show(CemeteryTalkFailActivity.this, "购买墓型不能为空");
+            return;
+        }
+        if (params.getPlanBuyMoney().isEmpty()) {
+            ToastUtils.show(CemeteryTalkFailActivity.this, "购买价位不能为空");
+            return;
+        }
+        if (params.getUserOneState().isEmpty()) {
+            ToastUtils.show(CemeteryTalkFailActivity.this, "使用者1现状不能为空");
+            return;
+        }
+        if (params.getAshLocation().isEmpty()) {
+            ToastUtils.show(CemeteryTalkFailActivity.this, "骨灰当前所在地不能为空");
+            return;
+        }
+        if (params.getRelation().isEmpty()) {
+            ToastUtils.show(CemeteryTalkFailActivity.this, "联系人与使用者的关系不能为空");
+            return;
+        }
+        if (params.getTalkPoint().isEmpty()) {
+            ToastUtils.show(CemeteryTalkFailActivity.this, "洽谈要点不能为空");
+            return;
+        }
+
+        //如果预约二次洽谈
+        if (params.isTalkResult()) {
+            params.setTrafficWay(mETTrafficWay.getText().toString());
+            params.setOrderTime(mTVTime.getText().toString());
+            params.setPersonNum(mETPersonNum.getText().toString());
+            params.setOrderLocation(mMapSelect2.getLocation());
+
+            if (params.getTrafficWay().isEmpty()) {
+                ToastUtils.show(CemeteryTalkFailActivity.this, "交通方式不能为空");
+                return;
+            }
+            if (params.getOrderTime().isEmpty()) {
+                ToastUtils.show(CemeteryTalkFailActivity.this, "预约时间不能为空");
+                return;
+            }
+            if (params.getPersonNum().isEmpty()) {
+                ToastUtils.show(CemeteryTalkFailActivity.this, "人数不能为空");
+                return;
+            }
+            if (params.getOrderLocation().isEmpty()) {
+                ToastUtils.show(CemeteryTalkFailActivity.this, "预约地点不能为空");
+                return;
+            }
+        }
+        Utils.LogVPrint( "BespeakId:" + params.getBespeakId());
+        Utils.LogVPrint( "PlanBuyCemetery:" + params.getPlanBuyCemetery());
+        Utils.LogVPrint( "PlanBuyMoney:" + params.getPlanBuyMoney());
+        Utils.LogVPrint( "UserOneState:" + params.getUserOneState());
+        Utils.LogVPrint( "UserTwoState:" + params.getUserTwoState());
+        Utils.LogVPrint( "AshLocation:" + params.getAshLocation());
+        Utils.LogVPrint( "Relation:" + params.getRelation());
+        Utils.LogVPrint( "TalkPoint:" + params.getTalkPoint());
+        Utils.LogVPrint( "TalkResult:" + params.isTalkResult());
+        Utils.LogVPrint( "TrafficWay:" + params.getTrafficWay());
+        Utils.LogVPrint( "OrderTime:" + params.getOrderTime());
+        Utils.LogVPrint( "PersonNum:" + params.getPersonNum());
+        Utils.LogVPrint( "OrderLocation:" + params.getOrderLocation());
+        Utils.LogVPrint( "getRemark:" + params.getRemark());
+
+        MHttpManagerFactory.getAccountManager().saveCemeteryTalkInfo(CemeteryTalkFailActivity.this, params, new HttpResponseHandler<Object>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                CemeteryFragment.C_bOrder_isRefresh=true;
+                ToastUtils.show(CemeteryTalkFailActivity.this, "提交数据成功");
+                finish();
+            }
+
+            @Override
+            public void onError(String message) {
+                ToastUtils.show(CemeteryTalkFailActivity.this, "提交数据失败");
             }
         });
     }
@@ -208,11 +321,14 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
             if (view == mTVTime) {
                 Utils.timeSelect(CemeteryTalkFailActivity.this, mTVTime);
             } else if (view == mBTSubmit) {
-
+                saveData();
             }
         }
     };
 
+    /**
+     * 设置不可点击
+     */
     public void setStateShow() {
         mETPlanToMoney.setFocusable(false);
         mETTalkPoint.setFocusable(false);

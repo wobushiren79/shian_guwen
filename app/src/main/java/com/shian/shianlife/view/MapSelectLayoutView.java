@@ -87,7 +87,6 @@ public class MapSelectLayoutView extends LinearLayout implements Serializable {
      */
     private void listCheck() {
         if (listData != null && listData.size() > 0) {
-            Log.v("this", "listData.size()" + listData.size());
             final AlertDialog dialog = new AlertDialog.Builder(getContext())
                     .setTitle("选择地址")
                     .create();
@@ -148,7 +147,6 @@ public class MapSelectLayoutView extends LinearLayout implements Serializable {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.v("this", "onReceive");
             int num = intent.getIntExtra("numView", 0);
             if (num == numView) {
                 String location = intent.getStringExtra("location");

@@ -15,7 +15,6 @@ import java.util.List;
 public class MyLocationListener implements BDLocationListener {
     @Override
     public void onReceiveLocation(BDLocation location) {
-        Log.v("BaiduLocationApiDem", "onReceiveLocation");
 // map view 销毁后不在处理新接收的位置
         if (location == null) {
             return;

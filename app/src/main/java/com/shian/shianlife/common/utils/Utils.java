@@ -14,16 +14,24 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.shian.shianlife.base.SaBaseApplication;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpSaveTime;
 import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 
 public class Utils {
+
+    public static void LogVPrint(String content){
+        if(SaBaseApplication.LOGFLAG){
+            Log.v("this",content+"");
+        }
+    }
 
     public static String getDateUtils(long paramLong) {
         return TransitionDate.DateToStr(new Date(paramLong), "yyyy-MM-dd HH:mm");

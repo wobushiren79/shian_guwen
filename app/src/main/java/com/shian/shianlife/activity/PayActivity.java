@@ -58,11 +58,9 @@ public class PayActivity extends BaseActivity {
         isPayDing = getIntent().getBooleanExtra("ding", true);
         orderId = getIntent().getLongExtra("orderId", -1);
         if (!isPayDing) {
-            Log.v("this", "!isPayDing");
             llFP.setVisibility(View.VISIBLE);
         }
         if (isPayDing) {
-            Log.v("this", "isPayDing");
             frePay();
         } else {
             setTitle("支付余款");
@@ -276,7 +274,6 @@ public class PayActivity extends BaseActivity {
 
     private void zhifubaoEwm(final long payId) {
         //支付宝
-        Log.v("this","zhifubaoEwm");
         HpOrderIdParams params = new HpOrderIdParams();
         params.setPayId(payId);
         MHttpManagerFactory.getAccountManager().creatZhiFuBaoEwm(this, params,
@@ -291,7 +288,6 @@ public class PayActivity extends BaseActivity {
                         in.putExtra("orderCode",
                                 getIntent().getStringExtra("orderCode"));
 
-                        Log.v("this", "payId:" + payId + " ewm:" + result.getCodeUrl() + " payAmount:" + payAmount + " orderCode:" + getIntent().getStringExtra("orderCode"));
                         startActivity(in);
                         finish();
                     }
@@ -309,7 +305,6 @@ public class PayActivity extends BaseActivity {
     }
 
     private void posEwm(long payId) {
-        Log.v("this","posEwm");
         HpOrderIdParams params = new HpOrderIdParams();
         params.setPayId(payId);
         params.setPayAmount(payAmount);
@@ -342,7 +337,6 @@ public class PayActivity extends BaseActivity {
     }
 
     private void weixinEwm(final long payId) {
-        Log.v("this","weixinEwm");
         HpOrderIdParams params = new HpOrderIdParams();
         params.setPayId(payId);
         MHttpManagerFactory.getAccountManager().creatWeinxinEwm(this, params,
@@ -357,7 +351,6 @@ public class PayActivity extends BaseActivity {
                         in.putExtra("orderCode",
                                 getIntent().getStringExtra("orderCode"));
 
-                        Log.v("this", "payId:" + payId + " ewm:" + result.getCodeUrl() + " payAmount:" + payAmount + " orderCode:" + getIntent().getStringExtra("orderCode"));
                         startActivity(in);
                         finish();
                     }
@@ -375,7 +368,6 @@ public class PayActivity extends BaseActivity {
     }
 
     private void payCash(long payId) {
-        Log.v("this","payCash");
         String cash = etXj.getText().toString();
         if (TextUtils.isEmpty(cash)) {
             ToastUtils.show(this, "请输入票据单号");

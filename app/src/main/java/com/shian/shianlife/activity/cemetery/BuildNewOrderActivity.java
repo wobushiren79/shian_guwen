@@ -196,14 +196,16 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         params.setPersonNum(dataPersonNum);
         params.setCustomerLocation(dataUserLocation);
 
-        Log.v("this", "CustomerName" + dataName);
-        Log.v("this", "CustomerMobile" + dataPhone);
-        Log.v("this", "PromiseTime" + dataTime);
-        Log.v("this", "PlanCemeteryLocation" + dataLocation);
-        Log.v("this", "TrafficWay" + dataTraffic);
-        Log.v("this", "PersonNum" + dataPersonNum);
-        Log.v("this", "Customer" + dataUserLocation);
-        Log.v("this", "submitType" + params.getSubmitType());
+
+        Utils.LogVPrint( "CustomerName" + dataName);
+        Utils.LogVPrint( "CustomerMobile" + dataPhone);
+        Utils.LogVPrint("PromiseTime" + dataTime);
+        Utils.LogVPrint( "PlanCemeteryLocation" + dataLocation);
+        Utils.LogVPrint( "TrafficWay" + dataTraffic);
+        Utils.LogVPrint( "PersonNum" + dataPersonNum);
+        Utils.LogVPrint(  "Customer" + dataUserLocation);
+        Utils.LogVPrint(  "submitType" + params.getSubmitType());
+
 
         MHttpManagerFactory.getAccountManager().saveCemeteryBuildData(BuildNewOrderActivity.this, params, new HttpResponseHandler<Object>() {
             @Override

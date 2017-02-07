@@ -70,11 +70,11 @@ public class SendOrderStep4 extends BaseSendOrder {
             @Override
             public void onSuccess(HrGetSendOrderDataFive result) {
 
-                Log.v("this", "getDeadLocation" + result.getDeadLocation());
-                Log.v("this", "getZsLocation" + result.getZsLocation());
-                Log.v("this", "getAgentmanLocation" + result.getAgentmanLocation());
-                Log.v("this", "getTheDayLocation" + result.getTheDayLocation());
-                Log.v("this", "getDeadmanLocation" + result.getDeadmanLocation());
+                Utils.LogVPrint("getDeadLocation" + result.getDeadLocation());
+                Utils.LogVPrint("getZsLocation" + result.getZsLocation());
+                Utils.LogVPrint("getAgentmanLocation" + result.getAgentmanLocation());
+                Utils.LogVPrint("getTheDayLocation" + result.getTheDayLocation());
+                Utils.LogVPrint("getDeadmanLocation" + result.getDeadmanLocation());
 
                 Intent intent = new Intent(SendOrderActivity.UPDATA_ACTION);
                 ArrayList<String> data = new ArrayList<String>();

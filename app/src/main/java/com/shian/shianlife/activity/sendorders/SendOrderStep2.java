@@ -75,16 +75,17 @@ public class SendOrderStep2 extends BaseSendOrder {
 
             @Override
             public void onSuccess(HrGetSendOrderDataThree result) {
-                Log.v("this", "getFuneralLocation" + result.getFuneralLocation());
-                Log.v("this", "getFireWay" + result.getFireWay());
-                Log.v("this", "getTrafficWay" + result.getTrafficWay());
-                Log.v("this", "getMeetTime" + result.getMeetTime());
-                Log.v("this", "getMeetLocation" + result.getMeetLocation());
-                Log.v("this", "getProcedureName" + result.getProcedureName());
-                Log.v("this", "getFirstDayRemark" + result.getFirstDayRemark());
-                Log.v("this", "getAfterLocation" + result.getAfterLocation());
-                Log.v("this", "getDeadLocation" + result.getDeadLocation());
-                Log.v("this", "getZsLocation" + result.getZsLocation());
+                Utils.LogVPrint("getFuneralLocation" + result.getFuneralLocation());
+                Utils.LogVPrint("getFireWay" + result.getFireWay());
+                Utils.LogVPrint("getTrafficWay" + result.getTrafficWay());
+                Utils.LogVPrint("getMeetTime" + result.getMeetTime());
+                Utils.LogVPrint("getMeetLocation" + result.getMeetLocation());
+                Utils.LogVPrint("getProcedureName" + result.getProcedureName());
+                Utils.LogVPrint("getFirstDayRemark" + result.getFirstDayRemark());
+                Utils.LogVPrint("getAfterLocation" + result.getAfterLocation());
+                Utils.LogVPrint("getDeadLocation" + result.getDeadLocation());
+                Utils.LogVPrint("getFuneralLocation" + result.getFuneralLocation());
+                Utils.LogVPrint("getZsLocation" + result.getZsLocation());
 
                 Intent intent = new Intent(SendOrderActivity.UPDATA_ACTION);
                 ArrayList<String> data = new ArrayList<String>();

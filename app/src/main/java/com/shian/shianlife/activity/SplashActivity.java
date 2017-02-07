@@ -38,9 +38,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
 
     @Override
     protected void onCreate(Bundle arg0) {
-        if (LOGFLAG) {
-            Log.v(LOG_TAG, "onCreate");
-        }
         super.onCreate(arg0);
         initPush();
 
