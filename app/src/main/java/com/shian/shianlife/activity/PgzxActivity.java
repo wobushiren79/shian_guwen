@@ -423,9 +423,9 @@ public class PgzxActivity extends BaseActivity {
                     // ev.setVisibility(View.VISIBLE);
                     // }
                     ev.setOnClickListener(new OnClickListener() {
-
                         @Override
                         public void onClick(View v) {
+                            Utils.LogVPrint("评价");
                             Intent intent = new Intent(PgzxActivity.this,
                                     EvaluateActivity.class);
                             intent.putExtra("orderId", getIntent()
@@ -554,8 +554,6 @@ public class PgzxActivity extends BaseActivity {
                                 }
                             });
                         }
-
-
                         break;
                     case 5:
                         if (templateItem.isHasComment()) {
@@ -565,6 +563,9 @@ public class PgzxActivity extends BaseActivity {
                         } else {
                             ev.setVisibility(View.VISIBLE);
                             tv4.setText("待评价");
+                            if(isShoukuan){
+                                ev.setVisibility(View.GONE);
+                            }
                         }
                         break;
                     case 6:
