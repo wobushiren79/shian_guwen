@@ -44,11 +44,6 @@ public class ImagePreviewActivity extends BaseActivity implements OnLongClickLis
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 0:
-                    Log.v("this", "1");
-                    Log.v("this", "1" + mBitmap.toString());
-                    Log.v("this", "mBitmap.getWidth:" + mBitmap.getWidth());
-                    Log.v("this", "metrics.widthPixels:" + metrics.widthPixels);
-                    Log.v("this", "h" + mBitmap.getHeight() * metrics.widthPixels / mBitmap.getWidth());
                     if (mBitmap.getWidth() <metrics.widthPixels) {
                         mImageView.setImageBitmap(mBitmap);
                     } else {
@@ -84,7 +79,6 @@ public class ImagePreviewActivity extends BaseActivity implements OnLongClickLis
         setContentView(mImageView);
         setTitle("查看图片");
         url = getIntent().getStringExtra("url");
-        Log.v("this", "url:" + url);
         mHandlerThread = new HandlerThread(getClass().getSimpleName());
         mHandlerThread.start();
         mThreadHandler = new Handler(mHandlerThread.getLooper()) {

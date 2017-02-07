@@ -46,7 +46,6 @@ public class CustomerActivity extends BaseActivity {
         super.onCreate(arg0);
         setContentView(R.layout.activity_customer);
         khxqType = getIntent().getIntExtra("khxqtype", -1);
-        Log.v("this", "CustomerActivity khxqType:" + khxqType);
         setTitle("客户详情");
         initView();
     }

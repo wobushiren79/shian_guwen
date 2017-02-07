@@ -86,7 +86,7 @@ public class SendOrderStep1 extends BaseSendOrder {
         initSp2("其他");
         initSp3("其他");
 
-        mSelectLayout.setData(1,new ArrayList<String>());
+        mSelectLayout.setData(1, new ArrayList<String>());
     }
 
 
@@ -151,17 +151,19 @@ public class SendOrderStep1 extends BaseSendOrder {
         params.setConsultId(consultId);
         params.setMeetTime(meetTime);
         params.setFirstDayRemark(mETRemark.getText().toString());
-        Log.v("this", "ConsultId" + params.getConsultId());
-        Log.v("this", "FuneralLocation:" + params.getFuneralLocation());
-        Log.v("this", "FireWay:" + params.getFireWay());
-        Log.v("this", "Traffice:" + params.getTrafficWay());
-        Log.v("this", "MeetTime" + params.getMeetTime());
-        Log.v("this", "MeetLocation" + params.getMeetLocation());
-        Log.v("this", "DeadmanCardIdPic:" + params.getDeadmanCardIdPic());
-        Log.v("this", "DeadmanCardIdPic:" + params.getDeadmanAccountPic());
-        Log.v("this", "AgentmanCardIdPic:" + params.getAgentmanCardIdPic());
-        Log.v("this", "DeadPic:" + params.getDeadPic());
-        Log.v("this", "FirstDayRemark:" + params.getFirstDayRemark());
+
+        Utils.LogVPrint("ConsultId" + params.getConsultId());
+        Utils.LogVPrint("FuneralLocation:" + params.getFuneralLocation());
+        Utils.LogVPrint("FireWay:" + params.getFireWay());
+        Utils.LogVPrint("Traffice:" + params.getTrafficWay());
+        Utils.LogVPrint("MeetTime" + params.getMeetTime());
+        Utils.LogVPrint("MeetLocation" + params.getMeetLocation());
+        Utils.LogVPrint("DeadmanCardIdPic:" + params.getDeadmanCardIdPic());
+        Utils.LogVPrint("DeadmanAccountPic:" + params.getDeadmanAccountPic());
+        Utils.LogVPrint("AgentmanCardIdPic:" + params.getAgentmanCardIdPic());
+        Utils.LogVPrint("DeadPic:" + params.getDeadPic());
+        Utils.LogVPrint("FirstDayRemark:" + params.getFirstDayRemark());
+
         MHttpManagerFactory.getAccountManager().saveSendOrderDataTwo(getContext(), params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart() {
@@ -195,25 +197,22 @@ public class SendOrderStep1 extends BaseSendOrder {
                     @Override
                     public void onSuccess(HrGetSendOrderDataTwo result) {
                         // TODO Auto-generated method stub
-                        Log.v("this", "getFuneralLocation:" + result.getFuneralLocation());
+                        Utils.LogVPrint("getFuneralLocation:" + result.getFuneralLocation());
+                        Utils.LogVPrint("getFireWay:" + result.getFireWay());
+                        Utils.LogVPrint("getTrafficWay:" + result.getTrafficWay());
+                        Utils.LogVPrint("getMeetTime:" + result.getMeetTime());
+                        Utils.LogVPrint("getMeetLocation:" + result.getMeetLocation());
+                        Utils.LogVPrint("getFirstDayRemark:" + result.getFirstDayRemark());
+                        Utils.LogVPrint("getDeadmanCardIdPic:" + result.getDeadmanCardIdPic());
+                        Utils.LogVPrint("getDeadmanAccountPic:" + result.getDeadmanAccountPic());
+                        Utils.LogVPrint("getDeadPic:" + result.getDeadPic());
+                        Utils.LogVPrint("getAgentmanCardIdPic:" + result.getAgentmanCardIdPic());
+                        Utils.LogVPrint("getDeadLocation:" + result.getDeadLocation());
+                        Utils.LogVPrint("getAgentmanLocation:" + result.getAgentmanLocation());
+                        Utils.LogVPrint("getDeadmanLocation:" + result.getDeadmanLocation());
+                        Utils.LogVPrint("getZsLocation:" + result.getZsLocation());
 
 
-                        Log.v("this", "getFireWay:" + result.getFireWay());
-                        Log.v("this", "getTrafficWay:" + result.getTrafficWay());
-                        Log.v("this", "getMeetTime:" + result.getMeetTime());
-                        Log.v("this", "getMeetLocation:" + result.getMeetLocation());
-                        Log.v("this", "getFirstDayRemark:" + result.getFirstDayRemark());
-
-                        Log.v("this", "getDeadmanCardIdPic:" + result.getDeadmanCardIdPic());
-                        Log.v("this", "getDeadmanAccountPic:" + result.getDeadmanAccountPic());
-                        Log.v("this", "getDeadPic:" + result.getDeadPic());
-                        Log.v("this", "getAgentmanCardIdPic:" + result.getAgentmanCardIdPic());
-
-
-                        Log.v("this", "getDeadLocation:" + result.getDeadLocation());
-                        Log.v("this", "getAgentmanLocation:" + result.getAgentmanLocation());
-                        Log.v("this", "getDeadmanLocation:" + result.getDeadmanLocation());
-                        Log.v("this", "getZsLocation:" + result.getZsLocation());
                         if (result.getFuneralLocation() != null) {
                             mETFuneralHome.setText(result.getFuneralLocation());
                         }
@@ -227,16 +226,11 @@ public class SendOrderStep1 extends BaseSendOrder {
                             }
                         }
                         if (result.getTrafficWay() != null) {
-                            Log.v("this", "trafficway!=null");
-
                             if (result.getTrafficWay().equals("其他")) {
-                                Log.v("this", "0");
                                 mSPTrafficWay.setSelection(0);
                             } else if (result.getTrafficWay().equals("客户自驾")) {
-                                Log.v("this", "1");
                                 mSPTrafficWay.setSelection(1);
                             } else if (result.getTrafficWay().equals("公司派车")) {
-                                Log.v("this", "2");
                                 mSPTrafficWay.setSelection(2);
                             }
                         }

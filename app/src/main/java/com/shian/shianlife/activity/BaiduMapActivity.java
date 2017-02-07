@@ -113,7 +113,6 @@ public class BaiduMapActivity extends Activity {
             mBaiduMap.clear();
             if (poiInfos != null) {
                 for (PoiInfo poiInfo : poiInfos) {
-                    Log.v("this", "poiInfo:" + poiInfo.name);
                     LatLng point = poiInfo.location;
                     //构建Marker图标
                     BitmapDescriptor bitmap = BitmapDescriptorFactory

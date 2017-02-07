@@ -132,7 +132,6 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
             mBaiduMap.clear();
             if (poiInfos != null) {
                 for (PoiInfo poiInfo : poiInfos) {
-                    Log.v("this", "poiInfo:" + poiInfo.name);
                     LatLng point = poiInfo.location;
                     //构建Marker图标
                     BitmapDescriptor bitmap = BitmapDescriptorFactory
@@ -192,7 +191,6 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
      * @param view
      */
     public void check(View view) {
-        Log.v("this", "location:" + locationPoint);
         Intent intent = new Intent(MapSelectLayoutView.THE_ACTION);
         intent.putExtra("numView", numView);
         intent.putExtra("location", locationPoint);

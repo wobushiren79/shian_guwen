@@ -21,9 +21,6 @@ public class WebActivity extends BaseActivity {
     protected void onCreate(Bundle arg0) {
 
         super.onCreate(arg0);
-        if (LOGFLAG) {
-            Log.v(LOG_TAG, "onCreate");
-        }
         RelativeLayout rl = new RelativeLayout(this);
         final WebView web = new WebView(this);
         rl.addView(web, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);

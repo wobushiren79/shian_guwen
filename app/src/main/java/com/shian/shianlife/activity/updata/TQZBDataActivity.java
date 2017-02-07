@@ -197,7 +197,6 @@ public class TQZBDataActivity extends BaseActivity {
     }
 
     private void uploadFile(final PicImageView ib, final String file, String path) {
-        Log.v("this", "file:" + file + " path:" + path);
         final ProgressBar pbVIew = (ProgressBar) ((ViewGroup) ib.getParent()).getChildAt(1);
         MHttpManagerFactory.getFileManager().upLoadFile(TQZBDataActivity.this, file, path,
                 new FileHttpResponseHandler<HrUploadFile>() {

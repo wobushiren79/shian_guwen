@@ -132,21 +132,20 @@ public class WSZDataActivity extends BaseActivity {
                     public void onSuccess(HrConsultUsageResult result) {
                         // TODO Auto-generated method stub
 
-                        Log.v("this", "Name:" + result.getConsultUsage().getName());
-                        Log.v("this", "CardId:" + result.getConsultUsage().getCardId());
-                        Log.v("this", "Age:" + result.getConsultUsage().getAge());
-                        Log.v("this", "Sex:" + result.getConsultUsage().getSex());
-                        Log.v("this", "ShoeSize:" + result.getConsultUsage().getShoeSize());
-                        Log.v("this", "State:" + result.getConsultUsage().getState());
-                        Log.v("this", "Birthday:" + result.getConsultUsage().getBirthday());
-                        Log.v("this", "Location:" + result.getConsultUsage().getLocation());
-                        Log.v("this", "ClothesData:" + result.getConsultUsage().getClothesData());
-                        Log.v("this", "OtherHealth:" + result.getConsultUsage().getOtherHealth());
-                        Log.v("this", "Note:" + result.getConsultUsage().getNote());
-
-                        Log.v("this", "AgentmanLocation:" + result.getConsultUsage().getAgentmanLocation());
-                        Log.v("this", "ZsLocation:" + result.getConsultUsage().getZsLocation());
-                        Log.v("this", "DeadLocation:" + result.getConsultUsage().getDeadLocation());
+                        Utils.LogVPrint("Name:" + result.getConsultUsage().getName());
+                        Utils.LogVPrint("CardId:" + result.getConsultUsage().getCardId());
+                        Utils.LogVPrint( "Age:" + result.getConsultUsage().getAge());
+                        Utils.LogVPrint( "Sex:" + result.getConsultUsage().getSex());
+                        Utils.LogVPrint("ShoeSize:" + result.getConsultUsage().getShoeSize());
+                        Utils.LogVPrint("State:" + result.getConsultUsage().getState());
+                        Utils.LogVPrint("Birthday:" + result.getConsultUsage().getBirthday());
+                        Utils.LogVPrint("Location:" + result.getConsultUsage().getLocation());
+                        Utils.LogVPrint( "ClothesData:" + result.getConsultUsage().getClothesData());
+                        Utils.LogVPrint("OtherHealth:" + result.getConsultUsage().getOtherHealth());
+                        Utils.LogVPrint("Note:" + result.getConsultUsage().getNote());
+                        Utils.LogVPrint("AgentmanLocation:" + result.getConsultUsage().getAgentmanLocation());
+                        Utils.LogVPrint("ZsLocation:" + result.getConsultUsage().getZsLocation());
+                        Utils.LogVPrint("DeadLocation:" + result.getConsultUsage().getDeadLocation());
 
                         List<String> listLocationData = new ArrayList<String>();
                         if (result.getConsultUsage().getAgentmanLocation() != null) {
@@ -303,17 +302,18 @@ public class WSZDataActivity extends BaseActivity {
 
         params.setNote(bz);
 
-        Log.v("this", "Name:" + params.getName());
-        Log.v("this", "CardId:" + params.getCardId());
-        Log.v("this", "Age:" + params.getAge());
-        Log.v("this", "Sex:" + params.getSex());
-        Log.v("this", "ShoeSize:" + params.getShoeSize());
-        Log.v("this", "State:" + params.getState());
-        Log.v("this", "Birthday:" + params.getBirthday());
-        Log.v("this", "Location:" + params.getLocation());
-        Log.v("this", "ClothesData:" + params.getClothesData());
-        Log.v("this", "OtherHealth:" + params.getOtherHealth());
-        Log.v("this", "Note:" + params.getNote());
+
+        Utils.LogVPrint("Name:" + params.getName());
+        Utils.LogVPrint("CardId:" + params.getCardId());
+        Utils.LogVPrint( "Age:" + params.getAge());
+        Utils.LogVPrint( "Sex:" + params.getSex());
+        Utils.LogVPrint("ShoeSize:" + params.getShoeSize());
+        Utils.LogVPrint( "State:" + params.getState());
+        Utils.LogVPrint( "Birthday:" + params.getBirthday());
+        Utils.LogVPrint("Location:" + params.getLocation());
+        Utils.LogVPrint("ClothesData:" + params.getClothesData());
+        Utils.LogVPrint( "OtherHealth:" + params.getOtherHealth());
+        Utils.LogVPrint("Note:" + params.getNote());
 
         MHttpManagerFactory.getAccountManager().saveCustomerUsage(WSZDataActivity.this,
                 params, new HttpResponseHandler<Object>() {

@@ -185,7 +185,6 @@ public class ListFwpdzView extends BaseOrderView {
                 tv_qt31.setText(model.getPayeeName());
                 // 治丧地址
                 TextView tv_qt41 = (TextView) view.getView(R.id.tv_qt41);
-                Log.v("this", "getFuneralAddress:" + model.getFuneralAddress());
                 tv_qt41.setText(model.getFuneralAddress());
                 View khxq = view.getView(R.id.fl_kexq);
                 ImageView ivPhone1 = (ImageView) view.getView(R.id.iv_qt12);
@@ -211,7 +210,6 @@ public class ListFwpdzView extends BaseOrderView {
                         @Override
                         public void onClick(View view) {
                             Intent intent = new Intent(getContext(), RoutePlanActivity.class);
-                            Log.v("this", model.getFuneralAddress());
                             intent.putExtra("RoutePlanLocation", model.getFuneralAddress());
                             getContext().startActivity(intent);
                         }

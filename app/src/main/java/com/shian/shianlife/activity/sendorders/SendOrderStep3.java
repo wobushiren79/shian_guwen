@@ -141,15 +141,15 @@ public class SendOrderStep3 extends BaseSendOrder {
 
             @Override
             public void onSuccess(HrGetSendOrderDataFour result) {
-                Log.v("this", "getZsLocation:" + result.getZsLocation());
-                Log.v("this", "getCrematorName:" + result.getCrematorName());
-                Log.v("this", "getServiceWindows:" + result.getServiceWindows());
-                Log.v("this", "getBodiesPark:" + result.getBodiesPark());
-                Log.v("this", "getBodiesParkName:" + result.getBodiesParkName());
-                Log.v("this", "getFireTime:" + result.getFireTime());
-                Log.v("this", "getBodiesByeTime:" + result.getBodiesByeTime());
-                Log.v("this", "getFuneralTime:" + result.getFuneralTime());
-                Log.v("this", "getFuneralRemark:" + result.getFuneralRemark());
+                Utils.LogVPrint("getZsLocation:" + result.getZsLocation());
+                Utils.LogVPrint("getCrematorName:" + result.getCrematorName());
+                Utils.LogVPrint("getServiceWindows:" + result.getServiceWindows());
+                Utils.LogVPrint("getBodiesPark:" + result.getBodiesPark());
+                Utils.LogVPrint( "getBodiesParkName:" + result.getBodiesParkName());
+                Utils.LogVPrint( "getFireTime:" + result.getFireTime());
+                Utils.LogVPrint( "getBodiesByeTime:" + result.getBodiesByeTime());
+                Utils.LogVPrint( "getFuneralTime:" + result.getFuneralTime());
+                Utils.LogVPrint("getFuneralRemark:" + result.getFuneralRemark());
 
                 if (result.getCrematorName() != null) {
                     if (result.getCrematorName().equals("其他")) {

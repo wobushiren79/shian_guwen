@@ -25,6 +25,7 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.view.customer.PicImageView;
 import com.shian.shianlife.common.view.finger.DrawView;
 import com.shian.shianlife.fragment.OrderFragment;
@@ -201,21 +202,20 @@ public class ContractDataActivity extends BaseActivity {
                         String adviserName = result.getAdviserName();
 
 
-                        Log.v("this", "deadmanName" + deadmanName);
-                        Log.v("this", "deadmanSex" + deadmanSex);
-                        Log.v("this", "deadmanState" + deadmanState);
-                        Log.v("this", "deadmanCardId" + deadmanCardId);
-                        Log.v("this", "deadmanAge" + deadmanAge);
-                        Log.v("this", "deadmanShoes" + deadmanShoes);
-                        Log.v("this", "agentmanName" + agentmanName);
-                        Log.v("this", "agentmanPhone" + agentmanPhone);
-                        Log.v("this", "agentmanEmail" + agentmanEmail);
-                        Log.v("this", "agentmanCardId" + agentmanCardId);
-                        Log.v("this", "agentmanLocation" + agentmanLocation);
-                        Log.v("this", "agentmanRelation" + agentmanRelation);
-
-                        Log.v("this", "zsLocation" + zsLocation);
-                        Log.v("this", "adviserName" + adviserName);
+                        Utils.LogVPrint("deadmanName" + deadmanName);
+                        Utils.LogVPrint("deadmanSex" + deadmanSex);
+                        Utils.LogVPrint("deadmanState" + deadmanState);
+                        Utils.LogVPrint( "deadmanCardId" + deadmanCardId);
+                        Utils.LogVPrint("deadmanAge" + deadmanAge);
+                        Utils.LogVPrint("deadmanShoes" + deadmanShoes);
+                        Utils.LogVPrint("agentmanPhone" + agentmanPhone);
+                        Utils.LogVPrint( "agentmanName" + agentmanName);
+                        Utils.LogVPrint("agentmanEmail" + agentmanEmail);
+                        Utils.LogVPrint("agentmanCardId" + agentmanCardId);
+                        Utils.LogVPrint( "agentmanLocation" + agentmanLocation);
+                        Utils.LogVPrint( "agentmanRelation" + agentmanRelation);
+                        Utils.LogVPrint( "zsLocation" + zsLocation);
+                        Utils.LogVPrint("adviserName" + adviserName);
 
                         mTVFirstName.setText(agentmanName);
                         mTVDeadName.setText(deadmanName);
@@ -325,7 +325,7 @@ public class ContractDataActivity extends BaseActivity {
                         add.setFileName(file);
                         add.setFileUrl(t.getNameMap().get(file).toString());
                         String FileUrl = AppContansts.OSSURL + add.getFileUrl();
-                        Log.v("this", "FileUrl:" + FileUrl);
+                        Utils.LogVPrint( "FileUrl:" + FileUrl);
                         HpSaveContractData params = new HpSaveContractData();
                         params.setPicUrl(FileUrl);
                         params.setConsultId(consultId);

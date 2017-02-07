@@ -88,8 +88,8 @@ public class JBRDataActivity extends BaseActivity {
         mTVBack.setOnClickListener(onClickListener);
         mTVNext.setOnClickListener(onClickListener);
 
-        selectLayoutView1.setData(1,new ArrayList<String>());
-        selectLayoutView2.setData(2,new ArrayList<String>());
+        selectLayoutView1.setData(1, new ArrayList<String>());
+        selectLayoutView2.setData(2, new ArrayList<String>());
     }
 
     int mapCheckNum = 0;
@@ -165,7 +165,7 @@ public class JBRDataActivity extends BaseActivity {
             ToastUtils.show(JBRDataActivity.this, "经办人邮箱不能为空");
             return;
         }
-        if(!Utils.isEmail(email)){
+        if (!Utils.isEmail(email)) {
             ToastUtils.show(JBRDataActivity.this, "经办人邮箱格式错误");
             return;
         }
@@ -179,16 +179,15 @@ public class JBRDataActivity extends BaseActivity {
         params.setZsLocation(zsLocation);
         params.setBirthday(TransitionDate.StrToDate("2016-12-13", "yyyy-MM-dd").getTime());
 
-        Log.v("this", "ConsultId:" + params.getConsultId());
-        Log.v("this", "Name:" + params.getName());
-        Log.v("this", "LinkInfo:" + params.getLinkInfo());
-        Log.v("this", "Location:" + params.getLocation());
-        Log.v("this", "zsLocation:" + params.getZsLocation());
-        Log.v("this", "CardId:" + params.getCardId());
-        Log.v("this", "Email:" + params.getEmail());
-        Log.v("this", "Remark:" + params.getRemark());
-        Log.v("this", "Relation:" + params.getRelation());
-
+        Utils.LogVPrint("ConsultId:" + params.getConsultId());
+        Utils.LogVPrint("Name:" + params.getName());
+        Utils.LogVPrint("LinkInfo:" + params.getLinkInfo());
+        Utils.LogVPrint("Location:" + params.getLocation());
+        Utils.LogVPrint("zsLocation:" + params.getZsLocation());
+        Utils.LogVPrint("CardId:" + params.getCardId());
+        Utils.LogVPrint("Email:" + params.getEmail());
+        Utils.LogVPrint("Remark:" + params.getRemark());
+        Utils.LogVPrint("Relation:" + params.getRelation());
 
         MHttpManagerFactory.getAccountManager().saveCustomerAgentman(JBRDataActivity.this, params,
                 new HttpResponseHandler<Object>() {
@@ -231,14 +230,14 @@ public class JBRDataActivity extends BaseActivity {
                     @Override
                     public void onSuccess(HrConsultAgentman result) {
                         // TODO Auto-generated method stub
-                        Log.v("this", "Name:" + result.getConsultAgentman().getName());
-                        Log.v("this", "LinkInfo:" + result.getConsultAgentman().getLinkInfo());
-                        Log.v("this", "Location:" + result.getConsultAgentman().getLocation());
-                        Log.v("this", "CardId:" + result.getConsultAgentman().getCardId());
-                        Log.v("this", "Email:" + result.getConsultAgentman().getEmail());
-                        Log.v("this", "Remark:" + result.getConsultAgentman().getRemark());
-                        Log.v("this", "Relation:" + result.getConsultAgentman().getRelation());
-                        Log.v("this", "zsLocation" + result.getConsultAgentman().getZsLocation());
+                        Utils.LogVPrint("Name:" + result.getConsultAgentman().getName());
+                        Utils.LogVPrint("LinkInfo:" + result.getConsultAgentman().getLinkInfo());
+                        Utils.LogVPrint("Location:" + result.getConsultAgentman().getLocation());
+                        Utils.LogVPrint("CardId:" + result.getConsultAgentman().getCardId());
+                        Utils.LogVPrint("Email:" + result.getConsultAgentman().getEmail());
+                        Utils.LogVPrint("Remark:" + result.getConsultAgentman().getRemark());
+                        Utils.LogVPrint("Relation:" + result.getConsultAgentman().getRelation());
+                        Utils.LogVPrint("zsLocation" + result.getConsultAgentman().getZsLocation());
 
                         mETJBRName.setText(result.getConsultAgentman().getName());
                         mETJBRPhone.setText(result.getConsultAgentman().getLinkInfo());

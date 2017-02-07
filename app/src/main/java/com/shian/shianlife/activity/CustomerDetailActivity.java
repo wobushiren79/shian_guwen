@@ -2,6 +2,7 @@ package com.shian.shianlife.activity;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.view.customerdetail.CemeteryDetailInfoView;
 import com.shian.shianlife.common.view.customerdetail.ContractDetailInfoView;
 import com.shian.shianlife.common.view.customerdetail.CustomerDeadInfoView;
@@ -175,17 +176,17 @@ public class CustomerDetailActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(HrGetCustomerFuneralOther result) {
-                        Log.v("this", "getDeadTime:" + result.getDeadTime());
-                        Log.v("this", "getDeadLocation:" + result.getDeadLocation());
-                        Log.v("this", "getZsLocation:" + result.getZsLocation());
-                        Log.v("this", "getFuneralLocation:" + result.getFuneralLocation());
-                        Log.v("this", "getFuneralTime:" + result.getFuneralTime());
-                        Log.v("this", "getFireTime:" + result.getFireTime());
-                        Log.v("this", "getCrematorName:" + result.getCrematorName());
-                        Log.v("this", "getServiceWindows:" + result.getServiceWindows());
-                        Log.v("this", "getBodiesPark:" + result.getBodiesPark());
-                        Log.v("this", "getBodiesByeTime:" + result.getBodiesByeTime());
-                        Log.v("this", "getAshDeal:" + result.getAshDeal());
+                        Utils.LogVPrint( "getDeadTime:" + result.getDeadTime());
+                        Utils.LogVPrint("getDeadLocation:" + result.getDeadLocation());
+                        Utils.LogVPrint( "getZsLocation:" + result.getZsLocation());
+                        Utils.LogVPrint( "getFuneralLocation:" + result.getFuneralLocation());
+                        Utils.LogVPrint( "getFuneralTime:" + result.getFuneralTime());
+                        Utils.LogVPrint( "getFireTime:" + result.getFireTime());
+                        Utils.LogVPrint(  "getCrematorName:" + result.getCrematorName());
+                        Utils.LogVPrint(  "getServiceWindows:" + result.getServiceWindows());
+                        Utils.LogVPrint( "getBodiesPark:" + result.getBodiesPark());
+                        Utils.LogVPrint( "getBodiesByeTime:" + result.getBodiesByeTime());
+                        Utils.LogVPrint( "getAshDeal:" + result.getAshDeal());
                         fdiv.setData(result);
                     }
 

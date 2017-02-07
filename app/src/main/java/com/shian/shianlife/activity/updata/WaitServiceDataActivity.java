@@ -18,6 +18,7 @@ import com.shian.shianlife.activity.MapLocation;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.TransitionDate;
+import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
@@ -57,7 +58,6 @@ public class WaitServiceDataActivity extends BaseActivity {
     }
 
     private void initData() {
-        Log.v("this", "initData");
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId(consultId);
         MHttpManagerFactory.getAccountManager().getWaitServicePostData(WaitServiceDataActivity.this,
@@ -69,13 +69,12 @@ public class WaitServiceDataActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(HrGetWaitServicePostData result) {
-                        Log.v("this", "onSuccess");
 
-                        Log.v("this", "DeadLocation:" + result.getDeadLocation());
-                        Log.v("this", "DeadTime:" + result.getDeadTime());
-                        Log.v("this", "AgentmanLocation:" + result.getAgentmanLocation());
-                        Log.v("this", "DeadmanLocation:" + result.getDeadmanLocation());
-                        Log.v("this", "ZsLocation:" + result.getZsLocation());
+                        Utils.LogVPrint("DeadLocation:" + result.getDeadLocation());
+                        Utils.LogVPrint("DeadTime:" + result.getDeadTime());
+                        Utils.LogVPrint("AgentmanLocation:" + result.getAgentmanLocation());
+                        Utils.LogVPrint("DeadmanLocation:" + result.getDeadmanLocation());
+                        Utils.LogVPrint( "ZsLocation:" + result.getZsLocation());
 
                         if (result.getDeadLocation() != null) {
                             listLocation.add(result.getDeadLocation());
@@ -98,7 +97,6 @@ public class WaitServiceDataActivity extends BaseActivity {
 
                     @Override
                     public void onError(String message) {
-                        Log.v("this", "onError");
                     }
                 });
     }

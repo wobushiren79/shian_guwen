@@ -524,7 +524,6 @@ public class QTView extends BaseOrderView {
                 ddxq.setOnClickListener(clickListener);
                 tk.setOnClickListener(clickListener);
                 // khxq.setOnClickListener(clickListener);
-                Log.v("this", "getOrderId():" + model.getOrderId());
                 if (model.getOrderId() == 0 && !model.isShowFirstTalk()) {
                     tv_talkagain.setVisibility(VISIBLE);
                     tv_talkagain.setOnClickListener(clickListener);
@@ -594,7 +593,6 @@ public class QTView extends BaseOrderView {
                     break;
                 case R.id.tv_talkagain:
                     //二次洽谈资料
-                    Log.v("this", "二次洽谈资料");
                     HpConsultIdParams params = new HpConsultIdParams();
                     params.setConsultId(model.getConsultId());
                     MHttpManagerFactory.getAccountManager().getTalkFailData(getContext(),
@@ -736,15 +734,11 @@ public class QTView extends BaseOrderView {
 
             if (model.getOrderId() == 0) {
                 //未创建订单时
-                Log.v("this", "未创建订单时");
-                Log.v("this", "是否是第一次洽谈:" + model.isShowFirstTalk());
                 Intent intent = new Intent(getContext(), SaveTalkFailActivity.class);
                 intent.putExtra("SaveTalkFailActivity", model.getConsultId());
                 getContext().startActivity(intent);
             } else {
                 //创建订单后
-                Log.v("this", "创建订单后");
-                Log.v("this", "step:" + model.getStep());
                 Intent intent = null;
                 switch (model.getStep()) {
                     case 0:

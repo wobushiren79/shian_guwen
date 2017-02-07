@@ -362,13 +362,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 AppContansts.LOCAL_STREET = location.getAddress().street;
                 AppContansts.LOCAL_STREETNUM = location.getAddress().streetNumber;
                 AppContansts.LOCAL_ADDRESS = location.getAddress().address;
-                Log.v("this", "location.getAddrStr():" + location.getAddrStr()
-                        + " province:" + location.getAddress().province
-                        + " city:" + location.getAddress().city
-                        + " street:" + location.getAddress().street
-                        + " streetNumber:" + location.getAddress().streetNumber
-                        + " city:" + location.getAddress().city
-                );
                 AppContansts.LOCAL_latitude = location.getLatitude();
                 AppContansts.LOCAL_longitude = location.getLongitude();
                 setTitleLocation(AppContansts.LOCAL_STREET + AppContansts.LOCAL_STREETNUM);

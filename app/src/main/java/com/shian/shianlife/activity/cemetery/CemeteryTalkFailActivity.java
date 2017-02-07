@@ -287,7 +287,6 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
         inType = getIntent().getIntExtra(CemeteryQTView.TALK_INFO_STATE, -1);
         beSpeakId = getIntent().getLongExtra(CemeteryQTView.TALK_INFO_ID, -1);
         setTitle("洽谈信息");
-        Log.v("this", "inType:" + inType);
         planToBuyList = Utils.stringsToList(SelectData.CEMETERY_TYPE);
         stateList = Utils.stringsToList(SelectData.CEMETERY_STATE);
         relationList = Utils.stringsToList(SelectData.CEMETERY_RELATION);

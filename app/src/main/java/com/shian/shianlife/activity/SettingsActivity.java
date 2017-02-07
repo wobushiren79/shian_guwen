@@ -113,7 +113,6 @@ public class SettingsActivity extends BaseActivity {
                             @Override
                             public void onSuccess(Object result) {
                                 // TODO Auto-generated method stub
-                                Log.v("this","onsuccess");
                                 SharePerfrenceUtils.setShareAutoLogin(
                                         getBaseContext(), false);
                                 PushManager.startWork(getApplicationContext(),

@@ -155,10 +155,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     private void initLogin(String channelId) {
         ShareLogin loginS = SharePerfrenceUtils.getLoginShare(this);
         if (loginS.isAutoLogin()) {
-            if (LOGFLAG) {
-                Log.v(LOG_TAG, "isAutoLogin");
-            }
-
             if (loginS.getLoginType() == 0) {
                 //登录状态为普通状态
                 HpLoginParams params = new HpLoginParams();
@@ -226,9 +222,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
 
 
         } else {
-            if (LOGFLAG) {
-                Log.v(LOG_TAG, "noAutoLogin");
-            }
             initView();
         }
     }
@@ -241,7 +234,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
 
                 PushConstants.LOGIN_TYPE_API_KEY,
                 Utils.getMetaValue(this, "api_key"));
-        Log.v("this", "api_key:" + Utils.getMetaValue(this, "api_key"));
         // Push: 如果想基于地理位置推送，可以打开支持地理位置的推送的开关
         // PushManager.enableLbs(getApplicationContext());
         // Push: 设置自定义的通知样式，具体API介绍见用户手册，如果想使用系统默认的可以不加这段代码
@@ -269,9 +261,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     @Override
     public void onPush(String channelId) {
         // TODO Auto-generated method stub
-        if (LOGFLAG) {
-            Log.v(LOG_TAG, "channelId:" + channelId);
-        }
         initLogin(channelId);
     }
 }

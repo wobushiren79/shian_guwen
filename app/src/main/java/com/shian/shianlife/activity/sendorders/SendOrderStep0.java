@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.shian.shianlife.R;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.TransitionDate;
+import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
@@ -46,12 +47,11 @@ public class SendOrderStep0 extends BaseSendOrder {
                     @Override
                     public void onSuccess(HrGetSendOrderDataOne result) {
                         // TODO Auto-generated method stub
-                        Log.v("this", "SendOrderStep0 onSuccess");
-                        Log.v("this", "Time:" + result.getDeadTime());
-                        Log.v("this", "AgentmanLocation:" + result.getAgentmanLocation());
-                        Log.v("this", "DeadLocation:" + result.getDeadLocation());
-                        Log.v("this", "DeadLocation:" + result.getDeadmanLocation());
-                        Log.v("this", "ZsLocation:" + result.getZsLocation());
+                        Utils.LogVPrint("Time:" + result.getDeadTime());
+                        Utils.LogVPrint("AgentmanLocation:" + result.getAgentmanLocation());
+                        Utils.LogVPrint("DeadLocation:" + result.getDeadLocation());
+                        Utils.LogVPrint("DeadmanLocation:" + result.getDeadmanLocation());
+                        Utils.LogVPrint("ZsLocation:" + result.getZsLocation());
 
                         if (result.getAgentmanLocation() != null) {
                             listData.add(result.getAgentmanLocation());

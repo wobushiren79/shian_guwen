@@ -676,7 +676,6 @@ public class PgzxActivity extends BaseActivity {
             mTVShenHeNum.setText(waitSHNum + "");
             mTVWaitNum.setText(waitPDNum + "");
         }
-        Log.v("this", "setNum over");
     }
 
     private void setState() {
