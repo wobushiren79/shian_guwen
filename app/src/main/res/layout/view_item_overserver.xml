@@ -224,7 +224,7 @@
 
             <TextView
                 style="@style/orderlist_item_btn_textStyle"
-                android:layout_width="@dimen/dimen_400dp"
+                android:layout_width="@dimen/dimen_250dp"
                 android:layout_height="@dimen/dimen_60dp"
                 android:text="订单详情" />
         </FrameLayout>

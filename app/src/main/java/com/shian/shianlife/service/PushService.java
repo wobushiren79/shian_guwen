@@ -13,6 +13,7 @@ import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.MainActivity;
+import com.shian.shianlife.activity.SplashActivity;
 import com.shian.shianlife.common.push.Utils;
 
 /**
@@ -54,13 +55,14 @@ public class PushService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             Notification.Builder builder = new Notification.Builder(this.getApplicationContext());
-            Intent nfIntent = new Intent(this, MainActivity.class);
-            builder.setContentIntent(PendingIntent.getActivity(this, 0, nfIntent, 0)) // 设置PendingIntent
+//            Intent nfIntent = new Intent(this, SplashActivity.class);
+            builder
+//                    .setContentIntent(PendingIntent.getActivity(this, 0, nfIntent, 0)) // 设置PendingIntent
                     .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.mipmap.ic_launcher)) // 设置下拉列表中的图标(大图标)
                     .setContentTitle("圆满人生") // 设置下拉列表里的标题
                     .setSmallIcon(R.mipmap.ic_launcher) // 设置状态栏内的小图标
-                    .setContentText("已开启消息通知") // 设置上下文内容
-                    .setWhen(System.currentTimeMillis()); // 设置该通知发生的时间
+                    .setContentText("已开启消息通知"); // 设置上下文内容
+//                    .setWhen(System.currentTimeMillis()); // 设置该通知发生的时间
             Notification notification = null; // 获取构建好的Notification
 
             notification = builder.build();

@@ -537,7 +537,7 @@ public class CemeteryQTView extends BaseOrderView {
 
                     @Override
                     public void onError(String message) {
-
+                        ToastUtils.show(getContext(), "接单失败");
                     }
                 });
 
@@ -567,7 +567,7 @@ public class CemeteryQTView extends BaseOrderView {
 
                     @Override
                     public void onError(String message) {
-
+                        ToastUtils.show(getContext(), "拒单失败");
                     }
                 });
     }
