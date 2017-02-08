@@ -113,7 +113,9 @@ public class CetemeryTextSelectLayoutView extends LinearLayout {
         }
     };
 
-
+    /**
+     * 设置不可点击
+     */
     public void setStateShow() {
         mSPContent.setEnabled(false);
         mSPContent.setBackgroundResource(R.drawable.bg_cemetery_item_et_1);

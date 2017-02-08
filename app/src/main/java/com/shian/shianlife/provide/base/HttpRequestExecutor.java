@@ -19,6 +19,7 @@ import com.shian.shianlife.activity.LoginActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.FilePathUtils;
 import com.shian.shianlife.common.utils.ObjectMapperFactory;
+import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.mapapi.CustomDialog;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -79,7 +80,6 @@ public class HttpRequestExecutor {
             if (params != null) {
                 String httpParams = params.getHttpParams();
                 httpEntity = new StringEntity(httpParams, HTTP.UTF_8);
-
             }
             if (method.contains("doLogout") || method.contains("doLogin")
                     || method.contains("address/load")) {

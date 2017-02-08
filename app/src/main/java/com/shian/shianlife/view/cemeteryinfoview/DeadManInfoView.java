@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.provide.MHttpManagerFactory;
+import com.shian.shianlife.provide.base.HttpResponseHandler;
+import com.shian.shianlife.provide.params.HpCemeteryIdParams;
+import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessTwo;
 import com.shian.shianlife.view.CetemeryTextSelectLayoutView;
 import com.shian.shianlife.view.SelectData;
 
@@ -20,7 +24,7 @@ import java.util.List;
  * Created by Administrator on 2017/1/11.
  */
 
-public class DeadManInfoView extends LinearLayout implements CetemeryTextSelectLayoutView.onSelectedListener {
+public class DeadManInfoView extends BaseInfoView implements CetemeryTextSelectLayoutView.onSelectedListener {
     private View view;
 
     CetemeryTextSelectLayoutView mSelectDeadManSex1;
@@ -54,6 +58,59 @@ public class DeadManInfoView extends LinearLayout implements CetemeryTextSelectL
 
         initData();
         initView();
+        getData();
+    }
+
+    private void getData() {
+        HpCemeteryIdParams params=new HpCemeteryIdParams();
+        params.setBespeakId(beSpeakId);
+        MHttpManagerFactory.getAccountManager().getCemeteryTalkSuccessTwo(getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessTwo>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(HrGetCemeteryTalkSuccessTwo result) {
+                Utils.LogVPrint("getDeadmanOneName:"+result.getDeadmanOneName());
+                Utils.LogVPrint("getDeadmanOneAge:"+result.getDeadmanOneAge());
+                Utils.LogVPrint("getDeadmanOneSex:"+result.getDeadmanOneSex());
+                Utils.LogVPrint("getDeadmanOneState:"+result.getDeadmanOneState());
+                Utils.LogVPrint("getDeadmanOneCardId:"+result.getDeadmanOneCardId());
+                Utils.LogVPrint("getDeadmanOneDeadTime:"+result.getDeadmanOneDeadTime());
+
+                Utils.LogVPrint("getDeadmanTwoName:"+result.getDeadmanTwoName());
+                Utils.LogVPrint("getDeadmanTwoAge:"+result.getDeadmanTwoAge());
+                Utils.LogVPrint("getDeadmanTwoSex:"+result.getDeadmanTwoSex());
+                Utils.LogVPrint("getDeadmanTwoState:"+result.getDeadmanTwoState());
+                Utils.LogVPrint("getDeadmanTwoCardId:"+result.getDeadmanTwoCardId());
+                Utils.LogVPrint("getDeadmanTwoDeadTime:"+result.getDeadmanTwoDeadTime());
+
+                Utils.LogVPrint("getRemark"+result.getRemark());
+
+                mETDeadManName1.setText(result.getDeadmanOneName());
+                mETDeadManAge1.setText(result.getDeadmanOneAge());
+                mSelectDeadManSex1.setString(result.getDeadmanOneSex());
+                mSelectDeadManState1.setString(result.getDeadmanOneState());
+                mETDeadManCardId1.setText(result.getDeadmanOneCardId());
+                mTVDeadManTime1.setText(result.getDeadmanOneDeadTime());
+
+
+                mETDeadManName2.setText(result.getDeadmanTwoName());
+                mETDeadManAge2.setText(result.getDeadmanTwoAge());
+                mSelectDeadManSex2.setString(result.getDeadmanTwoSex());
+                mSelectDeadManState2.setString(result.getDeadmanTwoState());
+                mETDeadManCardId2.setText(result.getDeadmanTwoCardId());
+                mTVDeadManTime2.setText(result.getDeadmanTwoDeadTime());
+
+                mETRemark.setText(result.getRemark());
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
     }
 
     private void initData() {
@@ -121,5 +178,9 @@ public class DeadManInfoView extends LinearLayout implements CetemeryTextSelectL
         mTVDeadManTime2.setClickable(false);
 
         mETRemark.setFocusable(false);
+    }
+    @Override
+    public void saveData() {
+        super.saveData();
     }
 }

@@ -20,7 +20,7 @@ import java.util.List;
  * Created by Administrator on 2017/1/11.
  */
 
-public class AgentManInfoView extends LinearLayout implements CetemeryTextSelectLayoutView.onSelectedListener {
+public class AgentManInfoView extends BaseInfoView implements CetemeryTextSelectLayoutView.onSelectedListener {
     private View view;
 
     CetemeryTextSelectLayoutView mSelectRelation;
@@ -80,5 +80,10 @@ public class AgentManInfoView extends LinearLayout implements CetemeryTextSelect
         mETAgentManCardId.setFocusable(false);
         mETAgentManEmail.setFocusable(false);
         mETAgentManRemark.setFocusable(false);
+    }
+
+    @Override
+    public void saveData() {
+        super.saveData();
     }
 }

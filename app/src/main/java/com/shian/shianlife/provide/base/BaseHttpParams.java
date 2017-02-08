@@ -17,9 +17,8 @@ import com.shian.shianlife.provide.params.ContentParams;
  */
 public class BaseHttpParams
 {
-
 	public String getHttpParams() {
-		ContentParams<BaseHttpParams> pa=	new ContentParams<BaseHttpParams>();
+		ContentParams<BaseHttpParams> pa=new ContentParams<BaseHttpParams>();
 		pa.setContent(this);
 		String contentParams=JSONUtil.writeEntityToJSONString(pa);
 		Log.e("tag", "contentParams="+contentParams);

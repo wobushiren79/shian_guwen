@@ -24,7 +24,8 @@ public class CemeteryOrderModel {
 
     private Integer infoStatus;//资料填写状态：0，未填写信息。1，填写了购墓订单，2.填写了使用者信息，3填写了经办人信息
     private long bespeakAssignId;//咨询指派ID
-    private boolean isEdit;//是否可编辑（true:可以编辑 false：不可编辑 ）
+    private Integer isEdit;//是否可编辑（1:可以编辑 0：不可编辑 ）
+
 
     public long getBespeakId() {
         return bespeakId;
@@ -165,13 +166,11 @@ public class CemeteryOrderModel {
         this.infoStatus = infoStatus;
     }
 
-
-
-    public boolean isEdit() {
+    public Integer getIsEdit() {
         return isEdit;
     }
 
-    public void setEdit(boolean edit) {
-        isEdit = edit;
+    public void setIsEdit(Integer isEdit) {
+        this.isEdit = isEdit;
     }
 }

@@ -10,6 +10,8 @@ public class HpConsultIdParams extends BaseHttpParams {
 	String introduce;
 	String curAddress;
 
+
+
 	public String getCurAddress() {
 		return curAddress;
 	}

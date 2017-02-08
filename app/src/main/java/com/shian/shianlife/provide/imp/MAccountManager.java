@@ -7,6 +7,9 @@ import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpAcceptParams;
 import com.shian.shianlife.provide.params.HpAddConsultParams;
 import com.shian.shianlife.provide.params.HpAuditOrder;
+import com.shian.shianlife.provide.params.HpCemeteryIdParams;
+import com.shian.shianlife.provide.params.HpCetemeryAcceptParams;
+import com.shian.shianlife.provide.params.HpCetemeryRejectParams;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpGetOrderDetailParams;
 import com.shian.shianlife.provide.params.HpLoginParams;
@@ -19,6 +22,8 @@ import com.shian.shianlife.provide.params.HpRefundParams;
 import com.shian.shianlife.provide.params.HpRejectParams;
 import com.shian.shianlife.provide.params.HpSaveCemeteryBuildData;
 import com.shian.shianlife.provide.params.HpSaveCemeteryTalkData;
+import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessOne;
+import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessTwo;
 import com.shian.shianlife.provide.params.HpSaveComment;
 import com.shian.shianlife.provide.params.HpSaveContractData;
 import com.shian.shianlife.provide.params.HpSaveCustomerAgentmanParams;
@@ -45,6 +50,8 @@ import com.shian.shianlife.provide.result.HrConsultFuneral;
 import com.shian.shianlife.provide.result.HrConsultUsageResult;
 import com.shian.shianlife.provide.result.HrGetCemeteryBuildData;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkData;
+import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessOne;
+import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessTwo;
 import com.shian.shianlife.provide.result.HrGetComment;
 import com.shian.shianlife.provide.result.HrGetContractData;
 import com.shian.shianlife.provide.result.HrGetCustomerContract;
@@ -742,9 +749,8 @@ public interface MAccountManager extends HttpManager {
      * @param params
      * @param handler
      */
-    public void acceptCemetery(Context context, HpAcceptParams params,
+    public void acceptCemetery(Context context, HpCetemeryAcceptParams params,
                        HttpResponseHandler<Object> handler);
-
 
     /**
      * 公墓系统拒单
@@ -753,7 +759,7 @@ public interface MAccountManager extends HttpManager {
      * @param params
      * @param handler
      */
-    public void rejectCemetery(Context context, HpRejectParams params,
+    public void rejectCemetery(Context context, HpCetemeryRejectParams params,
                        HttpResponseHandler<Object> handler);
 
     /**
@@ -762,7 +768,7 @@ public interface MAccountManager extends HttpManager {
      * @param context
      * @param handler
      */
-    public void getCemeteryTalkInfo(Context context, HpConsultIdParams params, HttpResponseHandler<HrGetCemeteryTalkData> handler);
+    public void getCemeteryTalkInfo(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkData> handler);
 
     /**
      * 保存公墓洽谈信息
@@ -773,4 +779,23 @@ public interface MAccountManager extends HttpManager {
      */
     public void saveCemeteryTalkInfo(Context context, HpSaveCemeteryTalkData params, HttpResponseHandler<Object> handler);
 
+    /**
+     * 获取公墓洽谈成功第一步信息
+     */
+    public void getCemeteryTalkSuccessOne(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessOne> handler);
+
+    /**
+     * 保存公墓洽谈成功第一步信息
+     */
+    public void saveCemeteryTalkSuccessOne(Context context, HpSaveCemeteryTalkSuccessOne params, HttpResponseHandler<Object> handler);
+
+    /**
+     * 获取公墓洽谈成功第二步信息
+     */
+    public void getCemeteryTalkSuccessTwo(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessTwo> handler);
+
+    /**
+     * 保存公墓洽谈成功第二步信息
+     */
+    public void saveCemeteryTalkSuccessTwo(Context context, HpSaveCemeteryTalkSuccessTwo params, HttpResponseHandler<Object> handler);
 }

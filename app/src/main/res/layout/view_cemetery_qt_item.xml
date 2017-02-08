@@ -110,12 +110,12 @@
             android:background="@drawable/cemetery_item_title">
 
             <TextView
+                android:id="@+id/tv_tag"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:paddingBottom="@dimen/dimen_40dp"
                 android:rotation="45"
-                android:text="洽谈中"
                 android:textColor="#f6c858"
                 android:textSize="@dimen/txtsize_20sp" />
 

@@ -17,6 +17,7 @@ import com.shian.shianlife.common.view.order.CemeteryQTView;
 import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
+import com.shian.shianlife.provide.params.HpCemeteryIdParams;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpSaveCemeteryTalkData;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkData;
@@ -71,8 +72,8 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
      * 获取数据
      */
     private void getData() {
-        HpConsultIdParams params = new HpConsultIdParams();
-        params.setConsultId(beSpeakId);
+        HpCemeteryIdParams params = new HpCemeteryIdParams();
+        params.setBespeakId(beSpeakId);
         MHttpManagerFactory.getAccountManager().getCemeteryTalkInfo(CemeteryTalkFailActivity.this, params, new HttpResponseHandler<HrGetCemeteryTalkData>() {
             @Override
             public void onStart() {
