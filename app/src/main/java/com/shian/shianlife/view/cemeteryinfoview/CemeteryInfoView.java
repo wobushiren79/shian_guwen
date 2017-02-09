@@ -2,6 +2,7 @@ package com.shian.shianlife.view.cemeteryinfoview;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -16,6 +17,7 @@ import com.shian.shianlife.provide.params.HpCemeteryIdParams;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessOne;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessOne;
+import com.shian.shianlife.view.CetemeryLocationSelectLayoutView;
 import com.shian.shianlife.view.CetemeryTextSelectLayoutView;
 import com.shian.shianlife.view.SelectData;
 
@@ -39,11 +41,12 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
     EditText mETMyService;
     EditText mETRemark;
 
-    CetemeryTextSelectLayoutView mSelectCemeteryName;
-    CetemeryTextSelectLayoutView mSelectLocation1;
-    CetemeryTextSelectLayoutView mSelectLocation2;
-    CetemeryTextSelectLayoutView mSelectLocation3;
-    CetemeryTextSelectLayoutView mSelectLocation4;
+    CetemeryLocationSelectLayoutView mSelectCemeteryName;
+    CetemeryLocationSelectLayoutView mSelectLocation1;
+    CetemeryLocationSelectLayoutView mSelectLocation2;
+    CetemeryLocationSelectLayoutView mSelectLocation3;
+    CetemeryLocationSelectLayoutView mSelectLocation4;
+
     CetemeryTextSelectLayoutView mSelectCemeteryType;
     CetemeryTextSelectLayoutView mSelectCemeteryAttribute;
     CetemeryTextSelectLayoutView mSelectPayState;
@@ -66,6 +69,11 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
         super(context, attrs);
         initData();
         initView();
+    }
+
+    @Override
+    public void getDataStart() {
+        super.getDataStart();
         getData();
     }
 
@@ -80,23 +88,23 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
 
             @Override
             public void onSuccess(HrGetCemeteryTalkSuccessOne result) {
-                Utils.LogVPrint("getOrderNum:"+  result.getOrderNum());
-                Utils.LogVPrint("isSaveCan:"+  result.isSaveCan());
-                Utils.LogVPrint("getCemeteryName:"+  result.getCemeteryName());
-                Utils.LogVPrint("getGarden:"+  result.getGarden());
-                Utils.LogVPrint("getDistrict:"+  result.getDistrict());
-                Utils.LogVPrint("getPlatoon:"+  result.getPlatoon());
-                Utils.LogVPrint("getMark:"+  result.getMark());
-                Utils.LogVPrint("getCemeteryType:"+  result.getCemeteryType());
-                Utils.LogVPrint("getCemeteryProperties:"+  result.getCemeteryProperties());
-                Utils.LogVPrint("getPlanSale:"+  result.getPlanSale());
-                Utils.LogVPrint("getSaleMoney:"+  result.getSaleMoney());
-                Utils.LogVPrint("getPayState:"+  result.getPayState());
-                Utils.LogVPrint("getMoneyPay:"+  result.getMoneyPay());
-                Utils.LogVPrint("getCemeteryReceive:"+  result.getCemeteryReceive());
-                Utils.LogVPrint("getFreeService:"+  result.getFreeService());
-                Utils.LogVPrint("getChoiceService:"+  result.getChoiceService());
-                Utils.LogVPrint("getRemark:"+  result.getRemark());
+                Utils.LogVPrint("getOrderNum:" + result.getOrderNum());
+                Utils.LogVPrint("isSaveCan:" + result.isSaveCan());
+                Utils.LogVPrint("getCemeteryName:" + result.getCemeteryName());
+                Utils.LogVPrint("getGarden:" + result.getGarden());
+                Utils.LogVPrint("getDistrict:" + result.getDistrict());
+                Utils.LogVPrint("getPlatoon:" + result.getPlatoon());
+                Utils.LogVPrint("getMark:" + result.getMark());
+                Utils.LogVPrint("getCemeteryType:" + result.getCemeteryType());
+                Utils.LogVPrint("getCemeteryProperties:" + result.getCemeteryProperties());
+                Utils.LogVPrint("getPlanSale:" + result.getPlanSale());
+                Utils.LogVPrint("getSaleMoney:" + result.getSaleMoney());
+                Utils.LogVPrint("getPayState:" + result.getPayState());
+                Utils.LogVPrint("getMoneyPay:" + result.getMoneyPay());
+                Utils.LogVPrint("getCemeteryReceive:" + result.getCemeteryReceive());
+                Utils.LogVPrint("getFreeService:" + result.getFreeService());
+                Utils.LogVPrint("getChoiceService:" + result.getChoiceService());
+                Utils.LogVPrint("getRemark:" + result.getRemark());
 
                 mETId.setText(result.getOrderNum());
                 mSelectCemeteryName.setString(result.getCemeteryName());
@@ -114,6 +122,14 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
                 mETFreeService.setText(result.getFreeService());
                 mETMyService.setText(result.getChoiceService());
                 mETRemark.setText(result.getRemark());
+
+                mSelectCemeteryName.setLocationIdAndType(result.getCemeteryId(),0);
+                mSelectLocation1.setLocationIdAndType(result.getGardenId(),1);
+                mSelectLocation2.setLocationIdAndType(result.getDistrictId(),2);
+                mSelectLocation3.setLocationIdAndType(result.getPlatoonId(),3);
+                mSelectLocation4.setLocationIdAndType(result.getMarkId(),4);
+
+
             }
 
             @Override
@@ -123,10 +139,18 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
         });
     }
 
+
     private void initData() {
         cemeteryTypeList = Utils.stringsToList(SelectData.CEMETERY_TYPE);
         cemeteryAttributeList = Utils.stringsToList(SelectData.CEMETERY_ATTRIBUTE);
         payStateList = Utils.stringsToList(SelectData.CEMETERY_PAYSTATE);
+
+//        cemeteryNameList.add("");
+//        location1List.add("");
+//        location2List.add("");
+//        location3List.add("");
+//        location4List.add("");
+
     }
 
     private void initView() {
@@ -141,21 +165,21 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
         mETMyService = (EditText) view.findViewById(R.id.et_myservice);
         mETRemark = (EditText) view.findViewById(R.id.et_remark);
 
-        mSelectCemeteryName = (CetemeryTextSelectLayoutView) view.findViewById(R.id.select_cemeteryname);
-        mSelectLocation1 = (CetemeryTextSelectLayoutView) view.findViewById(R.id.select_location_1);
-        mSelectLocation2 = (CetemeryTextSelectLayoutView) view.findViewById(R.id.select_location_2);
-        mSelectLocation3 = (CetemeryTextSelectLayoutView) view.findViewById(R.id.select_location_3);
-        mSelectLocation4 = (CetemeryTextSelectLayoutView) view.findViewById(R.id.select_location_4);
+        mSelectCemeteryName = (CetemeryLocationSelectLayoutView) view.findViewById(R.id.select_cemeteryname);
+        mSelectLocation1 = (CetemeryLocationSelectLayoutView) view.findViewById(R.id.select_location_1);
+        mSelectLocation2 = (CetemeryLocationSelectLayoutView) view.findViewById(R.id.select_location_2);
+        mSelectLocation3 = (CetemeryLocationSelectLayoutView) view.findViewById(R.id.select_location_3);
+        mSelectLocation4 = (CetemeryLocationSelectLayoutView) view.findViewById(R.id.select_location_4);
         mSelectCemeteryType = (CetemeryTextSelectLayoutView) view.findViewById(R.id.select_cemeterytype);
         mSelectCemeteryAttribute = (CetemeryTextSelectLayoutView) view.findViewById(R.id.select_cemeteryattribute);
         mSelectPayState = (CetemeryTextSelectLayoutView) view.findViewById(R.id.select_paystate);
 
         mSelectCemeteryName.setName("公墓名称：");
-        mSelectCemeteryName.setData(cemeteryNameList, 0, this);
         mSelectLocation1.setName("苑 ");
         mSelectLocation2.setName("区 ");
         mSelectLocation3.setName("排 ");
         mSelectLocation4.setName("号 ");
+        mSelectCemeteryName.setData(cemeteryNameList, 0, this);
         mSelectLocation1.setData(location1List, 1, this);
         mSelectLocation2.setData(location2List, 2, this);
         mSelectLocation3.setData(location3List, 3, this);
@@ -166,6 +190,13 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
         mSelectCemeteryAttribute.setData(cemeteryAttributeList, 6, this);
         mSelectPayState.setName("支付情况：");
         mSelectPayState.setData(payStateList, 7, this);
+
+
+        mSelectCemeteryName.setItemType(0);
+        mSelectLocation1.setItemType(1);
+        mSelectLocation2.setItemType(2);
+        mSelectLocation3.setItemType(3);
+        mSelectLocation4.setItemType(4);
     }
 
     @Override
@@ -195,8 +226,9 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
 
     @Override
     public void saveData() {
-        HpSaveCemeteryTalkSuccessOne params=new HpSaveCemeteryTalkSuccessOne();
+        HpSaveCemeteryTalkSuccessOne params = new HpSaveCemeteryTalkSuccessOne();
         params.setBespeakId(beSpeakId);
+        params.setOrderedId(orderId);
         params.setSaveType(changeState);
         params.setOrderNum(mETId.getText().toString());
         params.setCemeteryName(mSelectCemeteryName.getSelectedData());
@@ -215,68 +247,68 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
         params.setChoiceService(mETMyService.getText().toString());
         params.setRemark(mETRemark.getText().toString());
 
-        if(params.getBespeakId()==-1){
-            ToastUtils.show(getContext(),"订单数据异常，请退出重新加载");
+        if (params.getBespeakId() == -1 || params.getOrderedId() == -1 || params.getSaveType() == -1) {
+            ToastUtils.show(getContext(), "订单数据异常，请退出重新加载");
             return;
         }
-        if(params.getOrderNum().isEmpty()){
-            ToastUtils.show(getContext(),"订单编号不能为空");
+        if (params.getOrderNum().isEmpty()) {
+            ToastUtils.show(getContext(), "订单编号不能为空");
             return;
         }
-        if(params.getCemeteryName().isEmpty()){
-            ToastUtils.show(getContext(),"公墓名称不能为空");
+        if (params.getCemeteryName().isEmpty()) {
+            ToastUtils.show(getContext(), "公墓名称不能为空");
             return;
         }
-        if(params.getGarden().isEmpty()){
-            ToastUtils.show(getContext(),"苑不能为空");
+        if (params.getGarden().isEmpty()) {
+            ToastUtils.show(getContext(), "苑不能为空");
             return;
         }
-        if(params.getDistrict().isEmpty()){
-            ToastUtils.show(getContext(),"区不能为空");
+        if (params.getDistrict().isEmpty()) {
+            ToastUtils.show(getContext(), "区不能为空");
             return;
         }
-        if(params.getPlatoon().isEmpty()){
-            ToastUtils.show(getContext(),"排不能为空");
+        if (params.getPlatoon().isEmpty()) {
+            ToastUtils.show(getContext(), "排不能为空");
             return;
         }
-        if(params.getMark().isEmpty()){
-            ToastUtils.show(getContext(),"号不能为空");
+        if (params.getMark().isEmpty()) {
+            ToastUtils.show(getContext(), "号不能为空");
             return;
         }
-        if(params.getCemeteryType().isEmpty()){
-            ToastUtils.show(getContext(),"墓型不能为空");
+        if (params.getCemeteryType().isEmpty()) {
+            ToastUtils.show(getContext(), "墓型不能为空");
             return;
         }
-        if(params.getCemeteryProperties().isEmpty()){
-            ToastUtils.show(getContext(),"墓穴属性不能为空");
+        if (params.getCemeteryProperties().isEmpty()) {
+            ToastUtils.show(getContext(), "墓穴属性不能为空");
             return;
         }
-        if(params.getPlanSale().isEmpty()){
-            ToastUtils.show(getContext(),"挂牌价不能为空");
+        if (params.getPlanSale().isEmpty()) {
+            ToastUtils.show(getContext(), "挂牌价不能为空");
             return;
         }
-        if(params.getSaleMoney().isEmpty()){
-            ToastUtils.show(getContext(),"成交价不能为空");
+        if (params.getSaleMoney().isEmpty()) {
+            ToastUtils.show(getContext(), "成交价不能为空");
             return;
         }
-        if(params.getPayState().isEmpty()){
-            ToastUtils.show(getContext(),"支付情况");
+        if (params.getPayState().isEmpty()) {
+            ToastUtils.show(getContext(), "支付情况");
             return;
         }
-        if(params.getMoneyPay().isEmpty()){
-            ToastUtils.show(getContext(),"金额不能为空");
+        if (params.getMoneyPay().isEmpty()) {
+            ToastUtils.show(getContext(), "金额不能为空");
             return;
         }
-        if(params.getCemeteryName().isEmpty()){
-            ToastUtils.show(getContext(),"公墓接待不能为空");
+        if (params.getCemeteryName().isEmpty()) {
+            ToastUtils.show(getContext(), "公墓接待不能为空");
             return;
         }
-        if(params.getFreeService().isEmpty()){
-            ToastUtils.show(getContext(),"赠送服务不能为空");
+        if (params.getFreeService().isEmpty()) {
+            ToastUtils.show(getContext(), "赠送服务不能为空");
             return;
         }
-        if(params.getChoiceService().isEmpty()){
-            ToastUtils.show(getContext(),"自选附属服务不能为空");
+        if (params.getChoiceService().isEmpty()) {
+            ToastUtils.show(getContext(), "自选附属服务不能为空");
             return;
         }
         MHttpManagerFactory.getAccountManager().saveCemeteryTalkSuccessOne(getContext(), params, new HttpResponseHandler<Object>() {
@@ -284,10 +316,13 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
             public void onStart() {
 
             }
+
             @Override
             public void onSuccess(Object result) {
-                ToastUtils.show(getContext(),"数据提交成功");
+                ToastUtils.show(getContext(), "数据提交成功");
+                CemeteryInfoView.super.saveData();
             }
+
             @Override
             public void onError(String message) {
 

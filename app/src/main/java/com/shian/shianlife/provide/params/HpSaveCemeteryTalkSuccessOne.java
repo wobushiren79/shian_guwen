@@ -8,6 +8,7 @@ import com.shian.shianlife.provide.base.BaseHttpParams;
 
 public class HpSaveCemeteryTalkSuccessOne extends BaseHttpParams {
     private long bespeakId;//咨询ID
+    private long orderedId;//订单ID
     private int saveType;//提交人的类型（1，洽谈人。2，售后。如果是售后，那么这个提交只能进行一次）
     private String orderNum;//订单编号
     private String cemeteryName;//公墓名称
@@ -25,6 +26,14 @@ public class HpSaveCemeteryTalkSuccessOne extends BaseHttpParams {
     private String freeService;//赠送服务
     private String choiceService;//自选服务
     private String remark;//	备注
+
+    public long getOrderedId() {
+        return orderedId;
+    }
+
+    public void setOrderedId(long orderedId) {
+        this.orderedId = orderedId;
+    }
 
     public long getBespeakId() {
         return bespeakId;

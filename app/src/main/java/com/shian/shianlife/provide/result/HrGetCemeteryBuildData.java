@@ -1,5 +1,7 @@
 package com.shian.shianlife.provide.result;
 
+import com.shian.shianlife.provide.model.CemeteryNameModel;
+
 import java.util.List;
 
 /**
@@ -7,13 +9,13 @@ import java.util.List;
  */
 
 public class HrGetCemeteryBuildData {
-    private List<String> cemeteryLocationList;
+    private List<CemeteryNameModel> cemeteryLocationList;
 
-    public List<String> getCemeteryLocationList() {
+    public List<CemeteryNameModel> getCemeteryLocationList() {
         return cemeteryLocationList;
     }
 
-    public void setCemeteryLocationList(List<String> cemeteryLocationList) {
+    public void setCemeteryLocationList(List<CemeteryNameModel> cemeteryLocationList) {
         this.cemeteryLocationList = cemeteryLocationList;
     }
 }

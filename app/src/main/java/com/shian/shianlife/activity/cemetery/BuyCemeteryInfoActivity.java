@@ -1,6 +1,7 @@
 package com.shian.shianlife.activity.cemetery;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -16,11 +17,13 @@ import com.shian.shianlife.view.cemeteryinfoview.DeadManInfoView;
 import static com.shian.shianlife.common.view.order.CemeteryQTView.BUY_INFO;
 import static com.shian.shianlife.common.view.order.CemeteryQTView.TALK_CHANGE_INFO_STATE;
 import static com.shian.shianlife.common.view.order.CemeteryQTView.TALK_INFO_ID;
+import static com.shian.shianlife.common.view.order.CemeteryQTView.TALK_INFO_ORDER_ID;
 
-public class BuyCemeteryInfoActivity extends BaseActivity {
+public class BuyCemeteryInfoActivity extends BaseActivity implements BaseInfoView.InfoCallBack{
     int inType = -1;
-    long beSpeakId=-1;
     int changeState=-1;//修改信息（1为洽谈 2为售后）
+    long beSpeakId=-1;
+    long orderId=-1;
     LinearLayout mLLContent;
 
 
@@ -35,6 +38,7 @@ public class BuyCemeteryInfoActivity extends BaseActivity {
         inType = getIntent().getIntExtra(BUY_INFO, -1);
         changeState=getIntent().getIntExtra(TALK_CHANGE_INFO_STATE,-1);
         beSpeakId=getIntent().getLongExtra(TALK_INFO_ID,-1);
+        orderId=getIntent().getLongExtra(TALK_INFO_ORDER_ID,-1);
         initView();
         initData();
     }
@@ -68,7 +72,10 @@ public class BuyCemeteryInfoActivity extends BaseActivity {
                 break;
         }
         mLLContent.addView(mBaseInfoView);
+        mBaseInfoView.setInfoCallBack(this);
         mBaseInfoView.setBeSpeakId(beSpeakId);
+        mBaseInfoView.setOrderId(orderId);
+        mBaseInfoView.getDataStart();
         mBaseInfoView.setChangeState(changeState);
     }
 
@@ -112,22 +119,26 @@ public class BuyCemeteryInfoActivity extends BaseActivity {
                         break;
                 }
             } else if (view == mBTNext) {
-                mLLContent.removeAllViews();
-                switch (inType) {
-                    case 0:
-                        inType = 1;
-                        initData();
-                        break;
-                    case 1:
-                        inType = 2;
-                        initData();
-                        break;
-                    case 2:
-                        finish();
-                        break;
-                }
                 mBaseInfoView.saveData();
             }
         }
     };
+
+    @Override
+    public void SaveSuccess() {
+        mLLContent.removeAllViews();
+        switch (inType) {
+            case 0:
+                inType = 1;
+                initData();
+                break;
+            case 1:
+                inType = 2;
+                initData();
+                break;
+            case 2:
+                finish();
+                break;
+        }
+    }
 }

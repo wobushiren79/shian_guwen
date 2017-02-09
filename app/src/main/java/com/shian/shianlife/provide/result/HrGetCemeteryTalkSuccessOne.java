@@ -22,6 +22,51 @@ public class HrGetCemeteryTalkSuccessOne {
     private String freeService;//赠送服务
     private String choiceService;//自选服务
     private String remark;//备注
+    private long cemeteryId;//	公墓名称 id
+    private long gardenId;//苑 id
+    private long districtId;//	区 id
+    private long platoonId;//	排 id
+    private long markId;//	号 id
+
+    public long getCemeteryId() {
+        return cemeteryId;
+    }
+
+    public void setCemeteryId(long cemeteryId) {
+        this.cemeteryId = cemeteryId;
+    }
+
+    public long getGardenId() {
+        return gardenId;
+    }
+
+    public void setGardenId(long gardenId) {
+        this.gardenId = gardenId;
+    }
+
+    public long getDistrictId() {
+        return districtId;
+    }
+
+    public void setDistrictId(long districtId) {
+        this.districtId = districtId;
+    }
+
+    public long getPlatoonId() {
+        return platoonId;
+    }
+
+    public void setPlatoonId(long platoonId) {
+        this.platoonId = platoonId;
+    }
+
+    public long getMarkId() {
+        return markId;
+    }
+
+    public void setMarkId(long markId) {
+        this.markId = markId;
+    }
 
     public String getOrderNum() {
         return orderNum;

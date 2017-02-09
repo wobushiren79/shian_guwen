@@ -32,6 +32,7 @@ import java.util.List;
 public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTextSelectLayoutView.onSelectedListener {
     int inType = -1;
     long beSpeakId = -1;
+    long orderId=-1;
     LinearLayout mLLDetails;
 
     EditText mETPlanToMoney;
@@ -129,6 +130,7 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
     private void saveData() {
         HpSaveCemeteryTalkData params = new HpSaveCemeteryTalkData();
         params.setBespeakId(beSpeakId);
+        params.setOrderedId(orderId);
         params.setPlanBuyCemetery(mSelectPlanToBuy.getSelectedData());
         params.setPlanBuyMoney(mETPlanToMoney.getText().toString());
         params.setUserOneState(mSelectState1.getSelectedData());
@@ -144,7 +146,7 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
         params.setRemark(mETRemark.getText().toString());
 
 
-        if (params.getBespeakId() == -1) {
+        if (params.getBespeakId() == -1||params.getOrderedId()==-1) {
             ToastUtils.show(CemeteryTalkFailActivity.this, "数据获取异常，请重新加载预订单");
             return;
         }
@@ -287,6 +289,7 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
     private void initData() {
         inType = getIntent().getIntExtra(CemeteryQTView.TALK_INFO_STATE, -1);
         beSpeakId = getIntent().getLongExtra(CemeteryQTView.TALK_INFO_ID, -1);
+        orderId=getIntent().getLongExtra(CemeteryQTView.TALK_INFO_ORDER_ID,-1);
         setTitle("洽谈信息");
         planToBuyList = Utils.stringsToList(SelectData.CEMETERY_TYPE);
         stateList = Utils.stringsToList(SelectData.CEMETERY_STATE);

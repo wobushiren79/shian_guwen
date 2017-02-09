@@ -29,7 +29,7 @@ import java.util.List;
  */
 
 public class CetemeryTextSelectLayoutView extends LinearLayout {
-    private View view;
+     View view;
     TextView mTVName;
     Spinner mSPContent;
     ImageView mIVSelect;
@@ -68,6 +68,7 @@ public class CetemeryTextSelectLayoutView extends LinearLayout {
         this.selectedListener = selectedListener;
         this.num = num;
     }
+
 
     private void initView() {
         view = LayoutInflater.from(getContext()).inflate(R.layout.view_cemetery_text_select, this);
@@ -122,6 +123,9 @@ public class CetemeryTextSelectLayoutView extends LinearLayout {
         mIVSelect.setVisibility(GONE);
     }
 
+    public  void setStateClick(boolean state){
+        mSPContent.setEnabled(state);
+    }
     public void setString(String name) {
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).equals(name)) {

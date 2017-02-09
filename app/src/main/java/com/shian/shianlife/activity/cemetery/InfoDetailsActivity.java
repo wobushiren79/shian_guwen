@@ -10,10 +10,15 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.view.cemeteryinfoview.CemeteryInfoView;
 
+import static com.shian.shianlife.common.view.order.CemeteryQTView.TALK_INFO_ID;
+import static com.shian.shianlife.common.view.order.CemeteryQTView.TALK_INFO_ORDER_ID;
+
 public class InfoDetailsActivity extends BaseActivity {
 
     Button mBTDetailes;
     CemeteryInfoView cemeteryInfoView;
+    long orderId;
+    long beSpeakId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +26,12 @@ public class InfoDetailsActivity extends BaseActivity {
 
         setTitle("订单详情");
         initView();
+        initData();
+    }
+
+    private void initData() {
+        beSpeakId=getIntent().getLongExtra(TALK_INFO_ID,-1);
+        orderId=getIntent().getLongExtra(TALK_INFO_ORDER_ID,-1);
     }
 
     private void initView() {

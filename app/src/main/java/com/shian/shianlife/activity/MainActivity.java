@@ -30,6 +30,7 @@ import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.local.LocationService;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.fragment.HomeFragment;
 import com.shian.shianlife.fragment.OrderFragment;
@@ -351,8 +352,8 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         @Override
         public void onReceiveLocation(BDLocation location) {
             // TODO Auto-generated method stub
-            if (null != location
-                    && location.getLocType() != BDLocation.TypeServerError) {
+
+            if (null != location&& location.getLocType() != BDLocation.TypeServerError) {
                 if (location.getAddrStr() == null) return;
                 location(location.getAddrStr());
                 AppContansts.LocalString = location.getAddrStr();
@@ -365,7 +366,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 AppContansts.LOCAL_latitude = location.getLatitude();
                 AppContansts.LOCAL_longitude = location.getLongitude();
                 setTitleLocation(AppContansts.LOCAL_STREET + AppContansts.LOCAL_STREETNUM);
-
             }
         }
 

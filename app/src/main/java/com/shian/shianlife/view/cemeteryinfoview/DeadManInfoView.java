@@ -5,14 +5,15 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpCemeteryIdParams;
+import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessTwo;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessTwo;
 import com.shian.shianlife.view.CetemeryTextSelectLayoutView;
 import com.shian.shianlife.view.SelectData;
@@ -62,7 +63,7 @@ public class DeadManInfoView extends BaseInfoView implements CetemeryTextSelectL
     }
 
     private void getData() {
-        HpCemeteryIdParams params=new HpCemeteryIdParams();
+        HpCemeteryIdParams params = new HpCemeteryIdParams();
         params.setBespeakId(beSpeakId);
         MHttpManagerFactory.getAccountManager().getCemeteryTalkSuccessTwo(getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessTwo>() {
             @Override
@@ -72,21 +73,21 @@ public class DeadManInfoView extends BaseInfoView implements CetemeryTextSelectL
 
             @Override
             public void onSuccess(HrGetCemeteryTalkSuccessTwo result) {
-                Utils.LogVPrint("getDeadmanOneName:"+result.getDeadmanOneName());
-                Utils.LogVPrint("getDeadmanOneAge:"+result.getDeadmanOneAge());
-                Utils.LogVPrint("getDeadmanOneSex:"+result.getDeadmanOneSex());
-                Utils.LogVPrint("getDeadmanOneState:"+result.getDeadmanOneState());
-                Utils.LogVPrint("getDeadmanOneCardId:"+result.getDeadmanOneCardId());
-                Utils.LogVPrint("getDeadmanOneDeadTime:"+result.getDeadmanOneDeadTime());
+                Utils.LogVPrint("getDeadmanOneName:" + result.getDeadmanOneName());
+                Utils.LogVPrint("getDeadmanOneAge:" + result.getDeadmanOneAge());
+                Utils.LogVPrint("getDeadmanOneSex:" + result.getDeadmanOneSex());
+                Utils.LogVPrint("getDeadmanOneState:" + result.getDeadmanOneState());
+                Utils.LogVPrint("getDeadmanOneCardId:" + result.getDeadmanOneCardId());
+                Utils.LogVPrint("getDeadmanOneDeadTime:" + result.getDeadmanOneDeadTime());
 
-                Utils.LogVPrint("getDeadmanTwoName:"+result.getDeadmanTwoName());
-                Utils.LogVPrint("getDeadmanTwoAge:"+result.getDeadmanTwoAge());
-                Utils.LogVPrint("getDeadmanTwoSex:"+result.getDeadmanTwoSex());
-                Utils.LogVPrint("getDeadmanTwoState:"+result.getDeadmanTwoState());
-                Utils.LogVPrint("getDeadmanTwoCardId:"+result.getDeadmanTwoCardId());
-                Utils.LogVPrint("getDeadmanTwoDeadTime:"+result.getDeadmanTwoDeadTime());
+                Utils.LogVPrint("getDeadmanTwoName:" + result.getDeadmanTwoName());
+                Utils.LogVPrint("getDeadmanTwoAge:" + result.getDeadmanTwoAge());
+                Utils.LogVPrint("getDeadmanTwoSex:" + result.getDeadmanTwoSex());
+                Utils.LogVPrint("getDeadmanTwoState:" + result.getDeadmanTwoState());
+                Utils.LogVPrint("getDeadmanTwoCardId:" + result.getDeadmanTwoCardId());
+                Utils.LogVPrint("getDeadmanTwoDeadTime:" + result.getDeadmanTwoDeadTime());
 
-                Utils.LogVPrint("getRemark"+result.getRemark());
+                Utils.LogVPrint("getRemark" + result.getRemark());
 
                 mETDeadManName1.setText(result.getDeadmanOneName());
                 mETDeadManAge1.setText(result.getDeadmanOneAge());
@@ -179,8 +180,89 @@ public class DeadManInfoView extends BaseInfoView implements CetemeryTextSelectL
 
         mETRemark.setFocusable(false);
     }
+
     @Override
     public void saveData() {
-        super.saveData();
+
+
+        HpSaveCemeteryTalkSuccessTwo params = new HpSaveCemeteryTalkSuccessTwo();
+        params.setBespeakId(beSpeakId);
+        params.setOrderedId(orderId);
+        params.setSaveType(changeState);
+        params.setDeadmanOneName(mETDeadManName1.getText().toString());
+        params.setDeadmanOneAge(mETDeadManName1.getText().toString());
+        params.setDeadmanOneSex(mSelectDeadManSex1.getSelectedData());
+        params.setDeadmanOneState(mSelectDeadManState1.getSelectedData());
+        params.setDeadmanOneCardId(mETDeadManCardId1.getText().toString());
+        params.setDeadmanOneDeadTime(mTVDeadManTime1.getText().toString());
+        params.setDeadmanTwoName(mETDeadManName2.getText().toString());
+        params.setDeadmanTwoAge(mETDeadManName2.getText().toString());
+        params.setDeadmanTwoSex(mSelectDeadManSex2.getSelectedData());
+        params.setDeadmanTwoState(mSelectDeadManState2.getSelectedData());
+        params.setDeadmanTwoCardId(mETDeadManCardId2.getText().toString());
+        params.setDeadmanTwoDeadTime(mTVDeadManTime2.getText().toString());
+        params.setRemark(mETRemark.getText().toString());
+
+        Utils.LogVPrint("DeadmanOneName:" + params.getDeadmanOneName());
+        Utils.LogVPrint("OrderedId" + params.getOrderedId());
+        Utils.LogVPrint("DeadmanOneAge:" + params.getDeadmanOneAge());
+        Utils.LogVPrint("DeadmanOneSex:" + params.getDeadmanOneSex());
+        Utils.LogVPrint("DeadmanOneState:" + params.getDeadmanOneState());
+        Utils.LogVPrint("DeadmanOneCardId:" + params.getDeadmanOneCardId());
+        Utils.LogVPrint("DeadmanOneDeadTime:" + params.getDeadmanOneDeadTime());
+        Utils.LogVPrint("DeadmanTwoName:" + params.getDeadmanTwoName());
+        Utils.LogVPrint("DeadmanTwoAge:" + params.getDeadmanTwoAge());
+        Utils.LogVPrint("gDeadmanTwoSex:" + params.getDeadmanTwoSex());
+        Utils.LogVPrint("DeadmanTwoState:" + params.getDeadmanTwoState());
+        Utils.LogVPrint("DeadmanTwoCardId:" + params.getDeadmanTwoCardId());
+        Utils.LogVPrint("DeadmanTwoDeadTime:" + params.getDeadmanTwoDeadTime());
+        Utils.LogVPrint("getRemark" + params.getRemark());
+
+        if (params.getBespeakId() == -1 || params.getSaveType() == -1 || params.getOrderedId() == -1) {
+            ToastUtils.show(getContext(), "数据加载异常，请重新载入");
+            return;
+        }
+        if (params.getDeadmanOneName().isEmpty()) {
+            ToastUtils.show(getContext(), "使用者1名字不能为空");
+            return;
+        }
+        if (params.getDeadmanOneAge().isEmpty()) {
+            ToastUtils.show(getContext(), "使用者1年龄不能为空");
+            return;
+        }
+        if (params.getDeadmanOneSex().isEmpty()) {
+            ToastUtils.show(getContext(), "使用者1性别不能为空");
+            return;
+        }
+        if (params.getDeadmanOneState().isEmpty()) {
+            ToastUtils.show(getContext(), "使用者1状态不能为空");
+            return;
+        }
+        if (params.getDeadmanOneCardId().isEmpty()) {
+            ToastUtils.show(getContext(), "使用者1身份证不能为空");
+            return;
+        }
+        if (params.getDeadmanOneDeadTime().isEmpty()) {
+            ToastUtils.show(getContext(), "使用者1去世时间不能为空");
+            return;
+        }
+        MHttpManagerFactory.getAccountManager().saveCemeteryTalkSuccessTwo(getContext(), params, new HttpResponseHandler<Object>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+                ToastUtils.show(getContext(), "提交数据成功");
+                DeadManInfoView.super.saveData();
+            }
+
+            @Override
+            public void onError(String message) {
+                ToastUtils.show(getContext(), "提交数据失败");
+            }
+        });
+
     }
 }

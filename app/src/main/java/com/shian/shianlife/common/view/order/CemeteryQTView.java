@@ -52,7 +52,8 @@ import java.util.List;
 public class CemeteryQTView extends BaseOrderView {
 
     public final static String TALK_INFO_STATE = "TalkInfoState";//跳转到洽谈信息状态（0，新建。1，查询详情）
-    public final static String TALK_INFO_ID = "TalkInfoId";//跳转到洽谈信息所需ID
+    public final static String TALK_INFO_ID = "TalkInfoId";//跳转到洽谈信息所需预约单ID
+    public final static String TALK_INFO_ORDER_ID = "TalkInfoOrderId";//跳转到洽谈信息所需订单ID
     public final static String TALK_CHANGE_INFO_STATE="TalkChangeInfoState";//修改购墓信息的人（1。新建下修改，2 售后下修改）
     public final static String BUY_INFO = "BuyInfo";//跳转到定墓资料填写（0，购墓信息。1，使用者信息，2，经办人信息）
 
@@ -240,7 +241,7 @@ public class CemeteryQTView extends BaseOrderView {
                 public void onClick(View view) {
                     if (view == holder.btUserInfo) {
                         //查询洽谈信息
-                        queryDetailsInfo();
+                        queryDetailsInfo(data);
                     } else if (view == holder.btTalkFail) {
                         //填写洽谈失败信息
                         queryTalkInfo(0,data);
@@ -316,6 +317,11 @@ public class CemeteryQTView extends BaseOrderView {
                 contentList.add(data.getPlanCemeteryLocation());
                 contentList.add(data.getTrafficWay());
                 contentList.add(data.getRemark());
+
+                holder.itemlayout_6.setVisibility(VISIBLE);
+                holder.itemlayout_7.setVisibility(VISIBLE);
+                holder.tv_line_5.setVisibility(VISIBLE);
+                holder.tv_line_6.setVisibility(VISIBLE);
             } else {
                 if (data.getIsEdit()==1) {
                     holder.llStateAccept.setVisibility(GONE);
@@ -380,9 +386,7 @@ public class CemeteryQTView extends BaseOrderView {
                     phoneTV.setVisibility(GONE);
                 }
 
-
                 if (i == (nameStrings.length-1)&&data.getTalkFailResult()==3) {
-
                     detailsBT.setVisibility(VISIBLE);
                     detailsBT.setOnClickListener(new OnClickListener() {
                         @Override
@@ -551,8 +555,10 @@ public class CemeteryQTView extends BaseOrderView {
     /**
      * 查询详情
      */
-    private void queryDetailsInfo() {
+    private void queryDetailsInfo(CemeteryOrderModel model) {
         Intent intent = new Intent(getContext(), InfoDetailsActivity.class);
+        intent.putExtra(TALK_INFO_ID,model.getBespeakId());
+        intent.putExtra(TALK_INFO_ORDER_ID,model.getOrderedId());
         getContext().startActivity(intent);
     }
 
@@ -620,6 +626,7 @@ public class CemeteryQTView extends BaseOrderView {
         Intent intent = new Intent(getContext(), BuyCemeteryInfoActivity.class);
         intent.putExtra(TALK_CHANGE_INFO_STATE,1);
         intent.putExtra(TALK_INFO_ID,model.getBespeakId());
+        intent.putExtra(TALK_INFO_ORDER_ID,model.getOrderedId());
         switch (0) {
             case 0:
                 intent.putExtra(BUY_INFO, 0);
@@ -643,6 +650,8 @@ public class CemeteryQTView extends BaseOrderView {
         Intent intent = new Intent(getContext(), CemeteryTalkFailActivity.class);
         intent.putExtra(TALK_INFO_STATE, value);
         intent.putExtra(TALK_INFO_ID,model.getBespeakId());
+        intent.putExtra(TALK_INFO_ORDER_ID,model.getOrderedId());
+
         getContext().startActivity(intent);
     }
 

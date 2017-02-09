@@ -16,6 +16,7 @@ import com.shian.shianlife.common.view.order.CemeteryQTView;
 import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
+import com.shian.shianlife.provide.model.CemeteryNameModel;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpSaveCemeteryBuildData;
 import com.shian.shianlife.provide.result.HrGetCemeteryBuildData;
@@ -40,7 +41,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
     EditText mETPersonNum;
     Button mBTSubmit;
 
-    List<String> ctemeryNameList = new ArrayList<>();
+    List<CemeteryNameModel> ctemeryNameList = new ArrayList<>();
     List<String> trafficeWayList = new ArrayList<>();
 
 
@@ -98,7 +99,11 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
             public void onSuccess(HrGetCemeteryBuildData result) {
                 if (result != null) {
                     ctemeryNameList = result.getCemeteryLocationList();
-                    mCetemeryNameSelectLayout.setData(ctemeryNameList, 0, BuildNewOrderActivity.this);
+                    List<String> list = new ArrayList<String>();
+                    for (CemeteryNameModel model : ctemeryNameList) {
+                        list.add(model.getCemeteryName());
+                    }
+                    mCetemeryNameSelectLayout.setData(list, 0, BuildNewOrderActivity.this);
                 }
 
             }
@@ -197,14 +202,14 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         params.setCustomerLocation(dataUserLocation);
 
 
-        Utils.LogVPrint( "CustomerName" + dataName);
-        Utils.LogVPrint( "CustomerMobile" + dataPhone);
+        Utils.LogVPrint("CustomerName" + dataName);
+        Utils.LogVPrint("CustomerMobile" + dataPhone);
         Utils.LogVPrint("PromiseTime" + dataTime);
-        Utils.LogVPrint( "PlanCemeteryLocation" + dataLocation);
-        Utils.LogVPrint( "TrafficWay" + dataTraffic);
-        Utils.LogVPrint( "PersonNum" + dataPersonNum);
-        Utils.LogVPrint(  "Customer" + dataUserLocation);
-        Utils.LogVPrint(  "submitType" + params.getSubmitType());
+        Utils.LogVPrint("PlanCemeteryLocation" + dataLocation);
+        Utils.LogVPrint("TrafficWay" + dataTraffic);
+        Utils.LogVPrint("PersonNum" + dataPersonNum);
+        Utils.LogVPrint("Customer" + dataUserLocation);
+        Utils.LogVPrint("submitType" + params.getSubmitType());
 
 
         MHttpManagerFactory.getAccountManager().saveCemeteryBuildData(BuildNewOrderActivity.this, params, new HttpResponseHandler<Object>() {
@@ -215,8 +220,8 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
 
             @Override
             public void onSuccess(Object result) {
-                ToastUtils.show(BuildNewOrderActivity.this,"创建成功");
-                CemeteryFragment.C_bOrder_isRefresh=true;
+                ToastUtils.show(BuildNewOrderActivity.this, "创建成功");
+                CemeteryFragment.C_bOrder_isRefresh = true;
                 finish();
             }
 

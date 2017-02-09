@@ -27,12 +27,12 @@
             android:padding="@dimen/dimen_20dp" />
     </LinearLayout>
 
-    <com.shian.shianlife.view.CetemeryTextSelectLayoutView
+    <com.shian.shianlife.view.CetemeryLocationSelectLayoutView
         android:id="@+id/select_cemeteryname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimen_10dp"
-        android:layout_marginTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryTextSelectLayoutView>
+        android:layout_marginTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryLocationSelectLayoutView>
 
     <TextView
         android:layout_width="match_parent"
@@ -59,33 +59,33 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.shian.shianlife.view.CetemeryTextSelectLayoutView
+            <com.shian.shianlife.view.CetemeryLocationSelectLayoutView
                 android:id="@+id/select_location_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dimen_10dp"
-                android:layout_marginTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryTextSelectLayoutView>
+                android:layout_marginTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryLocationSelectLayoutView>
 
-            <com.shian.shianlife.view.CetemeryTextSelectLayoutView
+            <com.shian.shianlife.view.CetemeryLocationSelectLayoutView
                 android:id="@+id/select_location_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dimen_10dp"
-                android:layout_marginTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryTextSelectLayoutView>
+                android:layout_marginTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryLocationSelectLayoutView>
 
-            <com.shian.shianlife.view.CetemeryTextSelectLayoutView
+            <com.shian.shianlife.view.CetemeryLocationSelectLayoutView
                 android:id="@+id/select_location_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dimen_10dp"
-                android:layout_marginTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryTextSelectLayoutView>
+                android:layout_marginTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryLocationSelectLayoutView>
 
-            <com.shian.shianlife.view.CetemeryTextSelectLayoutView
+            <com.shian.shianlife.view.CetemeryLocationSelectLayoutView
                 android:id="@+id/select_location_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dimen_10dp"
-                android:layout_marginTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryTextSelectLayoutView>
+                android:layout_marginTop="@dimen/dimen_10dp"></com.shian.shianlife.view.CetemeryLocationSelectLayoutView>
 
         </LinearLayout>
     </LinearLayout>

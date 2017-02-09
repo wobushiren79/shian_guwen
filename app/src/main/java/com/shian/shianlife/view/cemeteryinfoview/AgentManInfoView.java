@@ -8,7 +8,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.provide.MHttpManagerFactory;
+import com.shian.shianlife.provide.base.HttpResponseHandler;
+import com.shian.shianlife.provide.params.HpCemeteryIdParams;
+import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessThree;
+import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessThree;
 import com.shian.shianlife.view.CetemeryTextSelectLayoutView;
 import com.shian.shianlife.view.MapSelectLayoutView;
 import com.shian.shianlife.view.SelectData;
@@ -45,7 +51,41 @@ public class AgentManInfoView extends BaseInfoView implements CetemeryTextSelect
 
         initData();
         initView();
+        getData();
+    }
 
+    private void getData() {
+        HpCemeteryIdParams params = new HpCemeteryIdParams();
+        params.setBespeakId(beSpeakId);
+        MHttpManagerFactory.getAccountManager().getCemeteryTalkSuccessThree(getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessThree>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(HrGetCemeteryTalkSuccessThree result) {
+                Utils.LogVPrint("getAgentmanName" + result.getAgentmanName());
+                Utils.LogVPrint("getAgentmanPhone" + result.getAgentmanPhone());
+                Utils.LogVPrint("getRelation" + result.getRelation());
+                Utils.LogVPrint("getAgentmanLocation" + result.getAgentmanLocation());
+                Utils.LogVPrint("getAgentmanCardId" + result.getAgentmanCardId());
+                Utils.LogVPrint("getAgentmanEmail" + result.getAgentmanEmail());
+                Utils.LogVPrint("getRemark" + result.getRemark());
+
+                mETAgentManName.setText(result.getAgentmanName());
+                mETAgentManPhone.setText(result.getAgentmanPhone());
+                mSelectRelation.setString(result.getRelation());
+                mMapAgentManLocation.setLocation(result.getAgentmanLocation());
+                mETAgentManCardId.setText(result.getAgentmanCardId());
+                mETAgentManRemark.setText(result.getRemark());
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
     }
 
     private void initData() {
@@ -84,6 +124,72 @@ public class AgentManInfoView extends BaseInfoView implements CetemeryTextSelect
 
     @Override
     public void saveData() {
-        super.saveData();
+        HpSaveCemeteryTalkSuccessThree params = new HpSaveCemeteryTalkSuccessThree();
+        params.setBespeakId(beSpeakId);
+        params.setSaveType(changeState);
+        params.setOrderedId(orderId);
+        params.setAgentmanName(mETAgentManName.getText().toString());
+        params.setAgentmanPhone(mETAgentManPhone.getText().toString());
+        params.setRelation(mSelectRelation.getSelectedData());
+        params.setAgentmanLocation(mMapAgentManLocation.getLocation());
+        params.setAgentmanCardId(mETAgentManCardId.getText().toString());
+        params.setAgentmanEmail(mETAgentManEmail.getText().toString());
+        params.setRemark(mETAgentManRemark.getText().toString());
+
+        Utils.LogVPrint("BespeakId" + params.getBespeakId());
+        Utils.LogVPrint("OrderedId" + params.getOrderedId());
+        Utils.LogVPrint("SaveType" + params.getSaveType());
+        Utils.LogVPrint("AgentmanName" + params.getAgentmanName());
+        Utils.LogVPrint("AgentmanPhone" + params.getAgentmanPhone());
+        Utils.LogVPrint("Relation" + params.getRelation());
+        Utils.LogVPrint("AgentmanLocation" + params.getAgentmanLocation());
+        Utils.LogVPrint("AgentmanCardId" + params.getAgentmanCardId());
+        Utils.LogVPrint("AgentmanEmail" + params.getAgentmanEmail());
+        Utils.LogVPrint("Remark" + params.getRemark());
+        if (params.getBespeakId() == -1 || params.getSaveType() == -1||params.getOrderedId()==-1) {
+            ToastUtils.show(getContext(), "加载数据异常，请重新加载");
+            return;
+        }
+        if (params.getAgentmanName().isEmpty()) {
+            ToastUtils.show(getContext(), "经办人姓名不能为空");
+            return;
+        }
+        if (params.getAgentmanPhone().isEmpty()) {
+            ToastUtils.show(getContext(), "经办人电话不能为空");
+            return;
+        }
+        if (params.getRelation().isEmpty()) {
+            ToastUtils.show(getContext(), "经办人关系不能为空");
+            return;
+        }
+        if (params.getAgentmanLocation().isEmpty()) {
+            ToastUtils.show(getContext(), "地址不能为空");
+            return;
+        }
+        if (params.getAgentmanCardId().isEmpty()) {
+            ToastUtils.show(getContext(), "经办人身份证不能为空");
+            return;
+        }
+        if (params.getAgentmanEmail().isEmpty()) {
+            ToastUtils.show(getContext(), "经办人邮箱不能为空");
+            return;
+        }
+        MHttpManagerFactory.getAccountManager().saveCemeteryTalkSuccessThree(getContext(), params, new HttpResponseHandler<Object>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(Object result) {
+
+                AgentManInfoView.super.saveData();
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
     }
 }

@@ -9,6 +9,7 @@ import com.shian.shianlife.provide.base.BaseHttpParams;
 public class HpSaveCemeteryTalkData extends BaseHttpParams {
 
     private long bespeakId;//咨询ID
+    private long orderedId;//订单ID
     private String planBuyCemetery;//计划购买墓型
     private String planBuyMoney;//计划购买价位
     private String userOneState;//使用者1现状
@@ -22,6 +23,14 @@ public class HpSaveCemeteryTalkData extends BaseHttpParams {
     private String trafficWay;//	交通方式
     private String orderLocation;//预约地点
     private String remark;//备注
+
+    public long getOrderedId() {
+        return orderedId;
+    }
+
+    public void setOrderedId(long orderedId) {
+        this.orderedId = orderedId;
+    }
 
     public long getBespeakId() {
         return bespeakId;
