@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.view.order.CemeteryQTView;
+import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.view.cemeteryinfoview.AgentManInfoView;
 import com.shian.shianlife.view.cemeteryinfoview.BaseInfoView;
 import com.shian.shianlife.view.cemeteryinfoview.CemeteryInfoView;
@@ -54,6 +55,7 @@ public class BuyCemeteryInfoActivity extends BaseActivity implements BaseInfoVie
     }
 
     private void initData() {
+
         switch (inType) {
             case 0:
                 setTitle("创建购墓订单");
@@ -75,9 +77,11 @@ public class BuyCemeteryInfoActivity extends BaseActivity implements BaseInfoVie
         mBaseInfoView.setInfoCallBack(this);
         mBaseInfoView.setBeSpeakId(beSpeakId);
         mBaseInfoView.setOrderId(orderId);
-        mBaseInfoView.getDataStart();
         mBaseInfoView.setChangeState(changeState);
+        mBaseInfoView.getDataStart();
     }
+
+
 
     private void setButton() {
         switch (inType) {
@@ -137,6 +141,8 @@ public class BuyCemeteryInfoActivity extends BaseActivity implements BaseInfoVie
                 initData();
                 break;
             case 2:
+                initData();
+                CemeteryFragment.C_bOrder_isRefresh=true;
                 finish();
                 break;
         }

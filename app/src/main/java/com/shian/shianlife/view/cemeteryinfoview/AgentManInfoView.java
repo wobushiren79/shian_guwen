@@ -51,10 +51,18 @@ public class AgentManInfoView extends BaseInfoView implements CetemeryTextSelect
 
         initData();
         initView();
+    }
+
+    @Override
+    public void getDataStart() {
+        super.getDataStart();
         getData();
     }
 
     private void getData() {
+        if (beSpeakId == -1) {
+            return;
+        }
         HpCemeteryIdParams params = new HpCemeteryIdParams();
         params.setBespeakId(beSpeakId);
         MHttpManagerFactory.getAccountManager().getCemeteryTalkSuccessThree(getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessThree>() {
@@ -73,12 +81,29 @@ public class AgentManInfoView extends BaseInfoView implements CetemeryTextSelect
                 Utils.LogVPrint("getAgentmanEmail" + result.getAgentmanEmail());
                 Utils.LogVPrint("getRemark" + result.getRemark());
 
-                mETAgentManName.setText(result.getAgentmanName());
-                mETAgentManPhone.setText(result.getAgentmanPhone());
-                mSelectRelation.setString(result.getRelation());
-                mMapAgentManLocation.setLocation(result.getAgentmanLocation());
-                mETAgentManCardId.setText(result.getAgentmanCardId());
-                mETAgentManRemark.setText(result.getRemark());
+                if (result != null) {
+                    if (result.getAgentmanName() != null) {
+                        mETAgentManName.setText(result.getAgentmanName());
+                    }
+                    if (result.getAgentmanPhone() != null) {
+                        mETAgentManPhone.setText(result.getAgentmanPhone());
+                    }
+                    if (result.getRelation() != null) {
+                        mSelectRelation.setString(result.getRelation());
+                    }
+                    if (result.getAgentmanLocation() != null) {
+                        mMapAgentManLocation.setLocation(result.getAgentmanLocation());
+                    }
+                    if (result.getAgentmanCardId() != null) {
+                        mETAgentManCardId.setText(result.getAgentmanCardId());
+                    }
+                    if (result.getAgentmanEmail() != null) {
+                        mETAgentManEmail.setText(result.getAgentmanEmail());
+                    }
+                    if (result.getRemark() != null) {
+                        mETAgentManRemark.setText(result.getRemark());
+                    }
+                }
             }
 
             @Override
@@ -146,7 +171,7 @@ public class AgentManInfoView extends BaseInfoView implements CetemeryTextSelect
         Utils.LogVPrint("AgentmanCardId" + params.getAgentmanCardId());
         Utils.LogVPrint("AgentmanEmail" + params.getAgentmanEmail());
         Utils.LogVPrint("Remark" + params.getRemark());
-        if (params.getBespeakId() == -1 || params.getSaveType() == -1||params.getOrderedId()==-1) {
+        if (params.getBespeakId() == -1 || params.getSaveType() == -1 || params.getOrderedId() == -1) {
             ToastUtils.show(getContext(), "加载数据异常，请重新加载");
             return;
         }
@@ -174,6 +199,10 @@ public class AgentManInfoView extends BaseInfoView implements CetemeryTextSelect
             ToastUtils.show(getContext(), "经办人邮箱不能为空");
             return;
         }
+        if (Utils.isEmail(params.getAgentmanEmail())) {
+            ToastUtils.show(getContext(), "邮箱格式不对");
+            return;
+        }
         MHttpManagerFactory.getAccountManager().saveCemeteryTalkSuccessThree(getContext(), params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart() {
@@ -182,7 +211,7 @@ public class AgentManInfoView extends BaseInfoView implements CetemeryTextSelect
 
             @Override
             public void onSuccess(Object result) {
-
+                ToastUtils.show(getContext(), "数据提交成功");
                 AgentManInfoView.super.saveData();
             }
 

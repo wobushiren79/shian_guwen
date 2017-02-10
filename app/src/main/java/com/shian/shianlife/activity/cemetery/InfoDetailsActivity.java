@@ -25,8 +25,9 @@ public class InfoDetailsActivity extends BaseActivity {
         setContentView(R.layout.activity_info_details);
 
         setTitle("订单详情");
-        initView();
         initData();
+        initView();
+
     }
 
     private void initData() {
@@ -41,6 +42,10 @@ public class InfoDetailsActivity extends BaseActivity {
         mBTDetailes.setOnClickListener(onClickListener);
 
         cemeteryInfoView.setStateShow();
+
+        cemeteryInfoView.setBeSpeakId(beSpeakId);
+        cemeteryInfoView.setOrderId(orderId);
+        cemeteryInfoView.getDataStart();
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -48,6 +53,8 @@ public class InfoDetailsActivity extends BaseActivity {
         public void onClick(View view) {
             if (view == mBTDetailes) {
                 Intent intent = new Intent(InfoDetailsActivity.this, MoreInfoDetailsActivity.class);
+                intent.putExtra(TALK_INFO_ID,beSpeakId);
+                intent.putExtra(TALK_INFO_ORDER_ID,orderId);
                 startActivity(intent);
             }
         }

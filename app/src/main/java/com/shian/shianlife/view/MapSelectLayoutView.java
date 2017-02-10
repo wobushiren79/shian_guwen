@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
-import com.shian.shianlife.activity.MapLocation;
-import com.shian.shianlife.activity.updata.WSZDataActivity;
+import com.shian.shianlife.activity.map.MapLocation;
 
 import java.io.Serializable;
 import java.util.ArrayList;

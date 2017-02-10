@@ -22,28 +22,31 @@
 
     <ImageView
         android:id="@+id/iv_phone"
-        android:layout_width="@dimen/dimen_50dp"
-        android:layout_height="@dimen/dimen_50dp"
+        android:layout_width="@dimen/dimen_40dp"
+        android:layout_height="@dimen/dimen_40dp"
         android:layout_gravity="center"
+        android:visibility="gone"
         android:background="@drawable/cemetery_phone"
-        android:visibility="gone" />
+      />
 
     <Button
         android:id="@+id/bt_userinfo"
         android:layout_width="@dimen/dimen_140dp"
         android:layout_height="@dimen/dimen_50dp"
         android:layout_gravity="center|right"
+        android:visibility="gone"
         android:background="@drawable/bg_cemetery_item_button_2"
         android:gravity="center"
         android:text="洽谈信息"
         android:textColor="@color/white"
-        android:visibility="gone" />
+     />
 
     <Button
         android:id="@+id/bt_map"
-        android:layout_width="@dimen/dimen_50dp"
-        android:layout_height="@dimen/dimen_50dp"
+        android:visibility="gone"
+        android:layout_width="@dimen/dimen_40dp"
+        android:layout_height="@dimen/dimen_40dp"
         android:layout_gravity="center|right"
         android:background="@drawable/cemetery_qt_item_map"
-        android:visibility="gone" />
+      />
 </LinearLayout>

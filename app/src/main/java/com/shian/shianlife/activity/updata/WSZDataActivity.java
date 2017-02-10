@@ -1,27 +1,18 @@
 package com.shian.shianlife.activity.updata;
 
-import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.os.PersistableBundle;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
-import com.shian.shianlife.activity.MapLocation;
-import com.shian.shianlife.activity.SaveTalkFailActivity;
 import com.shian.shianlife.base.BaseActivity;
 
 import com.shian.shianlife.common.utils.ToastUtils;

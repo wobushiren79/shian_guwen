@@ -126,6 +126,7 @@ public class CetemeryTextSelectLayoutView extends LinearLayout {
     public  void setStateClick(boolean state){
         mSPContent.setEnabled(state);
     }
+
     public void setString(String name) {
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).equals(name)) {

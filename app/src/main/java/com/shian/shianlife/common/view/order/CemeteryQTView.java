@@ -4,11 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +18,7 @@ import android.widget.TextView;
 import com.chanven.lib.cptr.loadmore.OnLoadMoreListener;
 import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper;
 import com.shian.shianlife.R;
-import com.shian.shianlife.activity.RoutePlanActivity;
+import com.shian.shianlife.activity.map.RoutePlanActivity;
 import com.shian.shianlife.activity.cemetery.BuildNewOrderActivity;
 import com.shian.shianlife.activity.cemetery.BuyCemeteryInfoActivity;
 import com.shian.shianlife.activity.cemetery.CemeteryTalkFailActivity;
@@ -34,11 +30,9 @@ import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.impl.CemeteryOrderManagerImpl;
 import com.shian.shianlife.provide.model.CemeteryOrderModel;
-import com.shian.shianlife.provide.params.HpAcceptParams;
 import com.shian.shianlife.provide.params.HpCetemeryAcceptParams;
 import com.shian.shianlife.provide.params.HpCetemeryRejectParams;
 import com.shian.shianlife.provide.params.HpGetOrderListParams;
-import com.shian.shianlife.provide.params.HpRejectParams;
 import com.shian.shianlife.provide.result.HrGetCemeteryListData;
 
 import java.util.ArrayList;
@@ -627,7 +621,7 @@ public class CemeteryQTView extends BaseOrderView {
         intent.putExtra(TALK_CHANGE_INFO_STATE,1);
         intent.putExtra(TALK_INFO_ID,model.getBespeakId());
         intent.putExtra(TALK_INFO_ORDER_ID,model.getOrderedId());
-        switch (0) {
+        switch (model.getInfoStatus()) {
             case 0:
                 intent.putExtra(BUY_INFO, 0);
                 break;

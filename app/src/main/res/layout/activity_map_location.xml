@@ -4,7 +4,7 @@
     android:id="@+id/activity_map_location"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.shian.shianlife.activity.MapLocation">
+    tools:context="com.shian.shianlife.activity.map.MapLocation">
 
     <com.baidu.mapapi.map.MapView
         android:id="@+id/bmapView"

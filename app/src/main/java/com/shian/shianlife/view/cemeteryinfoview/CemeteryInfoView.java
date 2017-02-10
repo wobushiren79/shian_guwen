@@ -29,7 +29,7 @@ import java.util.List;
  * Created by Administrator on 2017/1/11.
  */
 
-public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelectLayoutView.onSelectedListener {
+public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelectLayoutView.onSelectedListener, CetemeryLocationSelectLayoutView.OnLocationSelectedListener {
     private View view;
 
     EditText mETId;
@@ -78,6 +78,9 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
     }
 
     private void getData() {
+        if (beSpeakId == -1) {
+            return;
+        }
         HpCemeteryIdParams params = new HpCemeteryIdParams();
         params.setBespeakId(beSpeakId);
         MHttpManagerFactory.getAccountManager().getCemeteryTalkSuccessOne(getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessOne>() {
@@ -106,29 +109,70 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
                 Utils.LogVPrint("getChoiceService:" + result.getChoiceService());
                 Utils.LogVPrint("getRemark:" + result.getRemark());
 
-                mETId.setText(result.getOrderNum());
-                mSelectCemeteryName.setString(result.getCemeteryName());
-                mSelectLocation1.setString(result.getGarden());
-                mSelectLocation2.setString(result.getDistrict());
-                mSelectLocation3.setString(result.getPlatoon());
-                mSelectLocation4.setString(result.getMark());
-                mSelectCemeteryType.setString(result.getCemeteryType());
-                mSelectCemeteryAttribute.setString(result.getCemeteryProperties());
-                mETPlanToMoney.setText(result.getPlanSale());
-                mETSaleToMoney.setText(result.getSaleMoney());
-                mSelectPayState.setString(result.getPayState());
-                mETMoney.setText(result.getMoneyPay());
-                mETCemeteryMan.setText(result.getCemeteryReceive());
-                mETFreeService.setText(result.getFreeService());
-                mETMyService.setText(result.getChoiceService());
-                mETRemark.setText(result.getRemark());
+                if (result != null) {
 
-                mSelectCemeteryName.setLocationIdAndType(result.getCemeteryId(),0);
-                mSelectLocation1.setLocationIdAndType(result.getGardenId(),1);
-                mSelectLocation2.setLocationIdAndType(result.getDistrictId(),2);
-                mSelectLocation3.setLocationIdAndType(result.getPlatoonId(),3);
-                mSelectLocation4.setLocationIdAndType(result.getMarkId(),4);
+                    if (result.getOrderNum() != null) {
+                        mETId.setText(result.getOrderNum());
+                    }
+                    if (result.getCemeteryName() != null) {
+                        mSelectCemeteryName.setString(result.getCemeteryName(), result.getCemeteryId());
+                    }
+                    if (result.getGarden() != null) {
+                        mSelectLocation1.setString(result.getGarden(), result.getGardenId());
+                    }
+                    if (result.getDistrict() != null) {
+                        mSelectLocation2.setString(result.getDistrict(), result.getDistrictId());
+                    }
+                    if (result.getPlatoon() != null) {
+                        mSelectLocation3.setString(result.getPlatoon(), result.getPlatoonId());
+                    }
+                    if (result.getMark() != null) {
+                        mSelectLocation4.setString(result.getMark(), result.getMarkId());
+                    }
+                    if (result.getCemeteryType() != null) {
+                        mSelectCemeteryType.setString(result.getCemeteryType());
+                    }
+                    if (result.getCemeteryProperties() != null) {
+                        mSelectCemeteryAttribute.setString(result.getCemeteryProperties());
+                    }
+                    if (result.getPlanSale() != null) {
+                        mETPlanToMoney.setText(result.getPlanSale());
+                    }
+                    if (result.getSaleMoney() != null) {
+                        mETSaleToMoney.setText(result.getSaleMoney());
+                    }
+                    if (result.getPayState() != null) {
+                        mSelectPayState.setString(result.getPayState());
+                    }
+                    if (result.getMoneyPay() != null) {
+                        mETMoney.setText(result.getMoneyPay());
+                    }
+                    if (result.getCemeteryReceive() != null) {
+                        mETCemeteryMan.setText(result.getCemeteryReceive());
+                    }
+                    if (result.getFreeService() != null) {
+                        mETFreeService.setText(result.getFreeService());
+                    }
+                    if (result.getChoiceService() != null) {
+                        mETMyService.setText(result.getChoiceService());
+                    }
+                    if (result.getRemark() != null) {
+                        mETRemark.setText(result.getRemark());
+                    }
 
+
+
+
+
+
+
+
+                    mSelectCemeteryName.setLocationIdAndType(result.getCemeteryId(), 0);
+                    mSelectLocation1.setLocationIdAndType(result.getCemeteryId(), 1);
+                    mSelectLocation2.setLocationIdAndType(result.getGardenId(), 2);
+                    mSelectLocation3.setLocationIdAndType(result.getDistrictId(), 3);
+                    mSelectLocation4.setLocationIdAndType(result.getPlatoonId(), 4);
+                }
 
             }
 
@@ -179,11 +223,11 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
         mSelectLocation2.setName("区 ");
         mSelectLocation3.setName("排 ");
         mSelectLocation4.setName("号 ");
-        mSelectCemeteryName.setData(cemeteryNameList, 0, this);
-        mSelectLocation1.setData(location1List, 1, this);
-        mSelectLocation2.setData(location2List, 2, this);
-        mSelectLocation3.setData(location3List, 3, this);
-        mSelectLocation4.setData(location4List, 4, this);
+        mSelectCemeteryName.setData(cemeteryNameList, 0, this, this);
+        mSelectLocation1.setData(location1List, 1, this, this);
+        mSelectLocation2.setData(location2List, 2, this, this);
+        mSelectLocation3.setData(location3List, 3, this, this);
+        mSelectLocation4.setData(location4List, 4, this, this);
         mSelectCemeteryType.setName("墓型：");
         mSelectCemeteryType.setData(cemeteryTypeList, 5, this);
         mSelectCemeteryAttribute.setName("墓穴属性：");
@@ -202,6 +246,52 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
     @Override
     public void onItemSelected(View view, int i, long l, int num) {
 
+    }
+
+    @Override
+    public void onItemSelected(View view, int i, long l, int num, long thisID) {
+        switch (num) {
+            case 0:
+                if (mSelectCemeteryName.isFirstSet()) {
+                    mSelectCemeteryName.setFirstSet(false);
+                } else {
+                    mSelectLocation1.setListDataClear();
+                    mSelectLocation2.setListDataClear();
+                    mSelectLocation3.setListDataClear();
+                    mSelectLocation4.setListDataClear();
+                }
+                mSelectLocation1.setLocationId(thisID);
+                break;
+            case 1:
+                if (mSelectLocation1.isFirstSet()) {
+                    mSelectLocation1.setFirstSet(false);
+                } else {
+                    mSelectLocation2.setListDataClear();
+                    mSelectLocation3.setListDataClear();
+                    mSelectLocation4.setListDataClear();
+                }
+                mSelectLocation2.setLocationId(thisID);
+                break;
+            case 2:
+                if (mSelectLocation2.isFirstSet()) {
+                    mSelectLocation2.setFirstSet(false);
+                } else {
+                    mSelectLocation3.setListDataClear();
+                    mSelectLocation4.setListDataClear();
+                }
+                mSelectLocation3.setLocationId(thisID);
+                break;
+            case 3:
+                if (mSelectLocation3.isFirstSet()) {
+                    mSelectLocation3.setFirstSet(false);
+                } else {
+                    mSelectLocation4.setListDataClear();
+                }
+                mSelectLocation4.setLocationId(thisID);
+                break;
+            case 4:
+                break;
+        }
     }
 
     public void setStateShow() {
@@ -330,4 +420,5 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
         });
 
     }
+
 }

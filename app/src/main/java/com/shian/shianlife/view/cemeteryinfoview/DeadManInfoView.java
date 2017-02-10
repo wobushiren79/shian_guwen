@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.cemetery.BuildNewOrderActivity;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
@@ -59,10 +60,18 @@ public class DeadManInfoView extends BaseInfoView implements CetemeryTextSelectL
 
         initData();
         initView();
+    }
+
+    @Override
+    public void getDataStart() {
+        super.getDataStart();
         getData();
     }
 
     private void getData() {
+        if (beSpeakId == -1) {
+            return;
+        }
         HpCemeteryIdParams params = new HpCemeteryIdParams();
         params.setBespeakId(beSpeakId);
         MHttpManagerFactory.getAccountManager().getCemeteryTalkSuccessTwo(getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessTwo>() {
@@ -73,6 +82,8 @@ public class DeadManInfoView extends BaseInfoView implements CetemeryTextSelectL
 
             @Override
             public void onSuccess(HrGetCemeteryTalkSuccessTwo result) {
+
+
                 Utils.LogVPrint("getDeadmanOneName:" + result.getDeadmanOneName());
                 Utils.LogVPrint("getDeadmanOneAge:" + result.getDeadmanOneAge());
                 Utils.LogVPrint("getDeadmanOneSex:" + result.getDeadmanOneSex());
@@ -89,22 +100,50 @@ public class DeadManInfoView extends BaseInfoView implements CetemeryTextSelectL
 
                 Utils.LogVPrint("getRemark" + result.getRemark());
 
-                mETDeadManName1.setText(result.getDeadmanOneName());
-                mETDeadManAge1.setText(result.getDeadmanOneAge());
-                mSelectDeadManSex1.setString(result.getDeadmanOneSex());
-                mSelectDeadManState1.setString(result.getDeadmanOneState());
-                mETDeadManCardId1.setText(result.getDeadmanOneCardId());
-                mTVDeadManTime1.setText(result.getDeadmanOneDeadTime());
+                if (result != null) {
+
+                    if (result.getDeadmanOneName() != null) {
+                        mETDeadManName1.setText(result.getDeadmanOneName());
+                    }
+                    if (result.getDeadmanOneAge() != null) {
+                        mETDeadManAge1.setText(result.getDeadmanOneAge());
+                    }
+                    if (result.getDeadmanOneSex() != null) {
+                        mSelectDeadManSex1.setString(result.getDeadmanOneSex());
+                    }
+                    if (result.getDeadmanOneState() != null) {
+                        mSelectDeadManState1.setString(result.getDeadmanOneState());
+                    }
+                    if (result.getDeadmanOneCardId() != null) {
+                        mETDeadManCardId1.setText(result.getDeadmanOneCardId());
+                    }
+                    if (result.getDeadmanOneDeadTime() != null) {
+                        mTVDeadManTime1.setText(result.getDeadmanOneDeadTime());
+                    }
+                    if (result.getDeadmanTwoName() != null) {
+                        mETDeadManName2.setText(result.getDeadmanTwoName());
+                    }
+                    if (result.getDeadmanTwoAge() != null) {
+                        mETDeadManAge2.setText(result.getDeadmanTwoAge());
+                    }
+                    if (result.getDeadmanTwoSex() != null) {
+                        mSelectDeadManSex2.setString(result.getDeadmanTwoSex());
+                    }
+                    if (result.getDeadmanTwoState() != null) {
+                        mSelectDeadManState2.setString(result.getDeadmanTwoState());
+                    }
+                    if (result.getDeadmanTwoCardId() != null) {
+                        mETDeadManCardId2.setText(result.getDeadmanTwoCardId());
+                    }
+                    if (result.getDeadmanTwoDeadTime() != null) {
+                        mTVDeadManTime2.setText(result.getDeadmanTwoDeadTime());
+                    }
+                    if (result.getRemark() != null) {
+                        mETRemark.setText(result.getRemark());
+                    }
 
 
-                mETDeadManName2.setText(result.getDeadmanTwoName());
-                mETDeadManAge2.setText(result.getDeadmanTwoAge());
-                mSelectDeadManSex2.setString(result.getDeadmanTwoSex());
-                mSelectDeadManState2.setString(result.getDeadmanTwoState());
-                mETDeadManCardId2.setText(result.getDeadmanTwoCardId());
-                mTVDeadManTime2.setText(result.getDeadmanTwoDeadTime());
-
-                mETRemark.setText(result.getRemark());
+                }
             }
 
             @Override
@@ -136,15 +175,34 @@ public class DeadManInfoView extends BaseInfoView implements CetemeryTextSelectL
 
         mETRemark = (EditText) view.findViewById(R.id.et_remark);
 
-        mSelectDeadManSex1.setName("使用者1性别");
-        mSelectDeadManSex2.setName("使用者2性别");
-        mSelectDeadManState1.setName("使用者1现状");
-        mSelectDeadManState2.setName("使用者2现状");
+        mSelectDeadManSex1.setName("使用者1性别：");
+        mSelectDeadManSex2.setName("使用者2性别：");
+        mSelectDeadManState1.setName("使用者1现状：");
+        mSelectDeadManState2.setName("使用者2现状：");
 
         mSelectDeadManSex1.setData(sexList, 0, this);
         mSelectDeadManSex2.setData(sexList, 1, this);
         mSelectDeadManState1.setData(stateList, 2, this);
         mSelectDeadManState2.setData(stateList, 3, this);
+
+        mTVDeadManTime1.setOnClickListener(onClickListener);
+        mTVDeadManTime2.setOnClickListener(onClickListener);
+    }
+
+    OnClickListener onClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (v == mTVDeadManTime1) {
+                timeSelect(mTVDeadManTime1);
+            } else if (v == mTVDeadManTime2) {
+                timeSelect(mTVDeadManTime2);
+            }
+
+        }
+    };
+
+    public void timeSelect(TextView textView) {
+        Utils.timeSelect(getContext(), textView);
     }
 
     @Override
@@ -240,6 +298,10 @@ public class DeadManInfoView extends BaseInfoView implements CetemeryTextSelectL
         }
         if (params.getDeadmanOneCardId().isEmpty()) {
             ToastUtils.show(getContext(), "使用者1身份证不能为空");
+            return;
+        }
+        if (params.getDeadmanOneCardId().getBytes().length != 18) {
+            ToastUtils.show(getContext(), "往生者身份证号码不足18位");
             return;
         }
         if (params.getDeadmanOneDeadTime().isEmpty()) {
