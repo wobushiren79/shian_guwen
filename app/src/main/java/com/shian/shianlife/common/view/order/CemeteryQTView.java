@@ -1,10 +1,12 @@
 package com.shian.shianlife.common.view.order;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,10 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * Created by Administrator on 2017/1/9.
- */
 
+@SuppressLint("InflateParams")
 public class CemeteryQTView extends BaseOrderView {
 
     public final static String TALK_INFO_STATE = "TalkInfoState";//跳转到洽谈信息状态（0，新建。1，查询详情）
@@ -153,6 +153,7 @@ public class CemeteryQTView extends BaseOrderView {
                     @Override
                     public void onfresh() {
                         clearData();
+                        listAdapter.notifyDataSetChanged();
                         getData();
                     }
                 });

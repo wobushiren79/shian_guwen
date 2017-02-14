@@ -107,7 +107,7 @@
         android:paddingTop="@dimen/dimen_10dp">
 
         <TextView
-            style="@style/cemetery_text_style_3"
+            style="@style/cemetery_text_style_3_nonecessary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="经办人邮箱地址：" />

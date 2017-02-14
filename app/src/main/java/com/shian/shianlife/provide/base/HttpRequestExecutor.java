@@ -97,8 +97,7 @@ public class HttpRequestExecutor {
                 getSession(context);
             }
             Log.i("tag", "methed=" + C_sBaseUrl + "/" + method);
-            httpClient.post(context, C_sBaseUrl + "/" + method, headers,
-                    httpEntity, "application/json",
+            httpClient.post(context, C_sBaseUrl + "/" + method, headers,httpEntity, "application/json",
                     new AsyncHttpResponseHandler() {
                         @Override
                         public void onStart() {
@@ -124,8 +123,6 @@ public class HttpRequestExecutor {
                                     pd.cancel();
                                 response(context, method, c, response, arg2);
                             }
-
-
                         }
 
                         @Override
@@ -145,7 +142,7 @@ public class HttpRequestExecutor {
 
                         }
                     });
-        } catch (UnsupportedEncodingException e1) {
+        } catch (Exception e1) {
             // onError(response, context.getString(R.string.servererror),
             // context);
             if (pd != null) {

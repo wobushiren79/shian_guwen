@@ -30,6 +30,7 @@ import com.shian.shianlife.provide.base.HttpRequestExecutor;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpLoginParams;
 import com.shian.shianlife.provide.result.HrLoginResult;
+import com.shian.shianlife.service.UpDataService;
 
 public class SplashActivity extends BaseActivity implements OnPushListener {
     private static final String LOG_TAG = "SPLASH_ACTIVITY";
@@ -40,7 +41,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         initPush();
-
     }
 
     private void initView() {

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import butterknife.InjectViews;
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
@@ -52,6 +53,7 @@ public class MessageDetailActviity extends BaseActivity {
                         public void onSuccess(HrCommentResult result) {
                             // TODO Auto-generated method stub
                             AppContansts.MessageCount = result.getCount();
+                            ShortcutBadger.applyCount(MessageDetailActviity.this, AppContansts.MessageCount);
                         }
 
                         @Override

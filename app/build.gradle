@@ -67,6 +67,7 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.6.1'
     compile 'com.commit451:PhotoView:1.2.4'
     compile 'com.isseiaoki:simplecropview:1.0.13'
+    compile 'me.leolin:ShortcutBadger:1.1.13@aar'//通知图标数量
     compile files('libs/bugly_crash_release__2.1.5.jar')
     compile files('libs/pushservice-5.0.0.66.jar')
     compile project(':librarys:cptr')
@@ -87,6 +88,7 @@ dependencies {
     compile files('libs/baidumapapi_radar_v4_1_1.jar')
     compile files('libs/baidumapapi_search_v4_1_1.jar')
     compile files('libs/baidumapapi_util_v4_1_1.jar')
+
 //    compile 'com.google.android:multidex:0.1'
 
 

@@ -2,6 +2,7 @@ package com.shian.shianlife.view.cemeteryinfoview;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import com.shian.shianlife.R;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpCemeteryIdParams;
@@ -195,14 +197,15 @@ public class AgentManInfoView extends BaseInfoView implements CetemeryTextSelect
             ToastUtils.show(getContext(), "经办人身份证不能为空");
             return;
         }
-        if (params.getAgentmanEmail().isEmpty()) {
-            ToastUtils.show(getContext(), "经办人邮箱不能为空");
-            return;
-        }
-        if (Utils.isEmail(params.getAgentmanEmail())) {
-            ToastUtils.show(getContext(), "邮箱格式不对");
-            return;
-        }
+//        if (params.getAgentmanEmail().isEmpty()) {
+//            ToastUtils.show(getContext(), "经办人邮箱不能为空");
+//            return;
+//        }
+//        if (!Utils.isEmail(params.getAgentmanEmail())) {
+//            Log.v("this","params.getAgentmanEmail():"+params.getAgentmanEmail());
+//            ToastUtils.show(getContext(), "邮箱格式不对");
+//            return;
+//        }
         MHttpManagerFactory.getAccountManager().saveCemeteryTalkSuccessThree(getContext(), params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart() {

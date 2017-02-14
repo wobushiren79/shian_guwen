@@ -12,10 +12,15 @@ public class HpSaveCemeteryTalkSuccessOne extends BaseHttpParams {
     private int saveType;//提交人的类型（1，洽谈人。2，售后。如果是售后，那么这个提交只能进行一次）
     private String orderNum;//订单编号
     private String cemeteryName;//公墓名称
+    private long cemeteryId;//公墓名称 id
     private String garden;//	苑
+    private long gardenId;//苑 id
     private String district;//区
+    private long districtId;//区 id
     private String platoon;//排
+    private long platoonId;//排 id
     private String mark;//号
+    private long markId;//号 id
     private String cemeteryType;//	墓型
     private String cemeteryProperties;//	墓穴属性
     private String planSale;//挂牌价
@@ -26,6 +31,47 @@ public class HpSaveCemeteryTalkSuccessOne extends BaseHttpParams {
     private String freeService;//赠送服务
     private String choiceService;//自选服务
     private String remark;//	备注
+
+
+    public long getCemeteryId() {
+        return cemeteryId;
+    }
+
+    public void setCemeteryId(long cemeteryId) {
+        this.cemeteryId = cemeteryId;
+    }
+
+    public long getGardenId() {
+        return gardenId;
+    }
+
+    public void setGardenId(long gardenId) {
+        this.gardenId = gardenId;
+    }
+
+    public long getDistrictId() {
+        return districtId;
+    }
+
+    public void setDistrictId(long districtId) {
+        this.districtId = districtId;
+    }
+
+    public long getPlatoonId() {
+        return platoonId;
+    }
+
+    public void setPlatoonId(long platoonId) {
+        this.platoonId = platoonId;
+    }
+
+    public long getMarkId() {
+        return markId;
+    }
+
+    public void setMarkId(long markId) {
+        this.markId = markId;
+    }
 
     public long getOrderedId() {
         return orderedId;

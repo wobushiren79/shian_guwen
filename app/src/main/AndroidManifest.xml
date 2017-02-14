@@ -46,6 +46,8 @@
     <!-- 摄影机 -->
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+
     <permission
         android:name="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.shian.shianlife"
         android:protectionLevel="normal" />
@@ -398,6 +400,7 @@
         <activity android:name=".activity.map.BNDemoMainActivity"></activity>
 
         <service android:name=".service.PushService" />
+        <service android:name=".service.UpDataService"></service>
 
         <receiver android:name=".common.push.MyPushReceiver">
             <intent-filter>

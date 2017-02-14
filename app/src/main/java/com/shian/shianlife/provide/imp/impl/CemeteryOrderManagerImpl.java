@@ -1,6 +1,7 @@
 package com.shian.shianlife.provide.imp.impl;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.shian.shianlife.provide.base.HttpRequestExecutor;
 import com.shian.shianlife.provide.base.HttpResponseHandler;

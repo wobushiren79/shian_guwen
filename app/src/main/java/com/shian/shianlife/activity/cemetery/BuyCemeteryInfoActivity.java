@@ -131,6 +131,7 @@ public class BuyCemeteryInfoActivity extends BaseActivity implements BaseInfoVie
     @Override
     public void SaveSuccess() {
         mLLContent.removeAllViews();
+        CemeteryFragment.C_bOrder_isRefresh=true;
         switch (inType) {
             case 0:
                 inType = 1;
@@ -142,7 +143,6 @@ public class BuyCemeteryInfoActivity extends BaseActivity implements BaseInfoVie
                 break;
             case 2:
                 initData();
-                CemeteryFragment.C_bOrder_isRefresh=true;
                 finish();
                 break;
         }

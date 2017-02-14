@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import com.shian.shianlife.R;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpCemeteryIdParams;
@@ -322,10 +323,15 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
         params.setSaveType(changeState);
         params.setOrderNum(mETId.getText().toString());
         params.setCemeteryName(mSelectCemeteryName.getSelectedData());
+        params.setCemeteryId(mSelectCemeteryName.getThisLocationId());
         params.setGarden(mSelectLocation1.getSelectedData());
+        params.setGardenId(mSelectLocation1.getThisLocationId());
         params.setDistrict(mSelectLocation2.getSelectedData());
+        params.setDistrictId(mSelectLocation2.getThisLocationId());
         params.setPlatoon(mSelectLocation3.getSelectedData());
+        params.setPlatoonId(mSelectLocation3.getThisLocationId());
         params.setMark(mSelectLocation4.getSelectedData());
+        params.setMarkId(mSelectLocation4.getThisLocationId());
         params.setCemeteryType(mSelectCemeteryType.getSelectedData());
         params.setCemeteryProperties(mSelectCemeteryAttribute.getSelectedData());
         params.setPlanSale(mETPlanToMoney.getText().toString());
@@ -415,7 +421,7 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
 
             @Override
             public void onError(String message) {
-
+                  Utils.LogVPrint(message);
             }
         });
 

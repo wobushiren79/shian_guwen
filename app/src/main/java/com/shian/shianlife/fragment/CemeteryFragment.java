@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseFragment;
 import com.shian.shianlife.common.utils.JSONUtil;
@@ -25,14 +26,8 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-
-/**
- * Created by Administrator on 2017/1/6.
- */
 @SuppressLint("InflateParams")
 public class CemeteryFragment extends BaseFragment {
-
-
     @InjectView(R.id.indicator)
     TabPageIndicator indicator;
     @InjectView(R.id.pager)

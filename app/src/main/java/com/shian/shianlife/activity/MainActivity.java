@@ -41,10 +41,12 @@ import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.result.HrCommentResult;
 import com.shian.shianlife.service.PushService;
+import com.shian.shianlife.service.UpDataService;
 
 import org.support.v4.annotation.NonNull;
 
 import butterknife.InjectView;
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -80,10 +82,12 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         initPermission();
 //        initLocation();
         startPushService();
+//        checkUpData();
+
     }
 
     private void startPushService() {
-        Intent intent=new Intent(MainActivity.this, PushService.class);
+        Intent intent = new Intent(MainActivity.this, PushService.class);
         startService(intent);
     }
 
@@ -153,11 +157,11 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         showFragment(R.id.rb_main_1);
         MHttpManagerFactory.getAccountManager().getMessageCount(this,
                 new HttpResponseHandler<HrCommentResult>() {
-
                     @Override
                     public void onSuccess(HrCommentResult result) {
                         // TODO Auto-generated method stub
                         AppContansts.MessageCount = result.getCount();
+                        ShortcutBadger.applyCount(MainActivity.this, AppContansts.MessageCount);
                         if (result.getCount() == 0) {
                             setMessageIconVisible(View.GONE);
                         } else {
@@ -276,9 +280,9 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         // TODO Auto-generated method stub
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == 1010) {
-            int state=data.getIntExtra("Settings",-1);
+            int state = data.getIntExtra("Settings", -1);
             Intent in = new Intent(this, LoginActivity.class);
-            in.putExtra("loginStateChange",state);
+            in.putExtra("loginStateChange", state);
             startActivity(in);
             finish();
         }
@@ -353,7 +357,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         public void onReceiveLocation(BDLocation location) {
             // TODO Auto-generated method stub
 
-            if (null != location&& location.getLocType() != BDLocation.TypeServerError) {
+            if (null != location && location.getLocType() != BDLocation.TypeServerError) {
                 if (location.getAddrStr() == null) return;
                 location(location.getAddrStr());
                 AppContansts.LocalString = location.getAddrStr();
@@ -392,5 +396,13 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 }
             });
         }
+    }
+
+    /**
+     * 检测是否有更新 并执行下载
+     */
+    public void checkUpData() {
+        Intent intent = new Intent(MainActivity.this, UpDataService.class);
+        startService(intent);
     }
 }
