@@ -3,60 +3,103 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.shian.shianlife.activity.MainActivity" >
+    tools:context="com.shian.shianlife.activity.MainActivity">
 
     <FrameLayout
         android:id="@+id/fl_main"
-        android:background="@color/main_blackground"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:background="@color/main_blackground"></FrameLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/dimen_96dp">
+
+        <RadioGroup
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/dimen_20dp">
+
+            <RadioButton
+
+                android:id="@+id/rb_main_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:checked="true"
+                android:drawableTop="@drawable/ic_bar_home_selector_2"
+                android:gravity="center_horizontal"
+                android:text="@string/main_1"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtsize_20sp" />
+
+            <RadioButton
+                android:id="@+id/rb_main_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+
+                android:drawableTop="@drawable/ic_bar_order_selector_2"
+                android:gravity="center_horizontal"
+                android:text="@string/main_2"
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtsize_20sp" />
+
+            <RadioButton
+                android:id="@+id/rb_main_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/ic_bar_my_selector_2"
+                android:gravity="center_horizontal"
+                android:text="@string/main_3"
+                android:textColor="@color/white"
+
+                android:textSize="@dimen/txtsize_20sp" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <RelativeLayout
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:background="@drawable/msg_point"
+                    android:layout_width="@dimen/dimen_40dp"
+                    android:layout_height="@dimen/dimen_40dp"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:ems="2"
+                    android:text="99"
+                    android:layout_marginTop="@dimen/dimen_1dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="@dimen/dimen_50dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+        </LinearLayout>
+
     </FrameLayout>
 
-    <RadioGroup
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/dimen_96dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/dimen_20dp" >
-
-        <RadioButton
-            android:id="@+id/rb_main_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:checked="true"
-            android:drawableTop="@drawable/ic_bar_home_selector_2"
-            android:gravity="center_horizontal"
-            android:textColor="@color/white"
-            android:text="@string/main_1"
-            android:textSize="@dimen/txtsize_20sp" />
-
-        <RadioButton
-            android:id="@+id/rb_main_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:drawableTop="@drawable/ic_bar_order_selector_2"
-            android:gravity="center_horizontal"
-            android:textColor="@color/white"
-            android:text="@string/main_2"
-            android:textSize="@dimen/txtsize_20sp" />
-
-        <RadioButton
-            android:id="@+id/rb_main_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:button="@null"
-            android:textColor="@color/white"
-            android:text="@string/main_3"
-            android:drawableTop="@drawable/ic_bar_my_selector_2"
-            android:gravity="center_horizontal"
-
-            android:textSize="@dimen/txtsize_20sp" />
-    </RadioGroup>
 
 </LinearLayout>

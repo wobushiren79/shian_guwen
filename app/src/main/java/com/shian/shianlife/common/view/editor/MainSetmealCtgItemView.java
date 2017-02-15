@@ -48,7 +48,6 @@ public class MainSetmealCtgItemView extends FrameLayout {
         llOneOrder = (LinearLayout) v.findViewById(R.id.ll_oneorder);
         btnAddOrder = (Button) v.findViewById(R.id.btn_addorder);
         btnAddOrder.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View arg0) {
                 addProductItem();

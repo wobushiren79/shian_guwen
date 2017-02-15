@@ -17,16 +17,28 @@
 package com.viewpagerindicator;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.R.attr.paddingRight;
+import static android.R.attr.width;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
@@ -35,7 +47,9 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
  * across different configurations or circumstances.
  */
 public class TabPageIndicator extends HorizontalScrollView implements PageIndicator {
-    /** Title text used when no title is provided by the adapter. */
+    /**
+     * Title text used when no title is provided by the adapter.
+     */
     private static final CharSequence EMPTY_TITLE = "";
 
     /**
@@ -54,7 +68,7 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
 
     private final OnClickListener mTabClickListener = new OnClickListener() {
         public void onClick(View view) {
-            TabView tabView = (TabView)view;
+            TabView tabView = (TabView) view;
             final int oldSelected = mViewPager.getCurrentItem();
             final int newSelected = tabView.getIndex();
             mViewPager.setCurrentItem(newSelected);
@@ -99,7 +113,7 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
         final int childCount = mTabLayout.getChildCount();
         if (childCount > 1 && (widthMode == MeasureSpec.EXACTLY || widthMode == MeasureSpec.AT_MOST)) {
             if (childCount > 2) {
-                mMaxTabWidth = (int)(MeasureSpec.getSize(widthMeasureSpec) * 0.4f);
+                mMaxTabWidth = (int) (MeasureSpec.getSize(widthMeasureSpec) * 0.4f);
             } else {
                 mMaxTabWidth = MeasureSpec.getSize(widthMeasureSpec) / 2;
             }
@@ -149,17 +163,23 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
         }
     }
 
+    private List<TabView> listTabView=new ArrayList<>();
+
+    public List<TabView> getListTabView() {
+        return listTabView;
+    }
+
     private void addTab(int index, CharSequence text, int iconResId) {
         final TabView tabView = new TabView(getContext());
         tabView.mIndex = index;
         tabView.setFocusable(true);
         tabView.setOnClickListener(mTabClickListener);
+        tabView.setMsgCornerNumber(0);
         tabView.setText(text);
-
         if (iconResId != 0) {
             tabView.setCompoundDrawablesWithIntrinsicBounds(iconResId, 0, 0, 0);
         }
-
+        listTabView.add(tabView);
         mTabLayout.addView(tabView, new LinearLayout.LayoutParams(0, MATCH_PARENT, 1));
     }
 
@@ -207,7 +227,7 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
         PagerAdapter adapter = mViewPager.getAdapter();
         IconPagerAdapter iconAdapter = null;
         if (adapter instanceof IconPagerAdapter) {
-            iconAdapter = (IconPagerAdapter)adapter;
+            iconAdapter = (IconPagerAdapter) adapter;
         }
         final int count = adapter.getCount();
         for (int i = 0; i < count; i++) {
@@ -258,8 +278,12 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
         mListener = listener;
     }
 
-    private class TabView extends TextView {
+    public class TabView extends TextView {
         private int mIndex;
+        private boolean isShowMsgCorner = true;//是否展示消息图标
+
+        private int MsgCornerNumber = 0;
+        private int MsgCornerSize = 50;
 
         public TabView(Context context) {
             super(context, null, R.attr.vpiTabPageIndicatorStyle);
@@ -276,8 +300,49 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
             }
         }
 
+        @Override
+        protected void onDraw(Canvas canvas) {
+            super.onDraw(canvas);
+            if (isShowMsgCorner) {
+                Paint paint = new Paint();
+                paint.setAntiAlias(true);
+                paint.setDither(true);
+//            paint.setStyle(Paint.Style.FILL_AND_STROKE);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.msg_point);
+                Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+                Rect rect2 = new Rect(this.getWidth() - MsgCornerSize, 0, this.getWidth(), MsgCornerSize);
+                canvas.drawBitmap(bitmap, rect, rect2, paint);
+
+                paint.setTextAlign(Paint.Align.CENTER);
+                paint.setTextSize(MsgCornerSize - 10);
+                paint.setColor(Color.WHITE);
+                canvas.drawText(MsgCornerNumber+"", this.getWidth() - MsgCornerSize / 2, MsgCornerSize * 3 / 4, paint);
+
+
+            }
+        }
+
+        public void setMsgCornerNumber(int number) {
+            this.MsgCornerNumber = number;
+            if (this.MsgCornerNumber <= 0) {
+                setMsgCornerVisibility(false);
+            }else if(this.MsgCornerNumber>99){
+                setMsgCornerVisibility(true);
+                this.MsgCornerNumber=99;
+            }else{
+                setMsgCornerVisibility(true);
+            }
+            invalidate();
+        }
+
+        public void setMsgCornerVisibility(boolean isShowMsgCorner) {
+            this.isShowMsgCorner = isShowMsgCorner;
+            invalidate();
+        }
+
         public int getIndex() {
             return mIndex;
         }
     }
+
 }

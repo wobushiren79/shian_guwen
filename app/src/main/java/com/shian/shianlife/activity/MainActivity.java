@@ -86,6 +86,8 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 
     }
 
+
+
     private void startPushService() {
         Intent intent = new Intent(MainActivity.this, PushService.class);
         startService(intent);
@@ -161,7 +163,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                     public void onSuccess(HrCommentResult result) {
                         // TODO Auto-generated method stub
                         AppContansts.MessageCount = result.getCount();
-                        ShortcutBadger.applyCount(MainActivity.this, AppContansts.MessageCount);
+
                         if (result.getCount() == 0) {
                             setMessageIconVisible(View.GONE);
                         } else {

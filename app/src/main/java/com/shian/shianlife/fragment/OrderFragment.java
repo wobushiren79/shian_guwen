@@ -59,8 +59,14 @@ public class OrderFragment extends BaseFragment {
 		if (views.size() > 0) {
 			((BaseOrderView) views.get(mIndex)).refresh();
 		}
+		setMsgCorner();
 	}
-
+	private void setMsgCorner() {
+		List<TabPageIndicator.TabView> listTabView=indicator.getListTabView();
+		for (TabPageIndicator.TabView tabview:listTabView) {
+              tabview.setMsgCornerNumber(2);
+		}
+	}
 
 	@Override
 	public void onResume() {

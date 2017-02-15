@@ -21,6 +21,7 @@ import com.shian.shianlife.common.view.editor.CemeterySetmealView;
 import com.shian.shianlife.common.view.editor.CemeterySetmealView.OnCemeteryChangeListener;
 import com.shian.shianlife.common.view.editor.FuneralSetmealView;
 import com.shian.shianlife.common.view.editor.FuneralSetmealView.OnFuneralChangeListener;
+import com.shian.shianlife.common.view.editor.MainSetmealOtherView;
 import com.shian.shianlife.common.view.editor.MainSetmealView;
 import com.shian.shianlife.common.view.editor.MainSetmealView.OnMainChangeListener;
 import com.shian.shianlife.common.view.order.AddedSetmealView;
@@ -54,6 +55,8 @@ public class EditOrderActivity extends BaseActivity {
     TextView tv_total;
     @InjectView(R.id.msv)
     MainSetmealView mainSetmealView;
+    @InjectView(R.id.msvother)
+    MainSetmealOtherView mainSetmealOtherView;
     @InjectView(R.id.fsv)
     FuneralSetmealView funeralSetmealView;
     @InjectView(R.id.rl_top)
@@ -267,8 +270,6 @@ public class EditOrderActivity extends BaseActivity {
                 }
             }
         }
-
-
     }
 
     @OnClick(R.id.tv_edit_commit)

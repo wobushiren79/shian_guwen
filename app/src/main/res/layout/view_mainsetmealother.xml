@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:gravity="center"
+        android:text="治丧套餐"
+        android:textSize="@dimen/dimen_32dp" />
+
+    <TextView
+        android:layout_width="@dimen/dimen_60dp"
+        android:layout_height="@dimen/dimen_4dp"
+        android:layout_gravity="center"
+        android:background="@color/blackgroundmain" />
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:layout_marginLeft="@dimen/dimen_20dp"
+        android:layout_marginRight="@dimen/dimen_20dp"
+        android:layout_marginBottom="@dimen/dimen_30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_46dp"
+            android:text="套餐名称："
+            android:textSize="@dimen/dimen_30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_46dp"
+            android:layout_weight="1"
+            android:text="流芳（居家）"
+            android:textSize="@dimen/dimen_30dp" />
+
+        <Button
+            android:layout_width="@dimen/dimen_150dp"
+            android:layout_height="@dimen/dimen_46dp"
+            android:background="@drawable/zhy_button_bg"
+            android:text="更改"
+            android:textColor="@color/blackgroundmain"
+            android:textSize="@dimen/dimen_30dp" />
+
+    </LinearLayout>
+    <TextView
+        android:background="@color/zhy_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp" />
+</LinearLayout>

@@ -53,7 +53,6 @@ public class MessageDetailActviity extends BaseActivity {
                         public void onSuccess(HrCommentResult result) {
                             // TODO Auto-generated method stub
                             AppContansts.MessageCount = result.getCount();
-                            ShortcutBadger.applyCount(MessageDetailActviity.this, AppContansts.MessageCount);
                         }
 
                         @Override

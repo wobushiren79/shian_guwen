@@ -37,7 +37,7 @@
     <color name="chlickcolor">#f4dc5f</color>
     <color name="main_blackground">#ECECEC</color>
     <color name="cemetery_textcolor">#83e69f</color>
-
+    <color name="zhy_line">#898989</color>
     <color name="cemetery_titlecolor">#f6c858</color>
     <!-- Dialog Color -->
     <color name="version_msg_color">#ff6699ff</color>
@@ -342,37 +342,37 @@
     <color name="item_text">#757573</color>
     <color name="text_title">#000000</color>
     <color name="text_content">#888888</color>
- 
+
     <!-- zjh -->
     <color name="control_bg">#ffe1e0e0</color>
     <color name="common_title_bg">#ffcc6666</color>
     <color name="common_title">#ffd17676</color>
     <color name="common_text_black">#ffababab</color>
-   <color name="common_text_blue">#ff6699cc</color>
-     <color name="common_list_white">#fff0f0f0</color>  
-    
-     <color name="gray_main_tab_bg">#f0f0f0</color>
+    <color name="common_text_blue">#ff6699cc</color>
+    <color name="common_list_white">#fff0f0f0</color>
+
+    <color name="gray_main_tab_bg">#f0f0f0</color>
     <color name="gray_main_rb_bg_f">#cccccc</color>
     <color name="gray_main_rb_bg_normal">#00000000</color>
     <color name="red_main_rb_f">#cc6666</color>
-     <color name="red_main_rb">#88898a</color>
-     <color name="red_common">#cc6666</color>
-     <color name="gray_common">#e1e0e0</color>
-      <color name="red_btn_f">#cc9999</color>
-       <color name="gray_item_shua_textcolor">#666666</color>
-      <color name="black_item_shua_textcolor">#333333</color>
-     <color name="light_gray_item_shua_textcolor">#999999</color>
-     
-     <color name="white_bg">#e1e0e0</color>
-     <color name="red_in_app">#cc6666</color>
-     <color name="white_text">#e1e0e0</color>
-     <color name="white_item">#f0f0f0</color>
-     <color name="white_text_canEdit">#cc9999</color>
-     <color name="account_blue">#6699cc</color>
-     <color name="account_green">#66a268</color>
-     
-     <color name="itme_gray_samll">#cccccc</color>
-     <color name="item_gray_big">#333333</color>
-     
-     
+    <color name="red_main_rb">#88898a</color>
+    <color name="red_common">#cc6666</color>
+    <color name="gray_common">#e1e0e0</color>
+    <color name="red_btn_f">#cc9999</color>
+    <color name="gray_item_shua_textcolor">#666666</color>
+    <color name="black_item_shua_textcolor">#333333</color>
+    <color name="light_gray_item_shua_textcolor">#999999</color>
+
+    <color name="white_bg">#e1e0e0</color>
+    <color name="red_in_app">#cc6666</color>
+    <color name="white_text">#e1e0e0</color>
+    <color name="white_item">#f0f0f0</color>
+    <color name="white_text_canEdit">#cc9999</color>
+    <color name="account_blue">#6699cc</color>
+    <color name="account_green">#66a268</color>
+
+    <color name="itme_gray_samll">#cccccc</color>
+    <color name="item_gray_big">#333333</color>
+
+
 </resources>

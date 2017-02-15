@@ -110,6 +110,7 @@ public class SetmealProductItemView extends FrameLayout implements
 				change(false);
 			}
 		});
+
 	}
 
 	private boolean isEdit = true;
