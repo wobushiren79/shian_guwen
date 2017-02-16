@@ -17,10 +17,19 @@ public class ProductItemModel {
 	int skuId;// 商品ID
 
 	float totalPrice;
-
 	int num;
 
+	int count;//数量
+
 	boolean canEdit;
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 	public int getSkuId() {
 		return skuId;

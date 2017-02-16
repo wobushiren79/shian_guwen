@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_text"
+            android:textSize="@dimen/dimen_26dp" />
+
+        <ImageView
+            android:id="@+id/iv_detail"
+            android:layout_width="@dimen/dimen_22dp"
+            android:layout_height="@dimen/dimen_26dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/zhy_sku_detail" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:textColor="@color/gray_text"
+        android:textSize="@dimen/dimen_26dp" />
+
+    <TextView
+        android:id="@+id/tv_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:textColor="@color/gray_text"
+        android:textSize="@dimen/dimen_26dp" />
+
+</LinearLayout>

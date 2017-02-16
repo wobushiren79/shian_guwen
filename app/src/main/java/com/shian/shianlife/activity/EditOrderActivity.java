@@ -215,6 +215,8 @@ public class EditOrderActivity extends BaseActivity {
     }
 
     protected void initOrderView(HrGetOrderDetailResult result) {
+        mainSetmealOtherView.setInitData("治丧主套餐",mainSetmeals);
+
         mainSetmealView.setCtgItems("治丧主套餐", mainSetmeals, result);
         mainSetmealView.setOrderId(orderId);
         mainSetmealView.setOnMainChangeListener(new OnMainChangeListener() {
@@ -353,6 +355,8 @@ public class EditOrderActivity extends BaseActivity {
     }
 
     private void initOrderView() {
+        mainSetmealOtherView.setInitData("治丧主套餐",mainSetmeals);
+
         mainSetmealView.setCtgItems("治丧主套餐", mainSetmeals);
         mainSetmealView.setOnMainChangeListener(new OnMainChangeListener() {
 

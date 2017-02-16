@@ -27,7 +27,7 @@ public class ScrollListView extends ListView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        super.onMeasure(widthMeasureSpec, expandSpec);
     }
 
 
@@ -49,5 +49,7 @@ public class ScrollListView extends ListView {
         // listView.getDividerHeight()获取子项间分隔符占用的高度
         // params.height最后得到整个ListView完整显示需要的高度
         listView.setLayoutParams(params);
+
+
     }
 }
