@@ -82,7 +82,7 @@ public class HttpRequestExecutor {
                 httpEntity = new StringEntity(httpParams, HTTP.UTF_8);
             }
             if (method.contains("doLogout") || method.contains("doLogin")
-                    || method.contains("address/load")) {
+                    || method.contains("address/load") || method.contains("order/list/wating/handle/count")) {
                 pd = null;
                 getSession(context);
             } else {

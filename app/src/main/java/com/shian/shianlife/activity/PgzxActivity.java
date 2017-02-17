@@ -239,36 +239,7 @@ public class PgzxActivity extends BaseActivity {
                 ivData.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //获取商品详情
-                        HpSkuIdParams params = new HpSkuIdParams();
-                        params.setSkuId(templateItem.getSkuId());
-                        MHttpManagerFactory.getAccountManager().getSKUDetails(PgzxActivity.this, params, new HttpResponseHandler<HrGetSKUDetails>() {
-                            @Override
-                            public void onStart() {
-
-                            }
-
-                            @Override
-                            public void onSuccess(HrGetSKUDetails result) {
-
-                                if (result.getDetails() != null && !result.getDetails().equals("")) {
-                                    AlertDialog dialog = new AlertDialog.Builder(PgzxActivity.this)
-                                            .setTitle("商品详情")
-                                            .setMessage(result.getDetails())
-                                            .setPositiveButton("确认", null)
-                                            .create();
-                                    dialog.show();
-                                } else {
-                                    ToastUtils.show(PgzxActivity.this, "没有商品详情数据");
-                                }
-                            }
-
-                            @Override
-                            public void onError(String message) {
-
-                            }
-                        });
-
+                        Utils.getSKUDetails(PgzxActivity.this,templateItem.getSkuId());
                     }
                 });
 

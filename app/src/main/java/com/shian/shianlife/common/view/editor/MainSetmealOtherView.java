@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,9 +19,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.provide.model.CreateOrderProductItemModel;
 import com.shian.shianlife.provide.model.CtgItemModel;
+import com.shian.shianlife.provide.model.OrderCtgItemModel;
+import com.shian.shianlife.provide.model.OrderProductItemModel;
 import com.shian.shianlife.provide.model.ProductItemModel;
+import com.shian.shianlife.provide.model.ProjectItemModel;
 import com.shian.shianlife.provide.model.SetmealModel;
+import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.view.ScrollListView;
 import com.shian.shianlife.view.dialog.EditOrderSetmealChangeDialog;
 
@@ -28,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/2/15.
+ * Created by Administrator
  */
 
 public class MainSetmealOtherView extends LinearLayout {
@@ -42,11 +49,15 @@ public class MainSetmealOtherView extends LinearLayout {
 
     private List<SetmealModel> mainSetmeals = new ArrayList<>();// 系统主套餐
     private List<CtgItemModel> ctgItems = new ArrayList<>();
+    private List<CtgItemModel> detailsCtgItems = new ArrayList<>();
     private List<String> listTitle = new ArrayList<>();
+
+    private HrGetOrderDetailResult result;
 
     private String titleName;
     private String SetmealName;
     private int SetmealPosition = 0;
+    private int mainID;
 
     public MainSetmealOtherView(Context context) {
         this(context, null);
@@ -67,11 +78,29 @@ public class MainSetmealOtherView extends LinearLayout {
         }
         mTVTitle.setText(titleName);
         if (mainSetmeals != null && mainSetmeals.size() > 0) {
+            mainID = mainSetmeals.get(0).getId();
             mTVSetmealName.setText(mainSetmeals.get(0).getName());
             SetmealName = mainSetmeals.get(0).getName();
             ctgItems.addAll(mainSetmeals.get(0).getCtgItems());
+            setInitDetailsCtgItems();
         }
         theAdapter.notifyDataSetChanged();
+
+
+    }
+
+    public void setInitData(String name, List<SetmealModel> mainSetmeals, HrGetOrderDetailResult result) {
+        this.result = result;
+        setInitData(name, mainSetmeals);
+        for (int i = 0; i < mainSetmeals.size(); i++) {
+            SetmealModel setmealData = mainSetmeals.get(i);
+            if (result.getBoard().getSetmealMainId() == setmealData.getId()) {
+                setSelectSetmeal(mainSetmeals.get(i).getName(), i);
+                break;
+            }
+        }
+
+
     }
 
 
@@ -93,8 +122,7 @@ public class MainSetmealOtherView extends LinearLayout {
     BaseAdapter theAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
-            Log.v("this", "ctgItems.size():" + ctgItems.size());
-            return ctgItems.size();
+            return detailsCtgItems.size();
         }
 
         @Override
@@ -119,10 +147,10 @@ public class MainSetmealOtherView extends LinearLayout {
             } else {
                 theViewHolder = (TheViewHolder) convertView.getTag();
             }
-            AbsListView.LayoutParams layoutparams = new AbsListView.LayoutParams
+            LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams
                     (ViewGroup.LayoutParams.MATCH_PARENT, MainSetmealOtherView.this.getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_48dp));
-            convertView.setLayoutParams(layoutparams);
-            final CtgItemModel data = ctgItems.get(position);
+            theViewHolder.tvTitle.setLayoutParams(layoutparams);
+            final CtgItemModel data = detailsCtgItems.get(position);
             theViewHolder.tvTitle.setText(data.getName());
             theViewHolder.itemListView.setAdapter(new BaseAdapter() {
                 @Override
@@ -145,19 +173,19 @@ public class MainSetmealOtherView extends LinearLayout {
                     ItemViewHolder itemViewHolder;
                     if (convertView == null) {
                         convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_mainsetmealother_listview_items_items, null);
-                        itemViewHolder=new ItemViewHolder();
+                        itemViewHolder = new ItemViewHolder();
                         itemViewHolder.ivDetail = (ImageView) convertView.findViewById(R.id.iv_detail);
-                        itemViewHolder.tvName= (TextView) convertView.findViewById(R.id.tv_name);
-                        itemViewHolder.tvNum= (TextView) convertView.findViewById(R.id.tv_num);
-                        itemViewHolder.tvMoney= (TextView) convertView.findViewById(R.id.tv_money);
+                        itemViewHolder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
+                        itemViewHolder.tvNum = (TextView) convertView.findViewById(R.id.tv_num);
+                        itemViewHolder.tvMoney = (TextView) convertView.findViewById(R.id.tv_money);
                         convertView.setTag(itemViewHolder);
-                    }else{
-                        itemViewHolder= (ItemViewHolder) convertView.getTag();
+                    } else {
+                        itemViewHolder = (ItemViewHolder) convertView.getTag();
                     }
-                    ProductItemModel dataItem= data.getProductItems().get(position);
-                    itemViewHolder.tvName.setText(dataItem.getName());
-                    itemViewHolder.tvMoney.setText("￥："+dataItem.getPrice()*dataItem.getCount());
-                    itemViewHolder.tvNum.setText("x "+dataItem.getCount()+dataItem.getUnit());
+                    ProductItemModel dataItem = data.getProductItems().get(position);
+                    itemViewHolder.tvName.setText(dataItem.getName() + "(" + dataItem.getSpecification() + ")");
+                    itemViewHolder.tvMoney.setText("￥：" + dataItem.getPrice() * dataItem.getCount());
+                    itemViewHolder.tvNum.setText("x " + dataItem.getCount() + dataItem.getUnit());
                     return convertView;
                 }
 
@@ -166,6 +194,12 @@ public class MainSetmealOtherView extends LinearLayout {
                     TextView tvNum;
                     TextView tvMoney;
                     ImageView ivDetail;
+                }
+            });
+            theViewHolder.itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Utils.getSKUDetails(getContext(), data.getProductItems().get(position).getId());
                 }
             });
             return convertView;
@@ -201,11 +235,101 @@ public class MainSetmealOtherView extends LinearLayout {
     private void setSelectSetmeal(String name, int position) {
         ctgItems.clear();
         SetmealPosition = position;
+        mainID = mainSetmeals.get(position).getId();
         ctgItems.addAll(mainSetmeals.get(position).getCtgItems());
+        setInitDetailsCtgItems();
         mTVSetmealName.setText(name);
         SetmealName = name;
         theAdapter.notifyDataSetChanged();
     }
 
+    private void setInitDetailsCtgItems() {
+        detailsCtgItems.clear();
+        for (CtgItemModel CtgData : ctgItems) {
+            List<ProductItemModel> listTempProduct = new ArrayList<>();
+            for (ProductItemModel ProductData : CtgData.getProductItems()) {
+                if (ProductData.getCount() != 0) {
+                    listTempProduct.add(ProductData);
+                }
+            }
+            if (listTempProduct.size() != 0) {
+                CtgItemModel tempCtgData = new CtgItemModel();
+                tempCtgData.setId(CtgData.getId());
+                tempCtgData.setName(CtgData.getName());
+                tempCtgData.setProductItems(listTempProduct);
+                detailsCtgItems.add(tempCtgData);
+            }
+        }
+    }
+
+    public List<CreateOrderProductItemModel> getProductItemModels() {
+        List<CreateOrderProductItemModel> newList = new ArrayList<CreateOrderProductItemModel>();
+        if (result == null) {
+            createOrderProduct(newList);
+            return newList;
+        } else {
+               if(mainID!=result.getBoard().getSetmealMainId()){
+                   addCreateOrderProduct(newList,2);
+                   createOrderProduct(newList);
+               }else{
+                   addCreateOrderProduct(newList,1);
+               }
+
+
+            return newList;
+        }
+    }
+
+    private void createOrderProduct(List<CreateOrderProductItemModel> newList) {
+        for (CtgItemModel CtgData : detailsCtgItems) {
+            for (ProductItemModel ProductData : CtgData.getProductItems()) {
+                CreateOrderProductItemModel item = new CreateOrderProductItemModel();
+                item.setCategoryId(CtgData.getId());
+                item.setProjectId(1);
+                item.setNumber(ProductData.getCount());
+                item.setPrice(ProductData.getPrice());
+                item.setSkuId(ProductData.getId());
+                item.setTotalPrice(ProductData.getPrice() * ProductData.getCount());
+                item.setStatusFlag(1);
+                item.setChange(false);
+                newList.add(item);
+            }
+        }
+    }
+
+    /**
+     *
+     * @param newList
+     * @param isDelete  1为不删除 2为删除
+     */
+    private void addCreateOrderProduct(List<CreateOrderProductItemModel> newList,int isDelete) {
+        for (ProjectItemModel projectItemData : result.getProjectItems()) {
+            if (projectItemData.getId() == 1) {
+                for (OrderCtgItemModel orderCtgItemData : projectItemData.getCtgItems()) {
+                    for (OrderProductItemModel orderProductItemData : orderCtgItemData.getProductItems()) {
+                        CreateOrderProductItemModel item = new CreateOrderProductItemModel();
+                        item.setId(orderProductItemData.getId());
+                        item.setCategoryId(orderCtgItemData.getId());
+                        item.setProjectId(1);
+                        item.setNumber(orderProductItemData.getNumber());
+                        item.setPrice(orderProductItemData.getPrice());
+                        item.setSkuId(orderProductItemData.getSkuId());
+                        item.setTotalPrice(orderProductItemData.getTotalPrice());
+                        item.setStatusFlag(isDelete);
+                        item.setChange(false);
+                        newList.add(item);
+                    }
+                }
+                break;
+            }
+        }
+    }
+
+    public int getMainID() {
+        return mainID;
+    }
 
 }
+
+
+

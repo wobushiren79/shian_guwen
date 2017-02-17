@@ -15,11 +15,10 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
 import com.kf5sdk.api.CallBack;
 import com.kf5sdk.init.KF5SDKConfig;
 import com.kf5sdk.init.UserInfo;
@@ -35,22 +34,26 @@ import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.fragment.HomeFragment;
 import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.fragment.UserCenterFragment;
-import com.shian.shianlife.mapapi.MyLocationListener;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.result.HrCommentResult;
+import com.shian.shianlife.provide.result.HrGetMsgNumberForUntreated;
 import com.shian.shianlife.service.PushService;
 import com.shian.shianlife.service.UpDataService;
+import com.viewpagerindicator.TabPageIndicator;
 
 import org.support.v4.annotation.NonNull;
+
+import java.util.List;
 
 import butterknife.InjectView;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
-public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
+public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, OrderFragment.OrderFragmentCallBack {
 
     private final String LOG_TAG = "MAIN_ACTIVITY";
+    int loginType;
 
     @InjectView(R.id.fl_main)
     View flMain;
@@ -60,6 +63,8 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     RadioButton rbMain2;
     @InjectView(R.id.rb_main_3)
     RadioButton rbMain3;
+    @InjectView(R.id.tv_msgnum)
+    TextView tvMsgNumber;
     private FragmentManager mFragmentManager;
     private FragmentTransaction transcation;
     private HomeFragment homeFragment;
@@ -85,7 +90,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 //        checkUpData();
 
     }
-
 
 
     private void startPushService() {
@@ -148,6 +152,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     }
 
     private void initDate() {
+        loginType = SharePerfrenceUtils.getLoginShare(this).getLoginType();
         mFragmentManager = getSupportFragmentManager();
     }
 
@@ -163,11 +168,13 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                     public void onSuccess(HrCommentResult result) {
                         // TODO Auto-generated method stub
                         AppContansts.MessageCount = result.getCount();
-
                         if (result.getCount() == 0) {
                             setMessageIconVisible(View.GONE);
                         } else {
                             setMessageIconVisible(View.VISIBLE);
+                        }
+                        if (loginType == 0) {
+                            getMsgNumber();
                         }
                     }
 
@@ -194,11 +201,11 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 transcation.replace(R.id.fl_main, homeFragment);
                 break;
             case R.id.rb_main_2:
-                int loginType = SharePerfrenceUtils.getLoginShare(this).getLoginType();
                 if (loginType == 0) {
                     //普通账号
                     if (orderFragment == null) {
                         orderFragment = new OrderFragment();
+                        orderFragment.setCallBack(this);
                     }
                     transcation.replace(R.id.fl_main, orderFragment);
                 } else if (loginType == 1) {
@@ -221,6 +228,11 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 break;
         }
         transcation.commit();
+    }
+
+    @Override
+    public void changeMsgNum() {
+        getMsgNumber();
     }
 
     class RBCheckListener implements OnCheckedChangeListener {
@@ -406,5 +418,70 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     public void checkUpData() {
         Intent intent = new Intent(MainActivity.this, UpDataService.class);
         startService(intent);
+    }
+
+
+    /**
+     * 获取未处理订单消息
+     */
+    public void getMsgNumber() {
+        MHttpManagerFactory.getAccountManager().getMsgNumberForUntreated(MainActivity.this, new HttpResponseHandler<HrGetMsgNumberForUntreated>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(HrGetMsgNumberForUntreated result) {
+                AppContansts.MsgNumber = result;
+                AppContansts.MsgNumberTotal = result.getAssignment()
+                        + result.getAuditing()
+                        + result.getService()
+                        + result.getTalk()
+                        + result.getUnpaid();
+
+                if (AppContansts.MsgNumberTotal > 99) {
+                    tvMsgNumber.setVisibility(View.VISIBLE);
+                    tvMsgNumber.setText("99");
+                } else if (AppContansts.MsgNumberTotal == 0) {
+                    tvMsgNumber.setVisibility(View.GONE);
+                } else {
+                    tvMsgNumber.setVisibility(View.VISIBLE);
+                    tvMsgNumber.setText(AppContansts.MsgNumberTotal + "");
+                }
+                ShortcutBadger.applyCount(MainActivity.this, AppContansts.MsgNumberTotal);
+                if (orderFragment != null) {
+                    List<TabPageIndicator.TabView> listTabView = orderFragment.indicator.getListTabView();
+                    for (TabPageIndicator.TabView tabview : listTabView) {
+                        String titel = tabview.getText().toString();
+                        switch (titel) {
+                            case "洽谈":
+                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getTalk());
+                                break;
+                            case "待服务":
+                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getService());
+                                break;
+                            case "服务派单中":
+                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAssignment());
+                                break;
+                            case "待评审":
+                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAuditing());
+                                break;
+                            case "待收款":
+                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getUnpaid());
+                                break;
+                            case "服务结束":
+//                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getEndService());
+                                break;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
     }
 }

@@ -65,6 +65,7 @@ import com.shian.shianlife.provide.result.HrGetCustomerContract;
 import com.shian.shianlife.provide.result.HrGetCustomerFuneral;
 import com.shian.shianlife.provide.result.HrGetCustomerFuneralOther;
 import com.shian.shianlife.provide.result.HrGetCustomerPreready;
+import com.shian.shianlife.provide.result.HrGetMsgNumberForUntreated;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.provide.result.HrGetOrderNote;
 import com.shian.shianlife.provide.result.HrGetSKUDetails;
@@ -689,7 +690,7 @@ public class MAccountManagerImpl implements MAccountManager {
 
     @Override
     public void acceptCemetery(Context context, HpCetemeryAcceptParams params, HttpResponseHandler<Object> handler) {
-        excutor.requestPost(context, "cemetery/ordered/bespeak/accept",Object.class, params,
+        excutor.requestPost(context, "cemetery/ordered/bespeak/accept", Object.class, params,
                 handler);
     }
 
@@ -752,6 +753,12 @@ public class MAccountManagerImpl implements MAccountManager {
     public void getCemeteryStructure(Context context, HpCemeteryStructureParams params, HttpResponseHandler<HrGetCemeteryStructure> handler) {
         excutor.requestPost(context, "cemetery/structure/item/get", HrGetCemeteryStructure.class, params,
                 handler);
+    }
+
+    @Override
+    public void getMsgNumberForUntreated(Context context, HttpResponseHandler<HrGetMsgNumberForUntreated> handler) {
+        excutor.requestPost(context, "order/list/wating/handle/count", HrGetMsgNumberForUntreated.class,
+                new BaseHttpParams(), handler);
     }
 
 

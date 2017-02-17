@@ -103,7 +103,6 @@ public class MainSetmealCtgItemView extends FrameLayout {
 
         mProductItemView.setEnableEdit(selectProductItem.isCanEdit());
         mProductItemView.setOnProductItemChangeListener(new OnProductItemChangeListener() {
-
             @Override
             public void onProductItemChange(boolean isFirst) {
                 if (!isFirst) {

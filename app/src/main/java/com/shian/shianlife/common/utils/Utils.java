@@ -13,17 +13,29 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.shian.shianlife.activity.MainActivity;
+import com.shian.shianlife.activity.PgzxActivity;
 import com.shian.shianlife.base.SaBaseApplication;
+import com.shian.shianlife.common.contanst.AppContansts;
+import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpSaveTime;
+import com.shian.shianlife.provide.params.HpSkuIdParams;
+import com.shian.shianlife.provide.result.HrGetMsgNumberForUntreated;
+import com.shian.shianlife.provide.result.HrGetSKUDetails;
 import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
+import com.viewpagerindicator.TabPageIndicator;
+
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class Utils {
 
@@ -111,6 +123,39 @@ public class Utils {
         }
         return list;
     }
+
+
+   public static void  getSKUDetails(final Context context, long id){
+       //获取商品详情
+       HpSkuIdParams params = new HpSkuIdParams();
+       params.setSkuId(id);
+       MHttpManagerFactory.getAccountManager().getSKUDetails(context, params, new HttpResponseHandler<HrGetSKUDetails>() {
+           @Override
+           public void onStart() {
+
+           }
+
+           @Override
+           public void onSuccess(HrGetSKUDetails result) {
+
+               if (result.getDetails() != null && !result.getDetails().equals("")) {
+                   AlertDialog dialog = new AlertDialog.Builder(context)
+                           .setTitle("商品详情")
+                           .setMessage(result.getDetails())
+                           .setPositiveButton("确认", null)
+                           .create();
+                   dialog.show();
+               } else {
+                   ToastUtils.show(context, "没有商品详情数据");
+               }
+           }
+
+           @Override
+           public void onError(String message) {
+
+           }
+       });
+   }
 
 
 

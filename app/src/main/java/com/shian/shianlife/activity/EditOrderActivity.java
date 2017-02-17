@@ -215,7 +215,7 @@ public class EditOrderActivity extends BaseActivity {
     }
 
     protected void initOrderView(HrGetOrderDetailResult result) {
-        mainSetmealOtherView.setInitData("治丧主套餐",mainSetmeals);
+        mainSetmealOtherView.setInitData("治丧主套餐",mainSetmeals,result);
 
         mainSetmealView.setCtgItems("治丧主套餐", mainSetmeals, result);
         mainSetmealView.setOrderId(orderId);
@@ -279,7 +279,8 @@ public class EditOrderActivity extends BaseActivity {
         final HpCreateOrderParams params = new HpCreateOrderParams();
         params.setSetmealMain(1);
         List<CreateOrderProductItemModel> mList = new ArrayList<CreateOrderProductItemModel>();
-        mList.addAll(mainSetmealView.getProductItemModels());
+//        mList.addAll(mainSetmealView.getProductItemModels());
+        mList.addAll(mainSetmealOtherView.getProductItemModels());
         mList.addAll(funeralSetmealView.getProductItemModels());
         mList.addAll(cemeterySetmealView.getProductItemModels());
         mList.addAll(addedSetmealView.getProductItemModels());
@@ -288,14 +289,14 @@ public class EditOrderActivity extends BaseActivity {
         params.setItems(mList);
         params.setSetmealCemetery(cemeterySetmealView.getCemeterID());
         params.setSetmealFuneral(funeralSetmealView.getFuneralID());
-        params.setSetmealMain(mainSetmealView.getMainID());
+//        params.setSetmealMain(mainSetmealView.getMainID());
+        params.setSetmealMain(mainSetmealOtherView.getMainID());
         if (orderId != -1) {
             OrderManagerImpl.getInstance().editOrder(this, params,
                     new HttpResponseHandler<HrOderId>() {
 
                         @Override
                         public void onSuccess(HrOderId result) {
-
                             OrderFragment.C_bOrder_isRefresh = true;
                             if(pgzx==1){
                                 sendBroadcast(new Intent(PgzxActivity.PGZX_ACTION));

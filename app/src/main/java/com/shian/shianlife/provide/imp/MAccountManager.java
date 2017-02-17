@@ -62,6 +62,7 @@ import com.shian.shianlife.provide.result.HrGetCustomerContract;
 import com.shian.shianlife.provide.result.HrGetCustomerFuneral;
 import com.shian.shianlife.provide.result.HrGetCustomerFuneralOther;
 import com.shian.shianlife.provide.result.HrGetCustomerPreready;
+import com.shian.shianlife.provide.result.HrGetMsgNumberForUntreated;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.provide.result.HrGetOrderNote;
 import com.shian.shianlife.provide.result.HrGetSKUDetails;
@@ -818,4 +819,9 @@ public interface MAccountManager extends HttpManager {
      *
      */
     public void getCemeteryStructure(Context context, HpCemeteryStructureParams params, HttpResponseHandler<HrGetCemeteryStructure> handler);
+
+    /**
+     * 订单待处理计数提示功能
+     */
+    public void getMsgNumberForUntreated(Context context, HttpResponseHandler<HrGetMsgNumberForUntreated> handler);
 }

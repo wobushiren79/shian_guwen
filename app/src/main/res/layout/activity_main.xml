@@ -80,6 +80,8 @@
                 android:layout_weight="1">
 
                 <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tv_msgnum"
                     android:background="@drawable/msg_point"
                     android:layout_width="@dimen/dimen_40dp"
                     android:layout_height="@dimen/dimen_40dp"
@@ -87,7 +89,6 @@
                     android:textColor="@color/white"
                     android:gravity="center"
                     android:ems="2"
-                    android:text="99"
                     android:layout_marginTop="@dimen/dimen_1dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginRight="@dimen/dimen_50dp" />

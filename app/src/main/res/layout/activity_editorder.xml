@@ -35,10 +35,17 @@
         <com.shian.shianlife.common.view.editor.MainSetmealOtherView
             android:id="@+id/msvother"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></com.shian.shianlife.common.view.editor.MainSetmealOtherView>
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dimen_30dp"></com.shian.shianlife.common.view.editor.MainSetmealOtherView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_20dp"
+            android:background="@color/zhy_line_3" />
 
         <com.shian.shianlife.common.view.editor.MainSetmealView
             android:id="@+id/msv"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/dimen_20dp"

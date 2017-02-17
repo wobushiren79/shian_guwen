@@ -29,8 +29,6 @@ public class ScrollListView extends ListView {
         int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
         super.onMeasure(widthMeasureSpec, expandSpec);
     }
-
-
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         // 获取ListView对应的Adapter
         ListAdapter listAdapter = listView.getAdapter();
