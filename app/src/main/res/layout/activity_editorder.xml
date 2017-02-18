@@ -45,12 +45,12 @@
 
         <com.shian.shianlife.common.view.editor.MainSetmealView
             android:id="@+id/msv"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/dimen_20dp"
             android:layout_marginRight="@dimen/dimen_20dp"
-            android:layout_marginTop="@dimen/dimen_10dp" />
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:visibility="gone" />
 
         <com.shian.shianlife.common.view.editor.FuneralSetmealView
             android:id="@+id/fsv"
@@ -59,6 +59,11 @@
             android:layout_marginLeft="@dimen/dimen_20dp"
             android:layout_marginRight="@dimen/dimen_20dp"
             android:layout_marginTop="@dimen/dimen_40dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_20dp"
+            android:background="@color/zhy_line_3" />
 
         <com.shian.shianlife.common.view.editor.CemeterySetmealView
             android:id="@+id/csv"

@@ -18,6 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.daimajia.swipe.SwipeLayout;
+import com.daimajia.swipe.adapters.BaseSwipeAdapter;
+import com.daimajia.swipe.util.Attributes;
 import com.shian.shianlife.R;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.model.CreateOrderProductItemModel;
@@ -59,6 +62,8 @@ public class MainSetmealOtherView extends LinearLayout {
     private int SetmealPosition = 0;
     private int mainID;
 
+    SetmealOtherViewChangeListener changeListener;
+
     public MainSetmealOtherView(Context context) {
         this(context, null);
     }
@@ -66,6 +71,10 @@ public class MainSetmealOtherView extends LinearLayout {
     public MainSetmealOtherView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView();
+    }
+
+    public void setChangeListener(SetmealOtherViewChangeListener changeListener) {
+        this.changeListener = changeListener;
     }
 
     public void setInitData(String name, List<SetmealModel> mainSetmeals) {
@@ -92,6 +101,7 @@ public class MainSetmealOtherView extends LinearLayout {
     public void setInitData(String name, List<SetmealModel> mainSetmeals, HrGetOrderDetailResult result) {
         this.result = result;
         setInitData(name, mainSetmeals);
+        //设置选择的套餐
         for (int i = 0; i < mainSetmeals.size(); i++) {
             SetmealModel setmealData = mainSetmeals.get(i);
             if (result.getBoard().getSetmealMainId() == setmealData.getId()) {
@@ -99,8 +109,25 @@ public class MainSetmealOtherView extends LinearLayout {
                 break;
             }
         }
+        //设置详细的套餐数据
+        detailsCtgItems.clear();
+        for (ProjectItemModel prjectItem : result.getProjectItems()) {
+            if (prjectItem.getId() == 1) {
+                for (OrderCtgItemModel orderCtgItemModel : prjectItem.getCtgItems()) {
+                    CtgItemModel ctgItemModel = new CtgItemModel();
+                    ctgItemModel.setName(orderCtgItemModel.getName());
+                    ctgItemModel.setId(orderCtgItemModel.getId());
+                    List<ProductItemModel> productItems = new ArrayList<>();
+                    for (OrderProductItemModel orderProductItemModel : orderCtgItemModel.getProductItems()) {
+                        ProductItemModel productItemModel=new ProductItemModel();
 
-
+                    }
+                    ctgItemModel.setProductItems(productItems);
+                    detailsCtgItems.add(ctgItemModel);
+                }
+                break;
+            }
+        }
     }
 
 
@@ -136,12 +163,12 @@ public class MainSetmealOtherView extends LinearLayout {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int positionfather, View convertView, ViewGroup parent) {
             TheViewHolder theViewHolder;
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_mainsetmealother_listview_items, null);
                 theViewHolder = new TheViewHolder();
-                theViewHolder.itemListView = (ListView) convertView.findViewById(R.id.listview_data);
+                theViewHolder.itemListView = (ScrollListView) convertView.findViewById(R.id.listview_data);
                 theViewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
                 convertView.setTag(theViewHolder);
             } else {
@@ -150,64 +177,138 @@ public class MainSetmealOtherView extends LinearLayout {
             LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams
                     (ViewGroup.LayoutParams.MATCH_PARENT, MainSetmealOtherView.this.getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_48dp));
             theViewHolder.tvTitle.setLayoutParams(layoutparams);
-            final CtgItemModel data = detailsCtgItems.get(position);
+            final CtgItemModel data = detailsCtgItems.get(positionfather);
             theViewHolder.tvTitle.setText(data.getName());
-            theViewHolder.itemListView.setAdapter(new BaseAdapter() {
+            BaseSwipeAdapter baseSwipeAdapter = new BaseSwipeAdapter() {
+                @Override
+                public int getSwipeLayoutResourceId(int position) {
+                    return R.id.swipelayout;
+                }
+
+                @Override
+                public View generateView(int position, ViewGroup parent) {
+                    View view = LayoutInflater.from(getContext()).inflate(R.layout.view_mainsetmealother_listview_items_items, null);
+                    return view;
+                }
+
+                @Override
+                public void fillValues(final int positionchilden, View convertView) {
+
+                    ImageView ivDetail = (ImageView) convertView.findViewById(R.id.iv_detail);
+                    TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
+                    TextView tvNum = (TextView) convertView.findViewById(R.id.tv_num);
+                    TextView tvMoney = (TextView) convertView.findViewById(R.id.tv_money);
+                    final SwipeLayout swipeLayout = (SwipeLayout) convertView.findViewById(R.id.swipelayout);
+
+                    ProductItemModel dataItem = data.getProductItems().get(positionchilden);
+                    tvName.setText(dataItem.getName() + "(" + dataItem.getSpecification() + ")");
+                    tvMoney.setText("￥：" + dataItem.getPrice() * dataItem.getCount());
+                    tvNum.setText("x " + dataItem.getCount() + dataItem.getUnit());
+
+                    swipeLayout.addDrag(SwipeLayout.DragEdge.Right, R.id.ll_bottom);
+                    swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
+                    TextView tvDelete = (TextView) convertView.findViewById(R.id.tv_delete);
+                    TextView tvDetails = (TextView) convertView.findViewById(R.id.tv_detail);
+
+                    tvDelete.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            detailsCtgItems.get(positionfather).getProductItems().remove(positionchilden);
+                            theAdapter.notifyDataSetChanged();
+                        }
+                    });
+                    tvDetails.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Utils.getSKUDetails(getContext(), data.getProductItems().get(positionchilden).getId());
+                        }
+                    });
+
+                    swipeLayout.getSurfaceView().setOnClickListener(new OnClickListener() {
+
+                        @Override
+                        public void onClick(View view) {
+                            SwipeLayout.Status status = swipeLayout.getOpenStatus();
+                            if (status == SwipeLayout.Status.Close) {
+                                swipeLayout.open();
+                            } else if (status == SwipeLayout.Status.Open) {
+                                swipeLayout.close();
+                            } else {
+
+                            }
+                        }
+                    });
+                }
+
                 @Override
                 public int getCount() {
                     return data.getProductItems().size();
                 }
 
                 @Override
-                public Object getItem(int position) {
+                public Object getItem(int i) {
                     return null;
                 }
 
                 @Override
-                public long getItemId(int position) {
-                    return 0;
+                public long getItemId(int i) {
+                    return i;
                 }
+            };
 
-                @Override
-                public View getView(int position, View convertView, ViewGroup parent) {
-                    ItemViewHolder itemViewHolder;
-                    if (convertView == null) {
-                        convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_mainsetmealother_listview_items_items, null);
-                        itemViewHolder = new ItemViewHolder();
-                        itemViewHolder.ivDetail = (ImageView) convertView.findViewById(R.id.iv_detail);
-                        itemViewHolder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
-                        itemViewHolder.tvNum = (TextView) convertView.findViewById(R.id.tv_num);
-                        itemViewHolder.tvMoney = (TextView) convertView.findViewById(R.id.tv_money);
-                        convertView.setTag(itemViewHolder);
-                    } else {
-                        itemViewHolder = (ItemViewHolder) convertView.getTag();
-                    }
-                    ProductItemModel dataItem = data.getProductItems().get(position);
-                    itemViewHolder.tvName.setText(dataItem.getName() + "(" + dataItem.getSpecification() + ")");
-                    itemViewHolder.tvMoney.setText("￥：" + dataItem.getPrice() * dataItem.getCount());
-                    itemViewHolder.tvNum.setText("x " + dataItem.getCount() + dataItem.getUnit());
-                    return convertView;
-                }
+            baseSwipeAdapter.setMode(Attributes.Mode.Single);
+            theViewHolder.itemListView.setAdapter(baseSwipeAdapter);
+//            theViewHolder.itemListView.setAdapter(new BaseAdapter() {
+//                @Override
+//                public int getCount() {
+//                    return data.getProductItems().size();
+//                }
+//
+//                @Override
+//                public Object getItem(int position) {
+//                    return null;
+//                }
+//
+//                @Override
+//                public long getItemId(int position) {
+//                    return 0;
+//                }
+//
+//                @Override
+//                public View getView(int position, View convertView, ViewGroup parent) {
+//                    ItemViewHolder itemViewHolder;
+//                    if (convertView == null) {
+//                        convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_mainsetmealother_listview_items_items, null);
+//                        itemViewHolder = new ItemViewHolder();
+//                        itemViewHolder.ivDetail = (ImageView) convertView.findViewById(R.id.iv_detail);
+//                        itemViewHolder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
+//                        itemViewHolder.tvNum = (TextView) convertView.findViewById(R.id.tv_num);
+//                        itemViewHolder.tvMoney = (TextView) convertView.findViewById(R.id.tv_money);
+//                        convertView.setTag(itemViewHolder);
+//                    } else {
+//                        itemViewHolder = (ItemViewHolder) convertView.getTag();
+//                    }
+//                    ProductItemModel dataItem = data.getProductItems().get(position);
+//                    itemViewHolder.tvName.setText(dataItem.getName() + "(" + dataItem.getSpecification() + ")");
+//                    itemViewHolder.tvMoney.setText("￥：" + dataItem.getPrice() * dataItem.getCount());
+//                    itemViewHolder.tvNum.setText("x " + dataItem.getCount() + dataItem.getUnit());
+//                    return convertView;
+//                }
+//
+//                class ItemViewHolder {
+//                    TextView tvName;
+//                    TextView tvNum;
+//                    TextView tvMoney;
+//                    ImageView ivDetail;
+//                }
+//            });
 
-                class ItemViewHolder {
-                    TextView tvName;
-                    TextView tvNum;
-                    TextView tvMoney;
-                    ImageView ivDetail;
-                }
-            });
-            theViewHolder.itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Utils.getSKUDetails(getContext(), data.getProductItems().get(position).getId());
-                }
-            });
             return convertView;
         }
 
         class TheViewHolder {
             TextView tvTitle;
-            ListView itemListView;
+            ScrollListView itemListView;
         }
     };
 
@@ -268,14 +369,12 @@ public class MainSetmealOtherView extends LinearLayout {
             createOrderProduct(newList);
             return newList;
         } else {
-               if(mainID!=result.getBoard().getSetmealMainId()){
-                   addCreateOrderProduct(newList,2);
-                   createOrderProduct(newList);
-               }else{
-                   addCreateOrderProduct(newList,1);
-               }
-
-
+            if (mainID != result.getBoard().getSetmealMainId()) {
+                addCreateOrderProduct(newList, 2);
+                createOrderProduct(newList);
+            } else {
+                addCreateOrderProduct(newList, 1);
+            }
             return newList;
         }
     }
@@ -298,11 +397,10 @@ public class MainSetmealOtherView extends LinearLayout {
     }
 
     /**
-     *
      * @param newList
-     * @param isDelete  1为不删除 2为删除
+     * @param isDelete 1为不删除 2为删除
      */
-    private void addCreateOrderProduct(List<CreateOrderProductItemModel> newList,int isDelete) {
+    private void addCreateOrderProduct(List<CreateOrderProductItemModel> newList, int isDelete) {
         for (ProjectItemModel projectItemData : result.getProjectItems()) {
             if (projectItemData.getId() == 1) {
                 for (OrderCtgItemModel orderCtgItemData : projectItemData.getCtgItems()) {
@@ -327,6 +425,10 @@ public class MainSetmealOtherView extends LinearLayout {
 
     public int getMainID() {
         return mainID;
+    }
+
+    public interface SetmealOtherViewChangeListener {
+        void changeTotalPrice();
     }
 
 }

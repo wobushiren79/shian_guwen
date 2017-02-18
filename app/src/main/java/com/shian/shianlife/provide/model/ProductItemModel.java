@@ -16,12 +16,22 @@ public class ProductItemModel {
 	String unit;// 单位
 	int skuId;// 商品ID
 
+	int orderId;//真正的订单ID
+
 	float totalPrice;
 	int num;
 
 	int count;//数量
 
 	boolean canEdit;
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
 
 	public int getCount() {
 		return count;

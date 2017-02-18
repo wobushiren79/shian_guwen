@@ -214,8 +214,62 @@ public class EditOrderActivity extends BaseActivity {
                 });
     }
 
+    private void initOrderView() {
+        mainSetmealOtherView.setInitData("治丧主套餐", mainSetmeals);
+        mainSetmealOtherView.setChangeListener(new MainSetmealOtherView.SetmealOtherViewChangeListener() {
+
+            @Override
+            public void changeTotalPrice() {
+                change();
+            }
+        });
+
+        mainSetmealView.setCtgItems("治丧主套餐", mainSetmeals);
+        mainSetmealView.setOnMainChangeListener(new OnMainChangeListener() {
+
+            @Override
+            public void onMainChange() {
+                change();
+            }
+        });
+        funeralSetmealView.setCtgItems("殡仪馆项目", funeralSetmeals);
+        funeralSetmealView
+                .setOnFuneralChangeListener(new OnFuneralChangeListener() {
+
+                    @Override
+                    public void onFuneralChange() {
+                        change();
+                    }
+                });
+        cemeterySetmealView.setCtgItems("公墓项目", cemeteries);
+        cemeterySetmealView
+                .setOnCemeteryChangeListener(new OnCemeteryChangeListener() {
+
+                    @Override
+                    public void onCemeteryChange() {
+                        change();
+                    }
+                });
+        addedSetmealView.setOnAddedChangeListener(new OnAddedChangeListener() {
+
+            @Override
+            public void onChange() {
+                change();
+            }
+        });
+
+
+    }
+
     protected void initOrderView(HrGetOrderDetailResult result) {
-        mainSetmealOtherView.setInitData("治丧主套餐",mainSetmeals,result);
+        mainSetmealOtherView.setInitData("治丧主套餐", mainSetmeals, result);
+        mainSetmealOtherView.setChangeListener(new MainSetmealOtherView.SetmealOtherViewChangeListener() {
+
+            @Override
+            public void changeTotalPrice() {
+                change();
+            }
+        });
 
         mainSetmealView.setCtgItems("治丧主套餐", mainSetmeals, result);
         mainSetmealView.setOrderId(orderId);
@@ -298,7 +352,7 @@ public class EditOrderActivity extends BaseActivity {
                         @Override
                         public void onSuccess(HrOderId result) {
                             OrderFragment.C_bOrder_isRefresh = true;
-                            if(pgzx==1){
+                            if (pgzx == 1) {
                                 sendBroadcast(new Intent(PgzxActivity.PGZX_ACTION));
                             }
                             finish();
@@ -355,48 +409,17 @@ public class EditOrderActivity extends BaseActivity {
         }
     }
 
-    private void initOrderView() {
-        mainSetmealOtherView.setInitData("治丧主套餐",mainSetmeals);
-
-        mainSetmealView.setCtgItems("治丧主套餐", mainSetmeals);
-        mainSetmealView.setOnMainChangeListener(new OnMainChangeListener() {
-
-            @Override
-            public void onMainChange() {
-                change();
-            }
-        });
-        funeralSetmealView.setCtgItems("殡仪馆项目", funeralSetmeals);
-        funeralSetmealView
-                .setOnFuneralChangeListener(new OnFuneralChangeListener() {
-
-                    @Override
-                    public void onFuneralChange() {
-                        change();
-                    }
-                });
-        cemeterySetmealView.setCtgItems("公墓项目", cemeteries);
-        cemeterySetmealView
-                .setOnCemeteryChangeListener(new OnCemeteryChangeListener() {
-
-                    @Override
-                    public void onCemeteryChange() {
-                        change();
-                    }
-                });
-        addedSetmealView.setOnAddedChangeListener(new OnAddedChangeListener() {
-
-            @Override
-            public void onChange() {
-                change();
-            }
-        });
-
-
-    }
 
     protected void change() {
         totalPrice = 0;
+        List<CreateOrderProductItemModel> mainProductItemOtherModels = mainSetmealOtherView
+                .getProductItemModels();
+        if (mainProductItemOtherModels != null) {
+            for (CreateOrderProductItemModel model : mainProductItemOtherModels) {
+                totalPrice += model.getTotalPrice();
+            }
+        }
+
         List<CreateOrderProductItemModel> mainProductItemModels = mainSetmealView
                 .getProductItemModelsT();
         if (mainProductItemModels != null) {
