@@ -4,6 +4,14 @@
         "source": "D:\\AndroidStudio\\Project\\shian_guwen\\librarys\\cycleViewPager\\res\\drawable-xhdpi\\ic_order_test.png"
     },
     {
+        "merged": "D:\\Android\\Project\\new_shian\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\ic_launcher.png",
+        "source": "D:\\Android\\Project\\new_shian\\librarys\\cycleViewPager\\res\\drawable-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Android\\Project\\new_shian\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\ic_order_test.png",
+        "source": "D:\\Android\\Project\\new_shian\\librarys\\cycleViewPager\\res\\drawable-xhdpi\\ic_order_test.png"
+    },
+    {
         "merged": "D:\\AndroidStudio\\Project\\shian_guwen\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\release\\drawable-xhdpi-v4\\ic_launcher.png",
         "source": "D:\\AndroidStudio\\Project\\shian_guwen\\librarys\\cycleViewPager\\res\\drawable-xhdpi\\ic_launcher.png"
     }

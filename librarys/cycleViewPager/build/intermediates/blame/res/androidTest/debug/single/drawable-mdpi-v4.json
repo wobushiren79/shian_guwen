@@ -2,5 +2,9 @@
     {
         "merged": "D:\\AndroidStudio\\Project\\shian_guwen\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\ic_launcher.png",
         "source": "D:\\AndroidStudio\\Project\\shian_guwen\\librarys\\cycleViewPager\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Android\\Project\\new_shian\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\ic_launcher.png",
+        "source": "D:\\Android\\Project\\new_shian\\librarys\\cycleViewPager\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\ic_launcher.png"
     }
 ]

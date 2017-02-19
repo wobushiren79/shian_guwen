@@ -8,13 +8,13 @@ package com.shian.shianlife.provide.model;
  */
 public class ProductItemModel {
 
-	int id;// 订单ID
+	int id;// 商品ID
 	String name;// 商品名称
 	int categoryId;// 类别ID
 	float price;// 单价
 	String specification;// 规格
 	String unit;// 单位
-	int skuId;// 商品ID
+
 
 	int orderId;//真正的订单ID
 
@@ -24,6 +24,8 @@ public class ProductItemModel {
 	int count;//数量
 
 	boolean canEdit;
+
+
 
 	public int getOrderId() {
 		return orderId;
@@ -41,13 +43,6 @@ public class ProductItemModel {
 		this.count = count;
 	}
 
-	public int getSkuId() {
-		return skuId;
-	}
-
-	public void setSkuId(int skuId) {
-		this.skuId = skuId;
-	}
 
 	public int getNum() {
 		return num;

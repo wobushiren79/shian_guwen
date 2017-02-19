@@ -54,6 +54,7 @@ public class MainSetmealOtherView extends LinearLayout {
     private List<CtgItemModel> ctgItems = new ArrayList<>();
     private List<CtgItemModel> detailsCtgItems = new ArrayList<>();
     private List<String> listTitle = new ArrayList<>();
+    private List<CreateOrderProductItemModel>  deleteProudctItems=new ArrayList<>();
 
     private HrGetOrderDetailResult result;
 
@@ -61,6 +62,7 @@ public class MainSetmealOtherView extends LinearLayout {
     private String SetmealName;
     private int SetmealPosition = 0;
     private int mainID;
+
 
     SetmealOtherViewChangeListener changeListener;
 
@@ -74,6 +76,7 @@ public class MainSetmealOtherView extends LinearLayout {
     }
 
     public void setChangeListener(SetmealOtherViewChangeListener changeListener) {
+        Log.v("this","setChangeListener");
         this.changeListener = changeListener;
     }
 
@@ -102,6 +105,7 @@ public class MainSetmealOtherView extends LinearLayout {
         this.result = result;
         setInitData(name, mainSetmeals);
         //设置选择的套餐
+
         for (int i = 0; i < mainSetmeals.size(); i++) {
             SetmealModel setmealData = mainSetmeals.get(i);
             if (result.getBoard().getSetmealMainId() == setmealData.getId()) {
@@ -109,6 +113,10 @@ public class MainSetmealOtherView extends LinearLayout {
                 break;
             }
         }
+        setListData(result);
+    }
+
+    private void setListData(HrGetOrderDetailResult result) {
         //设置详细的套餐数据
         detailsCtgItems.clear();
         for (ProjectItemModel prjectItem : result.getProjectItems()) {
@@ -120,11 +128,25 @@ public class MainSetmealOtherView extends LinearLayout {
                     List<ProductItemModel> productItems = new ArrayList<>();
                     for (OrderProductItemModel orderProductItemModel : orderCtgItemModel.getProductItems()) {
                         ProductItemModel productItemModel=new ProductItemModel();
+                        productItemModel.setOrderId(orderProductItemModel.getId());
+                        productItemModel.setName(orderProductItemModel.getName());
+                        productItemModel.setCategoryId(orderProductItemModel.getCategoryId());
+                        productItemModel.setSpecification(orderProductItemModel.getSpecification());
+                        productItemModel.setUnit(orderProductItemModel.getUnit());
+                        productItemModel.setId(orderProductItemModel.getSkuId());
+                        productItemModel.setCount(orderProductItemModel.getNumber());
+                        productItemModel.setCanEdit(orderProductItemModel.isCanEdit());
+                        productItemModel.setPrice(orderProductItemModel.getPrice());
+                        productItemModel.setTotalPrice(orderProductItemModel.getTotalPrice());
+
+                        productItems.add(productItemModel);
+
 
                     }
                     ctgItemModel.setProductItems(productItems);
                     detailsCtgItems.add(ctgItemModel);
                 }
+                theAdapter.notifyDataSetChanged();
                 break;
             }
         }
@@ -200,7 +222,7 @@ public class MainSetmealOtherView extends LinearLayout {
                     TextView tvMoney = (TextView) convertView.findViewById(R.id.tv_money);
                     final SwipeLayout swipeLayout = (SwipeLayout) convertView.findViewById(R.id.swipelayout);
 
-                    ProductItemModel dataItem = data.getProductItems().get(positionchilden);
+                    final ProductItemModel dataItem = data.getProductItems().get(positionchilden);
                     tvName.setText(dataItem.getName() + "(" + dataItem.getSpecification() + ")");
                     tvMoney.setText("￥：" + dataItem.getPrice() * dataItem.getCount());
                     tvNum.setText("x " + dataItem.getCount() + dataItem.getUnit());
@@ -213,8 +235,22 @@ public class MainSetmealOtherView extends LinearLayout {
                     tvDelete.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            CreateOrderProductItemModel item=new CreateOrderProductItemModel();
+                            item.setCategoryId(data.getId());
+                            item.setProjectId(1);
+                            item.setNumber(dataItem.getCount());
+                            item.setPrice(dataItem.getPrice());
+                            item.setSkuId(dataItem.getId());
+                            item.setTotalPrice(dataItem.getPrice() * dataItem.getCount());
+                            item.setStatusFlag(2);
+                            item.setChange(false);
+                            if(dataItem.getOrderId()!=0){
+                                item.setId(dataItem.getOrderId());
+                            }
+                            deleteProudctItems.add(item);
                             detailsCtgItems.get(positionfather).getProductItems().remove(positionchilden);
                             theAdapter.notifyDataSetChanged();
+                            changeListener.changeTotalPrice();
                         }
                     });
                     tvDetails.setOnClickListener(new OnClickListener() {
@@ -342,10 +378,15 @@ public class MainSetmealOtherView extends LinearLayout {
         mTVSetmealName.setText(name);
         SetmealName = name;
         theAdapter.notifyDataSetChanged();
+        if(result!=null&&mainID==result.getBoard().getSetmealMainId() ){
+            setListData(result);
+        }
+        changeListener.changeTotalPrice();
     }
 
     private void setInitDetailsCtgItems() {
         detailsCtgItems.clear();
+        deleteProudctItems.clear();
         for (CtgItemModel CtgData : ctgItems) {
             List<ProductItemModel> listTempProduct = new ArrayList<>();
             for (ProductItemModel ProductData : CtgData.getProductItems()) {
@@ -373,7 +414,8 @@ public class MainSetmealOtherView extends LinearLayout {
                 addCreateOrderProduct(newList, 2);
                 createOrderProduct(newList);
             } else {
-                addCreateOrderProduct(newList, 1);
+                newList.addAll(deleteProudctItems);
+                createOrderProduct(newList);
             }
             return newList;
         }
@@ -391,6 +433,9 @@ public class MainSetmealOtherView extends LinearLayout {
                 item.setTotalPrice(ProductData.getPrice() * ProductData.getCount());
                 item.setStatusFlag(1);
                 item.setChange(false);
+                if(ProductData.getOrderId()!=0){
+                    item.setId(ProductData.getOrderId());
+                }
                 newList.add(item);
             }
         }

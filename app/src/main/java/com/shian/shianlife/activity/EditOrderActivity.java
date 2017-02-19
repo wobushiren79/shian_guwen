@@ -215,7 +215,6 @@ public class EditOrderActivity extends BaseActivity {
     }
 
     private void initOrderView() {
-        mainSetmealOtherView.setInitData("治丧主套餐", mainSetmeals);
         mainSetmealOtherView.setChangeListener(new MainSetmealOtherView.SetmealOtherViewChangeListener() {
 
             @Override
@@ -223,6 +222,8 @@ public class EditOrderActivity extends BaseActivity {
                 change();
             }
         });
+        mainSetmealOtherView.setInitData("治丧主套餐", mainSetmeals);
+
 
         mainSetmealView.setCtgItems("治丧主套餐", mainSetmeals);
         mainSetmealView.setOnMainChangeListener(new OnMainChangeListener() {
@@ -262,7 +263,6 @@ public class EditOrderActivity extends BaseActivity {
     }
 
     protected void initOrderView(HrGetOrderDetailResult result) {
-        mainSetmealOtherView.setInitData("治丧主套餐", mainSetmeals, result);
         mainSetmealOtherView.setChangeListener(new MainSetmealOtherView.SetmealOtherViewChangeListener() {
 
             @Override
@@ -270,6 +270,7 @@ public class EditOrderActivity extends BaseActivity {
                 change();
             }
         });
+        mainSetmealOtherView.setInitData("治丧主套餐", mainSetmeals, result);
 
         mainSetmealView.setCtgItems("治丧主套餐", mainSetmeals, result);
         mainSetmealView.setOrderId(orderId);
@@ -415,18 +416,23 @@ public class EditOrderActivity extends BaseActivity {
         List<CreateOrderProductItemModel> mainProductItemOtherModels = mainSetmealOtherView
                 .getProductItemModels();
         if (mainProductItemOtherModels != null) {
+            Log.v("this",mainProductItemOtherModels.size()+"szie");
             for (CreateOrderProductItemModel model : mainProductItemOtherModels) {
-                totalPrice += model.getTotalPrice();
+                if (model.getStatusFlag() != 2) {
+                    totalPrice += model.getTotalPrice();
+                }
             }
         }
 
-        List<CreateOrderProductItemModel> mainProductItemModels = mainSetmealView
-                .getProductItemModelsT();
-        if (mainProductItemModels != null) {
-            for (CreateOrderProductItemModel model : mainProductItemModels) {
-                totalPrice += model.getTotalPrice();
-            }
-        }
+//        List<CreateOrderProductItemModel> mainProductItemModels = mainSetmealView
+//                .getProductItemModelsT();
+//        if (mainProductItemModels != null) {
+//            for (CreateOrderProductItemModel model : mainProductItemModels) {
+//                totalPrice += model.getTotalPrice();
+//            }
+//        }
+
+
         List<CreateOrderProductItemModel> funeralProductItemModels = funeralSetmealView
                 .getProductItemModelsT();
         if (funeralProductItemModels != null) {

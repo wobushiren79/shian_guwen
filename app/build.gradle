@@ -4,7 +4,7 @@ apply plugin: 'android-apt'
 android {
     signingConfigs {
     }
-    compileSdkVersion 25
+    compileSdkVersion 24
     buildToolsVersion "23.0.3"
     aaptOptions.cruncherEnabled = false
     aaptOptions.useNewCruncher = false
@@ -51,7 +51,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25+'
+    compile 'com.android.support:appcompat-v7:24+'
     compile 'com.loopj.android:android-async-http:1.4.6'
     apt 'com.jakewharton:butterknife:6.0.0'
     compile 'com.google.code.gson:gson:2.3.1'
@@ -67,8 +67,8 @@ dependencies {
     compile 'com.isseiaoki:simplecropview:1.0.13'
     compile 'me.leolin:ShortcutBadger:1.1.13@aar'//通知图标数量
 
-    compile 'com.android.support:recyclerview-v7:25+'
-    compile 'com.android.support:support-v4:25+'
+    compile 'com.android.support:recyclerview-v7:24+'
+    compile 'com.android.support:support-v4:24+'
 //    compile "com.daimajia.swipelayout:library:1.2.0@aar"
     compile project(':librarys:AndroidSwipeLayout')
 
