@@ -174,7 +174,7 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
         tabView.mIndex = index;
         tabView.setFocusable(true);
         tabView.setOnClickListener(mTabClickListener);
-        tabView.setMsgCornerNumber(0);
+        tabView.setMsgCornerNumber(0,0);
         tabView.setText(text);
         if (iconResId != 0) {
             tabView.setCompoundDrawablesWithIntrinsicBounds(iconResId, 0, 0, 0);
@@ -314,16 +314,17 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
                 canvas.drawBitmap(bitmap, rect, rect2, paint);
 
                 paint.setTextAlign(Paint.Align.CENTER);
-                paint.setTextSize(MsgCornerSize - 10);
-                paint.setColor(Color.WHITE);
+                paint.setTextSize(MsgCornerSize/1.5f);
+                paint.setColor(Color.parseColor("#333333"));
                 canvas.drawText(MsgCornerNumber+"", this.getWidth() - MsgCornerSize / 2, MsgCornerSize * 3 / 4, paint);
 
 
             }
         }
 
-        public void setMsgCornerNumber(int number) {
+        public void setMsgCornerNumber(int number,int size) {
             this.MsgCornerNumber = number;
+            this.MsgCornerSize=size;
             if (this.MsgCornerNumber <= 0) {
                 setMsgCornerVisibility(false);
             }else if(this.MsgCornerNumber>99){

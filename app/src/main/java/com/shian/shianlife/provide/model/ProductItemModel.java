@@ -23,7 +23,7 @@ public class ProductItemModel {
 
 	int count;//数量
 
-	boolean canEdit;
+	boolean canEdit=true;
 
 
 

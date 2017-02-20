@@ -22,6 +22,7 @@ import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 import com.daimajia.swipe.util.Attributes;
 import com.shian.shianlife.R;
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.model.CreateOrderProductItemModel;
 import com.shian.shianlife.provide.model.CtgItemModel;
@@ -97,7 +98,7 @@ public class MainSetmealOtherView extends LinearLayout {
             setInitDetailsCtgItems();
         }
         theAdapter.notifyDataSetChanged();
-
+        changeListener.changeTotalPrice();
 
     }
 
@@ -114,6 +115,7 @@ public class MainSetmealOtherView extends LinearLayout {
             }
         }
         setListData(result);
+
     }
 
     private void setListData(HrGetOrderDetailResult result) {
@@ -137,11 +139,13 @@ public class MainSetmealOtherView extends LinearLayout {
                         productItemModel.setCount(orderProductItemModel.getNumber());
                         productItemModel.setCanEdit(orderProductItemModel.isCanEdit());
                         productItemModel.setPrice(orderProductItemModel.getPrice());
-                        productItemModel.setTotalPrice(orderProductItemModel.getTotalPrice());
-
+                        productItemModel.setTotalPrice(orderProductItemModel.getPrice()*orderProductItemModel.getNumber());
                         productItems.add(productItemModel);
 
-
+                        //如果不能编辑 那么不能更改套餐
+                        if(!orderProductItemModel.isCanEdit()){
+                            mBTChangeSetMeal.setVisibility(GONE);
+                        }
                     }
                     ctgItemModel.setProductItems(productItems);
                     detailsCtgItems.add(ctgItemModel);
@@ -235,6 +239,10 @@ public class MainSetmealOtherView extends LinearLayout {
                     tvDelete.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            if(!dataItem.isCanEdit()){
+                                ToastUtils.show(getContext(),"该项已经被接单，不能删除");
+                                return;
+                            }
                             CreateOrderProductItemModel item=new CreateOrderProductItemModel();
                             item.setCategoryId(data.getId());
                             item.setProjectId(1);

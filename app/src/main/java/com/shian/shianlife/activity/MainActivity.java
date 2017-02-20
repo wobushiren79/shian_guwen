@@ -65,6 +65,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     RadioButton rbMain3;
     @InjectView(R.id.tv_msgnum)
     TextView tvMsgNumber;
+
     private FragmentManager mFragmentManager;
     private FragmentTransaction transcation;
     private HomeFragment homeFragment;
@@ -452,23 +453,24 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 ShortcutBadger.applyCount(MainActivity.this, AppContansts.MsgNumberTotal);
                 if (orderFragment != null) {
                     List<TabPageIndicator.TabView> listTabView = orderFragment.indicator.getListTabView();
+                    int cornerSize=MainActivity.this.getResources().getDimensionPixelSize(R.dimen.dimen_30dp);
                     for (TabPageIndicator.TabView tabview : listTabView) {
                         String titel = tabview.getText().toString();
                         switch (titel) {
                             case "洽谈":
-                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getTalk());
+                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getTalk(),cornerSize);
                                 break;
                             case "待服务":
-                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getService());
+                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getService(),cornerSize);
                                 break;
                             case "服务派单中":
-                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAssignment());
+                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAssignment(),cornerSize);
                                 break;
                             case "待评审":
-                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAuditing());
+                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAuditing(),cornerSize);
                                 break;
                             case "待收款":
-                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getUnpaid());
+                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getUnpaid(),cornerSize);
                                 break;
                             case "服务结束":
 //                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getEndService());

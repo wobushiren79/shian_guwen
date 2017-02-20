@@ -396,7 +396,6 @@ public class PgzxActivity extends BaseActivity {
                     ev.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Utils.LogVPrint("评价");
                             Intent intent = new Intent(PgzxActivity.this,
                                     EvaluateActivity.class);
                             intent.putExtra("orderId", getIntent()
@@ -567,12 +566,10 @@ public class PgzxActivity extends BaseActivity {
                     @Override
                     public void onSuccess(HrOrderItenList result) {
                         // TODO Auto-generated method stub
-
                         if(result.getOrderHandleStatus()==7){
                             tvNew.setVisibility(View.VISIBLE);
                             tvNew.setEnabled(false);
-                            tvNew.setBackgroundColor(getResources().getColor(
-                                    R.color.gray_common));
+                            tvNew.setBackgroundColor(getResources().getColor(R.color.gray_common));
                             tvNew.setTextColor(Color.WHITE);
                         }else{
                             if (!result.isCanEdit()) {

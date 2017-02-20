@@ -328,6 +328,7 @@ public class ContractDataActivity extends BaseActivity {
                         Utils.LogVPrint( "FileUrl:" + FileUrl);
                         HpSaveContractData params = new HpSaveContractData();
                         params.setPicUrl(FileUrl);
+                        params.setContractAmount(payInfo.getTotalAmount());
                         params.setConsultId(consultId);
                         MHttpManagerFactory.getAccountManager().saveContractData(ContractDataActivity.this, params,
                                 new HttpResponseHandler<Object>() {

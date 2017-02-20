@@ -20,7 +20,7 @@ public class OrderProductItemModel {
 
 	int number;
 
-	boolean canEdit;
+	boolean canEdit=true;
 	String refundId;
 	String refundNumber;
 	String refundTotalPrice;

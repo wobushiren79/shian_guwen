@@ -35,7 +35,17 @@ public class HrGetOrderNote {
 	private String adviserNote;
 	private String auditNote;
 	private List<PicItem> picItems;
-	
+
+	private String label;//商品评价信息
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
 	public String getOrderNum() {
 		return orderNum;
 	}

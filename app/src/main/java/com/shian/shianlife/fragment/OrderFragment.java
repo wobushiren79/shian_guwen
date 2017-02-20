@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.MainActivity;
 import com.shian.shianlife.base.BaseFragment;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.JSONUtil;
@@ -73,27 +74,28 @@ public class OrderFragment extends BaseFragment {
 
     private void setMsgCorner() {
         List<TabPageIndicator.TabView> listTabView = indicator.getListTabView();
+        int cornerSize=getContext().getResources().getDimensionPixelSize(R.dimen.dimen_30dp);
         if (AppContansts.MsgNumber != null) {
             for (TabPageIndicator.TabView tabview : listTabView) {
                 String titel = tabview.getText().toString();
                 switch (titel) {
                     case "洽谈":
-                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getTalk());
+                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getTalk(),cornerSize);
                         break;
                     case "待服务":
-                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getService());
+                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getService(),cornerSize);
                         break;
                     case "服务派单中":
-                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAssignment());
+                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAssignment(),cornerSize);
                         break;
                     case "待评审":
-                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAuditing());
+                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAuditing(),cornerSize);
                         break;
                     case "待收款":
-                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getUnpaid());
+                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getUnpaid(),cornerSize);
                         break;
                     case "服务结束":
-//                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getEndService());
+                      //tabview.setMsgCornerNumber(AppContansts.MsgNumber.getEndService());
                         break;
                 }
             }

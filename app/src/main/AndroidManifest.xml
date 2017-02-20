@@ -45,7 +45,6 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <!-- 摄影机 -->
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
 
     <permission
@@ -395,12 +394,11 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-
-        <activity android:name=".activity.map.BNDemoGuideActivity"></activity>
-        <activity android:name=".activity.map.BNDemoMainActivity"></activity>
+        <activity android:name=".activity.map.BNDemoGuideActivity" />
+        <activity android:name=".activity.map.BNDemoMainActivity" />
 
         <service android:name=".service.PushService" />
-        <service android:name=".service.UpDataService"></service>
+        <service android:name=".service.UpDataService" />
 
         <receiver android:name=".common.push.MyPushReceiver">
             <intent-filter>
@@ -410,6 +408,7 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".activity.map.NewRoutePlanActivity"></activity>
     </application>
 
 </manifest>

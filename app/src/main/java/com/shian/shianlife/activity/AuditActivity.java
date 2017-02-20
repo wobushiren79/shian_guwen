@@ -96,7 +96,8 @@ public class AuditActivity extends BaseActivity {
 						tvList.get(6).append(getTime(result.getStartTime()));
 						tvList.get(7).append(getTime(result.getEndTime()));
 						tvList.get(8).append(result.getExecutorNote()==null?"":result.getExecutorNote());
-						tvList.get(9).append(result.getAdviserNote());
+//						tvList.get(9).append(result.getAdviserNote());
+						tvList.get(9).append(result.getLabel());
 						
 					}
 
