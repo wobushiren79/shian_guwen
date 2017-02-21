@@ -32,6 +32,7 @@ import com.shian.shianlife.activity.NewOrderActivity;
 import com.shian.shianlife.activity.OrderDetailActivity;
 import com.shian.shianlife.activity.PayActivity;
 import com.shian.shianlife.activity.RefundActivity;
+import com.shian.shianlife.activity.map.NewRoutePlanActivity;
 import com.shian.shianlife.activity.map.RoutePlanActivity;
 import com.shian.shianlife.activity.SaveTalkFailActivity;
 import com.shian.shianlife.activity.updata.ContractDataActivity;
@@ -284,7 +285,7 @@ public class QTView extends BaseOrderView {
                 button_map.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(getContext(), RoutePlanActivity.class);
+                        Intent intent = new Intent(getContext(), NewRoutePlanActivity.class);
                         intent.putExtra("RoutePlanLocation", model.getCustomerAddress());
                         getContext().startActivity(intent);
                     }

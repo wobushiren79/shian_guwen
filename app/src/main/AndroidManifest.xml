@@ -408,7 +408,12 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.map.NewRoutePlanActivity"></activity>
+        <activity
+            android:name=".activity.map.NewRoutePlanActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".activity.map.NewMapLineActivity"
+            android:configChanges="orientation|screenSize"></activity>
     </application>
 
 </manifest>

@@ -83,8 +83,6 @@ public class EditOrderSetmealChangeDialog extends Dialog {
 
             AbsListView.LayoutParams layoutparams = new AbsListView.LayoutParams
                     (ViewGroup.LayoutParams.MATCH_PARENT, getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_50dp));
-
-
             TextView textView = new TextView(getContext());
             textView.setText(listData.get(position));
             textView.setGravity(Gravity.CENTER);

@@ -18,12 +18,53 @@
         android:layout_height="wrap_content"
         android:text="退出" />
 
+    <Button
+        android:id="@+id/map_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="更多" />
+
+    <Button
+        android:id="@+id/map_resetlocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/map_more"
+        android:text="自选" />
+
+    <Button
+        android:id="@+id/map_mylocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/map_wayll"
+        android:text="我的位置" />
+
     <LinearLayout
+        android:id="@+id/map_wayll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-        <TextView
+        android:gravity="left"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <Button
+            android:id="@+id/map_walk"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="步行" />
+
+        <Button
+            android:id="@+id/map_bus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="公交" />
+
+        <Button
+            android:id="@+id/map_drive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="驾车" />
     </LinearLayout>
 </RelativeLayout>
