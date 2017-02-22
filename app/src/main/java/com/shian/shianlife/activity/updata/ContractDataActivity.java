@@ -290,6 +290,10 @@ public class ContractDataActivity extends BaseActivity {
     };
 
     private void complete() {
+        if(dvPay.getDrawable()==null){
+            ToastUtils.showLongTime(ContractDataActivity.this,"还没有签名");
+            return;
+        }
         mTVNext.setVisibility(View.GONE);
         mTVBack.setVisibility(View.GONE);
         mTVComplete.setVisibility(View.GONE);

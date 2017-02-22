@@ -3,6 +3,7 @@ package com.shian.shianlife.activity.map;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -45,12 +46,14 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.mapapi.CustomDialog;
 import com.shian.shianlife.mapapi.RouteLineAdapter;
 import com.shian.shianlife.mapapi.overlayutil.DrivingRouteOverlay;
 import com.shian.shianlife.mapapi.overlayutil.OverlayManager;
 import com.shian.shianlife.mapapi.overlayutil.TransitRouteOverlay;
 import com.shian.shianlife.mapapi.overlayutil.WalkingRouteOverlay;
 import com.shian.shianlife.view.dialog.MapLineChoiceDialog;
+import com.shian.shianlife.view.dialog.MapMoreDialog;
 
 public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClickListener, OnGetRoutePlanResultListener {
     Button mMapBack;
@@ -58,9 +61,9 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
     Button mResetLocation;
     Button mMapMyLocation;
 
-    Button mMapWalk;
-    Button mMapBus;
-    Button mMapDrive;
+    ImageView mMapWalk;
+    ImageView mMapBus;
+    ImageView mMapDrive;
 
     MapView mMapView;
 
@@ -72,12 +75,13 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
     private final static double mapCenterlongitude = 104.0722210000;
 
     String endPointStr;
+    LatLng endPointLatLng;
     boolean isUseNumPoint = false;//是否使用经纬来搜索
     boolean isFirstSearch = true;//是否是第一次搜索
 
     int nowSearchType = 3;//当前的搜索状态。0跨城公交 1开车 2公车 3走路 4自行车
 
-
+    CustomDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,9 +110,9 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
         mResetLocation = (Button) findViewById(R.id.map_resetlocation);
         mMapMyLocation = (Button) findViewById(R.id.map_mylocation);
 
-        mMapWalk = (Button) findViewById(R.id.map_walk);
-        mMapBus = (Button) findViewById(R.id.map_bus);
-        mMapDrive = (Button) findViewById(R.id.map_drive);
+        mMapWalk = (ImageView) findViewById(R.id.map_walk);
+        mMapBus = (ImageView) findViewById(R.id.map_bus);
+        mMapDrive = (ImageView) findViewById(R.id.map_drive);
 
         mMapView = (MapView) findViewById(R.id.map);
         mBaiduMap = mMapView.getMap();
@@ -145,11 +149,13 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
             child.setVisibility(View.INVISIBLE);
         }
         //绘制我的位置
-        setMyLocation();
+        drawMyLocation();
         //去掉缩放按钮
         mMapView.showZoomControls(false);
         //隐藏比例尺
         mMapView.showScaleControl(false);
+        //设置为我的位置
+        backMyLocation();
     }
 
 
@@ -159,32 +165,36 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
      * @param v
      */
     private void searchProcess(View v) {
-        // 重置浏览节点的路线数据
-        mBaiduMap.clear();
         // 处理搜索按钮响应
         // 设置起终点信息，对于tranist search 来说，城市名无意义
         LatLng latLngStart = new LatLng(AppContansts.LOCAL_latitude, AppContansts.LOCAL_longitude);
         PlanNode stNode = PlanNode.withLocation(latLngStart);
         PlanNode enNode = null;
         if (isUseNumPoint) {
-//            enNode = PlanNode.withLocation(latLng);
+            if (endPointLatLng == null) {
+                ToastUtils.show(NewRoutePlanActivity.this, "还没有选择终点");
+                return;
+            }
+            enNode = PlanNode.withLocation(endPointLatLng);
         } else {
             enNode = PlanNode.withCityNameAndPlaceName(AppContansts.LOCAL_CITY, endPointStr);
         }
+        // 重置浏览节点的路线数据
+        mBaiduMap.clear();
         // 实际使用中请对起点终点城市进行正确的设定
         if (v == null) {
             mSearch.walkingSearch((new WalkingRoutePlanOption())
                     .from(stNode).to(enNode));
             nowSearchType = 3;
-        } else if (v.getId() == R.id.drive) {
+        } else if (v.getId() == R.id.map_drive) {
             mSearch.drivingSearch((new DrivingRoutePlanOption())
                     .from(stNode).to(enNode));
             nowSearchType = 1;
-        } else if (v.getId() == R.id.transit) {
+        } else if (v.getId() == R.id.map_bus) {
             mSearch.transitSearch((new TransitRoutePlanOption())
                     .from(stNode).city(AppContansts.LOCAL_CITY).to(enNode));
             nowSearchType = 2;
-        } else if (v.getId() == R.id.walk) {
+        } else if (v.getId() == R.id.map_walk) {
             mSearch.walkingSearch((new WalkingRoutePlanOption())
                     .from(stNode).to(enNode));
             nowSearchType = 3;
@@ -201,7 +211,17 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
 //            nowSearchType = 4;
 //        }
         //绘制我的位置
-        setMyLocation();
+        drawMyLocation();
+        dialog = new CustomDialog(NewRoutePlanActivity.this);
+        dialog.show();
+    }
+
+    /**
+     * 更多操作
+     */
+    private void moreOperate() {
+        MapMoreDialog dialog=new MapMoreDialog(NewRoutePlanActivity.this,R.style.CustomDialog);
+        dialog.show();
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -211,21 +231,38 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
                 //结束
                 finish();
             } else if (v == mMapMore) {
-
-            } else if (v == mMapWalk) {
-
+                moreOperate();
             } else if (v == mMapMyLocation) {
                 //返回我的位置
                 backMyLocation();
-            } else if (v == mMapBus) {
-
-            } else if (v == mMapDrive) {
-
             } else if (v == mResetLocation) {
-
+                setPointMode();
+            } else if (v == mMapWalk) {
+                searchProcess(mMapWalk);
+            } else if (v == mMapBus) {
+                searchProcess(mMapBus);
+            } else if (v == mMapDrive) {
+                searchProcess(mMapDrive);
             }
         }
     };
+
+
+    /**
+     * 切换模式
+     */
+    private void setPointMode() {
+        mBaiduMap.clear();
+        drawMyLocation();
+        endPointLatLng = null;
+        if (isUseNumPoint) {
+            isUseNumPoint = false;
+            mResetLocation.setBackgroundResource(R.drawable.zhy_map_getpoint);
+        } else {
+            isUseNumPoint = true;
+            mResetLocation.setBackgroundResource(R.drawable.zhy_map_getpoint_check);
+        }
+    }
 
     /**
      * 返回我的位置
@@ -240,14 +277,31 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
     /**
      * 绘制我的位置
      */
-    private void setMyLocation() {
+    private void drawMyLocation() {
         //构建Marker图标
         BitmapDescriptor bitmap = BitmapDescriptorFactory
-                .fromResource(R.drawable.icon_marka);
+                .fromResource(R.drawable.zhy_map_point_1);
         //构建MarkerOption，用于在地图上添加Marker
         LatLng point = new LatLng(AppContansts.LOCAL_latitude, AppContansts.LOCAL_longitude);
         OverlayOptions option = new MarkerOptions()
                 .position(point)
+                .icon(bitmap);
+        //在地图上添加Marker，并显示
+        mBaiduMap.addOverlay(option);
+    }
+
+    /**
+     * 绘制地点
+     *
+     * @param locationLatLng
+     */
+    private void drawLocation(LatLng locationLatLng) {
+        //构建Marker图标
+        BitmapDescriptor bitmap = BitmapDescriptorFactory
+                .fromResource(R.drawable.zhy_map_point_2);
+        //构建MarkerOption，用于在地图上添加Marker
+        OverlayOptions option = new MarkerOptions()
+                .position(locationLatLng)
                 .icon(bitmap);
         //在地图上添加Marker，并显示
         mBaiduMap.addOverlay(option);
@@ -260,61 +314,36 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
 
     @Override
     public boolean onMapPoiClick(MapPoi mapPoi) {
-        return false;
+        if (isUseNumPoint) {
+            //获取经纬度
+            double latitude = mapPoi.getPosition().latitude;
+            double longitude = mapPoi.getPosition().longitude;
+            String locationName = mapPoi.getName();
+//            endNodeStr = locationName;
+            LatLng point = new LatLng(latitude, longitude);
+            this.endPointLatLng = point;
+            mBaiduMap.clear();
+            drawLocation(point);
+            drawMyLocation();
+            return false;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void onGetWalkingRouteResult(WalkingRouteResult result) {
-        if (result == null) {
-            //没有找到地址
-            ToastUtils.showLongTime(NewRoutePlanActivity.this, "没有找到地址,请点击地图选择终点位置");
-            return;
-        }
-        if (result.error == SearchResult.ERRORNO.AMBIGUOUS_ROURE_ADDR) {
-            // 起终点或途经点地址有岐义，通过以下接口获取建议查询信息
-            ToastUtils.showLongTime(NewRoutePlanActivity.this, "没有找到地址,请点击地图选择终点位置");
-            return;
-        }
-        if (result.error == SearchResult.ERRORNO.NO_ERROR) {
-            Intent intent = new Intent(NewRoutePlanActivity.this, NewMapLineActivity.class);
-            intent.putExtra("MapLine",result);
-            startActivity(intent);
-//            if (result.getRouteLines().size() > 1) {
-//                nowResultwalk = result;
-//                Utils.LogVPrint("结果数>1");
-//                MapLineChoiceDialog dialog = new MapLineChoiceDialog(NewRoutePlanActivity.this,
-//                        result.getRouteLines(),
-//                        RouteLineAdapter.Type.WALKING_ROUTE);
-//                dialog.setCancelable(false);
-//                dialog.show();
-//            } else if (result.getRouteLines().size() == 1) {
-//
-//                Utils.LogVPrint("结果数=1");
-//                route = result.getRouteLines().get(0);
-//
-//                WalkingRouteOverlay overlay = new MyWalkingRouteOverlay(mBaiduMap);
-//                mBaiduMap.setOnMarkerClickListener(overlay);
-//                routeOverlay = overlay;
-//                overlay.setData(result.getRouteLines().get(0));
-//                overlay.addToMap();
-//                overlay.zoomToSpan();
-//                // 直接显示
-//            } else {
-//                Utils.LogVPrint("结果数<0");
-//                return;
-//            }
-        }
+        resultDeal(result);
     }
-
 
     @Override
     public void onGetDrivingRouteResult(DrivingRouteResult result) {
-
+        resultDeal(result);
     }
 
     @Override
     public void onGetTransitRouteResult(TransitRouteResult result) {
-
+        resultDeal(result);
     }
 
     @Override
@@ -332,9 +361,46 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
 
     }
 
-
-
-
+    private void resultDeal(SearchResult result) {
+        if (dialog != null) {
+            dialog.cancel();
+        }
+        if (result == null) {
+            //没有找到地址
+            ToastUtils.showLongTime(NewRoutePlanActivity.this, "没有找到地址,请点击地图选择终点位置");
+            return;
+        }
+        if (result.error == SearchResult.ERRORNO.AMBIGUOUS_ROURE_ADDR) {
+            // 起终点或途经点地址有岐义，通过以下接口获取建议查询信息
+            ToastUtils.showLongTime(NewRoutePlanActivity.this, "没有找到地址,请点击地图选择终点位置");
+            return;
+        }
+        if (result.error == SearchResult.ERRORNO.ST_EN_TOO_NEAR) {
+            ToastUtils.showLongTime(NewRoutePlanActivity.this, "目的地太近没有搜索到线路，请尝试其他搜索方式");
+            return;
+        }
+        if (result.error == SearchResult.ERRORNO.NO_ERROR) {
+            if (result instanceof WalkingRouteResult) {
+                WalkingRouteResult walkingRouteResult = (WalkingRouteResult) result;
+                WalkingRouteLine line = walkingRouteResult.getRouteLines().get(0);
+                LatLng latLng = line.getTerminal().getLocation();
+                drawLocation(latLng);
+            } else if (result instanceof TransitRouteResult) {
+                TransitRouteResult transitRouteResult = (TransitRouteResult) result;
+                TransitRouteLine line = transitRouteResult.getRouteLines().get(0);
+                LatLng latLng = line.getTerminal().getLocation();
+                drawLocation(latLng);
+            } else if (result instanceof DrivingRouteResult) {
+                DrivingRouteResult drivingRouteResult = (DrivingRouteResult) result;
+                DrivingRouteLine line = drivingRouteResult.getRouteLines().get(0);
+                LatLng latLng = line.getTerminal().getLocation();
+                drawLocation(latLng);
+            }
+            Intent intent = new Intent(NewRoutePlanActivity.this, NewMapLineActivity.class);
+            intent.putExtra("MapLine", result);
+            startActivity(intent);
+        }
+    }
 
 
 }

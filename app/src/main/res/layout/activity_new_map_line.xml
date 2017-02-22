@@ -6,47 +6,73 @@
     android:layout_height="match_parent"
     tools:context="com.shian.shianlife.activity.map.NewMapLineActivity">
 
-    <Button
-        android:id="@+id/map_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="退出" />
 
     <com.baidu.mapapi.map.MapView
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></com.baidu.mapapi.map.MapView>
 
-    <LinearLayout
+
+    <com.yinglan.scrolllayout.ScrollLayout
+        android:id="@+id/scroll_down_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="标题" />
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="标题" />
+            <com.yinglan.scrolllayout.content.ContentListView
+                android:id="@+id/map_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"></com.yinglan.scrolllayout.content.ContentListView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="标题" />
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_head"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_120dp"
+                android:clickable="true"
+                android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/map_listview"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_150dp"></ListView>
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_20dp"
+                    android:text="测试"
+                    android:textSize="@dimen/dimen_30dp" />
+
+                <TextView
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:layout_marginRight="@dimen/dimen_20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3分钟 | s"
+                    android:textColor="@color/zhy_line_2"
+                    android:textSize="@dimen/dimen_22dp" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </com.yinglan.scrolllayout.ScrollLayout>
+
+    <Button
+        android:id="@+id/map_back"
+        android:layout_width="@dimen/dimen_72dp"
+        android:layout_height="@dimen/dimen_72dp"
+        android:layout_marginLeft="@dimen/dimen_20dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:background="@drawable/zhy_map_back" />
+
+    <Button
+        android:id="@+id/map_mylocation"
+        android:layout_width="@dimen/dimen_72dp"
+        android:layout_height="@dimen/dimen_72dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dimen_20dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:background="@drawable/zhy_map_mylocation" />
+
+
 </RelativeLayout>

@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import com.shian.shianlife.R;
 
 /**
- * Created by Administrator on 2016/12/6.
+ * Created by Administrator
  */
 
 public class CustomDialog extends Dialog {

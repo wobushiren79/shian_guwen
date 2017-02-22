@@ -55,7 +55,6 @@ public class BaseActivity extends FragmentActivity {
         mMain= (LinearLayout) findViewById(R.id.mainll);
         flContent = (FrameLayout) findViewById(R.id.fl_base);
         ((SaBaseApplication) getApplicationContext()).addActivity(this);
-
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
     }
 

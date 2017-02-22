@@ -42,6 +42,7 @@
     <color name="zhy_line_3">#e4e4e4</color>
     <color name="cemetery_titlecolor">#f6c858</color>
     <color name="gray_text">#767676</color>
+    <color name="zhy_text_color_1">#48cfad</color>
     <!-- Dialog Color -->
     <color name="version_msg_color">#ff6699ff</color>
     <color name="message_color">#ffccccff</color>

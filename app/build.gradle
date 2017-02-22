@@ -66,6 +66,7 @@ dependencies {
     compile 'com.commit451:PhotoView:1.2.4'
     compile 'com.isseiaoki:simplecropview:1.0.13'
     compile 'me.leolin:ShortcutBadger:1.1.13@aar'//通知图标数量
+    compile 'com.yinglan.scrolllayout:scrolllayout:1.0.0'//上拉抽屉
 
     compile 'com.android.support:recyclerview-v7:24+'
     compile 'com.android.support:support-v4:24+'

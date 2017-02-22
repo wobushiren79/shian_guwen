@@ -18,6 +18,8 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.InfoWindow;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.model.LatLng;
@@ -34,16 +36,23 @@ import com.baidu.mapapi.search.route.TransitRouteResult;
 import com.baidu.mapapi.search.route.WalkingRouteLine;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.shian.shianlife.R;
+import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.mapapi.overlayutil.DrivingRouteOverlay;
 import com.shian.shianlife.mapapi.overlayutil.OverlayManager;
 import com.shian.shianlife.mapapi.overlayutil.TransitRouteOverlay;
 import com.shian.shianlife.mapapi.overlayutil.WalkingRouteOverlay;
+import com.yinglan.scrolllayout.ScrollLayout;
+import com.yinglan.scrolllayout.content.ContentListView;
+import com.yinglan.scrolllayout.content.ContentScrollView;
 
 public class NewMapLineActivity extends Activity {
     Button mMapBack;
+    Button mMapMyLocation;
     MapView mMapView;
     BaiduMap mBaiduMap;
-    ListView mLineListView;
+    ScrollLayout mScrollLayout;
+    ContentListView mLineListView;
 
     //线路绘制
     RouteLine route = null;
@@ -52,13 +61,13 @@ public class NewMapLineActivity extends Activity {
     TextView popupText = null; // 泡泡view
 
     //返回的结果
-    WalkingRouteResult nowResultwalk = null;
+    WalkingRouteResult walkResult = null;
+    TransitRouteResult transitResult = null;
+    DrivingRouteResult drivingResult = null;
     BikingRouteResult nowResultbike = null;
-    TransitRouteResult nowResultransit = null;
-    DrivingRouteResult nowResultdrive = null;
     MassTransitRouteResult nowResultmass = null;
 
-    boolean useDefaultIcon = false;//是否使用默认图标
+    boolean useDefaultIcon = true;//是否使用默认图标
     int nodeIndex = -1; // 节点索引,供浏览节点时使用
     int lineType = -1;//选择地图的类型 1.为步行 2为公交车 3为驾车
 
@@ -73,18 +82,67 @@ public class NewMapLineActivity extends Activity {
     }
 
     private void initData() {
+
         SearchResult result = getIntent().getParcelableExtra("MapLine");
         if (result instanceof WalkingRouteResult) {
             lineType = 1;
-            Log.v("this", "WalkingRouteResult");
-            WalkingRouteResult walkResult = (WalkingRouteResult) result;
-            WalkingRouteOverlay overlay = new MyWalkingRouteOverlay(mBaiduMap);
+            walkResult = (WalkingRouteResult) result;
+            if(walkResult.getRouteLines().size()==1){
+                WalkingRouteOverlay overlay = new MyWalkingRouteOverlay(mBaiduMap);
+                mBaiduMap.setOnMarkerClickListener(overlay);
+                routeOverlay = overlay;
+                overlay.setData(walkResult.getRouteLines().get(0));
+                overlay.addToMap();
+                overlay.zoomToSpan();
+            }else if(walkResult.getRouteLines().size()>1){
+
+            }
+
+        } else if (result instanceof TransitRouteResult) {
+            lineType = 2;
+            transitResult = (TransitRouteResult) result;
+            TransitRouteOverlay overlay = new MyTransitRouteOverlay(mBaiduMap);
             mBaiduMap.setOnMarkerClickListener(overlay);
             routeOverlay = overlay;
-            overlay.setData(walkResult.getRouteLines().get(0));
+            overlay.setData(transitResult.getRouteLines().get(0));
+            overlay.addToMap();
+            overlay.zoomToSpan();
+        } else if (result instanceof DrivingRouteResult) {
+            lineType = 3;
+            drivingResult = (DrivingRouteResult) result;
+            DrivingRouteOverlay overlay = new MyDrivingRouteOverlay(mBaiduMap);
+            mBaiduMap.setOnMarkerClickListener(overlay);
+            routeOverlay = overlay;
+            overlay.setData(drivingResult.getRouteLines().get(0));
             overlay.addToMap();
             overlay.zoomToSpan();
         }
+
+        //            if (result.getRouteLines().size() > 1) {
+//                nowResultwalk = result;
+//                Utils.LogVPrint("结果数>1");
+//                MapLineChoiceDialog dialog = new MapLineChoiceDialog(NewRoutePlanActivity.this,
+//                        result.getRouteLines(),
+//                        RouteLineAdapter.Type.WALKING_ROUTE);
+//                dialog.setCancelable(false);
+//                dialog.show();
+//            } else if (result.getRouteLines().size() == 1) {
+//
+//                Utils.LogVPrint("结果数=1");
+//                route = result.getRouteLines().get(0);
+//
+//                WalkingRouteOverlay overlay = new MyWalkingRouteOverlay(mBaiduMap);
+//                mBaiduMap.setOnMarkerClickListener(overlay);
+//                routeOverlay = overlay;
+//                overlay.setData(result.getRouteLines().get(0));
+//                overlay.addToMap();
+//                overlay.zoomToSpan();
+//                // 直接显示
+//            } else {
+//                Utils.LogVPrint("结果数<0");
+//                return;
+//            }
+        backMyLocation();
     }
 
     private void initMap() {
@@ -101,19 +159,49 @@ public class NewMapLineActivity extends Activity {
 
     private void initView() {
         mMapBack = (Button) findViewById(R.id.map_back);
+        mMapMyLocation= (Button) findViewById(R.id.map_mylocation);
         mMapView = (MapView) findViewById(R.id.map);
-        mLineListView = (ListView) findViewById(R.id.map_listview);
+        mScrollLayout= (ScrollLayout) findViewById(R.id.scroll_down_layout);
+        mLineListView = (ContentListView) findViewById(R.id.map_listview);
 
         mMapBack.setOnClickListener(onClickListener);
-
+        mMapMyLocation.setOnClickListener(onClickListener);
         mBaiduMap = mMapView.getMap();
+
+        /**设置 setting*/
+        mScrollLayout.setMinOffset(0);
+        mScrollLayout.setMaxOffset(BaseActivity.metrics.heightPixels/3);
+        mScrollLayout.setExitOffset(BaseActivity.metrics.heightPixels/10);
+        mScrollLayout.setIsSupportExit(true);
+        mScrollLayout.setAllowHorizontalScroll(true);
+        mScrollLayout.setOnScrollChangedListener(mOnScrollChangedListener);
+        mScrollLayout.setToExit();
     }
+
+    ScrollLayout.OnScrollChangedListener mOnScrollChangedListener=new ScrollLayout.OnScrollChangedListener() {
+        @Override
+        public void onScrollProgressChanged(float currentProgress) {
+
+        }
+
+        @Override
+        public void onScrollFinished(ScrollLayout.Status currentStatus) {
+
+        }
+
+        @Override
+        public void onChildScroll(int top) {
+
+        }
+    };
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (v == mMapBack) {
                 finish();
+            }else if(v==mMapMyLocation){
+                backMyLocation();
             }
         }
     };
@@ -210,6 +298,15 @@ public class NewMapLineActivity extends Activity {
         }
     }
 
+    /**
+     * 返回我的位置
+     */
+    private void backMyLocation() {
+        LatLng cenpt = new LatLng(AppContansts.LOCAL_latitude, AppContansts.LOCAL_longitude);
+        MapStatus mMapStatus = new MapStatus.Builder().target(cenpt).zoom(18).build();
+        MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
+        mBaiduMap.setMapStatus(mMapStatusUpdate);
+    }
 //    /**
 //     * 节点浏览示例
 //     *
