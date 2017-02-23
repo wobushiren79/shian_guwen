@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ZoomControls;
@@ -24,6 +25,7 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.RouteLine;
+import com.baidu.mapapi.search.core.RouteStep;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.route.BikingRouteLine;
 import com.baidu.mapapi.search.route.BikingRouteResult;
@@ -38,21 +40,32 @@ import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
+import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.mapapi.RouteLineAdapter;
 import com.shian.shianlife.mapapi.overlayutil.DrivingRouteOverlay;
 import com.shian.shianlife.mapapi.overlayutil.OverlayManager;
 import com.shian.shianlife.mapapi.overlayutil.TransitRouteOverlay;
 import com.shian.shianlife.mapapi.overlayutil.WalkingRouteOverlay;
+import com.shian.shianlife.view.dialog.MapLineChoiceDialog;
 import com.yinglan.scrolllayout.ScrollLayout;
 import com.yinglan.scrolllayout.content.ContentListView;
 import com.yinglan.scrolllayout.content.ContentScrollView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NewMapLineActivity extends Activity {
     Button mMapBack;
     Button mMapMyLocation;
+
+    TextView mTVTitle;
+    TextView mTVTimeAndDistance;
+
     MapView mMapView;
     BaiduMap mBaiduMap;
     ScrollLayout mScrollLayout;
     ContentListView mLineListView;
+    LinearLayout mLLHead;
 
     //线路绘制
     RouteLine route = null;
@@ -70,6 +83,8 @@ public class NewMapLineActivity extends Activity {
     boolean useDefaultIcon = true;//是否使用默认图标
     int nodeIndex = -1; // 节点索引,供浏览节点时使用
     int lineType = -1;//选择地图的类型 1.为步行 2为公交车 3为驾车
+    List<WalkingRouteLine> listDataLine = new ArrayList<>();
+    List<RouteStep> listData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,35 +102,58 @@ public class NewMapLineActivity extends Activity {
         if (result instanceof WalkingRouteResult) {
             lineType = 1;
             walkResult = (WalkingRouteResult) result;
-            if(walkResult.getRouteLines().size()==1){
+            if (walkResult.getRouteLines().size() == 1) {
                 WalkingRouteOverlay overlay = new MyWalkingRouteOverlay(mBaiduMap);
                 mBaiduMap.setOnMarkerClickListener(overlay);
                 routeOverlay = overlay;
                 overlay.setData(walkResult.getRouteLines().get(0));
                 overlay.addToMap();
                 overlay.zoomToSpan();
-            }else if(walkResult.getRouteLines().size()>1){
 
+                listData.addAll(walkResult.getRouteLines().get(0).getAllStep());
+                int time = walkResult.getRouteLines().get(0).getDuration();
+                int distance = walkResult.getRouteLines().get(0).getDistance();
+                Utils.LogVPrint(" s"+walkResult.getRouteLines().get(0).getStarting().getTitle());
+                setHeadInfo("", time, distance);
+            } else if (walkResult.getRouteLines().size() > 1) {
+                mapLineChoice();
             }
-
         } else if (result instanceof TransitRouteResult) {
             lineType = 2;
             transitResult = (TransitRouteResult) result;
-            TransitRouteOverlay overlay = new MyTransitRouteOverlay(mBaiduMap);
-            mBaiduMap.setOnMarkerClickListener(overlay);
-            routeOverlay = overlay;
-            overlay.setData(transitResult.getRouteLines().get(0));
-            overlay.addToMap();
-            overlay.zoomToSpan();
+            if (transitResult.getRouteLines().size() == 1) {
+                TransitRouteOverlay overlay = new MyTransitRouteOverlay(mBaiduMap);
+                mBaiduMap.setOnMarkerClickListener(overlay);
+                routeOverlay = overlay;
+                overlay.setData(transitResult.getRouteLines().get(0));
+                overlay.addToMap();
+                overlay.zoomToSpan();
+
+                listData.addAll(transitResult.getRouteLines().get(0).getAllStep());
+                int time = transitResult.getRouteLines().get(0).getDuration();
+                int distance = transitResult.getRouteLines().get(0).getDistance();
+                setHeadInfo("", time, distance);
+            } else if (transitResult.getRouteLines().size() > 1) {
+                mapLineChoice();
+            }
         } else if (result instanceof DrivingRouteResult) {
             lineType = 3;
             drivingResult = (DrivingRouteResult) result;
-            DrivingRouteOverlay overlay = new MyDrivingRouteOverlay(mBaiduMap);
-            mBaiduMap.setOnMarkerClickListener(overlay);
-            routeOverlay = overlay;
-            overlay.setData(drivingResult.getRouteLines().get(0));
-            overlay.addToMap();
-            overlay.zoomToSpan();
+            if (drivingResult.getRouteLines().size() == 1) {
+                DrivingRouteOverlay overlay = new MyDrivingRouteOverlay(mBaiduMap);
+                mBaiduMap.setOnMarkerClickListener(overlay);
+                routeOverlay = overlay;
+                overlay.setData(drivingResult.getRouteLines().get(0));
+                overlay.addToMap();
+                overlay.zoomToSpan();
+
+                listData.addAll(drivingResult.getRouteLines().get(0).getAllStep());
+                int time = drivingResult.getRouteLines().get(0).getDuration();
+                int distance = drivingResult.getRouteLines().get(0).getDistance();
+                setHeadInfo("", time, distance);
+            } else if (drivingResult.getRouteLines().size() > 1) {
+                mapLineChoice();
+            }
         }
 
         //            if (result.getRouteLines().size() > 1) {
@@ -145,6 +183,36 @@ public class NewMapLineActivity extends Activity {
         backMyLocation();
     }
 
+    /**
+     * 线路选择
+     */
+    private void mapLineChoice() {
+        MapLineChoiceDialog lineChoiceDialog = null;
+        switch (lineType) {
+            case 1:
+                lineChoiceDialog = new MapLineChoiceDialog(NewMapLineActivity.this, walkResult.getRouteLines(), RouteLineAdapter.Type.WALKING_ROUTE);
+                break;
+            case 2:
+                lineChoiceDialog = new MapLineChoiceDialog(NewMapLineActivity.this, transitResult.getRouteLines(), RouteLineAdapter.Type.TRANSIT_ROUTE);
+                break;
+            case 3:
+                lineChoiceDialog = new MapLineChoiceDialog(NewMapLineActivity.this, drivingResult.getRouteLines(), RouteLineAdapter.Type.DRIVING_ROUTE);
+                break;
+        }
+        if (lineChoiceDialog != null) {
+            lineChoiceDialog.setMapLineChoiceCallBack(new MapLineChoiceDialog.MapLineChoiceCallBack() {
+                @Override
+                public void setMapLine(int position) {
+                    listData.clear();
+                }
+            });
+            lineChoiceDialog.show();
+        }
+    }
+
+    /**
+     * 初始化地图
+     */
     private void initMap() {
         //去掉百度图标
         View child = mMapView.getChildAt(1);
@@ -157,28 +225,58 @@ public class NewMapLineActivity extends Activity {
         mMapView.showScaleControl(false);
     }
 
+    /**
+     * 设置标题信息
+     *
+     * @param title
+     * @param time
+     * @param distance
+     */
+    private void setHeadInfo(String title, int time, int distance) {
+        String timeString;
+        String distranceString;
+
+        if (time / 3600 == 0) {
+            timeString = (time / 60) + "分钟";
+        } else {
+            timeString = time / 3600 + "小时" + (time % 3600) / 60 + "分钟";
+        }
+        distranceString = distance + "米";
+
+        mTVTitle.setText(title);
+        mTVTimeAndDistance.setText(timeString + " | " + distranceString);
+    }
+
     private void initView() {
         mMapBack = (Button) findViewById(R.id.map_back);
-        mMapMyLocation= (Button) findViewById(R.id.map_mylocation);
+        mMapMyLocation = (Button) findViewById(R.id.map_mylocation);
+
+        mTVTitle = (TextView) findViewById(R.id.tv_title);
+        mTVTimeAndDistance = (TextView) findViewById(R.id.tv_timeanddistance);
+
         mMapView = (MapView) findViewById(R.id.map);
-        mScrollLayout= (ScrollLayout) findViewById(R.id.scroll_down_layout);
+        mScrollLayout = (ScrollLayout) findViewById(R.id.scroll_down_layout);
         mLineListView = (ContentListView) findViewById(R.id.map_listview);
+        mLLHead = (LinearLayout) findViewById(R.id.ll_head);
 
         mMapBack.setOnClickListener(onClickListener);
         mMapMyLocation.setOnClickListener(onClickListener);
+        mLLHead.setOnClickListener(onClickListener);
         mBaiduMap = mMapView.getMap();
 
         /**设置 setting*/
         mScrollLayout.setMinOffset(0);
-        mScrollLayout.setMaxOffset(BaseActivity.metrics.heightPixels/3);
-        mScrollLayout.setExitOffset(BaseActivity.metrics.heightPixels/10);
+        mScrollLayout.setMaxOffset(BaseActivity.metrics.heightPixels / 3);
+        mScrollLayout.setExitOffset(BaseActivity.metrics.heightPixels / 10);
         mScrollLayout.setIsSupportExit(true);
         mScrollLayout.setAllowHorizontalScroll(true);
         mScrollLayout.setOnScrollChangedListener(mOnScrollChangedListener);
         mScrollLayout.setToExit();
+
+        mLineListView.setAdapter(LineAdapter);
     }
 
-    ScrollLayout.OnScrollChangedListener mOnScrollChangedListener=new ScrollLayout.OnScrollChangedListener() {
+    ScrollLayout.OnScrollChangedListener mOnScrollChangedListener = new ScrollLayout.OnScrollChangedListener() {
         @Override
         public void onScrollProgressChanged(float currentProgress) {
 
@@ -200,16 +298,18 @@ public class NewMapLineActivity extends Activity {
         public void onClick(View v) {
             if (v == mMapBack) {
                 finish();
-            }else if(v==mMapMyLocation){
+            } else if (v == mMapMyLocation) {
                 backMyLocation();
+            } else if (v == mLLHead) {
+                mScrollLayout.setToOpen();
             }
         }
     };
 
-    BaseAdapter adapter = new BaseAdapter() {
+    BaseAdapter LineAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
-            return 0;
+            return listData.size();
         }
 
         @Override

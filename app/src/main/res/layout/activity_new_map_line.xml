@@ -37,18 +37,18 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_20dp"
-                    android:text="测试"
                     android:textSize="@dimen/dimen_30dp" />
 
                 <TextView
+                    android:id="@+id/tv_timeanddistance"
                     android:layout_marginLeft="@dimen/dimen_20dp"
                     android:layout_marginRight="@dimen/dimen_20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3分钟 | s"
                     android:textColor="@color/zhy_line_2"
                     android:textSize="@dimen/dimen_22dp" />
             </LinearLayout>

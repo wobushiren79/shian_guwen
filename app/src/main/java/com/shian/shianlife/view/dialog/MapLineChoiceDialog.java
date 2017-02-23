@@ -38,8 +38,11 @@ public class MapLineChoiceDialog extends Dialog {
     private List<? extends RouteLine> mtransitRouteLines;
     private ListView transitRouteList;
     private RouteLineAdapter mTransitAdapter;
+    private MapLineChoiceCallBack mapLineChoiceCallBack;
 
-
+    public void setMapLineChoiceCallBack(MapLineChoiceCallBack mapLineChoiceCallBack) {
+        this.mapLineChoiceCallBack = mapLineChoiceCallBack;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +54,14 @@ public class MapLineChoiceDialog extends Dialog {
         transitRouteList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mapLineChoiceCallBack.setMapLine(position);
                 dismiss();
             }
         });
     }
 
+    public interface MapLineChoiceCallBack{
+        void setMapLine(int position);
+    }
 
 }
