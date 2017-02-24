@@ -50,7 +50,6 @@ public class AgentManInfoView extends BaseInfoView implements CetemeryTextSelect
     public AgentManInfoView(Context context, AttributeSet attrs) {
         super(context, attrs);
         view = LayoutInflater.from(getContext()).inflate(R.layout.view_agentman_info, this);
-
         initData();
         initView();
     }

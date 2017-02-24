@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -83,6 +84,7 @@ public class NewMapLineActivity extends Activity {
     boolean useDefaultIcon = true;//是否使用默认图标
     int nodeIndex = -1; // 节点索引,供浏览节点时使用
     int lineType = -1;//选择地图的类型 1.为步行 2为公交车 3为驾车
+    String endPointStr;
     List<WalkingRouteLine> listDataLine = new ArrayList<>();
     List<RouteStep> listData = new ArrayList<>();
 
@@ -97,24 +99,13 @@ public class NewMapLineActivity extends Activity {
     }
 
     private void initData() {
-
         SearchResult result = getIntent().getParcelableExtra("MapLine");
+        endPointStr = getIntent().getStringExtra("MapLineEndPoint");
         if (result instanceof WalkingRouteResult) {
             lineType = 1;
             walkResult = (WalkingRouteResult) result;
             if (walkResult.getRouteLines().size() == 1) {
-                WalkingRouteOverlay overlay = new MyWalkingRouteOverlay(mBaiduMap);
-                mBaiduMap.setOnMarkerClickListener(overlay);
-                routeOverlay = overlay;
-                overlay.setData(walkResult.getRouteLines().get(0));
-                overlay.addToMap();
-                overlay.zoomToSpan();
-
-                listData.addAll(walkResult.getRouteLines().get(0).getAllStep());
-                int time = walkResult.getRouteLines().get(0).getDuration();
-                int distance = walkResult.getRouteLines().get(0).getDistance();
-                Utils.LogVPrint(" s"+walkResult.getRouteLines().get(0).getStarting().getTitle());
-                setHeadInfo("", time, distance);
+                walkLineOverlay(0);
             } else if (walkResult.getRouteLines().size() > 1) {
                 mapLineChoice();
             }
@@ -122,17 +113,7 @@ public class NewMapLineActivity extends Activity {
             lineType = 2;
             transitResult = (TransitRouteResult) result;
             if (transitResult.getRouteLines().size() == 1) {
-                TransitRouteOverlay overlay = new MyTransitRouteOverlay(mBaiduMap);
-                mBaiduMap.setOnMarkerClickListener(overlay);
-                routeOverlay = overlay;
-                overlay.setData(transitResult.getRouteLines().get(0));
-                overlay.addToMap();
-                overlay.zoomToSpan();
-
-                listData.addAll(transitResult.getRouteLines().get(0).getAllStep());
-                int time = transitResult.getRouteLines().get(0).getDuration();
-                int distance = transitResult.getRouteLines().get(0).getDistance();
-                setHeadInfo("", time, distance);
+                transitLineOverlay(0);
             } else if (transitResult.getRouteLines().size() > 1) {
                 mapLineChoice();
             }
@@ -140,47 +121,57 @@ public class NewMapLineActivity extends Activity {
             lineType = 3;
             drivingResult = (DrivingRouteResult) result;
             if (drivingResult.getRouteLines().size() == 1) {
-                DrivingRouteOverlay overlay = new MyDrivingRouteOverlay(mBaiduMap);
-                mBaiduMap.setOnMarkerClickListener(overlay);
-                routeOverlay = overlay;
-                overlay.setData(drivingResult.getRouteLines().get(0));
-                overlay.addToMap();
-                overlay.zoomToSpan();
-
-                listData.addAll(drivingResult.getRouteLines().get(0).getAllStep());
-                int time = drivingResult.getRouteLines().get(0).getDuration();
-                int distance = drivingResult.getRouteLines().get(0).getDistance();
-                setHeadInfo("", time, distance);
+                drivingLineOverlay(0);
             } else if (drivingResult.getRouteLines().size() > 1) {
                 mapLineChoice();
             }
         }
-
-        //            if (result.getRouteLines().size() > 1) {
-//                nowResultwalk = result;
-//                Utils.LogVPrint("结果数>1");
-//                MapLineChoiceDialog dialog = new MapLineChoiceDialog(NewRoutePlanActivity.this,
-//                        result.getRouteLines(),
-//                        RouteLineAdapter.Type.WALKING_ROUTE);
-//                dialog.setCancelable(false);
-//                dialog.show();
-//            } else if (result.getRouteLines().size() == 1) {
-//
-//                Utils.LogVPrint("结果数=1");
-//                route = result.getRouteLines().get(0);
-//
-//                WalkingRouteOverlay overlay = new MyWalkingRouteOverlay(mBaiduMap);
-//                mBaiduMap.setOnMarkerClickListener(overlay);
-//                routeOverlay = overlay;
-//                overlay.setData(result.getRouteLines().get(0));
-//                overlay.addToMap();
-//                overlay.zoomToSpan();
-//                // 直接显示
-//            } else {
-//                Utils.LogVPrint("结果数<0");
-//                return;
-//            }
         backMyLocation();
+    }
+
+    private void drivingLineOverlay(int position) {
+        DrivingRouteOverlay overlay = new MyDrivingRouteOverlay(mBaiduMap);
+        mBaiduMap.setOnMarkerClickListener(overlay);
+        routeOverlay = overlay;
+        overlay.setData(drivingResult.getRouteLines().get(position));
+        overlay.addToMap();
+        overlay.zoomToSpan();
+
+        listData.addAll(drivingResult.getRouteLines().get(position).getAllStep());
+        int time = drivingResult.getRouteLines().get(position).getDuration();
+        int distance = drivingResult.getRouteLines().get(position).getDistance();
+        setHeadInfo(AppContansts.LOCAL_STREET + " 至 " + endPointStr, time, distance);
+    }
+
+    private void transitLineOverlay(int position) {
+        TransitRouteOverlay overlay = new MyTransitRouteOverlay(mBaiduMap);
+        mBaiduMap.setOnMarkerClickListener(overlay);
+        routeOverlay = overlay;
+        overlay.setData(transitResult.getRouteLines().get(position));
+        overlay.addToMap();
+        overlay.zoomToSpan();
+
+        listData.addAll(transitResult.getRouteLines().get(position).getAllStep());
+        int time = transitResult.getRouteLines().get(position).getDuration();
+        int distance = transitResult.getRouteLines().get(position).getDistance();
+        setHeadInfo(AppContansts.LOCAL_STREET + " 至 " + endPointStr, time, distance);
+    }
+
+    private void walkLineOverlay(int position) {
+        WalkingRouteOverlay overlay = new MyWalkingRouteOverlay(mBaiduMap);
+        mBaiduMap.setOnMarkerClickListener(overlay);
+        routeOverlay = overlay;
+        overlay.setData(walkResult.getRouteLines().get(position));
+        overlay.addToMap();
+        overlay.zoomToSpan();
+        listData.addAll(walkResult.getRouteLines().get(position).getAllStep());
+        int time = walkResult.getRouteLines().get(position).getDuration();
+        int distance = walkResult.getRouteLines().get(position).getDistance();
+
+        Log.v("this", "getInstructions" + walkResult.getRouteLines().get(position).getAllStep().get(position).getInstructions());
+        Log.v("this", "getExitInstructions" + walkResult.getRouteLines().get(position).getAllStep().get(position).getExitInstructions());
+        Log.v("this", "getEntranceInstructions" + walkResult.getRouteLines().get(position).getAllStep().get(position).getEntranceInstructions());
+        setHeadInfo(AppContansts.LOCAL_STREET + " 至 " + endPointStr, time, distance);
     }
 
     /**
@@ -204,8 +195,20 @@ public class NewMapLineActivity extends Activity {
                 @Override
                 public void setMapLine(int position) {
                     listData.clear();
+                    switch (lineType) {
+                        case 1:
+                            walkLineOverlay(position);
+                            break;
+                        case 2:
+                            transitLineOverlay(position);
+                            break;
+                        case 3:
+                            drivingLineOverlay(position);
+                            break;
+                    }
                 }
             });
+            lineChoiceDialog.setCanceledOnTouchOutside(false);
             lineChoiceDialog.show();
         }
     }
@@ -274,7 +277,9 @@ public class NewMapLineActivity extends Activity {
         mScrollLayout.setToExit();
 
         mLineListView.setAdapter(LineAdapter);
+
     }
+
 
     ScrollLayout.OnScrollChangedListener mOnScrollChangedListener = new ScrollLayout.OnScrollChangedListener() {
         @Override
@@ -324,7 +329,49 @@ public class NewMapLineActivity extends Activity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            return null;
+            ViewHolder holder;
+            if (convertView == null) {
+                convertView = View.inflate(NewMapLineActivity.this, R.layout.layout_newmapline_item, null);
+                holder = new ViewHolder();
+                holder.tvContent = (TextView) convertView.findViewById(R.id.tv_content);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            RouteStep step = listData.get(position);
+            final LatLng location;
+            final String title;
+            switch (lineType) {
+                case 1:
+                    location = ((WalkingRouteLine.WalkingStep) step).getEntrance().getLocation();
+                    title = ((WalkingRouteLine.WalkingStep) step).getInstructions();
+                    break;
+                case 2:
+                    location = ((TransitRouteLine.TransitStep) step).getEntrance().getLocation();
+                    title = ((TransitRouteLine.TransitStep) step).getInstructions();
+                    break;
+                case 3:
+                    location = ((DrivingRouteLine.DrivingStep) step).getEntrance().getLocation();
+                    title = ((DrivingRouteLine.DrivingStep) step).getInstructions();
+                    break;
+                default:
+                    location = null;
+                    title = "";
+                    break;
+            }
+            holder.tvContent.setText(title);
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    nodeShow(location,title);
+                    mScrollLayout.scrollToExit();
+                }
+            });
+            return convertView;
+        }
+
+        class ViewHolder {
+            TextView tvContent;
         }
     };
 
@@ -407,116 +454,20 @@ public class NewMapLineActivity extends Activity {
         MapStatusUpdate mMapStatusUpdate = MapStatusUpdateFactory.newMapStatus(mMapStatus);
         mBaiduMap.setMapStatus(mMapStatusUpdate);
     }
-//    /**
-//     * 节点浏览示例
-//     *
-//     * @param v
-//     */
-//    public void nodeClick(View v) {
-//        LatLng nodeLocation = null;
-//        String nodeTitle = null;
-//        Object step = null;
-//        if (nowSearchType != 0 && nowSearchType != -1) {
-//            // 非跨城综合交通
-//            if (route == null || route.getAllStep() == null) {
-//                return;
-//            }
-//            if (nodeIndex == -1 && v.getId() == R.id.pre) {
-//                return;
-//            }
-//            // 设置节点索引
-//            if (v.getId() == R.id.next) {
-//                if (nodeIndex < route.getAllStep().size() - 1) {
-//                    nodeIndex++;
-//                } else {
-//                    return;
-//                }
-//            } else if (v.getId() == R.id.pre) {
-//                if (nodeIndex > 0) {
-//                    nodeIndex--;
-//                } else {
-//                    return;
-//                }
-//            }
-//            // 获取节结果信息
-//            step = route.getAllStep().get(nodeIndex);
-//            if (step instanceof DrivingRouteLine.DrivingStep) {
-//                nodeLocation = ((DrivingRouteLine.DrivingStep) step).getEntrance().getLocation();
-//                nodeTitle = ((DrivingRouteLine.DrivingStep) step).getInstructions();
-//            } else if (step instanceof WalkingRouteLine.WalkingStep) {
-//                nodeLocation = ((WalkingRouteLine.WalkingStep) step).getEntrance().getLocation();
-//                nodeTitle = ((WalkingRouteLine.WalkingStep) step).getInstructions();
-//            } else if (step instanceof TransitRouteLine.TransitStep) {
-//                nodeLocation = ((TransitRouteLine.TransitStep) step).getEntrance().getLocation();
-//                nodeTitle = ((TransitRouteLine.TransitStep) step).getInstructions();
-//            } else if (step instanceof BikingRouteLine.BikingStep) {
-//                nodeLocation = ((BikingRouteLine.BikingStep) step).getEntrance().getLocation();
-//                nodeTitle = ((BikingRouteLine.BikingStep) step).getInstructions();
-//            }
-//        } else if (nowSearchType == 0) {
-//            // 跨城综合交通  综合跨城公交的结果判断方式不一样
-//            if (massroute == null || massroute.getNewSteps() == null) {
-//                return;
-//            }
-//            if (nodeIndex == -1 && v.getId() == R.id.pre) {
-//                return;
-//            }
-//            boolean isSamecity = nowResultmass.getOrigin().getCityId() == nowResultmass.getDestination().getCityId();
-//            int size = 0;
-//            if (isSamecity) {
-//                size = massroute.getNewSteps().size();
-//            } else {
-//                for (int i = 0; i < massroute.getNewSteps().size(); i++) {
-//                    size += massroute.getNewSteps().get(i).size();
-//                }
-//            }
-//
-//            // 设置节点索引
-//            if (v.getId() == R.id.next) {
-//                if (nodeIndex < size - 1) {
-//                    nodeIndex++;
-//                } else {
-//                    return;
-//                }
-//            } else if (v.getId() == R.id.pre) {
-//                if (nodeIndex > 0) {
-//                    nodeIndex--;
-//                } else {
-//                    return;
-//                }
-//            }
-//            if (isSamecity) {
-//                // 同城
-//                step = massroute.getNewSteps().get(nodeIndex).get(0);
-//            } else {
-//                // 跨城
-//                int num = 0;
-//                for (int j = 0; j < massroute.getNewSteps().size(); j++) {
-//                    num += massroute.getNewSteps().get(j).size();
-//                    if (nodeIndex - num < 0) {
-//                        int k = massroute.getNewSteps().get(j).size() + nodeIndex - num;
-//                        step = massroute.getNewSteps().get(j).get(k);
-//                        break;
-//                    }
-//                }
-//            }
-//
-//            nodeLocation = ((MassTransitRouteLine.TransitStep) step).getStartLocation();
-//            nodeTitle = ((MassTransitRouteLine.TransitStep) step).getInstructions();
-//        }
-//
-//        if (nodeLocation == null || nodeTitle == null) {
-//            return;
-//        }
-//
-//        // 移动节点至中心
-//        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(nodeLocation));
-//        // show popup
-//        popupText = new TextView(NewRoutePlanActivity.this);
-//        popupText.setBackgroundResource(R.drawable.popup);
-//        popupText.setTextColor(0xFF000000);
-//        popupText.setText(nodeTitle);
-//        popupText.setGravity(Gravity.CENTER);
-//        mBaiduMap.showInfoWindow(new InfoWindow(popupText, nodeLocation, 0));
-//    }
+
+    /**
+     * 节点浏览示例
+     */
+    public void nodeShow(LatLng nodeLocation,String nodeTitle) {
+        // 移动节点至中心
+        mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(nodeLocation));
+        // show popup
+        popupText = new TextView(NewMapLineActivity.this);
+        popupText.setBackgroundResource(R.drawable.popup);
+        popupText.setTextColor(0xFF000000);
+        popupText.setText(nodeTitle);
+        popupText.setGravity(Gravity.CENTER);
+        mBaiduMap.showInfoWindow(new InfoWindow(popupText, nodeLocation, 0));
+    }
+
 }

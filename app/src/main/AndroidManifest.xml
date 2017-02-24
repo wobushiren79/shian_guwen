@@ -411,9 +411,13 @@
         <activity
             android:name=".activity.map.NewRoutePlanActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.map.NewMapLineActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.map.NewMapChoiceActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"></activity>
     </application>

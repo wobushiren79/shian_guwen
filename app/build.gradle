@@ -4,14 +4,14 @@ apply plugin: 'android-apt'
 android {
     signingConfigs {
     }
-    compileSdkVersion 24
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 23
+    buildToolsVersion '25.0.1'
     aaptOptions.cruncherEnabled = false
     aaptOptions.useNewCruncher = false
     defaultConfig {
         applicationId "com.shian.shianlife"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 21
         versionCode 8
         versionName "1.4"
         multiDexEnabled true
@@ -24,9 +24,12 @@ android {
         debug {
             jniDebuggable false
         }
+
     }
-
-
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries = false
+    }
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES.txt'
         exclude 'META-INF/LICENSE.txt'
@@ -51,7 +54,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24+'
+    compile 'com.android.support:appcompat-v7:23+'
     compile 'com.loopj.android:android-async-http:1.4.6'
     apt 'com.jakewharton:butterknife:6.0.0'
     compile 'com.google.code.gson:gson:2.3.1'
@@ -68,8 +71,8 @@ dependencies {
     compile 'me.leolin:ShortcutBadger:1.1.13@aar'//通知图标数量
     compile 'com.yinglan.scrolllayout:scrolllayout:1.0.0'//上拉抽屉
 
-    compile 'com.android.support:recyclerview-v7:24+'
-    compile 'com.android.support:support-v4:24+'
+    compile 'com.android.support:recyclerview-v7:23+'
+    compile 'com.android.support:support-v4:23+'
 //    compile "com.daimajia.swipelayout:library:1.2.0@aar"
     compile project(':librarys:AndroidSwipeLayout')
 

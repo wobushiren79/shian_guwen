@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\AndroidStudio\\Project\\shian_guwen\\librarys\\cycleViewPager\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v14\\values-v14.xml",
+        "outputFile": "D:\\Android\\Project\\shian_guwen\\librarys\\cycleViewPager\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v14\\values-v14.xml",
         "map": [
             {
                 "to": {
@@ -12,7 +12,7 @@
                     "endOffset": 201
                 },
                 "from": {
-                    "file": "D:\\AndroidStudio\\Project\\shian_guwen\\librarys\\cycleViewPager\\res\\values-v14\\styles.xml",
+                    "file": "D:\\Android\\Project\\shian_guwen\\librarys\\cycleViewPager\\res\\values-v14\\styles.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,

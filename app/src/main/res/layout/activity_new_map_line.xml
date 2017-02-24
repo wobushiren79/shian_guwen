@@ -24,20 +24,32 @@
             android:layout_height="match_parent">
 
             <com.yinglan.scrolllayout.content.ContentListView
+                android:scrollbars="none"
                 android:id="@+id/map_listview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:divider="@null"
+                android:dividerHeight="@dimen/dimen_0dp"
+                android:layout_below="@+id/ll_head"
                 android:background="@android:color/white"></com.yinglan.scrolllayout.content.ContentListView>
+
+            <TextView
+                android:layout_below="@+id/ll_head"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:background="@color/zhy_line" />
 
             <LinearLayout
                 android:id="@+id/ll_head"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_120dp"
+                android:background="@android:color/white"
                 android:clickable="true"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_title"
+                    android:singleLine="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/dimen_20dp"
@@ -45,10 +57,10 @@
 
                 <TextView
                     android:id="@+id/tv_timeanddistance"
-                    android:layout_marginLeft="@dimen/dimen_20dp"
-                    android:layout_marginRight="@dimen/dimen_20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:layout_marginRight="@dimen/dimen_20dp"
                     android:textColor="@color/zhy_line_2"
                     android:textSize="@dimen/dimen_22dp" />
             </LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_new_map_choice"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.shian.shianlife.activity.map.NewMapChoiceActivity">
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.baidu.mapapi.map.MapView>
+
+    <Button
+        android:id="@+id/bt_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:text="请选择需要改变的地点" />
+</RelativeLayout>

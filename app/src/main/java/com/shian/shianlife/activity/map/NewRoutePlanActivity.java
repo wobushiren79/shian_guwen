@@ -75,6 +75,7 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
     private final static double mapCenterlongitude = 104.0722210000;
 
     String endPointStr;
+    String checkEndPointStr;
     LatLng endPointLatLng;
     boolean isUseNumPoint = false;//是否使用经纬来搜索
     boolean isFirstSearch = true;//是否是第一次搜索
@@ -183,9 +184,9 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
         mBaiduMap.clear();
         // 实际使用中请对起点终点城市进行正确的设定
         if (v == null) {
-            mSearch.walkingSearch((new WalkingRoutePlanOption())
-                    .from(stNode).to(enNode));
-            nowSearchType = 3;
+            mSearch.transitSearch((new TransitRoutePlanOption())
+                    .from(stNode).city(AppContansts.LOCAL_CITY).to(enNode));
+            nowSearchType = 2;
         } else if (v.getId() == R.id.map_drive) {
             mSearch.drivingSearch((new DrivingRoutePlanOption())
                     .from(stNode).to(enNode));
@@ -220,7 +221,13 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
      * 更多操作
      */
     private void moreOperate() {
-        MapMoreDialog dialog=new MapMoreDialog(NewRoutePlanActivity.this,R.style.CustomDialog);
+        MapMoreDialog dialog = new MapMoreDialog(NewRoutePlanActivity.this, R.style.CustomDialog);
+        dialog.setDialogCallBack(new MapMoreDialog.DialogCallBack() {
+            @Override
+            public void changeLocation() {
+                finish();
+            }
+        });
         dialog.show();
     }
 
@@ -318,8 +325,7 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
             //获取经纬度
             double latitude = mapPoi.getPosition().latitude;
             double longitude = mapPoi.getPosition().longitude;
-            String locationName = mapPoi.getName();
-//            endNodeStr = locationName;
+            checkEndPointStr = mapPoi.getName();
             LatLng point = new LatLng(latitude, longitude);
             this.endPointLatLng = point;
             mBaiduMap.clear();
@@ -397,7 +403,13 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
                 drawLocation(latLng);
             }
             Intent intent = new Intent(NewRoutePlanActivity.this, NewMapLineActivity.class);
+
             intent.putExtra("MapLine", result);
+            if (isUseNumPoint) {
+                intent.putExtra("MapLineEndPoint", checkEndPointStr);
+            } else {
+                intent.putExtra("MapLineEndPoint", endPointStr);
+            }
             startActivity(intent);
         }
     }
