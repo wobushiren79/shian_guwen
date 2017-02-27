@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.chanven.lib.cptr.loadmore.OnLoadMoreListener;
 import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper;
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.map.NewRoutePlanActivity;
 import com.shian.shianlife.activity.map.RoutePlanActivity;
 import com.shian.shianlife.activity.cemetery.BuildNewOrderActivity;
 import com.shian.shianlife.activity.cemetery.BuyCemeteryInfoActivity;
@@ -357,7 +358,9 @@ public class CemeteryQTView extends BaseOrderView {
                         mapBT.setOnClickListener(new OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(getContext(), RoutePlanActivity.class);
+                                Intent intent = new Intent(getContext(), NewRoutePlanActivity.class);
+                                intent.putExtra("LocationType",-1);
+                                intent.putExtra("ConsultId",-1);
                                 intent.putExtra("RoutePlanLocation", contentList.get(finalI));
                                 getContext().startActivity(intent);
                             }

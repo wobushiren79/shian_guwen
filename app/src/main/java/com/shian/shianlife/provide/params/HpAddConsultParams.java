@@ -8,6 +8,15 @@ public class HpAddConsultParams extends BaseHttpParams {
 	private int businessType;
 	String description;
 	private TalkAddress customerAddress;
+	private String customerAddressNew;
+
+	public String getCustomerAddressNew() {
+		return customerAddressNew;
+	}
+
+	public void setCustomerAddressNew(String customerAddressNew) {
+		this.customerAddressNew = customerAddressNew;
+	}
 
 	public String getCustomerName() {
 		return customerName;

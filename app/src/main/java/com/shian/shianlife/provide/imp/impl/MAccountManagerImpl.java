@@ -13,6 +13,7 @@ import com.shian.shianlife.provide.params.HpCemeteryIdParams;
 import com.shian.shianlife.provide.params.HpCemeteryStructureParams;
 import com.shian.shianlife.provide.params.HpCetemeryAcceptParams;
 import com.shian.shianlife.provide.params.HpCetemeryRejectParams;
+import com.shian.shianlife.provide.params.HpChangeLocation;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpGetOrderDetailParams;
 import com.shian.shianlife.provide.params.HpLoginParams;
@@ -759,6 +760,12 @@ public class MAccountManagerImpl implements MAccountManager {
     public void getMsgNumberForUntreated(Context context, HttpResponseHandler<HrGetMsgNumberForUntreated> handler) {
         excutor.requestPost(context, "order/list/wating/handle/count", HrGetMsgNumberForUntreated.class,
                 new BaseHttpParams(), handler);
+    }
+
+    @Override
+    public void changeLocation(Context context, HpChangeLocation params, HttpResponseHandler<Object> handler) {
+        excutor.requestPost(context, "customer/address/position/change", Object.class, params,
+                handler);
     }
 
 

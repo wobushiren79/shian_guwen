@@ -3,18 +3,14 @@ package com.shian.shianlife.activity.map;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.ZoomControls;
 
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.InfoWindow;
 import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
@@ -23,15 +19,12 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.core.RouteLine;
 import com.baidu.mapapi.search.core.SearchResult;
-import com.baidu.mapapi.search.route.BikingRouteLine;
 import com.baidu.mapapi.search.route.BikingRouteResult;
 import com.baidu.mapapi.search.route.DrivingRouteLine;
 import com.baidu.mapapi.search.route.DrivingRoutePlanOption;
 import com.baidu.mapapi.search.route.DrivingRouteResult;
 import com.baidu.mapapi.search.route.IndoorRouteResult;
-import com.baidu.mapapi.search.route.MassTransitRouteLine;
 import com.baidu.mapapi.search.route.MassTransitRouteResult;
 import com.baidu.mapapi.search.route.OnGetRoutePlanResultListener;
 import com.baidu.mapapi.search.route.PlanNode;
@@ -47,12 +40,6 @@ import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.mapapi.CustomDialog;
-import com.shian.shianlife.mapapi.RouteLineAdapter;
-import com.shian.shianlife.mapapi.overlayutil.DrivingRouteOverlay;
-import com.shian.shianlife.mapapi.overlayutil.OverlayManager;
-import com.shian.shianlife.mapapi.overlayutil.TransitRouteOverlay;
-import com.shian.shianlife.mapapi.overlayutil.WalkingRouteOverlay;
-import com.shian.shianlife.view.dialog.MapLineChoiceDialog;
 import com.shian.shianlife.view.dialog.MapMoreDialog;
 
 public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClickListener, OnGetRoutePlanResultListener {
@@ -82,6 +69,9 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
 
     int nowSearchType = 3;//当前的搜索状态。0跨城公交 1开车 2公车 3走路 4自行车
 
+    public static SearchResult result;
+    public static int locationType = -1;//需要修改的地址类型 1经办人地址、2治丧地址、3往生者地址、4去世地址、5殡仪馆地址、6治丧约见地址、7出殡前地址、8出殡当天地址、9客户当前地址
+    public static long consultId = -1;
     CustomDialog dialog;
 
     @Override
@@ -100,6 +90,8 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
         //初始线路获取传过来的地址
         endPointStr = "";
         endPointStr = getIntent().getStringExtra("RoutePlanLocation");
+        locationType = getIntent().getIntExtra("LocationType", -1);
+        consultId = getIntent().getLongExtra("ConsultId", -1);
     }
 
     /**
@@ -184,9 +176,9 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
         mBaiduMap.clear();
         // 实际使用中请对起点终点城市进行正确的设定
         if (v == null) {
-            mSearch.transitSearch((new TransitRoutePlanOption())
-                    .from(stNode).city(AppContansts.LOCAL_CITY).to(enNode));
-            nowSearchType = 2;
+            mSearch.walkingSearch((new WalkingRoutePlanOption())
+                    .from(stNode).to(enNode));
+            nowSearchType = 3;
         } else if (v.getId() == R.id.map_drive) {
             mSearch.drivingSearch((new DrivingRoutePlanOption())
                     .from(stNode).to(enNode));
@@ -368,6 +360,7 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
     }
 
     private void resultDeal(SearchResult result) {
+        this.result = result;
         if (dialog != null) {
             dialog.cancel();
         }
@@ -383,6 +376,10 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
         }
         if (result.error == SearchResult.ERRORNO.ST_EN_TOO_NEAR) {
             ToastUtils.showLongTime(NewRoutePlanActivity.this, "目的地太近没有搜索到线路，请尝试其他搜索方式");
+            return;
+        }
+        if (result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
+            ToastUtils.showLongTime(NewRoutePlanActivity.this, "没有找到可规划的路径");
             return;
         }
         if (result.error == SearchResult.ERRORNO.NO_ERROR) {
@@ -403,8 +400,6 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
                 drawLocation(latLng);
             }
             Intent intent = new Intent(NewRoutePlanActivity.this, NewMapLineActivity.class);
-
-            intent.putExtra("MapLine", result);
             if (isUseNumPoint) {
                 intent.putExtra("MapLineEndPoint", checkEndPointStr);
             } else {
@@ -414,5 +409,9 @@ public class NewRoutePlanActivity extends Activity implements BaiduMap.OnMapClic
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        result = null;
+    }
 }

@@ -135,8 +135,9 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
             int i = b;
             sb.append("" + i);
         }
+        sb.append("00000000000000");//防止账号过短
         userInfo.sdkName = "来自世安工单";
-        userInfo.phone = sb.toString().substring(0, 11);
+        userInfo.phone = sb.toString().substring(0,11);
         userInfo.helpAddress = "wenshikai.kf5.com";
         userInfo.email = name + "@sina.com";
         userInfo.deviceToken = name;

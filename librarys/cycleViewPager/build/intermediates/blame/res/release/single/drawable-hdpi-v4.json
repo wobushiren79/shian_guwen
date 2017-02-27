@@ -1,5 +1,17 @@
 [
     {
+        "merged": "E:\\Android\\AndroidProjects\\shian_guwen\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\c.jpg",
+        "source": "E:\\Android\\AndroidProjects\\shian_guwen\\librarys\\cycleViewPager\\res\\drawable-hdpi\\c.jpg"
+    },
+    {
+        "merged": "E:\\Android\\AndroidProjects\\shian_guwen\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\e.jpg",
+        "source": "E:\\Android\\AndroidProjects\\shian_guwen\\librarys\\cycleViewPager\\res\\drawable-hdpi\\e.jpg"
+    },
+    {
+        "merged": "E:\\Android\\AndroidProjects\\shian_guwen\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\b.jpg",
+        "source": "E:\\Android\\AndroidProjects\\shian_guwen\\librarys\\cycleViewPager\\res\\drawable-hdpi\\b.jpg"
+    },
+    {
         "merged": "D:\\Android\\Project\\shian_guwen\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\e.jpg",
         "source": "D:\\Android\\Project\\shian_guwen\\librarys\\cycleViewPager\\res\\drawable-hdpi\\e.jpg"
     },
@@ -8,8 +20,20 @@
         "source": "D:\\Android\\Project\\shian_guwen\\librarys\\cycleViewPager\\res\\drawable-hdpi\\b.jpg"
     },
     {
+        "merged": "E:\\Android\\AndroidProjects\\shian_guwen\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "E:\\Android\\AndroidProjects\\shian_guwen\\librarys\\cycleViewPager\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "E:\\Android\\AndroidProjects\\shian_guwen\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\a.jpg",
+        "source": "E:\\Android\\AndroidProjects\\shian_guwen\\librarys\\cycleViewPager\\res\\drawable-hdpi\\a.jpg"
+    },
+    {
         "merged": "D:\\Android\\Project\\shian_guwen\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\a.jpg",
         "source": "D:\\Android\\Project\\shian_guwen\\librarys\\cycleViewPager\\res\\drawable-hdpi\\a.jpg"
+    },
+    {
+        "merged": "E:\\Android\\AndroidProjects\\shian_guwen\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\d.jpg",
+        "source": "E:\\Android\\AndroidProjects\\shian_guwen\\librarys\\cycleViewPager\\res\\drawable-hdpi\\d.jpg"
     },
     {
         "merged": "D:\\Android\\Project\\shian_guwen\\librarys\\cycleViewPager\\build\\intermediates\\res\\merged\\release\\drawable-hdpi-v4\\d.jpg",

@@ -2,24 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/button_radius_2"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="更多设置" />
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/dimen_20dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:text="更多设置"
+        android:textSize="@dimen/dimen_36dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_text_color_1" />
 
     <Button
         android:id="@+id/bt_changelocation"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="修改当前地址" />
+        android:text="修改当前地址"
+        android:theme="@style/Theme.AppCompat.Light" />
 
     <Button
         android:id="@+id/bt_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="退出" />
+        android:layout_width="@dimen/dimen_150dp"
+        android:layout_height="@dimen/dimen_56dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/dimen_30dp"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:background="@drawable/button_radius_1"
+        android:text="退出"
+        android:textColor="@color/white"
+         />
 </LinearLayout>

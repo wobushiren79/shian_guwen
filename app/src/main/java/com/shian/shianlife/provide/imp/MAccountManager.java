@@ -11,6 +11,7 @@ import com.shian.shianlife.provide.params.HpCemeteryIdParams;
 import com.shian.shianlife.provide.params.HpCemeteryStructureParams;
 import com.shian.shianlife.provide.params.HpCetemeryAcceptParams;
 import com.shian.shianlife.provide.params.HpCetemeryRejectParams;
+import com.shian.shianlife.provide.params.HpChangeLocation;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpGetOrderDetailParams;
 import com.shian.shianlife.provide.params.HpLoginParams;
@@ -824,4 +825,9 @@ public interface MAccountManager extends HttpManager {
      * 订单待处理计数提示功能
      */
     public void getMsgNumberForUntreated(Context context, HttpResponseHandler<HrGetMsgNumberForUntreated> handler);
+
+    /**
+     * 改变地址
+     */
+    public void changeLocation(Context context, HpChangeLocation params, HttpResponseHandler<Object> handler);
 }

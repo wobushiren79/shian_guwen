@@ -69,11 +69,9 @@ public class EditOrderActivity extends BaseActivity {
      * 订单ID
      */
     long orderId;
-
     private List<SetmealModel> mainSetmeals;// 系统主套餐
     private List<SetmealModel> funeralSetmeals;// 系统殡仪馆信息
     private List<CemeteryModel> cemeteries;// 系统公墓信息
-
     /**
      * 用户之前提交的订单详情内容
      */
@@ -281,6 +279,7 @@ public class EditOrderActivity extends BaseActivity {
                 change();
             }
         });
+
         funeralSetmealView.setCtgItems("殡仪馆项目", funeralSetmeals, result);
         funeralSetmealView.setOrderId(orderId);
         funeralSetmealView
@@ -291,6 +290,7 @@ public class EditOrderActivity extends BaseActivity {
                         change();
                     }
                 });
+
         cemeterySetmealView.setCtgItems("公墓项目", cemeteries, result);
         cemeterySetmealView.setOrderId(orderId);
         cemeterySetmealView

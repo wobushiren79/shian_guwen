@@ -4,11 +4,13 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.map.NewMapChoiceActivity;
+import com.shian.shianlife.activity.map.NewRoutePlanActivity;
 import com.shian.shianlife.common.utils.ToastUtils;
 
 /**
@@ -31,8 +33,16 @@ public class MapMoreDialog extends Dialog {
     public MapMoreDialog(Context context, int themeResId) {
         super(context, themeResId);
         view = View.inflate(context, R.layout.dialog_map_more, null);
+
         setContentView(view);
         initView();
+
+        //设置长宽
+        WindowManager.LayoutParams params = this.getWindow()
+                .getAttributes();
+        params.width = getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_500dp);
+        params.height =  getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_300dp);
+        this.getWindow().setAttributes(params);
     }
 
     private void initView() {
@@ -50,13 +60,21 @@ public class MapMoreDialog extends Dialog {
             if (v == mBTBack) {
                 cancel();
             } else if (v == mBTChangeLocation) {
-                Intent intent = new Intent(getContext(), NewMapChoiceActivity.class);
-                getContext().startActivity(intent);
-                dialogCallBack.changeLocation();
-                cancel();
+                changeLocation();
             }
         }
     };
+
+    private void changeLocation() {
+        if(NewRoutePlanActivity.consultId==-1||NewRoutePlanActivity.locationType==-1){
+            ToastUtils.show(getContext(),"不能更改当前地址");
+        }else{
+            Intent intent = new Intent(getContext(), NewMapChoiceActivity.class);
+            getContext().startActivity(intent);
+            dialogCallBack.changeLocation();
+        }
+        cancel();
+    }
 
     public interface DialogCallBack{
         void changeLocation();

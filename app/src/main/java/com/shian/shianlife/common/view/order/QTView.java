@@ -286,6 +286,8 @@ public class QTView extends BaseOrderView {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(getContext(), NewRoutePlanActivity.class);
+                        intent.putExtra("LocationType",9);
+                        intent.putExtra("ConsultId",model.getConsultId());
                         intent.putExtra("RoutePlanLocation", model.getCustomerAddress());
                         getContext().startActivity(intent);
                     }

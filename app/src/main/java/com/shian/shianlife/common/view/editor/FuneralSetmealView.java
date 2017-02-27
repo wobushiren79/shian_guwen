@@ -190,7 +190,6 @@ public class FuneralSetmealView extends FrameLayout implements OnItemSelectedLis
 		FuneralSetmealCtgItemView mCtgItemView = new FuneralSetmealCtgItemView(getContext(), mProductItemModels);
 
 
-
 		mCtgItemView.setCtgDate(ctgItemModel, productItems);
 		mCtgItemView.setOnFuneralCtgChangeListener(new OnFuneralCtgChangeListener() {
 

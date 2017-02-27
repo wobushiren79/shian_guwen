@@ -40,6 +40,9 @@ public class NewOrderActivity extends BaseActivity {
 	EditText etBz;
 	@InjectView(R.id.et_otheradd)
 	EditText etOther;
+	@InjectView(R.id.et_neworder_newlocation)
+	EditText etLocation;
+
 	private HpAddConsultParams params = new HpAddConsultParams();
 
 	@Override
@@ -85,8 +88,9 @@ public class NewOrderActivity extends BaseActivity {
 		final String name = etName.getText().toString();
 		final String phone = etPhone.getText().toString();
 		final String bz = etBz.getText().toString();
-		final String address = lbsView.getDetailAddress();
-		final HpAddConsultParams.TalkAddress ad = lbsView.getTalkAddress();
+//		final String address = lbsView.getDetailAddress();
+		final String address = etLocation.getText().toString();
+//		final HpAddConsultParams.TalkAddress ad = lbsView.getTalkAddress();
 
 		if (name == null || name.equals("")) {
 			ToastUtils.show(this, "客户姓名不能为空");
@@ -125,7 +129,8 @@ public class NewOrderActivity extends BaseActivity {
 //				HpAddConsultParams.TalkAddress ad = lbsView.getTalkAddress();
 				params.setCustomerName(name);
 				params.setCustomerMobile(phone);
-				params.setCustomerAddress(ad);
+//				params.setCustomerAddress(ad);
+				params.setCustomerAddressNew(address);
 				params.setDescription(bz);
 				MHttpManagerFactory.getAccountManager().addConsult(NewOrderActivity.this, params,
 						new HttpResponseHandler<HrAddConsultResult>() {

@@ -63,8 +63,8 @@ public class FuneralSetmealCtgItemView extends FrameLayout {
 		CreateOrderProductItemModel model = new CreateOrderProductItemModel();
 		model.setProjectId(2);
 		mProductItemModels.add(model);
-		final SetmealProductItemView mProductItemView = new SetmealProductItemView(getContext(), productItems, model);
-
+		final SetmealProductItemView mProductItemView = new SetmealProductItemView(getContext(), productItems, model,1);
+		mProductItemView.setCantChange();//设置不能修改
 
 
 		mProductItemView.setOnProductItemChangeListener(new OnProductItemChangeListener() {
@@ -102,8 +102,8 @@ public class FuneralSetmealCtgItemView extends FrameLayout {
 		model.setStatusFlag(1);
 		model.setChange(true);
 		mProductItemModels.add(model);
-		final SetmealProductItemView mProductItemView = new SetmealProductItemView(getContext(), productItems, model);
-
+		final SetmealProductItemView mProductItemView = new SetmealProductItemView(getContext(), productItems, model,1);
+		mProductItemView.setCantChange();//设置不能修改
 
 
 

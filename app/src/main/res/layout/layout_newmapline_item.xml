@@ -5,8 +5,8 @@
 
     <ImageView
         android:layout_marginLeft="@dimen/dimen_40dp"
-        android:layout_marginTop="@dimen/dimen_10dp"
-      android:layout_marginBottom="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
+      android:layout_marginBottom="@dimen/dimen_20dp"
         android:src="@drawable/zhy_map_walk_uncheck"
         android:layout_width="@dimen/dimen_50dp"
         android:layout_height="@dimen/dimen_45dp" />
@@ -14,7 +14,6 @@
         android:layout_marginLeft="@dimen/dimen_20dp"
         android:id="@+id/tv_content"
         android:singleLine="true"
-        android:text="ceshi1"
         android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:textSize="@dimen/dimen_24dp"

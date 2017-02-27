@@ -58,6 +58,7 @@ import java.util.List;
 public class NewMapLineActivity extends Activity {
     Button mMapBack;
     Button mMapMyLocation;
+    Button mMapLineChange;
 
     TextView mTVTitle;
     TextView mTVTimeAndDistance;
@@ -99,7 +100,7 @@ public class NewMapLineActivity extends Activity {
     }
 
     private void initData() {
-        SearchResult result = getIntent().getParcelableExtra("MapLine");
+        SearchResult result = NewRoutePlanActivity.result;
         endPointStr = getIntent().getStringExtra("MapLineEndPoint");
         if (result instanceof WalkingRouteResult) {
             lineType = 1;
@@ -167,10 +168,6 @@ public class NewMapLineActivity extends Activity {
         listData.addAll(walkResult.getRouteLines().get(position).getAllStep());
         int time = walkResult.getRouteLines().get(position).getDuration();
         int distance = walkResult.getRouteLines().get(position).getDistance();
-
-        Log.v("this", "getInstructions" + walkResult.getRouteLines().get(position).getAllStep().get(position).getInstructions());
-        Log.v("this", "getExitInstructions" + walkResult.getRouteLines().get(position).getAllStep().get(position).getExitInstructions());
-        Log.v("this", "getEntranceInstructions" + walkResult.getRouteLines().get(position).getAllStep().get(position).getEntranceInstructions());
         setHeadInfo(AppContansts.LOCAL_STREET + " 至 " + endPointStr, time, distance);
     }
 
@@ -178,6 +175,7 @@ public class NewMapLineActivity extends Activity {
      * 线路选择
      */
     private void mapLineChoice() {
+        mBaiduMap.clear();
         MapLineChoiceDialog lineChoiceDialog = null;
         switch (lineType) {
             case 1:
@@ -253,6 +251,7 @@ public class NewMapLineActivity extends Activity {
     private void initView() {
         mMapBack = (Button) findViewById(R.id.map_back);
         mMapMyLocation = (Button) findViewById(R.id.map_mylocation);
+        mMapLineChange = (Button) findViewById(R.id.map_linechange);
 
         mTVTitle = (TextView) findViewById(R.id.tv_title);
         mTVTimeAndDistance = (TextView) findViewById(R.id.tv_timeanddistance);
@@ -265,6 +264,8 @@ public class NewMapLineActivity extends Activity {
         mMapBack.setOnClickListener(onClickListener);
         mMapMyLocation.setOnClickListener(onClickListener);
         mLLHead.setOnClickListener(onClickListener);
+        mMapLineChange.setOnClickListener(onClickListener);
+
         mBaiduMap = mMapView.getMap();
 
         /**设置 setting*/
@@ -307,9 +308,18 @@ public class NewMapLineActivity extends Activity {
                 backMyLocation();
             } else if (v == mLLHead) {
                 mScrollLayout.setToOpen();
+            } else if (v == mMapLineChange) {
+                lineChange();
             }
         }
     };
+
+    /**
+     * 重新选择线路
+     */
+    private void lineChange() {
+        mapLineChoice();
+    }
 
     BaseAdapter LineAdapter = new BaseAdapter() {
         @Override
@@ -363,7 +373,7 @@ public class NewMapLineActivity extends Activity {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    nodeShow(location,title);
+                    nodeShow(location, title);
                     mScrollLayout.scrollToExit();
                 }
             });
@@ -458,7 +468,7 @@ public class NewMapLineActivity extends Activity {
     /**
      * 节点浏览示例
      */
-    public void nodeShow(LatLng nodeLocation,String nodeTitle) {
+    public void nodeShow(LatLng nodeLocation, String nodeTitle) {
         // 移动节点至中心
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.newLatLng(nodeLocation));
         // show popup
