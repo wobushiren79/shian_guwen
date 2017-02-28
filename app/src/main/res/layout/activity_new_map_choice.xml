@@ -12,13 +12,13 @@
         android:layout_height="match_parent"></com.baidu.mapapi.map.MapView>
 
     <Button
-        android:layout_marginBottom="@dimen/dimen_50dp"
         android:id="@+id/bt_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_radius_1"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/dimen_50dp"
+        android:background="@drawable/button_radius_1"
         android:paddingLeft="@dimen/dimen_10dp"
         android:paddingRight="@dimen/dimen_10dp"
         android:text="请选择需要改变的地点"
@@ -42,4 +42,13 @@
         android:layout_marginRight="@dimen/dimen_20dp"
         android:layout_marginTop="@dimen/dimen_20dp"
         android:background="@drawable/zhy_map_mylocation" />
+
+    <Button
+        android:id="@+id/map_et"
+        android:layout_width="@dimen/dimen_60dp"
+        android:layout_height="@dimen/dimen_60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dimen_50dp"
+        android:layout_marginLeft="@dimen/dimen_20dp"
+        android:background="@drawable/zhy_map_et_mode"/>
 </RelativeLayout>

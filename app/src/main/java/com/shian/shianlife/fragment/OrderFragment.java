@@ -49,7 +49,7 @@ public class OrderFragment extends BaseFragment {
     private List<String> arrTitles = new ArrayList<String>();
 
     public static boolean C_bOrder_isRefresh;
-    OrderFragmentCallBack orderFragmentCallBack;
+    public static OrderFragmentCallBack orderFragmentCallBack;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,6 +57,9 @@ public class OrderFragment extends BaseFragment {
         ButterKnife.inject(this, v);
         return v;
     }
+
+
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -244,7 +247,6 @@ public class OrderFragment extends BaseFragment {
         // }
         // }
     }
-
     public interface OrderFragmentCallBack{
         void changeMsgNum();
     }

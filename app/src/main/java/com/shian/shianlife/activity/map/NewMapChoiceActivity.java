@@ -1,8 +1,10 @@
 package com.shian.shianlife.activity.map;
 
 import android.app.Activity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,6 +30,7 @@ import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpChangeLocation;
+import com.shian.shianlife.view.dialog.MapEditModeDialog;
 
 public class NewMapChoiceActivity extends Activity implements BaiduMap.OnMapClickListener {
 
@@ -36,6 +39,7 @@ public class NewMapChoiceActivity extends Activity implements BaiduMap.OnMapClic
     Button mBTSubmit;
     Button mBTBack;
     Button mBTMyLocation;
+    Button mBTET;
 
 
     MapPoi mapPoi;
@@ -54,12 +58,14 @@ public class NewMapChoiceActivity extends Activity implements BaiduMap.OnMapClic
         mBTSubmit = (Button) findViewById(R.id.bt_submit);
         mBTBack = (Button) findViewById(R.id.map_back);
         mBTMyLocation = (Button) findViewById(R.id.map_mylocation);
+        mBTET = (Button) findViewById(R.id.map_et);
 
         mBaiduMap = mMapView.getMap();
 
         mBTSubmit.setOnClickListener(onClickListener);
         mBTBack.setOnClickListener(onClickListener);
         mBTMyLocation.setOnClickListener(onClickListener);
+        mBTET.setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -71,9 +77,25 @@ public class NewMapChoiceActivity extends Activity implements BaiduMap.OnMapClic
                 finish();
             } else if (view == mBTMyLocation) {
                 backMyLocation();
+            } else if (view == mBTET) {
+                inputMode();
             }
         }
     };
+
+    /**
+     * 输入框模式
+     */
+    private void inputMode() {
+        MapEditModeDialog dialog = new MapEditModeDialog(NewMapChoiceActivity.this, R.style.CustomDialog);
+        dialog.setCallBack(new MapEditModeDialog.MapEditModeDialogCallBack() {
+            @Override
+            public void changeData(String location) {
+                changePoint(location);
+            }
+        });
+        dialog.show();
+    }
 
 
     /**
@@ -81,7 +103,7 @@ public class NewMapChoiceActivity extends Activity implements BaiduMap.OnMapClic
      */
     private void dataSubmit() {
         if (mapPoi != null) {
-            changePoint();
+            changePoint(mapPoi.getName());
         } else {
             ToastUtils.show(NewMapChoiceActivity.this, "还没有选择需要修改的地点");
         }
@@ -91,11 +113,11 @@ public class NewMapChoiceActivity extends Activity implements BaiduMap.OnMapClic
     /**
      * 改变地点
      */
-    private void changePoint() {
+    private void changePoint(String location) {
         HpChangeLocation params = new HpChangeLocation();
         params.setConsultId(NewRoutePlanActivity.consultId);
         params.setOperationType(NewRoutePlanActivity.locationType);
-        params.setAddressDetail(mapPoi.getName());
+        params.setAddressDetail(location);
         MHttpManagerFactory.getAccountManager().changeLocation(NewMapChoiceActivity.this, params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart() {

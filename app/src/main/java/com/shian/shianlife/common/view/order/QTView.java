@@ -44,6 +44,7 @@ import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.utils.ViewGropMap;
 import com.shian.shianlife.common.view.TipsDialog;
+import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.impl.OrderManagerImpl;
@@ -56,6 +57,8 @@ import com.shian.shianlife.provide.params.HpRejectParams;
 import com.shian.shianlife.provide.result.HrGetOrderListResult;
 import com.shian.shianlife.provide.result.HrGetTalkFail;
 import com.shian.shianlife.view.TalkDataDialog;
+
+import static com.shian.shianlife.fragment.OrderFragment.orderFragmentCallBack;
 
 @SuppressLint("InflateParams")
 public class QTView extends BaseOrderView {
@@ -703,6 +706,7 @@ public class QTView extends BaseOrderView {
 
                                 @Override
                                 public void onSuccess(Object result) {
+                                    orderFragmentCallBack.changeMsgNum();
                                     refresh();
                                 }
 
