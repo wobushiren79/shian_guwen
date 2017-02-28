@@ -89,9 +89,7 @@ public class AuditActivity extends BaseActivity {
 						tvList.get(1).append(result.getAgentmanName());
 						tvList.get(2).append(result.getSkuName());
 						tvList.get(3).append(result.getExecutorName());
-						tvList.get(4).append(
-								result.getFuneralAddress() == null ? ""
-										: result.getFuneralAddress());
+						tvList.get(4).append(result.getFuneralAddress() == null ? "": result.getFuneralAddress());
 						tvList.get(5).append(getTime(result.getAcceptTime()));
 						tvList.get(6).append(getTime(result.getStartTime()));
 						tvList.get(7).append(getTime(result.getEndTime()));
