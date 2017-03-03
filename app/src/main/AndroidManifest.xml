@@ -77,7 +77,7 @@
             android:name=".activity.LoginActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".activity.MainActivity"
             android:configChanges="orientation|screenSize"
@@ -394,14 +394,6 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".activity.map.BNDemoGuideActivity" />
-        <activity android:name=".activity.map.BNDemoMainActivity" >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
 
         <service android:name=".service.PushService" />
         <service android:name=".service.UpDataService" />

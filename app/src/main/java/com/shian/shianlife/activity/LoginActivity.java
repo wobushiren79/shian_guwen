@@ -23,6 +23,7 @@ import com.shian.shianlife.provide.base.HttpRequestExecutor;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpLoginParams;
 import com.shian.shianlife.provide.result.HrLoginResult;
+import com.shian.shianlife.view.customview.LoadingButton;
 
 public class LoginActivity extends BaseActivity {
     private final String LOG_TAG = "LOGIN_ACTIVITY";
@@ -39,6 +40,8 @@ public class LoginActivity extends BaseActivity {
     RadioButton rbState1;
     @InjectView(R.id.rb_state2)
     RadioButton rbState2;
+    @InjectView(R.id.btn_login)
+    LoadingButton lbLogin;
 
     ShareLogin loginS;
 
@@ -111,6 +114,7 @@ public class LoginActivity extends BaseActivity {
         }
         if (rbState1.isChecked()) {
             //登录状态为普通类型
+            lbLogin.setLoading();
             HpLoginParams params = new HpLoginParams();
             params.setPassword(etUserPassword.getText().toString());
             params.setUsername(etUserName.getText().toString());
@@ -120,6 +124,7 @@ public class LoginActivity extends BaseActivity {
 
                 @Override
                 public void onSuccess(HrLoginResult result) {
+                    lbLogin.setComplete();
                     cookie = result.getSessionId();
                     HttpRequestExecutor.setSession(cookie, LoginActivity.this);
                     SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, cbRe.isChecked(),
@@ -139,11 +144,13 @@ public class LoginActivity extends BaseActivity {
 
                 @Override
                 public void onError(String message) {
+                    lbLogin.setNormal();
                 }
             });
         }
         if (rbState2.isChecked()) {
             //登录状态为公墓类型
+            lbLogin.setLoading();
             HpLoginParams params = new HpLoginParams();
             params.setPassword(etUserPassword.getText().toString());
             params.setUsername(etUserName.getText().toString());
@@ -154,6 +161,7 @@ public class LoginActivity extends BaseActivity {
 
                 @Override
                 public void onSuccess(HrLoginResult result) {
+                    lbLogin.setComplete();
                     cookie = result.getSessionId();
                     HttpRequestExecutor.setSession(cookie, LoginActivity.this);
                     SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, cbRe.isChecked(),
@@ -174,6 +182,7 @@ public class LoginActivity extends BaseActivity {
 
                 @Override
                 public void onError(String message) {
+                    lbLogin.setNormal();
                 }
             });
         }

@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_new_map_line"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.shian.shianlife.activity.map.NewMapLineActivity">
+    android:layout_height="match_parent">
 
 
     <com.baidu.mapapi.map.MapView
@@ -103,5 +102,14 @@
         android:layout_marginTop="@dimen/dimen_20dp"
         android:background="@drawable/zhy_map_mylocation" />
 
+    <Button
+        android:layout_below="@+id/map_mylocation"
+        android:background="@drawable/zhy_button_navigation"
+        android:id="@+id/bt_navigation"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:layout_marginRight="@dimen/dimen_20dp"
+        android:layout_width="@dimen/dimen_72dp"
+        android:layout_height="@dimen/dimen_72dp" />
 
 </RelativeLayout>

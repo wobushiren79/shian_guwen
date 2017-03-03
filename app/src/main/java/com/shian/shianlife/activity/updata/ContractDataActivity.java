@@ -301,7 +301,7 @@ public class ContractDataActivity extends BaseActivity {
         mTVNext.setVisibility(View.VISIBLE);
         mTVBack.setVisibility(View.VISIBLE);
         mTVComplete.setVisibility(View.VISIBLE);
-        final Bitmap bmp = Bitmap.createScaledBitmap(bitmap, metrics.widthPixels / 2, (bitmap.getHeight() * metrics.widthPixels / bitmap.getWidth()) / 2, true);
+        final Bitmap bmp = Bitmap.createScaledBitmap(bitmap, metrics.widthPixels / 3, (bitmap.getHeight() * metrics.widthPixels / bitmap.getWidth()) / 3, true);
         new Thread() {
             @Override
             public void run() {

@@ -33,8 +33,7 @@ import com.shian.shianlife.provide.result.HrLoginResult;
 import com.shian.shianlife.service.UpDataService;
 
 public class SplashActivity extends BaseActivity implements OnPushListener {
-    private static final String LOG_TAG = "SPLASH_ACTIVITY";
-    RelativeLayout fl;
+    private int sleepTime=2500;//loading时间
 
 
     @Override
@@ -44,16 +43,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     }
 
     private void initView() {
-        fl = new RelativeLayout(this);
-        fl.setBackgroundResource(R.drawable.loading);
-        final ImageView iv = new ImageView(this);
-        LayoutParams lap = new LayoutParams(LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT);
-        lap.addRule(RelativeLayout.CENTER_IN_PARENT);
-        iv.setLayoutParams(lap);
-//		iv.setBackgroundResource(R.drawable.ic_splash_logo1);
-        fl.addView(iv);
-        setContentView(fl);
+        setContentView(R.layout.activity_splash);
 
 
         new Thread(new Runnable() {
@@ -61,7 +51,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(2500);
+                    Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -70,30 +60,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
                 finish();
             }
         }).start();
-        iv.animate().alpha(0).setDuration(1500)
-                .setListener(new AnimatorListener() {
-
-                    @Override
-                    public void onAnimationStart(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationRepeat(Animator animation) {
-
-                    }
-
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-//						iv.setBackgroundResource(R.drawable.ic_splash_logo2);
-//						iv.animate().alpha(1).setDuration(1500).start();
-                    }
-
-                    @Override
-                    public void onAnimationCancel(Animator animation) {
-
-                    }
-                }).start();
     }
 
     private void initView1(final HrLoginResult result) {
@@ -114,7 +80,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(2500);
+                    Thread.sleep(sleepTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -163,9 +129,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
                 params.setSystemType("2");
                 params.setChannelId(channelId);
 
-                RelativeLayout fl = new RelativeLayout(this);
-                fl.setBackgroundResource(R.drawable.loading);
-                setContentView(fl);
+                setContentView(R.layout.activity_splash);
                 MHttpManagerFactory.getAccountManager().login(this, params,
                         new HttpResponseHandler<HrLoginResult>() {
 
@@ -195,9 +159,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
                 params.setSystemType("2");
                 params.setChannelId(channelId);
 
-                RelativeLayout fl = new RelativeLayout(this);
-                fl.setBackgroundResource(R.drawable.loading);
-                setContentView(fl);
+                setContentView(R.layout.activity_splash);
                 MHttpManagerFactory.getAccountManager().loginCemetery(this, params,
                         new HttpResponseHandler<HrLoginResult>() {
 

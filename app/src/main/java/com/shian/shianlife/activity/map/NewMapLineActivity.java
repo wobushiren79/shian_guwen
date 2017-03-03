@@ -1,6 +1,8 @@
 package com.shian.shianlife.activity.map;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +28,7 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.RouteLine;
+import com.baidu.mapapi.search.core.RouteNode;
 import com.baidu.mapapi.search.core.RouteStep;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.route.BikingRouteLine;
@@ -41,6 +44,7 @@ import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.mapapi.RouteLineAdapter;
 import com.shian.shianlife.mapapi.overlayutil.DrivingRouteOverlay;
@@ -52,10 +56,13 @@ import com.yinglan.scrolllayout.ScrollLayout;
 import com.yinglan.scrolllayout.content.ContentListView;
 import com.yinglan.scrolllayout.content.ContentScrollView;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NewMapLineActivity extends Activity {
+
+    Button mMapNavigation;
     Button mMapBack;
     Button mMapMyLocation;
     Button mMapLineChange;
@@ -82,6 +89,10 @@ public class NewMapLineActivity extends Activity {
     BikingRouteResult nowResultbike = null;
     MassTransitRouteResult nowResultmass = null;
 
+    WalkingRouteLine walkrouteLine = null;
+    TransitRouteLine transitRouteLine = null;
+    DrivingRouteLine drivingRouteLine = null;
+
     boolean useDefaultIcon = true;//是否使用默认图标
     int nodeIndex = -1; // 节点索引,供浏览节点时使用
     int lineType = -1;//选择地图的类型 1.为步行 2为公交车 3为驾车
@@ -93,7 +104,6 @@ public class NewMapLineActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_map_line);
-
         initView();
         initMap();
         initData();
@@ -134,10 +144,11 @@ public class NewMapLineActivity extends Activity {
         DrivingRouteOverlay overlay = new MyDrivingRouteOverlay(mBaiduMap);
         mBaiduMap.setOnMarkerClickListener(overlay);
         routeOverlay = overlay;
-        overlay.setData(drivingResult.getRouteLines().get(position));
+
+        drivingRouteLine = drivingResult.getRouteLines().get(position);
+        overlay.setData(drivingRouteLine);
         overlay.addToMap();
         overlay.zoomToSpan();
-
         listData.addAll(drivingResult.getRouteLines().get(position).getAllStep());
         int time = drivingResult.getRouteLines().get(position).getDuration();
         int distance = drivingResult.getRouteLines().get(position).getDistance();
@@ -148,10 +159,11 @@ public class NewMapLineActivity extends Activity {
         TransitRouteOverlay overlay = new MyTransitRouteOverlay(mBaiduMap);
         mBaiduMap.setOnMarkerClickListener(overlay);
         routeOverlay = overlay;
-        overlay.setData(transitResult.getRouteLines().get(position));
+
+        transitRouteLine = transitResult.getRouteLines().get(position);
+        overlay.setData(transitRouteLine);
         overlay.addToMap();
         overlay.zoomToSpan();
-
         listData.addAll(transitResult.getRouteLines().get(position).getAllStep());
         int time = transitResult.getRouteLines().get(position).getDuration();
         int distance = transitResult.getRouteLines().get(position).getDistance();
@@ -162,9 +174,12 @@ public class NewMapLineActivity extends Activity {
         WalkingRouteOverlay overlay = new MyWalkingRouteOverlay(mBaiduMap);
         mBaiduMap.setOnMarkerClickListener(overlay);
         routeOverlay = overlay;
-        overlay.setData(walkResult.getRouteLines().get(position));
+
+        walkrouteLine = walkResult.getRouteLines().get(position);
+        overlay.setData(walkrouteLine);
         overlay.addToMap();
         overlay.zoomToSpan();
+
         listData.addAll(walkResult.getRouteLines().get(position).getAllStep());
         int time = walkResult.getRouteLines().get(position).getDuration();
         int distance = walkResult.getRouteLines().get(position).getDistance();
@@ -252,6 +267,7 @@ public class NewMapLineActivity extends Activity {
         mMapBack = (Button) findViewById(R.id.map_back);
         mMapMyLocation = (Button) findViewById(R.id.map_mylocation);
         mMapLineChange = (Button) findViewById(R.id.map_linechange);
+        mMapNavigation = (Button) findViewById(R.id.bt_navigation);
 
         mTVTitle = (TextView) findViewById(R.id.tv_title);
         mTVTimeAndDistance = (TextView) findViewById(R.id.tv_timeanddistance);
@@ -265,7 +281,7 @@ public class NewMapLineActivity extends Activity {
         mMapMyLocation.setOnClickListener(onClickListener);
         mLLHead.setOnClickListener(onClickListener);
         mMapLineChange.setOnClickListener(onClickListener);
-
+        mMapNavigation.setOnClickListener(onClickListener);
         mBaiduMap = mMapView.getMap();
 
         /**设置 setting*/
@@ -310,9 +326,77 @@ public class NewMapLineActivity extends Activity {
                 mScrollLayout.setToOpen();
             } else if (v == mMapLineChange) {
                 lineChange();
+            } else if (v == mMapNavigation) {
+                navigationFunction();
             }
         }
     };
+
+
+    /**
+     * 导航功能
+     */
+    private void navigationFunction() {
+        RouteNode startLatLng = null;
+        RouteNode endLatLng = null;
+        switch (lineType) {
+            case 1:
+                if (walkrouteLine != null) {
+                    startLatLng = walkrouteLine.getStarting();
+                    endLatLng=walkrouteLine.getTerminal();
+                }
+                break;
+            case 2:
+                if (transitRouteLine != null) {
+                    startLatLng = transitRouteLine.getStarting();
+                    endLatLng=transitRouteLine.getTerminal();
+                }
+                break;
+            case 3:
+                if (drivingRouteLine != null) {
+                    startLatLng = drivingRouteLine.getStarting();
+                    endLatLng=drivingRouteLine.getTerminal();
+                }
+                break;
+        }
+
+        if(startLatLng!=null&&endLatLng!=null){
+            Intent intent = new Intent();
+            if (Utils.isInstalled(NewMapLineActivity.this, "com.baidu.BaiduMap")) {
+                try {
+                    intent = Intent.parseUri("intent://map/direction?" +
+                            "origin=latlng:" + startLatLng.getLocation().latitude + "," + startLatLng.getLocation().longitude +
+                            "|name:" + AppContansts.LOCAL_ADDRESS +
+                            "&destination=latlng:" + endLatLng.getLocation().latitude + "," + endLatLng.getLocation().longitude +
+                            "|name:" + endPointStr +
+                            "&mode=driving" +
+                            "&src=Name|AppName" +
+                            "#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end", 0);
+                } catch (URISyntaxException e) {
+                    Utils.LogVPrint("URISyntaxException : " + e.getMessage());
+                    e.printStackTrace();
+                }
+                startActivity(intent);
+            } else if (Utils.isInstalled(NewMapLineActivity.this, "com.autonavi.minimap")) {
+                intent.setData(Uri
+                        .parse("androidamap://route?" +
+                                "sourceApplication=softname" +
+                                "&slat=" + startLatLng.getLocation().latitude +
+                                "&slon=" + startLatLng.getLocation().longitude +
+                                "&dlat=" + endLatLng.getLocation().latitude +
+                                "&dlon=" +endLatLng.getLocation().longitude+
+                                "&dname=" + endPointStr +
+                                "&dev=0" +
+                                "&m=0" +
+                                "&t=2"));
+                startActivity(intent);
+            } else {
+                ToastUtils.showLongTime(NewMapLineActivity.this, "请先下载百度地图或高德地图");
+            }
+        }else{
+            ToastUtils.show(NewMapLineActivity.this, "导航失败");
+        }
+    }
 
     /**
      * 重新选择线路

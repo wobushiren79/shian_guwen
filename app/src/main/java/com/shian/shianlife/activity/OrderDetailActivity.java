@@ -29,7 +29,7 @@ public class OrderDetailActivity extends BaseActivity {
 	CustomDetailView mCustomDetailView;
 	MainDetailView mMainDetailView;
 	FuneralDetailView mFuneralDetailView;
-	CemeteryDetailView mCemeteryDetailView;
+//	CemeteryDetailView mCemeteryDetailView;
 	AddedDetailView mAddedDetailView;
 	PayInfoView mPayInfoView;
 
@@ -46,13 +46,13 @@ public class OrderDetailActivity extends BaseActivity {
 		mCustomDetailView = new CustomDetailView(this);
 		mMainDetailView = new MainDetailView(this);
 		mFuneralDetailView = new FuneralDetailView(this);
-		mCemeteryDetailView = new CemeteryDetailView(this);
+//		mCemeteryDetailView = new CemeteryDetailView(this);
 		mAddedDetailView = new AddedDetailView(this);
 		mPayInfoView = new PayInfoView(this);
 		ll_parent.addView(mCustomDetailView);
 		ll_parent.addView(mMainDetailView);
 		ll_parent.addView(mFuneralDetailView);
-		ll_parent.addView(mCemeteryDetailView);
+//		ll_parent.addView(mCemeteryDetailView);
 		ll_parent.addView(mAddedDetailView);
 		ll_parent.addView(mPayInfoView);
 		orderId = getIntent().getLongExtra("orderId", 0);
@@ -78,7 +78,7 @@ public class OrderDetailActivity extends BaseActivity {
 				});
 				mMainDetailView.setData(result);
 				mFuneralDetailView.setData(result);
-				mCemeteryDetailView.setData(result);
+//				mCemeteryDetailView.setData(result);
 				mAddedDetailView.setData(result);
 				mPayInfoView.setData(result);
 			}
