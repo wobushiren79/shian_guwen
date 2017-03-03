@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -42,6 +45,8 @@ public class LoginActivity extends BaseActivity {
     RadioButton rbState2;
     @InjectView(R.id.btn_login)
     LoadingButton lbLogin;
+    @InjectView(R.id.rl_content)
+    RelativeLayout rlContent;
 
     ShareLogin loginS;
 
@@ -51,6 +56,17 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         initView();
         changeState();
+        startAnim();
+    }
+
+    /**
+     * 动画
+     */
+    private void startAnim() {
+        TranslateAnimation translateAnimation=new TranslateAnimation(Animation.RELATIVE_TO_SELF,Animation.RELATIVE_TO_SELF,1000,Animation.RELATIVE_TO_SELF);
+        translateAnimation.setDuration(1000);
+        rlContent.setAnimation(translateAnimation);
+        translateAnimation.start();
     }
 
     //切换账号处理
