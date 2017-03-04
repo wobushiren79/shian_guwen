@@ -1,121 +1,209 @@
 package com.shian.shianlife.activity;
 
-import android.animation.Animator;
-import android.animation.Animator.AnimatorListener;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.RelativeLayout.LayoutParams;
+
 
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
-import com.kf5sdk.api.CallBack;
-import com.kf5sdk.init.KF5SDKConfig;
-import com.kf5sdk.init.UserInfo;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.base.BaseActivity.OnPushListener;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.push.Utils;
 import com.shian.shianlife.common.utils.JSONUtil;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils.ShareLogin;
-import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpRequestExecutor;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpLoginParams;
+import com.shian.shianlife.provide.phpresult.PHPHrGetLoginAdvertisement;
 import com.shian.shianlife.provide.result.HrLoginResult;
-import com.shian.shianlife.service.UpDataService;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SplashActivity extends BaseActivity implements OnPushListener {
-    private int sleepTime=2500;//loading时间
+    private int sleepTime = 2500;//loading时间
+    private int advertisementTime = 5000;//广告时间
+    HrLoginResult result = null;
+
+    Timer timerIntent;//定时跳转
+    Button mBTJump;
+    ImageView mIVAdvertising;
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 0) {
+                advertisementSet();
+            }
+        }
+    };
 
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
+        setContentView(R.layout.activity_splash);
+        init();
         initPush();
+        initAdvertisement();
+    }
+
+    /**
+     * 获取广告图
+     */
+    private void initAdvertisement() {
+        MHttpManagerFactory.getPHPManager().loginAdvertisement(SplashActivity.this, new HttpResponseHandler<PHPHrGetLoginAdvertisement>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(final PHPHrGetLoginAdvertisement result) {
+                String picUrl = AppContansts.PhpURL + result.getBanner();
+                ImageLoader.getInstance().displayImage(picUrl, mIVAdvertising);
+                mIVAdvertising.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mBTJump.setText("跳转");
+                        jumpWeb(result);
+                    }
+                });
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        });
+    }
+
+
+    private void init() {
+        mBTJump = (Button) findViewById(R.id.bt_jump);
+        mIVAdvertising = (ImageView) findViewById(R.id.iv_advertising);
+
+        mBTJump.setOnClickListener(onClickListener);
+    }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (v == mBTJump) {
+                jumpActivity();
+            }
+        }
+    };
+
+    private void jumpActivity() {
+        ShareLogin loginS = SharePerfrenceUtils.getLoginShare(this);
+        if (loginS.isAutoLogin()) {
+            jumpMain(result);
+        } else {
+            jumpLogin();
+        }
     }
 
     private void initView() {
-        setContentView(R.layout.activity_splash);
-
-
         new Thread(new Runnable() {
-
             @Override
             public void run() {
                 try {
                     Thread.sleep(sleepTime);
+                    isOpenAdvertisement(true);
+                    timerIntent = new Timer();
+                    timerIntent.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            jumpLogin();
+                        }
+                    }, advertisementTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Intent in = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(in);
-                finish();
             }
         }).start();
     }
 
+
     private void initView1(final HrLoginResult result) {
-//        RelativeLayout fl = new RelativeLayout(this);
-//        fl.setBackgroundResource(R.drawable.zrjm);
-//        fl.setBackgroundColor(getResources().getColor(R.color.app_bg));
-//        final ImageView iv = new ImageView(this);
-//        LayoutParams lap = new LayoutParams(LayoutParams.WRAP_CONTENT,
-//                LayoutParams.WRAP_CONTENT);
-//        lap.addRule(RelativeLayout.CENTER_IN_PARENT);
-//        iv.setLayoutParams(lap);
-//        iv.setBackgroundResource(R.drawable.ic_splash_logo1);
-
-//        fl.addView(iv);
-//        setContentView(fl);
+        this.result = result;
         new Thread(new Runnable() {
-
             @Override
             public void run() {
                 try {
                     Thread.sleep(sleepTime);
+                    isOpenAdvertisement(true);
+                    timerIntent = new Timer();
+                    timerIntent.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            jumpMain(result);
+                        }
+                    }, advertisementTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
-
-                Intent in = new Intent(SplashActivity.this, MainActivity.class);
-                in.putExtra("loginData", JSONUtil.writeEntityToJSONString(result));
-                startActivity(in);
-                finish();
             }
         }).start();
-//        iv.animate().alpha(0).setDuration(1000)
-//                .setListener(new AnimatorListener() {
-//
-//                    @Override
-//                    public void onAnimationStart(Animator animation) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAnimationRepeat(Animator animation) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onAnimationEnd(Animator animation) {
-////						iv.setBackgroundResource(R.drawable.ic_splash_logo2);
-////						iv.animate().alpha(1).setDuration(1500).start();
-//                    }
-//
-//                    @Override
-//                    public void onAnimationCancel(Animator animation) {
-//
-//                    }
-//                }).start();
+    }
+
+    /**
+     * 跳转主界面
+     *
+     * @param result
+     */
+    private void jumpMain(HrLoginResult result) {
+        cancelTimer();
+        Intent in = new Intent(SplashActivity.this, MainActivity.class);
+        in.putExtra("loginData", JSONUtil.writeEntityToJSONString(result));
+        startActivity(in);
+        finish();
+    }
+
+    /**
+     * 跳转登录界面
+     */
+    private void jumpLogin() {
+        cancelTimer();
+        Intent in = new Intent(SplashActivity.this, LoginActivity.class);
+        startActivity(in);
+        finish();
+    }
+
+    /**
+     * 跳转网页界面
+     *
+     * @param result
+     */
+    private void jumpWeb(PHPHrGetLoginAdvertisement result) {
+        cancelTimer();
+        Intent intent = new Intent(SplashActivity.this, WebActivity.class);
+        intent.putExtra("url", result.getUrl());
+        startActivity(intent);
+    }
+
+    /**
+     * 关闭定时器
+     */
+    private void cancelTimer() {
+        if (timerIntent != null) {
+            timerIntent.cancel();
+        }
+
     }
 
     private void initLogin(String channelId) {
@@ -128,8 +216,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
                 params.setUsername(loginS.getUsername());
                 params.setSystemType("2");
                 params.setChannelId(channelId);
-
-                setContentView(R.layout.activity_splash);
                 MHttpManagerFactory.getAccountManager().login(this, params,
                         new HttpResponseHandler<HrLoginResult>() {
 
@@ -159,7 +245,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
                 params.setSystemType("2");
                 params.setChannelId(channelId);
 
-                setContentView(R.layout.activity_splash);
+
                 MHttpManagerFactory.getAccountManager().loginCemetery(this, params,
                         new HttpResponseHandler<HrLoginResult>() {
 
@@ -181,8 +267,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
                             }
                         });
             }
-
-
         } else {
             initView();
         }
@@ -193,7 +277,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
         String pkgName = this.getPackageName();
 
         PushManager.startWork(getApplicationContext(),
-
                 PushConstants.LOGIN_TYPE_API_KEY,
                 Utils.getMetaValue(this, "api_key"));
         // Push: 如果想基于地理位置推送，可以打开支持地理位置的推送的开关
@@ -224,5 +307,25 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     public void onPush(String channelId) {
         // TODO Auto-generated method stub
         initLogin(channelId);
+    }
+
+
+    /**
+     * 是否开启广告
+     *
+     * @param isOpen
+     */
+    public void isOpenAdvertisement(boolean isOpen) throws InterruptedException {
+        if (isOpen == false) {
+            return;
+        } else {
+            handler.obtainMessage(0).sendToTarget();
+        }
+    }
+
+    private void advertisementSet() {
+        mBTJump.setVisibility(View.VISIBLE);
+        mIVAdvertising.setVisibility(View.VISIBLE);
+
     }
 }

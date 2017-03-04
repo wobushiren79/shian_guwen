@@ -455,7 +455,6 @@ public class MAccountManagerImpl implements MAccountManager {
         // TODO Auto-generated method stub
         excutor.requestPost(context, "order/endService", Object.class, params,
                 handler);
-
     }
 
     @Override

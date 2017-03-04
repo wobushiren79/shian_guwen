@@ -23,22 +23,22 @@ public class WebActivity extends BaseActivity {
         super.onCreate(arg0);
         RelativeLayout rl = new RelativeLayout(this);
         final WebView web = new WebView(this);
-        rl.addView(web, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        Button btn = new Button(this);
-        btn.setText("返回");
+//        rl.addView(web, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+//        Button btn = new Button(this);
+//        btn.setText("返回");
 
-        ViewGroup.MarginLayoutParams mp = new ViewGroup.MarginLayoutParams(220, 150);  //item的宽高
-        mp.setMargins(0, 100, 25, 100);//分别是margin_top那四个属性
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(mp);
-        lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        rl.addView(btn, lp);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                web.goBack();
-            }
-        });
+//        ViewGroup.MarginLayoutParams mp = new ViewGroup.MarginLayoutParams(220, 150);  //item的宽高
+//        mp.setMargins(0, 100, 25, 100);//分别是margin_top那四个属性
+//        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(mp);
+//        lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+//        lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+//        rl.addView(btn, lp);
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                web.goBack();
+//            }
+//        });
         web.getSettings().setJavaScriptEnabled(true);
         web.loadUrl(getIntent().getStringExtra("url"));
         web.setWebViewClient(new WebViewClient() {
