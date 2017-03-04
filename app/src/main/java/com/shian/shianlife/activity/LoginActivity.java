@@ -29,8 +29,6 @@ import com.shian.shianlife.provide.result.HrLoginResult;
 import com.shian.shianlife.view.customview.LoadingButton;
 
 public class LoginActivity extends BaseActivity {
-    private final String LOG_TAG = "LOGIN_ACTIVITY";
-
     @InjectView(R.id.et_login_username)
     EditText etUserName;
     @InjectView(R.id.et_login_password)
@@ -218,8 +216,10 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.btn_login_web)
     void loginWeb(View v) {
-        Intent in = new Intent(this, WebActivity.class);
-        in.putExtra("url", "http://m.e-funeral.cn");
+//        Intent in = new Intent(this, WebActivity.class);
+//        in.putExtra("url", "http://m.e-funeral.cn");
+//        startActivity(in);
+        Intent in=new Intent(this,LoginPhoneActivity.class);
         startActivity(in);
     }
 }
