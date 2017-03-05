@@ -46,6 +46,9 @@
     <color name="zhy_text_color_1">#48cfad</color>
     <color name="zhy_text_color_2">#c4c4c4</color>
     <color name="zhy_text_color_3">#A4D5C9</color>
+    <color name="zhy_text_color_4">#FC8383</color>
+    <color name="zhy_text_color_5">#818181</color>
+    <color name="zhy_text_color_6">#67BEDB</color>
     <color name="zhy_backgroud_1">#F1F6F5</color>
     <!-- Dialog Color -->
     <color name="version_msg_color">#ff6699ff</color>

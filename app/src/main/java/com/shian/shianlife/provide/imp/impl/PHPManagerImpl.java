@@ -30,4 +30,10 @@ public class PHPManagerImpl implements PHPManager {
         excutor.requestPHPPost(context, "Home/index/loginbanner", PHPHrGetLoginAdvertisement.class,
                 new BaseHttpParams(), handler);
     }
+
+    @Override
+    public void mainAdvertisement(Context context, HttpResponseHandler<PHPHrGetLoginAdvertisement> handler) {
+        excutor.requestPHPPost(context, "Home/index/indexbanner", PHPHrGetLoginAdvertisement.class,
+                new BaseHttpParams(), handler);
+    }
 }
