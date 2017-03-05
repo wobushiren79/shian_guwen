@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/librarys/AndroidSwipeLayout/AndroidSwipeLayout.iml" filepath="$PROJECT_DIR$/librarys/AndroidSwipeLayout/AndroidSwipeLayout.iml" />
       <module fileurl="file://$PROJECT_DIR$/librarys/ImageSelector/ImageSelector.iml" filepath="$PROJECT_DIR$/librarys/ImageSelector/ImageSelector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PullToRefresh/PullToRefresh.iml" filepath="$PROJECT_DIR$/PullToRefresh/PullToRefresh.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/librarys/cptr/cptr.iml" filepath="$PROJECT_DIR$/librarys/cptr/cptr.iml" />
       <module fileurl="file://$PROJECT_DIR$/librarys/cycleViewPager/cycleViewPager.iml" filepath="$PROJECT_DIR$/librarys/cycleViewPager/cycleViewPager.iml" />

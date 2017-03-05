@@ -315,10 +315,8 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
 
                 paint.setTextAlign(Paint.Align.CENTER);
                 paint.setTextSize(MsgCornerSize/1.5f);
-                paint.setColor(Color.parseColor("#333333"));
+                paint.setColor(Color.parseColor("#ffffff"));
                 canvas.drawText(MsgCornerNumber+"", this.getWidth() - MsgCornerSize / 2, MsgCornerSize * 3 / 4, paint);
-
-
             }
         }
 

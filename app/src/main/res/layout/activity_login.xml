@@ -109,7 +109,6 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dimen_40dp"
                     android:layout_gravity="left"
-                    android:layout_marginRight="@dimen/dimen_100dp"
                     android:layout_weight="1"
                     android:buttonTint="@color/zhy_text_color_2"
                     android:text="记住密码"

@@ -107,19 +107,19 @@ public class BaseActivity extends FragmentActivity {
 
     public void setTitle(String title) {
         findViewById(R.id.rl_head).setVisibility(View.VISIBLE);
-        TextView tvHeadLeft = (TextView) findViewById(R.id.tv_head_left);
+//        TextView tvHeadLeft = (TextView) findViewById(R.id.tv_head_left);
         TextView tvHeadTitle = (TextView) findViewById(R.id.tv_head_title);
         TextView back= (TextView) findViewById(R.id.back);
         ImageView ivHeadTitle = (ImageView) findViewById(R.id.iv_head_title);
         TextView tvHeadLocation = (TextView) findViewById(R.id.title_location);
-        ImageView logo= (ImageView) findViewById(R.id.logo);
+//        ImageView logo= (ImageView) findViewById(R.id.logo);
         View tvHeadRight = findViewById(R.id.tv_head_right);
         if (!title.equals("title")) {
             tvHeadLocation.setVisibility(View.GONE);
             ivHeadTitle.setVisibility(View.GONE);
-            logo.setVisibility(View.GONE);
+//            logo.setVisibility(View.GONE);
             back.setVisibility(View.VISIBLE);
-            tvHeadLeft.setVisibility(View.GONE);
+//            tvHeadLeft.setVisibility(View.GONE);
 
             tvHeadTitle.setVisibility(View.VISIBLE);
             tvHeadTitle.setText(title);
@@ -148,7 +148,7 @@ public class BaseActivity extends FragmentActivity {
             });
         } else {
             back.setVisibility(View.GONE);
-            logo.setVisibility(View.VISIBLE);
+//            logo.setVisibility(View.VISIBLE);
             ivHeadTitle.setVisibility(View.GONE);
             tvHeadTitle.setVisibility(View.GONE);
         }

@@ -4,6 +4,8 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -31,7 +33,9 @@ import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.fragment.CemeteryFragment;
+import com.shian.shianlife.fragment.FindFragment;
 import com.shian.shianlife.fragment.HomeFragment;
+import com.shian.shianlife.fragment.NewHomeFragment;
 import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.fragment.UserCenterFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
@@ -45,6 +49,7 @@ import com.viewpagerindicator.TabPageIndicator;
 
 import org.support.v4.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
@@ -52,7 +57,6 @@ import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, OrderFragment.OrderFragmentCallBack {
 
-    private final String LOG_TAG = "MAIN_ACTIVITY";
     int loginType;
 
     @InjectView(R.id.fl_main)
@@ -63,16 +67,21 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     RadioButton rbMain2;
     @InjectView(R.id.rb_main_3)
     RadioButton rbMain3;
+    @InjectView(R.id.rb_main_4)
+    RadioButton rbMain4;
     @InjectView(R.id.tv_msgnum)
     TextView tvMsgNumber;
 
     private FragmentManager mFragmentManager;
     private FragmentTransaction transcation;
-    private HomeFragment homeFragment;
+    //    private HomeFragment homeFragment;
+    private NewHomeFragment homeFragment;
+    private FindFragment findFragment;
     private OrderFragment orderFragment;
     private UserCenterFragment userFragment;
     private CemeteryFragment cemeteryFragment;//新增公墓服务界面
 
+    List<RadioButton> listRB = new ArrayList<>();
     //定位初始化
 //    public LocationClient mLocationClient = null;
 //    public BDLocationListener myListener = new MyLocationListener();
@@ -137,7 +146,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         }
         sb.append("00000000000000");//防止账号过短
         userInfo.sdkName = "来自世安工单";
-        userInfo.phone = sb.toString().substring(0,11);
+        userInfo.phone = sb.toString().substring(0, 11);
         userInfo.helpAddress = "wenshikai.kf5.com";
         userInfo.email = name + "@sina.com";
         userInfo.deviceToken = name;
@@ -163,6 +172,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         rbMain1.setOnCheckedChangeListener(new RBCheckListener());
         rbMain2.setOnCheckedChangeListener(new RBCheckListener());
         rbMain3.setOnCheckedChangeListener(new RBCheckListener());
+        rbMain4.setOnCheckedChangeListener(new RBCheckListener());
         showFragment(R.id.rb_main_1);
         MHttpManagerFactory.getAccountManager().getMessageCount(this,
                 new HttpResponseHandler<HrCommentResult>() {
@@ -191,6 +201,25 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                         // TODO Auto-generated method stub
                     }
                 });
+        initRB();
+    }
+
+    /**
+     * 设置rb的大小
+     */
+    private void initRB() {
+        listRB.add(rbMain1);
+        listRB.add(rbMain2);
+        listRB.add(rbMain3);
+        listRB.add(rbMain4);
+        for (RadioButton rb : listRB) {
+            Rect rect = new Rect();
+            rect.set(0, 0, getResources().getDimensionPixelOffset(R.dimen.dimen_48dp), getResources().getDimensionPixelOffset(R.dimen.dimen_48dp)); // 这里分别是 left top right bottom  代表距离父view 的距离   长宽 是  right-left   bottom-top
+            //注意 xml没有设置 drawableTop 的图片话  drawableT 为null 的情况
+            Drawable drawableT = rb.getCompoundDrawables()[1]; // getCompoundDrawables()得到一个数组  0 1 2 3 对应 left top right bottom 方向的drawable
+            drawableT.setBounds(rect);// 大小和位置控制
+            rb.setCompoundDrawables(null, drawableT, null, null); // 设置drawable    对应 left top right bottom 方向的drawable
+        }
     }
 
     private void showFragment(int state) {
@@ -198,7 +227,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         switch (state) {
             case R.id.rb_main_1:
                 if (homeFragment == null) {
-                    homeFragment = new HomeFragment();
+                    homeFragment = new NewHomeFragment();
                 }
                 transcation.replace(R.id.fl_main, homeFragment);
                 break;
@@ -220,6 +249,12 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 
                 break;
             case R.id.rb_main_3:
+                if (findFragment == null) {
+                    findFragment = new FindFragment();
+                }
+                transcation.replace(R.id.fl_main, findFragment);
+                break;
+            case R.id.rb_main_4:
                 if (userFragment == null) {
                     userFragment = new UserCenterFragment();
                 }
@@ -454,24 +489,24 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 ShortcutBadger.applyCount(MainActivity.this, AppContansts.MsgNumberTotal);
                 if (orderFragment != null) {
                     List<TabPageIndicator.TabView> listTabView = orderFragment.indicator.getListTabView();
-                    int cornerSize=MainActivity.this.getResources().getDimensionPixelSize(R.dimen.dimen_30dp);
+                    int cornerSize = MainActivity.this.getResources().getDimensionPixelSize(R.dimen.dimen_30dp);
                     for (TabPageIndicator.TabView tabview : listTabView) {
                         String titel = tabview.getText().toString();
                         switch (titel) {
                             case "洽谈":
-                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getTalk(),cornerSize);
+                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getTalk(), cornerSize);
                                 break;
                             case "待服务":
-                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getService(),cornerSize);
+                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getService(), cornerSize);
                                 break;
                             case "服务派单中":
-                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAssignment(),cornerSize);
+                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAssignment(), cornerSize);
                                 break;
                             case "待评审":
-                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAuditing(),cornerSize);
+                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAuditing(), cornerSize);
                                 break;
                             case "待收款":
-                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getUnpaid(),cornerSize);
+                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getUnpaid(), cornerSize);
                                 break;
                             case "服务结束":
 //                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getEndService());
