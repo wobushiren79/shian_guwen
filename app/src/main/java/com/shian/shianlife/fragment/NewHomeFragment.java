@@ -11,7 +11,10 @@ import android.view.animation.TranslateAnimation;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.base.BaseFragment;
+import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.view.customview.MainAPP;
 import com.shian.shianlife.view.customview.MainAdvertisementLayout;
+import com.shian.shianlife.view.customview.MainDynamic;
 import com.shian.shianlife.view.customview.UserInfoLayout;
 
 /**
@@ -21,14 +24,15 @@ import com.shian.shianlife.view.customview.UserInfoLayout;
 public class NewHomeFragment extends BaseFragment {
     View view;
 
-    UserInfoLayout mUserInfoLayout;
-    MainAdvertisementLayout mMainAdvertisementLayout;
+    UserInfoLayout mUserInfoLayout;//用户资料布局
+    MainAdvertisementLayout mMainAdvertisementLayout;//主页广告布局
+    MainDynamic mMainDynamicLayout;//重要通知
+    MainAPP mMainAPP;//我的APP
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_newhome, null, false);
         initView();
-
         return view;
     }
 
@@ -42,8 +46,11 @@ public class NewHomeFragment extends BaseFragment {
     private void initView() {
         mUserInfoLayout = (UserInfoLayout) view.findViewById(R.id.userinfo_layout);
         mMainAdvertisementLayout = (MainAdvertisementLayout) view.findViewById(R.id.mainadvertisement_layout);
+        mMainDynamicLayout = (MainDynamic) view.findViewById(R.id.maindynamic_layout);
+        mMainAPP = (MainAPP) view.findViewById(R.id.mainapp_layout);
 
-        mMainAdvertisementLayout.setCallBack(advertisermentlayout);
+        mMainAdvertisementLayout.setCallBack(advertisermentLayoutCallBack);
+        mMainDynamicLayout.setCallBack(mainDynamicCallBack);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -57,7 +64,7 @@ public class NewHomeFragment extends BaseFragment {
     /**
      * 广告加载完毕与取消动画
      */
-    MainAdvertisementLayout.CallBack advertisermentlayout = new MainAdvertisementLayout.CallBack() {
+    MainAdvertisementLayout.CallBack advertisermentLayoutCallBack = new MainAdvertisementLayout.CallBack() {
         @Override
         public void loadingComplete() {
             mMainAdvertisementLayout.setVisibility(View.VISIBLE);
@@ -109,4 +116,12 @@ public class NewHomeFragment extends BaseFragment {
         }
     };
 
+
+    MainDynamic.CallBack mainDynamicCallBack = new MainDynamic.CallBack() {
+        @Override
+        public void loadingComplete() {
+            mMainDynamicLayout.setVisibility(View.VISIBLE);
+
+        }
+    };
 }

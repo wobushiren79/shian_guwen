@@ -8,11 +8,13 @@ import java.util.regex.Pattern;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -20,6 +22,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.shian.shianlife.activity.MainActivity;
@@ -40,9 +44,9 @@ import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class Utils {
 
-    public static void LogVPrint(String content){
-        if(SaBaseApplication.LOGFLAG){
-            Log.v("this",content+"");
+    public static void LogVPrint(String content) {
+        if (SaBaseApplication.LOGFLAG) {
+            Log.v("this", content + "");
         }
     }
 
@@ -126,37 +130,37 @@ public class Utils {
     }
 
 
-   public static void  getSKUDetails(final Context context, long id){
-       //获取商品详情
-       HpSkuIdParams params = new HpSkuIdParams();
-       params.setSkuId(id);
-       MHttpManagerFactory.getAccountManager().getSKUDetails(context, params, new HttpResponseHandler<HrGetSKUDetails>() {
-           @Override
-           public void onStart() {
+    public static void getSKUDetails(final Context context, long id) {
+        //获取商品详情
+        HpSkuIdParams params = new HpSkuIdParams();
+        params.setSkuId(id);
+        MHttpManagerFactory.getAccountManager().getSKUDetails(context, params, new HttpResponseHandler<HrGetSKUDetails>() {
+            @Override
+            public void onStart() {
 
-           }
+            }
 
-           @Override
-           public void onSuccess(HrGetSKUDetails result) {
+            @Override
+            public void onSuccess(HrGetSKUDetails result) {
 
-               if (result.getDetails() != null && !result.getDetails().equals("")) {
-                   AlertDialog dialog = new AlertDialog.Builder(context)
-                           .setTitle("商品详情")
-                           .setMessage(result.getDetails())
-                           .setPositiveButton("确认", null)
-                           .create();
-                   dialog.show();
-               } else {
-                   ToastUtils.show(context, "没有商品详情数据");
-               }
-           }
+                if (result.getDetails() != null && !result.getDetails().equals("")) {
+                    AlertDialog dialog = new AlertDialog.Builder(context)
+                            .setTitle("商品详情")
+                            .setMessage(result.getDetails())
+                            .setPositiveButton("确认", null)
+                            .create();
+                    dialog.show();
+                } else {
+                    ToastUtils.show(context, "没有商品详情数据");
+                }
+            }
 
-           @Override
-           public void onError(String message) {
+            @Override
+            public void onError(String message) {
 
-           }
-       });
-   }
+            }
+        });
+    }
 
     /**
      * 检查手机上是否安装了指定的软件
@@ -176,5 +180,24 @@ public class Utils {
         }
         return false;
     }
+
+    /**
+     * 状态栏相关工具类
+     */
+    public static void setWindowStatusBarColor(Activity activity, int colorResId) {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = activity.getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(activity.getResources().getColor(colorResId));
+
+                //底部导航栏
+                //window.setNavigationBarColor(activity.getResources().getColor(colorResId));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

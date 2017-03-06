@@ -6,7 +6,7 @@ import com.shian.shianlife.provide.base.BaseHttpParams;
  * Created by Administrator on 2017/3/4.
  */
 
-public class PHPHrGetLoginAdvertisement extends BaseHttpParams {
+public class PHPHrGetLoginAdvertisement {
     private String banner;
     private String url;
 

@@ -47,7 +47,5 @@ public class ScrollListView extends ListView {
         // listView.getDividerHeight()获取子项间分隔符占用的高度
         // params.height最后得到整个ListView完整显示需要的高度
         listView.setLayoutParams(params);
-
-
     }
 }
