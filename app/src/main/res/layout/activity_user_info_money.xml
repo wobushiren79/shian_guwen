@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.handmark.pulltorefresh.library.PullToRefreshScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_user_info_money"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zhy_backgroud_1"
+    android:orientation="vertical"
+    tools:context="com.shian.shianlife.activity.UserInfoMoneyActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/zhy_userinfo_money_title_back"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dimen_64dp"
+                android:gravity="center"
+                android:text="账户余额"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_36dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dimen_16dp"
+                android:layout_marginTop="@dimen/dimen_74dp"
+                android:gravity="center"
+                android:text="￥0.00"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_96dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/bt_withdrawal"
+                android:layout_width="@dimen/dimen_200dp"
+                android:layout_height="@dimen/dimen_80dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/dimen_64dp"
+                android:layout_marginTop="@dimen/dimen_86dp"
+                android:background="@drawable/zhy_button_state_4"
+                android:gravity="center"
+                android:text="提现"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_110dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/dimen_48dp"
+                android:layout_height="@dimen/dimen_48dp"
+                android:layout_marginLeft="@dimen/dimen_36dp"
+                android:src="@drawable/zhy_userinfo_money_detail" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_16dp"
+                android:layout_weight="1"
+                android:text="消费明细"
+                android:textSize="@dimen/dimen_32dp" />
+
+            <ImageView
+                android:layout_width="@dimen/dimen_15dp"
+                android:layout_height="@dimen/dimen_33dp"
+                android:layout_marginRight="@dimen/dimen_32dp"
+                android:src="@drawable/zhy_userinfo_in" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_110dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/dimen_48dp"
+                android:layout_height="@dimen/dimen_48dp"
+                android:layout_marginLeft="@dimen/dimen_36dp"
+                android:src="@drawable/zhy_userinfo_money_record" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_16dp"
+                android:layout_weight="1"
+                android:text="提现记录"
+                android:textSize="@dimen/dimen_32dp" />
+
+            <ImageView
+                android:layout_width="@dimen/dimen_15dp"
+                android:layout_height="@dimen/dimen_33dp"
+                android:layout_marginRight="@dimen/dimen_32dp"
+                android:src="@drawable/zhy_userinfo_in" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_110dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/dimen_48dp"
+                android:layout_height="@dimen/dimen_48dp"
+                android:layout_marginLeft="@dimen/dimen_36dp"
+                android:src="@drawable/zhy_userinfo_money_progress" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_16dp"
+                android:layout_weight="1"
+                android:text="申请记录"
+                android:textSize="@dimen/dimen_32dp" />
+
+            <ImageView
+                android:layout_width="@dimen/dimen_15dp"
+                android:layout_height="@dimen/dimen_33dp"
+                android:layout_marginRight="@dimen/dimen_32dp"
+                android:src="@drawable/zhy_userinfo_in" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_110dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/dimen_48dp"
+                android:layout_height="@dimen/dimen_48dp"
+                android:layout_marginLeft="@dimen/dimen_36dp"
+                android:src="@drawable/zhy_userinfo_money_rule" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_16dp"
+                android:layout_weight="1"
+                android:text="返现规则"
+                android:textSize="@dimen/dimen_32dp" />
+
+            <ImageView
+                android:layout_width="@dimen/dimen_15dp"
+                android:layout_height="@dimen/dimen_33dp"
+                android:layout_marginRight="@dimen/dimen_32dp"
+                android:src="@drawable/zhy_userinfo_in" />
+        </LinearLayout>
+    </LinearLayout>
+</com.handmark.pulltorefresh.library.PullToRefreshScrollView>

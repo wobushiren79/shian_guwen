@@ -74,13 +74,12 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:launchMode="singleTask"
             android:name=".activity.LoginActivity"
             android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
-
             android:name=".activity.MainActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTask"
@@ -420,10 +419,19 @@
             android:name=".activity.map.NewMapChoiceActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.LoginPhoneActivity"
+        <activity
+            android:name=".activity.LoginPhoneActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity
+            android:name=".activity.UserInfoMoneyActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.UserInfoIntegralActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

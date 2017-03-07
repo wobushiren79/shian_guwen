@@ -1,10 +1,12 @@
 package com.shian.shianlife.view.customview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 
 import com.loopj.android.http.RequestParams;
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.WebActivity;
+import com.shian.shianlife.common.utils.TimeUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
@@ -34,11 +38,12 @@ public class MainDynamic extends LinearLayout {
     ScrollListView mListView;
     ImageView mIVMore;
 
-    List<DynamicItemsInfo> items=new ArrayList<>();
+    List<DynamicItemsInfo> items = new ArrayList<>();
 
 
-    private int showNumber=3;//动态通知数量
+    private int showNumber = 3;//动态通知数量
     private CallBack callBack;
+
     public MainDynamic(Context context) {
         this(context, null);
     }
@@ -59,9 +64,9 @@ public class MainDynamic extends LinearLayout {
      * 获取数据
      */
     private void getData() {
-        RequestParams requestParams=new RequestParams();
-        requestParams.put("number",showNumber);
-        requestParams.put("pagerNumber",0);
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("number", showNumber);
+        requestParams.put("pagerNumber", 0);
         MHttpManagerFactory.getPHPManager().getDynamicInfo(getContext(), requestParams, new HttpResponseHandler<PHPHrGetDynamic>() {
             @Override
             public void onStart() {
@@ -70,7 +75,7 @@ public class MainDynamic extends LinearLayout {
 
             @Override
             public void onSuccess(PHPHrGetDynamic result) {
-                items=result.getItems();
+                items = result.getItems();
                 adapter.notifyDataSetChanged();
                 callBack.loadingComplete();
             }
@@ -88,18 +93,30 @@ public class MainDynamic extends LinearLayout {
 
         mIVMore.setOnClickListener(onClickListener);
         mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(onItemClickListener);
     }
 
-    OnClickListener onClickListener=new OnClickListener() {
+
+    AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            int urlId = items.get(position).getId();
+            Intent intent = new Intent(getContext(), WebActivity.class);
+            intent.putExtra("url", "http://www.baidu.com");
+            getContext().startActivity(intent);
+        }
+    };
+
+    OnClickListener onClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            if(v==mIVMore){
-                ToastUtils.show(getContext(),"more");
+            if (v == mIVMore) {
+                ToastUtils.show(getContext(), "more");
             }
         }
     };
 
-    BaseAdapter adapter=new BaseAdapter() {
+    BaseAdapter adapter = new BaseAdapter() {
         @Override
         public int getCount() {
             return items.size();
@@ -118,38 +135,39 @@ public class MainDynamic extends LinearLayout {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
-            if(convertView==null){
-                convertView=View.inflate(getContext(),R.layout.view_main_dynamic_layout_items,null);
-                holder=new ViewHolder();
-                holder.tvContent= (TextView) convertView.findViewById(R.id.tv_content);
-                holder.tvTime= (TextView) convertView.findViewById(R.id.tv_time);
-                holder.tvTop= (TextView) convertView.findViewById(R.id.tv_top);
+            if (convertView == null) {
+                convertView = View.inflate(getContext(), R.layout.view_main_dynamic_layout_items, null);
+                holder = new ViewHolder();
+                holder.tvContent = (TextView) convertView.findViewById(R.id.tv_content);
+                holder.tvTime = (TextView) convertView.findViewById(R.id.tv_time);
+                holder.tvTop = (TextView) convertView.findViewById(R.id.tv_top);
                 convertView.setTag(holder);
-             }else{
-                holder= (ViewHolder) convertView.getTag();
+            } else {
+                holder = (ViewHolder) convertView.getTag();
             }
-            AbsListView.LayoutParams layoutParams=new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,MainDynamic.this.getResources().getDimensionPixelOffset(R.dimen.dimen_52dp));
-            DynamicItemsInfo data=items.get(position);
+            AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, MainDynamic.this.getResources().getDimensionPixelOffset(R.dimen.dimen_72dp));
+            DynamicItemsInfo data = items.get(position);
             convertView.setLayoutParams(layoutParams);
             holder.tvContent.setText(data.getTitle());
             holder.tvTime.setText(data.getTime());
-            if(position==0){
+            if (position == 0) {
                 holder.tvTop.setVisibility(VISIBLE);
-            }else{
+            } else {
                 holder.tvTop.setVisibility(GONE);
             }
             return convertView;
         }
-        class  ViewHolder{
+
+        class ViewHolder {
             TextView tvContent;
             TextView tvTime;
             TextView tvTop;
         }
     };
 
-    public interface CallBack{
+    public interface CallBack {
 
-      void loadingComplete();
+        void loadingComplete();
 
     }
 }

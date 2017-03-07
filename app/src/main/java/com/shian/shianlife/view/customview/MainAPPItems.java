@@ -1,6 +1,11 @@
 package com.shian.shianlife.view.customview;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.CalendarContract;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
@@ -10,7 +15,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.baidu.mapapi.search.core.RouteNode;
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.WebActivity;
+import com.shian.shianlife.activity.map.NewMapLineActivity;
+import com.shian.shianlife.common.contanst.AppContansts;
+import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.common.utils.Utils;
+
+import java.net.URISyntaxException;
 
 /**
  * Created by Administrator on 2017/3/6.
@@ -20,6 +33,8 @@ public class MainAPPItems extends LinearLayout {
     View view;
     ImageView mIVIcon;
     TextView mTVContent;
+
+    String url;
 
     public MainAPPItems(Context context) {
         this(context, null);
@@ -35,13 +50,13 @@ public class MainAPPItems extends LinearLayout {
     private void initView() {
         mIVIcon = (ImageView) view.findViewById(R.id.iv_icon);
         mTVContent = (TextView) view.findViewById(R.id.tv_content);
-
         view.setOnClickListener(onClickListener);
     }
 
-    public void setData(String content, int iconID) {
+    public void setData(String content, int iconID, String url) {
         mIVIcon.setImageResource(iconID);
         mTVContent.setText(content);
+        this.url = url;
     }
 
     OnClickListener onClickListener = new OnClickListener() {
@@ -50,11 +65,130 @@ public class MainAPPItems extends LinearLayout {
             if (v == view) {
                 TranslateAnimation animation = new TranslateAnimation
                         (Animation.RELATIVE_TO_SELF, Animation.RELATIVE_TO_SELF,
-                                Animation.RELATIVE_TO_SELF,-getResources().getDimensionPixelOffset(R.dimen.dimen_10dp));
+                                Animation.RELATIVE_TO_SELF, -getResources().getDimensionPixelOffset(R.dimen.dimen_10dp));
                 animation.setDuration(200);
                 animation.setInterpolator(new OvershootInterpolator());
+                animation.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        if (url.equals("")) {
+
+                        } else if (url.contains("all")) {
+
+                        } else if (url.contains("http://")) {
+                            if (url.contains("diditaxi")) {
+                                openWeb(1);
+                            } else {
+                                openWeb(0);
+                            }
+                        } else if (url.contains("navigation")) {
+                            navigationFunction();
+                        } else if (url.contains("calendar")) {
+                            openCalendar();
+                        } else if (url.contains("calculator")) {
+                            openCalculator();
+                        }
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+
                 mIVIcon.startAnimation(animation);
             }
         }
     };
+
+    /**
+     * 打开计算器
+     */
+    private void openCalculator() {
+        Intent intent = new Intent();
+        intent.setClassName("com.android.calculator2", "com.android.calculator2.Calculator");
+        getContext().startActivity(intent);
+    }
+
+    /**
+     * 打开日历
+     */
+    private void openCalendar() {
+        Intent i = new Intent();
+        ComponentName cn = null;
+        if (Integer.parseInt(Build.VERSION.SDK) >= 8) {
+            cn = new ComponentName("com.android.calendar", "com.android.calendar.LaunchActivity");
+        } else {
+            cn = new ComponentName("com.google.android.calendar", "com.android.calendar.LaunchActivity");
+        }
+        i.setComponent(cn);
+        getContext().startActivity(i);
+    }
+
+
+
+    /**
+     * 网页连接功能
+     *
+     * @param type 0为默认连接，1为滴滴
+     */
+    private void openWeb(int type) {
+        Intent intent = new Intent(getContext(), WebActivity.class);
+        if (type == 0) {
+            intent.putExtra("url", url);
+        } else if (type == 1) {
+            intent.putExtra("url", url
+                    + "/?channel=" + AppContansts.DiDichannel
+                    + "&maptype=soso" +//wgs baidu soso
+                    "&lat=" + AppContansts.LOCAL_latitude
+                    + "&lng=" + AppContansts.LOCAL_longitude);
+        }
+        getContext().startActivity(intent);
+    }
+
+
+    /**
+     * 导航功能
+     */
+    private void navigationFunction() {
+
+        Intent intent = new Intent();
+        if (Utils.isInstalled(getContext(), "com.baidu.BaiduMap")) {
+            try {
+                intent = Intent.parseUri("intent://map/direction?" +
+//                            "origin=latlng:" + startLatLng.getLocation().latitude + "," + startLatLng.getLocation().longitude +
+//                            "|name:" + AppContansts.LOCAL_ADDRESS +
+//                            "&destination=latlng:" + endLatLng.getLocation().latitude + "," + endLatLng.getLocation().longitude +
+//                            "|name:" + endPointStr +
+                        "mode=driving" +
+                        "&src=Name|AppName" +
+                        "#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end", 0);
+            } catch (URISyntaxException e) {
+                Utils.LogVPrint("URISyntaxException : " + e.getMessage());
+                e.printStackTrace();
+            }
+            getContext().startActivity(intent);
+        } else if (Utils.isInstalled(getContext(), "com.autonavi.minimap")) {
+            intent.setData(Uri
+                    .parse("androidamap://route?" +
+                            "sourceApplication=softname" +
+//                                "&slat=" + startLatLng.getLocation().latitude +
+//                                "&slon=" + startLatLng.getLocation().longitude +
+//                                "&dlat=" + endLatLng.getLocation().latitude +
+//                                "&dlon=" +endLatLng.getLocation().longitude+
+//                                "&dname=" + endPointStr +
+                            "dev=0" +
+                            "&m=0" +
+                            "&t=2"));
+            getContext().startActivity(intent);
+        } else {
+            ToastUtils.showLongTime(getContext(), "请先下载百度地图或高德地图");
+        }
+
+    }
 }

@@ -7,6 +7,8 @@ public class AppContansts {
     public static final String OSSURL = "http://shianlife123.oss-cn-qingdao.aliyuncs.com/";
     public static final String PhpURL = "http://192.168.0.72/shianapp";
 
+    public static final String DiDichannel="";//滴滴渠道号
+
     public static int MessageCount = 0;
     public static String LocalString;
 

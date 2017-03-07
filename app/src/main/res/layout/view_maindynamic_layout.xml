@@ -26,10 +26,7 @@
             android:layout_height="wrap_content"
             android:scrollbars="none"></com.shian.shianlife.view.ScrollListView>
 
-        <TextView
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_16dp" />
+
     </LinearLayout>
 
     <LinearLayout

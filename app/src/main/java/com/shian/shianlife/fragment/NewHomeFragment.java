@@ -121,7 +121,6 @@ public class NewHomeFragment extends BaseFragment {
         @Override
         public void loadingComplete() {
             mMainDynamicLayout.setVisibility(View.VISIBLE);
-
         }
     };
 }

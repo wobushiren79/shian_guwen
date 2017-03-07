@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_sign"
+        android:layout_width="@dimen/dimen_116dp"
+        android:layout_height="@dimen/dimen_42dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dimen_33dp"
+        android:background="@drawable/zhy_button_bg_uncheck_4"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:paddingLeft="@dimen/dimen_34dp"
+        android:text="未签到"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_24dp" />
+
+    <ImageView
+        android:id="@+id/iv_sign"
+        android:layout_width="@dimen/dimen_66dp"
+        android:layout_height="@dimen/dimen_66dp"
+        android:src="@drawable/zhy_userinfo_integral_sign" />
+
+</RelativeLayout>

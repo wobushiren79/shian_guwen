@@ -15,7 +15,7 @@
             android:id="@+id/iv_user_pic"
             android:layout_width="@dimen/dimen_132dp"
             android:layout_height="@dimen/dimen_132dp"
-            android:src="@color/zhy_text_color_1" />
+            android:src="@drawable/zhy_userinfo_icon" />
 
         <LinearLayout
             android:layout_width="@dimen/dimen_0dp"

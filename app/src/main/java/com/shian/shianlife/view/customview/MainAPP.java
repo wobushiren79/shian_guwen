@@ -85,10 +85,10 @@ public class MainAPP extends LinearLayout {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            AbsListView.LayoutParams layoutParams=new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,getResources().getDimensionPixelOffset(R.dimen.dimen_132dp));
+            AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen.dimen_132dp));
             MainAPPItems items = new MainAPPItems(getContext());
             items.setLayoutParams(layoutParams);
-            items.setData(appNameList[position].getName(),appNameList[position].getPicId());
+            items.setData(appNameList[position].getName(), appNameList[position].getPicId(), appNameList[position].getUrl());
             return items;
         }
     };
