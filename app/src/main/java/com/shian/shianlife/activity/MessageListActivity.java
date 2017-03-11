@@ -23,14 +23,18 @@ public class MessageListActivity extends BaseActivity {
     @InjectView(R.id.pager_customer)
     ViewPager viewPager;
 
-    private String[] titles = {"全部", "服务", "通知"};
+    private String[] titles =
+            {
+                    "全部",
+                    "服务",
+                    "通知"};
     private ArrayList<View> views;
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_messagelist);
-        setTitle("我的消息");
+//        setTitle("我的消息");
         setMessageVisible(View.GONE);
         initView();
     }
@@ -64,7 +68,6 @@ public class MessageListActivity extends BaseActivity {
 
             }
         });
-
     }
 
     @Override

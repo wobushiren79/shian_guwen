@@ -31,6 +31,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.MessageDetailActviity;
 import com.shian.shianlife.activity.MessageListActivity;
+import com.shian.shianlife.activity.NewMessageListActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.FilePathUtils;
 import com.shian.shianlife.common.utils.Utils;
@@ -81,7 +82,7 @@ public class BaseActivity extends FragmentActivity {
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
-        if ((this instanceof MessageListActivity)
+        if ((this instanceof NewMessageListActivity)
                 || (this instanceof MessageDetailActviity))
             return;
         if (AppContansts.MessageCount == 0) {
@@ -159,8 +160,7 @@ public class BaseActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent in = new Intent(getBaseContext(),
-                        MessageListActivity.class);
+                Intent in = new Intent(getBaseContext(),NewMessageListActivity.class);
                 startActivity(in);
             }
         });

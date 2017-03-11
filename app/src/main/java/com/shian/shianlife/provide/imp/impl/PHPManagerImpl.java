@@ -40,6 +40,12 @@ public class PHPManagerImpl implements PHPManager {
     }
 
     @Override
+    public void appAdvertisement(Context context, HttpResponseHandler<PHPHrGetLoginAdvertisement> handler) {
+        excutor.requestPHPPost(context, "Home/index/usebanner", PHPHrGetLoginAdvertisement.class,
+                new BaseHttpParams(), handler);
+    }
+
+    @Override
     public void getDynamicInfo(Context context, RequestParams params, HttpResponseHandler<PHPHrGetDynamic> handler) {
         excutor.requestPHPGet(context, "Home/index/dynamic", PHPHrGetDynamic.class,
                 params, handler);

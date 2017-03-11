@@ -50,7 +50,10 @@
     <color name="zhy_text_color_5">#818181</color>
     <color name="zhy_text_color_6">#67BEDB</color>
     <color name="zhy_text_color_7">#FFDA76</color>
+    <color name="zhy_text_color_8">#A2A2A2</color>
     <color name="zhy_title_color_1">#3baf92</color>
+    <color name="zhy_rb_check_1">#ededed</color>
+    <color name="zhy_rb_uncheck_1">#dedede</color>
     <color name="zhy_backgroud_1">#F1F6F5</color>
     <!-- Dialog Color -->
     <color name="version_msg_color">#ff6699ff</color>

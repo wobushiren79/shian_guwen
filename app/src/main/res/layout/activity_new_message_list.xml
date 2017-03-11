@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_new_message_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zhy_backgroud_1"
+    android:orientation="vertical"
+    tools:context="com.shian.shianlife.activity.NewMessageListActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_100dp"
+        android:background="@color/zhy_text_color_1">
+
+
+        <RadioGroup
+            android:id="@+id/rg_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_service"
+                android:layout_width="@dimen/dimen_100dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/dimen_32dp"
+                android:button="@null"
+                android:checked="true"
+                android:drawableBottom="@drawable/zhy_title_line"
+                android:gravity="center"
+                android:text="服务"
+                android:textColor="@color/white" />
+
+            <RadioButton
+                android:id="@+id/rb_notice"
+                android:layout_width="@dimen/dimen_100dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_32dp"
+                android:button="@null"
+                android:drawableBottom="@drawable/zhy_title_line_2"
+                android:gravity="center"
+                android:text="通知"
+                android:textColor="@color/white" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="@dimen/dimen_120dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:drawableLeft="@drawable/ic_back_default" />
+    </RelativeLayout>
+
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v4.view.ViewPager>
+</LinearLayout>

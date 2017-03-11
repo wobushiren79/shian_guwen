@@ -3,6 +3,8 @@ package com.shian.shianlife.view.customview;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.CalendarContract;
@@ -14,9 +16,11 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.mapapi.search.core.RouteNode;
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.AllAppActivity;
 import com.shian.shianlife.activity.WebActivity;
 import com.shian.shianlife.activity.map.NewMapLineActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
@@ -24,6 +28,7 @@ import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 
 import java.net.URISyntaxException;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/3/6.
@@ -79,8 +84,9 @@ public class MainAPPItems extends LinearLayout {
                         if (url.equals("")) {
 
                         } else if (url.contains("all")) {
-
-                        } else if (url.contains("http://")) {
+                            Intent intent = new Intent(getContext(), AllAppActivity.class);
+                            getContext().startActivity(intent);
+                        } else if (url.contains("http")) {
                             if (url.contains("diditaxi")) {
                                 openWeb(1);
                             } else {
@@ -91,7 +97,7 @@ public class MainAPPItems extends LinearLayout {
                         } else if (url.contains("calendar")) {
                             openCalendar();
                         } else if (url.contains("calculator")) {
-                            openCalculator();
+                            openJS();
                         }
                     }
 
@@ -106,14 +112,34 @@ public class MainAPPItems extends LinearLayout {
         }
     };
 
+
     /**
-     * 打开计算器
+     * 打开计算机
      */
-    private void openCalculator() {
-        Intent intent = new Intent();
-        intent.setClassName("com.android.calculator2", "com.android.calculator2.Calculator");
-        getContext().startActivity(intent);
+    public void openJS() {
+        PackageInfo pak = getAllApps(getContext(), "Calculator", "calculator"); //大小写
+        if (pak != null) {
+            Intent intent = new Intent();
+            intent = getContext().getPackageManager().getLaunchIntentForPackage(pak.packageName);
+            getContext().startActivity(intent);
+        } else {
+            Toast.makeText(getContext(), "未找到计算器", Toast.LENGTH_SHORT).show();
+        }
     }
+
+    public PackageInfo getAllApps(Context context, String app_flag_1, String app_flag_2) {
+        PackageManager pManager = context.getPackageManager();
+        // 获取手机内所有应用
+        List<PackageInfo> packlist = pManager.getInstalledPackages(0);
+        for (int i = 0; i < packlist.size(); i++) {
+            PackageInfo pak = (PackageInfo) packlist.get(i);
+            if (pak.packageName.contains(app_flag_1) || pak.packageName.contains(app_flag_2)) {
+                return pak;
+            }
+        }
+        return null;
+    }
+
 
     /**
      * 打开日历
@@ -131,7 +157,6 @@ public class MainAPPItems extends LinearLayout {
     }
 
 
-
     /**
      * 网页连接功能
      *
@@ -146,7 +171,8 @@ public class MainAPPItems extends LinearLayout {
                     + "/?channel=" + AppContansts.DiDichannel
                     + "&maptype=soso" +//wgs baidu soso
                     "&lat=" + AppContansts.LOCAL_latitude
-                    + "&lng=" + AppContansts.LOCAL_longitude);
+                    + "&lng=" + AppContansts.LOCAL_longitude
+            );
         }
         getContext().startActivity(intent);
     }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_notice_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zhy_backgroud_1"
+    android:orientation="vertical"
+    tools:context="com.shian.shianlife.activity.NoticeListActivity">
+
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/pull_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/zhy_backgroud_1"
+        android:dividerHeight="@dimen/dimen_10dp"
+        android:scrollbars="none"></com.handmark.pulltorefresh.library.PullToRefreshListView>
+</LinearLayout>

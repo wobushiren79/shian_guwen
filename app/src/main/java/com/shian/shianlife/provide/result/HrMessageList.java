@@ -21,7 +21,7 @@ public class HrMessageList {
 		private String body;
 		private String head;
 		private long id;
-		private int readStatus;
+		private int readStatus;//1 为未读
 		private long receiver;
 		private long serverCreateTime;
 		private int type;

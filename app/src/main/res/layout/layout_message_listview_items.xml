@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/rg_readstate"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_56dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_readall"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/zhy_message_rb_back"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="全部"
+            android:textColor="@color/message_rb_text_color"
+            android:textSize="@dimen/dimen_24dp" />
+
+        <RadioButton
+            android:id="@+id/rb_readun"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/zhy_message_rb_back"
+            android:button="@null"
+            android:gravity="center"
+            android:text="未读"
+            android:textColor="@color/message_rb_text_color"
+            android:textSize="@dimen/dimen_24dp" />
+    </RadioGroup>
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/pull_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/zhy_backgroud_1"
+        android:dividerHeight="@dimen/dimen_10dp"
+        android:scrollbars="none"></com.handmark.pulltorefresh.library.PullToRefreshListView>
+</LinearLayout>

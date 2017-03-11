@@ -28,6 +28,12 @@ public interface PHPManager extends HttpManager {
      */
     public void mainAdvertisement(Context context,HttpResponseHandler<PHPHrGetLoginAdvertisement> handler);
 
+    /**
+     * 获取app广告
+     * @param context
+     * @param handler
+     */
+    public void appAdvertisement(Context context,HttpResponseHandler<PHPHrGetLoginAdvertisement> handler);
 
     /**
      * 获取重要通知

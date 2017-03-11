@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.handmark.pulltorefresh.library.PullToRefreshScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_all_app"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zhy_backgroud_1"
+    tools:context="com.shian.shianlife.activity.AllAppActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+
+            android:padding="@dimen/dimen_20dp"
+            android:text="平台应用"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_32dp" />
+
+        <com.shian.shianlife.view.ScrollGridView
+            android:id="@+id/platform_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:numColumns="3"
+            android:paddingBottom="@dimen/dimen_10dp"
+            android:scrollbars="none"></com.shian.shianlife.view.ScrollGridView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:background="@color/white"
+            android:padding="@dimen/dimen_20dp"
+            android:text="工具"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_32dp" />
+
+        <com.shian.shianlife.view.ScrollGridView
+            android:id="@+id/tools_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:numColumns="3"
+            android:paddingBottom="@dimen/dimen_10dp"
+            android:scrollbars="none"></com.shian.shianlife.view.ScrollGridView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:background="@color/white"
+            android:padding="@dimen/dimen_20dp"
+            android:text="其他"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_32dp" />
+
+        <com.shian.shianlife.view.ScrollGridView
+            android:id="@+id/other_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:numColumns="3"
+            android:paddingBottom="@dimen/dimen_10dp"
+            android:scrollbars="none"></com.shian.shianlife.view.ScrollGridView>
+
+        <com.shian.shianlife.view.customview.AppAdvertisementLayout
+            android:visibility="gone"
+            android:id="@+id/appadvertisementlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20dp"></com.shian.shianlife.view.customview.AppAdvertisementLayout>
+    </LinearLayout>
+</com.handmark.pulltorefresh.library.PullToRefreshScrollView>

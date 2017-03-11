@@ -26,7 +26,7 @@ public class NewHomeFragment extends BaseFragment {
 
     UserInfoLayout mUserInfoLayout;//用户资料布局
     MainAdvertisementLayout mMainAdvertisementLayout;//主页广告布局
-    MainDynamic mMainDynamicLayout;//重要通知
+    MainDynamic mMainDynamicLayout;//重要动态
     MainAPP mMainAPP;//我的APP
 
     @Override
