@@ -75,6 +75,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23+'
     compile 'com.android.support:support-v4:23+'
     //    compile "com.daimajia.swipelayout:library:1.2.0@aar"
+
+    compile 'com.github.zcweng:switch-button:0.0.2@aar'//滑动开关
     compile project(':librarys:AndroidSwipeLayout')
     compile files('libs/bugly_crash_release__2.1.5.jar')
     compile files('libs/pushservice-5.0.0.66.jar')

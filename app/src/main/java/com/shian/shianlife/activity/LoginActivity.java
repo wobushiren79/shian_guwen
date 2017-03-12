@@ -55,7 +55,7 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         initView();
         changeState();
-        startAnim();
+
     }
 
     /**
@@ -81,6 +81,8 @@ public class LoginActivity extends BaseActivity {
             String username = etUserName.getText().toString();
             String password = etUserPassword.getText().toString();
             login(username, password);
+        }else{
+            startAnim();
         }
     }
 

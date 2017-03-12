@@ -18,6 +18,7 @@
             android:background="@color/main_blackground"></FrameLayout>
 
         <FrameLayout
+            android:background="@color/white"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/dimen_96dp">
 

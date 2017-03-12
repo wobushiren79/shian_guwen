@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zhy_backgroud_1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_16dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="@dimen/dimen_16dp">
+
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="@dimen/dimen_124dp"
+                android:layout_height="@dimen/dimen_124dp"
+                android:src="@drawable/zhy_userinfo_icon" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dimen_16dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="姓名"
+                    android:textColor="@color/black_item_shua_textcolor"
+                    android:textSize="@dimen/dimen_32dp" />
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/zhy_text_color_9"
+                    android:textSize="@dimen/dimen_24dp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_infoin"
+                android:layout_width="@dimen/dimen_33dp"
+                android:layout_height="@dimen/dimen_33dp"
+                android:layout_gravity="center"
+                android:src="@drawable/zhy_user_center_in" />
+        </LinearLayout>
+
+        <include
+            android:id="@+id/layout_help"
+            layout="@layout/layout_user_center_item"></include>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_2dp"
+            android:background="@color/zhy_line_5" />
+
+        <include
+            android:id="@+id/layout_collection"
+            layout="@layout/layout_user_center_item"></include>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_2dp"
+            android:background="@color/zhy_line_5" />
+
+        <include
+            android:id="@+id/layout_idea"
+            layout="@layout/layout_user_center_item"></include>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_2dp"
+            android:background="@color/zhy_line_5" />
+
+        <include
+            android:id="@+id/layout_setting"
+            layout="@layout/layout_user_center_item"></include>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_2dp"
+            android:layout_marginBottom="@dimen/dimen_16dp"
+            android:background="@color/zhy_line_5" />
+
+        <include
+            android:id="@+id/layout_platform"
+            layout="@layout/layout_user_center_item"></include>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_2dp"
+            android:background="@color/zhy_line_5" />
+
+        <include
+            android:id="@+id/layout_vsersion"
+            layout="@layout/layout_user_center_item"></include>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_2dp"
+            android:background="@color/zhy_line_5" />
+    </LinearLayout>
+</ScrollView>

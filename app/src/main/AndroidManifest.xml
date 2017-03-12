@@ -46,8 +46,9 @@
     <!-- 摄影机 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
-    <!--计算器-->
+    <!-- 计算器 -->
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+
     <permission
         android:name="baidu.push.permission.WRITE_PUSHINFOPROVIDER.com.shian.shianlife"
         android:protectionLevel="normal" />
@@ -447,6 +448,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.AllAppActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MyCollectionActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"></activity>
     </application>

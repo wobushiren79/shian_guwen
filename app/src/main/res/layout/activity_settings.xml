@@ -2,17 +2,65 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_blackground">
+    android:background="@color/zhy_backgroud_1">
 
     <LinearLayout
+        android:id="@+id/ll_settting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimen_32dp"
+            android:paddingRight="@dimen/dimen_16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我的服务状态"
+                    android:textColor="@color/dimgray"
+                    android:textSize="@dimen/dimen_24dp" />
+
+                <TextView
+
+                    android:id="@+id/tv_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/zhy_text_color_2"
+                    android:textSize="@dimen/dimen_20dp" />
+
+            </LinearLayout>
+
+            <com.suke.widget.SwitchButton xmlns:SwitchButton="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/st_switch"
+                android:layout_width="@dimen/dimen_100dp"
+                android:layout_height="@dimen/dimen_60dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+
+                SwitchButton:sb_checked_color="@color/zhy_text_color_1"
+                SwitchButton:sb_show_indicator="false" />
+
+        </LinearLayout>
+
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -47,8 +95,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.1dip"
-            android:background="@color/gray_main_rb_bg_f" />
+            android:layout_height="@dimen/dimen_2dp"
+            android:background="@color/zhy_line_5" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -112,28 +160,37 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.1dip"
+            android:layout_height="@dimen/dimen_1dp"
             android:background="@drawable/user_down_line"
             android:visibility="gone" />
 
         <LinearLayout
+            android:id="@+id/ll_clean"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="@dimen/dimen_80dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimen_32dp"
+            android:paddingRight="@dimen/dimen_16dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:padding="@dimen/dimen_30dp"
+                android:layout_gravity="center_vertical"
                 android:text="清楚缓存"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_top_bg" />
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
 
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
                 android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="@dimen/dimen_16dp"
+                android:layout_height="@dimen/dimen_16dp"
+                android:layout_gravity="center"
+                android:src="@drawable/zhy_user_center_in" />
 
             <TextView
                 android:id="@+id/tv_clean"
@@ -144,41 +201,59 @@
                 android:background="@drawable/ic_home_reg"
                 android:gravity="center"
                 android:text="清除"
-                android:textColor="@color/text_color" />
+                android:textColor="@color/text_color"
+                android:visibility="gone" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.1dip"
-            android:background="@color/gray_main_rb_bg_f" />
+            android:layout_height="@dimen/dimen_2dp"
+            android:background="@color/zhy_line_5" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_change"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tv_editorder"
-        android:layout_gravity="bottom"
-        android:background="@drawable/dialog_chlick"
-        android:gravity="center"
-        android:text="切换账号"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/dimen_40dp" />
+    <LinearLayout
+        android:id="@+id/ll_change"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80dp"
+        android:layout_below="@+id/ll_settting"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_change"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dimen_32dp"
+            android:text="切换账号"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/dimen_24dp" />
+
+        <ImageView
+            android:layout_width="@dimen/dimen_16dp"
+            android:layout_height="@dimen/dimen_16dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/dimen_16dp"
+            android:src="@drawable/zhy_user_center_in" />
+    </LinearLayout>
 
 
     <TextView
-        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dimen_16dp"
         android:id="@+id/tv_editorder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80dp"
+        android:layout_below="@+id/ll_change"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="bottom"
-        android:layout_margin="@dimen/dimen_40dp"
-        android:background="@drawable/dialog_chlick"
+        android:background="@color/white"
         android:gravity="center"
         android:text="退出账户"
-        android:textColor="@color/text_color"
-        android:textSize="@dimen/dimen_40dp" />
+        android:textColor="@color/zhy_text_color_1"
+        android:textSize="@dimen/dimen_24dp" />
 
 </RelativeLayout>

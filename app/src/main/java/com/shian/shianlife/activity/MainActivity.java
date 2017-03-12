@@ -36,6 +36,7 @@ import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.fragment.FindFragment;
 import com.shian.shianlife.fragment.HomeFragment;
 import com.shian.shianlife.fragment.NewHomeFragment;
+import com.shian.shianlife.fragment.NewUserCenterFragment;
 import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.fragment.UserCenterFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
@@ -58,7 +59,6 @@ import me.leolin.shortcutbadger.ShortcutBadger;
 public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, OrderFragment.OrderFragmentCallBack {
 
     int loginType;
-
     @InjectView(R.id.fl_main)
     View flMain;
     @InjectView(R.id.rb_main_1)
@@ -78,7 +78,8 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     private NewHomeFragment homeFragment;
     private FindFragment findFragment;
     private OrderFragment orderFragment;
-    private UserCenterFragment userFragment;
+//    private UserCenterFragment userFragment;
+    private NewUserCenterFragment userFragment;
     private CemeteryFragment cemeteryFragment;//新增公墓服务界面
 
     List<RadioButton> listRB = new ArrayList<>();
@@ -256,7 +257,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 break;
             case R.id.rb_main_4:
                 if (userFragment == null) {
-                    userFragment = new UserCenterFragment();
+                    userFragment = new NewUserCenterFragment();
                 }
                 transcation.replace(R.id.fl_main, userFragment);
                 break;
