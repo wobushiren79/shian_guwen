@@ -46,6 +46,7 @@ public class LoginActivity extends BaseActivity {
     @InjectView(R.id.rl_content)
     RelativeLayout rlContent;
 
+
     ShareLogin loginS;
 
     @Override
