@@ -4,43 +4,52 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HrLoginResult {
-	private String sessionId;
-	private String lastAccessTime;
-	private String startTimestamp;
-	private ArrayList<Integer> roleIds;
+    private String sessionId;
+    private String lastAccessTime;
+    private String startTimestamp;
+    private ArrayList<Integer> roleIds;
 
-	
+    private long userId;
 
-	public ArrayList<Integer> getRoleIds() {
-		return roleIds;
-	}
 
-	public void setRoleIds(ArrayList<Integer> roleIds) {
-		this.roleIds = roleIds;
-	}
+    public long getUserId() {
+        return userId;
+    }
 
-	public String getSessionId() {
-		return sessionId;
-	}
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
-	}
+    public ArrayList<Integer> getRoleIds() {
+        return roleIds;
+    }
 
-	public String getLastAccessTime() {
-		return lastAccessTime;
-	}
+    public void setRoleIds(ArrayList<Integer> roleIds) {
+        this.roleIds = roleIds;
+    }
 
-	public void setLastAccessTime(String lastAccessTime) {
-		this.lastAccessTime = lastAccessTime;
-	}
+    public String getSessionId() {
+        return sessionId;
+    }
 
-	public String getStartTimestamp() {
-		return startTimestamp;
-	}
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
 
-	public void setStartTimestamp(String startTimestamp) {
-		this.startTimestamp = startTimestamp;
-	}
+    public String getLastAccessTime() {
+        return lastAccessTime;
+    }
+
+    public void setLastAccessTime(String lastAccessTime) {
+        this.lastAccessTime = lastAccessTime;
+    }
+
+    public String getStartTimestamp() {
+        return startTimestamp;
+    }
+
+    public void setStartTimestamp(String startTimestamp) {
+        this.startTimestamp = startTimestamp;
+    }
 
 }

@@ -2,17 +2,29 @@ package com.shian.shianlife.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.loopj.android.http.RequestParams;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.MyCollectionActivity;
 import com.shian.shianlife.adapter.FindAdapter;
 import com.shian.shianlife.base.BaseFragment;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.provide.MHttpManagerFactory;
+import com.shian.shianlife.provide.base.HttpResponseHandler;
+import com.shian.shianlife.provide.phpmodel.SiftListData;
+import com.shian.shianlife.provide.phpresult.PHPHrGetSiftListData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/3/5.
@@ -23,10 +35,20 @@ public class FindFragment extends BaseFragment {
     ImageView mIVCollection;
     PullToRefreshListView mListView;
 
+    int number = 10;
+    int pagerNumber = 0;
+
+    FindAdapter findAdapter;
+    List<SiftListData> listDatas = new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_find, null, false);
+        listDatas.clear();
         initView();
+
+
+
         return view;
     }
 
@@ -35,7 +57,10 @@ public class FindFragment extends BaseFragment {
         mListView = (PullToRefreshListView) view.findViewById(R.id.pull_listview);
         mIVCollection = (ImageView) view.findViewById(R.id.iv_collection);
 
-        mListView.setAdapter(new FindAdapter(getContext()));
+        mListView.setMode(PullToRefreshBase.Mode.BOTH);
+        mListView.setOnRefreshListener(onRefreshListener2);
+        findAdapter = new FindAdapter(getContext(), listDatas);
+        mListView.setAdapter(findAdapter);
         mIVCollection.setOnClickListener(onClickListener);
     }
 
@@ -44,7 +69,33 @@ public class FindFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // 开始就呈现下拉状态
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mListView.setRefreshing(true);
+                pagerNumber=0;
+                getData(true);
+            }
+        }, 500);
+    }
 
+    PullToRefreshBase.OnRefreshListener2 onRefreshListener2 = new PullToRefreshBase.OnRefreshListener2() {
+        @Override
+        public void onPullDownToRefresh(PullToRefreshBase refreshView) {
+            pagerNumber=0;
+            getData(true);
+        }
+
+        @Override
+        public void onPullUpToRefresh(PullToRefreshBase refreshView) {
+            pagerNumber++;
+            getData(false);
+        }
+    };
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -54,4 +105,33 @@ public class FindFragment extends BaseFragment {
             }
         }
     };
+
+    private void getData(final boolean isClean) {
+        RequestParams params = new RequestParams();
+        params.put("type", "1");
+        params.put("userid", (int) AppContansts.userLoginInfo.getUserId());
+        params.put("number", number);
+        params.put("pagerNumber", pagerNumber);
+        MHttpManagerFactory.getPHPManager().getSiftListData(getContext(), params, new HttpResponseHandler<PHPHrGetSiftListData>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(PHPHrGetSiftListData result) {
+                if(isClean){
+                    listDatas.clear();
+                }
+                listDatas.addAll(result.getItems());
+                findAdapter.setData(listDatas);
+                mListView.onRefreshComplete();
+            }
+
+            @Override
+            public void onError(String message) {
+                mListView.onRefreshComplete();
+            }
+        });
+    }
 }

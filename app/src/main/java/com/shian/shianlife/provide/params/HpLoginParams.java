@@ -7,16 +7,7 @@ public class HpLoginParams extends BaseHttpParams {
 	private String password;
 	private String channelId;
 	private String systemType;
-	private String userId;
 
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
 
 	public String getUsername() {
 		return username;

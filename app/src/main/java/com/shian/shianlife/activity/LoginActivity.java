@@ -17,6 +17,7 @@ import butterknife.OnClick;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.JSONUtil;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils.ShareLogin;
@@ -62,7 +63,7 @@ public class LoginActivity extends BaseActivity {
      * 动画
      */
     private void startAnim() {
-        TranslateAnimation translateAnimation=new TranslateAnimation(Animation.RELATIVE_TO_SELF,Animation.RELATIVE_TO_SELF,1000,Animation.RELATIVE_TO_SELF);
+        TranslateAnimation translateAnimation = new TranslateAnimation(Animation.RELATIVE_TO_SELF, Animation.RELATIVE_TO_SELF, 1000, Animation.RELATIVE_TO_SELF);
         translateAnimation.setDuration(1000);
         rlContent.setAnimation(translateAnimation);
         translateAnimation.start();
@@ -81,7 +82,7 @@ public class LoginActivity extends BaseActivity {
             String username = etUserName.getText().toString();
             String password = etUserPassword.getText().toString();
             login(username, password);
-        }else{
+        } else {
             startAnim();
         }
     }
@@ -141,6 +142,7 @@ public class LoginActivity extends BaseActivity {
 
                 @Override
                 public void onSuccess(HrLoginResult result) {
+                    AppContansts.userLoginInfo = result;
                     lbLogin.setComplete();
                     cookie = result.getSessionId();
                     HttpRequestExecutor.setSession(cookie, LoginActivity.this);
@@ -178,6 +180,7 @@ public class LoginActivity extends BaseActivity {
 
                 @Override
                 public void onSuccess(HrLoginResult result) {
+                    AppContansts.userLoginInfo = result;
                     lbLogin.setComplete();
                     cookie = result.getSessionId();
                     HttpRequestExecutor.setSession(cookie, LoginActivity.this);
@@ -186,7 +189,6 @@ public class LoginActivity extends BaseActivity {
                     ToastUtils.show(getBaseContext(), "登陆成功");
                     Intent in = new Intent(LoginActivity.this, MainActivity.class);
                     String resultBack = JSONUtil.writeEntityToJSONString(result);
-
                     in.putExtra("loginData", resultBack);
                     startActivity(in);
                     finish();
@@ -222,7 +224,7 @@ public class LoginActivity extends BaseActivity {
 //        Intent in = new Intent(this, WebActivity.class);
 //        in.putExtra("url", "http://m.e-funeral.cn");
 //        startActivity(in);
-        Intent in=new Intent(this,LoginPhoneActivity.class);
+        Intent in = new Intent(this, LoginPhoneActivity.class);
         startActivity(in);
     }
 }

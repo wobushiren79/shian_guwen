@@ -3,10 +3,12 @@ package com.shian.shianlife.provide.imp;
 import android.content.Context;
 
 import com.loopj.android.http.RequestParams;
+import com.shian.shianlife.provide.base.BaseHttpParams;
 import com.shian.shianlife.provide.base.HttpManager;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.phpresult.PHPHrGetDynamic;
 import com.shian.shianlife.provide.phpresult.PHPHrGetLoginAdvertisement;
+import com.shian.shianlife.provide.phpresult.PHPHrGetSiftListData;
 
 
 /**
@@ -43,4 +45,20 @@ public interface PHPManager extends HttpManager {
      */
     public void getDynamicInfo(Context context, RequestParams params, HttpResponseHandler<PHPHrGetDynamic> handler);
 
+
+    /**
+     * 获取收藏列表
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void getSiftListData(Context context, RequestParams params, HttpResponseHandler<PHPHrGetSiftListData> handler);
+
+
+    /**
+     * 点赞与收藏接口
+     * @param context
+     * @param params
+     */
+    public void setSiftData(Context context, RequestParams params,HttpResponseHandler<Object> handler);
 }

@@ -156,7 +156,7 @@ public class NewUserCenterFragment extends BaseFragment {
         @Override
         public void onClick(View v) {
             if (v == mLLHelp) {
-
+                help();
             } else if (v == mLLCollection) {
                 collection();
             } else if (v == mLLIdea) {
@@ -170,6 +170,13 @@ public class NewUserCenterFragment extends BaseFragment {
             }
         }
     };
+
+    /**
+     * 帮助
+     */
+    private void help() {
+        
+    }
 
     /**
      * 收藏

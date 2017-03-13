@@ -145,15 +145,18 @@ public class MainAPPItems extends LinearLayout {
      * 打开日历
      */
     private void openCalendar() {
-        Intent i = new Intent();
-        ComponentName cn = null;
-        if (Integer.parseInt(Build.VERSION.SDK) >= 8) {
-            cn = new ComponentName("com.android.calendar", "com.android.calendar.LaunchActivity");
-        } else {
-            cn = new ComponentName("com.google.android.calendar", "com.android.calendar.LaunchActivity");
-        }
-        i.setComponent(cn);
-        getContext().startActivity(i);
+//        Intent i = new Intent();..
+//        ComponentName cn = null;
+//        if (Integer.parseInt(Build.VERSION.SDK) >= 8) {
+//            cn = new ComponentName("com.android.calendar", "com.android.calendar.LaunchActivity");
+//        } else {
+//            cn = new ComponentName("com.google.android.calendar", "com.android.calendar.LaunchActivity");
+//        }
+//        i.setComponent(cn);
+//        getContext().startActivity(i);
+        Intent intent=new Intent(getContext(),WebActivity.class);
+        intent.putExtra("url","http://tools.2345.com/m/rili.htm");
+        getContext().startActivity(intent);
     }
 
 
@@ -183,38 +186,41 @@ public class MainAPPItems extends LinearLayout {
      */
     private void navigationFunction() {
 
-        Intent intent = new Intent();
-        if (Utils.isInstalled(getContext(), "com.baidu.BaiduMap")) {
-            try {
-                intent = Intent.parseUri("intent://map/direction?" +
-//                            "origin=latlng:" + startLatLng.getLocation().latitude + "," + startLatLng.getLocation().longitude +
-//                            "|name:" + AppContansts.LOCAL_ADDRESS +
-//                            "&destination=latlng:" + endLatLng.getLocation().latitude + "," + endLatLng.getLocation().longitude +
-//                            "|name:" + endPointStr +
-                        "mode=driving" +
-                        "&src=Name|AppName" +
-                        "#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end", 0);
-            } catch (URISyntaxException e) {
-                Utils.LogVPrint("URISyntaxException : " + e.getMessage());
-                e.printStackTrace();
-            }
-            getContext().startActivity(intent);
-        } else if (Utils.isInstalled(getContext(), "com.autonavi.minimap")) {
-            intent.setData(Uri
-                    .parse("androidamap://route?" +
-                            "sourceApplication=softname" +
-//                                "&slat=" + startLatLng.getLocation().latitude +
-//                                "&slon=" + startLatLng.getLocation().longitude +
-//                                "&dlat=" + endLatLng.getLocation().latitude +
-//                                "&dlon=" +endLatLng.getLocation().longitude+
-//                                "&dname=" + endPointStr +
-                            "dev=0" +
-                            "&m=0" +
-                            "&t=2"));
-            getContext().startActivity(intent);
-        } else {
-            ToastUtils.showLongTime(getContext(), "请先下载百度地图或高德地图");
-        }
+//        Intent intent = new Intent();
+//        if (Utils.isInstalled(getContext(), "com.baidu.BaiduMap")) {
+//            try {
+//                intent = Intent.parseUri("intent://map/direction?" +
+////                            "origin=latlng:" + startLatLng.getLocation().latitude + "," + startLatLng.getLocation().longitude +
+////                            "|name:" + AppContansts.LOCAL_ADDRESS +
+////                            "&destination=latlng:" + endLatLng.getLocation().latitude + "," + endLatLng.getLocation().longitude +
+////                            "|name:" + endPointStr +
+//                        "mode=driving" +
+//                        "&src=Name|AppName" +
+//                        "#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end", 0);
+//            } catch (URISyntaxException e) {
+//                Utils.LogVPrint("URISyntaxException : " + e.getMessage());
+//                e.printStackTrace();
+//            }
+//            getContext().startActivity(intent);
+//        } else if (Utils.isInstalled(getContext(), "com.autonavi.minimap")) {
+//            intent.setData(Uri
+//                    .parse("androidamap://route?" +
+//                            "sourceApplication=softname" +
+////                                "&slat=" + startLatLng.getLocation().latitude +
+////                                "&slon=" + startLatLng.getLocation().longitude +
+////                                "&dlat=" + endLatLng.getLocation().latitude +
+////                                "&dlon=" +endLatLng.getLocation().longitude+
+////                                "&dname=" + endPointStr +
+//                            "dev=0" +
+//                            "&m=0" +
+//                            "&t=2"));
+//            getContext().startActivity(intent);
+//        } else {
+//            ToastUtils.showLongTime(getContext(), "请先下载百度地图或高德地图");
+//        }
+        Intent intent=new Intent(getContext(),WebActivity.class);
+        intent.putExtra("url","http://api.map.baidu.com/geocoder?address=天府广场&output=html&src=yhc");
+        getContext().startActivity(intent);
 
     }
 }
