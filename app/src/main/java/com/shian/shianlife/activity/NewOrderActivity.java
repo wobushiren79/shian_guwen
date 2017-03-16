@@ -26,143 +26,133 @@ import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpAddConsultParams;
 import com.shian.shianlife.provide.result.HrAddConsultResult;
+import com.shian.shianlife.view.writeview.EditTextViewNormal;
+import com.shian.shianlife.view.writeview.SpinnerViewNormal;
 
 public class NewOrderActivity extends BaseActivity {
-	@InjectView(R.id.lbs)
-	LBSLocalView lbsView;
-	@InjectView(R.id.sp_order_ywlx)
-	Spinner spYW;
-	@InjectView(R.id.et_neworder_name)
-	EditText etName;
-	@InjectView(R.id.et_neworder_phone)
-	EditText etPhone;
-	@InjectView(R.id.et_neworder_bz)
-	EditText etBz;
-	@InjectView(R.id.et_otheradd)
-	EditText etOther;
-	@InjectView(R.id.et_neworder_newlocation)
-	EditText etLocation;
 
-	private HpAddConsultParams params = new HpAddConsultParams();
+    @InjectView(R.id.write_name)
+    EditTextViewNormal writeName;
+    @InjectView(R.id.write_phone)
+    EditTextViewNormal writePhone;
+    @InjectView(R.id.write_location)
+    EditTextViewNormal writeLocation;
+    @InjectView(R.id.write_remark)
+    EditTextViewNormal writeRemark;
+    @InjectView(R.id.write_spinner)
+    SpinnerViewNormal writeSpinner;
 
-	@Override
-	protected void onCreate(Bundle arg0) {
-		super.onCreate(arg0);
-		setContentView(R.layout.activity_neworder);
-		setTitle("新建工单");
-		initView();
-	}
+    private HpAddConsultParams params = new HpAddConsultParams();
 
-	private void initView() {
-		lbsView.setLocalParams(0, 0, 0);
-		ArrayAdapter<CharSequence> province_adapter = ArrayAdapter.createFromResource(this, R.array.ywlx,
-				android.R.layout.simple_spinner_item);
-		province_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spYW.setAdapter(province_adapter);
-		spYW.setSelection(0);
-		spYW.setOnItemSelectedListener(new OnItemSelectedListener() {
+    @Override
+    protected void onCreate(Bundle arg0) {
+        super.onCreate(arg0);
+        setContentView(R.layout.activity_neworder);
+        setTitle("新建工单");
+        initView();
+    }
 
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				params.setBusinessType(position + 1);
-			}
+    private void initView() {
+        writeSpinner.initSpinner(R.array.ywlx);
+        writeSpinner.setSpinnerCallBack(new SpinnerViewNormal.SpinnerCallBack() {
+            @Override
+            public void itemSelected(int position) {
+                Utils.LogVPrint("position:"+position);
+                 params.setBusinessType(position+1);
+            }
+        });
+    }
 
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-			}
-		});
-	}
+    @OnClick(R.id.tv_editorder)
+    void editOrderClick(View v) {
+        editOrder(false);
+    }
 
-	@OnClick(R.id.tv_editorder)
-	void editOrderClick(View v) {
-		editOrder(false);
-	}
+    @OnClick(R.id.tv_qiatan)
+    void qiatan() {
+        editOrder(true);
+    }
 
-	@OnClick(R.id.tv_qiatan)
-	void qiatan() {
-		editOrder(true);
-	}
+    private void editOrder(final boolean isF) {
 
-	private void editOrder(final boolean isF) {
-
-		final String name = etName.getText().toString();
-		final String phone = etPhone.getText().toString();
-		final String bz = etBz.getText().toString();
+        final String name = writeName.getData();
+        final String phone = writePhone.getData();
+        final String bz = writeRemark.getData();
 //		final String address = lbsView.getDetailAddress();
-		final String address = etLocation.getText().toString();
+        final String address = writeLocation.getData();
 //		final HpAddConsultParams.TalkAddress ad = lbsView.getTalkAddress();
 
-		if (name == null || name.equals("")) {
-			ToastUtils.show(this, "客户姓名不能为空");
-			return;
-		}
-		if (phone == null || phone.equals("")) {
-			ToastUtils.show(this, "客户电话不能为空");
-			return;
-		}
-		if (address == null || address.equals("")) {
-			ToastUtils.show(this, "详细地址不能为空");
-			return;
-		}
-		if (params.getBusinessType() == 0) {
-			ToastUtils.show(this, "请选择业务类型");
-			return;
-		}
-		if (!Utils.isPhoneNumber(phone)) {
-			ToastUtils.show(this, "请输入正确的号码");
-			return;
-		}
-		TipsDialog mDialog = new TipsDialog(this);
-		mDialog.setTitle("点击确认后，信息将无法修改\n请仔细核实信息");
-		mDialog.setTopButton("取消", new OnClickListener() {
+        if (name == null || name.equals("")) {
+            ToastUtils.show(this, "客户姓名不能为空");
+            return;
+        }
+        if (phone == null || phone.equals("")) {
+            ToastUtils.show(this, "客户电话不能为空");
+            return;
+        }
+        if (address == null || address.equals("")) {
+            ToastUtils.show(this, "详细地址不能为空");
+            return;
+        }
+        if (params.getBusinessType() == 0) {
+            ToastUtils.show(this, "请选择业务类型");
+            return;
+        }
+        if (!Utils.isPhoneNumber(phone)) {
+            ToastUtils.show(this, "请输入正确的号码");
+            return;
+        }
+        TipsDialog mDialog = new TipsDialog(this);
+        mDialog.setTitle("点击确认后，信息将无法修改\n请仔细核实信息");
+        mDialog.setTopButton("取消", new OnClickListener() {
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
 
-			}
-		});
-		mDialog.setBottomButton("确定", new OnClickListener() {
+            }
+        });
+        mDialog.setBottomButton("确定", new OnClickListener() {
 
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 //				HpAddConsultParams.TalkAddress ad = lbsView.getTalkAddress();
-				params.setCustomerName(name);
-				params.setCustomerMobile(phone);
+                params.setCustomerName(name);
+                params.setCustomerMobile(phone);
 //				params.setCustomerAddress(ad);
-				params.setCustomerAddressNew(address);
-				params.setDescription(bz);
-				MHttpManagerFactory.getAccountManager().addConsult(NewOrderActivity.this, params,
-						new HttpResponseHandler<HrAddConsultResult>() {
+                params.setCustomerAddressNew(address);
+                params.setDescription(bz);
+                MHttpManagerFactory.getAccountManager().addConsult(NewOrderActivity.this, params,
+                        new HttpResponseHandler<HrAddConsultResult>() {
 
-							@Override
-							public void onSuccess(HrAddConsultResult result) {
-								if (result != null) {
-									ToastUtils.show(getBaseContext(), "创建成功");
-									if(!isF){
-									Intent in = new Intent(NewOrderActivity.this, EditOrderActivity.class);
-									in.putExtra("consultId", result.getConsultId());
-									startActivity(in);
-									}
-									OrderFragment.C_bOrder_isRefresh=true;
-									finish();
-								}
-							}
+                            @Override
+                            public void onSuccess(HrAddConsultResult result) {
+                                if (result != null) {
+                                    ToastUtils.show(getBaseContext(), "创建成功");
+                                    if (!isF) {
+                                        Intent in = new Intent(NewOrderActivity.this, EditOrderActivity.class);
+                                        in.putExtra("consultId", result.getConsultId());
+                                        startActivity(in);
+                                    }
+                                    OrderFragment.C_bOrder_isRefresh = true;
+                                    finish();
+                                }
+                            }
 
-							@Override
-							public void onStart() {
+                            @Override
+                            public void onStart() {
 
-							}
+                            }
 
-							@Override
-							public void onError(String message) {
+                            @Override
+                            public void onError(String message) {
 
-							}
-						});
+                            }
+                        });
 
-			}
-		});
-		mDialog.show();
+            }
+        });
+        mDialog.show();
 
-	}
+    }
 }

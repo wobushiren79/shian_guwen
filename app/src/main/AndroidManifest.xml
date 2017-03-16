@@ -457,6 +457,14 @@
         <activity
             android:name=".activity.CustomerHelpActivity"
             android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.IdeaFeedbackActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HotIssueListActivity"
+            android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"></activity>
     </application>
 

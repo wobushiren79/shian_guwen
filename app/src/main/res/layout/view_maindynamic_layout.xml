@@ -43,6 +43,7 @@
             android:layout_gravity="center"
             android:layout_height="@dimen/dimen_19dp" />
         <TextView
+            android:id="@+id/tv_title"
             android:layout_marginLeft="@dimen/dimen_8dp"
             android:textColor="@color/white"
             android:text="重要动态"

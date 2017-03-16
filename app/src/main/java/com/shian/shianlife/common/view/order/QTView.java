@@ -374,8 +374,8 @@ public class QTView extends BaseOrderView {
                     tvq2.setText("客户姓名：");
                     tvq3.setText("治丧指导：");
 
-                    tvq0.setTextColor(getContext().getResources().getColor(R.color.blackgroundmain));
-                    tv_qt01.setTextColor(getContext().getResources().getColor(R.color.blackgroundmain));
+                    tvq0.setTextColor(getContext().getResources().getColor(R.color.dimgray));
+                    tv_qt01.setTextColor(getContext().getResources().getColor(R.color.zhy_text_color_9));
 
                     Utils.call(ivq1, model.getAgentmanMobile());
                     Utils.call(ivq2, model.getCustomerMobile());
@@ -389,8 +389,8 @@ public class QTView extends BaseOrderView {
                         ivq3.setVisibility(View.GONE);
                         tvqfp.setVisibility(View.VISIBLE);
                         tvqfp.setEnabled(true);
-                        tvqfp.setBackgroundColor(getResources().getColor(
-                                R.color.chlickcolor));
+//                        tvqfp.setBackgroundColor(getResources().getColor(
+//                                R.color.chlickcolor));
                         tvqfp.setOnClickListener(new OrderListBtnClick(model,
                                 aIndex));
 
@@ -411,8 +411,8 @@ public class QTView extends BaseOrderView {
                     tvqfp.setVisibility(View.GONE);
                     ivq3.setVisibility(View.GONE);
 
-                    tvq0.setTextColor(getContext().getResources().getColor(R.color.black));
-                    tv_qt01.setTextColor(getContext().getResources().getColor(R.color.black));
+                    tvq0.setTextColor(getContext().getResources().getColor(R.color.dimgray));
+                    tv_qt01.setTextColor(getContext().getResources().getColor(R.color.zhy_text_color_9));
 
                     if (!TextUtils.isEmpty(promiseTime)) {
                         tv_qt11.setText(mDateFormat.format(new Date(Long
@@ -473,7 +473,7 @@ public class QTView extends BaseOrderView {
                 } else {
                     payFre.setVisibility(View.GONE);
                     create.setVisibility(View.VISIBLE);
-                    tvclose.setText("洽谈失败，结束洽谈");
+                    tvclose.setText("洽谈失败");
                 }
 
                 if (model.getConsultStatus() == 4

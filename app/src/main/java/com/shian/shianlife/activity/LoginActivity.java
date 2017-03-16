@@ -227,4 +227,5 @@ public class LoginActivity extends BaseActivity {
         Intent in = new Intent(this, LoginPhoneActivity.class);
         startActivity(in);
     }
+
 }

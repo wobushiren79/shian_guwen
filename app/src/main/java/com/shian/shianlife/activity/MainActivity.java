@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import com.kf5sdk.api.CallBack;
 import com.kf5sdk.init.KF5SDKConfig;
 import com.kf5sdk.init.UserInfo;
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.cemetery.BuildNewOrderActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.base.SaBaseApplication;
 import com.shian.shianlife.common.contanst.AppContansts;
@@ -54,11 +56,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
+import butterknife.OnClick;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, OrderFragment.OrderFragmentCallBack {
 
-    int loginType;
+    int loginType;//0殡仪 1.公墓
     @InjectView(R.id.fl_main)
     View flMain;
     @InjectView(R.id.rb_main_1)
@@ -71,6 +74,8 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     RadioButton rbMain4;
     @InjectView(R.id.tv_msgnum)
     TextView tvMsgNumber;
+    @InjectView(R.id.iv_buildnew)
+    ImageView ivBuildNew;
 
     private FragmentManager mFragmentManager;
     private FragmentTransaction transcation;
@@ -78,7 +83,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     private NewHomeFragment homeFragment;
     private FindFragment findFragment;
     private OrderFragment orderFragment;
-//    private UserCenterFragment userFragment;
+    //    private UserCenterFragment userFragment;
     private NewUserCenterFragment userFragment;
     private CemeteryFragment cemeteryFragment;//新增公墓服务界面
 
@@ -98,7 +103,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         initPermission();
 //        initLocation();
         startPushService();
-//        checkUpData();
+//        checkUpData();//检测更新
 
     }
 
@@ -522,5 +527,16 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 
             }
         });
+    }
+
+    @OnClick(R.id.iv_buildnew)
+    public void buildNew() {
+        if (loginType == 0) {
+            Intent in = new Intent(MainActivity.this, NewOrderActivity.class);
+            MainActivity.this.startActivity(in);
+        } else if (loginType == 1) {
+            Intent intent = new Intent(MainActivity.this, BuildNewOrderActivity.class);
+            MainActivity.this.startActivity(intent);
+        }
     }
 }

@@ -1,11 +1,12 @@
 package com.shian.shianlife.provide.result;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by asus on 2016/7/26.
  */
-public class HrUserInfo {
+public class HrUserInfo implements Serializable{
     private int appStatus;
     private String name;
     private String headImg;

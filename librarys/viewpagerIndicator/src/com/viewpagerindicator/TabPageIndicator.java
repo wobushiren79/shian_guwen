@@ -292,7 +292,6 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
         @Override
         public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
             // Re-measure if we went beyond our maximum size.
             if (mMaxTabWidth > 0 && getMeasuredWidth() > mMaxTabWidth) {
                 super.onMeasure(MeasureSpec.makeMeasureSpec(mMaxTabWidth, MeasureSpec.EXACTLY),
@@ -310,7 +309,7 @@ public class TabPageIndicator extends HorizontalScrollView implements PageIndica
 //            paint.setStyle(Paint.Style.FILL_AND_STROKE);
                 Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.msg_point);
                 Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-                Rect rect2 = new Rect(this.getWidth() - MsgCornerSize, 0, this.getWidth(), MsgCornerSize);
+                Rect rect2 = new Rect(this.getWidth() - MsgCornerSize, 2, this.getWidth(), MsgCornerSize);
                 canvas.drawBitmap(bitmap, rect, rect2, paint);
 
                 paint.setTextAlign(Paint.Align.CENTER);

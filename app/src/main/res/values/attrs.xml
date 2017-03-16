@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyViewAttr">
+        <attr name="titleName" format="string" />
+        <attr name="isImportant" format="boolean" />
+        <attr name="inputType" format="integer" />
+        <attr name="isLonger" format="boolean" />
+    </declare-styleable>
+
+
+</resources>

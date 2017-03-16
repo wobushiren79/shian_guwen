@@ -8,12 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dimen_16dp"
-        android:background="@color/white"
+
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
@@ -41,6 +42,7 @@
             android:background="@drawable/user_down_line" />
 
         <LinearLayout
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -70,6 +72,7 @@
             android:background="@drawable/user_down_line" />
 
         <LinearLayout
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -99,6 +102,7 @@
             android:background="@drawable/user_down_line" />
 
         <LinearLayout
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -142,6 +146,7 @@
             android:background="@drawable/user_down_line" />
 
         <LinearLayout
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -176,6 +181,7 @@
             android:background="@drawable/user_down_line" />
 
         <LinearLayout
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_160dp"
             android:orientation="horizontal">
@@ -215,14 +221,15 @@
 
         <TextView
             android:id="@+id/tv_editorder"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/dimen_688dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
-            android:layout_marginBottom="@dimen/dimen_24dp"
-            android:layout_marginTop="@dimen/dimen_24dp"
+            android:paddingBottom="@dimen/dimen_24dp"
+            android:paddingTop="@dimen/dimen_24dp"
             android:gravity="center"
             android:text="保存"
-            android:textColor="@color/zhy_text_color_1"
-            android:textSize="@dimen/dimen_24dp" />
+            android:background="@drawable/zhy_button_state_5"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_32dp" />
     </LinearLayout>
 </ScrollView>

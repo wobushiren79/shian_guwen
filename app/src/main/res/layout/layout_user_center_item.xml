@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/zhy_button_state_ll_white"
     android:layout_height="@dimen/dimen_80dp"
     android:orientation="horizontal">
 

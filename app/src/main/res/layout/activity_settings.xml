@@ -242,18 +242,18 @@
     </LinearLayout>
 
 
-    <TextView
+    <Button
         android:layout_marginTop="@dimen/dimen_16dp"
         android:id="@+id/tv_editorder"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/dimen_688dp"
         android:layout_height="@dimen/dimen_80dp"
         android:layout_below="@+id/ll_change"
         android:layout_centerHorizontal="true"
         android:layout_gravity="bottom"
-        android:background="@color/white"
+        android:background="@drawable/zhy_button_state_5"
         android:gravity="center"
         android:text="退出账户"
-        android:textColor="@color/zhy_text_color_1"
+        android:textColor="@color/white"
         android:textSize="@dimen/dimen_24dp" />
 
 </RelativeLayout>

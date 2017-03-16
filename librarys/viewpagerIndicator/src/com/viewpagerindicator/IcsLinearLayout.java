@@ -30,7 +30,6 @@ class IcsLinearLayout extends LinearLayout {
     private int mShowDividers;
     private int mDividerPadding;
 
-
     public IcsLinearLayout(Context context, int themeAttr) {
         super(context);
 
