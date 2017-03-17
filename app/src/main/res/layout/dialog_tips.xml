@@ -1,51 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg_dialog_tips"
+    android:layout_width="@dimen/dimen_534dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/zhy_button_state_item_white"
     android:orientation="vertical">
 
     <TextView
-        android:text="确认提交？"
         android:id="@+id/tv_top"
+        android:textColor="@color/black_item_shua_textcolor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_48dp"
+        android:layout_marginTop="@dimen/dimen_48dp"
+        android:gravity="center"
+        android:text="确认提交？"
+        android:textSize="@dimen/dimen_32dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_width="@dimen/dimen_318dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginBottom="@dimen/dimen_40dp"
         android:gravity="center"
-        android:paddingLeft="@dimen/dimen_15dp"
-        android:paddingRight="@dimen/dimen_15dp"
         android:text="结束洽谈后服务单将提交系统，请确认所填信息已经完善！"
-        android:textColor="@color/blackgroundmain"
-        android:textSize="@dimen/txtsize_27sp" />
+        android:textColor="@color/zhy_text_color_11"
+        android:textSize="@dimen/txtsize_24sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_text_color_2" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="@dimen/dimen_69dp"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_btn1"
             style="@style/orderlist_item_btn_textStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/dialog_onchlick_state"
-            android:text="继续洽谈" />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/zhy_button_state_6"
+            android:text="继续洽谈"
+            android:textColor="@color/zhy_text_color_11" />
+
+        <TextView
+            android:layout_width="@dimen/dimen_1dp"
+            android:layout_height="match_parent"
+            android:background="@color/zhy_text_color_2" />
 
         <TextView
             android:id="@+id/tv_btn2"
-
             style="@style/orderlist_item_btn_textStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20dp"
-            android:background="@drawable/dialog_onchlick_state"
-            android:text="结束洽谈" />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/zhy_button_state_6"
+            android:text="结束洽谈"
+            android:textColor="@color/zhy_text_color_1" />
     </LinearLayout>
 
 </LinearLayout>

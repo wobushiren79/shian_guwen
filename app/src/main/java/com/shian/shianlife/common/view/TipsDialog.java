@@ -102,14 +102,14 @@ public class TipsDialog extends Dialog {
     @Override
     public void show() {
         super.show();
-        outMetrics = new DisplayMetrics();
-        getWindow().getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
-        LayoutParams params = getWindow().getAttributes();
-        params.width = (int) (outMetrics.widthPixels * 0.67);
-        params.height = (int) (outMetrics.heightPixels * 0.41);
-//        params.height = LayoutParams.WRAP_CONTENT;
-        params.gravity = Gravity.CENTER;
-        getWindow().setAttributes(params);
+//        outMetrics = new DisplayMetrics();
+//        getWindow().getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
+//        LayoutParams params = getWindow().getAttributes();
+//        params.width = (int) (outMetrics.widthPixels * 0.67);
+//        params.height = (int) (outMetrics.heightPixels * 0.41);
+////        params.height = LayoutParams.WRAP_CONTENT;
+//        params.gravity = Gravity.CENTER;
+//        getWindow().setAttributes(params);
 
     }
 

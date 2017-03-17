@@ -28,13 +28,12 @@
         android:textColor="@color/dimgray"
         android:textSize="@dimen/dimen_24dp" />
 
-    <EditText
+    <TextView
         android:layout_marginLeft="@dimen/dimen_8dp"
         android:textColor="@color/zhy_text_color_9"
         android:gravity="top"
-        android:id="@+id/et_input"
+        android:id="@+id/tv_time"
         android:textSize="@dimen/dimen_24dp"
-        android:background="@null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

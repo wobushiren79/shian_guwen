@@ -4,7 +4,7 @@
     android:id="@+id/activity_save_talk_fail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_blackground"
+    android:background="@color/zhy_backgroud_1"
     android:orientation="vertical"
     tools:context="com.shian.shianlife.activity.SaveTalkFailActivity">
 
@@ -14,337 +14,127 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-        <LinearLayout
+        <com.shian.shianlife.view.writeview.EditTextViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_marginRight="@dimen/dimen_10dp"
-            android:layout_marginTop="@dimen/dimen_30dp"
-            android:orientation="vertical">
+            android:layout_marginTop="@dimen/dimen_8dp"
+            MyViewAttr:isImportant="false"
+            MyViewAttr:titleName="往生者姓名"></com.shian.shianlife.view.writeview.EditTextViewNormal>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_5" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:text="往生者姓名:"
-                android:textColor="@color/gray_item_shua_textcolor"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <EditText
-                android:id="@+id/et_name"
-
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_60dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/et_bk1"
-                android:padding="@dimen/dimen_10dp"
-                android:textColor="@color/blackgroundmain"
-                android:textSize="@dimen/text_size_top_bg" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
+        <com.shian.shianlife.view.writeview.SpinnerViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_30dp"
-            android:orientation="vertical">
+            MyViewAttr:isImportant="false"
+            MyViewAttr:titleName="往生者现状"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:text="往生者现状:"
-                android:textColor="@color/gray_item_shua_textcolor"
-                android:textSize="@dimen/text_size_top_bg" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_5" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Spinner
-                    android:id="@+id/sp_state"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_60dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dimen_10dp"
-                    android:layout_marginRight="@dimen/dimen_10dp"
-                    android:background="@drawable/et_bk1"
-                    android:textColor="@color/blackgroundmain"
-                    android:textSize="@dimen/text_size_detail_list" />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
+        <com.shian.shianlife.view.writeview.MapSelectViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_mapselect_now"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_30dp"
-            android:orientation="vertical">
+            MyViewAttr:isImportant="false"
+            MyViewAttr:titleName="客户当前所在地"></com.shian.shianlife.view.writeview.MapSelectViewNormal>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_5" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:text="往生者当前所在地:"
-                android:textColor="@color/gray_item_shua_textcolor"
-                android:textSize="@dimen/text_size_top_bg" />
-
-
-            <!--<include-->
-            <!--android:id="@+id/include_location"-->
-            <!--layout="@layout/layout_mapcheck" />    -->
-
-            <!--<EditText-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/dimen_60dp"-->
-            <!--android:layout_gravity="center_vertical"-->
-            <!--android:layout_marginLeft="@dimen/dimen_10dp"-->
-            <!--android:layout_marginRight="@dimen/dimen_10dp"-->
-            <!--android:background="@drawable/et_bk1"-->
-            <!--android:enabled="false"-->
-            <!--android:padding="@dimen/dimen_10dp"-->
-            <!--android:textColor="@color/blackgroundmain"-->
-            <!--android:textSize="@dimen/text_size_top_bg" />-->
-
-            <com.shian.shianlife.view.MapSelectLayoutView
-                android:id="@+id/mapselect1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.shian.shianlife.view.MapSelectLayoutView>
-
-        </LinearLayout>
-
-        <LinearLayout
+        <com.shian.shianlife.view.writeview.SpinnerViewEdit xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_relation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_30dp"
-            android:orientation="vertical">
+            MyViewAttr:isImportant="true"
+            MyViewAttr:titleName="联系人是往生者的"></com.shian.shianlife.view.writeview.SpinnerViewEdit>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_5" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:drawableLeft="@drawable/xingxing"
-                android:text="联系人是往生者的:"
-                android:textColor="@color/gray_item_shua_textcolor"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginRight="@dimen/dimen_10dp"
-                android:orientation="horizontal">
-
-                <Spinner
-                    android:id="@+id/sp_relation"
-                    android:layout_width="@dimen/dimen_200dp"
-                    android:layout_height="@dimen/dimen_60dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/et_bk1"
-                    android:textColor="@color/blackgroundmain"
-                    android:textSize="@dimen/text_size_detail_list" />
-
-                <EditText
-                    android:id="@+id/et_relation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen_60dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dimen_10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/et_bk1"
-                    android:hint="选择其他时填写"
-                    android:padding="@dimen/dimen_10dp"
-                    android:textColor="@color/blackgroundmain"
-                    android:textSize="@dimen/text_size_detail_list" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
+        <com.shian.shianlife.view.writeview.MapSelectViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_mapselect_plan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_30dp"
-            android:orientation="vertical">
+            MyViewAttr:isImportant="false"
+            MyViewAttr:titleName="计划治丧地址"></com.shian.shianlife.view.writeview.MapSelectViewNormal>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_5" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:text="计划治丧地址:"
-                android:textColor="@color/gray_item_shua_textcolor"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <!--<include-->
-            <!--android:id="@+id/include_planlocation"-->
-            <!--layout="@layout/layout_mapcheck" />-->
-
-            <com.shian.shianlife.view.MapSelectLayoutView
-                android:id="@+id/mapselect2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.shian.shianlife.view.MapSelectLayoutView>
-        </LinearLayout>
-
-        <LinearLayout
+        <com.shian.shianlife.view.writeview.SpinnerViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_planproject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_30dp"
-            android:orientation="vertical">
+            MyViewAttr:isImportant="false"
+            MyViewAttr:titleName="计划治丧方案"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:text="计划治丧方案:"
-                android:textColor="@color/gray_item_shua_textcolor"
-                android:textSize="@dimen/text_size_top_bg" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_5" />
 
-            <Spinner
-                android:id="@+id/sp_planproject"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_60dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:background="@drawable/et_bk1"
-                android:textColor="@color/blackgroundmain"
-                android:textSize="@dimen/text_size_detail_list" />
-        </LinearLayout>
-
-        <LinearLayout
+        <com.shian.shianlife.view.writeview.EditTextViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_talkpoint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginTop="@dimen/dimen_30dp"
-            android:orientation="vertical">
+            MyViewAttr:isImportant="true"
+            MyViewAttr:isLonger="true"
+            MyViewAttr:titleName="洽谈要点"></com.shian.shianlife.view.writeview.EditTextViewNormal>
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_30dp"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_5" />
 
-                android:drawableLeft="@drawable/xingxing"
-                android:text="洽谈要点:"
-                android:textColor="@color/gray_item_shua_textcolor"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <EditText
-                android:id="@+id/et_remark"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginRight="@dimen/dimen_10dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_et_order"
-                android:lines="5"
-                android:padding="@dimen/dimen_10dp"
-                android:textColor="@color/blackgroundmain"
-                android:textSize="@dimen/text_size_top_bg" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
+        <com.shian.shianlife.view.writeview.SpinnerViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_talkresult"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_30dp"
-            android:orientation="vertical">
+            MyViewAttr:isImportant="true"
+            MyViewAttr:titleName="洽谈结果"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_5" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-
-                android:drawableLeft="@drawable/xingxing"
-                android:text="洽谈结果:"
-                android:textColor="@color/gray_item_shua_textcolor"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <Spinner
-                android:id="@+id/sp_qtjg"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_60dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:background="@drawable/et_bk1"
-                android:textColor="@color/blackgroundmain"
-                android:textSize="@dimen/text_size_detail_list" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/timell"
+        <com.shian.shianlife.view.writeview.TimeSelectViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_timeselect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_30dp"
-            android:orientation="vertical">
+            MyViewAttr:isImportant="true"
+            MyViewAttr:titleName="预约洽谈时间"></com.shian.shianlife.view.writeview.TimeSelectViewNormal>
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:drawableLeft="@drawable/xingxing"
-                android:text="预约洽谈时间:"
-                android:textColor="@color/gray_item_shua_textcolor"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <TextView
-                android:id="@+id/et_talk_time"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_60dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginRight="@dimen/dimen_10dp"
-                android:layout_weight="1"
-                android:background="@drawable/et_bk1"
-                android:padding="@dimen/dimen_10dp"
-                android:textColor="@color/blackgroundmain"
-                android:textSize="@dimen/text_size_top_bg" />
-        </LinearLayout>
 
         <Button
             android:id="@+id/submit"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimen_70dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:background="@drawable/ic_home_reg"
-            android:gravity="center"
-            android:padding="@dimen/dimen_10dp"
-            android:text="确认提交，结束洽谈"
-            android:textColor="@color/text_color" />
+            android:textSize="@dimen/dimen_32dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="@dimen/dimen_688dp"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_marginTop="@dimen/dimen_24dp"
+            android:background="@drawable/zhy_button_state_5"
+            android:text="结束洽谈"
+            android:textColor="@color/white" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_24dp" />
     </LinearLayout>
 
 </ScrollView>

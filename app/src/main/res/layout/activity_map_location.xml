@@ -20,7 +20,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/dimen_40dp"
-        android:background="@color/blackgroundmain"
+        android:background="@drawable/zhy_button_state_5"
         android:padding="@dimen/dimen_10dp"
         android:text="确认所选位置"
         android:textColor="@color/white"

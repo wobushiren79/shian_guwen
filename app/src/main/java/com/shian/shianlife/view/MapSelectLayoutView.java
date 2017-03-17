@@ -142,7 +142,6 @@ public class MapSelectLayoutView extends LinearLayout implements Serializable {
     }
 
     private BroadcastReceiver locationDataReceiver = new BroadcastReceiver() {
-
         @Override
         public void onReceive(Context context, Intent intent) {
             int num = intent.getIntExtra("numView", 0);

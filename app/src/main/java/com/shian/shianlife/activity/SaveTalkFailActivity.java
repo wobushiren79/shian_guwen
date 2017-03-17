@@ -25,35 +25,30 @@ import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpTalkFailParams;
 import com.shian.shianlife.view.MapSelectLayoutView;
+import com.shian.shianlife.view.writeview.EditTextViewNormal;
+import com.shian.shianlife.view.writeview.MapSelectViewNormal;
+import com.shian.shianlife.view.writeview.SpinnerViewEdit;
+import com.shian.shianlife.view.writeview.SpinnerViewNormal;
+import com.shian.shianlife.view.writeview.TimeSelectViewNormal;
 import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 
 import java.util.ArrayList;
 
 public class SaveTalkFailActivity extends BaseActivity {
     Long ConsultId;
-
-    TextView mTalkTime;
-    TextView mETTime;
     Button mSubmit;
 
-    Spinner mSPRelation;
-    Spinner mSPState;
-    Spinner mSPPlanProject;
-    Spinner mSPQTJG;
-
-    EditText mETRelation;
-    EditText mETName;
-    EditText mRemark;
-
-
-    LinearLayout mTimeLL;
-
+    EditTextViewNormal mWriteName;
+    EditTextViewNormal mWriteTalkPoint;
+    SpinnerViewNormal mWriteState;
+    SpinnerViewNormal mWritePlanProject;
+    SpinnerViewNormal mWriteTalkResult;
+    MapSelectViewNormal mWriteNowLocation;
+    MapSelectViewNormal mWritePlanLocation;
+    SpinnerViewEdit mWriteRelation;
+    TimeSelectViewNormal mWriteTime;
 
     HpTalkFailParams params;
-
-
-    MapSelectLayoutView mSelectLayoutView1;
-    MapSelectLayoutView mSelectLayoutView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,95 +67,48 @@ public class SaveTalkFailActivity extends BaseActivity {
     }
 
     private void initView() {
-        mTalkTime = (TextView) findViewById(R.id.et_talk_time);
         mSubmit = (Button) findViewById(R.id.submit);
-        mSPRelation = (Spinner) findViewById(R.id.sp_relation);
-        mETRelation = (EditText) findViewById(R.id.et_relation);
-        mETName = (EditText) findViewById(R.id.et_name);
-        mSPState = (Spinner) findViewById(R.id.sp_state);
-        mSPPlanProject = (Spinner) findViewById(R.id.sp_planproject);
-        mRemark = (EditText) findViewById(R.id.et_remark);
-        mSPQTJG = (Spinner) findViewById(R.id.sp_qtjg);
-        mTimeLL = (LinearLayout) findViewById(R.id.timell);
-        mETTime = (TextView) findViewById(R.id.et_talk_time);
 
+        mWriteName = (EditTextViewNormal) findViewById(R.id.write_name);
+        mWriteTalkPoint = (EditTextViewNormal) findViewById(R.id.write_talkpoint);
+        mWriteState = (SpinnerViewNormal) findViewById(R.id.write_state);
+        mWritePlanProject = (SpinnerViewNormal) findViewById(R.id.write_planproject);
+        mWriteTalkResult = (SpinnerViewNormal) findViewById(R.id.write_talkresult);
+        mWriteNowLocation = (MapSelectViewNormal) findViewById(R.id.write_mapselect_now);
+        mWritePlanLocation = (MapSelectViewNormal) findViewById(R.id.write_mapselect_plan);
+        mWriteRelation = (SpinnerViewEdit) findViewById(R.id.write_relation);
+        mWriteTime = (TimeSelectViewNormal) findViewById(R.id.write_timeselect);
 
-        mSelectLayoutView1 = (MapSelectLayoutView) findViewById(R.id.mapselect1);
-        mSelectLayoutView2 = (MapSelectLayoutView) findViewById(R.id.mapselect2);
-
-        mSelectLayoutView1.setData(1,new ArrayList<String>());
-        mSelectLayoutView2.setData(2,new ArrayList<String>());
-
-
-        mTalkTime.setOnClickListener(onClickListener);
         mSubmit.setOnClickListener(onClickListener);
-
-
-        setSPText(0, "其他", mSPRelation);
-        setSPText(1, "其他", mSPState);
-        setSPText(2, "其他", mSPPlanProject);
-        setSPText(3, "预约二次洽谈", mSPQTJG);
-    }
-
-
-    private void setSPText(final int type, String name, Spinner spinner) {
-        int listData = 0;
-        if (type == 0) {
-            //与逝者关系
-            listData = R.array.gx;
-        } else if (type == 1) {
-            listData = R.array.szxz;
-        } else if (type == 2) {
-            listData = R.array.zsfx;
-        } else if (type == 3) {
-            listData = R.array.qtjg;
-        }
-
-        ArrayAdapter<CharSequence> province_adapter = ArrayAdapter.createFromResource(SaveTalkFailActivity.this, listData,
-                android.R.layout.simple_spinner_item);
-        final String[] arrs = getResources().getStringArray(listData);
-        province_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(province_adapter);
-        spinner.setSelection(Utils.getArrayINdex(arrs, name));
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
+        mWriteState.initSpinner(R.array.szxz);
+        mWriteRelation.initSpinner(R.array.gx);
+        mWritePlanProject.initSpinner(R.array.zsfx);
+        mWriteTalkResult.initSpinner(R.array.qtjg);
+        mWriteNowLocation.setNumView(0);
+        mWritePlanLocation.setNumView(1);
+        mWriteTalkResult.setSpinnerCallBack(new SpinnerViewNormal.SpinnerCallBack() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (type == 0) {
-                    params.setRelation(arrs[position]);
-                } else if (type == 1) {
-                    params.setHealth(arrs[position]);
-                } else if (type == 2) {
-                    params.setProject(arrs[position]);
-                } else if (type == 3) {
-                    if (position == 0) {
-                        params.setResult(true);
-                        mTimeLL.setVisibility(View.VISIBLE);
-                    } else {
-                        params.setResult(false);
-                        mTimeLL.setVisibility(View.GONE);
-                        mTalkTime.setText("");
-                    }
+            public void itemSelected(int position, String name) {
+                if (position == 0) {
+                    params.setResult(true);
+                    mWriteTime.setVisibility(View.VISIBLE);
+                } else if (position == 1) {
+                    params.setResult(false);
+                    mWriteTime.setVisibility(View.GONE);
                 }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }
 
+
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (view == mTalkTime) {
-                setTime();
-            } else if (view == mSubmit) {
-                if (mRemark.getText().toString().equals("")) {
+            if (view == mSubmit) {
+                if (mWriteTalkPoint.getData().equals("")) {
                     Toast.makeText(SaveTalkFailActivity.this, "洽谈要点不能为空", Toast.LENGTH_LONG).show();
                 } else {
-                    if (mETTime.getText().toString().equals("") && mSPQTJG.getSelectedItemPosition() == 0) {
+                    if (mWriteTime.getData().equals("") && mWriteTalkResult.getSelectPosition() == 0) {
                         Toast.makeText(SaveTalkFailActivity.this, "请设置洽谈时间", Toast.LENGTH_LONG).show();
                     } else {
                         failTalk();
@@ -172,33 +120,29 @@ public class SaveTalkFailActivity extends BaseActivity {
     };
 
 
-
     /**
      * 提交网络请求
      */
     private void failTalk() {
+        params.setHealth(mWriteState.getData());
+        params.setRelation(mWriteRelation.getData());
         params.setConsultId(ConsultId + "");
-        if (mSPRelation.getSelectedItemPosition() == 0) {
-            if (mETRelation.getText().toString().equals("")) {
-                params.setRelation("其他");
-            } else {
-                params.setRelation(mETRelation.getText().toString());
-            }
-        }
-        params.setDeadName(mETName.getText().toString());
-        params.setRemark(mRemark.getText().toString());
-
-        params.setResultTime(mTalkTime.getText().toString());
-
-        Utils.LogVPrint( "ConsultId:" + params.getConsultId());
-        Utils.LogVPrint( "Relation:" + params.getRelation());
-        Utils.LogVPrint( "Name:" + params.getDeadName());
-        Utils.LogVPrint( "Health:" + params.getHealth());
-        Utils.LogVPrint( "Project:" + params.getProject());
+        params.setDeadName(mWriteName.getData());
+        params.setRemark(mWriteTalkPoint.getData());
+        params.setResultTime(mWriteTime.getData());
+        params.setLocation(mWriteNowLocation.getData());
+        params.setProject(mWritePlanProject.getData());
+        params.setPlanLocation(mWritePlanLocation.getData());
+        Utils.LogVPrint("ConsultId:" + params.getConsultId());
+        Utils.LogVPrint("Relation:" + params.getRelation());
+        Utils.LogVPrint("Name:" + params.getDeadName());
+        Utils.LogVPrint("Health:" + params.getHealth());
+        Utils.LogVPrint("Project:" + params.getProject());
         Utils.LogVPrint("Remark:" + params.getRemark());
-        Utils.LogVPrint( "Result:" + params.isResult());
-        Utils.LogVPrint(  "Time:" + params.getResultTime());
-
+        Utils.LogVPrint("Result:" + params.isResult());
+        Utils.LogVPrint("Time:" + params.getResultTime());
+        Utils.LogVPrint("Location:" + params.getLocation());
+        Utils.LogVPrint("PlanLocation:" + params.getPlanLocation());
 
         TipsDialog mDialog = new TipsDialog(SaveTalkFailActivity.this);
         mDialog.setTitle("请确认结束洽谈的客户信息已填写完善。");
@@ -266,23 +210,6 @@ public class SaveTalkFailActivity extends BaseActivity {
         mDialog.show();
 
 
-    }
-
-    /**
-     * 设置洽谈时间
-     */
-    private void setTime() {
-        //设置二次洽谈时间
-        DateTimeSelectorDialogBuilder dialog = DateTimeSelectorDialogBuilder
-                .getInstance(SaveTalkFailActivity.this);
-        dialog.show();
-        dialog.setOnSaveListener(new DateTimeSelectorDialogBuilder.OnSaveListener() {
-            @Override
-            public void onSaveSelectedDate(String selectedDate) {
-                // TODO Auto-generated method stub
-                mTalkTime.setText(selectedDate);
-            }
-        });
     }
 
 

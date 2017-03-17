@@ -94,7 +94,7 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
         LatLng point = new LatLng(AppContansts.LOCAL_latitude, AppContansts.LOCAL_longitude);
         //构建Marker图标
         BitmapDescriptor bitmap = BitmapDescriptorFactory
-                .fromResource(R.drawable.icon_marka);
+                .fromResource(R.drawable.zhy_map_point_2);
         //构建MarkerOption，用于在地图上添加Marker
         OverlayOptions option = new MarkerOptions()
                 .position(point)

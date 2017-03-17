@@ -5,50 +5,47 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
 
 /**
- * Created by Administrator on 2017/3/14.
+ * Created by Administrator on 2017/3/17.
  */
 
-public class SpinnerViewNormal extends BaseWriteView {
+public class SpinnerViewEdit extends BaseWriteView {
+
     View view;
     TextView mTVIsImportant;
     TextView mTVTitleName;
     Spinner mSpinner;
+    EditText mETInput;
 
+    SpinnerEditCallBack spinnerEditCallBack;
+    ArrayAdapter<CharSequence> province_adapter;
 
-    private SpinnerCallBack spinnerCallBack;
-    private ArrayAdapter<CharSequence> province_adapter;
-
-    public SpinnerViewNormal(Context context) {
+    public SpinnerViewEdit(Context context) {
         this(context, null);
     }
 
-    public SpinnerViewNormal(Context context, AttributeSet attrs) {
+    public SpinnerViewEdit(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        view = View.inflate(context, R.layout.zhy_write_spinnerview_normal, this);
+        view = View.inflate(context, R.layout.zhy_write_spinnerview_edit, this);
         initView();
         initData();
     }
 
-    public SpinnerCallBack getSpinnerCallBack() {
-        return spinnerCallBack;
-    }
-
-    public void setSpinnerCallBack(SpinnerCallBack spinnerCallBack) {
-        this.spinnerCallBack = spinnerCallBack;
+    public void setSpinnerEditCallBack(SpinnerEditCallBack spinnerEditCallBack) {
+        this.spinnerEditCallBack = spinnerEditCallBack;
     }
 
     private void initView() {
         mTVIsImportant = (TextView) view.findViewById(R.id.tv_important);
         mTVTitleName = (TextView) view.findViewById(R.id.tv_titlename);
         mSpinner = (Spinner) view.findViewById(R.id.spinner);
+        mETInput = (EditText) view.findViewById(R.id.et_input);
     }
 
     public void initSpinner(int arrayId) {
@@ -58,18 +55,31 @@ public class SpinnerViewNormal extends BaseWriteView {
         mSpinner.setAdapter(province_adapter);
         mSpinner.setSelection(0);
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (spinnerCallBack != null) {
-                    spinnerCallBack.itemSelected(position, province_adapter.getItem(position).toString());
+                if (spinnerEditCallBack != null) {
+                    spinnerEditCallBack.itemSelected(position, province_adapter.getItem(position).toString());
                 }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
+    }
+
+    public String getData() {
+        if (mSpinner.getSelectedItemPosition() == 0) {
+            return mETInput.getText().toString();
+        } else {
+            if (province_adapter != null) {
+                return province_adapter.getItem(mSpinner.getSelectedItemPosition()).toString();
+            } else {
+                return "";
+            }
+        }
+
     }
 
     private void initData() {
@@ -80,16 +90,12 @@ public class SpinnerViewNormal extends BaseWriteView {
         } else {
             mTVIsImportant.setVisibility(INVISIBLE);
         }
+        if (isLonger) {
+            mETInput.setLines(3);
+        }
     }
 
-    public String getData() {
-        return province_adapter.getItem(mSpinner.getSelectedItemPosition()).toString();
-    }
-    public int getSelectPosition(){
-        return mSpinner.getSelectedItemPosition();
-    }
-
-    public interface SpinnerCallBack {
+    public interface SpinnerEditCallBack {
         void itemSelected(int position, String name);
     }
 }
