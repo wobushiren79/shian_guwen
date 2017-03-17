@@ -6,7 +6,7 @@ package com.shian.shianlife.provide.phpmodel;
 
 public class AdvertisementData {
     private String banner;//   广告页地址
-    private String string;//  广告链接地址
+    private String url;//  广告链接地址
 
     public String getBanner() {
         return banner;
@@ -16,11 +16,11 @@ public class AdvertisementData {
         this.banner = banner;
     }
 
-    public String getString() {
-        return string;
+    public String getUrl() {
+        return url;
     }
 
-    public void setString(String string) {
-        this.string = string;
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

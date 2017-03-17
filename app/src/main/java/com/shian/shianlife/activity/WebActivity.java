@@ -45,6 +45,7 @@ public class WebActivity extends BaseActivity {
         webSettings.setGeolocationDatabasePath(dir);
         webSettings.setDomStorageEnabled(true);//允许DCOM
 
+        Utils.LogVPrint(getIntent().getStringExtra("url"));
         mWebView.loadUrl(getIntent().getStringExtra("url"));
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override

@@ -225,7 +225,7 @@ public class HttpRequestExecutor {
                                   final Class<T> c, RequestParams params,
                                   final HttpResponseHandler<T> response, final boolean isDialog) {
         if (!isNetworkConnected(context)) {
-            onError(response, context.getString(R.string.net_work_off), context);
+//            onError(response, context.getString(R.string.net_work_off), context);
             return;
         }
         try {

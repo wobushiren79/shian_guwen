@@ -82,7 +82,7 @@ public class FindAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, WebActivity.class);
-                intent.putExtra("url","http://www.baidu.com");
+                intent.putExtra("url",AppContansts.siftsPHPURL+"?id="+data.getId());
                 context.startActivity(intent);
             }
         });

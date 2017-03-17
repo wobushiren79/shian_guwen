@@ -112,7 +112,7 @@ public class AppAdvertisementLayout extends LinearLayout {
             } else if (v == mIVConent) {
                 if(result!=null){
                     Intent intent=new Intent(getContext(), WebActivity.class);
-                    intent.putExtra("url",result.getItems().get(0).getString());
+                    intent.putExtra("url",result.getItems().get(0).getUrl());
                     getContext().startActivity(intent);
                 }
             }

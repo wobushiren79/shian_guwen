@@ -18,6 +18,8 @@ import com.loopj.android.http.RequestParams;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.HotIssueListActivity;
 import com.shian.shianlife.activity.NoticeListActivity;
+import com.shian.shianlife.activity.WebActivity;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.phpmodel.HotIssueData;
@@ -104,7 +106,9 @@ public class HelpHotIssue extends LinearLayout {
     AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+            Intent intent=new Intent(getContext(),WebActivity.class);
+            intent.putExtra("url", AppContansts.helpsPHPURL+"?id="+listData.get(position).getId());
+            getContext().startActivity(intent);
         }
     };
 

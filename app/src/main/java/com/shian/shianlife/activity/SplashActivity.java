@@ -197,7 +197,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     private void jumpWeb(PHPHrGetAdvertisement result) {
         cancelTimer();
         Intent intent = new Intent(SplashActivity.this, WebActivity.class);
-        intent.putExtra("url", result.getItems().get(0).getBanner());
+        intent.putExtra("url", result.getItems().get(0).getUrl());
         startActivity(intent);
     }
 

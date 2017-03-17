@@ -18,6 +18,7 @@ import com.loopj.android.http.RequestParams;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.NoticeListActivity;
 import com.shian.shianlife.activity.WebActivity;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.TimeUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
@@ -102,10 +103,8 @@ public class MainDynamic extends LinearLayout {
     AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Log.v("this","position"+position);
-            int urlId = items.get(position).getId();
             Intent intent = new Intent(getContext(), WebActivity.class);
-            intent.putExtra("url", "http://www.baidu.com");
+            intent.putExtra("url", AppContansts.dynamicsPHPURL+"?id="+items.get(position).getId());
             getContext().startActivity(intent);
         }
     };

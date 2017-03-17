@@ -1,5 +1,6 @@
 package com.shian.shianlife.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.loopj.android.http.RequestParams;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.phpmodel.DynamicItemsInfo;
@@ -62,6 +64,9 @@ public class NoticeListActivity extends BaseActivity {
     AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent = new Intent(NoticeListActivity.this, WebActivity.class);
+            intent.putExtra("url", AppContansts.dynamicsPHPURL+"?id="+data.get(position-1).getId());
+            startActivity(intent);
         }
     };
 

@@ -452,15 +452,13 @@ public class QTView extends BaseOrderView {
 
                 if (model.isHasPrepay()) {
                     payFre.setEnabled(false);
-
-                    tvPay.setBackgroundColor(getResources().getColor(
-                            R.color.gray_common));
+                    tvPay.setBackgroundResource(R.drawable.zhy_button_state_item_gray);
                     tvPay.setTextColor(getContext().getResources().getColor(R.color.white));
-                    tvPay.setText("定金已支付");
+                    tvPay.setText("定金已付");
                 } else {
                     shift.setVisibility(View.GONE);
-                    tvPay.setBackgroundResource(R.drawable.bg_button_yellow);
-                    tvPay.setTextColor(getContext().getResources().getColor(R.color.text_color));
+                    tvPay.setBackgroundResource(R.drawable.zhy_button_state_item_yellow);
+                    tvPay.setTextColor(getContext().getResources().getColor(R.color.white));
                     tvPay.setText("支付定金");
                     payFre.setEnabled(true);
                 }
@@ -470,10 +468,14 @@ public class QTView extends BaseOrderView {
                     create.setVisibility(View.GONE);
                     payFre.setOnClickListener(clickListener);
                     tvclose.setText("结束洽谈");
+                    tvclose.setBackgroundResource(R.drawable.zhy_button_state_5);
+                    tvclose.setTextColor(Color.WHITE);
                 } else {
                     payFre.setVisibility(View.GONE);
                     create.setVisibility(View.VISIBLE);
                     tvclose.setText("洽谈失败");
+                    tvclose.setBackgroundResource(R.drawable.zhy_button_state_2);
+                    tvclose.setTextColor(getResources().getColor(R.color.zhy_text_color_1));
                 }
 
                 if (model.getConsultStatus() == 4
