@@ -82,7 +82,9 @@ public class FindAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, WebActivity.class);
-                intent.putExtra("url",AppContansts.siftsPHPURL+"?id="+data.getId());
+                intent.putExtra("url", AppContansts.siftsPHPURL + "?id=" + data.getId());
+                intent.putExtra("isShare", true);
+                intent.putExtra("shareData",data);
                 context.startActivity(intent);
             }
         });

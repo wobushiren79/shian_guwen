@@ -21,7 +21,7 @@ public class EditTextViewNormal extends BaseWriteView {
 
 
     public EditTextViewNormal(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public EditTextViewNormal(Context context, AttributeSet attrs) {
@@ -46,7 +46,7 @@ public class EditTextViewNormal extends BaseWriteView {
         } else {
             mTVIsImportant.setVisibility(INVISIBLE);
         }
-        if(isLonger){
+        if (isLonger) {
             mETInput.setLines(3);
         }
     }
@@ -78,7 +78,13 @@ public class EditTextViewNormal extends BaseWriteView {
         initData();
     }
 
+    public void setData(String name) {
+        mETInput.setText(name);
+        initData();
+    }
+
     public String getData() {
         return mETInput.getText().toString();
     }
+
 }

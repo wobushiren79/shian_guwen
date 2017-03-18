@@ -25,7 +25,7 @@
         android:paddingBottom="@dimen/dimen_33dp"
         android:paddingTop="@dimen/dimen_33dp"
         android:textColor="@color/dimgray"
-        android:textSize="@dimen/dimen_24dp" />
+        android:textSize="@dimen/dimen_28dp" />
 
     <Spinner
         android:id="@+id/spinner"

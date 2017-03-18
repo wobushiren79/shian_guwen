@@ -2,433 +2,159 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_blackground">
+    android:background="@color/zhy_backgroud_1">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/dimen_10dp">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <com.shian.shianlife.view.writeview.EditTextViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_deadname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_40dp"
-            android:orientation="horizontal">
-
-
-
-            <TextView
-                android:drawableLeft="@drawable/xingxing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="往生者姓名:"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <EditText
-                android:id="@+id/et_sz_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:layout_marginRight="@dimen/dimen_30dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_et_order"
-                android:padding="@dimen/dimen_10dp"
-                android:textSize="@dimen/text_size_top_bg" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@color/gray" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:orientation="horizontal">
-
-
-
-            <TextView
-                android:drawableLeft="@drawable/xingxing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="往生者身份证号码:"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <EditText
-                android:id="@+id/et_sz_idcard"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:layout_marginRight="@dimen/dimen_30dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_et_order"
-                android:padding="@dimen/dimen_10dp"
-                android:textSize="@dimen/text_size_top_bg" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@color/gray" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:drawableLeft="@drawable/xingxing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="往生者年龄:"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <EditText
-                android:id="@+id/et_sz_age"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:layout_marginRight="@dimen/dimen_30dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_et_order"
-                android:inputType="number"
-                android:padding="@dimen/dimen_10dp"
-                android:textSize="@dimen/text_size_top_bg" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@color/gray" />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:orientation="horizontal">
-
-
-
-            <TextView
-                android:drawableLeft="@drawable/xingxing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="往生者性别:"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <RadioButton
-                android:id="@+id/rb_sz_wz"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:checked="true"
-                android:text="未知"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <RadioButton
-                android:id="@+id/rb_sz_man"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:text="男"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <RadioButton
-                android:id="@+id/rb_sz_felman"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:text="女"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <RadioButton
-                android:id="@+id/rb_sz_bm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:text="保密"
-                android:textSize="@dimen/text_size_top_bg" />
-        </RadioGroup>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@color/gray" />
-
-
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:orientation="horizontal">
-
-
-
-            <TextView
-                android:drawableLeft="@drawable/xingxing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="往生者鞋码:"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <EditText
-                android:id="@+id/et_sz_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:layout_marginRight="@dimen/dimen_30dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_et_order"
-                android:padding="@dimen/dimen_10dp"
-                android:textSize="@dimen/text_size_top_bg" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@color/gray" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:orientation="horizontal">
-
-
-
-            <TextView
-                android:drawableLeft="@drawable/xingxing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="往生者现状:"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <Spinner
-                android:id="@+id/sp_sz_szxz"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_70dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:layout_marginRight="@dimen/dimen_30dp"
-                android:textSize="@dimen/text_size_detail_list" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@color/gray" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:orientation="horizontal">
-
-
-            <TextView
-                android:drawableLeft="@drawable/xingxing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="往生者出生日期:"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <TextView
-                android:id="@+id/tv_sz_birthd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:layout_marginRight="@dimen/dimen_30dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_et_order"
-                android:padding="@dimen/dimen_10dp"
-                android:textSize="@dimen/text_size_top_bg" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@color/gray" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20dp"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:drawableLeft="@drawable/xingxing"
-                style="@style/edit_order_textStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-                android:textSize="@dimen/text_size_top_bg"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="往生者当前所在地:" />
-
-            <!--<include layout="@layout/layout_mapcheck"/>-->
-
-            <com.shian.shianlife.view.MapSelectLayoutView
-                android:id="@+id/mapselect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.shian.shianlife.view.MapSelectLayoutView>
-        </LinearLayout>
-
+            MyViewAttr:isImportant="true"
+            MyViewAttr:titleName="往生者姓名"></com.shian.shianlife.view.writeview.EditTextViewNormal>
 
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@color/gray" />
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
 
-        <LinearLayout
+        <com.shian.shianlife.view.writeview.EditTextViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_deadcardid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:orientation="horizontal">
+            MyViewAttr:isImportant="true"
+            MyViewAttr:titleName="往生者身份证"></com.shian.shianlife.view.writeview.EditTextViewNormal>
 
-
-
-            <TextView
-                android:drawableLeft="@drawable/xingxing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="寿衣信息:"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <Spinner
-                android:id="@+id/sp_clothes"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_70dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:layout_marginRight="@dimen/dimen_30dp"
-                android:textSize="@dimen/text_size_detail_list" />
-        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@color/gray" />
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
 
-        <LinearLayout
+        <com.shian.shianlife.view.writeview.EditTextViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_deadage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:orientation="horizontal">
+            MyViewAttr:isImportant="true"
+            MyViewAttr:titleName="往生者年龄"></com.shian.shianlife.view.writeview.EditTextViewNormal>
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="另一半信息:"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <Spinner
-                android:id="@+id/sp_other_health"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_70dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:layout_marginRight="@dimen/dimen_30dp"
-                android:textSize="@dimen/text_size_detail_list" />
-        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@color/gray" />
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
 
-        <LinearLayout
+
+        <com.shian.shianlife.view.writeview.SpinnerViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_deadsex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:orientation="horizontal">
+            MyViewAttr:isImportant="true"
+            MyViewAttr:titleName="往生者性别"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="备注:"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <EditText
-                android:id="@+id/et_sz_bz"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:layout_marginRight="@dimen/dimen_30dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_et_order"
-                android:padding="@dimen/dimen_10dp"
-                android:textSize="@dimen/text_size_top_bg" />
-        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_deadshoe"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            MyViewAttr:isImportant="true"
+            MyViewAttr:titleName="往生者鞋码"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.SpinnerViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_deadstate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:isImportant="true"
+            MyViewAttr:titleName="往生者现状"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.TimeSelectViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_timeselect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:isImportant="true"
+            MyViewAttr:titleName="往生者出生日期"></com.shian.shianlife.view.writeview.TimeSelectViewNormal>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.MapSelectViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_mapselect_now"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:isImportant="true"
+            MyViewAttr:titleName="往生者所在地"></com.shian.shianlife.view.writeview.MapSelectViewNormal>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+
+        <com.shian.shianlife.view.writeview.SpinnerViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_deadclothes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:isImportant="true"
+            MyViewAttr:titleName="寿衣信息"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.SpinnerViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_otherstate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:isImportant="false"
+            MyViewAttr:titleName="另一半信息"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/write_remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:isImportant="false"
+            MyViewAttr:isLonger="true"
+            MyViewAttr:titleName="备注"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
 
         <TextView
+            style="@style/zhy_button_submit_1"
             android:id="@+id/tv_editorder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
+            android:layout_gravity="center"
             android:layout_margin="@dimen/dimen_40dp"
-            android:background="@drawable/ic_home_reg"
             android:gravity="center"
             android:padding="@dimen/dimen_10dp"
             android:text="继续填写经办人信息"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/dimen_40dp" />
+            />
     </LinearLayout>
 
 </ScrollView>

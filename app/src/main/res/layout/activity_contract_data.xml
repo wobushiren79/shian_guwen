@@ -2,17 +2,19 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_contract_data"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_blackground"
+    android:background="@color/white"
     tools:context="com.shian.shianlife.activity.updata.ContractDataActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/dimen_10dp">
+        android:paddingBottom="@dimen/dimen_16dp"
+        android:paddingLeft="@dimen/dimen_32dp"
+        android:paddingRight="@dimen/dimen_32dp"
+        android:paddingTop="@dimen/dimen_16dp">
 
         <TextView
             android:id="@+id/tv_contractId"
@@ -20,8 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="合同信息"
-            android:textColor="@color/black"
-            android:textSize="@dimen/txtsize_40sp" />
+            android:textColor="@color/black_item_shua_textcolor"
+            android:textSize="@dimen/txtsize_32sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,16 +31,17 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/zhy_text_contract_2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="甲方（委托方）:" />
+                android:text="甲方(委托方):" />
 
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="xxx"
-                android:textColor="@color/blackgroundmain" />
+                android:text=""
+                android:textColor="@color/zhy_text_color_1" />
         </LinearLayout>
 
         <LinearLayout
@@ -47,29 +50,35 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/zhy_text_contract_2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="乙方（服务单位）:" />
+                android:text="乙方(服务单位):" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="四川世安生命文化有限责任公司"
-                android:textColor="@color/blackgroundmain" />
+                android:textColor="@color/zhy_text_color_1" />
         </LinearLayout>
 
         <TextView
+            style="@style/zhy_text_contract_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_8dp"
+            android:layout_marginTop="8dp"
             android:text="根据《中华人民共和国合同法》及有关法律法规的规定，结合殡葬服务的特点，甲、乙双方在遵循自愿、平等、公平、诚实信用原则的基础上，经双方协商一致，就殡葬服务有关事项达成如下协议：" />
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="第一条 服务内容
  甲方委托乙方为本合同指定的被服务人员（以下简称被服务对象）的殡葬仪式提供相关服务。" />
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="第二条基本情况
@@ -78,17 +87,15 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black">
+            android:background="@color/dimgray">
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
-
                     style="@style/TableText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="往生者姓名" />
 
@@ -96,7 +103,6 @@
                     android:id="@+id/tv_deadmanname"
                     style="@style/TableText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text=""
                     android:textColor="@color/blackgroundmain" />
@@ -104,7 +110,6 @@
                 <TextView
                     style="@style/TableText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="性别" />
 
@@ -112,26 +117,11 @@
                     android:id="@+id/tv_deadmansex"
                     style="@style/TableText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text=""
                     android:textColor="@color/blackgroundmain" />
 
-                <TextView
-                    style="@style/TableText"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="状态" />
 
-                <TextView
-                    android:id="@+id/tv_deadmanstate"
-                    style="@style/TableText"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textColor="@color/blackgroundmain" />
             </TableRow>
 
             <TableRow
@@ -142,7 +132,6 @@
 
                     style="@style/TableText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="身份证号" />
 
@@ -150,7 +139,6 @@
                     android:id="@+id/tv_deadmancardid"
                     style="@style/TableText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text=""
                     android:textColor="@color/blackgroundmain" />
@@ -158,7 +146,6 @@
                 <TextView
                     style="@style/TableText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="年龄" />
 
@@ -171,10 +158,30 @@
                     android:text=""
                     android:textColor="@color/blackgroundmain" />
 
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
                 <TextView
                     style="@style/TableText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="状态" />
+
+                <TextView
+                    android:id="@+id/tv_deadmanstate"
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/blackgroundmain" />
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
                     android:layout_weight="1"
                     android:text="寿鞋鞋码" />
 
@@ -182,7 +189,6 @@
                     android:id="@+id/tv_deadmanshoes"
                     style="@style/TableText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text=""
                     android:textColor="@color/blackgroundmain" />
@@ -190,6 +196,7 @@
         </TableLayout>
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2.委托方基本信息" />
@@ -197,17 +204,15 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black">
+            android:background="@color/dimgray">
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
-
                     style="@style/TableText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="经办人姓名" />
 
@@ -215,7 +220,6 @@
                     android:id="@+id/tv_agentmanname"
                     style="@style/TableText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text=""
                     android:textColor="@color/blackgroundmain" />
@@ -223,7 +227,6 @@
                 <TextView
                     style="@style/TableText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="联系电话" />
 
@@ -231,26 +234,11 @@
                     android:id="@+id/tv_agentmanphone"
                     style="@style/TableText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text=""
                     android:textColor="@color/blackgroundmain" />
 
-                <TextView
-                    style="@style/TableText"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="邮箱地址" />
 
-                <TextView
-                    android:id="@+id/tv_agentmanemail"
-                    style="@style/TableText"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textColor="@color/blackgroundmain" />
             </TableRow>
 
             <TableRow
@@ -258,10 +246,8 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-
                     style="@style/TableText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="身份证号" />
 
@@ -277,7 +263,6 @@
                 <TextView
                     style="@style/TableText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="经办人地址" />
 
@@ -286,6 +271,28 @@
                     style="@style/TableText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textColor="@color/blackgroundmain" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/TableText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="邮箱地址" />
+
+                <TextView
+                    android:id="@+id/tv_agentmanemail"
+                    style="@style/TableText"
+                    android:layout_width="0dp"
                     android:layout_weight="1"
                     android:text=""
                     android:textColor="@color/blackgroundmain" />
@@ -301,7 +308,6 @@
                     android:id="@+id/tv_agentmanrelation"
                     style="@style/TableText"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text=""
                     android:textColor="@color/blackgroundmain" />
@@ -309,6 +315,7 @@
         </TableLayout>
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3、乙方联系地址：成都市锦江区静沙南路29号，联系电话：028-966188。
@@ -321,21 +328,22 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <TextView style="@style/zhy_text_contract_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2、治丧地址：" />
 
             <TextView
+                android:textSize="@dimen/dimen_24dp"
                 android:id="@+id/tv_zslocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="xxxx"
                 android:textColor="@color/blackgroundmain" />
 
         </LinearLayout>
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="第四条 殡葬服务项目" />
@@ -351,6 +359,7 @@
             android:layout_height="wrap_content"></com.shian.shianlife.view.ScrollListView>
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="殡葬服务的实施
@@ -362,41 +371,48 @@
 
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1、依据乙方提供的治丧方案及价格明细表计算，各项殡葬服务费用合计为：" />
 
         <TextView
+            android:textSize="@dimen/dimen_24dp"
             android:id="@+id/tv_allmoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="xxxxxxxxxxxx"
+            android:text=""
             android:textColor="@color/blackgroundmain" />
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2、本合同签订后当日，甲方应向乙方支付预付款：" />
 
         <TextView
+            android:textSize="@dimen/dimen_24dp"
             android:id="@+id/tv_firstmoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="xxxxxxxxxxxx"
+            android:text=""
             android:textColor="@color/blackgroundmain" />
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="定金和预付款可充抵殡葬服务费用。" />
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="3、在签订本合同时，甲乙双方确定各项殡葬服务费用总额。本合同签订后甲乙双方约定新增加或取消服务项目的，相应费用应计入服务费用总额或从服务费用总额中扣除。
 [治丧方案+增值服务]" />
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="4、甲方应在乙方结束各项服务后提供服务清单与付费凭证时，将剩余的服务费用款项" />
@@ -410,34 +426,41 @@
                 android:id="@+id/tv_lastmoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="xxxx"
+                android:textSize="@dimen/dimen_24dp"
+                android:text=""
                 android:textColor="@color/blackgroundmain" />
 
 
         </LinearLayout>
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="一次性向乙方支付完毕。" />
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/contract_1" />
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="经办人：" />
+            android:text="经办人签字：" />
 
         <ImageView
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
             android:id="@+id/dv_pay"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_200dp"
-            android:background="@color/white" />
+            android:layout_height="@dimen/dimen_400dp"
+            android:background="@color/zhy_backgroud_1" />
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="乙方：四川世安生命文化有限责任公司" />
@@ -448,19 +471,22 @@
             android:orientation="horizontal">
 
             <TextView
+                style="@style/zhy_text_contract_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="委托代理人：" />
 
             <TextView
+                android:textSize="@dimen/dimen_24dp"
                 android:id="@+id/tv_dlman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="xxxxxx"
+                android:text=""
                 android:textColor="@color/blackgroundmain" />
         </LinearLayout>
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -468,6 +494,7 @@
             android:text="殡葬服务客户须知" />
 
         <TextView
+            style="@style/zhy_text_contract_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1、在业务服务期间，客户应当妥善维护现场租赁用品，若在服务结束后，出现了租赁物品遗失或损坏，客户应当照价赔偿。

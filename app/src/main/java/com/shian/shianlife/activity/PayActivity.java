@@ -1,17 +1,24 @@
 package com.shian.shianlife.activity;
 
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,6 +27,7 @@ import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
 
+import com.bumptech.glide.util.Util;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
@@ -49,6 +57,8 @@ public class PayActivity extends BaseActivity {
     TextView tv_prepayNum;
     @InjectView(R.id.tv_pay_title)
     TextView tvT;
+    @InjectViews({R.id.iv_anim_pic_1, R.id.iv_anim_pic_2, R.id.iv_anim_pic_3, R.id.iv_anim_pic_4})
+    List<ImageView> ivAnimList;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -67,6 +77,30 @@ public class PayActivity extends BaseActivity {
             tvT.setText("余款金额：");
             restPay();
             initFP();
+        }
+        startAnimation();
+    }
+
+    /**
+     * 开始动画
+     */
+    private void startAnimation() {
+
+        for (ImageView iv : ivAnimList) {
+            AnimationSet animationSet = new AnimationSet(true);
+            TranslateAnimation translateAnimation = new TranslateAnimation
+                    (Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f,
+                            Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 1f);
+            translateAnimation.setDuration((int)((Math.random()*5000)+5000));
+            translateAnimation.setRepeatMode(Animation.REVERSE);
+            translateAnimation.setRepeatCount(Animation.INFINITE);
+
+            AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+            alphaAnimation.setDuration(2000);
+
+            animationSet.addAnimation(alphaAnimation);
+            animationSet.addAnimation(translateAnimation);
+            iv.startAnimation(animationSet);
         }
     }
 

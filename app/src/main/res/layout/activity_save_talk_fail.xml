@@ -121,17 +121,15 @@
             MyViewAttr:titleName="预约洽谈时间"></com.shian.shianlife.view.writeview.TimeSelectViewNormal>
 
 
-
-        <Button
+        <TextView
             android:id="@+id/submit"
-            android:textSize="@dimen/dimen_32dp"
+            style="@style/zhy_button_submit_1"
             android:layout_gravity="center_horizontal"
-            android:layout_width="@dimen/dimen_688dp"
-            android:layout_height="@dimen/dimen_80dp"
             android:layout_marginTop="@dimen/dimen_24dp"
             android:background="@drawable/zhy_button_state_5"
-            android:text="结束洽谈"
-            android:textColor="@color/white" />
+            android:gravity="center"
+            android:text="结束洽谈" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_24dp" />

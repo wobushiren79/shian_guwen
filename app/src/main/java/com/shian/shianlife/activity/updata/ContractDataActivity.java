@@ -221,16 +221,16 @@ public class ContractDataActivity extends BaseActivity {
                         mTVDeadName.setText(deadmanName);
                         String sDeadmanSex = "";
                         switch (deadmanSex) {
-                            case "0":
+                            case "1":
                                 sDeadmanSex = "未知";
                                 break;
-                            case "1":
+                            case "2":
                                 sDeadmanSex = "男";
                                 break;
-                            case "2":
+                            case "3":
                                 sDeadmanSex = "女";
                                 break;
-                            case "3":
+                            case "4":
                                 sDeadmanSex = "保密";
                                 break;
                         }
@@ -381,9 +381,10 @@ public class ContractDataActivity extends BaseActivity {
                 });
     }
 
+    /**
+     * 签名
+     */
     private void drawName() {
-
-
         AlertDialog alertDialog;
         final DrawView drawView = new DrawView(ContractDataActivity.this);
         drawView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.dimen_40dp)));
@@ -402,7 +403,7 @@ public class ContractDataActivity extends BaseActivity {
                 })
                 .create();
         alertDialog.show();
-        alertDialog.getWindow().setLayout(metrics.widthPixels, metrics.heightPixels / 2);
+        alertDialog.getWindow().setLayout(getResources().getDimensionPixelOffset(R.dimen.dimen_533dp), getResources().getDimensionPixelOffset(R.dimen.dimen_595dp));
     }
 
 

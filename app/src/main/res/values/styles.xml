@@ -93,10 +93,12 @@
     </style>
 
     <style name="TableText">
-        <item name="android:textSize">@dimen/txtsize_22sp</item>
+        <item name="android:textSize">@dimen/dimen_24dp</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_margin">@dimen/dimen_1dp</item>
         <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/black_item_shua_textcolor</item>
+        <item name="android:layout_height">match_parent</item>
     </style>
 
     <style name="cemetery_text_style_1">
@@ -150,4 +152,29 @@
         <item name="colorButtonNormal">@color/zhy_text_color_1</item>
         <item name="colorControlHighlight">#22000000</item>
     </style>
+
+    <style name="zhy_button_submit_1">
+        <item name="android:textSize">@dimen/dimen_32dp</item>
+        <item name="android:background">@drawable/zhy_button_state_5</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_width">@dimen/dimen_688dp</item>
+        <item name="android:layout_height">@dimen/dimen_80dp</item>
+    </style>
+
+    <style name="zhy_text_contract_1">
+        <item name="android:textSize">@dimen/dimen_24dp</item>
+        <item name="android:textColor">@color/dimgray</item>
+
+    </style>
+
+    <style name="zhy_text_contract_2">
+        <item name="android:textSize">@dimen/dimen_32dp</item>
+        <item name="android:textColor">@color/black_item_shua_textcolor</item>
+    </style>
+    <style name="zhy_text_contract_3">
+        <item name="android:textSize">@dimen/dimen_24dp</item>
+        <item name="android:textColor">@color/black_item_shua_textcolor</item>
+
+    </style>
+
 </resources>

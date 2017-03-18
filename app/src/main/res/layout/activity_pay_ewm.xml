@@ -2,90 +2,123 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_blackground"
+    android:background="@color/zhy_backgroud_1"
     android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_192dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_96dp"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dimen_32dp"
+                android:paddingRight="@dimen/dimen_32dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="订单编号:"
+                    android:textColor="@color/zhy_text_color_1"
+                    android:textSize="@dimen/dimen_32dp" />
+
+                <TextView
+                    android:id="@+id/tv_ewm_0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dimen_30dp"
+                    android:textColor="@color/dimgray"
+                    android:textSize="@dimen/dimen_32dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_96dp"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dimen_32dp"
+                android:paddingRight="@dimen/dimen_32dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="支付金额:"
+                    android:textColor="@color/zhy_text_color_1"
+                    android:textSize="@dimen/dimen_32dp" />
+
+                <TextView
+                    android:id="@+id/tv_ewm_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dimen_30dp"
+                    android:textColor="@color/dimgray"
+                    android:textSize="@dimen/dimen_32dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="@dimen/dimen_110dp"
+            android:layout_height="@dimen/dimen_110dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/dimen_32dp"
+            android:src="@drawable/zhy_pay_ewm_title_icon" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_20dp"
-        android:background="@color/white" />
-
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/dimen_20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:text="订单编号:"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dimen_40dp" />
-
-        <TextView
-            android:id="@+id/tv_ewm_0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="@dimen/dimen_30dp"
-            android:text=""
-            android:textColor="@color/blackgroundmain"
-            android:textSize="@dimen/dimen_30dp" />
-    </LinearLayout>
+        android:layout_height="@dimen/dimen_24dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/dimen_20dp">
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:text="支付金額:"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dimen_40dp" />
+            android:layout_marginTop="@dimen/dimen_28dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_ewm_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginLeft="@dimen/dimen_30dp"
-            android:text=""
-            android:textColor="@color/blackgroundmain"
-            android:textSize="@dimen/dimen_30dp" />
-    </LinearLayout>
+            <ImageView
+                android:layout_width="@dimen/dimen_26dp"
+                android:layout_height="@dimen/dimen_26dp"
+                android:src="@drawable/zhy_pay_ewm_code_icon" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/black" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dimen_8dp"
+                android:text="扫码支付"
+                android:textColor="@color/zhy_text_color_1"
+                android:textSize="@dimen/dimen_32dp" />
+        </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/iv_ewm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dimen_460dp"
+            android:layout_height="@dimen/dimen_460dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dimen_200dp"
-            android:background="@drawable/icon_qr_code" />
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dimen_50dp"
+            android:layout_marginTop="@dimen/dimen_50dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/iv_ewm"
-            android:layout_centerHorizontal="true"
-            android:text="扫码支付"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dimen_40dp" />
-    </RelativeLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -36,7 +36,7 @@ import java.util.ArrayList;
 
 public class SaveTalkFailActivity extends BaseActivity {
     Long ConsultId;
-    Button mSubmit;
+    TextView mSubmit;
 
     EditTextViewNormal mWriteName;
     EditTextViewNormal mWriteTalkPoint;
@@ -67,7 +67,7 @@ public class SaveTalkFailActivity extends BaseActivity {
     }
 
     private void initView() {
-        mSubmit = (Button) findViewById(R.id.submit);
+        mSubmit = (TextView) findViewById(R.id.submit);
 
         mWriteName = (EditTextViewNormal) findViewById(R.id.write_name);
         mWriteTalkPoint = (EditTextViewNormal) findViewById(R.id.write_talkpoint);

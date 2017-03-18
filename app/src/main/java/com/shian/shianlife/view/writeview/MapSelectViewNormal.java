@@ -32,6 +32,7 @@ public class MapSelectViewNormal extends BaseWriteView {
     private ArrayAdapter<String> arrayAdapter;
     private int numView;
     public static String THE_ACTION = "MapLocationData";
+
     public MapSelectViewNormal(Context context) {
         this(context, null);
     }
@@ -85,6 +86,10 @@ public class MapSelectViewNormal extends BaseWriteView {
 
     public String getData() {
         return mAutoTextView.getText().toString();
+    }
+
+    public void setData(String location) {
+        mAutoTextView.setText(location);
     }
 
     OnClickListener onClickListener = new OnClickListener() {

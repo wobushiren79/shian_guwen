@@ -26,6 +26,10 @@ import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpSaveCustomerUsageParams;
 import com.shian.shianlife.provide.result.HrConsultUsageResult;
 import com.shian.shianlife.view.MapSelectLayoutView;
+import com.shian.shianlife.view.writeview.EditTextViewNormal;
+import com.shian.shianlife.view.writeview.MapSelectViewNormal;
+import com.shian.shianlife.view.writeview.SpinnerViewNormal;
+import com.shian.shianlife.view.writeview.TimeSelectViewNormal;
 import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 
 
@@ -35,25 +39,22 @@ import java.util.List;
 
 
 public class WSZDataActivity extends BaseActivity {
-    EditText mETName;
-    EditText mETCardId;
-    EditText mETAge;
-    EditText mETShoesSize;
-    EditText mETRemark;
-
-    TextView mTVBirthdayTime;
     TextView mTVNext;
 
-    Spinner mSPHealth;
-    Spinner mSPClothes;
-    Spinner mSPOtherHealth;
+    EditTextViewNormal mWriteDeadName;
+    EditTextViewNormal mWriteCardId;
+    EditTextViewNormal mWriteDeadAge;
+    EditTextViewNormal mWriteShoesSize;
+    EditTextViewNormal mWriteRemark;
 
-    MapSelectLayoutView mSelectLayoutView;
+    SpinnerViewNormal mWriteDeadSex;
+    SpinnerViewNormal mWriteDeadState;
+    SpinnerViewNormal mWriteDeadClothes;
+    SpinnerViewNormal mWriteOtherState;
 
-    RadioButton mRBUn, mRBMan, mRBWoman, mRBSelect;
-    List<RadioButton> rbList = new ArrayList<>();
+    TimeSelectViewNormal mWriteTimeSelect;
 
-
+    MapSelectViewNormal mWriteMapSelectNow;
     long consultId;
     long orderId;
 
@@ -77,43 +78,30 @@ public class WSZDataActivity extends BaseActivity {
     }
 
     private void initView() {
-        mETName = (EditText) findViewById(R.id.et_sz_name);
-        mETCardId = (EditText) findViewById(R.id.et_sz_idcard);
-        mETAge = (EditText) findViewById(R.id.et_sz_age);
-        mETShoesSize = (EditText) findViewById(R.id.et_sz_size);
-        mETRemark = (EditText) findViewById(R.id.et_sz_bz);
+        mWriteDeadName = (EditTextViewNormal) findViewById(R.id.write_deadname);
+        mWriteCardId = (EditTextViewNormal) findViewById(R.id.write_deadcardid);
+        mWriteDeadAge = (EditTextViewNormal) findViewById(R.id.write_deadage);
+        mWriteDeadSex = (SpinnerViewNormal) findViewById(R.id.write_deadsex);
+        mWriteShoesSize = (EditTextViewNormal) findViewById(R.id.write_deadshoe);
+        mWriteDeadState = (SpinnerViewNormal) findViewById(R.id.write_deadstate);
+        mWriteTimeSelect = (TimeSelectViewNormal) findViewById(R.id.write_timeselect);
+        mWriteMapSelectNow = (MapSelectViewNormal) findViewById(R.id.write_mapselect_now);
+        mWriteDeadClothes = (SpinnerViewNormal) findViewById(R.id.write_deadclothes);
+        mWriteRemark = (EditTextViewNormal) findViewById(R.id.write_remark);
+        mWriteOtherState = (SpinnerViewNormal) findViewById(R.id.write_otherstate);
 
-        mSPClothes = (Spinner) findViewById(R.id.sp_clothes);
-        mSPHealth = (Spinner) findViewById(R.id.sp_sz_szxz);
-        mSPOtherHealth = (Spinner) findViewById(R.id.sp_other_health);
-
-        mTVBirthdayTime = (TextView) findViewById(R.id.tv_sz_birthd);
         mTVNext = (TextView) findViewById(R.id.tv_editorder);
-
-        mRBUn = (RadioButton) findViewById(R.id.rb_sz_wz);
-        mRBMan = (RadioButton) findViewById(R.id.rb_sz_man);
-        mRBWoman = (RadioButton) findViewById(R.id.rb_sz_felman);
-        mRBSelect = (RadioButton) findViewById(R.id.rb_sz_bm);
-
-        mSelectLayoutView = (MapSelectLayoutView) findViewById(R.id.mapselect);
-
-        rbList.add(mRBUn);
-        rbList.add(mRBMan);
-        rbList.add(mRBWoman);
-        rbList.add(mRBSelect);
-
-        mTVBirthdayTime.setOnClickListener(onClickListener);
         mTVNext.setOnClickListener(onClickListener);
-        mSelectLayoutView.setData(1, new ArrayList<String>());
+
+        mWriteDeadSex.initSpinner(R.array.sex);
+        mWriteDeadState.initSpinner(R.array.szxz);
+        mWriteOtherState.initSpinner(R.array.szxz);
+        mWriteDeadClothes.initSpinner(R.array.syxx);
+        mWriteMapSelectNow.setNumView(0);
     }
 
 
     private void initData() {
-        initSp1(0, "健康", mSPHealth);
-        initSp1(1, "家属自己准备寿衣", mSPClothes);
-        initSp1(2, "健康", mSPOtherHealth);
-
-        setSexListener();
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId(consultId);
         MHttpManagerFactory.getAccountManager().getCustomerUsage(WSZDataActivity.this,
@@ -125,13 +113,13 @@ public class WSZDataActivity extends BaseActivity {
 
                         Utils.LogVPrint("Name:" + result.getConsultUsage().getName());
                         Utils.LogVPrint("CardId:" + result.getConsultUsage().getCardId());
-                        Utils.LogVPrint( "Age:" + result.getConsultUsage().getAge());
-                        Utils.LogVPrint( "Sex:" + result.getConsultUsage().getSex());
+                        Utils.LogVPrint("Age:" + result.getConsultUsage().getAge());
+                        Utils.LogVPrint("Sex:" + result.getConsultUsage().getSex());
                         Utils.LogVPrint("ShoeSize:" + result.getConsultUsage().getShoeSize());
                         Utils.LogVPrint("State:" + result.getConsultUsage().getState());
                         Utils.LogVPrint("Birthday:" + result.getConsultUsage().getBirthday());
                         Utils.LogVPrint("Location:" + result.getConsultUsage().getLocation());
-                        Utils.LogVPrint( "ClothesData:" + result.getConsultUsage().getClothesData());
+                        Utils.LogVPrint("ClothesData:" + result.getConsultUsage().getClothesData());
                         Utils.LogVPrint("OtherHealth:" + result.getConsultUsage().getOtherHealth());
                         Utils.LogVPrint("Note:" + result.getConsultUsage().getNote());
                         Utils.LogVPrint("AgentmanLocation:" + result.getConsultUsage().getAgentmanLocation());
@@ -151,16 +139,23 @@ public class WSZDataActivity extends BaseActivity {
                         if (result.getConsultUsage().getLocation() != null) {
                             listLocationData.add(result.getConsultUsage().getLocation());
                         }
-                        mSelectLayoutView.setData(1, listLocationData);
-                        mETName.setText(result.getConsultUsage().getName());
-                        mETCardId.setText(result.getConsultUsage().getCardId());
-                        mETAge.setText(result.getConsultUsage().getAge());
-                        mETShoesSize.setText(result.getConsultUsage().getShoeSize());
-                        mTVBirthdayTime.setText(TransitionDate.DateToStr(new Date(
+                        mWriteDeadSex.setData(result.getConsultUsage().getSex()-1);
+                        mWriteDeadState.setData(result.getConsultUsage().getState());
+                        mWriteDeadClothes.setData(result.getConsultUsage().getClothesData());
+                        mWriteOtherState.setData(result.getConsultUsage().getOtherHealth());
+
+
+                        mWriteMapSelectNow.initAutoTextView(listLocationData);
+                        mWriteDeadName.setData(result.getConsultUsage().getName());
+                        mWriteCardId.setData(result.getConsultUsage().getCardId());
+                        mWriteDeadAge.setData(result.getConsultUsage().getAge());
+                        mWriteShoesSize.setData(result.getConsultUsage().getShoeSize());
+
+                        mWriteTimeSelect.setData(TransitionDate.DateToStr(new Date(
                                         result.getConsultUsage().getBirthday()),
                                 "yyyy-MM-dd"));
-                        mSelectLayoutView.setLocation(result.getConsultUsage().getLocation());
-                        mETRemark.setText(result.getConsultUsage().getNote());
+                        mWriteMapSelectNow.setData(result.getConsultUsage().getLocation());
+                        mWriteRemark.setData(result.getConsultUsage().getNote());
                     }
 
                     @Override
@@ -216,42 +211,24 @@ public class WSZDataActivity extends BaseActivity {
         });
     }
 
-    private void setSexListener() {
-        for (int i = 0; i < rbList.size(); i++) {
-            setCheckListener(rbList.get(i), i);
-        }
-    }
-
-    private void setCheckListener(RadioButton rb, final int index) {
-        rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // TODO Auto-generated method stub
-                if (isChecked)
-                    params.setSex(index + 1);
-            }
-        });
-    }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (view == mTVBirthdayTime) {
-                setBirthdayTime();
-            } else if (view == mTVNext) {
+            if (view == mTVNext) {
                 upData();
             }
         }
     };
 
     private void upData() {
-        String name = mETName.getText().toString();
-        String carid = mETCardId.getText().toString();
-        String age = mETAge.getText().toString();
-        String size = mETShoesSize.getText().toString();
-        String birthd = mTVBirthdayTime.getText().toString();
-        String location = mSelectLayoutView.getLocation();
-        String bz = mETRemark.getText().toString();
+        String name = mWriteDeadName.getData();
+        String carid = mWriteCardId.getData();
+        String age = mWriteDeadAge.getData();
+        String size = mWriteShoesSize.getData();
+        String birthd = mWriteTimeSelect.getData();
+        String location = mWriteMapSelectNow.getData();
+        String bz = mWriteRemark.getData();
 
         if (TextUtils.isEmpty(name)) {
             ToastUtils.show(WSZDataActivity.this, "往生者姓名不能为空");
@@ -290,20 +267,22 @@ public class WSZDataActivity extends BaseActivity {
         params.setBirthday(TransitionDate.StrToDate(birthd, "yyyy-MM-dd")
                 .getTime());
         params.setLocation(location);
-
         params.setNote(bz);
-
+        params.setSex(mWriteDeadSex.getSelectPosition() + 1);
+        params.setState(mWriteDeadState.getData());
+        params.setClothesData(mWriteDeadClothes.getData());
+        params.setOtherHealth(mWriteOtherState.getData());
 
         Utils.LogVPrint("Name:" + params.getName());
         Utils.LogVPrint("CardId:" + params.getCardId());
-        Utils.LogVPrint( "Age:" + params.getAge());
-        Utils.LogVPrint( "Sex:" + params.getSex());
+        Utils.LogVPrint("Age:" + params.getAge());
+        Utils.LogVPrint("Sex:" + params.getSex());
         Utils.LogVPrint("ShoeSize:" + params.getShoeSize());
-        Utils.LogVPrint( "State:" + params.getState());
-        Utils.LogVPrint( "Birthday:" + params.getBirthday());
+        Utils.LogVPrint("State:" + params.getState());
+        Utils.LogVPrint("Birthday:" + params.getBirthday());
         Utils.LogVPrint("Location:" + params.getLocation());
         Utils.LogVPrint("ClothesData:" + params.getClothesData());
-        Utils.LogVPrint( "OtherHealth:" + params.getOtherHealth());
+        Utils.LogVPrint("OtherHealth:" + params.getOtherHealth());
         Utils.LogVPrint("Note:" + params.getNote());
 
         MHttpManagerFactory.getAccountManager().saveCustomerUsage(WSZDataActivity.this,
@@ -341,18 +320,5 @@ public class WSZDataActivity extends BaseActivity {
         OrderFragment.C_bOrder_isRefresh = true;
     }
 
-    private void setBirthdayTime() {
-        DateTimeSelectorDialogBuilder dialog = DateTimeSelectorDialogBuilder
-                .getInstance(WSZDataActivity.this);
-        dialog.setShowHour(false);
-        dialog.show();
-        dialog.setOnSaveListener(new DateTimeSelectorDialogBuilder.OnSaveListener() {
 
-            @Override
-            public void onSaveSelectedDate(String selectedDate) {
-                // TODO Auto-generated method stub
-                mTVBirthdayTime.setText(selectedDate);
-            }
-        });
-    }
 }

@@ -1,10 +1,12 @@
 package com.shian.shianlife.provide.phpmodel;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2017/3/13.
  */
 
-public class SiftListData {
+public class SiftListData implements Serializable{
     private int id;//  精选Id
     private String img;//   图片地址
     private String title;//   标题

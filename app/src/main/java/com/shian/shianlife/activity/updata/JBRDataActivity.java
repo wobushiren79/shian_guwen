@@ -22,29 +22,28 @@ import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpSaveCustomerAgentmanParams;
 import com.shian.shianlife.provide.result.HrConsultAgentman;
 import com.shian.shianlife.view.MapSelectLayoutView;
+import com.shian.shianlife.view.writeview.EditTextViewNormal;
+import com.shian.shianlife.view.writeview.MapSelectViewNormal;
+import com.shian.shianlife.view.writeview.SpinnerViewEdit;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class JBRDataActivity extends BaseActivity {
-
-    EditText mETJBRName;
-    EditText mETJBRPhone;
-    EditText mETJBRRelation;
-    EditText mETJBRCardId;
-    EditText mETJBREmail;
-    EditText mETRemark;
-
-    Spinner mSPRelation;
-
-
     TextView mTVBack;
     TextView mTVNext;
 
-    MapSelectLayoutView selectLayoutView1;
-    MapSelectLayoutView selectLayoutView2;
+    EditTextViewNormal mWriteAgentName;
+    EditTextViewNormal mWriteAgentMoblie;
+    EditTextViewNormal mWriteAgentCardId;
+    EditTextViewNormal mWriteAgentEmail;
+    EditTextViewNormal mWriteRemark;
 
+    SpinnerViewEdit mWriteAgentRelation;
+
+    MapSelectViewNormal mWriteMapSelectAgentLocation;
+    MapSelectViewNormal mWriteMapSelectZSLocation;
 
     long consultId;
     long orderId;
@@ -61,29 +60,24 @@ public class JBRDataActivity extends BaseActivity {
     }
 
     private void initView() {
-        mETJBRName = (EditText) findViewById(R.id.et_jbr_0);
-        mETJBRPhone = (EditText) findViewById(R.id.et_jbr_1);
-        mETJBRRelation = (EditText) findViewById(R.id.et_jbr_2);
-        mETJBRCardId = (EditText) findViewById(R.id.et_jbr_cardid);
-        mETJBREmail = (EditText) findViewById(R.id.et_jbr_email);
-        mETRemark = (EditText) findViewById(R.id.et_remark);
-
+        mWriteAgentName = (EditTextViewNormal) findViewById(R.id.write_agentname);
+        mWriteAgentMoblie = (EditTextViewNormal) findViewById(R.id.write_agentmoblie);
+        mWriteAgentRelation = (SpinnerViewEdit) findViewById(R.id.write_agentrelation);
+        mWriteAgentCardId = (EditTextViewNormal) findViewById(R.id.write_agentcardid);
+        mWriteMapSelectAgentLocation = (MapSelectViewNormal) findViewById(R.id.write_mapselect_agentlocation);
+        mWriteMapSelectZSLocation = (MapSelectViewNormal) findViewById(R.id.write_mapselect_zslocation);
+        mWriteAgentEmail= (EditTextViewNormal) findViewById(R.id.write_agentemail);
+        mWriteRemark= (EditTextViewNormal) findViewById(R.id.write_remark);
 
         mTVBack = (TextView) findViewById(R.id.tv_back);
         mTVNext = (TextView) findViewById(R.id.tv_next);
 
-        selectLayoutView1 = (MapSelectLayoutView) findViewById(R.id.mapselect1);
-        selectLayoutView2 = (MapSelectLayoutView) findViewById(R.id.mapselect2);
-
-
-        mSPRelation = (Spinner) findViewById(R.id.sp_jbr_0);
-
-
         mTVBack.setOnClickListener(onClickListener);
         mTVNext.setOnClickListener(onClickListener);
 
-        selectLayoutView1.setData(1, new ArrayList<String>());
-        selectLayoutView2.setData(2, new ArrayList<String>());
+        mWriteAgentRelation.initSpinner(R.array.gx);
+        mWriteMapSelectAgentLocation.setNumView(0);
+        mWriteMapSelectZSLocation.setNumView(1);
     }
 
     int mapCheckNum = 0;
@@ -110,22 +104,14 @@ public class JBRDataActivity extends BaseActivity {
     }
 
     private void upData() {
-        if (mSPRelation.getSelectedItemPosition() == 0) {
-            if (mETJBRRelation.getText().toString().equals("")) {
-                params.setRelation("其他");
-            } else {
-                params.setRelation(mETJBRRelation.getText().toString());
-            }
-        }
-
         //生成合同信息
-        String name = mETJBRName.getText().toString();
-        String phone = mETJBRPhone.getText().toString();
-        String location = selectLayoutView1.getLocation();
-        String zsLocation = selectLayoutView2.getLocation();
-        String cardid = mETJBRCardId.getText().toString();
-        String email = mETJBREmail.getText().toString();
-        String remark = mETRemark.getText().toString();
+        String name = mWriteAgentName.getData();
+        String phone = mWriteAgentMoblie.getData();
+        String location = mWriteMapSelectAgentLocation.getData();
+        String zsLocation = mWriteMapSelectZSLocation.getData();
+        String cardid = mWriteAgentCardId.getData();
+        String email = mWriteAgentEmail.getData();
+        String remark = mWriteRemark.getData();
 
         if (TextUtils.isEmpty(name)) {
             ToastUtils.show(JBRDataActivity.this, "经办人不能为空");
@@ -163,6 +149,7 @@ public class JBRDataActivity extends BaseActivity {
             ToastUtils.show(JBRDataActivity.this, "经办人邮箱格式错误");
             return;
         }
+        params.setRelation(mWriteAgentRelation.getData());
         params.setConsultId((JBRDataActivity.this).getIntent().getLongExtra("consultId", 0));
         params.setName(name);
         params.setLinkInfo(phone);
@@ -215,7 +202,6 @@ public class JBRDataActivity extends BaseActivity {
         setTitle("经办人信息");
         consultId = getIntent().getLongExtra("consultId", 0);
         orderId = getIntent().getLongExtra("orderId", 0);
-        initSp1("其他");
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId((JBRDataActivity.this).getIntent().getLongExtra("consultId", 0));
         MHttpManagerFactory.getAccountManager().getCustomerAgentman(JBRDataActivity.this, params,
@@ -233,14 +219,15 @@ public class JBRDataActivity extends BaseActivity {
                         Utils.LogVPrint("Relation:" + result.getConsultAgentman().getRelation());
                         Utils.LogVPrint("zsLocation" + result.getConsultAgentman().getZsLocation());
 
-                        mETJBRName.setText(result.getConsultAgentman().getName());
-                        mETJBRPhone.setText(result.getConsultAgentman().getLinkInfo());
-                        mETJBRRelation.setText(result.getConsultAgentman().getRelation());
-                        mETJBRCardId.setText(result.getConsultAgentman().getCardId());
-                        mETJBREmail.setText(result.getConsultAgentman().getEmail());
-                        mETRemark.setText(result.getConsultAgentman().getRemark());
-                        selectLayoutView1.setLocation(result.getConsultAgentman().getLocation());
-                        selectLayoutView2.setLocation(result.getConsultAgentman().getZsLocation());
+
+                        mWriteAgentName.setData(result.getConsultAgentman().getName());
+                        mWriteAgentMoblie.setData(result.getConsultAgentman().getLinkInfo());
+                        mWriteAgentRelation.setData(result.getConsultAgentman().getRelation());
+                        mWriteAgentCardId.setData(result.getConsultAgentman().getCardId());
+                        mWriteAgentEmail.setData(result.getConsultAgentman().getEmail());
+                        mWriteRemark.setData(result.getConsultAgentman().getRemark());
+                        mWriteMapSelectAgentLocation.setData(result.getConsultAgentman().getLocation());
+                        mWriteMapSelectZSLocation.setData(result.getConsultAgentman().getZsLocation());
 
                         List<String> listLocationData = new ArrayList<String>();
                         if (result.getConsultAgentman().getLocation() != null) {
@@ -255,8 +242,8 @@ public class JBRDataActivity extends BaseActivity {
                         if (result.getConsultAgentman().getDeadmanLocation() != null) {
                             listLocationData.add(result.getConsultAgentman().getDeadmanLocation());
                         }
-                        selectLayoutView1.setData(1, listLocationData);
-                        selectLayoutView1.setData(2, listLocationData);
+                        mWriteMapSelectAgentLocation.initAutoTextView(listLocationData);
+                        mWriteMapSelectZSLocation.initAutoTextView(listLocationData);
                     }
 
                     @Override
@@ -273,26 +260,6 @@ public class JBRDataActivity extends BaseActivity {
                 });
     }
 
-    private void initSp1(String i) {
-        ArrayAdapter<CharSequence> province_adapter = ArrayAdapter.createFromResource(JBRDataActivity.this, R.array.gx,
-                android.R.layout.simple_spinner_item);
-        final String[] arrs = getResources().getStringArray(R.array.gx);
-        province_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mSPRelation.setAdapter(province_adapter);
-        mSPRelation.setSelection(Utils.getArrayINdex(arrs, i));
-        mSPRelation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                params.setRelation(arrs[position]);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
 
     @Override
     protected void onDestroy() {

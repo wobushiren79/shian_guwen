@@ -78,4 +78,8 @@ public class TimeSelectViewNormal extends BaseWriteView {
     public String getData() {
         return mTVTime.getText().toString();
     }
+
+    public void setData(String time) {
+        mTVTime.setText(time);
+    }
 }

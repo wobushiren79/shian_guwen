@@ -82,6 +82,25 @@ public class SpinnerViewEdit extends BaseWriteView {
 
     }
 
+    public void setData(String name) {
+        boolean isChange = false;
+        for (int i = 0; i < province_adapter.getCount(); i++) {
+            if (name.equals(province_adapter.getItem(i))) {
+                mSpinner.setSelection(i);
+                isChange = true;
+                return;
+            }
+        }
+        if (!isChange) {
+            mETInput.setText(name);
+        }
+    }
+
+    public void setData(int position) {
+        mSpinner.setSelection(position);
+    }
+
+
     private void initData() {
         mTVTitleName.setText(titleName);
 //        mETInput.setInputType(inputType);
