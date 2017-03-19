@@ -87,7 +87,7 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dimgray">
+            android:background="#e1e1e1">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -129,7 +129,6 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-
                     style="@style/TableText"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -204,7 +203,7 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dimgray">
+            android:background="#e1e1e1">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -328,17 +327,18 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView style="@style/zhy_text_contract_3"
+            <TextView
+                style="@style/zhy_text_contract_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2、治丧地址：" />
 
             <TextView
-                android:textSize="@dimen/dimen_24dp"
                 android:id="@+id/tv_zslocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/blackgroundmain" />
+                android:textColor="@color/blackgroundmain"
+                android:textSize="@dimen/dimen_24dp" />
 
         </LinearLayout>
 
@@ -377,12 +377,12 @@
             android:text="1、依据乙方提供的治丧方案及价格明细表计算，各项殡葬服务费用合计为：" />
 
         <TextView
-            android:textSize="@dimen/dimen_24dp"
             android:id="@+id/tv_allmoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:textColor="@color/blackgroundmain" />
+            android:textColor="@color/blackgroundmain"
+            android:textSize="@dimen/dimen_24dp" />
 
         <TextView
             style="@style/zhy_text_contract_3"
@@ -391,12 +391,12 @@
             android:text="2、本合同签订后当日，甲方应向乙方支付预付款：" />
 
         <TextView
-            android:textSize="@dimen/dimen_24dp"
             android:id="@+id/tv_firstmoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:textColor="@color/blackgroundmain" />
+            android:textColor="@color/blackgroundmain"
+            android:textSize="@dimen/dimen_24dp" />
 
         <TextView
             style="@style/zhy_text_contract_3"
@@ -426,9 +426,9 @@
                 android:id="@+id/tv_lastmoney"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/dimen_24dp"
                 android:text=""
-                android:textColor="@color/blackgroundmain" />
+                android:textColor="@color/blackgroundmain"
+                android:textSize="@dimen/dimen_24dp" />
 
 
         </LinearLayout>
@@ -452,12 +452,14 @@
             android:text="经办人签字：" />
 
         <ImageView
-            android:layout_gravity="center"
-            android:scaleType="fitXY"
+            android:layout_marginBottom="@dimen/dimen_8dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
             android:id="@+id/dv_pay"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_400dp"
-            android:background="@color/zhy_backgroud_1" />
+            android:layout_gravity="center"
+            android:background="@drawable/zhy_button_state_item_gray"
+            android:scaleType="fitXY" />
 
         <TextView
             style="@style/zhy_text_contract_3"
@@ -477,12 +479,12 @@
                 android:text="委托代理人：" />
 
             <TextView
-                android:textSize="@dimen/dimen_24dp"
                 android:id="@+id/tv_dlman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textColor="@color/blackgroundmain" />
+                android:textColor="@color/blackgroundmain"
+                android:textSize="@dimen/dimen_24dp" />
         </LinearLayout>
 
         <TextView
@@ -513,42 +515,48 @@
 
             <TextView
                 android:id="@+id/tv_back"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="@dimen/dimen_80dp"
+                android:layout_marginLeft="@dimen/dimen_8dp"
+                android:layout_marginRight="@dimen/dimen_8dp"
                 android:layout_weight="1"
-                android:background="@drawable/ic_home_reg"
+                android:background="@drawable/zhy_button_state_2"
                 android:gravity="center"
                 android:padding="@dimen/dimen_10dp"
-                android:text="返回修改经办人信息"
-                android:textColor="@color/text_color" />
+                android:text="返回修改信息"
+                android:textColor="@color/zhy_text_color_1"
+                android:textSize="@dimen/dimen_24dp" />
 
             <TextView
                 android:id="@+id/tv_next"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="@dimen/dimen_80dp"
+                android:layout_marginLeft="@dimen/dimen_8dp"
+                android:layout_marginRight="@dimen/dimen_8dp"
                 android:layout_weight="1"
-                android:background="@drawable/ic_home_reg"
+                android:background="@drawable/zhy_button_state_2"
                 android:gravity="center"
                 android:padding="@dimen/dimen_10dp"
-                android:text="继续填写预备信息资料"
-                android:textColor="@color/text_color" />
+                android:text="继续填写资料"
+                android:textColor="@color/zhy_text_color_1"
+                android:textSize="@dimen/dimen_24dp" />
+
+            <TextView
+                android:id="@+id/tv_complete"
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="@dimen/dimen_80dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dimen_8dp"
+                android:layout_marginRight="@dimen/dimen_8dp"
+                android:layout_weight="1"
+                android:background="@drawable/zhy_button_state_5"
+                android:gravity="center"
+                android:padding="@dimen/dimen_10dp"
+                android:text="提交合同"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_24dp" />
         </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/tv_complete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/dimen_20dp"
-            android:background="@drawable/ic_home_reg"
-            android:gravity="center"
-            android:padding="@dimen/dimen_10dp"
-            android:text="提交合同，结束洽谈"
-            android:textColor="@color/blackgroundmain" />
     </LinearLayout>
 </ScrollView>

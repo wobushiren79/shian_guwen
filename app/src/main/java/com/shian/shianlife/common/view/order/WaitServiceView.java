@@ -19,6 +19,7 @@ import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper;
 import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper.OnSwipeRefreshListener;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.OrderDetailActivity;
+import com.shian.shianlife.activity.map.NewRoutePlanActivity;
 import com.shian.shianlife.activity.updata.WaitServiceDataActivity;
 import com.shian.shianlife.common.utils.TArrayListAdapter;
 import com.shian.shianlife.common.utils.TArrayListAdapter.IOnDrawViewEx;
@@ -190,7 +191,7 @@ public class WaitServiceView extends BaseOrderView {
     IOnDrawViewEx<OrderListModel> waitServiceDrawViewEx = new IOnDrawViewEx<OrderListModel>() {
 
         @Override
-        public void OnDrawViewEx(Context aContext, OrderListModel model,
+        public void OnDrawViewEx(Context aContext, final OrderListModel model,
                                  ViewGropMap view, int aIndex) {
             // 订单编号
             TextView tv_qt01 = (TextView) view.getView(R.id.tv_qt01);
@@ -204,16 +205,30 @@ public class WaitServiceView extends BaseOrderView {
             tv_qt21.setText(model.getTalkerName());
             // 逝者所在地
             TextView tv_qt31 = (TextView) view.getView(R.id.tv_qt31);
+            ImageView ivMap= (ImageView) view.getView(R.id.iv_map);
             if (model.getUsageCurAddress() == null) {
                 tv_qt31.setText("");
+                ivMap.setVisibility(GONE);
             } else {
                 tv_qt31.setText(model.getUsageCurAddress());
+                ivMap.setVisibility(VISIBLE);
+                ivMap.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getContext(), NewRoutePlanActivity.class);
+                        intent.putExtra("LocationType",3);
+                        intent.putExtra("ConsultId",model.getConsultId());
+                        intent.putExtra("RoutePlanLocation", model.getUsageCurAddress());
+                        getContext().startActivity(intent);
+                    }
+                });
             }
 
             TextView tv_qtbz = (TextView) view.getView(R.id.tv_qt_bz);
             ImageView ivPhone1 = (ImageView) view.getView(R.id.iv_qt12);
             ImageView ivPhone2 = (ImageView) view.getView(R.id.iv_qt22);
             ImageView ivPhone3 = (ImageView) view.getView(R.id.iv_qt32);
+
             Utils.call(ivPhone1, model.getAgentmanLinkInfo());
             Utils.call(ivPhone2, model.getTalkerMobile());
 //			Utils.call(ivPhone3, model.getCustomerMobile());

@@ -213,11 +213,12 @@ public class WaitMoneyView extends BaseOrderView {
 			if (model.isHasRest()) {
 				pay.setEnabled(false);
 
-				tvPay.setBackgroundColor(getResources().getColor(
-						R.color.gray_common));
+//				tvPay.setBackgroundColor(getResources().getColor(
+//						R.color.gray_common));
+				tvPay.setBackgroundResource(R.drawable.zhy_button_state_item_gray);
 				tvPay.setText("余款已支付");
 			} else {
-				tvPay.setBackgroundResource(R.drawable.bg_orderlist_item_btn);
+				tvPay.setBackgroundResource(R.drawable.zhy_button_state_item_yellow);
 				tvPay.setText("支付余款");
 				pay.setEnabled(true);
 			}

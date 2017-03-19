@@ -2,78 +2,127 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_blackground">
+    android:background="@color/zhy_backgroud_1">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/dimen_10dp">
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:text="附件:"
-            android:textSize="@dimen/text_size_top_bg" />
-
-        <Button
-            android:id="@+id/btn_yb_0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="@dimen/dimen_30dp"
-            android:layout_marginRight="@dimen/dimen_30dp"
-            android:background="@drawable/shape_et_order"
-            android:padding="@dimen/dimen_10dp"
-            android:tag="filew"
-            android:text="上传文件"
-            android:textSize="@dimen/text_size_detail_list" />
-
-        <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@color/gray" />
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_backgroud_1" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_80dp"
+            android:background="@color/white"
             android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/dimen_5dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_32dp"
+                android:background="@color/zhy_text_color_1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="图片:"
-                android:textSize="@dimen/text_size_top_bg" />
+                android:text="附件"
+                android:textColor="@color/black_item_shua_textcolor"
+                android:textSize="@dimen/dimen_32dp" />
         </LinearLayout>
 
-        <View
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@color/gray" />
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_backgroud_1" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:gravity="center"
+            android:layout_height="@dimen/dimen_80dp"
+            android:background="@color/white"
             android:orientation="horizontal">
 
-            <FrameLayout
+            <TextView
+                android:id="@+id/tv_upfile_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_32dp"
+                android:layout_weight="1"
+                android:text="选择附件文件上传..."
+                android:textColor="@color/zhy_text_color_2"
+                android:textSize="@dimen/dimen_32dp" />
+
+            <Button
+                android:id="@+id/btn_yb_0"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_55dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/dimen_32dp"
+                android:background="@drawable/zhy_button_state_2"
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:paddingRight="@dimen/dimen_10dp"
+                android:tag="filew"
+                android:text="上传文件"
+                android:textColor="@color/zhy_text_color_1"
+                android:textSize="@dimen/dimen_24dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/dimen_5dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_32dp"
+                android:background="@color/zhy_text_color_1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:text="图片"
+                android:textColor="@color/black_item_shua_textcolor"
+                android:textSize="@dimen/dimen_32dp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_backgroud_1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_160dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimen_16dp"
+            android:paddingRight="@dimen/dimen_16dp">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
                 <com.shian.shianlife.common.view.customer.PicImageView
                     android:id="@+id/btn_yb_pic_0"
-                    android:layout_width="@dimen/dimen_300dp"
-                    android:layout_height="@dimen/dimen_200dp"
-                    android:layout_margin="@dimen/dimen_20dp"
+                    android:layout_width="@dimen/dimen_152dp"
+                    android:layout_height="@dimen/dimen_120dp"
+                    android:layout_gravity="center"
                     android:background="@drawable/ic_ht_pic"
                     android:gravity="center"
                     android:tag="file1" />
@@ -81,127 +130,135 @@
                 <ProgressBar
                     android:id="@+id/pb_ht_pic_0"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="@dimen/dimen_300dp"
-                    android:layout_height="@dimen/dimen_200dp"
-                    android:layout_margin="@dimen/dimen_20dp"
+                    android:layout_width="@dimen/dimen_152dp"
+                    android:layout_height="@dimen/dimen_120dp"
+                    android:layout_gravity="center"
                     android:max="100"
                     android:progress="0"
                     android:visibility="gone" />
             </FrameLayout>
 
             <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
                 <com.shian.shianlife.common.view.customer.PicImageView
                     android:id="@+id/btn_yb_pic_1"
-                    android:layout_width="@dimen/dimen_300dp"
-                    android:layout_height="@dimen/dimen_200dp"
-                    android:layout_margin="@dimen/dimen_20dp"
+                    android:layout_width="@dimen/dimen_152dp"
+                    android:layout_height="@dimen/dimen_120dp"
+                    android:layout_gravity="center"
                     android:background="@drawable/ic_ht_pic"
                     android:gravity="center"
-                    android:tag="file2" />
+                    android:tag="file2"
+                    android:visibility="invisible" />
 
                 <ProgressBar
                     android:id="@+id/pb_ht_pic_1"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="@dimen/dimen_300dp"
-                    android:layout_height="@dimen/dimen_200dp"
-                    android:layout_margin="@dimen/dimen_20dp"
+                    android:layout_width="@dimen/dimen_152dp"
+                    android:layout_height="@dimen/dimen_120dp"
+                    android:layout_gravity="center"
                     android:max="100"
                     android:progress="0"
                     android:visibility="gone" />
             </FrameLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
 
             <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
                 <com.shian.shianlife.common.view.customer.PicImageView
                     android:id="@+id/btn_yb_pic_2"
-                    android:layout_width="@dimen/dimen_300dp"
-                    android:layout_height="@dimen/dimen_200dp"
-                    android:layout_margin="@dimen/dimen_20dp"
+                    android:layout_width="@dimen/dimen_152dp"
+                    android:layout_height="@dimen/dimen_120dp"
+                    android:layout_gravity="center"
                     android:background="@drawable/ic_ht_pic"
                     android:gravity="center"
-                    android:tag="file3" />
+                    android:tag="file3"
+                    android:visibility="invisible" />
 
                 <ProgressBar
                     android:id="@+id/pb_ht_pic_2"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="@dimen/dimen_300dp"
-                    android:layout_height="@dimen/dimen_200dp"
-                    android:layout_margin="@dimen/dimen_20dp"
+                    android:layout_width="@dimen/dimen_152dp"
+                    android:layout_height="@dimen/dimen_120dp"
+                    android:layout_gravity="center"
                     android:max="100"
                     android:progress="0"
                     android:visibility="gone" />
             </FrameLayout>
 
             <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
 
                 <com.shian.shianlife.common.view.customer.PicImageView
                     android:id="@+id/btn_yb_pic_3"
-                    android:layout_width="@dimen/dimen_300dp"
-                    android:layout_height="@dimen/dimen_200dp"
-                    android:layout_margin="@dimen/dimen_20dp"
+                    android:layout_width="@dimen/dimen_152dp"
+                    android:layout_height="@dimen/dimen_120dp"
+                    android:layout_gravity="center"
                     android:background="@drawable/ic_ht_pic"
                     android:gravity="center"
-                    android:tag="file4" />
+                    android:tag="file4"
+                    android:visibility="invisible" />
 
                 <ProgressBar
                     android:id="@+id/pb_ht_pic_3"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="@dimen/dimen_300dp"
-                    android:layout_height="@dimen/dimen_200dp"
-                    android:layout_margin="@dimen/dimen_20dp"
+                    android:layout_width="@dimen/dimen_152dp"
+                    android:layout_height="@dimen/dimen_120dp"
+                    android:layout_gravity="center"
                     android:max="100"
                     android:progress="0"
                     android:visibility="gone" />
             </FrameLayout>
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@color/gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:background="@color/white"
             android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/dimen_5dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_32dp"
+                android:background="@color/zhy_text_color_1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="完成情况:"
-                android:textSize="@dimen/text_size_top_bg" />
-
-            <EditText
-                android:id="@+id/et_yb_0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:layout_marginRight="@dimen/dimen_30dp"
-                android:layout_weight="1"
-                android:background="@drawable/shape_et_order"
-                android:padding="@dimen/dimen_10dp"
-                android:textSize="@dimen/text_size_top_bg" />
+                android:text="完成情况"
+                android:textColor="@color/black_item_shua_textcolor"
+                android:textSize="@dimen/dimen_32dp" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_backgroud_1" />
+
+        <EditText
+            android:id="@+id/et_yb_0"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:hint="请输入完成情况..."
+            android:paddingLeft="@dimen/dimen_32dp"
+            android:paddingRight="@dimen/dimen_32dp"
+            android:textSize="@dimen/dimen_24dp" />
+
 
         <View
             android:layout_width="match_parent"
@@ -209,40 +266,38 @@
             android:layout_weight="1" />
 
         <LinearLayout
-            android:layout_marginTop="@dimen/dimen_20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_65dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/tv_backback"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dimen_180dp"
+                android:layout_height="@dimen/dimen_80dp"
                 android:layout_gravity="bottom|center"
-                android:layout_marginLeft="@dimen/dimen_20dp"
-                android:layout_marginRight="@dimen/dimen_20dp"
-                android:layout_weight="1"
-                android:background="@drawable/ic_home_reg"
+                android:background="@drawable/zhy_button_state_2"
                 android:gravity="center"
+                android:layout_marginRight="@dimen/dimen_16dp"
                 android:padding="@dimen/dimen_10dp"
-                android:text="返回修改合同信息"
-                android:textSize="@dimen/txtsize_20sp"
-                android:textColor="@color/text_color" />
+                android:text="返回修改"
+                android:textColor="@color/zhy_text_color_1"
+                android:textSize="@dimen/dimen_24dp" />
 
             <TextView
+                android:layout_marginLeft="@dimen/dimen_16dp"
                 android:id="@+id/tv_editorder"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dimen_180dp"
+                android:layout_height="@dimen/dimen_80dp"
                 android:layout_gravity="bottom|center"
-                android:layout_marginLeft="@dimen/dimen_20dp"
-                android:layout_marginRight="@dimen/dimen_20dp"
-                android:layout_weight="1"
-                android:background="@drawable/ic_home_reg"
+                android:background="@drawable/zhy_button_state_5"
                 android:gravity="center"
                 android:padding="@dimen/dimen_10dp"
-                android:text="信息确认无误，结束洽谈"
-                android:textSize="@dimen/txtsize_20sp"
-                android:textColor="@color/blackgroundmain" />
+                android:text="确认无误"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_24dp" />
         </LinearLayout>
 
     </LinearLayout>

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shian.shianlife.R;
@@ -47,6 +48,7 @@ public class TQZBDataActivity extends BaseActivity {
     private long orderId;
 
     EditText et0;
+    TextView mTVUpFileName;
 
     PicImageView btn_yb_pic_0;
     PicImageView btn_yb_pic_1;
@@ -76,6 +78,7 @@ public class TQZBDataActivity extends BaseActivity {
         btn_yb_pic_3 = (PicImageView) findViewById(R.id.btn_yb_pic_3);
 
         et0 = (EditText) findViewById(R.id.et_yb_0);
+        mTVUpFileName = (TextView) findViewById(R.id.tv_upfile_name);
 
         btnList = new ArrayList<>();
         btnList.add(btn_yb_pic_0);
@@ -123,7 +126,7 @@ public class TQZBDataActivity extends BaseActivity {
             public void onFile(String paths) {
                 if (paths == null) return;
                 String filename = paths.substring(paths.lastIndexOf("/"));
-                v.setText(filename);
+                mTVUpFileName.setText(filename);
                 uploadFile(v, v.getTag().toString(), paths);
             }
         });
@@ -132,6 +135,13 @@ public class TQZBDataActivity extends BaseActivity {
 
     @OnClick({R.id.btn_yb_pic_0, R.id.btn_yb_pic_1, R.id.btn_yb_pic_2, R.id.btn_yb_pic_3})
     void btnPicClick(final PicImageView v) {
+        if(v==btn_yb_pic_0){
+            btn_yb_pic_1.setVisibility(View.VISIBLE);
+        }else if(v==btn_yb_pic_1){
+            btn_yb_pic_2.setVisibility(View.VISIBLE);
+        }else if(v==btn_yb_pic_2){
+            btn_yb_pic_3.setVisibility(View.VISIBLE);
+        }
         if (v.getAdd1Item() != null || v.getNewItem() != null) {
             Intent in = new Intent(TQZBDataActivity.this, ImagePreviewActivity.class);
             if (v.getNewItem() != null) {
@@ -208,7 +218,7 @@ public class TQZBDataActivity extends BaseActivity {
                         add.setFileName(file);
                         add.setFileUrl(t.getNameMap().get(file).toString());
                         ib.setNewItem(add);
-                        // addList.add(add);
+//                         addList.add(add);
                         pbVIew.setVisibility(View.GONE);
 
                     }

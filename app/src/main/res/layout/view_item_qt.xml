@@ -247,6 +247,22 @@
             android:gravity="center"
             android:orientation="horizontal">
 
+            <FrameLayout
+                android:id="@+id/fl_refuse"
+                android:layout_width="@dimen/dimen_133dp"
+                android:layout_height="@dimen/dimen_66dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dimen_14dp"
+                android:layout_marginRight="@dimen/dimen_14dp">
+
+                <TextView
+                    style="@style/orderlist_item_btn_textStyle"
+                    android:layout_width="@dimen/dimen_133dp"
+                    android:layout_height="@dimen/dimen_66dp"
+                    android:background="@drawable/zhy_button_state_2"
+                    android:text="拒单"
+                    android:textColor="@color/zhy_text_color_1" />
+            </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/fl_accept"
@@ -265,22 +281,6 @@
                     android:textColor="@color/white" />
             </FrameLayout>
 
-            <FrameLayout
-                android:id="@+id/fl_refuse"
-                android:layout_width="@dimen/dimen_133dp"
-                android:layout_height="@dimen/dimen_66dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/dimen_14dp"
-                android:layout_marginRight="@dimen/dimen_14dp">
-
-                <TextView
-                    style="@style/orderlist_item_btn_textStyle"
-                    android:layout_width="@dimen/dimen_133dp"
-                    android:layout_height="@dimen/dimen_66dp"
-                    android:background="@drawable/zhy_button_state_2"
-                    android:text="拒单"
-                    android:textColor="@color/zhy_text_color_1" />
-            </FrameLayout>
 
             <FrameLayout
                 android:id="@+id/fl_shift"

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dimen_650dp"
+    android:layout_height="@dimen/dimen_600dp"
+    android:background="@drawable/zhy_button_state_item_white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/dimen_32dp"
+        android:layout_marginTop="@dimen/dimen_32dp"
+        android:gravity="center"
+        android:text="请绘制签名"
+        android:textSize="@dimen/dimen_32dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/ll_draw"
+        android:layout_width="@dimen/dimen_550dp"
+        android:layout_height="@dimen/dimen_400dp"
+        android:layout_gravity="center"
+        android:background="@drawable/zhy_button_state_item_gray"
+        android:orientation="vertical"></LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:layout_marginTop="@dimen/dimen_16dp"
+        android:background="@color/zhy_line_3" />
+
+    <TextView
+        android:id="@+id/tv_submit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80dp"
+        android:background="@drawable/zhy_button_state_6"
+        android:gravity="center"
+        android:text="确认"
+        android:textColor="@color/zhy_text_color_1"
+        android:textSize="@dimen/dimen_24dp" />
+</LinearLayout>

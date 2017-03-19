@@ -60,6 +60,7 @@ import com.shian.shianlife.provide.result.HrOrderFeedback;
 import com.shian.shianlife.provide.result.HrUploadFile;
 import com.shian.shianlife.view.ScreenShot;
 import com.shian.shianlife.view.ScrollListView;
+import com.shian.shianlife.view.dialog.SignDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -301,7 +302,7 @@ public class ContractDataActivity extends BaseActivity {
         mTVNext.setVisibility(View.VISIBLE);
         mTVBack.setVisibility(View.VISIBLE);
         mTVComplete.setVisibility(View.VISIBLE);
-        final Bitmap bmp = Bitmap.createScaledBitmap(bitmap, metrics.widthPixels / 3, (bitmap.getHeight() * metrics.widthPixels / bitmap.getWidth()) / 3, true);
+        final Bitmap bmp = Bitmap.createScaledBitmap(bitmap,  (int)(metrics.widthPixels / 2.5), (int)((bitmap.getHeight() * metrics.widthPixels / bitmap.getWidth()) / 2.5), true);
         new Thread() {
             @Override
             public void run() {
@@ -385,25 +386,33 @@ public class ContractDataActivity extends BaseActivity {
      * 签名
      */
     private void drawName() {
-        AlertDialog alertDialog;
-        final DrawView drawView = new DrawView(ContractDataActivity.this);
-        drawView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.dimen_40dp)));
-        drawView.changeColour(7);
-        drawView.requestFocus();
-        drawView.changeColour(5);
-        alertDialog = new AlertDialog.Builder(ContractDataActivity.this)
-                .setTitle("请绘制签名")
-                .setView(drawView)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Bitmap bitmapName = drawView.getBitamp();
-                        dvPay.setImageBitmap(bitmapName);
-                    }
-                })
-                .create();
-        alertDialog.show();
-        alertDialog.getWindow().setLayout(getResources().getDimensionPixelOffset(R.dimen.dimen_533dp), getResources().getDimensionPixelOffset(R.dimen.dimen_595dp));
+//        AlertDialog alertDialog;
+//        final DrawView drawView = new DrawView(ContractDataActivity.this);
+//        drawView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelSize(R.dimen.dimen_40dp)));
+//        drawView.changeColour(7);
+//        drawView.requestFocus();
+//        drawView.changeColour(5);
+//        alertDialog = new AlertDialog.Builder(ContractDataActivity.this)
+//                .setTitle("请绘制签名")
+//                .setView(drawView)
+//                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        Bitmap bitmapName = drawView.getBitamp();
+//                        dvPay.setImageBitmap(bitmapName);
+//                    }
+//                })
+//                .create();
+//        alertDialog.show();
+//        alertDialog.getWindow().setLayout(getResources().getDimensionPixelOffset(R.dimen.dimen_600dp), getResources().getDimensionPixelOffset(R.dimen.dimen_595dp));
+        SignDialog dialog=new SignDialog(ContractDataActivity.this,R.style.CustomDialog);
+        dialog.setCallBack(new SignDialog.CallBack() {
+            @Override
+            public void signComplete(Bitmap bitmapName) {
+                dvPay.setImageBitmap(bitmapName);
+            }
+        });
+        dialog.show();
     }
 
 

@@ -172,7 +172,7 @@ public class CustomDetailView extends FrameLayout {
 
 	public void setData(HrGetOrderDetailResult result) {
 		mBordModel = result.getBoard();
-		tv_visitNum.appendContent(mBordModel.getVisitNum(),Color.parseColor("#467837"));
+		tv_visitNum.appendContent(mBordModel.getVisitNum(),getResources().getColor(R.color.zhy_text_color_1));
 		tv_orderNum.append(mBordModel.getOrderNum());
 		if(mBordModel.getOrderTime()!=0)
 		tv_orderTime.append(TimeUtils.formatTime(mBordModel.getOrderTime()));
