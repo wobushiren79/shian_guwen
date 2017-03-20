@@ -2,18 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <TextView
         style="@style/customer_detail_titleTextStyle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dimen_80dp"
         android:text="经办人信息" />
 
-    <View
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray_common" />
+        android:layout_height="@dimen/dimen_1dp"
+        android:layout_marginLeft="@dimen/dimen_32dp"
+        android:background="@color/zhy_line_3" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -23,14 +26,14 @@
         <TextView
             style="@style/customer_detail_title2TextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="姓名：" />
 
         <TextView
             android:id="@+id/tv_name"
             style="@style/customer_detail_contentTextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="未知" />
     </LinearLayout>
 
@@ -43,14 +46,14 @@
         <TextView
             style="@style/customer_detail_title2TextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="联系电话：" />
 
         <TextView
             android:id="@+id/tv_linkInfo"
             style="@style/customer_detail_contentTextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="未知" />
     </LinearLayout>
 
@@ -62,14 +65,14 @@
         <TextView
             style="@style/customer_detail_title2TextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="经办人是\n逝者的：" />
+            android:layout_height="@dimen/dimen_48dp"
+            android:text="经办人是逝者的：" />
 
         <TextView
             android:id="@+id/tv_relation"
             style="@style/customer_detail_contentTextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="未知" />
     </LinearLayout>
 
@@ -81,14 +84,14 @@
         <TextView
             style="@style/customer_detail_title2TextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="经办人地址：" />
 
         <TextView
             android:id="@+id/tv_address"
             style="@style/customer_detail_contentTextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="未知" />
     </LinearLayout>
 
@@ -101,14 +104,14 @@
         <TextView
             style="@style/customer_detail_title2TextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="身份证号码：" />
 
         <TextView
             android:id="@+id/tv_cardid"
             style="@style/customer_detail_contentTextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="未知" />
     </LinearLayout>
 
@@ -120,14 +123,14 @@
         <TextView
             style="@style/customer_detail_title2TextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="邮箱地址：" />
 
         <TextView
             android:id="@+id/tv_email"
             style="@style/customer_detail_contentTextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="未知" />
     </LinearLayout>
 
@@ -139,14 +142,14 @@
         <TextView
             style="@style/customer_detail_title2TextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="备注：" />
 
         <TextView
             android:id="@+id/tv_remark"
             style="@style/customer_detail_contentTextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/dimen_48dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -158,23 +161,20 @@
         <TextView
             style="@style/customer_detail_title2TextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="出生日期：" />
 
         <TextView
             android:id="@+id/tv_birthday"
             style="@style/customer_detail_contentTextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="未知" />
     </LinearLayout>
 
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginLeft="@dimen/dimen_25dp"
-        android:layout_marginRight="@dimen/dimen_25dp"
-        android:background="@color/gray_common" />
 
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_24dp" />
 </LinearLayout>

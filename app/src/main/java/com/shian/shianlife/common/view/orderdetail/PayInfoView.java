@@ -71,7 +71,7 @@ public class PayInfoView extends FrameLayout {
 
 	public void setData(HrGetOrderDetailResult result) {
 		PayInfoModel payInfo = result.getPayInfo();
-		tv_totalAmount.setText(payInfo.getTotalAmount() + "");
+		tv_totalAmount.setText("￥"+payInfo.getTotalAmount() );
 		tv_prepayAmount.append(payInfo.getPrepayAmount() + "");
 		if(payInfo.getPrepayEndTime()!=0)
 		tv_prepayEndTime.append(TimeUtils.formatTime(payInfo.getPrepayEndTime()));

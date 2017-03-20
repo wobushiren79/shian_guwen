@@ -2,18 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <TextView
         style="@style/customer_detail_titleTextStyle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dimen_80dp"
         android:text="合同信息" />
 
-    <View
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray_common" />
+        android:layout_height="@dimen/dimen_1dp"
+        android:layout_marginLeft="@dimen/dimen_32dp"
+        android:background="@color/zhy_line_3" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -24,14 +27,14 @@
         <TextView
             style="@style/customer_detail_title2TextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="合同编号：" />
 
         <TextView
             android:id="@+id/tv_contractNo"
             style="@style/customer_detail_contentTextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="未知" />
     </LinearLayout>
 
@@ -45,14 +48,14 @@
         <TextView
             style="@style/customer_detail_title2TextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="合同金额：" />
 
         <TextView
             android:id="@+id/tv_contractAmount"
             style="@style/customer_detail_contentTextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="未知" />
     </LinearLayout>
 
@@ -66,7 +69,7 @@
         <TextView
             style="@style/customer_detail_title2TextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="合同附件：" />
 
         <LinearLayout
@@ -89,14 +92,14 @@
         <TextView
             style="@style/customer_detail_title2TextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="备注：" />
 
         <TextView
             android:id="@+id/tv_description"
             style="@style/customer_detail_contentTextStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_48dp"
             android:text="未知" />
     </LinearLayout>
 
@@ -106,11 +109,9 @@
         android:layout_width="@dimen/dimen_100dp"
         android:layout_height="@dimen/dimen_100dp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginLeft="@dimen/dimen_25dp"
-        android:layout_marginRight="@dimen/dimen_25dp"
-        android:background="@color/gray_common" />
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_24dp" />
 </LinearLayout>

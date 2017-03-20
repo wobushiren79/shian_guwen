@@ -44,7 +44,7 @@ public class RefundOrderActivity extends BaseActivity {
 
 	MainDetailRefundView mMainDetailView;
 	FuneralDetailRefundView mFuneralDetailView;
-	CemeteryDetailRefundView mCemeteryDetailView;
+//	CemeteryDetailRefundView mCemeteryDetailView;
 	AddedDetailRefundView mAddedDetailView;
 	PayInfoRefundView mPayInfoView;
 
@@ -68,7 +68,7 @@ public class RefundOrderActivity extends BaseActivity {
 		}
 		mMainDetailView = new MainDetailRefundView(this);
 		mFuneralDetailView = new FuneralDetailRefundView(this);
-		mCemeteryDetailView = new CemeteryDetailRefundView(this);
+//		mCemeteryDetailView = new CemeteryDetailRefundView(this);
 		mAddedDetailView = new AddedDetailRefundView(this);
 		mPayInfoView = new PayInfoRefundView(this);
 		refundMoney=mPayInfoView.getreFundMoney();
@@ -80,7 +80,7 @@ public class RefundOrderActivity extends BaseActivity {
 		ll_parent.addView(textView);
 		ll_parent.addView(mMainDetailView);
 		ll_parent.addView(mFuneralDetailView);
-		ll_parent.addView(mCemeteryDetailView);
+//		ll_parent.addView(mCemeteryDetailView);
 		ll_parent.addView(mAddedDetailView);
 		ll_parent.addView(mPayInfoView);
 
@@ -97,7 +97,7 @@ public class RefundOrderActivity extends BaseActivity {
 			public void onSuccess(HrGetOrderDetailResult result) {
 				mMainDetailView.setData(result);
 				mFuneralDetailView.setData(result);
-				mCemeteryDetailView.setData(result);
+//				mCemeteryDetailView.setData(result);
 				mAddedDetailView.setData(result);
 				mPayInfoView.setData(result);
 			}

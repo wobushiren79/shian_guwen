@@ -43,8 +43,8 @@ public class CtgDetailView extends FrameLayout {
 		ProductDetailView mDetailView = new ProductDetailView(getContext());
 		mDetailView.setLayoutParams(
 				new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-		View line = getLineView();
-		parentLayout.addView(line);
+//		View line = getLineView();
+//		parentLayout.addView(line);
 		parentLayout.addView(mDetailView);
 		mDetailView.setData(mProductItemModel);
 
@@ -52,8 +52,11 @@ public class CtgDetailView extends FrameLayout {
 
 	private View getLineView() {
 		View line = new View(getContext());
-		line.setBackgroundColor(getContext().getResources().getColor(R.color.gray_common));
-		line.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1));
+		line.setBackgroundColor(getContext().getResources().getColor(R.color.zhy_line_3));
+		LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams
+				(LinearLayout.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen.dimen_2dp));
+		layoutParams.leftMargin=getResources().getDimensionPixelOffset(R.dimen.dimen_32dp);
+		line.setLayoutParams(layoutParams);
 		return line;
 	}
 

@@ -63,9 +63,7 @@ public class CustomerDetailActivity extends BaseActivity {
         orderId = getIntent().getLongExtra("orderId", 0);
         getCustomerDeatail();// 获取使用者信息（即逝者信息）
         getManagerDetail();// 获取经办人信息
-
         getCustomerContract();// 获取合同信息
-
         getCustomerFuneral();// 获取殡仪信息（即治丧信息）
         getCustomerPreready();// 获取提前准备
 //		getCustomerCemetery();// 获取公墓信息

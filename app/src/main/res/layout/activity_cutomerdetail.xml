@@ -13,48 +13,44 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_20dp"
-            android:background="@color/white" />
+            android:layout_height="@dimen/dimen_24dp"
+            android:background="@color/zhy_backgroud_1" />
 
         <com.shian.shianlife.common.view.customerdetail.CustomerDeadInfoView
             android:id="@+id/cdiv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20dp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_20dp"
-            android:background="@color/white" />
+            android:layout_height="@dimen/dimen_24dp"
+            android:background="@color/zhy_backgroud_1" />
 
         <com.shian.shianlife.common.view.customerdetail.ManagerDetailInfoView
             android:id="@+id/mdiv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20dp" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_20dp"
-            android:background="@color/white" />
+            android:layout_height="@dimen/dimen_24dp"
+            android:background="@color/zhy_backgroud_1" />
 
         <com.shian.shianlife.common.view.customerdetail.ContractDetailInfoView
             android:id="@+id/ctdiv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20dp" />
+            android:layout_height="wrap_content" />
 
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_20dp"
-            android:background="@color/white" />
+            android:layout_height="@dimen/dimen_24dp"
+            android:background="@color/zhy_backgroud_1" />
 
         <com.shian.shianlife.common.view.customerdetail.FunneralDetailInfoOtherView
             android:id="@+id/fdiv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20dp"></com.shian.shianlife.common.view.customerdetail.FunneralDetailInfoOtherView>
+            android:layout_height="wrap_content"></com.shian.shianlife.common.view.customerdetail.FunneralDetailInfoOtherView>
 
         <!--<TextView-->
         <!--android:layout_width="match_parent"-->
@@ -69,37 +65,37 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_20dp"
-            android:background="@color/white" />
+            android:layout_height="@dimen/dimen_24dp"
+            android:background="@color/zhy_backgroud_1"
+            android:visibility="gone" />
 
         <com.shian.shianlife.common.view.customerdetail.CemeteryDetailInfoView
             android:id="@+id/cediv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20dp"
             android:visibility="gone" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_20dp"
-            android:background="@color/white" />
+            android:background="@color/zhy_backgroud_1" />
 
         <com.shian.shianlife.common.view.customerdetail.PrereadyDetailInfoView
             android:id="@+id/pdiv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20dp" />
+            android:layout_marginTop="@dimen/dimen_24dp" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_20dp"
-            android:background="@color/white" />
+            android:layout_height="@dimen/dimen_24dp"
+            android:background="@color/zhy_backgroud_1" />
 
         <com.shian.shianlife.common.view.customerdetail.TalkDetailInfoView
             android:id="@+id/tdiv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_24dp"
             android:visibility="gone" />
     </LinearLayout>
 

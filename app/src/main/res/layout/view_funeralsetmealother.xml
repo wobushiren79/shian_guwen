@@ -9,36 +9,34 @@
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_80dp"
-        android:layout_marginLeft="@dimen/dimen_32dp"
         android:gravity="center_vertical"
-        android:text="治丧套餐"
+        android:paddingLeft="@dimen/dimen_32dp"
+        android:text="殡仪馆套餐"
         android:textColor="@color/zhy_text_color_1"
         android:textSize="@dimen/dimen_28dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_1dp"
-        android:layout_marginLeft="@dimen/dimen_32dp"
         android:background="@color/zhy_line_3" />
 
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_80dp"
-        android:gravity="center_vertical"
+        android:background="@color/zhy_line_4"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/dimen_32dp"
             android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dimen_32dp"
             android:text="套餐名称："
             android:textColor="@color/dimgray"
             android:textSize="@dimen/dimen_24dp" />
 
         <TextView
-            android:id="@+id/tv_setmeal"
+            android:id="@+id/tv_setmealFuneralName"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -47,67 +45,27 @@
             android:textSize="@dimen/dimen_24dp" />
 
         <Button
-            android:id="@+id/bt_changesetmeal"
             android:layout_width="@dimen/dimen_120dp"
-            android:layout_height="@dimen/dimen_48dp"
+            android:layout_height="@dimen/dimen_49dp"
             android:layout_marginRight="@dimen/dimen_32dp"
             android:background="@drawable/zhy_button_state_2"
             android:text="更改"
-            android:textColor="@color/zhy_text_color_1"
-            android:textSize="@dimen/dimen_30dp" />
+            android:textColor="@color/zhy_text_color_1" />
+
 
     </LinearLayout>
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_1dp"
-        android:background="@color/zhy_line_3" />
-
-    <TextView
-        android:id="@+id/tv_classifyname"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_80dp"
-        android:background="@color/zhy_line_4"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dimen_32dp"
-        android:text="套餐类目"
-        android:textColor="@color/zhy_text_color_1"
-        android:textSize="@dimen/dimen_24dp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_1dp"
-        android:background="@color/zhy_backgroud_1"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_1dp"
-            android:layout_marginLeft="@dimen/dimen_32dp"
-            android:background="@color/zhy_line_3" />
-    </LinearLayout>
-
-
-    <com.shian.shianlife.view.ScrollListView
-        android:id="@+id/listview_data"
+        android:id="@+id/ll_funeralsetmeal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/zhy_backgroud_1"
-        android:divider="@null"
-        android:dividerHeight="@dimen/dimen_0dp"
-        android:scrollbars="none"></com.shian.shianlife.view.ScrollListView>
-
+        android:orientation="vertical"></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_24dp"
-            android:background="@color/zhy_line_4" />
 
         <TextView
             android:layout_width="match_parent"
@@ -119,9 +77,4 @@
             android:textSize="@dimen/dimen_24dp"
             android:textStyle="bold" />
     </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_1dp"
-        android:background="@color/zhy_line_3" />
 </LinearLayout>

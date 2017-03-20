@@ -2,21 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/zhy_line_4"
     android:orientation="vertical">
 
     <TextView
-        android:paddingLeft="@dimen/dimen_20dp"
-        android:paddingRight="@dimen/dimen_20dp"
         android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/dimen_26dp" />
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/dimgray"
+        android:paddingLeft="@dimen/dimen_32dp"
+        android:paddingRight="@dimen/dimen_32dp"
+        android:textSize="@dimen/dimen_24dp" />
 
     <com.shian.shianlife.view.ScrollListView
-        android:layout_marginBottom="@dimen/dimen_20dp"
         android:id="@+id/listview_data"
-        android:divider="@null"
-        android:dividerHeight="@dimen/dimen_0dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></com.shian.shianlife.view.ScrollListView>
+        android:layout_height="wrap_content"
+        android:divider="@color/zhy_line_4"
+        android:dividerHeight="@dimen/dimen_10dp"></com.shian.shianlife.view.ScrollListView>
 </LinearLayout>

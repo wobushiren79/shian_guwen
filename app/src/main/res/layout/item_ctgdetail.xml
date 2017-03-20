@@ -2,20 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dimen_80dp"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginLeft="@dimen/dimen_32dp"
-        android:layout_marginRight="@dimen/dimen_32dp"
-        android:background="@color/gray_common" />
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0.5dp"-->
+    <!--android:layout_marginLeft="@dimen/dimen_32dp"-->
+    <!--android:layout_marginRight="@dimen/dimen_32dp"-->
+    <!--android:background="@color/gray_common" />-->
 
     <TextView
         android:id="@+id/tv_ctgName"
         style="@style/order_detail_ctgTextStyle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CTG" />
+        android:layout_height="@dimen/dimen_80dp"
+        android:layout_marginLeft="@dimen/dimen_32dp"
+        android:gravity="center_vertical"
+        android:text="CTG"
+        android:textSize="@dimen/dimen_24dp"
+        android:textStyle="bold" />
 
 </LinearLayout>

@@ -201,7 +201,7 @@ public class MainSetmealOtherView extends LinearLayout {
                 theViewHolder = (TheViewHolder) convertView.getTag();
             }
             LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams
-                    (ViewGroup.LayoutParams.MATCH_PARENT, MainSetmealOtherView.this.getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_48dp));
+                    (ViewGroup.LayoutParams.MATCH_PARENT, MainSetmealOtherView.this.getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_80dp));
             theViewHolder.tvTitle.setLayoutParams(layoutparams);
             final CtgItemModel data = detailsCtgItems.get(positionfather);
             theViewHolder.tvTitle.setText(data.getName());
@@ -220,7 +220,6 @@ public class MainSetmealOtherView extends LinearLayout {
                 @Override
                 public void fillValues(final int positionchilden, View convertView) {
 
-                    ImageView ivDetail = (ImageView) convertView.findViewById(R.id.iv_detail);
                     TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
                     TextView tvNum = (TextView) convertView.findViewById(R.id.tv_num);
                     TextView tvMoney = (TextView) convertView.findViewById(R.id.tv_money);

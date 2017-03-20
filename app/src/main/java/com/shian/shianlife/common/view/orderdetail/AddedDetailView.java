@@ -55,10 +55,14 @@ public class AddedDetailView extends FrameLayout {
 
 	private View getLineView() {
 		View line = new View(getContext());
-		line.setBackgroundColor(getContext().getResources().getColor(R.color.gray_common));
-		line.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1));
+		line.setBackgroundColor(getContext().getResources().getColor(R.color.zhy_line_3));
+		LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams
+				(LinearLayout.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen.dimen_1dp));
+		layoutParams.leftMargin=getResources().getDimensionPixelOffset(R.dimen.dimen_32dp);
+		line.setLayoutParams(layoutParams);
 		return line;
 	}
+
 
 	public void setData(HrGetOrderDetailResult result) {
 		totalPrice = 0;

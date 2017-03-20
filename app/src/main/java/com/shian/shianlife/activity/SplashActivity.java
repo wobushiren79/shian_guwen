@@ -226,7 +226,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
 
                             @Override
                             public void onSuccess(HrLoginResult result) {
-
                                 LoginActivity.cookie = result.getSessionId();
                                 HttpRequestExecutor.setSession(LoginActivity.cookie, SplashActivity.this);
                                 initView1(result);
@@ -239,7 +238,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
 
                             @Override
                             public void onError(String message) {
-
+                                jumpLogin();
                             }
                         });
             } else if (loginS.getLoginType() == 1) {
@@ -268,7 +267,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
 
                             @Override
                             public void onError(String message) {
-
+                                jumpLogin();
                             }
                         });
             }

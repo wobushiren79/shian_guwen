@@ -1,6 +1,7 @@
 package com.shian.shianlife.thisenum;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.common.contanst.AppContansts;
 
 /**
  * Created by Administrator on 2017/3/6.
@@ -15,7 +16,7 @@ public enum APPEnum {
     NAVIGATION("导航", R.drawable.zhy_myapp_navigation, "navigation"),//导航
     CALENDAR("万年历", R.drawable.zhy_myapp_calendar, "calendar"),//万年历
     CALCULATOR("计算器", R.drawable.zhy_myapp_calculator, "calculator"),//计算器
-    COMMUNICATION("通讯宝", R.drawable.zhy_myapp_zsproject, "communication"),//通讯宝
+    COMMUNICATION("通讯宝", R.drawable.zhy_myapp_zsproject, AppContansts.phonePHPURL),//通讯宝
     DIDI("滴滴打车", R.drawable.zhy_myapp_didi, "http://webapp.diditaxi.com.cn"),//
     INTEGRALMALL("积分商城", R.drawable.zhy_myapp_integralmall, ""); //积分商城
 
