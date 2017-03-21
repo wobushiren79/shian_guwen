@@ -12,14 +12,21 @@ import android.widget.TextView;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.common.view.order.AddedItemView;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.impl.ProductManagerImpl;
 import com.shian.shianlife.provide.model.AddedCtgModel;
+import com.shian.shianlife.provide.model.CreateOrderProductItemModel;
+import com.shian.shianlife.provide.model.GoodsModel;
 import com.shian.shianlife.provide.params.HpGetAddedCtgListParams;
 import com.shian.shianlife.provide.params.HpGetGoodsListParams;
 import com.shian.shianlife.provide.result.HrGetAddedCtgListResult;
 import com.shian.shianlife.provide.result.HrGetGoodsListResult;
+import com.shian.shianlife.view.ScrollListView;
+import com.shian.shianlife.view.dialog.BaseDialog;
+import com.shian.shianlife.view.dialog.SetMealSelectDialog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,13 +40,17 @@ public class AddedSetmealOtherView extends LinearLayout {
     TextView mTVSetMealName;
     Button mBTAdd;//添加
 
-    LinearLayout mLLAddSetMeal;
+    ScrollListView mListView;
 
 
     /**
      * 所有的增值服务产品列表
      */
     private List<AddedCtgModel> mAddedCtgModels = null;
+    /**
+     * 新建的订单列表
+     */
+    private List<CreateOrderProductItemModel> mProductItemModels;
 
     public AddedSetmealOtherView(Context context) {
         this(context, null);
@@ -49,16 +60,24 @@ public class AddedSetmealOtherView extends LinearLayout {
         super(context, attrs);
         view = View.inflate(context, R.layout.view_addedsetmealother, this);
         initView();
+        initData();
     }
 
     /**
-     * 初始化
+     * 初始化数据
+     */
+    private void initData() {
+        mProductItemModels = new ArrayList<>();
+    }
+
+    /**
+     * 初始化控件
      */
     private void initView() {
         mTVTitleName = (TextView) findViewById(R.id.tv_title);
         mTVSetMealName = (TextView) findViewById(R.id.tv_setmealFuneralName);
         mBTAdd = (Button) findViewById(R.id.bt_add);
-        mLLAddSetMeal = (LinearLayout) findViewById(R.id.ll_addsetmeal);
+        mListView = (ScrollListView) findViewById(R.id.listview);
 
         mBTAdd.setOnClickListener(onClickListener);
     }
@@ -117,18 +136,28 @@ public class AddedSetmealOtherView extends LinearLayout {
      * 选择增值服务产品
      */
     protected void showSelectAddedCtg() {
-        ArrayAdapter<AddedCtgModel> adapter = new ArrayAdapter<AddedCtgModel>(getContext(),
-                android.R.layout.simple_list_item_1, mAddedCtgModels);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("选择增值服务产品");
-        builder.setSingleChoiceItems(adapter, 0, new DialogInterface.OnClickListener() {
+//        ArrayAdapter<AddedCtgModel> adapter = new ArrayAdapter<AddedCtgModel>(getContext(),
+//                android.R.layout.simple_list_item_1, mAddedCtgModels);
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//        builder.setTitle("选择增值服务产品");
+//        builder.setSingleChoiceItems(adapter, 0, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//                getGoodsList(mAddedCtgModels.get(which));
+//            }
+//        });
+//        builder.show();
+        SetMealSelectDialog dialog = new SetMealSelectDialog(getContext(), mAddedCtgModels);
+        dialog.setCallback(new SetMealSelectDialog.CallBack() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                getGoodsList(mAddedCtgModels.get(which));
+            public void submit(List<AddedCtgModel> listData) {
+                for (AddedCtgModel data : listData) {
+                    getGoodsList(data);
+                }
             }
         });
-        builder.show();
+        dialog.show();
     }
 
 
@@ -146,7 +175,7 @@ public class AddedSetmealOtherView extends LinearLayout {
                     @Override
                     public void onSuccess(HrGetGoodsListResult result) {
                         if (result != null && result.getProductItems() != null && result.getProductItems().size() > 0) {
-//                            addAddedCtgView(result.getProductItems(), addedCtgModel);
+                            addAddedCtgView(result.getProductItems(), addedCtgModel);
                         }
                     }
 
@@ -164,5 +193,39 @@ public class AddedSetmealOtherView extends LinearLayout {
                 });
     }
 
+    /**
+     * 添加一款产品
+     *
+     * @param productItems
+     * @param addedCtgModel
+     */
+    protected void addAddedCtgView(List<GoodsModel> productItems, AddedCtgModel addedCtgModel) {
+        final CreateOrderProductItemModel model = new CreateOrderProductItemModel();
+        model.setCategoryId(addedCtgModel.getId());
+        model.setProjectId(4);
+        mProductItemModels.add(model);
+//        final AddedItemView addedItemView = new AddedItemView(getContext(), productItems, addedCtgModel, model);
+//        addedItemView.setOnChangeListener(new AddedItemView.OnChangeListener() {
+//
+//            @Override
+//            public void onChange(boolean isFirst) {
+//                if (onAddedChangeListener != null) {
+//                    onAddedChangeListener.onChange();
+//                }
+//            }
+//        });
+//        addedItemView.setOnDeleteListener(new AddedItemView.OnDeleteListener() {
+//
+//            @Override
+//            public void onDelete(CreateOrderProductItemModel model) {
+//                mProductItemModels.remove(model);
+//                mLinearLayout.removeView(addedItemView);
+//                if (onAddedChangeListener != null) {
+//                    onAddedChangeListener.onChange();
+//                }
+//            }
+//        });
+//        mLinearLayout.addView(addedItemView, mLinearLayout.getChildCount() - 1);
+    }
 
 }

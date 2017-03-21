@@ -188,9 +188,6 @@ public class AddedSetmealView extends FrameLayout {
 		model.setProjectId(4);
 		mProductItemModels.add(model);
 		final AddedItemView addedItemView = new AddedItemView(getContext(), productItems, addedCtgModel, model);
-
-
-
 		addedItemView.setOnChangeListener(new OnChangeListener() {
 
 			@Override

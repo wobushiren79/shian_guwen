@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/dimen_32dp"
-            android:text="套餐名称："
+            android:text="增值服务名称："
             android:textColor="@color/dimgray"
             android:textSize="@dimen/dimen_24dp" />
 
@@ -57,11 +57,10 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_addsetmeal"
+    <com.shian.shianlife.view.ScrollListView
+        android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"></LinearLayout>
+        android:layout_height="wrap_content"></com.shian.shianlife.view.ScrollListView>
 
     <LinearLayout
         android:layout_width="match_parent"

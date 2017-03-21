@@ -301,51 +301,6 @@ public class MainSetmealOtherView extends LinearLayout {
 
             baseSwipeAdapter.setMode(Attributes.Mode.Single);
             theViewHolder.itemListView.setAdapter(baseSwipeAdapter);
-//            theViewHolder.itemListView.setAdapter(new BaseAdapter() {
-//                @Override
-//                public int getCount() {
-//                    return data.getProductItems().size();
-//                }
-//
-//                @Override
-//                public Object getItem(int position) {
-//                    return null;
-//                }
-//
-//                @Override
-//                public long getItemId(int position) {
-//                    return 0;
-//                }
-//
-//                @Override
-//                public View getView(int position, View convertView, ViewGroup parent) {
-//                    ItemViewHolder itemViewHolder;
-//                    if (convertView == null) {
-//                        convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_mainsetmealother_listview_items_items, null);
-//                        itemViewHolder = new ItemViewHolder();
-//                        itemViewHolder.ivDetail = (ImageView) convertView.findViewById(R.id.iv_detail);
-//                        itemViewHolder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
-//                        itemViewHolder.tvNum = (TextView) convertView.findViewById(R.id.tv_num);
-//                        itemViewHolder.tvMoney = (TextView) convertView.findViewById(R.id.tv_money);
-//                        convertView.setTag(itemViewHolder);
-//                    } else {
-//                        itemViewHolder = (ItemViewHolder) convertView.getTag();
-//                    }
-//                    ProductItemModel dataItem = data.getProductItems().get(position);
-//                    itemViewHolder.tvName.setText(dataItem.getName() + "(" + dataItem.getSpecification() + ")");
-//                    itemViewHolder.tvMoney.setText("￥：" + dataItem.getPrice() * dataItem.getCount());
-//                    itemViewHolder.tvNum.setText("x " + dataItem.getCount() + dataItem.getUnit());
-//                    return convertView;
-//                }
-//
-//                class ItemViewHolder {
-//                    TextView tvName;
-//                    TextView tvNum;
-//                    TextView tvMoney;
-//                    ImageView ivDetail;
-//                }
-//            });
-
             return convertView;
         }
 

@@ -453,7 +453,7 @@ public class QTView extends BaseOrderView {
                 if (model.isHasPrepay()) {
                     payFre.setEnabled(false);
                     tvPay.setBackgroundResource(R.drawable.zhy_button_state_item_gray);
-                    tvPay.setTextColor(getContext().getResources().getColor(R.color.white));
+                    tvPay.setTextColor(getContext().getResources().getColor(R.color.zhy_text_color_12));
                     tvPay.setText("定金已付");
                 } else {
                     shift.setVisibility(View.GONE);

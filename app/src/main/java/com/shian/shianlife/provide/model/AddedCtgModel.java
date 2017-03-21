@@ -48,4 +48,13 @@ public class AddedCtgModel {
 		this.num = num;
 	}
 
+	boolean isCheck=false;//新增 是否选择了该项
+
+	public boolean isCheck() {
+		return isCheck;
+	}
+
+	public void setCheck(boolean check) {
+		isCheck = check;
+	}
 }

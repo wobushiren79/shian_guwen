@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipelayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="@dimen/dimen_400dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tv_detail"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/cemetery_titlecolor"
+            android:gravity="center"
+            android:text="详情"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/dimen_24dp" />
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/zhy_text_color_1"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_24dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/zhy_line_4"
+        android:orientation="horizontal">
+
+
+    </LinearLayout>
+
+
+</com.daimajia.swipe.SwipeLayout>
