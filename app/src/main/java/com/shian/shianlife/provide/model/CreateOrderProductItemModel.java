@@ -17,7 +17,19 @@ public class CreateOrderProductItemModel {
 	int statusFlag = 1;// 1有效 2无效
 	Long id = null;// 订单详情ID
 	boolean isChange;
-	
+
+	/**
+	 * 新增 商品名称
+	 */
+	String name;//商品名字
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public boolean isChange() {
 		return isChange;

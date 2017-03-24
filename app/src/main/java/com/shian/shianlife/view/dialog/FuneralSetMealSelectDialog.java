@@ -6,29 +6,31 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
-import com.shian.shianlife.adapter.SetMealSelectAdapter;
+import com.shian.shianlife.adapter.AddedSetMealSelectAdapter;
+import com.shian.shianlife.adapter.FuneralSetMealSelectAdapter;
 import com.shian.shianlife.base.BaseActivity;
-import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.model.AddedCtgModel;
+import com.shian.shianlife.provide.model.ProductItemModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/3/21.
+ * Created by Administrator on 2017/3/24.
  */
 
-public class SetMealSelectDialog extends BaseDialog {
+public class FuneralSetMealSelectDialog extends BaseDialog {
     ListView contentListView;
-    SetMealSelectAdapter adapter;
+    FuneralSetMealSelectAdapter adapter;
 
-    private List<AddedCtgModel> mAddedCtgModels = new ArrayList<>();
-    private List<AddedCtgModel> mSelectAddedList = new ArrayList<>();
-    private CallBack callback;
+    private FuneralSetMealSelectDialog.CallBack callback;
 
-    public SetMealSelectDialog(Context context, List<AddedCtgModel> mAddedCtgModels) {
+    private List<ProductItemModel> productItems;// 商品列表
+    private List<ProductItemModel> mSelectProductList = new ArrayList<>();
+
+    public FuneralSetMealSelectDialog(Context context, List<ProductItemModel> productItems) {
         super(context);
-        this.mAddedCtgModels = mAddedCtgModels;
+        this.productItems = productItems;
         initDialog();
     }
 
@@ -38,14 +40,14 @@ public class SetMealSelectDialog extends BaseDialog {
     }
 
     private void initOtherView() {
-        setTitle("选择增值服务产品");
+        setTitle("选择殡仪馆项目产品");
 
         mTVCancel.setOnClickListener(onClickListener);
         mTVSubmit.setOnClickListener(onClickListener);
     }
 
 
-    public void setCallback(CallBack callback) {
+    public void setCallback(FuneralSetMealSelectDialog.CallBack callback) {
         this.callback = callback;
     }
 
@@ -54,7 +56,7 @@ public class SetMealSelectDialog extends BaseDialog {
         contentListView.setDivider(null);
         contentListView.setDividerHeight(0);
         RelativeLayout.LayoutParams layoutParams;
-        if (mAddedCtgModels.size() > 6) {
+        if (productItems.size() > 6) {
             layoutParams = new RelativeLayout.LayoutParams
                     (ViewGroup.LayoutParams.MATCH_PARENT, (int) (BaseActivity.metrics.heightPixels * 0.6));
         } else {
@@ -62,7 +64,7 @@ public class SetMealSelectDialog extends BaseDialog {
                     (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
         contentListView.setLayoutParams(layoutParams);
-        adapter = new SetMealSelectAdapter(getContext(), mAddedCtgModels);
+        adapter = new FuneralSetMealSelectAdapter(getContext(), productItems);
         contentListView.setAdapter(adapter);
         setContent(contentListView);
     }
@@ -71,30 +73,30 @@ public class SetMealSelectDialog extends BaseDialog {
         @Override
         public void onClick(View v) {
             if (v == mTVCancel) {
-                SetMealSelectDialog.this.cancel();
+                FuneralSetMealSelectDialog.this.cancel();
             } else if (v == mTVSubmit) {
                 saveData();
-                SetMealSelectDialog.this.cancel();
+                FuneralSetMealSelectDialog.this.cancel();
             }
         }
     };
 
     private void saveData() {
         if (callback != null) {
-            for (AddedCtgModel data : mAddedCtgModels) {
+            for (ProductItemModel data : productItems) {
                 if (data.isCheck()) {
-                    mSelectAddedList.add(data);
+                    mSelectProductList.add(data);
                 }
             }
-            callback.submit(mSelectAddedList);
+            callback.submit(mSelectProductList);
         }
-        for (AddedCtgModel data : mAddedCtgModels) {
+        for (ProductItemModel data : productItems) {
             data.setCheck(false);
         }
     }
 
     public interface CallBack {
-        void submit(List<AddedCtgModel> listData);
+        void submit(List<ProductItemModel> listData);
     }
 
 }

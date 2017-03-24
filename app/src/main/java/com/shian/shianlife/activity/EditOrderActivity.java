@@ -17,8 +17,10 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.view.TipsDialog;
+import com.shian.shianlife.common.view.editor.AddedSetmealOtherView;
 import com.shian.shianlife.common.view.editor.CemeterySetmealView;
 import com.shian.shianlife.common.view.editor.CemeterySetmealView.OnCemeteryChangeListener;
+import com.shian.shianlife.common.view.editor.FuneralSetmealOtherView;
 import com.shian.shianlife.common.view.editor.FuneralSetmealView;
 import com.shian.shianlife.common.view.editor.FuneralSetmealView.OnFuneralChangeListener;
 import com.shian.shianlife.common.view.editor.MainSetmealOtherView;
@@ -51,6 +53,8 @@ public class EditOrderActivity extends BaseActivity {
     CemeterySetmealView cemeterySetmealView;
     @InjectView(R.id.asv)
     AddedSetmealView addedSetmealView;
+    @InjectView(R.id.asvother)
+    AddedSetmealOtherView addedSetmealOtherView;
     @InjectView(R.id.tv_total)
     TextView tv_total;
     @InjectView(R.id.msv)
@@ -59,6 +63,8 @@ public class EditOrderActivity extends BaseActivity {
     MainSetmealOtherView mainSetmealOtherView;
     @InjectView(R.id.fsv)
     FuneralSetmealView funeralSetmealView;
+    @InjectView(R.id.fsvother)
+    FuneralSetmealOtherView funeralSetmealOtherView;
     @InjectView(R.id.rl_top)
     View rltop;
     /**
@@ -240,6 +246,8 @@ public class EditOrderActivity extends BaseActivity {
                         change();
                     }
                 });
+        funeralSetmealOtherView.setCtgItems("殡仪馆项目",funeralSetmeals);
+
         cemeterySetmealView.setCtgItems("公墓项目", cemeteries);
         cemeterySetmealView
                 .setOnCemeteryChangeListener(new OnCemeteryChangeListener() {
@@ -249,8 +257,14 @@ public class EditOrderActivity extends BaseActivity {
                         change();
                     }
                 });
-        addedSetmealView.setOnAddedChangeListener(new OnAddedChangeListener() {
-
+//        addedSetmealView.setOnAddedChangeListener(new OnAddedChangeListener() {
+//
+//            @Override
+//            public void onChange() {
+//                change();
+//            }
+//        });
+        addedSetmealOtherView.setOnAddedChangeListener(new AddedSetmealOtherView.OnAddedChangeListener() {
             @Override
             public void onChange() {
                 change();
@@ -284,12 +298,12 @@ public class EditOrderActivity extends BaseActivity {
         funeralSetmealView.setOrderId(orderId);
         funeralSetmealView
                 .setOnFuneralChangeListener(new OnFuneralChangeListener() {
-
                     @Override
                     public void onFuneralChange() {
                         change();
                     }
                 });
+        funeralSetmealOtherView.setCtgItems("殡仪馆项目",funeralSetmeals, result);
 
         cemeterySetmealView.setCtgItems("公墓项目", cemeteries, result);
         cemeterySetmealView.setOrderId(orderId);
@@ -301,9 +315,16 @@ public class EditOrderActivity extends BaseActivity {
                         change();
                     }
                 });
-        addedSetmealView.setCtgItems(result);
-        addedSetmealView.setOnAddedChangeListener(new OnAddedChangeListener() {
-
+//        addedSetmealView.setCtgItems(result);
+//        addedSetmealView.setOnAddedChangeListener(new OnAddedChangeListener() {
+//
+//            @Override
+//            public void onChange() {
+//                change();
+//            }
+//        });
+        addedSetmealOtherView.setCtgItems(result);
+        addedSetmealOtherView.setOnAddedChangeListener(new AddedSetmealOtherView.OnAddedChangeListener() {
             @Override
             public void onChange() {
                 change();
@@ -338,7 +359,8 @@ public class EditOrderActivity extends BaseActivity {
         mList.addAll(mainSetmealOtherView.getProductItemModels());
         mList.addAll(funeralSetmealView.getProductItemModels());
         mList.addAll(cemeterySetmealView.getProductItemModels());
-        mList.addAll(addedSetmealView.getProductItemModels());
+        mList.addAll(addedSetmealOtherView.getProductItemModels());
+//        mList.addAll(addedSetmealView.getProductItemModels());
 //		mList.addAll(mLastProducts);
         params.setConsultId(consultId);
         params.setItems(mList);
@@ -447,14 +469,21 @@ public class EditOrderActivity extends BaseActivity {
                 totalPrice += model.getTotalPrice();
             }
         }
-        List<CreateOrderProductItemModel> addedProductItemModels = addedSetmealView
-
+        List<CreateOrderProductItemModel> addedProductItemModels = addedSetmealOtherView
                 .getProductItemModelsT();
         if (addedProductItemModels != null) {
             for (CreateOrderProductItemModel model : addedProductItemModels) {
                 totalPrice += model.getTotalPrice();
             }
         }
+//        List<CreateOrderProductItemModel> addedProductItemModels = addedSetmealView
+//
+//                .getProductItemModelsT();
+//        if (addedProductItemModels != null) {
+//            for (CreateOrderProductItemModel model : addedProductItemModels) {
+//                totalPrice += model.getTotalPrice();
+//            }
+//        }
         tv_total.setText(totalPrice + "");
 
 

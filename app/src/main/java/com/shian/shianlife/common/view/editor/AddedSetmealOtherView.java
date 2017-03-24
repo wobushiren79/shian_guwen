@@ -1,30 +1,30 @@
 package com.shian.shianlife.common.view.editor;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.adapter.SetMealProductAdapter;
 import com.shian.shianlife.common.utils.ToastUtils;
-import com.shian.shianlife.common.view.order.AddedItemView;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.impl.ProductManagerImpl;
 import com.shian.shianlife.provide.model.AddedCtgModel;
 import com.shian.shianlife.provide.model.CreateOrderProductItemModel;
 import com.shian.shianlife.provide.model.GoodsModel;
+import com.shian.shianlife.provide.model.OrderCtgItemModel;
+import com.shian.shianlife.provide.model.OrderProductItemModel;
+import com.shian.shianlife.provide.model.ProjectItemModel;
 import com.shian.shianlife.provide.params.HpGetAddedCtgListParams;
 import com.shian.shianlife.provide.params.HpGetGoodsListParams;
 import com.shian.shianlife.provide.result.HrGetAddedCtgListResult;
 import com.shian.shianlife.provide.result.HrGetGoodsListResult;
+import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.view.ScrollListView;
-import com.shian.shianlife.view.dialog.BaseDialog;
-import com.shian.shianlife.view.dialog.SetMealSelectDialog;
+import com.shian.shianlife.view.dialog.AddedSetMealSelectDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ public class AddedSetmealOtherView extends LinearLayout {
 
     ScrollListView mListView;
 
-
+    SetMealProductAdapter adapter;
     /**
      * 所有的增值服务产品列表
      */
@@ -51,6 +51,9 @@ public class AddedSetmealOtherView extends LinearLayout {
      * 新建的订单列表
      */
     private List<CreateOrderProductItemModel> mProductItemModels;
+    private ProjectItemModel mProjectItemModel;
+
+    OnAddedChangeListener onAddedChangeListener;
 
     public AddedSetmealOtherView(Context context) {
         this(context, null);
@@ -59,8 +62,17 @@ public class AddedSetmealOtherView extends LinearLayout {
     public AddedSetmealOtherView(Context context, AttributeSet attrs) {
         super(context, attrs);
         view = View.inflate(context, R.layout.view_addedsetmealother, this);
-        initView();
         initData();
+        initView();
+    }
+
+    public void setOnAddedChangeListener(OnAddedChangeListener onAddedChangeListener) {
+        this.onAddedChangeListener = onAddedChangeListener;
+    }
+
+    @Override
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 
     /**
@@ -68,7 +80,21 @@ public class AddedSetmealOtherView extends LinearLayout {
      */
     private void initData() {
         mProductItemModels = new ArrayList<>();
+        adapter = new SetMealProductAdapter(getContext(), mProductItemModels);
+        adapter.setCallBack(callBack);
     }
+
+    /**
+     * 增删改操作
+     */
+    SetMealProductAdapter.AdapterCallBack callBack = new SetMealProductAdapter.AdapterCallBack() {
+        @Override
+        public void dataChange() {
+            if (onAddedChangeListener != null) {
+                onAddedChangeListener.onChange();
+            }
+        }
+    };
 
     /**
      * 初始化控件
@@ -80,6 +106,7 @@ public class AddedSetmealOtherView extends LinearLayout {
         mListView = (ScrollListView) findViewById(R.id.listview);
 
         mBTAdd.setOnClickListener(onClickListener);
+        mListView.setAdapter(adapter);
     }
 
     OnClickListener onClickListener = new OnClickListener() {
@@ -136,20 +163,8 @@ public class AddedSetmealOtherView extends LinearLayout {
      * 选择增值服务产品
      */
     protected void showSelectAddedCtg() {
-//        ArrayAdapter<AddedCtgModel> adapter = new ArrayAdapter<AddedCtgModel>(getContext(),
-//                android.R.layout.simple_list_item_1, mAddedCtgModels);
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-//        builder.setTitle("选择增值服务产品");
-//        builder.setSingleChoiceItems(adapter, 0, new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//                getGoodsList(mAddedCtgModels.get(which));
-//            }
-//        });
-//        builder.show();
-        SetMealSelectDialog dialog = new SetMealSelectDialog(getContext(), mAddedCtgModels);
-        dialog.setCallback(new SetMealSelectDialog.CallBack() {
+        AddedSetMealSelectDialog dialog = new AddedSetMealSelectDialog(getContext(), mAddedCtgModels);
+        dialog.setCallback(new AddedSetMealSelectDialog.CallBack() {
             @Override
             public void submit(List<AddedCtgModel> listData) {
                 for (AddedCtgModel data : listData) {
@@ -201,31 +216,110 @@ public class AddedSetmealOtherView extends LinearLayout {
      */
     protected void addAddedCtgView(List<GoodsModel> productItems, AddedCtgModel addedCtgModel) {
         final CreateOrderProductItemModel model = new CreateOrderProductItemModel();
+        GoodsModel goodsModel = productItems.get(0);
         model.setCategoryId(addedCtgModel.getId());
+        model.setName(goodsModel.getName());
+        model.setSkuId(goodsModel.getId());
+        model.setPrice(goodsModel.getPrice());
+        model.setNumber(1);
+        model.setTotalPrice(model.getNumber() * model.getPrice());
         model.setProjectId(4);
+        model.setStatusFlag(1);
+        model.setChange(false);
         mProductItemModels.add(model);
-//        final AddedItemView addedItemView = new AddedItemView(getContext(), productItems, addedCtgModel, model);
-//        addedItemView.setOnChangeListener(new AddedItemView.OnChangeListener() {
-//
-//            @Override
-//            public void onChange(boolean isFirst) {
-//                if (onAddedChangeListener != null) {
-//                    onAddedChangeListener.onChange();
-//                }
-//            }
-//        });
-//        addedItemView.setOnDeleteListener(new AddedItemView.OnDeleteListener() {
-//
-//            @Override
-//            public void onDelete(CreateOrderProductItemModel model) {
-//                mProductItemModels.remove(model);
-//                mLinearLayout.removeView(addedItemView);
-//                if (onAddedChangeListener != null) {
-//                    onAddedChangeListener.onChange();
-//                }
-//            }
-//        });
-//        mLinearLayout.addView(addedItemView, mLinearLayout.getChildCount() - 1);
+        adapter.notifyDataSetChanged();
+        onAddedChangeListener.onChange();
     }
 
+    public List<CreateOrderProductItemModel> getProductItemModels() {
+        List<CreateOrderProductItemModel> newList = new ArrayList<CreateOrderProductItemModel>();
+        if (mProductItemModels != null)
+            for (CreateOrderProductItemModel m : mProductItemModels) {
+                if (!m.isChange()) {
+                    newList.add(m);
+                }
+            }
+        return newList;
+    }
+
+    public List<CreateOrderProductItemModel> getProductItemModelsT() {
+        List<CreateOrderProductItemModel> newList = new ArrayList<CreateOrderProductItemModel>();
+        if (mProductItemModels != null)
+            for (CreateOrderProductItemModel m : mProductItemModels) {
+                if (m.getStatusFlag() != 2) {
+                    newList.add(m);
+                }
+            }
+        return newList;
+    }
+
+    /**
+     * 第二次进入设置参数
+     *
+     * @param result
+     */
+    public void setCtgItems(HrGetOrderDetailResult result) {
+        for (ProjectItemModel mProjectItemModel : result.getProjectItems()) {
+            if ("增值项目".equals(mProjectItemModel.getName())) {
+                this.mProjectItemModel = mProjectItemModel;
+                for (OrderCtgItemModel mOrderCtgItemModel : mProjectItemModel.getCtgItems()) {
+                    getGoodsList(mOrderCtgItemModel);
+                }
+                break;
+            }
+        }
+
+    }
+
+    private void getGoodsList(final OrderCtgItemModel mOrderCtgItemModel) {
+        HpGetGoodsListParams params = new HpGetGoodsListParams();
+        params.setCtgId(mOrderCtgItemModel.getId());
+        ProductManagerImpl.getInstance().getGoodsList(getContext(), params,
+                new HttpResponseHandler<HrGetGoodsListResult>() {
+
+                    @Override
+                    public void onSuccess(HrGetGoodsListResult result) {
+                        if (result != null && result.getProductItems() != null && result.getProductItems().size() > 0) {
+                            for (OrderProductItemModel mOrderProductItemModel : mOrderCtgItemModel.getProductItems()) {
+                                addAddedCtgView(result.getProductItems(), mOrderCtgItemModel, mOrderProductItemModel);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onStart() {
+                        // TODO Auto-generated method stub
+
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
+
+    }
+
+    protected void addAddedCtgView(List<GoodsModel> productItems, OrderCtgItemModel mOrderCtgItemModel,
+                                   OrderProductItemModel mOrderProductItemModel) {
+        final CreateOrderProductItemModel model = new CreateOrderProductItemModel();
+        model.setProjectId(4);
+        model.setName(mOrderCtgItemModel.getProductItems().get(0).getName());
+        model.setCategoryId(mOrderCtgItemModel.getId());
+        model.setNumber(mOrderProductItemModel.getNumber());
+        model.setPrice(mOrderProductItemModel.getPrice());
+        model.setSkuId(mOrderProductItemModel.getSkuId());
+        model.setTotalPrice(mOrderProductItemModel.getTotalPrice());
+        model.setId(mOrderProductItemModel.getId());
+        model.setStatusFlag(1);
+        model.setChange(false);
+        mProductItemModels.add(model);
+        adapter.notifyDataSetChanged();
+        onAddedChangeListener.onChange();
+    }
+
+    public interface OnAddedChangeListener {
+        void onChange();
+    }
 }

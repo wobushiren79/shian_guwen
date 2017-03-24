@@ -53,7 +53,6 @@ public class FuneralSetmealView extends FrameLayout implements OnItemSelectedLis
 		ll_add = (LinearLayout) v.findViewById(R.id.ll_add);
 		sp = (Spinner) v.findViewById(R.id.sp_orders);
 		tvTitle = (TextView) v.findViewById(R.id.tv_orders_title);
-
 	}
 
 	public List<CreateOrderProductItemModel> getProductItemModels() {
@@ -62,7 +61,6 @@ public class FuneralSetmealView extends FrameLayout implements OnItemSelectedLis
 		for(CreateOrderProductItemModel m:mProductItemModels){
 			if(!m.isChange()){
 				newList.add(m);
-
 			}
 		}if(isSp>1){
 			newList.addAll(initList);

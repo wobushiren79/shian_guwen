@@ -2,7 +2,7 @@
 <com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/swipelayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="@dimen/dimen_80dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -37,11 +37,63 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/dimen_80dp"
         android:background="@color/zhy_line_4"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dimen_32dp"
+        android:paddingRight="@dimen/dimen_32dp">
 
+        <TextView
+            android:id="@+id/tv_titlename"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:text="司仪"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/dimen_24dp" />
 
+        <ImageView
+            android:id="@+id/iv_reduce"
+            android:layout_width="@dimen/dimen_32dp"
+            android:layout_height="@dimen/dimen_32dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:background="@drawable/zhy_order_reduce" />
+
+        <TextView
+            android:id="@+id/tv_number"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:clickable="false"
+            android:gravity="center"
+            android:lines="1"
+            android:text="123124"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/dimen_24dp" />
+
+        <ImageView
+            android:id="@+id/iv_add"
+            android:layout_width="@dimen/dimen_32dp"
+            android:layout_height="@dimen/dimen_32dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:background="@drawable/zhy_order_add" />
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center_vertical|right"
+            android:lines="1"
+            android:text="$1234"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/dimen_24dp" />
     </LinearLayout>
 
 

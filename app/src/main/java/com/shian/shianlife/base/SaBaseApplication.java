@@ -26,6 +26,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.shian.shianlife.common.local.LocationService;
+import com.shian.shianlife.common.utils.Utils;
 import com.tencent.bugly.crashreport.CrashReport;
 
 public class SaBaseApplication extends MultiDexApplication {
@@ -59,7 +60,6 @@ public class SaBaseApplication extends MultiDexApplication {
         // calculatedDispdpi();
         CrashReport.initCrashReport(getApplicationContext(), "58aeede7f2", false);
         KF5SDKInitializer.initialize(this);
-
     }
 
     /**
@@ -184,5 +184,7 @@ public class SaBaseApplication extends MultiDexApplication {
         Log.i("GlobalApplication", str);
 
     }
+
+
 
 }

@@ -77,7 +77,6 @@ public class MainSetmealOtherView extends LinearLayout {
     }
 
     public void setChangeListener(SetmealOtherViewChangeListener changeListener) {
-        Log.v("this","setChangeListener");
         this.changeListener = changeListener;
     }
 

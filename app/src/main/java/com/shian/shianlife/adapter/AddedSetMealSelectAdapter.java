@@ -20,13 +20,13 @@ import java.util.List;
  * Created by Administrator on 2017/3/21.
  */
 
-public class SetMealSelectAdapter extends BaseAdapter {
+public class AddedSetMealSelectAdapter extends BaseAdapter {
 
     Context context;
     private List<AddedCtgModel> mAddedCtgModels = new ArrayList<>();
 
 
-    public SetMealSelectAdapter(Context context, List<AddedCtgModel> mAddedCtgModels) {
+    public AddedSetMealSelectAdapter(Context context, List<AddedCtgModel> mAddedCtgModels) {
         this.context = context;
         this.mAddedCtgModels = mAddedCtgModels;
     }

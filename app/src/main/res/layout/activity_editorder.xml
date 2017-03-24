@@ -64,6 +64,11 @@
                 android:layout_marginRight="@dimen/dimen_20dp"
                 android:layout_marginTop="@dimen/dimen_40dp" />
 
+            <com.shian.shianlife.common.view.editor.FuneralSetmealOtherView
+                android:id="@+id/fsvother"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></com.shian.shianlife.common.view.editor.FuneralSetmealOtherView>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_20dp"
@@ -78,10 +83,6 @@
                 android:layout_marginTop="@dimen/dimen_40dp"
                 android:visibility="gone" />
 
-            <com.shian.shianlife.common.view.editor.AddedSetmealOtherView
-                android:id="@+id/asvother"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"></com.shian.shianlife.common.view.editor.AddedSetmealOtherView>
 
             <com.shian.shianlife.common.view.order.AddedSetmealView
                 android:id="@+id/asv"
@@ -89,9 +90,18 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dimen_20dp"
                 android:layout_marginRight="@dimen/dimen_20dp"
-                android:layout_marginTop="@dimen/dimen_40dp" />
+                android:layout_marginTop="@dimen/dimen_40dp"
+                android:visibility="gone" />
+
+            <com.shian.shianlife.common.view.editor.AddedSetmealOtherView
+                android:id="@+id/asvother"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></com.shian.shianlife.common.view.editor.AddedSetmealOtherView>
 
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_120dp"></TextView>
         </LinearLayout>
     </ScrollView>
 
