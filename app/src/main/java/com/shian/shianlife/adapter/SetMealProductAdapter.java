@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.daimajia.swipe.SwipeLayout;
 import com.shian.shianlife.R;
 import com.shian.shianlife.common.utils.Utils;
-import com.shian.shianlife.provide.model.AddedCtgModel;
 import com.shian.shianlife.provide.model.CreateOrderProductItemModel;
 
 import java.util.ArrayList;
@@ -26,6 +25,8 @@ public class SetMealProductAdapter extends BaseAdapter {
     List<CreateOrderProductItemModel> productItemModels;
     List<Integer> showItemModels = new ArrayList<>();
     AdapterCallBack callBack;
+
+    private boolean isEdit = true;
 
     public SetMealProductAdapter(Context context, List<CreateOrderProductItemModel> productItemModels) {
         this.context = context;
@@ -90,14 +91,16 @@ public class SetMealProductAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 holder.swipeLayout.close();
-                if (data.getId() == -1) {
+                if (data.getId() == null) {
                     productItemModels.remove(data);
                 } else {
                     data.setStatusFlag(2);
                 }
                 SetMealProductAdapter.this.notifyDataSetChanged();
-                if (callBack != null)
+                if (callBack != null) {
                     callBack.dataChange();
+                    callBack.dataDelete(data);
+                }
             }
         });
         holder.ivReduce.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +129,24 @@ public class SetMealProductAdapter extends BaseAdapter {
                     callBack.dataChange();
             }
         });
+        if (isEdit) {
+            holder.ivAdd.setVisibility(View.VISIBLE);
+            holder.ivReduce.setVisibility(View.VISIBLE);
+        } else {
+            holder.ivAdd.setVisibility(View.INVISIBLE);
+            holder.ivReduce.setVisibility(View.INVISIBLE);
+        }
         return convertView;
+    }
+
+    /**
+     * 设置是否可编辑
+     *
+     * @param isEdit
+     */
+    public void isEdit(boolean isEdit) {
+        this.isEdit = isEdit;
+        this.notifyDataSetChanged();
     }
 
     class ViewHolder {
@@ -143,5 +163,6 @@ public class SetMealProductAdapter extends BaseAdapter {
 
     public interface AdapterCallBack {
         void dataChange();
+        void dataDelete(CreateOrderProductItemModel data);
     }
 }

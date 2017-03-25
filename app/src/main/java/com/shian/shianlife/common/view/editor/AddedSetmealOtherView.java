@@ -94,6 +94,11 @@ public class AddedSetmealOtherView extends LinearLayout {
                 onAddedChangeListener.onChange();
             }
         }
+
+        @Override
+        public void dataDelete(CreateOrderProductItemModel data) {
+
+        }
     };
 
     /**

@@ -12,28 +12,12 @@
         <FrameLayout
             android:id="@+id/ll_pgzx"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">+
-
-                <TextView
-                    android:id="@+id/tv_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dimen_20dp"
-                    android:gravity="right"
-                    android:text="我应该如何操作下面的服务步骤？"
-                    android:textColor="@color/gray_item_shua_textcolor"
-                    android:textSize="@dimen/txtsize_30sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_1dp"
-                    android:background="@color/gray_item_shua_textcolor" />
 
                 <com.shian.shianlife.view.PGZXLayoutView
                     android:id="@+id/pgzx_1"
@@ -50,6 +34,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>
 
+                <TextView
+                    android:background="@color/zhy_line_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp" />
+                <TextView
+                    android:id="@+id/tv_1"
+                    android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/dimen_32dp"
+                    android:layout_height="@dimen/dimen_66dp"
+                    android:gravity="center_vertical|right"
+                    android:text="· 我应该如何操作下面的服务步骤？"
+                    android:textColor="@color/gray_item_shua_textcolor"
+                    android:textSize="@dimen/dimen_24dp" />
 
             </LinearLayout>
 
@@ -73,18 +70,18 @@
             android:orientation="horizontal">
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/tv_neworder1"
                 android:layout_width="@dimen/dimen_250dp"
                 android:layout_height="@dimen/dimen_60dp"
                 android:layout_gravity="center"
                 android:layout_marginRight="@dimen/dimen_10dp"
-                android:background="@drawable/pgzx_button1"
+                android:background="@drawable/zhy_button_state_5"
                 android:gravity="center"
                 android:padding="@dimen/dimen_10dp"
                 android:text="编辑订单"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/txtsize_32sp" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/txtsize_32sp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_neworder2"
@@ -92,11 +89,11 @@
                 android:layout_height="@dimen/dimen_60dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/dimen_10dp"
-                android:background="@drawable/pgzx_button2"
+                android:background="@drawable/zhy_button_state_item_yellow"
                 android:gravity="center"
                 android:padding="@dimen/dimen_10dp"
                 android:text="结束派单"
-                android:textColor="@color/text_color"
+                android:textColor="@color/white"
                 android:textSize="@dimen/txtsize_32sp"
                 android:visibility="gone" />
         </LinearLayout>

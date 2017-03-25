@@ -237,16 +237,22 @@ public class EditOrderActivity extends BaseActivity {
                 change();
             }
         });
-        funeralSetmealView.setCtgItems("殡仪馆项目", funeralSetmeals);
-        funeralSetmealView
-                .setOnFuneralChangeListener(new OnFuneralChangeListener() {
-
-                    @Override
-                    public void onFuneralChange() {
-                        change();
-                    }
-                });
-        funeralSetmealOtherView.setCtgItems("殡仪馆项目",funeralSetmeals);
+//        funeralSetmealView.setCtgItems("殡仪馆项目", funeralSetmeals);
+//        funeralSetmealView
+//                .setOnFuneralChangeListener(new OnFuneralChangeListener() {
+//
+//                    @Override
+//                    public void onFuneralChange() {
+//                        change();
+//                    }
+//                });
+        funeralSetmealOtherView.setOnFuneralChangeListener(new OnFuneralChangeListener() {
+            @Override
+            public void onFuneralChange() {
+                change();
+            }
+        });
+        funeralSetmealOtherView.setCtgItems("殡仪馆项目", funeralSetmeals);
 
         cemeterySetmealView.setCtgItems("公墓项目", cemeteries);
         cemeterySetmealView
@@ -294,16 +300,22 @@ public class EditOrderActivity extends BaseActivity {
             }
         });
 
-        funeralSetmealView.setCtgItems("殡仪馆项目", funeralSetmeals, result);
-        funeralSetmealView.setOrderId(orderId);
-        funeralSetmealView
-                .setOnFuneralChangeListener(new OnFuneralChangeListener() {
-                    @Override
-                    public void onFuneralChange() {
-                        change();
-                    }
-                });
-        funeralSetmealOtherView.setCtgItems("殡仪馆项目",funeralSetmeals, result);
+//        funeralSetmealView.setCtgItems("殡仪馆项目", funeralSetmeals, result);
+//        funeralSetmealView.setOrderId(orderId);
+//        funeralSetmealView
+//                .setOnFuneralChangeListener(new OnFuneralChangeListener() {
+//                    @Override
+//                    public void onFuneralChange() {
+//                        change();
+//                    }
+//                });
+        funeralSetmealOtherView.setOnFuneralChangeListener(new OnFuneralChangeListener() {
+            @Override
+            public void onFuneralChange() {
+                change();
+            }
+        });
+        funeralSetmealOtherView.setCtgItems("殡仪馆项目", funeralSetmeals, result);
 
         cemeterySetmealView.setCtgItems("公墓项目", cemeteries, result);
         cemeterySetmealView.setOrderId(orderId);
@@ -357,7 +369,8 @@ public class EditOrderActivity extends BaseActivity {
         List<CreateOrderProductItemModel> mList = new ArrayList<CreateOrderProductItemModel>();
 //        mList.addAll(mainSetmealView.getProductItemModels());
         mList.addAll(mainSetmealOtherView.getProductItemModels());
-        mList.addAll(funeralSetmealView.getProductItemModels());
+        mList.addAll(funeralSetmealOtherView.getProductItemModels());
+//        mList.addAll(funeralSetmealView.getProductItemModels());
         mList.addAll(cemeterySetmealView.getProductItemModels());
         mList.addAll(addedSetmealOtherView.getProductItemModels());
 //        mList.addAll(addedSetmealView.getProductItemModels());
@@ -365,7 +378,7 @@ public class EditOrderActivity extends BaseActivity {
         params.setConsultId(consultId);
         params.setItems(mList);
         params.setSetmealCemetery(cemeterySetmealView.getCemeterID());
-        params.setSetmealFuneral(funeralSetmealView.getFuneralID());
+        params.setSetmealFuneral(funeralSetmealOtherView.getFuneralID());
 //        params.setSetmealMain(mainSetmealView.getMainID());
         params.setSetmealMain(mainSetmealOtherView.getMainID());
         if (orderId != -1) {
@@ -438,7 +451,7 @@ public class EditOrderActivity extends BaseActivity {
         List<CreateOrderProductItemModel> mainProductItemOtherModels = mainSetmealOtherView
                 .getProductItemModels();
         if (mainProductItemOtherModels != null) {
-            Log.v("this",mainProductItemOtherModels.size()+"szie");
+            Log.v("this", mainProductItemOtherModels.size() + "szie");
             for (CreateOrderProductItemModel model : mainProductItemOtherModels) {
                 if (model.getStatusFlag() != 2) {
                     totalPrice += model.getTotalPrice();
@@ -455,13 +468,21 @@ public class EditOrderActivity extends BaseActivity {
 //        }
 
 
-        List<CreateOrderProductItemModel> funeralProductItemModels = funeralSetmealView
+        List<CreateOrderProductItemModel> funeralProductItemModels = funeralSetmealOtherView
                 .getProductItemModelsT();
         if (funeralProductItemModels != null) {
             for (CreateOrderProductItemModel model : funeralProductItemModels) {
                 totalPrice += model.getTotalPrice();
             }
         }
+//        List<CreateOrderProductItemModel> funeralProductItemModels = funeralSetmealView
+//                .getProductItemModelsT();
+//        if (funeralProductItemModels != null) {
+//            for (CreateOrderProductItemModel model : funeralProductItemModels) {
+//                totalPrice += model.getTotalPrice();
+//            }
+//        }
+
         List<CreateOrderProductItemModel> cemeteryProductItemModels = cemeterySetmealView
                 .getProductItemModelsT();
         if (cemeteryProductItemModels != null) {

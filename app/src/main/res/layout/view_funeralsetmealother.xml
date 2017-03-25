@@ -73,7 +73,7 @@
             android:layout_height="@dimen/dimen_66dp"
             android:gravity="center_vertical|right"
             android:paddingRight="@dimen/dimen_32dp"
-            android:text="· 点击查看详情或删除商品"
+            android:text="· 左滑查看详情或删除商品"
             android:textColor="@color/dimgray"
             android:textSize="@dimen/dimen_24dp"
             android:textStyle="bold" />

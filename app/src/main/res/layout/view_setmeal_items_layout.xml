@@ -10,7 +10,7 @@
         android:layout_height="@dimen/dimen_80dp"
         android:background="@color/white"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/dimen_50dp"
+        android:paddingLeft="@dimen/dimen_32dp"
         android:paddingRight="@dimen/dimen_32dp">
 
         <TextView

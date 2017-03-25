@@ -1,5 +1,7 @@
 package com.shian.shianlife;
 
+import android.util.Log;
+
 import org.junit.Test;
 
 import java.util.ArrayList;

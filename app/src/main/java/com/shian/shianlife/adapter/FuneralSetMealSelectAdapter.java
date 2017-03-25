@@ -63,7 +63,6 @@ public class FuneralSetMealSelectAdapter extends BaseAdapter {
         viewHolder.select.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Utils.LogVPrint(isChecked + "");
                 data.setCheck(isChecked);
                 notifyDataSetChanged();
             }

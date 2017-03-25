@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.shian.shianlife.R;
 import com.shian.shianlife.provide.model.CreateOrderProductItemModel;
 import com.shian.shianlife.provide.model.CtgItemModel;
+import com.shian.shianlife.provide.model.OrderCtgItemModel;
+import com.shian.shianlife.provide.model.OrderProductItemModel;
+import com.shian.shianlife.provide.model.ProductItemModel;
 import com.shian.shianlife.provide.model.ProjectItemModel;
 import com.shian.shianlife.provide.model.SetmealItemModel;
 import com.shian.shianlife.provide.model.SetmealModel;
@@ -37,6 +40,9 @@ public class FuneralSetmealOtherView extends LinearLayout {
 
     List<SetmealModel> mSetmealModels;
     List<CreateOrderProductItemModel> mProductItemModels;
+    List<CreateOrderProductItemModel> tempList = new ArrayList<>();
+    private HrGetOrderDetailResult result;
+    private ProjectItemModel projectItemModel;
     int funeralID;
 
     public FuneralSetmealOtherView(Context context) {
@@ -47,6 +53,34 @@ public class FuneralSetmealOtherView extends LinearLayout {
         super(context, attrs);
         view = View.inflate(context, R.layout.view_funeralsetmealother, this);
         initView();
+    }
+
+    public List<CreateOrderProductItemModel> getProductItemModels() {
+        List<CreateOrderProductItemModel> newList = new ArrayList<CreateOrderProductItemModel>();
+        if (mProductItemModels != null)
+            for (CreateOrderProductItemModel m : mProductItemModels) {
+                if (!m.isChange()) {
+                    newList.add(m);
+                }
+            }
+        newList.addAll(tempList);
+
+        return newList;
+    }
+
+    public List<CreateOrderProductItemModel> getProductItemModelsT() {
+        List<CreateOrderProductItemModel> newList = new ArrayList<CreateOrderProductItemModel>();
+        if (mProductItemModels != null)
+            for (CreateOrderProductItemModel m : mProductItemModels) {
+                if (m.getStatusFlag() != 2) {
+                    newList.add(m);
+                }
+            }
+        return newList;
+    }
+
+    public int getFuneralID() {
+        return funeralID;
     }
 
     /**
@@ -75,25 +109,27 @@ public class FuneralSetmealOtherView extends LinearLayout {
      */
     public void setCtgItems(String title, List<SetmealModel> funeralSetmeals, HrGetOrderDetailResult result) {
         mSetmealModels = funeralSetmeals;
+        this.result = result;
         mTVTitleName.setText(title);
         ArrayAdapter<SetmealModel> province_adapter = new ArrayAdapter<SetmealModel>(getContext(),
                 R.layout.textview_spinner_2, funeralSetmeals);
         province_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSPSetMealTitleName.setAdapter(province_adapter);
         mSPSetMealTitleName.setOnItemSelectedListener(onItemSelectedListener);
-//        for (int i = 0; i < mSetmealModels.size(); i++) {
-//            SetmealModel setmealModel = mSetmealModels.get(i);
-//            if (setmealModel.getId() == result.getBoard().getSetmealFuneralId()) {
-//                sp.setSelection(i);
-//                break;
-//            }
-//        }
-//        for (ProjectItemModel projectItemModel : result.getProjectItems()) {
-//            if ("殡仪馆".equals(projectItemModel.getName())) {
-//                this.projectItemModel = projectItemModel;
-//                break;
-//            }
-//        }
+
+        for (int i = 0; i < mSetmealModels.size(); i++) {
+            SetmealModel setmealModel = mSetmealModels.get(i);
+            if (setmealModel.getId() == result.getBoard().getSetmealFuneralId()) {
+                mSPSetMealTitleName.setSelection(i);
+                break;
+            }
+        }
+        for (ProjectItemModel projectItemModel : result.getProjectItems()) {
+            if ("殡仪馆".equals(projectItemModel.getName())) {
+                this.projectItemModel = projectItemModel;
+                break;
+            }
+        }
     }
 
 
@@ -109,8 +145,63 @@ public class FuneralSetmealOtherView extends LinearLayout {
             SetmealModel setmealModel = mSetmealModels.get(position);
             mProductItemModels = new ArrayList<>();
             funeralID = setmealModel.getId();
-            for (CtgItemModel ctgItem : setmealModel.getCtgItems()) {
-                SetMealItemsLayout setMealItemsLayout = new SetMealItemsLayout(getContext(),ctgItem);
+            for (CtgItemModel showCtgItem : setmealModel.getCtgItems()) {
+                SetMealItemsLayout setMealItemsLayout = new SetMealItemsLayout(getContext(), showCtgItem);
+                setMealItemsLayout.setCallBack(new SetMealItemsLayout.CallBack() {
+                    @Override
+                    public void dataChange(List<CreateOrderProductItemModel> newProductItemModels, List<CreateOrderProductItemModel> oldProductItemModels) {
+                        mProductItemModels.removeAll(oldProductItemModels);
+                        mProductItemModels.addAll(newProductItemModels);
+                        onFuneralChangeListener.onFuneralChange();
+                    }
+
+                    @Override
+                    public void dataDelete(CreateOrderProductItemModel data) {
+                        mProductItemModels.remove(data);
+                        onFuneralChangeListener.onFuneralChange();
+                    }
+
+
+                });
+                //是否第一次创建
+                if (projectItemModel != null) {
+                    List<OrderCtgItemModel> ctgItems = projectItemModel.getCtgItems();
+                    List<OrderProductItemModel> productItems = null;
+                    for (OrderCtgItemModel model : ctgItems) {
+                        if (model.getId() == showCtgItem.getId()) {
+                            productItems = model.getProductItems();
+                            break;
+                        }
+                    }
+                    if (productItems != null) {
+                        tempList = new ArrayList<>();
+                        if (mSetmealModels.get(position).getId() == result.getBoard().getSetmealFuneralId()) {
+                            addCtgItemView(showCtgItem,productItems, setMealItemsLayout);
+                        } else {
+                            for (OrderProductItemModel data : productItems) {
+                                CreateOrderProductItemModel model = new CreateOrderProductItemModel();
+                                model.setProjectId(1);
+                                model.setCategoryId(showCtgItem.getId());
+                                model.setNumber(data.getNumber());
+                                model.setPrice(data.getPrice());
+                                model.setSkuId(data.getSkuId());
+                                model.setTotalPrice(data.getTotalPrice());
+                                model.setId(data.getId());
+                                model.setStatusFlag(2);
+                                model.setChange(false);
+                                tempList.add(model);
+                                if (!data.isCanEdit()) {
+                                    mSPSetMealTitleName.setSelected(false);
+                                    mSPSetMealTitleName.setEnabled(false);
+                                    mBTChangeSetMeal.setVisibility(GONE);
+                                }
+                            }
+                            addCtgItemView(setMealItemsLayout);
+                        }
+                    }
+                } else {
+                    addCtgItemView(setMealItemsLayout);
+                }
                 mLLFueralSetMeal.addView(setMealItemsLayout);
             }
         }
@@ -121,6 +212,13 @@ public class FuneralSetmealOtherView extends LinearLayout {
         }
     };
 
+    private void addCtgItemView(CtgItemModel showCtgItem,List<OrderProductItemModel> productItems, SetMealItemsLayout setMealItemsLayout) {
+        setMealItemsLayout.setData(showCtgItem,productItems);
+    }
+
+    private void addCtgItemView(SetMealItemsLayout setMealItemsLayout) {
+
+    }
 
     private void initView() {
         mTVTitleName = (TextView) view.findViewById(R.id.tv_title);
@@ -140,4 +238,14 @@ public class FuneralSetmealOtherView extends LinearLayout {
             }
         }
     };
+
+    FuneralSetmealView.OnFuneralChangeListener onFuneralChangeListener;
+
+    public void setOnFuneralChangeListener(FuneralSetmealView.OnFuneralChangeListener onFuneralChangeListener) {
+        this.onFuneralChangeListener = onFuneralChangeListener;
+    }
+
+    public interface OnFuneralChangeListener {
+        public void onFuneralChange();
+    }
 }

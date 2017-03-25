@@ -15,7 +15,7 @@ public class CreateOrderProductItemModel {
 	float price;// 单价
 	float totalPrice;// 商品总价
 	int statusFlag = 1;// 1有效 2无效
-	Long id = null;// 订单详情ID
+	Long id ;// 订单详情ID
 	boolean isChange;
 
 	/**
@@ -47,7 +47,7 @@ public class CreateOrderProductItemModel {
 		this.statusFlag = statusFlag;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
