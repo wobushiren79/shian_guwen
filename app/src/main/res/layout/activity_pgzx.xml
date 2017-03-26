@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_blackground">
+    android:background="@color/zhy_backgroud_1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,37 +12,56 @@
         <FrameLayout
             android:id="@+id/ll_pgzx"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">+
+                android:orientation="vertical">
 
-                <com.shian.shianlife.view.PGZXLayoutView
+                <!--<com.shian.shianlife.view.PGZXLayoutView-->
+                <!--android:id="@+id/pgzx_1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>-->
+
+                <!--<com.shian.shianlife.view.PGZXLayoutView-->
+                <!--android:id="@+id/pgzx_2"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>-->
+
+                <!--<com.shian.shianlife.view.PGZXLayoutView-->
+                <!--android:id="@+id/pgzx_3"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>-->
+
+                <com.shian.shianlife.view.PGZXOtherLayoutView
                     android:id="@+id/pgzx_1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>
+                    android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXOtherLayoutView>
 
-                <com.shian.shianlife.view.PGZXLayoutView
+                <com.shian.shianlife.view.PGZXOtherLayoutView
                     android:id="@+id/pgzx_2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>
+                    android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXOtherLayoutView>
 
-                <com.shian.shianlife.view.PGZXLayoutView
+                <com.shian.shianlife.view.PGZXOtherLayoutView
                     android:id="@+id/pgzx_3"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXLayoutView>
+                    android:layout_height="wrap_content"></com.shian.shianlife.view.PGZXOtherLayoutView>
 
                 <TextView
-                    android:background="@color/zhy_line_5"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimen_1dp" />
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginTop="@dimen/dimen_40dp"
+                    android:background="@color/zhy_line_5" />
+
                 <TextView
                     android:id="@+id/tv_1"
                     android:layout_width="match_parent"
-                    android:layout_marginRight="@dimen/dimen_32dp"
                     android:layout_height="@dimen/dimen_66dp"
+                    android:layout_marginRight="@dimen/dimen_32dp"
                     android:gravity="center_vertical|right"
                     android:text="· 我应该如何操作下面的服务步骤？"
                     android:textColor="@color/gray_item_shua_textcolor"
@@ -65,7 +84,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_20dp"
+            android:background="@color/white"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -77,11 +96,11 @@
                 android:layout_marginRight="@dimen/dimen_10dp"
                 android:background="@drawable/zhy_button_state_5"
                 android:gravity="center"
+                android:visibility="gone"
                 android:padding="@dimen/dimen_10dp"
                 android:text="编辑订单"
                 android:textColor="@color/white"
-                android:textSize="@dimen/txtsize_32sp"
-                android:visibility="gone" />
+                android:textSize="@dimen/txtsize_32sp" />
 
             <TextView
                 android:id="@+id/tv_neworder2"
@@ -99,142 +118,180 @@
         </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/tv_refund"
-            android:layout_width="@dimen/dimen_250dp"
-            android:layout_height="@dimen/dimen_60dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dimen_20dp"
-            android:background="@drawable/ic_home_reg"
-            android:gravity="center"
-            android:text="申请退款"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/txtsize_32sp"
-            android:visibility="gone" />
+        <LinearLayout
+            android:paddingTop="@dimen/dimen_24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_refund"
+                android:layout_width="@dimen/dimen_688dp"
+                android:layout_height="@dimen/dimen_60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:background="@drawable/zhy_button_state_2"
+                android:gravity="center"
+                android:text="申请退款"
+                android:textColor="@color/zhy_text_color_1"
+                android:textSize="@dimen/dimen_32dp"
+                android:visibility="gone" />
+        </LinearLayout>
 
 
         <LinearLayout
             android:id="@+id/ll_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_24dp"
+            android:background="@color/white"
             android:orientation="vertical"
             android:visibility="gone">
 
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_1dp"
-                android:layout_marginTop="@dimen/dimen_20dp"
-                android:background="@color/gray_item_shua_textcolor" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dimen_80dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dimen_20dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dimen_32dp"
                 android:text="派单状态"
-                android:textColor="@color/blackgroundmain" />
+                android:textColor="@color/black_item_shua_textcolor"
+                android:textSize="@dimen/dimen_32dp" />
 
-            <TextView
-                android:id="@+id/tv_btn2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:text="我该如何派单和评价?" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dimen_120dp"
                 android:layout_marginTop="@dimen/dimen_10dp"
+                android:background="@color/zhy_line_4"
                 android:orientation="horizontal">
 
                 <LinearLayout
+
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:text="总服务项目"
-                        android:textColor="@color/blackgroundmain" />
+                        android:textColor="@color/dimgray"
+                        android:textSize="@dimen/dimen_24dp" />
 
                     <TextView
                         android:id="@+id/tv_allnum"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_gravity="center"
-                        android:gravity="center" />
+                        android:layout_weight="1"
+                        android:gravity="center|top"
+                        android:textColor="@color/zhy_text_color_1"
+                        android:textSize="@dimen/dimen_32dp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
+
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:text="待派单"
-                        android:textColor="@color/blackgroundmain" />
+                        android:textColor="@color/dimgray"
+                        android:textSize="@dimen/dimen_24dp" />
 
                     <TextView
                         android:id="@+id/tv_waitnum"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_gravity="center"
-                        android:gravity="center" />
+                        android:layout_weight="1"
+                        android:gravity="center|top"
+
+                        android:textColor="@color/zhy_text_color_1"
+                        android:textSize="@dimen/dimen_32dp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
+
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:text="待评价"
-                        android:textColor="@color/blackgroundmain" />
+                        android:textColor="@color/dimgray"
+                        android:textSize="@dimen/dimen_24dp" />
 
                     <TextView
                         android:id="@+id/tv_pjnum"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_gravity="center"
-                        android:gravity="center" />
+                        android:layout_weight="1"
+                        android:gravity="center|top"
+                        android:textColor="@color/zhy_text_color_1"
+                        android:textSize="@dimen/dimen_32dp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
+
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_gravity="center"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:text="待审核"
-                        android:textColor="@color/blackgroundmain" />
+                        android:textColor="@color/dimgray"
+                        android:textSize="@dimen/dimen_24dp" />
 
                     <TextView
                         android:id="@+id/tv_shenhenum"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_gravity="center"
-                        android:gravity="center" />
+                        android:layout_weight="1"
+                        android:gravity="center|top"
+                        android:textColor="@color/zhy_text_color_1"
+                        android:textSize="@dimen/dimen_32dp" />
                 </LinearLayout>
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_btn2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_66dp"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:gravity="center_vertical|right"
+                android:paddingRight="@dimen/dimen_32dp"
+                android:text="· 我该如何派单和评价?"
+                android:textColor="@color/black_item_shua_textcolor"
+                android:textSize="@dimen/dimen_24dp" />
         </LinearLayout>
 
 
@@ -242,6 +299,8 @@
             android:id="@+id/lv_swipe_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dimen_24dp"
+            android:background="@color/white"
             android:choiceMode="singleChoice"
             android:descendantFocusability="beforeDescendants"
             android:divider="@null"

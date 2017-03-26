@@ -26,8 +26,7 @@ public abstract class BaseSendOrder extends LinearLayout {
         super(context);
         this.context = context;
         this.consultId = consultId;
-        view = LayoutInflater.from(context).inflate(layoutID, null);
-        this.addView(view);
+        view = LayoutInflater.from(context).inflate(layoutID, this);
     }
 
 

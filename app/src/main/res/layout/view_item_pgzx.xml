@@ -4,35 +4,55 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_oi_0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/dimen_10dp"
-        android:layout_marginTop="@dimen/dimen_20dp"
-        android:text="户外棚配套	"
-        android:textColor="@color/blackgroundmain"
-        android:textSize="@dimen/text_size_top_bg" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_margin="@dimen/dimen_10dp"
-        android:background="@drawable/user_down_line" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/dimen_10dp">
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_oi_0"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="户外棚配套	"
+            android:textColor="@color/zhy_text_color_1"
+            android:textSize="@dimen/dimen_32dp" />
+
+        <TextView
+            android:id="@+id/tv_oi_4"
+            android:layout_width="@dimen/dimen_120dp"
+            android:layout_height="@dimen/dimen_60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_marginRight="@dimen/dimen_32dp"
+            android:background="@drawable/zhy_button_state_2"
+            android:gravity="center"
+            android:text="派单中"
+            android:textColor="@color/zhy_text_color_1"
+            android:textSize="@dimen/dimen_24dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:layout_marginLeft="@dimen/dimen_32dp"
+        android:background="@color/zhy_line_3" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:layout_weight="1"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:layout_marginRight="@dimen/dimen_32dp"
+
             android:orientation="horizontal">
 
             <TextView
@@ -40,56 +60,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:gravity="center"
+                android:layout_weight="0.2"
+                android:gravity="center_vertical"
                 android:text="高级户外棚	"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_detail_list" />
+                android:textColor="@color/black_item_shua_textcolor"
+                android:textSize="@dimen/dimen_24dp" />
 
-            <ImageView
-                android:id="@+id/iv_data"
-                android:layout_width="@dimen/dimen_40dp"
-                android:layout_height="@dimen/dimen_40dp"
-
-                android:src="@drawable/moreinfo" />
-
-            <TextView
-                android:id="@+id/tv_oi_4"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="派单中"
-                android:textColor="@color/blackgroundmain"
-                android:textSize="@dimen/text_size_detail_list" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@drawable/user_down_line" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tv_oi_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:layout_marginTop="@dimen/dimen_10dp"
-                android:layout_weight="1"
-                android:text="数量：1套"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_detail_list" />
 
             <TextView
                 android:id="@+id/tv_oi_3"
@@ -101,79 +77,97 @@
                 android:layout_marginTop="@dimen/dimen_10dp"
                 android:layout_weight="1"
                 android:text="型号：HW1"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_detail_list" />
+                android:textColor="@color/zhy_text_color_9"
+                android:textSize="@dimen/dimen_24dp" />
+
+            <ImageView
+                android:id="@+id/iv_data"
+                android:layout_width="@dimen/dimen_32dp"
+                android:layout_height="@dimen/dimen_32dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/tishi" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_oi_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dimen_32dp"
+                android:gravity="center_vertical"
+                android:text="数量：1套"
+                android:textColor="@color/black_item_shua_textcolor"
+                android:textSize="@dimen/dimen_24dp" />
+
+
         </LinearLayout>
 
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:background="@drawable/user_down_line" />
-
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/dimen_10dp"
-        android:visibility="gone">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen_10dp"
-            android:gravity="center"
-            android:text="+" />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/remakell"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dimen_80dp"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/dimen_10dp"
-        android:paddingLeft="@dimen/dimen_10dp"
-        android:paddingRight="@dimen/dimen_10dp">
+        android:paddingLeft="@dimen/dimen_32dp">
 
         <TextView
             android:id="@+id/tv_oi_5"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:gravity="center_vertical"
             android:text="备注说明:"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_detail_list" />
+            android:textColor="@color/black_item_shua_textcolor"
+            android:textSize="@dimen/dimen_24dp" />
 
         <EditText
             android:id="@+id/et_oi_bz"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dimen_10dp"
-            android:ems="15"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_detail_list" />
+            android:layout_marginRight="@dimen/dimen_32dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="填入备注..."
+            android:textColor="@color/black_item_shua_textcolor"
+            android:textSize="@dimen/dimen_24dp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_pdrlocation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dimen_80dp"
         android:orientation="horizontal"
-        android:padding="@dimen/dimen_10dp"
         android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:gravity="center_vertical"
             android:text="@string/pdrlocation"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_detail_list" />
+            android:textColor="@color/black_item_shua_textcolor"
+            android:textSize="@dimen/dimen_24dp" />
 
         <TextView
             android:id="@+id/text_pdrlocation"
@@ -181,39 +175,42 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dimen_10dp"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_detail_list" />
+            android:layout_weight="1"
+            android:textColor="@color/zhy_text_color_9"
+            android:textSize="@dimen/dimen_24dp" />
 
         <Button
             android:id="@+id/button_pdrlocation"
-            android:layout_width="@dimen/dimen_100dp"
-            android:layout_height="@dimen/dimen_50dp"
+            android:layout_width="@dimen/dimen_32dp"
+            android:layout_height="@dimen/dimen_32dp"
             android:layout_alignParentRight="true"
-            android:background="@drawable/button_map_onclick"
-            android:drawableLeft="@drawable/button_map_icon"
-            android:padding="@dimen/dimen_5dp"
-            android:text="@string/map"
-            android:textColor="@color/text_color"
-            android:textSize="@dimen/txtsize_20sp" />
+            android:layout_marginRight="@dimen/dimen_32dp"
+            android:background="@drawable/button_map_icon" />
     </LinearLayout>
 
-    <LinearLayout
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_line_3" />
+
+    <LinearLayout
         android:id="@+id/ll_ht_pic"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_10dp"
+        android:layout_height="@dimen/dimen_150dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:layout_marginRight="@dimen/dimen_32dp">
 
             <ImageView
                 android:id="@+id/btn_ht_pic_0"
-                android:layout_width="@dimen/dimen_150dp"
-                android:layout_height="@dimen/dimen_100dp"
-                android:layout_margin="@dimen/dimen_10dp"
+                android:layout_width="@dimen/dimen_155dp"
+                android:layout_height="@dimen/dimen_120dp"
                 android:background="@drawable/ic_ht_pic"
                 android:gravity="center"
                 android:tag="file1" />
@@ -221,9 +218,8 @@
             <ProgressBar
                 android:id="@+id/pb_ht_pic_0"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="@dimen/dimen_150dp"
-                android:layout_height="@dimen/dimen_100dp"
-                android:layout_margin="@dimen/dimen_10dp"
+                android:layout_width="@dimen/dimen_155dp"
+                android:layout_height="@dimen/dimen_120dp"
                 android:max="100"
                 android:progress="0"
                 android:visibility="gone" />
@@ -235,9 +231,9 @@
 
             <ImageView
                 android:id="@+id/btn_ht_pic_1"
-                android:layout_width="@dimen/dimen_150dp"
-                android:layout_height="@dimen/dimen_100dp"
-                android:layout_margin="@dimen/dimen_10dp"
+                android:layout_width="@dimen/dimen_155dp"
+                android:layout_height="@dimen/dimen_120dp"
+
                 android:background="@drawable/ic_ht_pic"
                 android:gravity="center"
                 android:tag="file2" />
@@ -245,9 +241,9 @@
             <ProgressBar
                 android:id="@+id/pb_ht_pic_1"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="@dimen/dimen_150dp"
-                android:layout_height="@dimen/dimen_100dp"
-                android:layout_margin="@dimen/dimen_10dp"
+                android:layout_width="@dimen/dimen_155dp"
+                android:layout_height="@dimen/dimen_120dp"
+
                 android:max="100"
                 android:progress="0"
                 android:visibility="gone" />
@@ -255,36 +251,31 @@
 
         <Button
             android:id="@+id/btn_save"
-            android:layout_width="80dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/dimen_120dp"
+            android:layout_height="@dimen/dimen_60dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/ic_home_reg"
+            android:layout_marginLeft="24dp"
+            android:background="@drawable/zhy_button_state_2"
             android:text="保存"
-            android:textColor="@color/text_color" />
+            android:textColor="@color/zhy_text_color_1" />
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_margin="@dimen/dimen_10dp"
-        android:background="@drawable/user_down_line" />
 
     <RelativeLayout
         android:id="@+id/rl_qt0"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_120dp"
-        android:padding="@dimen/dimen_20dp">
+        android:layout_height="@dimen/dimen_80dp">
 
         <TextView
             android:id="@+id/tv_11"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_centerVertical="true"
-            android:gravity="left"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:gravity="center_vertical"
             android:text="执行者姓名/ID:"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_detail_list" />
+            android:textColor="@color/black_item_shua_textcolor"
+            android:textSize="@dimen/dimen_24dp" />
 
         <TextView
             android:id="@+id/tv_pgzx_name"
@@ -293,25 +284,27 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dimen_15dp"
             android:layout_toRightOf="@+id/tv_11"
-            android:gravity="left"
+            android:gravity="center_vertical"
             android:text=""
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_detail_list" />
+            android:textColor="@color/zhy_text_color_9"
+            android:textSize="@dimen/dimen_24dp" />
 
         <ImageView
             android:id="@+id/iv_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dimen_32dp"
+            android:layout_height="@dimen/dimen_32dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimen_32dp"
             android:src="@drawable/ic_qt_phone" />
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0.5dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/gray_common" />
+
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_line_3" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -325,16 +318,16 @@
             android:layout_width="@dimen/dimen_350dp"
             android:layout_height="@dimen/dimen_80dp"
             android:layout_margin="@dimen/dimen_10dp"
-            android:background="@drawable/bg_button_yellow"
+            android:background="@drawable/zhy_button_state_5"
             android:gravity="center"
             android:text="评价"
-            android:textColor="@color/text_color"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_top_bg" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_20dp"
-        android:background="@color/white" />
+        android:layout_height="@dimen/dimen_24dp"
+        android:background="@color/zhy_backgroud_1" />
 
 </LinearLayout>

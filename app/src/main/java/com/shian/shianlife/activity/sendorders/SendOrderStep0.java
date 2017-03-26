@@ -16,6 +16,7 @@ import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpSaveSendOrderDataOne;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataOne;
 import com.shian.shianlife.view.MapSelectLayoutView;
+import com.shian.shianlife.view.writeview.MapSelectViewNormal;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,9 +28,7 @@ import java.util.List;
 
 public class SendOrderStep0 extends BaseSendOrder {
 
-
-    MapSelectLayoutView mSelectLayoutView;
-
+    MapSelectViewNormal mSelectLayoutView;
 
     public SendOrderStep0(Context context, long consultId) {
         super(context, R.layout.layout_sendorder_0, consultId);
@@ -65,10 +64,10 @@ public class SendOrderStep0 extends BaseSendOrder {
                         if (result.getZsLocation() != null) {
                             listData.add(result.getZsLocation());
                         }
-                        mSelectLayoutView.setData(1, listData);
                         if (result.getZsLocation() != null) {
-                            mSelectLayoutView.setLocation(result.getZsLocation());
+                            mSelectLayoutView.setData(result.getZsLocation());
                         }
+                        mSelectLayoutView.initAutoTextView(listData);
                         String Time = TransitionDate.DateToStr(new Date(result.getDeadTime()), "yyyy-MM-dd");
                         Intent intent = new Intent(SendOrderActivity.UPDATA_ACTION);
                         ArrayList<String> data = new ArrayList<String>();
@@ -96,20 +95,21 @@ public class SendOrderStep0 extends BaseSendOrder {
     }
 
     private void initView() {
-        mSelectLayoutView = (MapSelectLayoutView) view.findViewById(R.id.mapselect);
-        mSelectLayoutView.setData(1, new ArrayList<String>());
+        mSelectLayoutView = (MapSelectViewNormal) view.findViewById(R.id.write_mapselect_zslocation);
+
+        mSelectLayoutView.setNumView(0);
     }
 
 
     @Override
     public void saveData() {
-        if (mSelectLayoutView.getLocation().equals("")) {
+        if (mSelectLayoutView.getData().equals("")) {
             ToastUtils.show(getContext(), "治丧地址不能为空");
             return;
         }
         HpSaveSendOrderDataOne params = new HpSaveSendOrderDataOne();
         params.setConsultId(consultId);
-        params.setZsLocation(mSelectLayoutView.getLocation());
+        params.setZsLocation(mSelectLayoutView.getData());
         MHttpManagerFactory.getAccountManager().saveSendOrderDataOne(getContext(), params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart() {

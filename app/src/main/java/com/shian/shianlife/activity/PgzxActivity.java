@@ -46,6 +46,7 @@ import com.shian.shianlife.provide.result.HrOrderItenList;
 import com.shian.shianlife.provide.result.HrUploadFile;
 import com.shian.shianlife.provide.result.OrderItem;
 import com.shian.shianlife.view.PGZXLayoutView;
+import com.shian.shianlife.view.PGZXOtherLayoutView;
 import com.shian.shianlife.view.ScrollListView;
 
 import java.util.ArrayList;
@@ -80,9 +81,12 @@ public class PgzxActivity extends BaseActivity {
 
     public int orderStatus = 0;
 
-    PGZXLayoutView mPgzxLayoutView1;
-    PGZXLayoutView mPgzxLayoutView2;
-    PGZXLayoutView mPgzxLayoutView3;
+    //    PGZXLayoutView mPgzxLayoutView1;
+//    PGZXLayoutView mPgzxLayoutView2;
+//    PGZXLayoutView mPgzxLayoutView3;
+    PGZXOtherLayoutView mPgzxLayoutView1;
+    PGZXOtherLayoutView mPgzxLayoutView2;
+    PGZXOtherLayoutView mPgzxLayoutView3;
 
     ImageView mTVOver;
 
@@ -134,9 +138,9 @@ public class PgzxActivity extends BaseActivity {
         LLPDZT = (LinearLayout) findViewById(R.id.ll_data);
         LLPGZXState = (FrameLayout) findViewById(R.id.ll_pgzx);
         mTVOver = (ImageView) findViewById(R.id.tv_serviceover);
-        mPgzxLayoutView1 = (PGZXLayoutView) findViewById(R.id.pgzx_1);
-        mPgzxLayoutView2 = (PGZXLayoutView) findViewById(R.id.pgzx_2);
-        mPgzxLayoutView3 = (PGZXLayoutView) findViewById(R.id.pgzx_3);
+        mPgzxLayoutView1 = (PGZXOtherLayoutView) findViewById(R.id.pgzx_1);
+        mPgzxLayoutView2 = (PGZXOtherLayoutView) findViewById(R.id.pgzx_2);
+        mPgzxLayoutView3 = (PGZXOtherLayoutView) findViewById(R.id.pgzx_3);
 
 
         mTVAllNum = (TextView) findViewById(R.id.tv_allnum);
@@ -165,7 +169,7 @@ public class PgzxActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             Intent in = new Intent(PgzxActivity.this, EditOrderActivity.class);
-            in.putExtra("pgzx",1);
+            in.putExtra("pgzx", 1);
             in.putExtra("khxqtype", khxqType);
             in.putExtra("orderId", getIntent().getLongExtra("orderId", 0));
             in.putExtra("consultId", getIntent().getLongExtra("consultId", 0));
@@ -189,9 +193,9 @@ public class PgzxActivity extends BaseActivity {
         orderId = getIntent().getLongExtra("orderId", 0);
         consultId = getIntent().getLongExtra("consultId", 0);
 
-        mPgzxLayoutView1.setID(orderId, consultId);
-        mPgzxLayoutView2.setID(orderId, consultId);
-        mPgzxLayoutView3.setID(orderId, consultId);
+        mPgzxLayoutView1.setID(orderId, consultId, 1);
+        mPgzxLayoutView2.setID(orderId, consultId, 2);
+        mPgzxLayoutView3.setID(orderId, consultId, 3);
     }
 
     @Override
@@ -239,7 +243,7 @@ public class PgzxActivity extends BaseActivity {
                 ivData.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Utils.getSKUDetails(PgzxActivity.this,templateItem.getSkuId());
+                        Utils.getSKUDetails(PgzxActivity.this, templateItem.getSkuId());
                     }
                 });
 
@@ -533,7 +537,7 @@ public class PgzxActivity extends BaseActivity {
                         } else {
                             ev.setVisibility(View.VISIBLE);
                             tv4.setText("待评价");
-                            if(isShoukuan){
+                            if (isShoukuan) {
                                 ev.setVisibility(View.GONE);
                             }
                         }
@@ -566,12 +570,12 @@ public class PgzxActivity extends BaseActivity {
                     @Override
                     public void onSuccess(HrOrderItenList result) {
                         // TODO Auto-generated method stub
-                        if(result.getOrderHandleStatus()==7){
+                        if (result.getOrderHandleStatus() == 7) {
                             tvNew.setVisibility(View.VISIBLE);
                             tvNew.setEnabled(false);
                             tvNew.setBackgroundColor(getResources().getColor(R.color.gray_common));
                             tvNew.setTextColor(Color.WHITE);
-                        }else{
+                        } else {
                             if (!result.isCanEdit()) {
                                 tvNew.setEnabled(false);
                                 tvNew.setVisibility(View.VISIBLE);
@@ -580,7 +584,7 @@ public class PgzxActivity extends BaseActivity {
                                 tvNew.setTextColor(Color.WHITE);
                             } else if (isShenhe || isShoukuan) {
                                 tvNew.setVisibility(View.GONE);
-                            }else{
+                            } else {
                                 tvNew.setVisibility(View.VISIBLE);
                             }
                         }
@@ -655,44 +659,44 @@ public class PgzxActivity extends BaseActivity {
         }
         switch (orderStatus) {
             case 0:
-                mPgzxLayoutView1.setType(0, 1, 0);
-                mPgzxLayoutView2.setType(0, 0, 1);
-                mPgzxLayoutView3.setType(1, 0, 2);
+                mPgzxLayoutView1.setState(2, 1, 1);
+                mPgzxLayoutView2.setState(1, 1, 1);
+                mPgzxLayoutView3.setState(1, 1, 1);
                 break;
             case 1:
-                mPgzxLayoutView1.setType(0, 2, 0);
-                mPgzxLayoutView2.setType(0, 0, 1);
-                mPgzxLayoutView3.setType(1, 0, 2);
+                mPgzxLayoutView1.setState(3, 2, 1);
+                mPgzxLayoutView2.setState(1, 1, 1);
+                mPgzxLayoutView3.setState(1, 1, 1);
                 break;
             case 2:
-                mPgzxLayoutView1.setType(0, 3, 0);
-                mPgzxLayoutView2.setType(0, 1, 1);
-                mPgzxLayoutView3.setType(1, 0, 2);
+                mPgzxLayoutView1.setState(3, 3, 4);
+                mPgzxLayoutView2.setState(2, 1, 1);
+                mPgzxLayoutView3.setState(1, 1, 1);
                 break;
             case 3:
-                mPgzxLayoutView1.setType(0, 3, 0);
-                mPgzxLayoutView2.setType(0, 2, 1);
-                mPgzxLayoutView3.setType(1, 0, 2);
+                mPgzxLayoutView1.setState(3, 3, 4);
+                mPgzxLayoutView2.setState(3, 2, 1);
+                mPgzxLayoutView3.setState(1, 1, 1);
                 break;
             case 4:
-                mPgzxLayoutView1.setType(0, 3, 0);
-                mPgzxLayoutView2.setType(0, 3, 1);
-                mPgzxLayoutView3.setType(1, 1, 2);
+                mPgzxLayoutView1.setState(3, 3, 4);
+                mPgzxLayoutView2.setState(3, 3, 4);
+                mPgzxLayoutView3.setState(2, 1, 1);
                 break;
             case 5:
-                mPgzxLayoutView1.setType(0, 3, 0);
-                mPgzxLayoutView2.setType(0, 3, 1);
-                mPgzxLayoutView3.setType(1, 2, 2);
+                mPgzxLayoutView1.setState(3, 3, 4);
+                mPgzxLayoutView2.setState(3, 3, 4);
+                mPgzxLayoutView3.setState(3, 2, 1);
                 break;
             case 6:
-                mPgzxLayoutView1.setType(0, 3, 0);
-                mPgzxLayoutView2.setType(0, 3, 1);
-                mPgzxLayoutView3.setType(1, 3, 2);
+                mPgzxLayoutView1.setState(3, 3, 4);
+                mPgzxLayoutView2.setState(3, 3, 4);
+                mPgzxLayoutView3.setState(3, 3, 2);
                 break;
             case 7:
-                mPgzxLayoutView1.setType(0, 3, 0);
-                mPgzxLayoutView2.setType(0, 3, 1);
-                mPgzxLayoutView3.setType(1, 3, 2);
+                mPgzxLayoutView1.setState(3, 3, 4);
+                mPgzxLayoutView2.setState(3, 3, 4);
+                mPgzxLayoutView3.setState(3, 3, 3);
                 mTVOver.setVisibility(View.VISIBLE);
                 break;
         }

@@ -1,125 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/dimen_20dp">
+    android:orientation="vertical">
 
-    <TextView
+
+    <com.shian.shianlife.view.writeview.SpinnerViewNormal
+        android:id="@+id/write_cremator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/xingxing"
-        android:text="火化炉"
-        android:textColor="@color/blackgroundmain" />
-
-    <Spinner
-        android:id="@+id/sp_jbr_0"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_60dp"
-        android:layout_gravity="center_vertical"
-
-        android:background="@drawable/et_bk1"
-        android:textSize="@dimen/text_size_detail_list" />
+        MyViewAttr:isImportant="true"
+        MyViewAttr:titleName="火化炉"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_line_3" />
 
+    <com.shian.shianlife.view.writeview.EditTextViewNormal
+        android:id="@+id/write_service_window"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_20dp"
-        android:drawableLeft="@drawable/xingxing"
-        android:text="服务窗口"
-        android:textColor="@color/blackgroundmain" />
-
-    <EditText
-        android:id="@+id/tv_servicewindows"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_60dp"
-        android:background="@drawable/et_bk1"
-        android:padding="@dimen/dimen_5dp" />
+        MyViewAttr:isImportant="true"
+        MyViewAttr:titleName="服务窗口"></com.shian.shianlife.view.writeview.EditTextViewNormal>
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_line_3" />
+
+    <com.shian.shianlife.view.writeview.SpinnerViewEdit
+        android:id="@+id/write_body_park"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_20dp"
-        android:drawableLeft="@drawable/xingxing"
-        android:text="遗体停放"
-        android:textColor="@color/blackgroundmain" />
+        MyViewAttr:isImportant="true"
+        MyViewAttr:titleName="遗体停放"></com.shian.shianlife.view.writeview.SpinnerViewEdit>
 
-    <LinearLayout
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_line_3" />
+
+    <com.shian.shianlife.view.writeview.TimeSelectViewNormal
+        android:id="@+id/write_fire_timeselect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Spinner
-            android:id="@+id/bodiespark"
-            android:layout_width="@dimen/dimen_200dp"
-            android:layout_height="@dimen/dimen_60dp"
-            android:background="@drawable/et_bk1"></Spinner>
-
-        <EditText
-            android:id="@+id/et_bodiespark"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_60dp"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:background="@drawable/shape_et_order"
-            android:hint="选择单间停放时请输入停放厅名字"
-            android:padding="@dimen/dimen_10dp"
-            android:singleLine="true"
-            android:textSize="@dimen/txtsize_22sp" />
-    </LinearLayout>
+        MyViewAttr:isImportant="true"
+        MyViewAttr:titleName="火化时间"></com.shian.shianlife.view.writeview.TimeSelectViewNormal>
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_line_3" />
+
+    <com.shian.shianlife.view.writeview.TimeSelectViewNormal
+        android:id="@+id/write_bye_timeselect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_20dp"
-        android:drawableLeft="@drawable/xingxing"
-        android:text="火化时间"
-        android:textColor="@color/blackgroundmain" />
+        MyViewAttr:isImportant="true"
+        MyViewAttr:titleName="遗体告别时间"></com.shian.shianlife.view.writeview.TimeSelectViewNormal>
 
     <TextView
-        android:id="@+id/tv_firetime"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_60dp"
-        android:background="@drawable/et_bk1" />
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_line_3" />
 
-    <TextView
+    <com.shian.shianlife.view.writeview.TimeSelectViewNormal
+        android:id="@+id/write_out_timeselect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_20dp"
-        android:drawableLeft="@drawable/xingxing"
-        android:text="遗体告别时间"
-        android:textColor="@color/blackgroundmain" />
+        MyViewAttr:isImportant="true"
+        MyViewAttr:titleName="出殡时间"></com.shian.shianlife.view.writeview.TimeSelectViewNormal>
 
     <TextView
-        android:id="@+id/tv_bodiesbyetime"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_60dp"
-        android:background="@drawable/et_bk1" />
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_line_3" />
 
-    <TextView
+    <com.shian.shianlife.view.writeview.EditTextViewNormal
+        android:id="@+id/write_remark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_20dp"
-        android:drawableLeft="@drawable/xingxing"
-        android:text="出殡时间"
-        android:textColor="@color/blackgroundmain" />
+        MyViewAttr:isImportant="false"
+        MyViewAttr:isLonger="true"
+        MyViewAttr:titleName="备注"></com.shian.shianlife.view.writeview.EditTextViewNormal>
 
-    <TextView
-        android:id="@+id/tv_funeraltime"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_60dp"
-        android:background="@drawable/et_bk1" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_20dp"
-        android:text="备注"
-        android:textColor="@color/blackgroundmain" />
-
-    <EditText
-        android:id="@+id/et_remark"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_60dp"
-        android:background="@drawable/et_bk1" />
 </LinearLayout>

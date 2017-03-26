@@ -32,7 +32,8 @@ public class AllAppActivity extends BaseActivity {
             APPEnum.NAVIGATION,
             APPEnum.CALENDAR,
             APPEnum.CALCULATOR,
-            APPEnum.DIDI
+            APPEnum.DIDI,
+            APPEnum.COMMUNICATION
     };
     APPEnum[] otherData = {
             APPEnum.INTEGRALMALL

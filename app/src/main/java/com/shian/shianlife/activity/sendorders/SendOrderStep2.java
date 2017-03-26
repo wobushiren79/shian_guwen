@@ -15,6 +15,7 @@ import com.shian.shianlife.provide.params.HpSaveSendOrderDataThree;
 import com.shian.shianlife.provide.params.HpSaveTime;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataThree;
 import com.shian.shianlife.view.MapSelectLayoutView;
+import com.shian.shianlife.view.writeview.MapSelectViewNormal;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,7 +27,8 @@ import java.util.List;
 
 public class SendOrderStep2 extends BaseSendOrder {
     HpSaveSendOrderDataThree params = new HpSaveSendOrderDataThree();
-    MapSelectLayoutView mapSelectLayoutView;
+
+    MapSelectViewNormal mWriteLocation;
 
     public SendOrderStep2(Context context, long consultId) {
         super(context, R.layout.layout_sendorder_2, consultId);
@@ -36,12 +38,12 @@ public class SendOrderStep2 extends BaseSendOrder {
     @Override
     public void saveData() {
 
-        if (mapSelectLayoutView.getLocation().equals("")) {
+        if (mWriteLocation.getData().equals("")) {
             ToastUtils.show(getContext(), "当前地址不能为空");
             return;
         }
         params.setConsultId(consultId);
-        params.setAfterLocation(mapSelectLayoutView.getLocation());
+        params.setAfterLocation(mWriteLocation.getData());
         MHttpManagerFactory.getAccountManager().saveSendOrderDataThree(getContext(), params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart() {
@@ -111,9 +113,9 @@ public class SendOrderStep2 extends BaseSendOrder {
                 if (result.getZsLocation() != null) {
                     listData.add(result.getZsLocation());
                 }
-                mapSelectLayoutView.setData(1, listData);
+                mWriteLocation.initAutoTextView(listData);
                 if (result.getAfterLocation() != null) {
-                    mapSelectLayoutView.setLocation(result.getAfterLocation());
+                    mWriteLocation.setData(result.getAfterLocation());
                 }
 
 
@@ -130,9 +132,8 @@ public class SendOrderStep2 extends BaseSendOrder {
 
 
     private void initView() {
-        mapSelectLayoutView = (MapSelectLayoutView) findViewById(R.id.mapselect);
-        mapSelectLayoutView.setData(1, new ArrayList<String>());
-
+        mWriteLocation = (MapSelectViewNormal) findViewById(R.id.write_location);
+        mWriteLocation.setNumView(0);
         getData();
 
     }

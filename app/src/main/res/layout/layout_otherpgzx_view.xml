@@ -2,6 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dimen_32dp"
+    android:paddingRight="@dimen/dimen_32dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_40dp"
+        android:textColor="@color/item_gray_big"
+        android:textSize="@dimen/dimen_32dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.shian.shianlife.view.customview.PGZXItemView
+
+            android:id="@+id/pgzx_item_1"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></com.shian.shianlife.view.customview.PGZXItemView>
+
+        <com.shian.shianlife.view.customview.PGZXItemView
+            android:id="@+id/pgzx_item_2"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></com.shian.shianlife.view.customview.PGZXItemView>
+
+        <com.shian.shianlife.view.customview.PGZXItemView
+            android:id="@+id/pgzx_item_3"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></com.shian.shianlife.view.customview.PGZXItemView>
+    </LinearLayout>
+
 
 </LinearLayout>

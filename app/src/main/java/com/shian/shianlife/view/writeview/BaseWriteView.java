@@ -38,5 +38,5 @@ public abstract class BaseWriteView extends LinearLayout {
         typedArray.recycle();
     }
 
-    ;
+
 }

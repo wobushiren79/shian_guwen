@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -24,6 +26,7 @@ import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataOne;
+import com.shian.shianlife.view.writeview.CheckBoxViewNormal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +37,12 @@ public class SendOrderActivity extends BaseActivity {
     LinearLayout mLLHeadLayout;
     LinearLayout mLLCheckBoxLayout;
     LinearLayout mLLCotent;
-    Button mBTSubmit;
+    TextView mBTSubmit;
     Button mBTDetailes;
     long orderId;
     long consultId;
 
-    CheckBox mCBCheckAll;
+    CheckBoxViewNormal mCBCheckAll;
     int step = 0;
     String[] headData1 = {"去世时间", "去世地点"};
     String[] headData2 = {"治丧地址"};
@@ -63,9 +66,9 @@ public class SendOrderActivity extends BaseActivity {
             "协调、监督灵堂搭建、商品供应、仪式举行",
             "联系殡仪馆，预约火化时间"};
 
-    String[] checkData3 = {"陪同办理】联系家属确认见面时间、地点/\n【代办手续】确认相关证件（“三证一书）准确齐全",
+    String[] checkData3 = {"【陪同办理】联系家属确认见面时间、地点\n【代办手续】确认相关证件（“三证一书）准确齐全",
             "联系殡仪馆对接人，告知遗体转单间及单间价位",
-            "确定骨灰盒（东郊殡仪馆办理火化手续需要提前携带骨灰盒）",
+            "确定骨灰盒(东郊殡仪馆办理火化手续需要提前携带骨灰盒)",
             "前往殡仪馆办理火化手续，领取火化票据"};
 
     String[] checkData4 = {"返回治丧现场，查看灵堂消耗用品是否够用、回礼是否增加；",
@@ -94,7 +97,7 @@ public class SendOrderActivity extends BaseActivity {
     List<String[]> listCheckData = new ArrayList<>();
 
     List<View> listHeadView = new ArrayList<>();
-    List<CheckBox> listCheckBox = new ArrayList<>();
+    List<CheckBoxViewNormal> listCheckBox = new ArrayList<>();
 
 
     BaseSendOrder sendOrderStep;
@@ -122,13 +125,20 @@ public class SendOrderActivity extends BaseActivity {
     private void initView() {
         mLLHeadLayout = (LinearLayout) findViewById(R.id.ll_head_content);
         mLLCheckBoxLayout = (LinearLayout) findViewById(R.id.ll_checkbox);
-        mCBCheckAll = (CheckBox) findViewById(R.id.cb_allcheck);
-        mBTSubmit = (Button) findViewById(R.id.bt_submit);
+        mCBCheckAll = (CheckBoxViewNormal) findViewById(R.id.cb_allcheck);
+        mBTSubmit = (TextView) findViewById(R.id.bt_submit);
         mLLCotent = (LinearLayout) findViewById(R.id.ll_content);
         mBTDetailes = (Button) findViewById(R.id.bt_detailes);
-        mCBCheckAll.setOnClickListener(onClickListener);
         mBTSubmit.setOnClickListener(onClickListener);
         mBTDetailes.setOnClickListener(onClickListener);
+
+        mCBCheckAll.setLeftText("全选");
+        mCBCheckAll.setCheckBoxCheckChangeListener(new CheckBoxViewNormal.CheckBoxCheckChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                setCheckBoxAll();
+            }
+        });
     }
 
 
@@ -159,9 +169,11 @@ public class SendOrderActivity extends BaseActivity {
         }
         for (int i = 0; i < listCheckData.get(step).length; i++) {
             String checkText = listCheckData.get(step)[i];
-            CheckBox checkBox = new CheckBox(SendOrderActivity.this);
-            checkBox.setOnCheckedChangeListener(onCheckedChangeListListener);
-            checkBox.setText(checkText);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen.dimen_60dp));
+            CheckBoxViewNormal checkBox = new CheckBoxViewNormal(SendOrderActivity.this);
+            checkBox.setLayoutParams(layoutParams);
+            checkBox.setCheckBoxCheckChangeListener(onCheckedChangeListListener);
+            checkBox.setLeftText(checkText);
             listCheckBox.add(checkBox);
             mLLCheckBoxLayout.addView(checkBox);
         }
@@ -199,8 +211,6 @@ public class SendOrderActivity extends BaseActivity {
         public void onClick(View view) {
             if (view == mBTSubmit) {
                 sendOrderStep.saveData();
-            } else if (view == mCBCheckAll) {
-                setCheckBoxAll();
             } else if (view == mBTDetailes) {
                 getDetailes();
             }
@@ -216,26 +226,25 @@ public class SendOrderActivity extends BaseActivity {
 
     private void setCheckBoxAll() {
         if (mCBCheckAll.isChecked()) {
-
-            for (CheckBox box : listCheckBox) {
+            for (CheckBoxViewNormal box : listCheckBox) {
                 box.setChecked(true);
             }
             mBTSubmit.setVisibility(View.VISIBLE);
         } else {
 
-            for (CheckBox box : listCheckBox) {
+            for (CheckBoxViewNormal box : listCheckBox) {
                 box.setChecked(false);
             }
             mBTSubmit.setVisibility(View.GONE);
         }
     }
 
-    CompoundButton.OnCheckedChangeListener onCheckedChangeListListener = new CompoundButton.OnCheckedChangeListener() {
+    CheckBoxViewNormal.CheckBoxCheckChangeListener onCheckedChangeListListener = new CheckBoxViewNormal.CheckBoxCheckChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
             if (b) {
                 boolean isAllCheck = true;
-                for (CheckBox box : listCheckBox) {
+                for (CheckBoxViewNormal box : listCheckBox) {
                     if (!box.isChecked()) {
                         isAllCheck = false;
                         return;
