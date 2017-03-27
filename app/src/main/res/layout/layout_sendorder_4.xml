@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/dimen_20dp"
     android:orientation="vertical">
 
-    <TextView
+    <com.shian.shianlife.view.writeview.MapSelectViewNormal
+        android:id="@+id/write_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dimen_20dp"
-        android:layout_marginRight="@dimen/dimen_20dp"
-        android:drawableLeft="@drawable/xingxing"
-        android:text="当前地址："
-        android:textColor="@color/blackgroundmain" />
+        MyViewAttr:isImportant="true"
+        MyViewAttr:titleName="当前地址"></com.shian.shianlife.view.writeview.MapSelectViewNormal>
 
-    <com.shian.shianlife.view.MapSelectLayoutView
-        android:id="@+id/mapselect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_10dp"></com.shian.shianlife.view.MapSelectLayoutView>
 </LinearLayout>

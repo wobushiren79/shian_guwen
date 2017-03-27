@@ -10,7 +10,8 @@
         android:id="@+id/iv_pic"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_180dp"
-        android:src="@color/zhy_text_color_1" />
+        android:scaleType="fitXY"
+        android:src="@drawable/zhy_find_default_icon" />
 
     <TextView
         android:id="@+id/tv_title"

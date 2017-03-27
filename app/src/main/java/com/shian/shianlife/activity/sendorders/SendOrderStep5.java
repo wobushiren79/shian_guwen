@@ -15,6 +15,7 @@ import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpSaveSendOrderDataSix;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataFive;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataSix;
+import com.shian.shianlife.view.writeview.EditTextViewNormal;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,24 +26,36 @@ import java.util.Date;
 
 public class SendOrderStep5 extends BaseSendOrder {
 
-    EditText mETCarNum;
-    EditText mETPersonNum;
     HpSaveSendOrderDataSix params = new HpSaveSendOrderDataSix();
+
+    EditTextViewNormal mWriteCarNum;
+    EditTextViewNormal mWritePersonNum;
+
+    public SendOrderStep5(Context context, long consultId) {
+        super(context, R.layout.layout_sendorder_5, consultId);
+        initView();
+        getData();
+    }
+
+    private void initView() {
+        mWriteCarNum = (EditTextViewNormal) findViewById(R.id.write_carnum);
+        mWritePersonNum = (EditTextViewNormal) findViewById(R.id.write_personnum);
+    }
 
     @Override
     public void saveData() {
         params.setConsultId(consultId);
-        if (mETCarNum.getText().toString().equals("")) {
+        if (mWriteCarNum.getData().equals("")) {
             ToastUtils.show(getContext(), "还没有设置出殡车辆");
             return;
         }
-        params.setFuneralCarNum(mETCarNum.getText().toString());
-        if (mETPersonNum.getText().toString().equals("")) {
+
+        if (mWritePersonNum.getData().toString().equals("")) {
             ToastUtils.show(getContext(), "还没有设置出殡人数");
             return;
         }
-        params.setFuneralCarNum(mETCarNum.getText().toString());
-        params.setFuneralPersonNum(mETPersonNum.getText().toString());
+        params.setFuneralCarNum(mWriteCarNum.getData());
+        params.setFuneralPersonNum(mWritePersonNum.getData());
         MHttpManagerFactory.getAccountManager().saveSendOrderDataSix(getContext(), params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart() {
@@ -100,10 +113,10 @@ public class SendOrderStep5 extends BaseSendOrder {
                 getContext().sendBroadcast(intent);
 
                 if (result.getFuneralPersonNum() != null) {
-                    mETPersonNum.setText(result.getFuneralPersonNum());
+                    mWritePersonNum.setData(result.getFuneralPersonNum());
                 }
                 if (result.getFuneralCarNum() != null) {
-                    mETCarNum.setText(result.getFuneralCarNum());
+                    mWriteCarNum.setData(result.getFuneralCarNum());
                 }
             }
 
@@ -116,16 +129,5 @@ public class SendOrderStep5 extends BaseSendOrder {
         });
     }
 
-    public SendOrderStep5(Context context, long consultId) {
-        super(context, R.layout.layout_sendorder_5, consultId);
 
-
-        initView();
-        getData();
-    }
-
-    private void initView() {
-        mETCarNum = (EditText) findViewById(R.id.et_carnum);
-        mETPersonNum = (EditText) findViewById(R.id.et_personnum);
-    }
 }

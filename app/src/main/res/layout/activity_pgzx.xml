@@ -71,9 +71,9 @@
 
             <ImageView
                 android:id="@+id/tv_serviceover"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
+                android:layout_width="@dimen/dimen_150dp"
+                android:layout_height="@dimen/dimen_150dp"
+                android:layout_gravity="right|bottom"
                 android:layout_marginTop="1dp"
                 android:gravity="center"
                 android:src="@drawable/complete"
@@ -96,11 +96,11 @@
                 android:layout_marginRight="@dimen/dimen_10dp"
                 android:background="@drawable/zhy_button_state_5"
                 android:gravity="center"
-                android:visibility="gone"
                 android:padding="@dimen/dimen_10dp"
                 android:text="编辑订单"
                 android:textColor="@color/white"
-                android:textSize="@dimen/txtsize_32sp" />
+                android:textSize="@dimen/txtsize_32sp"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_neworder2"
@@ -119,11 +119,11 @@
 
 
         <LinearLayout
-            android:paddingTop="@dimen/dimen_24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="@dimen/dimen_24dp">
 
             <TextView
                 android:id="@+id/tv_refund"

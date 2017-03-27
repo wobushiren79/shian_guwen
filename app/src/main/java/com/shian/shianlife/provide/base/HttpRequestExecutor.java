@@ -83,7 +83,10 @@ public class HttpRequestExecutor {
                 httpEntity = new StringEntity(httpParams, HTTP.UTF_8);
             }
             if (method.contains("doLogout") || method.contains("doLogin")
-                    || method.contains("address/load") || method.contains("order/list/wating/handle/count")) {
+                    || method.contains("address/load") || method.contains("order/list/wating/handle/count")
+                    || method.contains("order/list/talk") || method.contains("order/list/waitService")
+                    || method.contains("order/list/dispatch") || method.contains("order/list/waitAudit")
+                    || method.contains("order/list/waitMoney") || method.contains("order/list/finish")) {
                 pd = null;
                 getSession(context);
             } else {

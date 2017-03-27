@@ -15,6 +15,7 @@ import com.shian.shianlife.provide.params.HpSaveSendOrderDataFive;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataFive;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataThree;
 import com.shian.shianlife.view.MapSelectLayoutView;
+import com.shian.shianlife.view.writeview.MapSelectViewNormal;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,18 +25,28 @@ import java.util.Date;
  */
 
 public class SendOrderStep4 extends BaseSendOrder {
-    MapSelectLayoutView mapSelectLayoutView;
-
+    MapSelectViewNormal mapSelectViewNormal;
     HpSaveSendOrderDataFive params = new HpSaveSendOrderDataFive();
+
+    public SendOrderStep4(Context context, long consultId) {
+        super(context, R.layout.layout_sendorder_4, consultId);
+        initView();
+        getData();
+    }
+
+    private void initView() {
+        mapSelectViewNormal = (MapSelectViewNormal) findViewById(R.id.write_location);
+        mapSelectViewNormal.setNumView(0);
+    }
 
     @Override
     public void saveData() {
         params.setConsultId(consultId);
-        if (mapSelectLayoutView.getLocation().equals("")) {
+        if (mapSelectViewNormal.getData().equals("")) {
             ToastUtils.show(getContext(), "地址不能为空");
             return;
         }
-        params.setTheDayLocation(mapSelectLayoutView.getLocation());
+        params.setTheDayLocation(mapSelectViewNormal.getData());
         MHttpManagerFactory.getAccountManager().saveSendOrderDataFive(getContext(), params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart() {
@@ -54,6 +65,7 @@ public class SendOrderStep4 extends BaseSendOrder {
             public void onError(String message) {
 
             }
+
         });
     }
 
@@ -69,7 +81,6 @@ public class SendOrderStep4 extends BaseSendOrder {
 
             @Override
             public void onSuccess(HrGetSendOrderDataFive result) {
-
                 Utils.LogVPrint("getDeadLocation" + result.getDeadLocation());
                 Utils.LogVPrint("getZsLocation" + result.getZsLocation());
                 Utils.LogVPrint("getAgentmanLocation" + result.getAgentmanLocation());
@@ -94,9 +105,9 @@ public class SendOrderStep4 extends BaseSendOrder {
                 if (result.getZsLocation() != null) {
                     listData.add(result.getZsLocation());
                 }
-                mapSelectLayoutView.setData(1, listData);
+                mapSelectViewNormal.initAutoTextView(listData);
                 if (result.getTheDayLocation() != null) {
-                    mapSelectLayoutView.setLocation(result.getTheDayLocation());
+                    mapSelectViewNormal.setData(result.getTheDayLocation());
                 }
             }
 
@@ -109,14 +120,5 @@ public class SendOrderStep4 extends BaseSendOrder {
         });
     }
 
-    public SendOrderStep4(Context context, long consultId) {
-        super(context, R.layout.layout_sendorder_4, consultId);
-        initView();
-        getData();
-    }
 
-    private void initView() {
-        mapSelectLayoutView = (MapSelectLayoutView) findViewById(R.id.mapselect);
-        mapSelectLayoutView.setData(1,new ArrayList<String>());
-    }
 }

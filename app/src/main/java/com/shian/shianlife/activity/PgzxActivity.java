@@ -475,6 +475,7 @@ public class PgzxActivity extends BaseActivity {
                                                                         getBaseContext(),
                                                                         "派单成功");
                                                                 tv4.setText("派单中");
+                                                                tv4.setBackgroundResource(R.drawable.zhy_button_state_item_white);
                                                                 waitPDNum--;
                                                                 mTVWaitNum.setText(waitPDNum + "");
                                                                 templateItem.setItemStatus(2);
@@ -505,15 +506,19 @@ public class PgzxActivity extends BaseActivity {
                 switch (templateItem.getItemStatus()) {
                     case 1:
                         tv4.setText("派单");
+                        tv4.setBackgroundResource(R.drawable.zhy_button_state_2);
                         break;
                     case 2:
                         tv4.setText("派单中");
+                        tv4.setBackgroundResource(R.drawable.zhy_button_state_item_white);
                         break;
                     case 3:
                         tv4.setText("已接受");
+                        tv4.setBackgroundResource(R.drawable.zhy_button_state_item_white);
                         break;
                     case 4:
                         tv4.setText("正在执行");
+                        tv4.setBackgroundResource(R.drawable.zhy_button_state_item_white);
                         pdrlocationll.setVisibility(View.VISIBLE);
                         if (templateItem.getPdrLocation() == null) {
                             btnPdrLocation.setVisibility(View.GONE);
@@ -541,15 +546,18 @@ public class PgzxActivity extends BaseActivity {
                                 ev.setVisibility(View.GONE);
                             }
                         }
+                        tv4.setBackgroundResource(R.drawable.zhy_button_state_item_white);
                         break;
                     case 6:
                         tv4.setText("审核未通过");
+                        tv4.setBackgroundResource(R.drawable.zhy_button_state_item_white);
                         break;
                     case 7:
                         tv4.setText("审核通过");
+                        tv4.setBackgroundResource(R.drawable.zhy_button_state_item_white);
                         break;
-
                     default:
+                        tv4.setBackgroundResource(R.drawable.zhy_button_state_2);
                         break;
                 }
             }

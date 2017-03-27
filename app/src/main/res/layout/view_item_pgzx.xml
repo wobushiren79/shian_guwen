@@ -197,8 +197,8 @@
     <LinearLayout
         android:id="@+id/ll_ht_pic"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_150dp"
         android:gravity="center_vertical"
+        android:layout_height="@dimen/dimen_150dp"
         android:orientation="horizontal">
 
         <FrameLayout
@@ -227,7 +227,8 @@
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
             <ImageView
                 android:id="@+id/btn_ht_pic_1"
@@ -255,9 +256,11 @@
             android:layout_height="@dimen/dimen_60dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="24dp"
+            android:layout_marginRight="@dimen/dimen_32dp"
             android:background="@drawable/zhy_button_state_2"
             android:text="保存"
-            android:textColor="@color/zhy_text_color_1" />
+            android:textColor="@color/zhy_text_color_1"
+            android:textSize="@dimen/dimen_24dp" />
     </LinearLayout>
 
 

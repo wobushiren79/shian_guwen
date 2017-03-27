@@ -17,6 +17,8 @@ import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpSaveWaitServicePostData;
 import com.shian.shianlife.provide.result.HrGetWaitServicePostData;
 import com.shian.shianlife.view.MapSelectLayoutView;
+import com.shian.shianlife.view.writeview.MapSelectViewNormal;
+import com.shian.shianlife.view.writeview.TimeSelectViewNormal;
 import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 
 import java.util.ArrayList;
@@ -26,14 +28,12 @@ import java.util.List;
 public class WaitServiceDataActivity extends BaseActivity {
     TextView mTVNext;
     TextView mTVBack;
-    TextView mTVTime;
-
 
     long orderId;
     long consultId;
 
-    MapSelectLayoutView mSelectLayoutView;
-
+    TimeSelectViewNormal mWriteTimeSelect;
+    MapSelectViewNormal mWriteMapSelect;
     List<String> listLocation = new ArrayList<>();
 
     @Override
@@ -46,6 +46,19 @@ public class WaitServiceDataActivity extends BaseActivity {
         consultId = getIntent().getLongExtra("consultId", 0);
         initView();
         initData();
+    }
+
+    private void initView() {
+        mWriteTimeSelect = (TimeSelectViewNormal) findViewById(R.id.write_timeselect);
+        mWriteMapSelect = (MapSelectViewNormal) findViewById(R.id.write_location);
+
+        mWriteMapSelect.setNumView(0);
+
+        mTVNext = (TextView) findViewById(R.id.tv_next);
+        mTVBack = (TextView) findViewById(R.id.tv_back);
+
+        mTVNext.setOnClickListener(onClickListener);
+        mTVBack.setOnClickListener(onClickListener);
     }
 
     private void initData() {
@@ -65,7 +78,7 @@ public class WaitServiceDataActivity extends BaseActivity {
                         Utils.LogVPrint("DeadTime:" + result.getDeadTime());
                         Utils.LogVPrint("AgentmanLocation:" + result.getAgentmanLocation());
                         Utils.LogVPrint("DeadmanLocation:" + result.getDeadmanLocation());
-                        Utils.LogVPrint( "ZsLocation:" + result.getZsLocation());
+                        Utils.LogVPrint("ZsLocation:" + result.getZsLocation());
 
                         if (result.getDeadLocation() != null) {
                             listLocation.add(result.getDeadLocation());
@@ -79,8 +92,8 @@ public class WaitServiceDataActivity extends BaseActivity {
                         if (result.getZsLocation() != null) {
                             listLocation.add(result.getZsLocation());
                         }
-                        mSelectLayoutView.setData(1, listLocation);
-                        mTVTime.setText(TransitionDate.DateToStr(new Date(
+                        mWriteMapSelect.initAutoTextView(listLocation);
+                        mWriteTimeSelect.setData(TransitionDate.DateToStr(new Date(
                                         result.getDeadTime()),
                                 "yyyy-MM-dd"));
 
@@ -92,39 +105,11 @@ public class WaitServiceDataActivity extends BaseActivity {
                 });
     }
 
-    private void setTimeDialog(final TextView v) {
-        DateTimeSelectorDialogBuilder dialog = DateTimeSelectorDialogBuilder
-                .getInstance(WaitServiceDataActivity.this);
-        dialog.show();
-        dialog.setOnSaveListener(new DateTimeSelectorDialogBuilder.OnSaveListener() {
-
-            @Override
-            public void onSaveSelectedDate(String selectedDate) {
-                // TODO Auto-generated method stub
-                v.setText(selectedDate);
-            }
-        });
-    }
-
-    private void initView() {
-        mTVNext = (TextView) findViewById(R.id.tv_next);
-        mTVBack = (TextView) findViewById(R.id.tv_back);
-        mTVTime = (TextView) findViewById(R.id.et_zs_0);
-
-        mSelectLayoutView = (MapSelectLayoutView) findViewById(R.id.mapselect);
-
-        mTVTime.setOnClickListener(onClickListener);
-        mTVNext.setOnClickListener(onClickListener);
-        mTVBack.setOnClickListener(onClickListener);
-
-    }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (view == mTVTime) {
-                setTimeDialog(mTVTime);
-            } else if (view == mTVBack) {
+            if (view == mTVBack) {
                 finish();
             } else if (view == mTVNext) {
                 setUpData();
@@ -134,8 +119,8 @@ public class WaitServiceDataActivity extends BaseActivity {
 
     private void setUpData() {
 
-        String time = mTVTime.getText().toString();
-        String location = mSelectLayoutView.getLocation();
+        String time = mWriteTimeSelect.getData();
+        String location = mWriteMapSelect.getData();
         if (time.equals("")) {
             ToastUtils.show(this, "去世时间不能为空");
             return;

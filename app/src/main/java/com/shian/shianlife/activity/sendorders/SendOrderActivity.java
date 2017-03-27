@@ -203,6 +203,7 @@ public class SendOrderActivity extends BaseActivity {
             case 7:
                 break;
         }
+
         mLLCotent.addView(sendOrderStep);
     }
 

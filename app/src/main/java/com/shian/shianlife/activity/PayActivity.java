@@ -91,7 +91,7 @@ public class PayActivity extends BaseActivity {
             TranslateAnimation translateAnimation = new TranslateAnimation
                     (Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0f,
                             Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 1f);
-            translateAnimation.setDuration((int)((Math.random()*5000)+5000));
+            translateAnimation.setDuration((int) ((Math.random() * 5000) + 5000));
             translateAnimation.setRepeatMode(Animation.REVERSE);
             translateAnimation.setRepeatCount(Animation.INFINITE);
 
@@ -214,7 +214,7 @@ public class PayActivity extends BaseActivity {
 
     private String payAmount;
 
-    private int payType;// 0:pos|1:weixin
+    private int payType = 1;// 0:pos|1:weixin
     @InjectView(R.id.et_xj)
     EditText etXj;
 
@@ -296,8 +296,10 @@ public class PayActivity extends BaseActivity {
 
     private void creatEwm(long payId) {
         if (payType == 0) {
+            //pos机
             posEwm(payId);
         } else if (payType == 1) {
+            //微信
             weixinEwm(payId);
         } else if (payType == 2) {
             payCash(payId);

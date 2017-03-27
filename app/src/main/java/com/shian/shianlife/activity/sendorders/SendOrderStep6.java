@@ -18,6 +18,9 @@ import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpSaveSendOrderDataSeven;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataFive;
 import com.shian.shianlife.provide.result.HrGetSendOrderDataSeven;
+import com.shian.shianlife.view.writeview.EditTextViewNormal;
+import com.shian.shianlife.view.writeview.SpinnerViewEdit;
+import com.shian.shianlife.view.writeview.SpinnerViewNormal;
 
 import java.util.ArrayList;
 
@@ -26,29 +29,46 @@ import java.util.ArrayList;
  */
 
 public class SendOrderStep6 extends BaseSendOrder {
-    Spinner mSPASL;
-    Spinner mSPDeadmanIdentity;
-    Spinner mSPAgentmanIdentity;
-    EditText mETName;
-    EditText mETAgentmanID;
 
     HpSaveSendOrderDataSeven params = new HpSaveSendOrderDataSeven();
 
+    SpinnerViewNormal mWriteAsl;
+    EditTextViewNormal mWriteCemeteryName;
+    SpinnerViewNormal mWriteDeadmanIdentity;
+    SpinnerViewEdit mWriteAgentmanIdentity;
+
+    public SendOrderStep6(Context context, long consultId) {
+        super(context, R.layout.layout_sendorder_6, consultId);
+        initView();
+        getData();
+    }
+
+    private void initView() {
+        mWriteAsl = (SpinnerViewNormal) findViewById(R.id.write_asl);
+        mWriteCemeteryName = (EditTextViewNormal) findViewById(R.id.write_cemeteryname);
+        mWriteAgentmanIdentity = (SpinnerViewEdit) findViewById(R.id.write_agentmanidentity);
+        mWriteDeadmanIdentity = (SpinnerViewNormal) findViewById(R.id.write_deadmanidentity);
+
+        mWriteAsl.initSpinner(R.array.asl_deal);
+        mWriteAgentmanIdentity.initSpinner(R.array.dead_ind);
+        mWriteDeadmanIdentity.initSpinner(R.array.dead_ind);
+    }
+
     @Override
     public void saveData() {
-        if (mETName.getText().toString().equals("")) {
+        if (mWriteCemeteryName.getData().equals("")) {
             ToastUtils.show(getContext(), "公墓名字还没有设置");
             return;
         }
-        if (mSPAgentmanIdentity.getSelectedItemPosition() == 0) {
-            if (mETAgentmanID.getText().toString().equals("")) {
-                params.setAgentmanIdentity("其他");
-            } else {
-                params.setAgentmanIdentity(mETAgentmanID.getText().toString());
-            }
+        if(mWriteAgentmanIdentity.getData().equals("")){
+            ToastUtils.show(getContext(), "经办人身份没有设置");
+            return;
         }
+        params.setAgentmanIdentity(mWriteAgentmanIdentity.getData());
+        params.setAshDeal(mWriteAsl.getData());
+        params.setDeadmanIdentity(mWriteDeadmanIdentity.getData());
         params.setConsultId(consultId);
-        params.setCemeteryName(mETName.getText().toString());
+        params.setCemeteryName(mWriteCemeteryName.getData());
         MHttpManagerFactory.getAccountManager().saveSendOrderDataSeven(getContext(), params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart() {
@@ -86,42 +106,17 @@ public class SendOrderStep6 extends BaseSendOrder {
                 Utils.LogVPrint("getCemeteryName" + result.getCemeteryName());
                 Utils.LogVPrint("getDeadmanIdentity" + result.getDeadmanIdentity());
                 Utils.LogVPrint("getAgentmanIdentity" + result.getAgentmanIdentity());
-
                 if (result.getCemeteryName() != null) {
-                    mETName.setText(result.getCemeteryName());
+                    mWriteCemeteryName.setData(result.getCemeteryName());
                 }
                 if (result.getAshDeal() != null) {
-                    if (result.getAshDeal().equals("其他")) {
-                        mSPASL.setSelection(0);
-                    } else if (result.getAshDeal().equals("寄存")) {
-                        mSPASL.setSelection(1);
-                    } else if (result.getAshDeal().equals("安葬")) {
-                        mSPASL.setSelection(2);
-                    }
+                    mWriteAsl.setData(result.getAshDeal());
                 }
                 if (result.getDeadmanIdentity() != null) {
-                    if (result.getDeadmanIdentity().equals("其他")) {
-                        mSPDeadmanIdentity.setSelection(0);
-                    } else if (result.getDeadmanIdentity().equals("政府")) {
-                        mSPDeadmanIdentity.setSelection(1);
-                    } else if (result.getDeadmanIdentity().equals("商界")) {
-                        mSPDeadmanIdentity.setSelection(2);
-                    } else if (result.getDeadmanIdentity().equals("一般职工")) {
-                        mSPDeadmanIdentity.setSelection(3);
-                    }
+                    mWriteDeadmanIdentity.setData(result.getDeadmanIdentity());
                 }
                 if (result.getAgentmanIdentity() != null) {
-                    if (result.getAgentmanIdentity().equals("其他")) {
-                        mSPAgentmanIdentity.setSelection(0);
-                    } else if (result.getAgentmanIdentity().equals("政府")) {
-                        mSPAgentmanIdentity.setSelection(1);
-                    } else if (result.getAgentmanIdentity().equals("商界")) {
-                        mSPAgentmanIdentity.setSelection(2);
-                    } else if (result.getAgentmanIdentity().equals("一般职工")) {
-                        mSPAgentmanIdentity.setSelection(3);
-                    } else {
-                        mETAgentmanID.setText(result.getAgentmanIdentity());
-                    }
+                    mWriteAgentmanIdentity.setData(result.getAgentmanIdentity());
                 }
             }
 
@@ -133,66 +128,4 @@ public class SendOrderStep6 extends BaseSendOrder {
             }
         });
     }
-
-    public SendOrderStep6(Context context, long consultId) {
-        super(context, R.layout.layout_sendorder_6, consultId);
-
-        initView();
-        getData();
-    }
-
-    private void initView() {
-        mSPASL = (Spinner) findViewById(R.id.sp_jbr_0);
-        mSPDeadmanIdentity = (Spinner) findViewById(R.id.sp_jbr_1);
-        mSPAgentmanIdentity = (Spinner) findViewById(R.id.sp_jbr_2);
-        mETAgentmanID = (EditText) findViewById(R.id.et_agentmanid);
-        mETName = (EditText) findViewById(R.id.et_name);
-
-        initSp("其他", 0);
-        initSp("其他", 1);
-        initSp("其他", 2);
-    }
-
-
-    private void initSp(String i, final int type) {
-        int array;
-        Spinner spinner;
-        if (type == 0) {
-            array = R.array.asl_deal;
-            spinner = mSPASL;
-        } else {
-            array = R.array.dead_ind;
-            if (type == 1) {
-                spinner = mSPDeadmanIdentity;
-            } else {
-                spinner = mSPAgentmanIdentity;
-            }
-        }
-        ArrayAdapter<CharSequence> province_adapter = ArrayAdapter.createFromResource(getContext(), array,
-                android.R.layout.simple_spinner_item);
-        final String[] arrs = getResources().getStringArray(array);
-        province_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(province_adapter);
-        spinner.setSelection(Utils.getArrayINdex(arrs, i));
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (type == 0) {
-                    params.setAshDeal(arrs[position]);
-                } else if (type == 1) {
-                    params.setDeadmanIdentity(arrs[position]);
-                } else if (type == 2) {
-                    params.setAgentmanIdentity(arrs[position]);
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-    }
-
-
 }

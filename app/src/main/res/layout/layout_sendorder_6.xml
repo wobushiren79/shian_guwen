@@ -1,87 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/dimen_20dp">
+    android:orientation="vertical">
+
+    <com.shian.shianlife.view.writeview.SpinnerViewNormal
+        android:id="@+id/write_asl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        MyViewAttr:isImportant="true"
+        MyViewAttr:titleName="骨灰处理"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/xingxing"
-        android:text="骨灰处理"
-        android:textColor="@color/blackgroundmain" />
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_line_3" />
 
-    <Spinner
-        android:id="@+id/sp_jbr_0"
+    <com.shian.shianlife.view.writeview.EditTextViewNormal
+        android:id="@+id/write_cemeteryname"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_60dp"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/et_bk1"
-        android:textSize="@dimen/text_size_detail_list" />
+        android:layout_height="wrap_content"
+        MyViewAttr:isImportant="true"
+        MyViewAttr:titleName="安葬公墓名称"></com.shian.shianlife.view.writeview.EditTextViewNormal>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_20dp"
-        android:drawableLeft="@drawable/xingxing"
-        android:text="安葬公墓名称"
-        android:textColor="@color/blackgroundmain" />
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_line_3" />
 
-    <EditText
-        android:id="@+id/et_name"
+    <com.shian.shianlife.view.writeview.SpinnerViewNormal
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_60dp"
-        android:background="@drawable/et_bk1" />
+        android:id="@+id/write_deadmanidentity"
+        android:layout_height="wrap_content"
+        MyViewAttr:isImportant="true"
+        MyViewAttr:titleName="往生者身份"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_20dp"
-        android:drawableLeft="@drawable/xingxing"
-        android:text="往生者身份"
-        android:textColor="@color/blackgroundmain" />
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_line_3" />
 
-    <Spinner
-        android:id="@+id/sp_jbr_1"
+    <com.shian.shianlife.view.writeview.SpinnerViewEdit
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_60dp"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/et_bk1"
-        android:textSize="@dimen/text_size_detail_list" />
-
-    <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/write_agentmanidentity"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_20dp"
-        android:drawableLeft="@drawable/xingxing"
-        android:text="经办人身份"
-        android:textColor="@color/blackgroundmain" />
+        MyViewAttr:isImportant="true"
+        MyViewAttr:titleName="经办人身份"></com.shian.shianlife.view.writeview.SpinnerViewEdit>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/sp_jbr_2"
-            android:layout_width="@dimen/dimen_300dp"
-            android:layout_height="@dimen/dimen_60dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:background="@drawable/et_bk1"
-            android:textSize="@dimen/text_size_detail_list" />
-
-        <EditText
-            android:id="@+id/et_agentmanid"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dimen_60dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dimen_10dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_et_order"
-            android:hint="选择其他时填写"
-            android:padding="@dimen/dimen_10dp"
-            android:textSize="@dimen/text_size_date_list" />
-    </LinearLayout>
 </LinearLayout>

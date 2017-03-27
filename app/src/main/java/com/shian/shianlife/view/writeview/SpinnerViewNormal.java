@@ -85,23 +85,25 @@ public class SpinnerViewNormal extends BaseWriteView {
     public String getData() {
         return province_adapter.getItem(mSpinner.getSelectedItemPosition()).toString();
     }
-    public int getSelectPosition(){
+
+    public int getSelectPosition() {
         return mSpinner.getSelectedItemPosition();
     }
+
     public void setData(String name) {
-
-        for (int i = 0; i < province_adapter.getCount(); i++) {
-            if (name.equals(province_adapter.getItem(i))) {
-                mSpinner.setSelection(i);
-                return;
+        if (name != null)
+            for (int i = 0; i < province_adapter.getCount(); i++) {
+                if (name.equals(province_adapter.getItem(i))) {
+                    mSpinner.setSelection(i);
+                    return;
+                }
             }
-        }
-
     }
 
     public void setData(int position) {
         mSpinner.setSelection(position);
     }
+
     public interface SpinnerCallBack {
         void itemSelected(int position, String name);
     }

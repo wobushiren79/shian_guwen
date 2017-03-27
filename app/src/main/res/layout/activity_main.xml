@@ -15,17 +15,24 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/main_blackground"></FrameLayout>
+            android:background="@color/main_blackground">
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
 
         <FrameLayout
-            android:background="@color/white"
             android:layout_width="fill_parent"
-            android:layout_height="@dimen/dimen_96dp">
+            android:layout_height="@dimen/dimen_96dp"
+            android:background="@color/white">
 
             <RadioGroup
-                android:layout_marginTop="@dimen/dimen_10dp"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dimen_10dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -98,7 +105,6 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:visibility="gone"
                         android:id="@+id/tv_msgnum"
                         android:layout_width="@dimen/dimen_40dp"
                         android:layout_height="@dimen/dimen_40dp"
@@ -109,7 +115,8 @@
                         android:background="@drawable/msg_point"
                         android:ems="2"
                         android:gravity="center"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:visibility="gone" />
                 </RelativeLayout>
 
                 <TextView
@@ -128,11 +135,11 @@
 
     <ImageView
         android:id="@+id/iv_buildnew"
-        android:layout_marginBottom="@dimen/dimen_28dp"
         android:layout_width="@dimen/dimen_100dp"
         android:layout_height="@dimen/dimen_100dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dimen_28dp"
         android:src="@drawable/zhy_build_new_order" />
 
 </RelativeLayout>

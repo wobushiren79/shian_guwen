@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -46,6 +48,7 @@ public class EvaluateActivity extends BaseActivity {
     @InjectView(R.id.ll_pic)
     LinearLayout llPic;
 
+    int scroeHeight;
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
@@ -53,8 +56,26 @@ public class EvaluateActivity extends BaseActivity {
         setTitle("评价");
         orderId = getIntent().getLongExtra("orderId", 0);
         orderItemId = getIntent().getLongExtra("orderItemId", 0);
+//        initView();
         initData();
     }
+
+//    private void initView() {
+//        try {
+//            Bitmap bmp = BitmapFactory.decodeResource(this.getResources(), R.drawable.ratingbar_state_2);
+//            scroeHeight = bmp.getHeight();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        //在需要的地方设置LayoutParams  记得图片只需要初始化一次就可以了。
+//        if(scroeHeight!=0){
+//            LinearLayout.LayoutParams llp = (LinearLayout.LayoutParams) rb.getLayoutParams();
+//            llp.width = -2;// 包裹内容
+//            llp.height = scroeHeight;
+//            rb.setLayoutParams(llp);
+//        }
+//    }
 
     private Handler mHandler = new Handler();
 
@@ -119,19 +140,21 @@ public class EvaluateActivity extends BaseActivity {
 
     @OnClick({R.id.btn_ev_0, R.id.btn_ev_1, R.id.btn_ev_2, R.id.btn_ev_3,
             R.id.btn_ev_4, R.id.btn_ev_5})
-    void btnClick(Button v) {
-
+    void btnClick(TextView v) {
         if (v.getTag() == null) {
             v.setTag(false);
             v.setBackgroundResource(R.drawable.shape_et_login);
+            v.setTextColor(getResources().getColor(R.color.zhy_text_color_1));
             listLabel.add(v.getText().toString());
         } else if ((Boolean) v.getTag()) {
             v.setTag(false);
             v.setBackgroundResource(R.drawable.shape_et_login);
+            v.setTextColor(getResources().getColor(R.color.zhy_text_color_1));
             listLabel.add(v.getText().toString());
         } else {
             v.setTag(true);
             v.setBackgroundResource(R.drawable.shape_et_order);
+            v.setTextColor(getResources().getColor(R.color.dimgray));
             listLabel.remove(v.getText().toString());
         }
 
