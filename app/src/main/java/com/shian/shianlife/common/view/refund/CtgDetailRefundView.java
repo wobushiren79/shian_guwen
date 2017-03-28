@@ -44,8 +44,8 @@ public class CtgDetailRefundView extends FrameLayout {
 		ProductDetailRefundView mDetailView = new ProductDetailRefundView(getContext());
 		mDetailView.setLayoutParams(
 				new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-		View line = getLineView();
-		parentLayout.addView(line);
+//		View line = getLineView();
+//		parentLayout.addView(line);
 		parentLayout.addView(mDetailView);
 		mDetailView.setData(mProductItemModel);
 

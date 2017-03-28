@@ -4,6 +4,10 @@
         "source": "E:\\Android\\AndroidProjects\\shian_guwen\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_rotate.png"
     },
     {
+        "merged": "E:\\Android\\AndroidProjects\\shian_guwen\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\zhy_loading.png",
+        "source": "E:\\Android\\AndroidProjects\\shian_guwen\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\zhy_loading.png"
+    },
+    {
         "merged": "E:\\Android\\AndroidProjects\\shian_guwen\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_flip.png",
         "source": "E:\\Android\\AndroidProjects\\shian_guwen\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_flip.png"
     },

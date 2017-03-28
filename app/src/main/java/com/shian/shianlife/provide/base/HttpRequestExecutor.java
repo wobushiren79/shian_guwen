@@ -57,7 +57,7 @@ public class HttpRequestExecutor {
         httpClient.setTimeout(15000);
     }
 
-    CustomDialog pd = null;
+     CustomDialog pd = null;
 
     /**
      * Post请求

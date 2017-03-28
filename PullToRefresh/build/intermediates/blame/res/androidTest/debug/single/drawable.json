@@ -1,5 +1,9 @@
 [
     {
+        "merged": "E:\\Android\\AndroidProjects\\shian_guwen\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\refresh_anim.xml",
+        "source": "E:\\Android\\AndroidProjects\\shian_guwen\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\refresh_anim.xml"
+    },
+    {
         "merged": "E:\\Android\\AndroidProjects\\shian_guwen\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\indicator_bg_bottom.xml",
         "source": "E:\\Android\\AndroidProjects\\shian_guwen\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable\\indicator_bg_bottom.xml"
     },

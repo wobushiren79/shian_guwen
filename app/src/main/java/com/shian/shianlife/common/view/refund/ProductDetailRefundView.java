@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,9 +20,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 @SuppressLint("InflateParams")
-public class ProductDetailRefundView extends FrameLayout {
-
-    private LinearLayout parentLayout;
+public class ProductDetailRefundView extends LinearLayout {
     @InjectView(R.id.tv_name)
     TextView tv_name;
     @InjectView(R.id.tv_huohao)
@@ -38,10 +37,16 @@ public class ProductDetailRefundView extends FrameLayout {
     TextView tv_tkje;
     @InjectView(R.id.et_reason)
     TextView et_reason;
-    @InjectView(R.id.tv_sub)
-    TextView tv_sub;
-    @InjectView(R.id.tv_add)
-    TextView tv_add;
+    @InjectView(R.id.iv_sub)
+    ImageView iv_sub;
+    @InjectView(R.id.iv_add)
+    ImageView iv_add;
+    @InjectView(R.id.et_num)
+    EditText etNum;
+
+    private int mNum;
+    private float mTotalPrice;
+    private long orderItemId;
 
     public ProductDetailRefundView(Context context) {
         super(context);
@@ -49,25 +54,16 @@ public class ProductDetailRefundView extends FrameLayout {
     }
 
     private void init() {
-        LinearLayout.LayoutParams mParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        mParams.topMargin = getContext().getResources().getDimensionPixelSize(R.dimen.dimen_45dp);
-        setLayoutParams(mParams);
-        parentLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.item_productdetailrefund, null);
-        addView(parentLayout);
+        View.inflate(getContext(), R.layout.item_productdetailrefund_other, this);
         ButterKnife.inject(this);
 
         boolean isFlag = ((RefundOrderActivity) getContext()).isDetailFlag();
         if (isFlag) {
-            tv_sub.setVisibility(View.GONE);
-            tv_add.setVisibility(View.GONE);
+            iv_sub.setVisibility(View.GONE);
+            iv_add.setVisibility(View.GONE);
             et_reason.setEnabled(false);
         }
     }
-
-    private int mNum;
-    private float mTotalPrice;
-    private long orderItemId;
 
     public void setData(OrderProductItemModel mProductItemModel) {
         tv_name.setText(mProductItemModel.getName());
@@ -76,8 +72,8 @@ public class ProductDetailRefundView extends FrameLayout {
         tv_danjia.setText(mProductItemModel.getPrice() + "");
         tv_money.setText(mProductItemModel.getTotalPrice() + "");
         tv_num.append(mProductItemModel.getNumber() + "");
-        etNum.setText(mProductItemModel.getRefundNumber()+"");
-        tv_tkje.setText("退款金额:" + mProductItemModel.getRefundTotalPrice()+ "");
+        etNum.setText(mProductItemModel.getRefundNumber() + "");
+        tv_tkje.setText("￥" + mProductItemModel.getRefundTotalPrice());
         if (!TextUtils.isEmpty(mProductItemModel.getRefundReason())) {
             et_reason.setText(mProductItemModel.getRefundReason());
         }
@@ -86,25 +82,22 @@ public class ProductDetailRefundView extends FrameLayout {
         orderItemId = mProductItemModel.getId();
     }
 
-    @InjectView(R.id.et_num)
-    EditText etNum;
-
-    @OnClick(R.id.tv_sub)
-    void SubClick(TextView v) {
+    @OnClick(R.id.iv_sub)
+    void SubClick(ImageView v) {
         int num = Integer.valueOf(etNum.getText().toString());
         if (num == 0) return;
         etNum.setText(--num + "");
-        tv_tkje.setText("退款金额:" + (mTotalPrice * num) + "");
+        tv_tkje.setText("￥" + (mTotalPrice * num));
         ((RefundOrderActivity) getContext()).setRefundMoney(-mTotalPrice);
         ((RefundOrderActivity) getContext()).setRefundItems(orderItemId, num, et_reason.getText().toString());
     }
 
-    @OnClick(R.id.tv_add)
-    void addClick(TextView v) {
+    @OnClick(R.id.iv_add)
+    void addClick(ImageView v) {
         int num = Integer.valueOf(etNum.getText().toString());
         if (num == mNum) return;
         etNum.setText(++num + "");
-        tv_tkje.setText("退款金额:" + (mTotalPrice * num) + "");
+        tv_tkje.setText("￥" + (mTotalPrice * num));
         ((RefundOrderActivity) getContext()).setRefundMoney(mTotalPrice);
         ((RefundOrderActivity) getContext()).setRefundItems(orderItemId, num, et_reason.getText().toString());
     }

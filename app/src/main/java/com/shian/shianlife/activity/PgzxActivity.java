@@ -342,7 +342,7 @@ public class PgzxActivity extends BaseActivity {
                     if (templateItem.getItemStatus() != 5) {
 //                        ev.setBackgroundColor(getResources().getColor(
 //                                R.color.gray_common));
-                        ev.setBackgroundResource(R.drawable.pdlbxq_1);
+                        ev.setBackgroundResource(R.drawable.zhy_button_state_item_gray);
                         ev.setTextColor(Color.WHITE);
                         ev.setEnabled(false);
                     } else {
@@ -350,18 +350,17 @@ public class PgzxActivity extends BaseActivity {
                             ev.setEnabled(true);
 //                            ev.setBackgroundColor(getResources().getColor(
 //                                    R.color.orangeyellow));
-                            ev.setBackgroundResource(R.drawable.pdlbxq_2);
-                            ev.setTextColor(getResources().getColor(R.color.text_color));
+                            ev.setBackgroundResource(R.drawable.zhy_button_state_5);
+                            ev.setTextColor(getResources().getColor(R.color.white));
                         } else {
 //                            ev.setBackgroundColor(getResources().getColor(
 //                                    R.color.gray_common));
-                            ev.setBackgroundResource(R.drawable.pdlbxq_1);
+                            ev.setBackgroundResource(R.drawable.zhy_button_state_item_gray);
                             ev.setEnabled(false);
                             ev.setTextColor(Color.WHITE);
                         }
                     }
                     ev.setText("审核");
-
                     ev.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {

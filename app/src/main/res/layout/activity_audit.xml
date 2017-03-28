@@ -2,213 +2,212 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_blackground">
+    android:background="@color/zhy_backgroud_1">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_au_0"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_80dp"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="@dimen/dimen_18dp"
-            android:layout_marginLeft="@dimen/dimen_30dp"
-            android:layout_marginTop="@dimen/dimen_33dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:layout_marginRight="@dimen/dimen_32dp"
             android:layout_weight="1"
-            android:gravity="left"
+            android:gravity="center_vertical"
             android:text="订单编号:"
-            android:textColor="@color/blackgroundmain"
-            android:textSize="@dimen/text_size_top_bg" />
+            android:textColor="@color/zhy_text_color_1"
+            android:textSize="@dimen/dimen_32dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_1dp"
-            android:background="@color/gray_main_rb_bg_f" />
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
 
         <TextView
             android:id="@+id/tv_au_1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_60dp"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="@dimen/dimen_10dp"
             android:layout_marginLeft="@dimen/dimen_30dp"
-            android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginRight="@dimen/dimen_32dp"
             android:layout_toRightOf="@+id/tv_qt0"
             android:layout_weight="1"
-            android:gravity="left"
+            android:gravity="center_vertical"
             android:text="经办人:"
-            android:textSize="@dimen/text_size_detail_list" />
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/dimen_24dp" />
 
         <TextView
             android:id="@+id/tv_au_2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_60dp"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginLeft="@dimen/dimen_30dp"
-            android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:layout_marginRight="@dimen/dimen_32dp"
             android:layout_toRightOf="@+id/tv_qt0"
-            android:layout_weight="1"
-            android:gravity="left"
+
+            android:gravity="center_vertical"
             android:text="执行名称:"
-            android:textSize="@dimen/text_size_detail_list" />
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/dimen_24dp" />
 
         <TextView
             android:id="@+id/tv_au_3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_60dp"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginLeft="@dimen/dimen_30dp"
-            android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:layout_marginRight="@dimen/dimen_32dp"
             android:layout_toRightOf="@+id/tv_qt0"
-            android:layout_weight="1"
-            android:gravity="left"
+            android:gravity="center_vertical"
             android:text="执行人员:"
-            android:textSize="@dimen/text_size_detail_list" />
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/dimen_24dp" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginLeft="@dimen/dimen_30dp"
-            android:layout_marginRight="@dimen/dimen_30dp"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:padding="@dimen/dimen_2dp">
+            android:layout_height="@dimen/dimen_60dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:layout_marginRight="@dimen/dimen_32dp">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:gravity="left"
+                android:gravity="center_vertical"
                 android:text="治丧地址:"
-                android:textSize="@dimen/text_size_detail_list" />
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
 
             <TextView
                 android:id="@+id/tv_au_4"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dimen_15dp"
                 android:layout_toRightOf="@+id/tv_qt0"
-                android:gravity="left"
-                android:text=""
-                android:textSize="@dimen/text_size_detail_list" />
+                android:gravity="center_vertical"
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
         </LinearLayout>
 
-        <View
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/dimen_30dp"
-            android:layout_marginRight="@dimen/dimen_30dp"
-            android:background="@color/gray_main_rb_bg_f" />
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/dimen_2dp">
+            android:layout_height="@dimen/dimen_60dp"
+            android:layout_marginRight="@dimen/dimen_32dp">
 
             <TextView
                 android:id="@+id/tt_qt0"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-                android:layout_marginLeft="@dimen/dimen_30dp"
-                android:layout_marginRight="@dimen/dimen_30dp"
-                android:layout_marginTop="@dimen/dimen_10dp"
-                android:gravity="left"
+                android:layout_marginLeft="@dimen/dimen_32dp"
+                android:gravity="center_vertical"
                 android:text="接单时间:"
-                android:textSize="@dimen/text_size_detail_list" />
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
 
             <TextView
                 android:id="@+id/tv_au_5"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dimen_15dp"
                 android:layout_toRightOf="@+id/tt_qt0"
-                android:gravity="left"
+                android:gravity="center_vertical"
                 android:text=""
-                android:textSize="@dimen/text_size_detail_list" />
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginLeft="@dimen/dimen_30dp"
-            android:layout_marginRight="@dimen/dimen_30dp"
-            android:layout_marginTop="@dimen/dimen_10dp">
+            android:layout_height="@dimen/dimen_60dp"
+            android:layout_marginRight="@dimen/dimen_32dp">
 
             <TextView
                 android:id="@+id/tt_qt1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:gravity="left"
+                android:layout_marginLeft="@dimen/dimen_32dp"
+
+                android:gravity="center_vertical"
                 android:text="开始执行时间:"
-                android:textSize="@dimen/text_size_detail_list" />
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
 
             <TextView
                 android:id="@+id/tv_au_6"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dimen_15dp"
                 android:layout_toRightOf="@+id/tt_qt1"
-                android:gravity="left"
+                android:gravity="center_vertical"
                 android:text=""
-                android:textSize="@dimen/text_size_detail_list" />
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginLeft="@dimen/dimen_30dp"
-            android:layout_marginRight="@dimen/dimen_30dp"
-            android:layout_marginTop="@dimen/dimen_10dp">
+            android:layout_height="@dimen/dimen_60dp"
+            android:layout_marginRight="@dimen/dimen_32dp"
+
+            >
 
             <TextView
                 android:id="@+id/tt_qt2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
-                android:gravity="left"
+                android:layout_marginLeft="@dimen/dimen_32dp"
+                android:gravity="center_vertical"
                 android:text="执行完成时间:"
-                android:textSize="@dimen/text_size_detail_list" />
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
 
             <TextView
                 android:id="@+id/tv_au_7"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dimen_15dp"
                 android:layout_toRightOf="@+id/tt_qt2"
-                android:gravity="left"
+                android:gravity="center_vertical"
                 android:text=""
-                android:textSize="@dimen/text_size_detail_list" />
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
         </RelativeLayout>
 
-        <View
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/dimen_30dp"
-            android:layout_marginRight="@dimen/dimen_30dp"
-            android:background="@color/gray_main_rb_bg_f" />
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginLeft="@dimen/dimen_30dp"
-            android:layout_marginRight="@dimen/dimen_30dp"
-            android:layout_marginTop="@dimen/dimen_10dp">
+            android:layout_marginBottom="@dimen/dimen_24dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:layout_marginRight="@dimen/dimen_32dp"
+            android:layout_marginTop="@dimen/dimen_24dp">
 
             <TextView
                 android:id="@+id/tt_qt3"
@@ -217,7 +216,8 @@
                 android:layout_centerVertical="true"
                 android:gravity="left"
                 android:text="执行人员反馈:"
-                android:textSize="@dimen/text_size_detail_list" />
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
 
             <TextView
                 android:id="@+id/tv_au_8"
@@ -228,31 +228,31 @@
                 android:layout_toRightOf="@+id/tt_qt3"
                 android:gravity="left"
                 android:text=""
-                android:textSize="@dimen/text_size_detail_list" />
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
         </RelativeLayout>
 
         <LinearLayout
             android:id="@+id/ll_pic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginTop="@dimen/dimen_10dp"
             android:orientation="horizontal">
 
         </LinearLayout>
 
-        <View
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@drawable/user_down_line" />
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginLeft="@dimen/dimen_30dp"
-            android:layout_marginRight="@dimen/dimen_30dp"
-            android:layout_marginTop="@dimen/dimen_10dp">
+            android:layout_marginBottom="@dimen/dimen_24dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:layout_marginRight="@dimen/dimen_32dp"
+            android:layout_marginTop="@dimen/dimen_24dp">
 
             <TextView
                 android:id="@+id/tt_qt4"
@@ -261,7 +261,8 @@
                 android:layout_centerVertical="true"
                 android:gravity="left"
                 android:text="治丧指导评价:"
-                android:textSize="@dimen/text_size_detail_list" />
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
 
             <TextView
                 android:id="@+id/tv_au_9"
@@ -272,28 +273,27 @@
                 android:layout_toRightOf="@+id/tt_qt4"
                 android:gravity="left"
                 android:text=""
-                android:textSize="@dimen/text_size_detail_list" />
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_24dp" />
         </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/dimen_30dp"
-            android:layout_marginRight="@dimen/dimen_30dp"
-            android:background="@color/gray_main_rb_bg_f" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="@dimen/dimen_10dp"
-            android:layout_marginLeft="@dimen/dimen_30dp"
+
+            android:layout_marginLeft="@dimen/dimen_32dp"
             android:layout_marginRight="@dimen/dimen_30dp"
-            android:layout_marginTop="@dimen/dimen_10dp"
-            android:gravity="left"
+            android:gravity="center_vertical"
             android:text="审核评价:"
-            android:textColor="@color/blackgroundmain"
-            android:textSize="@dimen/text_size_top_bg" />
+            android:textColor="@color/zhy_text_color_1"
+            android:textSize="@dimen/dimen_32dp" />
 
         <EditText
             android:id="@+id/et_au_note"
@@ -302,8 +302,11 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dimen_30dp"
             android:layout_marginRight="@dimen/dimen_30dp"
-            android:background="@drawable/shape_et_order_bg"
-            android:textSize="@dimen/text_size_top_bg" />
+            android:background="@drawable/zhy_edit_back_1"
+            android:gravity="left"
+            android:hint="输入审核评价..."
+            android:padding="@dimen/dimen_10dp"
+            android:textSize="@dimen/dimen_24dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -313,26 +316,27 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_yse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dimen_10dp"
-                android:background="@drawable/ic_home_reg"
-                android:gravity="center"
-                android:text="通过"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/dimen_40dp" />
-
-            <TextView
                 android:id="@+id/tv_no"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_10dp"
-                android:background="@drawable/ic_home_reg"
+                android:layout_width="@dimen/dimen_180dp"
+                android:layout_height="@dimen/dimen_80dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:background="@drawable/zhy_button_state_2"
                 android:gravity="center"
                 android:text="不通过"
-                android:textColor="@color/text_color"
-                android:textSize="@dimen/dimen_40dp" />
+                android:textColor="@color/zhy_text_color_1"
+                android:textSize="@dimen/dimen_32dp" />
+
+            <TextView
+                android:id="@+id/tv_yse"
+                android:layout_width="@dimen/dimen_180dp"
+                android:layout_height="@dimen/dimen_80dp"
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:background="@drawable/zhy_button_state_5"
+                android:gravity="center"
+                android:text="通过"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_32dp" />
+
         </LinearLayout>
     </LinearLayout>
 

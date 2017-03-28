@@ -67,7 +67,6 @@ public class BaseActivity extends FragmentActivity {
         flContent.addView(v, LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT);
         ButterKnife.inject(this);
-
     }
 
     @Override

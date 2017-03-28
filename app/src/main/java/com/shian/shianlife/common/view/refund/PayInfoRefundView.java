@@ -23,9 +23,8 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class PayInfoRefundView extends FrameLayout {
+public class PayInfoRefundView extends LinearLayout {
 
-    RelativeLayout parentLayout;
 
     @InjectView(R.id.tv_refund_yske)
     TextView tv_totalAmount;
@@ -49,12 +48,7 @@ public class PayInfoRefundView extends FrameLayout {
     }
 
     private void init() {
-        LinearLayout.LayoutParams mParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        mParams.topMargin = getContext().getResources().getDimensionPixelSize(R.dimen.dimen_1dp);
-        setLayoutParams(mParams);
-        parentLayout = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_moneydetailrefund, null);
-        addView(parentLayout);
+        View.inflate(getContext(),R.layout.view_moneydetailrefund,this);
         ButterKnife.inject(this);
         boolean isFlag = ((RefundOrderActivity) getContext()).isDetailFlag();
         if (isFlag) {

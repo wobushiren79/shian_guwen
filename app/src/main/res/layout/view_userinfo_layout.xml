@@ -28,7 +28,7 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="名字"
+                android:text=""
                 android:textSize="@dimen/dimen_32dp" />
 
             <TextView
@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_8dp"
-                android:text="职位"
+                android:text=""
                 android:textSize="@dimen/dimen_24dp" />
         </LinearLayout>
 
@@ -52,6 +52,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:layout_marginTop="@dimen/dimen_10dp"
                     android:layout_width="@dimen/dimen_25dp"
                     android:layout_height="@dimen/dimen_28dp"
                     android:layout_marginRight="@dimen/dimen_8dp"

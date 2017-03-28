@@ -41,6 +41,7 @@ import com.shian.shianlife.fragment.NewHomeFragment;
 import com.shian.shianlife.fragment.NewUserCenterFragment;
 import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.fragment.UserCenterFragment;
+import com.shian.shianlife.mapapi.CustomDialog;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
@@ -104,7 +105,8 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 //        initLocation();
         startPushService();
 //        checkUpData();//检测更新
-
+        CustomDialog dialog=new CustomDialog(this);
+        dialog.show();
     }
 
 

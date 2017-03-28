@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/dimen_80dp"
     android:background="@color/white"
     android:orientation="horizontal"
-    android:paddingBottom="@dimen/dimen_33dp"
     android:paddingLeft="@dimen/dimen_32dp"
-    android:paddingRight="@dimen/dimen_32dp"
-    android:paddingTop="@dimen/dimen_33dp">
+    android:paddingRight="@dimen/dimen_32dp">
 
     <TextView
         android:id="@+id/tv_important"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dimen_80dp"
         android:gravity="center"
         android:text="*"
         android:textColor="@color/zhy_text_color_10"
@@ -29,14 +27,14 @@
         android:textSize="@dimen/dimen_28dp" />
 
     <AutoCompleteTextView
-        android:layout_marginLeft="@dimen/dimen_8dp"
-        android:textColor="@color/zhy_text_color_9"
         android:id="@+id/auto_textview"
         android:layout_width="@dimen/dimen_0dp"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_8dp"
         android:layout_weight="1"
         android:background="@null"
         android:gravity="center_vertical"
+        android:textColor="@color/zhy_text_color_9"
         android:textSize="@dimen/dimen_24dp" />
 
     <ImageView

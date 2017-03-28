@@ -1,5 +1,9 @@
 [
     {
+        "merged": "E:\\Android\\AndroidProjects\\shian_guwen\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\zhy_loading.png",
+        "source": "E:\\Android\\AndroidProjects\\shian_guwen\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\zhy_loading.png"
+    },
+    {
         "merged": "E:\\Android\\AndroidProjects\\shian_guwen\\PullToRefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\indicator_arrow.png",
         "source": "E:\\Android\\AndroidProjects\\shian_guwen\\PullToRefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\indicator_arrow.png"
     },
