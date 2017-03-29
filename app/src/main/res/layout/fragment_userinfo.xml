@@ -137,7 +137,7 @@
             android:background="@color/zhy_backgroud_1"
             android:padding="@dimen/dimen_30dp"
             android:text="注：以上信息请联系客服人员进行修改"
-            android:textColor="@color/red"
+            android:textColor="@color/zhy_text_color_4"
             android:textSize="@dimen/dimen_24dp" />
 
         <View

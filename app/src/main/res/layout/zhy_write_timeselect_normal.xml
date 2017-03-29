@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/dimen_8dp"
-        android:gravity="top"
+        android:gravity="center_vertical"
         android:textColor="@color/zhy_text_color_9"
         android:textSize="@dimen/dimen_24dp" />
 </LinearLayout>

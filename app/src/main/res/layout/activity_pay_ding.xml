@@ -21,7 +21,6 @@
 
                 <ImageView
                     android:id="@+id/iv_anim_pic_1"
-
                     android:layout_width="@dimen/dimen_60dp"
                     android:layout_height="@dimen/dimen_60dp"
                     android:layout_marginLeft="@dimen/dimen_500dp"
@@ -66,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dimen_8dp"
                 android:layout_toRightOf="@+id/iv_title_icon"
                 android:text="定金金额:"
                 android:textColor="@color/zhy_text_color_1"
@@ -89,147 +89,162 @@
             android:layout_height="@dimen/dimen_24dp" />
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/ll_pay_fp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/dimen_30dp"
             android:background="@color/white"
-            android:visibility="gone"
-            >
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dimen_32dp"
+            android:paddingRight="@dimen/dimen_32dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_height="@dimen/dimen_80dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:text="发票类型:"
                     android:textColor="@color/dimgray"
-                    android:textSize="@dimen/dimen_28dp" />
+                    android:textSize="@dimen/dimen_24dp" />
 
                 <Spinner
                     android:id="@+id/sp_pay_20"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_height="@dimen/dimen_80dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:text="发票内容:"
                     android:textColor="@color/dimgray"
-                    android:textSize="@dimen/dimen_28dp" />
+                    android:textSize="@dimen/dimen_24dp" />
 
                 <EditText
                     android:id="@+id/et_content"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:textColor="@color/dimgray"
+                    android:textSize="@dimen/dimen_24dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_height="@dimen/dimen_80dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:text="发票抬头:"
                     android:textColor="@color/dimgray"
-                    android:textSize="@dimen/dimen_28dp" />
+                    android:textSize="@dimen/dimen_24dp" />
 
                 <EditText
                     android:id="@+id/et_tt"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:textColor="@color/dimgray"
+                    android:textSize="@dimen/dimen_24dp" />
             </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_10dp"
+                android:layout_height="@dimen/dimen_80dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:text="收件人:"
                     android:textColor="@color/dimgray"
-                    android:textSize="@dimen/dimen_28dp" />
+                    android:textSize="@dimen/dimen_24dp" />
 
                 <EditText
                     android:id="@+id/et_sjr"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:textColor="@color/dimgray"
+                    android:textSize="@dimen/dimen_24dp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dimen_80dp"
                 android:layout_marginTop="@dimen/dimen_10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:text="联系电话:"
                     android:textColor="@color/dimgray"
-                    android:textSize="@dimen/dimen_28dp" />
+                    android:textSize="@dimen/dimen_24dp" />
 
                 <EditText
                     android:id="@+id/et_phone"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:textColor="@color/dimgray"
+                    android:textSize="@dimen/dimen_24dp" />
             </LinearLayout>
 
             <com.shian.shianlife.common.view.LBSLocalView
                 android:id="@+id/lbs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_20dp" />
+                android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/et_otheradd"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dimen_80dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dimen_10dp"
-                android:background="@drawable/shape_et_order"
+                android:background="@drawable/zhy_et_background_1"
                 android:hint="选择其他时手动输入地址"
                 android:padding="@dimen/dimen_10dp"
                 android:textSize="@dimen/dimen_24dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dimen_80dp"
                 android:layout_marginTop="@dimen/dimen_10dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:text="支付地址:"
                     android:textColor="@color/dimgray"
-                    android:textSize="@dimen/dimen_28dp" />
+                    android:textSize="@dimen/dimen_24dp" />
 
                 <EditText
                     android:id="@+id/et_dz"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false" />
+                    android:layout_height="match_parent"
+                    android:enabled="false"
+                    android:textSize="@dimen/dimen_24dp" />
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:background="@color/zhy_line_3" />
         </LinearLayout>
 
         <TextView
@@ -286,10 +301,12 @@
 
             <CheckBox
                 android:id="@+id/cb_pos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/dimen_32dp" />
+                android:layout_marginRight="@dimen/dimen_32dp"
+                android:background="@drawable/zhy_checkbox"
+                android:button="@null" />
         </LinearLayout>
 
         <View
@@ -336,10 +353,12 @@
 
             <CheckBox
                 android:id="@+id/cb_zfb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/dimen_32dp" />
+                android:layout_marginRight="@dimen/dimen_32dp"
+                android:background="@drawable/zhy_checkbox"
+                android:button="@null" />
         </LinearLayout>
 
         <View
@@ -385,10 +404,12 @@
 
             <CheckBox
                 android:id="@+id/cb_weixin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/dimen_32dp"
+                android:background="@drawable/zhy_checkbox"
+                android:button="@null"
                 android:checked="true" />
         </LinearLayout>
 
@@ -435,10 +456,12 @@
 
             <CheckBox
                 android:id="@+id/cb_zhifubao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/dimen_32dp" />
+                android:layout_marginRight="@dimen/dimen_32dp"
+                android:background="@drawable/zhy_checkbox"
+                android:button="@null" />
         </LinearLayout>
 
 
@@ -447,11 +470,11 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_80dp"
             android:layout_margin="@dimen/dimen_32dp"
-            android:background="@drawable/shape_et_order"
-            android:padding="@dimen/dimen_10dp"
+            android:background="@drawable/zhy_et_background_1"
             android:hint="请输入票据单号"
-            android:textSize="@dimen/dimen_24dp"
             android:minHeight="@dimen/dimen_60dp"
+            android:padding="@dimen/dimen_10dp"
+            android:textSize="@dimen/dimen_24dp"
             android:visibility="gone" />
 
         <View
@@ -465,7 +488,7 @@
             android:layout_width="@dimen/dimen_688dp"
             android:layout_height="@dimen/dimen_80dp"
             android:layout_gravity="center_horizontal"
-             android:layout_marginTop="@dimen/dimen_32dp"
+            android:layout_marginTop="@dimen/dimen_32dp"
             android:background="@drawable/zhy_button_state_5"
             android:gravity="center"
             android:text="确认支付"

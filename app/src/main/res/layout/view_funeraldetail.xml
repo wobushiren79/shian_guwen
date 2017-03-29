@@ -10,7 +10,7 @@
         style="@style/order_detail_projectTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dimen_80dp"
-        android:text="殡仪馆项目" />
+        android:text="治丧配套商品" />
 
     <TextView
         android:layout_width="match_parent"

@@ -294,7 +294,8 @@
     </LinearLayout>
 
     <TextView
+        android:background="@color/zhy_backgroud_1"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_24dp" />
+        android:layout_height="@dimen/dimen_16dp" />
 
 </LinearLayout>

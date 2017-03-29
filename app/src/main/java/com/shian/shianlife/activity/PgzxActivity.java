@@ -81,9 +81,6 @@ public class PgzxActivity extends BaseActivity {
 
     public int orderStatus = 0;
 
-    //    PGZXLayoutView mPgzxLayoutView1;
-//    PGZXLayoutView mPgzxLayoutView2;
-//    PGZXLayoutView mPgzxLayoutView3;
     PGZXOtherLayoutView mPgzxLayoutView1;
     PGZXOtherLayoutView mPgzxLayoutView2;
     PGZXOtherLayoutView mPgzxLayoutView3;
@@ -372,6 +369,7 @@ public class PgzxActivity extends BaseActivity {
                         }
                     });
                     tv4.setEnabled(false);
+
                 } else if (isShoukuan) {
                     if (templateItem.getAdditions().size() == 0) {
                         ivPic0.setEnabled(false);
@@ -505,7 +503,11 @@ public class PgzxActivity extends BaseActivity {
                 switch (templateItem.getItemStatus()) {
                     case 1:
                         tv4.setText("派单");
-                        tv4.setBackgroundResource(R.drawable.zhy_button_state_2);
+                        if (isShenhe || isShoukuan) {
+                            tv4.setBackgroundResource(R.drawable.zhy_button_state_item_white);
+                        } else {
+                            tv4.setBackgroundResource(R.drawable.zhy_button_state_2);
+                        }
                         break;
                     case 2:
                         tv4.setText("派单中");
@@ -580,14 +582,13 @@ public class PgzxActivity extends BaseActivity {
                         if (result.getOrderHandleStatus() == 7) {
                             tvNew.setVisibility(View.VISIBLE);
                             tvNew.setEnabled(false);
-                            tvNew.setBackgroundColor(getResources().getColor(R.color.gray_common));
+                            tvNew.setBackgroundResource(R.drawable.zhy_button_state_item_gray);
                             tvNew.setTextColor(Color.WHITE);
                         } else {
                             if (!result.isCanEdit()) {
                                 tvNew.setEnabled(false);
                                 tvNew.setVisibility(View.VISIBLE);
-                                tvNew.setBackgroundColor(getResources().getColor(
-                                        R.color.gray_common));
+                                tvNew.setBackgroundResource(R.drawable.zhy_button_state_item_gray);
                                 tvNew.setTextColor(Color.WHITE);
                             } else if (isShenhe || isShoukuan) {
                                 tvNew.setVisibility(View.GONE);

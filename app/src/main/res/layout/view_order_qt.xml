@@ -17,12 +17,12 @@
             android:layout_centerHorizontal="true"
             android:text="什么订单也没有，\n赶快新建订单吧!"
             android:textColor="@color/white"
-            android:textSize="@dimen/dimen_40dp" />
+            android:textSize="@dimen/dimen_32dp" />
 
         <TextView
             android:id="@+id/tv_neworder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dimen_266dp"
+            android:layout_height="@dimen/dimen_80dp"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_marginBottom="@dimen/dimen_50dp"
@@ -56,14 +56,13 @@
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/sryt_swipe_listview"
-            android:layout_marginRight="@dimen/dimen_16dp"
-            android:layout_marginLeft="@dimen/dimen_16dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_16dp"
+            android:layout_marginRight="@dimen/dimen_16dp">
 
 
             <ListView
-                android:scrollbars="none"
                 android:id="@+id/lv_swipe_listview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -71,8 +70,28 @@
                 android:divider="@null"
                 android:dividerHeight="@dimen/dimen_0dp"
                 android:fadingEdge="none"
-                android:scrollbarStyle="outsideOverlay" />
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="none" />
         </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 
+
+    <LinearLayout
+        android:id="@+id/ll_build_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dimen_32dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_buildnew"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="@dimen/dimen_100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/dimen_32dp"
+            android:src="@drawable/zhy_build_new_order" />
+    </LinearLayout>
 </RelativeLayout>

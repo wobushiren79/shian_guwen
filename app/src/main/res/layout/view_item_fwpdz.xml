@@ -130,9 +130,10 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dimen_15dp"
+
                 android:layout_toLeftOf="@id/iv_qt22"
                 android:layout_toRightOf="@id/tv_qt20"
-                android:text="四川省成都市青羊区大石西路256号" />
+                android:text=" 地方 " />
         </RelativeLayout>
 
         <TextView

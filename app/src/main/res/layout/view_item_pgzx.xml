@@ -115,10 +115,7 @@
         </LinearLayout>
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_1dp"
-            android:background="@color/zhy_line_3" />
+
     </LinearLayout>
 
 
@@ -189,10 +186,6 @@
     </LinearLayout>
 
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_1dp"
-        android:background="@color/zhy_line_3" />
 
     <LinearLayout
         android:id="@+id/ll_ht_pic"
@@ -314,13 +307,13 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:padding="@dimen/dimen_10dp">
+    >
 
         <TextView
             android:id="@+id/tv_pgzx_ev"
             android:layout_width="@dimen/dimen_350dp"
             android:layout_height="@dimen/dimen_80dp"
-            android:layout_margin="@dimen/dimen_10dp"
+            android:layout_margin="@dimen/dimen_24dp"
             android:background="@drawable/zhy_button_state_5"
             android:gravity="center"
             android:text="评价"

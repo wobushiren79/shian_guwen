@@ -68,13 +68,6 @@ public class SendOrderStep3 extends BaseSendOrder {
     @Override
     public void saveData() {
         params.setConsultId(consultId);
-
-        if (mWriteServiceWindows.getData().equals("")) {
-            ToastUtils.show(getContext(), "服务窗口没有设置");
-            return;
-        }
-        params.setServiceWindows(mWriteServiceWindows.getData());
-
         if (!mWriteFireTime.getData().equals("")) {
             params.setFireTime(TransitionDate.StrToDate(mWriteFireTime.getData(), "yyyy-MM-dd").getTime());
         } else {
@@ -102,7 +95,7 @@ public class SendOrderStep3 extends BaseSendOrder {
             ToastUtils.show(getContext(), "遗体停放还没有填写");
             return;
         }
-
+        params.setServiceWindows(mWriteServiceWindows.getData());
         params.setCrematorName(mWriteCremator.getData());
         params.setFuneralRemark(mWriteRemark.getData());
 

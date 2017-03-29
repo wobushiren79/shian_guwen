@@ -26,10 +26,10 @@
 
         <ImageView
             android:id="@+id/iv_add"
-            android:layout_width="@dimen/dimen_32dp"
-            android:layout_height="@dimen/dimen_32dp"
+            android:layout_width="@dimen/dimen_36dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/zhy_order_add" />
+            android:src="@drawable/zhy_order_add" />
     </LinearLayout>
 
 

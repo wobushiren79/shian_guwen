@@ -86,7 +86,8 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/dimen_24dp">
 
             <TextView
                 android:id="@+id/tv_neworder1"
@@ -108,7 +109,7 @@
                 android:layout_height="@dimen/dimen_60dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/dimen_10dp"
-                android:background="@drawable/zhy_button_state_item_yellow"
+                android:background="@drawable/zhy_button_state_5"
                 android:gravity="center"
                 android:padding="@dimen/dimen_10dp"
                 android:text="结束派单"

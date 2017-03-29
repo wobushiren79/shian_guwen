@@ -6,15 +6,20 @@
 
     <CheckBox
         android:id="@+id/cb_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_width="@dimen/dimen_36dp"
+        android:layout_height="@dimen/dimen_36dp"
+        android:layout_gravity="center"
+        android:background="@drawable/zhy_checkbox"
+        android:button="@null" />
 
     <TextView
+        android:layout_marginLeft="@dimen/dimen_8dp"
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textSize="@dimen/dimen_24dp"
+        android:textColor="@color/dimgray"
         android:text="" />
 
     <FrameLayout

@@ -66,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_24dp"
-                    android:text="在线客服"
+                    android:text="电话客服"
                     android:textColor="@color/zhy_text_color_1"
                     android:textSize="@dimen/dimen_32dp" />
             </LinearLayout>

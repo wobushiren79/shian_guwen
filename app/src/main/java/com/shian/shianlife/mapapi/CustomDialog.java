@@ -96,13 +96,35 @@ public class CustomDialog extends Dialog {
         for (int i = 0; i < pointList.size(); i++) {
             ScaleAnimation scaleAnimation = new ScaleAnimation(0.0f, 1f, 0.0f, 1f,
                     Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            scaleAnimation.setDuration((pointNum - 1) * 150);
-            scaleAnimation.setRepeatCount(Animation.INFINITE);
+            scaleAnimation.setDuration(600);
+            scaleAnimation.setRepeatCount(1);
             scaleAnimation.setInterpolator(new LinearInterpolator());
-            scaleAnimation.setRepeatMode(Animation.REVERSE);
             scaleAnimation.setStartOffset((i + 1) * 150);
-            pointList.get(i).setAnimation(scaleAnimation);
-            scaleAnimation.startNow();
+            final int finalI = i;
+            scaleAnimation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    ScaleAnimation scaleAnimation = new ScaleAnimation(1f, 0.0f, 1f, 0.0f,
+                            Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                    scaleAnimation.setDuration(600);
+                    scaleAnimation.setRepeatCount(Animation.INFINITE);
+                    scaleAnimation.setInterpolator(new LinearInterpolator());
+                    scaleAnimation.setRepeatMode(Animation.REVERSE);
+                    pointList.get(finalI).startAnimation(scaleAnimation);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            pointList.get(i).startAnimation(scaleAnimation);
+
         }
     }
 

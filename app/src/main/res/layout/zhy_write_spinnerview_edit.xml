@@ -18,12 +18,10 @@
     <TextView
         android:id="@+id/tv_titlename"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/dimen_4dp"
         android:ems="7"
         android:gravity="center_vertical"
-        android:paddingBottom="@dimen/dimen_33dp"
-        android:paddingTop="@dimen/dimen_33dp"
         android:textColor="@color/dimgray"
         android:textSize="@dimen/dimen_28dp" />
 
@@ -49,5 +47,6 @@
         android:layout_height="match_parent"
         android:layout_marginRight="@dimen/dimen_32dp"
         android:background="@null"
+        android:gravity="center_vertical"
         android:textSize="@dimen/dimen_24dp" />
 </LinearLayout>

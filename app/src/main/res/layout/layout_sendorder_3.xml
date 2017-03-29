@@ -18,17 +18,6 @@
         android:layout_height="@dimen/dimen_1dp"
         android:background="@color/zhy_line_3" />
 
-    <com.shian.shianlife.view.writeview.EditTextViewNormal
-        android:id="@+id/write_service_window"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        MyViewAttr:isImportant="true"
-        MyViewAttr:titleName="服务窗口"></com.shian.shianlife.view.writeview.EditTextViewNormal>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_1dp"
-        android:background="@color/zhy_line_3" />
 
     <com.shian.shianlife.view.writeview.SpinnerViewEdit
         android:id="@+id/write_body_park"
@@ -72,6 +61,18 @@
         android:layout_height="wrap_content"
         MyViewAttr:isImportant="true"
         MyViewAttr:titleName="出殡时间"></com.shian.shianlife.view.writeview.TimeSelectViewNormal>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_line_3" />
+
+    <com.shian.shianlife.view.writeview.EditTextViewNormal
+        android:id="@+id/write_service_window"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        MyViewAttr:isImportant="false"
+        MyViewAttr:titleName="服务窗口"></com.shian.shianlife.view.writeview.EditTextViewNormal>
 
     <TextView
         android:layout_width="match_parent"

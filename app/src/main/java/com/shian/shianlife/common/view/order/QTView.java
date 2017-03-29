@@ -28,10 +28,12 @@ import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper.OnSwipeRefreshListener;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.CustomerActivity;
 import com.shian.shianlife.activity.EditOrderActivity;
+import com.shian.shianlife.activity.MainActivity;
 import com.shian.shianlife.activity.NewOrderActivity;
 import com.shian.shianlife.activity.OrderDetailActivity;
 import com.shian.shianlife.activity.PayActivity;
 import com.shian.shianlife.activity.RefundActivity;
+import com.shian.shianlife.activity.cemetery.BuildNewOrderActivity;
 import com.shian.shianlife.activity.map.NewRoutePlanActivity;
 import com.shian.shianlife.activity.map.RoutePlanActivity;
 import com.shian.shianlife.activity.SaveTalkFailActivity;
@@ -58,6 +60,9 @@ import com.shian.shianlife.provide.result.HrGetOrderListResult;
 import com.shian.shianlife.provide.result.HrGetTalkFail;
 import com.shian.shianlife.view.TalkDataDialog;
 
+import butterknife.InjectView;
+import butterknife.OnClick;
+
 import static com.shian.shianlife.fragment.OrderFragment.orderFragmentCallBack;
 
 @SuppressLint("InflateParams")
@@ -65,7 +70,7 @@ public class QTView extends BaseOrderView {
     private final String LOG_TGA = "QT_VIEW";
     private View v;
 
-
+    private ImageView ivBuildNew;
     private SwipeRefreshLayout mSryt;
     private ListView mListView;
     private TArrayListAdapter<OrderListModel> adapter;
@@ -105,6 +110,7 @@ public class QTView extends BaseOrderView {
         mListView = (ListView) v.findViewById(R.id.lv_swipe_listview);
         rl_order_qt0 = (RelativeLayout) v.findViewById(R.id.rl_order_qt0);
         ll_order_qt0 = (LinearLayout) v.findViewById(R.id.ll_order_qt0);
+        ivBuildNew = (ImageView) v.findViewById(R.id.iv_buildnew);
 
         mSryt.setColorSchemeColors(Color.BLUE);
         adapter = new TArrayListAdapter<OrderListModel>(getContext());
@@ -113,6 +119,7 @@ public class QTView extends BaseOrderView {
         v.findViewById(R.id.tv_neworder1).setOnClickListener(
                 newOrderClickListener);
 
+        ivBuildNew.setOnClickListener(newOrderClickListener);
     }
 
     private OnClickListener newOrderClickListener = new OnClickListener() {
@@ -289,8 +296,8 @@ public class QTView extends BaseOrderView {
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(getContext(), NewRoutePlanActivity.class);
-                        intent.putExtra("LocationType",9);
-                        intent.putExtra("ConsultId",model.getConsultId());
+                        intent.putExtra("LocationType", 9);
+                        intent.putExtra("ConsultId", model.getConsultId());
                         intent.putExtra("RoutePlanLocation", model.getCustomerAddress());
                         getContext().startActivity(intent);
                     }
@@ -889,7 +896,6 @@ public class QTView extends BaseOrderView {
                         }
                     });
         }
-
         /**
          * 客户详情
          */
@@ -899,11 +905,5 @@ public class QTView extends BaseOrderView {
             in.putExtra("orderId", model.getOrderId());
             getContext().startActivity(in);
         }
-
-
-    }
-
-    public void setWH() {
-
     }
 }

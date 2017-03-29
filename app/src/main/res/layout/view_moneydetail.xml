@@ -127,8 +127,8 @@
 
             <TextView
                 android:id="@+id/tv_refund"
-                android:layout_width="@dimen/dimen_120dp"
-                android:layout_height="@dimen/dimen_40dp"
+                android:layout_width="@dimen/dimen_140dp"
+                android:layout_height="@dimen/dimen_60dp"
                 android:layout_marginRight="@dimen/dimen_32dp"
                 android:background="@drawable/zhy_button_state_2"
                 android:gravity="center"

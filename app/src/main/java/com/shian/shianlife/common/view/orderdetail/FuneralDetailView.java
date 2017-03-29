@@ -45,8 +45,8 @@ public class FuneralDetailView extends FrameLayout {
 	}
 
 	public void addCtgItem(OrderCtgItemModel ctgItemModel) {
-		View line = getLineView();
-		parentLayout.addView(line, parentLayout.getChildCount() - 2);
+//		View line = getLineView();
+//		parentLayout.addView(line, parentLayout.getChildCount() - 2);
 		CtgDetailView mCtgDetailView = new CtgDetailView(getContext());
 		mCtgDetailView.setLayoutParams(
 				new LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));

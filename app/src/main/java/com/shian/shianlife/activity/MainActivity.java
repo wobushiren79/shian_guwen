@@ -75,8 +75,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     RadioButton rbMain4;
     @InjectView(R.id.tv_msgnum)
     TextView tvMsgNumber;
-    @InjectView(R.id.iv_buildnew)
-    ImageView ivBuildNew;
+
 
     private FragmentManager mFragmentManager;
     private FragmentTransaction transcation;
@@ -105,8 +104,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 //        initLocation();
         startPushService();
 //        checkUpData();//检测更新
-        CustomDialog dialog=new CustomDialog(this);
-        dialog.show();
     }
 
 
@@ -529,16 +526,5 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 
             }
         });
-    }
-
-    @OnClick(R.id.iv_buildnew)
-    public void buildNew() {
-        if (loginType == 0) {
-            Intent in = new Intent(MainActivity.this, NewOrderActivity.class);
-            MainActivity.this.startActivity(in);
-        } else if (loginType == 1) {
-            Intent intent = new Intent(MainActivity.this, BuildNewOrderActivity.class);
-            MainActivity.this.startActivity(intent);
-        }
     }
 }

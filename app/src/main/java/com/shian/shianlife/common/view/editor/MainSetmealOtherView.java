@@ -49,13 +49,14 @@ public class MainSetmealOtherView extends LinearLayout {
 
     Button mBTChangeSetMeal;
 
-    ScrollListView mListViewData;
+    //    ScrollListView mListViewData;
+    LinearLayout mLLListView;
 
     private List<SetmealModel> mainSetmeals = new ArrayList<>();// 系统主套餐
     private List<CtgItemModel> ctgItems = new ArrayList<>();
     private List<CtgItemModel> detailsCtgItems = new ArrayList<>();
     private List<String> listTitle = new ArrayList<>();
-    private List<CreateOrderProductItemModel>  deleteProudctItems=new ArrayList<>();
+    private List<CreateOrderProductItemModel> deleteProudctItems = new ArrayList<>();
 
     private HrGetOrderDetailResult result;
 
@@ -96,7 +97,8 @@ public class MainSetmealOtherView extends LinearLayout {
             ctgItems.addAll(mainSetmeals.get(0).getCtgItems());
             setInitDetailsCtgItems();
         }
-        theAdapter.notifyDataSetChanged();
+//        theAdapter.notifyDataSetChanged();
+        addView();
         changeListener.changeTotalPrice();
 
     }
@@ -105,7 +107,6 @@ public class MainSetmealOtherView extends LinearLayout {
         this.result = result;
         setInitData(name, mainSetmeals);
         //设置选择的套餐
-
         for (int i = 0; i < mainSetmeals.size(); i++) {
             SetmealModel setmealData = mainSetmeals.get(i);
             if (result.getBoard().getSetmealMainId() == setmealData.getId()) {
@@ -128,7 +129,7 @@ public class MainSetmealOtherView extends LinearLayout {
                     ctgItemModel.setId(orderCtgItemModel.getId());
                     List<ProductItemModel> productItems = new ArrayList<>();
                     for (OrderProductItemModel orderProductItemModel : orderCtgItemModel.getProductItems()) {
-                        ProductItemModel productItemModel=new ProductItemModel();
+                        ProductItemModel productItemModel = new ProductItemModel();
                         productItemModel.setOrderId(orderProductItemModel.getId());
                         productItemModel.setName(orderProductItemModel.getName());
                         productItemModel.setCategoryId(orderProductItemModel.getCategoryId());
@@ -138,19 +139,21 @@ public class MainSetmealOtherView extends LinearLayout {
                         productItemModel.setCount(orderProductItemModel.getNumber());
                         productItemModel.setCanEdit(orderProductItemModel.isCanEdit());
                         productItemModel.setPrice(orderProductItemModel.getPrice());
-                        productItemModel.setTotalPrice(orderProductItemModel.getPrice()*orderProductItemModel.getNumber());
+                        productItemModel.setTotalPrice(orderProductItemModel.getPrice() * orderProductItemModel.getNumber());
                         productItems.add(productItemModel);
 
                         //如果不能编辑 那么不能更改套餐
-                        if(!orderProductItemModel.isCanEdit()){
+                        if (!orderProductItemModel.isCanEdit()) {
                             mBTChangeSetMeal.setVisibility(GONE);
                         }
                     }
                     ctgItemModel.setProductItems(productItems);
                     detailsCtgItems.add(ctgItemModel);
                 }
-                theAdapter.notifyDataSetChanged();
+//                theAdapter.notifyDataSetChanged();
+                addView();
                 break;
+
             }
         }
     }
@@ -159,51 +162,30 @@ public class MainSetmealOtherView extends LinearLayout {
     private void initView() {
         layout = LayoutInflater.from(getContext()).inflate(R.layout.view_mainsetmealother, this);
         mTVTitle = (TextView) layout.findViewById(R.id.tv_title);
-        mListViewData = (ScrollListView) layout.findViewById(R.id.listview_data);
+//        mListViewData = (ScrollListView) layout.findViewById(R.id.listview_data);
+        mLLListView = (LinearLayout) layout.findViewById(R.id.ll_list);
         mTVSetmealName = (TextView) layout.findViewById(R.id.tv_setmeal);
 
         mBTChangeSetMeal = (Button) layout.findViewById(R.id.bt_changesetmeal);
 
         mBTChangeSetMeal.setOnClickListener(onClickListener);
 
-        mListViewData.setAdapter(theAdapter);
+//        mListViewData.setAdapter(theAdapter);
         mTVTitle.setText(titleName);
     }
 
-
-    BaseAdapter theAdapter = new BaseAdapter() {
-        @Override
-        public int getCount() {
-            return detailsCtgItems.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(final int positionfather, View convertView, ViewGroup parent) {
-            TheViewHolder theViewHolder;
-            if (convertView == null) {
-                convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_mainsetmealother_listview_items, null);
-                theViewHolder = new TheViewHolder();
-                theViewHolder.itemListView = (ScrollListView) convertView.findViewById(R.id.listview_data);
-                theViewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
-                convertView.setTag(theViewHolder);
-            } else {
-                theViewHolder = (TheViewHolder) convertView.getTag();
-            }
+    private void addView() {
+        mLLListView.removeAllViews();
+        for (int i = 0; i < detailsCtgItems.size(); i++) {
+            View convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_mainsetmealother_listview_items, null);
+            ScrollListView itemListView = (ScrollListView) convertView.findViewById(R.id.listview_data);
+            TextView tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
             LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams
                     (ViewGroup.LayoutParams.MATCH_PARENT, MainSetmealOtherView.this.getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_80dp));
-            theViewHolder.tvTitle.setLayoutParams(layoutparams);
-            final CtgItemModel data = detailsCtgItems.get(positionfather);
-            theViewHolder.tvTitle.setText(data.getName());
+            tvTitle.setLayoutParams(layoutparams);
+            final CtgItemModel data = detailsCtgItems.get(i);
+            tvTitle.setText(data.getName());
+            final int finalI = i;
             BaseSwipeAdapter baseSwipeAdapter = new BaseSwipeAdapter() {
                 @Override
                 public int getSwipeLayoutResourceId(int position) {
@@ -237,11 +219,11 @@ public class MainSetmealOtherView extends LinearLayout {
                     tvDelete.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if(!dataItem.isCanEdit()){
-                                ToastUtils.show(getContext(),"该项已经被接单，不能删除");
+                            if (!dataItem.isCanEdit()) {
+                                ToastUtils.show(getContext(), "该项已经被接单，不能删除");
                                 return;
                             }
-                            CreateOrderProductItemModel item=new CreateOrderProductItemModel();
+                            CreateOrderProductItemModel item = new CreateOrderProductItemModel();
                             item.setCategoryId(data.getId());
                             item.setProjectId(1);
                             item.setNumber(dataItem.getCount());
@@ -250,12 +232,12 @@ public class MainSetmealOtherView extends LinearLayout {
                             item.setTotalPrice(dataItem.getPrice() * dataItem.getCount());
                             item.setStatusFlag(2);
                             item.setChange(false);
-                            if(dataItem.getOrderId()!=0){
+                            if (dataItem.getOrderId() != 0) {
                                 item.setId(dataItem.getOrderId());
                             }
                             deleteProudctItems.add(item);
-                            detailsCtgItems.get(positionfather).getProductItems().remove(positionchilden);
-                            theAdapter.notifyDataSetChanged();
+                            detailsCtgItems.get(finalI).getProductItems().remove(positionchilden);
+                            addView();
                             changeListener.changeTotalPrice();
                         }
                     });
@@ -297,17 +279,149 @@ public class MainSetmealOtherView extends LinearLayout {
                     return i;
                 }
             };
-
             baseSwipeAdapter.setMode(Attributes.Mode.Single);
-            theViewHolder.itemListView.setAdapter(baseSwipeAdapter);
-            return convertView;
+            itemListView.setAdapter(baseSwipeAdapter);
+            mLLListView.addView(convertView);
         }
+    }
 
-        class TheViewHolder {
-            TextView tvTitle;
-            ScrollListView itemListView;
-        }
-    };
+//    BaseAdapter theAdapter = new BaseAdapter() {
+//        @Override
+//        public int getCount() {
+//            return detailsCtgItems.size();
+//        }
+//
+//        @Override
+//        public Object getItem(int position) {
+//            return null;
+//        }
+//
+//        @Override
+//        public long getItemId(int position) {
+//            return 0;
+//        }
+//
+//        @Override
+//        public View getView(final int positionfather, View convertView, ViewGroup parent) {
+//            TheViewHolder theViewHolder;
+//            if (convertView == null) {
+//                convertView = LayoutInflater.from(getContext()).inflate(R.layout.view_mainsetmealother_listview_items, null);
+//                theViewHolder = new TheViewHolder();
+//                theViewHolder.itemListView = (ScrollListView) convertView.findViewById(R.id.listview_data);
+//                theViewHolder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
+//                convertView.setTag(theViewHolder);
+//            } else {
+//                theViewHolder = (TheViewHolder) convertView.getTag();
+//            }
+//            LinearLayout.LayoutParams layoutparams = new LinearLayout.LayoutParams
+//                    (ViewGroup.LayoutParams.MATCH_PARENT, MainSetmealOtherView.this.getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_80dp));
+//            theViewHolder.tvTitle.setLayoutParams(layoutparams);
+//            final CtgItemModel data = detailsCtgItems.get(positionfather);
+//            theViewHolder.tvTitle.setText(data.getName());
+//            BaseSwipeAdapter baseSwipeAdapter = new BaseSwipeAdapter() {
+//                @Override
+//                public int getSwipeLayoutResourceId(int position) {
+//                    return R.id.swipelayout;
+//                }
+//
+//                @Override
+//                public View generateView(int position, ViewGroup parent) {
+//                    View view = LayoutInflater.from(getContext()).inflate(R.layout.view_mainsetmealother_listview_items_items, null);
+//                    return view;
+//                }
+//
+//                @Override
+//                public void fillValues(final int positionchilden, View convertView) {
+//
+//                    TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
+//                    TextView tvNum = (TextView) convertView.findViewById(R.id.tv_num);
+//                    TextView tvMoney = (TextView) convertView.findViewById(R.id.tv_money);
+//                    final SwipeLayout swipeLayout = (SwipeLayout) convertView.findViewById(R.id.swipelayout);
+//
+//                    final ProductItemModel dataItem = data.getProductItems().get(positionchilden);
+//                    tvName.setText(dataItem.getName() + "(" + dataItem.getSpecification() + ")");
+//                    tvMoney.setText("￥：" + dataItem.getPrice() * dataItem.getCount());
+//                    tvNum.setText("x " + dataItem.getCount() + dataItem.getUnit());
+//
+//                    swipeLayout.addDrag(SwipeLayout.DragEdge.Right, R.id.ll_bottom);
+//                    swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
+//                    TextView tvDelete = (TextView) convertView.findViewById(R.id.tv_delete);
+//                    TextView tvDetails = (TextView) convertView.findViewById(R.id.tv_detail);
+//
+//                    tvDelete.setOnClickListener(new OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            if (!dataItem.isCanEdit()) {
+//                                ToastUtils.show(getContext(), "该项已经被接单，不能删除");
+//                                return;
+//                            }
+//                            CreateOrderProductItemModel item = new CreateOrderProductItemModel();
+//                            item.setCategoryId(data.getId());
+//                            item.setProjectId(1);
+//                            item.setNumber(dataItem.getCount());
+//                            item.setPrice(dataItem.getPrice());
+//                            item.setSkuId(dataItem.getId());
+//                            item.setTotalPrice(dataItem.getPrice() * dataItem.getCount());
+//                            item.setStatusFlag(2);
+//                            item.setChange(false);
+//                            if (dataItem.getOrderId() != 0) {
+//                                item.setId(dataItem.getOrderId());
+//                            }
+//                            deleteProudctItems.add(item);
+//                            detailsCtgItems.get(positionfather).getProductItems().remove(positionchilden);
+//                            theAdapter.notifyDataSetChanged();
+//                            changeListener.changeTotalPrice();
+//                        }
+//                    });
+//                    tvDetails.setOnClickListener(new OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            Utils.getSKUDetails(getContext(), data.getProductItems().get(positionchilden).getId());
+//                        }
+//                    });
+//
+//                    swipeLayout.getSurfaceView().setOnClickListener(new OnClickListener() {
+//
+//                        @Override
+//                        public void onClick(View view) {
+//                            SwipeLayout.Status status = swipeLayout.getOpenStatus();
+//                            if (status == SwipeLayout.Status.Close) {
+//                                swipeLayout.open();
+//                            } else if (status == SwipeLayout.Status.Open) {
+//                                swipeLayout.close();
+//                            } else {
+//
+//                            }
+//                        }
+//                    });
+//                }
+//
+//                @Override
+//                public int getCount() {
+//                    return data.getProductItems().size();
+//                }
+//
+//                @Override
+//                public Object getItem(int i) {
+//                    return null;
+//                }
+//
+//                @Override
+//                public long getItemId(int i) {
+//                    return i;
+//                }
+//            };
+//
+//            baseSwipeAdapter.setMode(Attributes.Mode.Single);
+//            theViewHolder.itemListView.setAdapter(baseSwipeAdapter);
+//            return convertView;
+//        }
+//
+//        class TheViewHolder {
+//            TextView tvTitle;
+//            ScrollListView itemListView;
+//        }
+//    };
 
 
     OnClickListener onClickListener = new OnClickListener() {
@@ -320,7 +434,7 @@ public class MainSetmealOtherView extends LinearLayout {
     };
 
     private void creatDialog() {
-        EditOrderSetmealChangeDialog dialog = new EditOrderSetmealChangeDialog(getContext(), R.style.CustomDialogBottom, new EditOrderSetmealChangeDialog.DialogCallBack() {
+        EditOrderSetmealChangeDialog dialog = new EditOrderSetmealChangeDialog(getContext(), R.style.CustomDialog, new EditOrderSetmealChangeDialog.DialogCallBack() {
             @Override
             public void getSelectString(String name, int position) {
                 setSelectSetmeal(name, position);
@@ -338,8 +452,9 @@ public class MainSetmealOtherView extends LinearLayout {
         setInitDetailsCtgItems();
         mTVSetmealName.setText(name);
         SetmealName = name;
-        theAdapter.notifyDataSetChanged();
-        if(result!=null&&mainID==result.getBoard().getSetmealMainId() ){
+//        theAdapter.notifyDataSetChanged();
+        addView();
+        if (result != null && mainID == result.getBoard().getSetmealMainId()) {
             setListData(result);
         }
         changeListener.changeTotalPrice();
@@ -394,7 +509,7 @@ public class MainSetmealOtherView extends LinearLayout {
                 item.setTotalPrice(ProductData.getPrice() * ProductData.getCount());
                 item.setStatusFlag(1);
                 item.setChange(false);
-                if(ProductData.getOrderId()!=0){
+                if (ProductData.getOrderId() != 0) {
                     item.setId(ProductData.getOrderId());
                 }
                 newList.add(item);

@@ -252,7 +252,7 @@ public class EditOrderActivity extends BaseActivity {
                 change();
             }
         });
-        funeralSetmealOtherView.setCtgItems("殡仪馆项目", funeralSetmeals);
+        funeralSetmealOtherView.setCtgItems("治丧配套商品", funeralSetmeals);
 
         cemeterySetmealView.setCtgItems("公墓项目", cemeteries);
         cemeterySetmealView
@@ -315,7 +315,7 @@ public class EditOrderActivity extends BaseActivity {
                 change();
             }
         });
-        funeralSetmealOtherView.setCtgItems("殡仪馆项目", funeralSetmeals, result);
+        funeralSetmealOtherView.setCtgItems("治丧配套商品", funeralSetmeals, result);
 
         cemeterySetmealView.setCtgItems("公墓项目", cemeteries, result);
         cemeterySetmealView.setOrderId(orderId);
@@ -406,7 +406,7 @@ public class EditOrderActivity extends BaseActivity {
                     });
         } else {
             TipsDialog mDialog = new TipsDialog(this);
-            mDialog.setTitle("请确认客户选择由世安白事进行全程服务，创建订单后不可取消。");
+            mDialog.setTitle("请确认客户选择由圆满人生进行全程服务，创建订单后不可取消。");
             mDialog.setTopButton("暂不创建", new DialogInterface.OnClickListener() {
 
                 @Override

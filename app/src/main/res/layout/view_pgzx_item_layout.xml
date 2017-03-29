@@ -39,6 +39,7 @@
     </RelativeLayout>
 
     <TextView
+
         android:id="@+id/tv_content"
         android:layout_width="@dimen/dimen_160dp"
         android:layout_height="@dimen/dimen_78dp"

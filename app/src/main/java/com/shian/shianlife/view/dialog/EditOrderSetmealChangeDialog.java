@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.local.Utils;
 
 import java.util.ArrayList;
@@ -100,15 +101,16 @@ public class EditOrderSetmealChangeDialog extends Dialog {
          * 设置宽度全屏，要设置在show的后面
          */
         WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
-        layoutParams.gravity = Gravity.BOTTOM;
-        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.gravity = Gravity.CENTER;
+//        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.width = BaseActivity.metrics.widthPixels*2/3;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         getWindow().getDecorView().setPadding(0, 0, 0, 0);
         getWindow().setAttributes(layoutParams);
 
-        TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, 1000, 0);
-        translateAnimation.setDuration(500);
-        view.startAnimation(translateAnimation);
+//        TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, 1000, 0);
+//        translateAnimation.setDuration(500);
+//        view.startAnimation(translateAnimation);
 
     }
 

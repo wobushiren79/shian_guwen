@@ -112,7 +112,8 @@ public class SendOrderActivity extends BaseActivity {
         consultId = getIntent().getLongExtra("consultId", 0);
 
         String title = getIntent().getStringExtra("TitleName");
-        setTitle(title);
+        String titleno=  title.replaceAll("\r|\n","");
+        setTitle(titleno);
 
         initView();
         initData();
