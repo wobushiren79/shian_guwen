@@ -44,9 +44,10 @@ int id pullFromEnd 0x7f070007
 int id pullFromStart 0x7f070008
 int id pullUpFromBottom 0x7f070009
 int id pull_to_refresh_image 0x7f07000d
+int id pull_to_refresh_image_other 0x7f07000f
 int id pull_to_refresh_progress 0x7f07000e
-int id pull_to_refresh_sub_text 0x7f070010
-int id pull_to_refresh_text 0x7f07000f
+int id pull_to_refresh_sub_text 0x7f070011
+int id pull_to_refresh_text 0x7f070010
 int id rotate 0x7f07000b
 int id scrollview 0x7f070001
 int id webview 0x7f070002

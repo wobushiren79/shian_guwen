@@ -28,14 +28,11 @@ import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper.OnSwipeRefreshListener;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.CustomerActivity;
 import com.shian.shianlife.activity.EditOrderActivity;
-import com.shian.shianlife.activity.MainActivity;
 import com.shian.shianlife.activity.NewOrderActivity;
 import com.shian.shianlife.activity.OrderDetailActivity;
 import com.shian.shianlife.activity.PayActivity;
 import com.shian.shianlife.activity.RefundActivity;
-import com.shian.shianlife.activity.cemetery.BuildNewOrderActivity;
 import com.shian.shianlife.activity.map.NewRoutePlanActivity;
-import com.shian.shianlife.activity.map.RoutePlanActivity;
 import com.shian.shianlife.activity.SaveTalkFailActivity;
 import com.shian.shianlife.activity.updata.ContractDataActivity;
 import com.shian.shianlife.activity.updata.JBRDataActivity;
@@ -46,7 +43,6 @@ import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.utils.ViewGropMap;
 import com.shian.shianlife.common.view.TipsDialog;
-import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.impl.OrderManagerImpl;
@@ -58,22 +54,19 @@ import com.shian.shianlife.provide.params.HpOrderIdParams;
 import com.shian.shianlife.provide.params.HpRejectParams;
 import com.shian.shianlife.provide.result.HrGetOrderListResult;
 import com.shian.shianlife.provide.result.HrGetTalkFail;
+import com.shian.shianlife.thisenum.BuildOrderEnum;
+import com.shian.shianlife.view.popupbutton.PopupButton;
 import com.shian.shianlife.view.TalkDataDialog;
-
-import butterknife.InjectView;
-import butterknife.OnClick;
 
 import static com.shian.shianlife.fragment.OrderFragment.orderFragmentCallBack;
 
 @SuppressLint("InflateParams")
 public class QTView extends BaseOrderView {
-    private final String LOG_TGA = "QT_VIEW";
     private View v;
-
-    private ImageView ivBuildNew;
     private SwipeRefreshLayout mSryt;
     private ListView mListView;
     private TArrayListAdapter<OrderListModel> adapter;
+    private PopupButton mPopupButton;
 
     private SwipeRefreshHelper mSwipeRefreshHelper;
 
@@ -110,7 +103,7 @@ public class QTView extends BaseOrderView {
         mListView = (ListView) v.findViewById(R.id.lv_swipe_listview);
         rl_order_qt0 = (RelativeLayout) v.findViewById(R.id.rl_order_qt0);
         ll_order_qt0 = (LinearLayout) v.findViewById(R.id.ll_order_qt0);
-        ivBuildNew = (ImageView) v.findViewById(R.id.iv_buildnew);
+        mPopupButton = (PopupButton) v.findViewById(R.id.popupbutton);
 
         mSryt.setColorSchemeColors(Color.BLUE);
         adapter = new TArrayListAdapter<OrderListModel>(getContext());
@@ -119,7 +112,32 @@ public class QTView extends BaseOrderView {
         v.findViewById(R.id.tv_neworder1).setOnClickListener(
                 newOrderClickListener);
 
-        ivBuildNew.setOnClickListener(newOrderClickListener);
+        initPopupButton();
+    }
+
+    /**
+     * 初始化popup
+     */
+    private void initPopupButton() {
+        final BuildOrderEnum[] buildButtons = {
+                BuildOrderEnum.BY,
+                BuildOrderEnum.GM
+        };
+        for (int i = 0; i < buildButtons.length; i++) {
+            mPopupButton.addHorizontalButton(buildButtons[i].getName(), buildButtons[i].getIconId(), i);
+        }
+
+        mPopupButton.setCallBack(new PopupButton.PopupButtonCallBack() {
+            @Override
+            public void onClick(int positionButton) {
+                for (int i = 0; i < buildButtons.length; i++) {
+                    if (positionButton == i) {
+                        Intent intent = new Intent(getContext(), buildButtons[i].getActivity());
+                        getContext().startActivity(intent);
+                    }
+                }
+            }
+        });
     }
 
     private OnClickListener newOrderClickListener = new OnClickListener() {
@@ -352,6 +370,7 @@ public class QTView extends BaseOrderView {
                     default:
                         break;
                 }
+
                 ddxq.setVisibility(View.GONE);
                 if (model.getConsultStatus() == 1
                         || model.getConsultStatus() == 2
@@ -373,8 +392,8 @@ public class QTView extends BaseOrderView {
                 }
                 if ((model.getOrderStatus() == 2 || model.getOrderStatus() == 3 || model
                         .getOrderStatus() == 4)) {
-                    ivq0.setVisibility(View.GONE);
 
+                    ivq0.setVisibility(View.GONE);
                     button_map.setVisibility(GONE);
                     tvq0.setText("订单编号：");
                     tvq1.setText("经办人：");
@@ -896,6 +915,7 @@ public class QTView extends BaseOrderView {
                         }
                     });
         }
+
         /**
          * 客户详情
          */

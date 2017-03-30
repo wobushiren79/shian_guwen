@@ -154,9 +154,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int pullFromStart=0x7f070008;
         public static final int pullUpFromBottom=0x7f070009;
         public static final int pull_to_refresh_image=0x7f07000d;
+        public static final int pull_to_refresh_image_other=0x7f07000f;
         public static final int pull_to_refresh_progress=0x7f07000e;
-        public static final int pull_to_refresh_sub_text=0x7f070010;
-        public static final int pull_to_refresh_text=0x7f07000f;
+        public static final int pull_to_refresh_sub_text=0x7f070011;
+        public static final int pull_to_refresh_text=0x7f070010;
         public static final int rotate=0x7f07000b;
         public static final int scrollview=0x7f070001;
         public static final int webview=0x7f070002;

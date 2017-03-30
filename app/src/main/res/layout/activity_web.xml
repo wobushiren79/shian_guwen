@@ -1,56 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_100dp"
-        android:background="@color/zhy_text_color_1">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_back"
-            android:layout_width="@dimen/dimen_80dp"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dimen_16dp"
-            android:drawableLeft="@drawable/ic_back_default" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_100dp"
+            android:background="@color/zhy_text_color_1">
 
-        <ImageView
-            android:id="@+id/iv_cancel"
-            android:layout_width="@dimen/dimen_50dp"
-            android:layout_height="@dimen/dimen_50dp"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/tv_back"
-            android:src="@drawable/zhy_web_cancel" />
+            <TextView
+                android:id="@+id/tv_back"
+                android:layout_width="@dimen/dimen_80dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimen_16dp"
+                android:drawableLeft="@drawable/ic_back_default" />
 
-        <ImageView
-            android:id="@+id/iv_collection"
-            android:layout_marginLeft="@dimen/dimen_16dp"
-            android:layout_marginRight="@dimen/dimen_16dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/zhy_find_collection_details_1"
-            android:layout_width="@dimen/dimen_40dp"
-            android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/iv_cancel"
+                android:layout_width="@dimen/dimen_50dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_back"
+                android:src="@drawable/zhy_web_cancel" />
 
-        <ImageView
-            android:layout_toLeftOf="@+id/iv_collection"
-            android:src="@drawable/zhy_find_share"
-            android:id="@+id/iv_share"
-            android:layout_width="@dimen/dimen_40dp"
-            android:layout_height="match_parent"  />
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_share"
+                android:layout_width="@dimen/dimen_50dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dimen_16dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/zhy_find_share" />
 
-    <ProgressBar
-        android:id="@+id/myProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="5px" />
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_32dp" />
+        </RelativeLayout>
 
-    <WebView
-        android:id="@+id/web"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
-</LinearLayout>
+        <ProgressBar
+            android:id="@+id/myProgressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="5px" />
+
+        <WebView
+            android:id="@+id/web"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></WebView>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_collection"
+        android:layout_width="@dimen/dimen_50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/dimen_16dp"
+        android:layout_marginRight="@dimen/dimen_16dp"
+        android:layout_marginTop="@dimen/dimen_120dp"
+        android:src="@drawable/zhy_find_collection_details_1" />
+</RelativeLayout>
