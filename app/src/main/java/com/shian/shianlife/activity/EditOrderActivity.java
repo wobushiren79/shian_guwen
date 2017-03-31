@@ -255,8 +255,7 @@ public class EditOrderActivity extends BaseActivity {
         funeralSetmealOtherView.setCtgItems("治丧配套商品", funeralSetmeals);
 
         cemeterySetmealView.setCtgItems("公墓项目", cemeteries);
-        cemeterySetmealView
-                .setOnCemeteryChangeListener(new OnCemeteryChangeListener() {
+        cemeterySetmealView.setOnCemeteryChangeListener(new OnCemeteryChangeListener() {
 
                     @Override
                     public void onCemeteryChange() {

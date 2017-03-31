@@ -37,6 +37,7 @@ import com.shian.shianlife.provide.params.HpCetemeryAcceptParams;
 import com.shian.shianlife.provide.params.HpCetemeryRejectParams;
 import com.shian.shianlife.provide.params.HpGetOrderListParams;
 import com.shian.shianlife.provide.result.HrGetCemeteryListData;
+import com.shian.shianlife.thisenum.TalkEditInfoEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +57,7 @@ public class CemeteryQTView extends BaseOrderView {
     public final static String[] CEMETERY_LISTTYPE_2 = {"客户姓名", "联系电话", "预约地址", "预约时间", "预约参观公墓", "交通工具", "备注"};
     public final static String[] CEMETERY_LISTTYPE_3 = {"经办人", "经办人电话", "使用者", "公墓名称", "园区名称"};
 
-    private int page = 0;
+    private int page = 1;
     private int pageSize = 20;
 
     LinearLayout mLinearLayoutBuildNew;
@@ -275,7 +276,7 @@ public class CemeteryQTView extends BaseOrderView {
                     break;
             }
             if (data.getBespeakStatus() == 1) {
-                if (data.getIsEdit()==1) {
+                if (data.getIsEditInfo()==TalkEditInfoEnum.canTalk.getCode()) {
                     holder.llStateAccept.setVisibility(VISIBLE);
                     holder.llStateTalk.setVisibility(GONE);
                     holder.llDetailes.setVisibility(GONE);
@@ -296,7 +297,7 @@ public class CemeteryQTView extends BaseOrderView {
                 holder.tv_line_6.setVisibility(GONE);
 
             } else if (data.getBespeakStatus() == 2 || data.getBespeakStatus() == 3) {
-                if (data.getIsEdit()==1) {
+                if (data.getIsEditInfo()== TalkEditInfoEnum.canTalk.getCode()) {
                     holder.llStateAccept.setVisibility(GONE);
                     holder.llStateTalk.setVisibility(VISIBLE);
                     holder.llDetailes.setVisibility(GONE);
@@ -319,7 +320,7 @@ public class CemeteryQTView extends BaseOrderView {
                 holder.tv_line_5.setVisibility(VISIBLE);
                 holder.tv_line_6.setVisibility(VISIBLE);
             } else {
-                if (data.getIsEdit()==1) {
+                if (data.getIsEditInfo()==1) {
                     holder.llStateAccept.setVisibility(GONE);
                     holder.llStateTalk.setVisibility(GONE);
                     holder.llDetailes.setVisibility(VISIBLE);

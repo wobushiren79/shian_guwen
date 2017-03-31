@@ -160,14 +160,6 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
                     if (result.getRemark() != null) {
                         mETRemark.setText(result.getRemark());
                     }
-
-
-
-
-
-
-
-
                     mSelectCemeteryName.setLocationIdAndType(result.getCemeteryId(), 0);
                     mSelectLocation1.setLocationIdAndType(result.getCemeteryId(), 1);
                     mSelectLocation2.setLocationIdAndType(result.getGardenId(), 2);
@@ -195,7 +187,6 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
 //        location2List.add("");
 //        location3List.add("");
 //        location4List.add("");
-
     }
 
     private void initView() {
