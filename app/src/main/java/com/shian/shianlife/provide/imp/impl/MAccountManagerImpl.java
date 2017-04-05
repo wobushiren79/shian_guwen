@@ -690,7 +690,7 @@ public class MAccountManagerImpl implements MAccountManager {
 
     @Override
     public void acceptCemetery(Context context, HpCetemeryAcceptParams params, HttpResponseHandler<Object> handler) {
-        excutor.requestPost(context, "cemetery/ordered/bespeak/accept", Object.class, params,
+        excutor.requestPost(context, "marketing/talk/accept", Object.class, params,
                 handler);
     }
 
@@ -703,55 +703,55 @@ public class MAccountManagerImpl implements MAccountManager {
 
     @Override
     public void getCemeteryTalkInfo(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkData> handler) {
-        excutor.requestPost(context, "cemetery/ordered/customer/talkfail/get", HrGetCemeteryTalkData.class, params,
+        excutor.requestPost(context, "marketing/talk/getTalkPlan", HrGetCemeteryTalkData.class, params,
                 handler);
     }
 
     @Override
     public void saveCemeteryTalkInfo(Context context, HpSaveCemeteryTalkData params, HttpResponseHandler<Object> handler) {
-        excutor.requestPost(context, "cemetery/ordered/customer/talkfail/save", Object.class, params,
+        excutor.requestPost(context, "marketing/talk/saveTalkPlan", Object.class, params,
                 handler);
     }
 
     @Override
     public void getCemeteryTalkSuccessOne(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessOne> handler) {
-        excutor.requestPost(context, "cemetery/ordered/talk/buycemetery/get", HrGetCemeteryTalkSuccessOne.class, params,
+        excutor.requestPost(context, "marketing/order/buycemetery/get", HrGetCemeteryTalkSuccessOne.class, params,
                 handler);
     }
 
     @Override
     public void saveCemeteryTalkSuccessOne(Context context, HpSaveCemeteryTalkSuccessOne params, HttpResponseHandler<Object> handler) {
-        excutor.requestPost(context, "cemetery/ordered/talk/buycemetery/save", Object.class, params,
+        excutor.requestPost(context, "marketing/order/buycemetery/save/or/update", Object.class, params,
                 handler);
     }
 
     @Override
     public void getCemeteryTalkSuccessTwo(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessTwo> handler) {
-        excutor.requestPost(context, "cemetery/ordered/talk/customer/get", HrGetCemeteryTalkSuccessTwo.class, params,
+        excutor.requestPost(context, "marketing/order/deadinfo/get", HrGetCemeteryTalkSuccessTwo.class, params,
                 handler);
     }
 
     @Override
     public void saveCemeteryTalkSuccessTwo(Context context, HpSaveCemeteryTalkSuccessTwo params, HttpResponseHandler<Object> handler) {
-        excutor.requestPost(context, "cemetery/ordered/talk/customer/save", Object.class, params,
+        excutor.requestPost(context, "marketing/order/deadinfo/save/or/update", Object.class, params,
                 handler);
     }
 
     @Override
     public void getCemeteryTalkSuccessThree(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessThree> handler) {
-        excutor.requestPost(context, "cemetery/ordered/talk/agentman/get", HrGetCemeteryTalkSuccessThree.class, params,
+        excutor.requestPost(context, "marketing/order/agentinfo/get", HrGetCemeteryTalkSuccessThree.class, params,
                 handler);
     }
 
     @Override
     public void saveCemeteryTalkSuccessThree(Context context, HpSaveCemeteryTalkSuccessThree params, HttpResponseHandler<Object> handler) {
-        excutor.requestPost(context, "cemetery/ordered/talk/agentman/save", Object.class, params,
+        excutor.requestPost(context, "marketing/order/agentinfo/save/or/update", Object.class, params,
                 handler);
     }
 
     @Override
     public void getCemeteryStructure(Context context, HpCemeteryStructureParams params, HttpResponseHandler<HrGetCemeteryStructure> handler) {
-        excutor.requestPost(context, "cemetery/structure/item/get", HrGetCemeteryStructure.class, params,
+        excutor.requestPost(context, "marketing/cemetery/structure/list", HrGetCemeteryStructure.class, params,
                 handler);
     }
 

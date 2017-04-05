@@ -24,7 +24,9 @@ import java.util.List;
 public class CetemeryLocationSelectLayoutView extends CetemeryTextSelectLayoutView {
     long locationId = -1;//填写的上一级ID
     int itemType = -1;//公墓结构项类型，值：0,公墓。1,苑，2,区，3排，4 号
+    long parkIdTemp=-1;//园区id，注：仅类型为4墓位号时，才启用园区id
     long thisLocationId = -1;//本级选中ID
+
     boolean isFirstSet = true;
     OnLocationSelectedListener onLocationSelectedListener;
     List<CemeteryStructureModel> listData = new ArrayList<>();
@@ -67,13 +69,17 @@ public class CetemeryLocationSelectLayoutView extends CetemeryTextSelectLayoutVi
         this.itemType = itemType;
     }
 
+    public void setParkIdTemp(long parkIdTemp) {
+        this.parkIdTemp = parkIdTemp;
+    }
+
     public void setLocationIdAndType(long locationId, int itemType) {
-        Log.v("this", "setLocationIdAndType");
         this.locationId = locationId;
         this.itemType = itemType;
         setIsClick();
         setStateClick(false);
     }
+
 
     public boolean isFirstSet() {
         return isFirstSet;
@@ -114,6 +120,10 @@ public class CetemeryLocationSelectLayoutView extends CetemeryTextSelectLayoutVi
         HpCemeteryStructureParams params = new HpCemeteryStructureParams();
         params.setItemId(locationId);
         params.setItemType(itemType);
+        //查号的时候传区ID
+        if(itemType==4){
+            params.setParkIdTemp(parkIdTemp);
+        }
         MHttpManagerFactory.getAccountManager().getCemeteryStructure(getContext(), params, new HttpResponseHandler<HrGetCemeteryStructure>() {
             @Override
             public void onStart() {

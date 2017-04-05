@@ -13,14 +13,14 @@ public class HpSaveCemeteryTalkSuccessOne extends BaseHttpParams {
     private String orderNum;//订单编号
     private String cemeteryName;//公墓名称
     private long cemeteryId;//公墓名称 id
-    private String garden;//	苑
-    private long gardenId;//苑 id
+    private String garden;//	墓园（苑）
+    private long tombsId;//墓园（苑）id
     private String district;//区
-    private long districtId;//区 id
+    private long parkId;//园区id
     private String platoon;//排
-    private long platoonId;//排 id
-    private String mark;//号
-    private long markId;//号 id
+    private long rowNumber;//排号
+    private String mark;//墓位
+    private long tombsPositionId;//墓位id
     private String cemeteryType;//	墓型
     private String cemeteryProperties;//	墓穴属性
     private String planSale;//挂牌价
@@ -41,36 +41,20 @@ public class HpSaveCemeteryTalkSuccessOne extends BaseHttpParams {
         this.cemeteryId = cemeteryId;
     }
 
-    public long getGardenId() {
-        return gardenId;
+    public void setTombsId(long tombsId) {
+        this.tombsId = tombsId;
     }
 
-    public void setGardenId(long gardenId) {
-        this.gardenId = gardenId;
+    public void setParkId(long parkId) {
+        this.parkId = parkId;
     }
 
-    public long getDistrictId() {
-        return districtId;
+    public void setRowNumber(long rowNumber) {
+        this.rowNumber = rowNumber;
     }
 
-    public void setDistrictId(long districtId) {
-        this.districtId = districtId;
-    }
-
-    public long getPlatoonId() {
-        return platoonId;
-    }
-
-    public void setPlatoonId(long platoonId) {
-        this.platoonId = platoonId;
-    }
-
-    public long getMarkId() {
-        return markId;
-    }
-
-    public void setMarkId(long markId) {
-        this.markId = markId;
+    public void setTombsPositionId(long tombsPositionId) {
+        this.tombsPositionId = tombsPositionId;
     }
 
     public long getOrderedId() {

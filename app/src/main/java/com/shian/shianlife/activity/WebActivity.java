@@ -163,9 +163,9 @@ public class WebActivity extends BaseActivity {
              * Uri uri = Uri.fromFile(f); intent.putExtra(Intent.EXTRA_STREAM,
              * uri); 　
              */
-        if (data == null) {
-            return;
-        }
+//        if (data == null) {
+//            return;
+//        }
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_SUBJECT, "Share");
@@ -178,7 +178,7 @@ public class WebActivity extends BaseActivity {
      * @param type （1.为点赞   2.为收藏）
      */
     private void setData(int type, int siftID) {
-        mIVCollection.setImageResource(R.drawable.zhy_find_collection_details_2);
+        mIVCollection.setImageResource(R.drawable.zhy_find_collection_2);
         mIVCollection.setClickable(false);
         ToastUtils.show(WebActivity.this, "收藏成功");
         RequestParams params = new RequestParams();

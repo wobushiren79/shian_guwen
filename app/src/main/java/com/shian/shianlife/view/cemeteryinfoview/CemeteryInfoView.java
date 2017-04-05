@@ -233,6 +233,7 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
         mSelectLocation2.setItemType(2);
         mSelectLocation3.setItemType(3);
         mSelectLocation4.setItemType(4);
+
     }
 
     @Override
@@ -279,6 +280,7 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
                 } else {
                     mSelectLocation4.setListDataClear();
                 }
+                mSelectLocation4.setParkIdTemp(mSelectLocation2.getThisLocationId());
                 mSelectLocation4.setLocationId(thisID);
                 break;
             case 4:
@@ -316,13 +318,13 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
         params.setCemeteryName(mSelectCemeteryName.getSelectedData());
         params.setCemeteryId(mSelectCemeteryName.getThisLocationId());
         params.setGarden(mSelectLocation1.getSelectedData());
-        params.setGardenId(mSelectLocation1.getThisLocationId());
+        params.setTombsId(mSelectLocation1.getThisLocationId());
         params.setDistrict(mSelectLocation2.getSelectedData());
-        params.setDistrictId(mSelectLocation2.getThisLocationId());
+        params.setParkId(mSelectLocation2.getThisLocationId());
         params.setPlatoon(mSelectLocation3.getSelectedData());
-        params.setPlatoonId(mSelectLocation3.getThisLocationId());
+        params.setRowNumber(mSelectLocation3.getThisLocationId());
         params.setMark(mSelectLocation4.getSelectedData());
-        params.setMarkId(mSelectLocation4.getThisLocationId());
+        params.setTombsPositionId(mSelectLocation4.getThisLocationId());
         params.setCemeteryType(mSelectCemeteryType.getSelectedData());
         params.setCemeteryProperties(mSelectCemeteryAttribute.getSelectedData());
         params.setPlanSale(mETPlanToMoney.getText().toString());

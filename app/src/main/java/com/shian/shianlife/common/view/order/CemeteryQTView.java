@@ -37,11 +37,11 @@ import com.shian.shianlife.provide.params.HpCetemeryAcceptParams;
 import com.shian.shianlife.provide.params.HpCetemeryRejectParams;
 import com.shian.shianlife.provide.params.HpGetOrderListParams;
 import com.shian.shianlife.provide.result.HrGetCemeteryListData;
+import com.shian.shianlife.thisenum.CemeteryOrderInfoStateEnum;
 import com.shian.shianlife.thisenum.TalkEditInfoEnum;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 @SuppressLint("InflateParams")
@@ -50,7 +50,7 @@ public class CemeteryQTView extends BaseOrderView {
     public final static String TALK_INFO_STATE = "TalkInfoState";//跳转到洽谈信息状态（0，新建。1，查询详情）
     public final static String TALK_INFO_ID = "TalkInfoId";//跳转到洽谈信息所需预约单ID
     public final static String TALK_INFO_ORDER_ID = "TalkInfoOrderId";//跳转到洽谈信息所需订单ID
-    public final static String TALK_CHANGE_INFO_STATE="TalkChangeInfoState";//修改购墓信息的人（1。新建下修改，2 售后下修改）
+    public final static String TALK_CHANGE_INFO_STATE = "TalkChangeInfoState";//修改购墓信息的人（1。新建下修改，2 售后下修改）
     public final static String BUY_INFO = "BuyInfo";//跳转到定墓资料填写（0，购墓信息。1，使用者信息，2，经办人信息）
 
     public final static String[] CEMETERY_LISTTYPE_1 = {"客户姓名", "联系电话", "预约地址", "预约时间", "预约参观公墓"};
@@ -100,7 +100,7 @@ public class CemeteryQTView extends BaseOrderView {
     }
 
     private void clearData() {
-        page = 0;
+        page = 1;
         listData.clear();
     }
 
@@ -118,7 +118,7 @@ public class CemeteryQTView extends BaseOrderView {
             public void onSuccess(HrGetCemeteryListData result) {
                 if (result.getItems() != null) {
                     listData.addAll(result.getItems());
-                    if (result.getItems().size() == 0 && page != 0) {
+                    if (result.getItems().size() == 0 && page != 1) {
                         page--;
                         mSwipeRefreshHelper.loadMoreComplete(false);
                     }
@@ -217,7 +217,7 @@ public class CemeteryQTView extends BaseOrderView {
 
                 holder.tv_line_6 = (TextView) convertView.findViewById(R.id.line_6);
                 holder.tv_line_5 = (TextView) convertView.findViewById(R.id.line_5);
-                holder.tv_tag= (TextView) convertView.findViewById(R.id.tv_tag);
+                holder.tv_tag = (TextView) convertView.findViewById(R.id.tv_tag);
 
                 convertView.setTag(holder);
             } else {
@@ -241,7 +241,7 @@ public class CemeteryQTView extends BaseOrderView {
                         queryDetailsInfo(data);
                     } else if (view == holder.btTalkFail) {
                         //填写洽谈失败信息
-                        queryTalkInfo(0,data);
+                        queryTalkInfo(0, data);
                     } else if (view == holder.btSubmit) {
                         //填写定墓信息
                         fillCetemeryInfo(data);
@@ -258,7 +258,7 @@ public class CemeteryQTView extends BaseOrderView {
             String[] nameStrings = new String[0];
             final List<String> contentList = new ArrayList<String>();
 
-            switch (data.getBespeakStatus()){
+            switch (data.getBespeakStatus()) {
                 case 1:
                     holder.tv_tag.setText("接单中");
                     break;
@@ -276,11 +276,11 @@ public class CemeteryQTView extends BaseOrderView {
                     break;
             }
             if (data.getBespeakStatus() == 1) {
-                if (data.getIsEditInfo()==TalkEditInfoEnum.canTalk.getCode()) {
+                if (data.getIsEditInfo() == TalkEditInfoEnum.canTalk.getCode()) {
                     holder.llStateAccept.setVisibility(VISIBLE);
                     holder.llStateTalk.setVisibility(GONE);
                     holder.llDetailes.setVisibility(GONE);
-                }else{
+                } else {
                     holder.llStateAccept.setVisibility(GONE);
                     holder.llStateTalk.setVisibility(GONE);
                     holder.llDetailes.setVisibility(GONE);
@@ -297,11 +297,11 @@ public class CemeteryQTView extends BaseOrderView {
                 holder.tv_line_6.setVisibility(GONE);
 
             } else if (data.getBespeakStatus() == 2 || data.getBespeakStatus() == 3) {
-                if (data.getIsEditInfo()== TalkEditInfoEnum.canTalk.getCode()) {
+                if (data.getIsEditInfo() == TalkEditInfoEnum.canTalk.getCode()) {
                     holder.llStateAccept.setVisibility(GONE);
                     holder.llStateTalk.setVisibility(VISIBLE);
                     holder.llDetailes.setVisibility(GONE);
-                }else{
+                } else {
                     holder.llStateAccept.setVisibility(GONE);
                     holder.llStateTalk.setVisibility(GONE);
                     holder.llDetailes.setVisibility(GONE);
@@ -320,11 +320,11 @@ public class CemeteryQTView extends BaseOrderView {
                 holder.tv_line_5.setVisibility(VISIBLE);
                 holder.tv_line_6.setVisibility(VISIBLE);
             } else {
-                if (data.getIsEditInfo()==1) {
+                if (data.getIsEditInfo() == 1) {
                     holder.llStateAccept.setVisibility(GONE);
                     holder.llStateTalk.setVisibility(GONE);
                     holder.llDetailes.setVisibility(VISIBLE);
-                }else{
+                } else {
                     holder.llStateAccept.setVisibility(GONE);
                     holder.llStateTalk.setVisibility(GONE);
                     holder.llDetailes.setVisibility(GONE);
@@ -360,8 +360,8 @@ public class CemeteryQTView extends BaseOrderView {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(getContext(), NewRoutePlanActivity.class);
-                                intent.putExtra("LocationType",-1);
-                                intent.putExtra("ConsultId",-1);
+                                intent.putExtra("LocationType", -1);
+                                intent.putExtra("ConsultId", -1);
                                 intent.putExtra("RoutePlanLocation", contentList.get(finalI));
                                 getContext().startActivity(intent);
                             }
@@ -385,13 +385,13 @@ public class CemeteryQTView extends BaseOrderView {
                     phoneTV.setVisibility(GONE);
                 }
 
-                if (i == (nameStrings.length-1)&&data.getTalkFailResult()==3) {
+                if (i == (nameStrings.length - 1) && data.getTalkFailResult() == 3) {
                     detailsBT.setVisibility(VISIBLE);
                     detailsBT.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             //订单详情
-                            queryTalkInfo(1,data);
+                            queryTalkInfo(1, data);
                         }
                     });
                 } else {
@@ -556,8 +556,8 @@ public class CemeteryQTView extends BaseOrderView {
      */
     private void queryDetailsInfo(CemeteryOrderModel model) {
         Intent intent = new Intent(getContext(), InfoDetailsActivity.class);
-        intent.putExtra(TALK_INFO_ID,model.getBespeakId());
-        intent.putExtra(TALK_INFO_ORDER_ID,model.getOrderedId());
+        intent.putExtra(TALK_INFO_ID, model.getBespeakId());
+        intent.putExtra(TALK_INFO_ORDER_ID, model.getOrderedId());
         getContext().startActivity(intent);
     }
 
@@ -594,28 +594,29 @@ public class CemeteryQTView extends BaseOrderView {
      * 拒单
      */
     private void rejectOrder(CemeteryOrderModel model) {
-        HpCetemeryRejectParams params = new HpCetemeryRejectParams();
-        params.setBespeakId(model.getBespeakId());
-        params.setBespeakAssignId(model.getBespeakAssignId());
-        MHttpManagerFactory.getAccountManager().rejectCemetery(getContext(),
-                params, new HttpResponseHandler<Object>() {
-
-                    @Override
-                    public void onSuccess(Object result) {
-                        refresh();
-                        ToastUtils.show(getContext(), "拒单成功");
-                    }
-
-                    @Override
-                    public void onStart() {
-
-                    }
-
-                    @Override
-                    public void onError(String message) {
-//                      ToastUtils.show(getContext(), "拒单失败");
-                    }
-                });
+//        HpCetemeryRejectParams params = new HpCetemeryRejectParams();
+//        params.setBespeakId(model.getBespeakId());
+//        params.setBespeakAssignId(model.getBespeakAssignId());
+//        MHttpManagerFactory.getAccountManager().rejectCemetery(getContext(),
+//                params, new HttpResponseHandler<Object>() {
+//
+//                    @Override
+//                    public void onSuccess(Object result) {
+//                        refresh();
+//                        ToastUtils.show(getContext(), "拒单成功");
+//                    }
+//
+//                    @Override
+//                    public void onStart() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(String message) {
+////                      ToastUtils.show(getContext(), "拒单失败");
+//                    }
+//                });
+        ToastUtils.show(getContext(), "拒单失败");
     }
 
     /**
@@ -623,19 +624,15 @@ public class CemeteryQTView extends BaseOrderView {
      */
     private void fillCetemeryInfo(CemeteryOrderModel model) {
         Intent intent = new Intent(getContext(), BuyCemeteryInfoActivity.class);
-        intent.putExtra(TALK_CHANGE_INFO_STATE,1);
-        intent.putExtra(TALK_INFO_ID,model.getBespeakId());
-        intent.putExtra(TALK_INFO_ORDER_ID,model.getOrderedId());
-        switch (model.getInfoStatus()) {
-            case 0:
-                intent.putExtra(BUY_INFO, 0);
-                break;
-            case 1:
-                intent.putExtra(BUY_INFO, 1);
-                break;
-            case 2:
-                intent.putExtra(BUY_INFO, 2);
-                break;
+        intent.putExtra(TALK_CHANGE_INFO_STATE, 1);
+        intent.putExtra(TALK_INFO_ID, model.getBespeakId());
+        intent.putExtra(TALK_INFO_ORDER_ID, model.getOrderedId());
+        if (model.getInfoStatus() == CemeteryOrderInfoStateEnum.notFillInfo.getCode()) {
+            intent.putExtra(BUY_INFO, CemeteryOrderInfoStateEnum.notFillInfo.getCode());
+        } else if (model.getInfoStatus() == CemeteryOrderInfoStateEnum.fillCemeteryOrdered.getCode()) {
+            intent.putExtra(BUY_INFO, CemeteryOrderInfoStateEnum.fillCemeteryOrdered.getCode());
+        } else if (model.getInfoStatus() == CemeteryOrderInfoStateEnum.fillCemeteryUserInfo.getCode()) {
+            intent.putExtra(BUY_INFO, CemeteryOrderInfoStateEnum.fillCemeteryUserInfo.getCode());
         }
         getContext().startActivity(intent);
     }
@@ -645,11 +642,11 @@ public class CemeteryQTView extends BaseOrderView {
      *
      * @param value (0为填写，1为查询)
      */
-    private void queryTalkInfo(int value,CemeteryOrderModel model) {
+    private void queryTalkInfo(int value, CemeteryOrderModel model) {
         Intent intent = new Intent(getContext(), CemeteryTalkFailActivity.class);
         intent.putExtra(TALK_INFO_STATE, value);
-        intent.putExtra(TALK_INFO_ID,model.getBespeakId());
-        intent.putExtra(TALK_INFO_ORDER_ID,model.getOrderedId());
+        intent.putExtra(TALK_INFO_ID, model.getBespeakId());
+        intent.putExtra(TALK_INFO_ORDER_ID, model.getOrderedId());
 
         getContext().startActivity(intent);
     }
