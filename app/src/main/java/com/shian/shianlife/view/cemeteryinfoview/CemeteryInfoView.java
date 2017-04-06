@@ -18,6 +18,7 @@ import com.shian.shianlife.provide.params.HpCemeteryIdParams;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessOne;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessOne;
+import com.shian.shianlife.provide.result.HrOrderIdResult;
 import com.shian.shianlife.view.CetemeryLocationSelectLayoutView;
 import com.shian.shianlife.view.CetemeryTextSelectLayoutView;
 import com.shian.shianlife.view.SelectData;
@@ -61,7 +62,6 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
     List<String> cemeteryAttributeList = new ArrayList<>();
     List<String> payStateList = new ArrayList<>();
 
-
     public CemeteryInfoView(Context context) {
         this(context, null);
     }
@@ -71,6 +71,7 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
         initData();
         initView();
     }
+
 
     @Override
     public void getDataStart() {
@@ -329,7 +330,7 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
         params.setCemeteryProperties(mSelectCemeteryAttribute.getSelectedData());
         params.setPlanSale(mETPlanToMoney.getText().toString());
         params.setSaleMoney(mETSaleToMoney.getText().toString());
-        params.setPayState(mSelectPayState.getSelectedData());
+//        params.setPayState(mSelectPayState.getSelectedData());
         params.setMoneyPay(mETMoney.getText().toString());
         params.setCemeteryReceive(mETCemeteryMan.getText().toString());
         params.setFreeService(mETFreeService.getText().toString());
@@ -380,10 +381,10 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
             ToastUtils.show(getContext(), "成交价不能为空");
             return;
         }
-        if (params.getPayState().isEmpty()) {
-            ToastUtils.show(getContext(), "支付情况");
-            return;
-        }
+//        if (params.getPayState().isEmpty()) {
+//            ToastUtils.show(getContext(), "支付情况");
+//            return;
+//        }
         if (params.getMoneyPay().isEmpty()) {
             ToastUtils.show(getContext(), "金额不能为空");
             return;
@@ -400,24 +401,27 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
             ToastUtils.show(getContext(), "自选附属服务不能为空");
             return;
         }
-        MHttpManagerFactory.getAccountManager().saveCemeteryTalkSuccessOne(getContext(), params, new HttpResponseHandler<Object>() {
+        MHttpManagerFactory.getAccountManager().saveCemeteryTalkSuccessOne(getContext(), params, new HttpResponseHandler<HrOrderIdResult>() {
             @Override
             public void onStart() {
 
             }
 
             @Override
-            public void onSuccess(Object result) {
+            public void onSuccess(HrOrderIdResult result) {
                 ToastUtils.show(getContext(), "数据提交成功");
                 CemeteryInfoView.super.saveData();
+                if(infoCallBack!=null)
+                infoCallBack.getOrderId(result.getOrderId());
             }
 
             @Override
             public void onError(String message) {
-                  Utils.LogVPrint(message);
+
             }
         });
 
     }
+
 
 }

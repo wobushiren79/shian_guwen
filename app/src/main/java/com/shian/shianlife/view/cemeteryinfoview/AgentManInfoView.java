@@ -66,6 +66,7 @@ public class AgentManInfoView extends BaseInfoView implements CetemeryTextSelect
         }
         HpCemeteryIdParams params = new HpCemeteryIdParams();
         params.setBespeakId(beSpeakId);
+        params.setOrderId(orderId);
         MHttpManagerFactory.getAccountManager().getCemeteryTalkSuccessThree(getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessThree>() {
             @Override
             public void onStart() {
@@ -153,7 +154,7 @@ public class AgentManInfoView extends BaseInfoView implements CetemeryTextSelect
         HpSaveCemeteryTalkSuccessThree params = new HpSaveCemeteryTalkSuccessThree();
         params.setBespeakId(beSpeakId);
         params.setSaveType(changeState);
-        params.setOrderedId(orderId);
+        params.setOrderId(orderId);
         params.setAgentmanName(mETAgentManName.getText().toString());
         params.setAgentmanPhone(mETAgentManPhone.getText().toString());
         params.setRelation(mSelectRelation.getSelectedData());
@@ -162,17 +163,7 @@ public class AgentManInfoView extends BaseInfoView implements CetemeryTextSelect
         params.setAgentmanEmail(mETAgentManEmail.getText().toString());
         params.setRemark(mETAgentManRemark.getText().toString());
 
-        Utils.LogVPrint("BespeakId" + params.getBespeakId());
-        Utils.LogVPrint("OrderedId" + params.getOrderedId());
-        Utils.LogVPrint("SaveType" + params.getSaveType());
-        Utils.LogVPrint("AgentmanName" + params.getAgentmanName());
-        Utils.LogVPrint("AgentmanPhone" + params.getAgentmanPhone());
-        Utils.LogVPrint("Relation" + params.getRelation());
-        Utils.LogVPrint("AgentmanLocation" + params.getAgentmanLocation());
-        Utils.LogVPrint("AgentmanCardId" + params.getAgentmanCardId());
-        Utils.LogVPrint("AgentmanEmail" + params.getAgentmanEmail());
-        Utils.LogVPrint("Remark" + params.getRemark());
-        if (params.getBespeakId() == -1 || params.getSaveType() == -1 || params.getOrderedId() == -1) {
+        if (params.getBespeakId() == -1 || params.getSaveType() == -1 || params.getOrderId() == -1) {
             ToastUtils.show(getContext(), "加载数据异常，请重新加载");
             return;
         }

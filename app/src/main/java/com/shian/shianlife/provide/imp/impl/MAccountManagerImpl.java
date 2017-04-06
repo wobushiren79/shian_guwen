@@ -82,6 +82,7 @@ import com.shian.shianlife.provide.result.HrGetWaitServicePostData;
 import com.shian.shianlife.provide.result.HrLoginResult;
 import com.shian.shianlife.provide.result.HrMessageList;
 import com.shian.shianlife.provide.result.HrOrderFeedback;
+import com.shian.shianlife.provide.result.HrOrderIdResult;
 import com.shian.shianlife.provide.result.HrOrderInvoic;
 import com.shian.shianlife.provide.result.HrOrderItenList;
 import com.shian.shianlife.provide.result.HrOrderItenNote;
@@ -720,8 +721,8 @@ public class MAccountManagerImpl implements MAccountManager {
     }
 
     @Override
-    public void saveCemeteryTalkSuccessOne(Context context, HpSaveCemeteryTalkSuccessOne params, HttpResponseHandler<Object> handler) {
-        excutor.requestPost(context, "marketing/order/buycemetery/save/or/update", Object.class, params,
+    public void saveCemeteryTalkSuccessOne(Context context, HpSaveCemeteryTalkSuccessOne params, HttpResponseHandler<HrOrderIdResult> handler) {
+        excutor.requestPost(context, "marketing/order/buycemetery/save/or/update", HrOrderIdResult.class, params,
                 handler);
     }
 

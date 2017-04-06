@@ -9,7 +9,7 @@ import com.shian.shianlife.provide.base.BaseHttpParams;
 public class HpSaveCemeteryTalkSuccessTwo extends BaseHttpParams {
 
     private long bespeakId;//咨询ID
-    private  long orderedId;//订单编号
+    private  long orderId;//订单编号
     private int saveType;//提交人的类型（1，洽谈人。2，售后。如果是售后，那么这个提交只能进行一次）
     private String deadmanOneName;//使用者1
     private String deadmanTwoName;//使用者2
@@ -25,12 +25,12 @@ public class HpSaveCemeteryTalkSuccessTwo extends BaseHttpParams {
     private String deadmanTwoDeadTime;//使用者2死亡时间
     private String remark;//备注
 
-    public long getOrderedId() {
-        return orderedId;
+    public long getOrderId() {
+        return orderId;
     }
 
-    public void setOrderedId(long orderedId) {
-        this.orderedId = orderedId;
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
     }
 
     public long getBespeakId() {

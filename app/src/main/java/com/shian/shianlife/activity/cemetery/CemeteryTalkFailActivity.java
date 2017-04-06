@@ -90,7 +90,7 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
                 Utils.LogVPrint( "getAshLocation:" + result.getAshLocation());
                 Utils.LogVPrint( "getRelation:" + result.getRelation());
                 Utils.LogVPrint( "getTalkPoint:" + result.getTalkPoint());
-                Utils.LogVPrint( "isTalkResult:" + result.isTalkResult());
+                Utils.LogVPrint( "isTalkResult:" + result.getTalkResult());
                 Utils.LogVPrint( "getTrafficWay:" + result.getTrafficWay());
                 Utils.LogVPrint( "getOrderTime:" + result.getOrderTime());
                 Utils.LogVPrint( "getPersonNum:" + result.getPersonNum());
@@ -105,7 +105,7 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
                 mMapSelect1.setLocation(result.getAshLocation());
                 mSelectRelation.setString(result.getRelation());
                 mETTalkPoint.setText(result.getTalkPoint());
-                if (result.isTalkResult()) {
+                if (result.getTalkResult()==1) {
                     mSelectResult.setName("预约二次洽谈");
                 } else {
                     mSelectResult.setName("未预约");
@@ -139,9 +139,9 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
         params.setRelation(mSelectRelation.getSelectedData());
         params.setTalkPoint(mETTalkPoint.getText().toString());
         if (mSelectResult.getSelectedData().equals("预约二次洽谈")) {
-            params.setTalkResult(true);
+            params.setTalkResult(1);
         } else {
-            params.setTalkResult(false);
+            params.setTalkResult(0);
         }
         params.setRemark(mETRemark.getText().toString());
 
@@ -176,7 +176,7 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
         }
 
         //如果预约二次洽谈
-        if (params.isTalkResult()) {
+        if (params.getTalkResult()==1) {
             params.setTrafficWay(mETTrafficWay.getText().toString());
             params.setOrderTime(mTVTime.getText().toString());
             params.setPersonNum(mETPersonNum.getText().toString());
@@ -207,7 +207,7 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
         Utils.LogVPrint( "AshLocation:" + params.getAshLocation());
         Utils.LogVPrint( "Relation:" + params.getRelation());
         Utils.LogVPrint( "TalkPoint:" + params.getTalkPoint());
-        Utils.LogVPrint( "TalkResult:" + params.isTalkResult());
+        Utils.LogVPrint( "TalkResult:" + params.getTalkResult());
         Utils.LogVPrint( "TrafficWay:" + params.getTrafficWay());
         Utils.LogVPrint( "OrderTime:" + params.getOrderTime());
         Utils.LogVPrint( "PersonNum:" + params.getPersonNum());

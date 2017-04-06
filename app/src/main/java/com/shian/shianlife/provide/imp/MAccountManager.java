@@ -79,6 +79,7 @@ import com.shian.shianlife.provide.result.HrGetWaitServicePostData;
 import com.shian.shianlife.provide.result.HrLoginResult;
 import com.shian.shianlife.provide.result.HrMessageList;
 import com.shian.shianlife.provide.result.HrOrderFeedback;
+import com.shian.shianlife.provide.result.HrOrderIdResult;
 import com.shian.shianlife.provide.result.HrOrderInvoic;
 import com.shian.shianlife.provide.result.HrOrderItenList;
 import com.shian.shianlife.provide.result.HrOrderItenNote;
@@ -793,7 +794,7 @@ public interface MAccountManager extends HttpManager {
     /**
      * 保存公墓洽谈成功第一步信息
      */
-    public void saveCemeteryTalkSuccessOne(Context context, HpSaveCemeteryTalkSuccessOne params, HttpResponseHandler<Object> handler);
+    public void saveCemeteryTalkSuccessOne(Context context, HpSaveCemeteryTalkSuccessOne params, HttpResponseHandler<HrOrderIdResult> handler);
 
     /**
      * 获取公墓洽谈成功第二步信息

@@ -75,6 +75,7 @@ public class DeadManInfoView extends BaseInfoView implements CetemeryTextSelectL
         }
         HpCemeteryIdParams params = new HpCemeteryIdParams();
         params.setBespeakId(beSpeakId);
+        params.setOrderId(orderId);
         MHttpManagerFactory.getAccountManager().getCemeteryTalkSuccessTwo(getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessTwo>() {
             @Override
             public void onStart() {
@@ -246,7 +247,7 @@ public class DeadManInfoView extends BaseInfoView implements CetemeryTextSelectL
 
         HpSaveCemeteryTalkSuccessTwo params = new HpSaveCemeteryTalkSuccessTwo();
         params.setBespeakId(beSpeakId);
-        params.setOrderedId(orderId);
+        params.setOrderId(orderId);
         params.setSaveType(changeState);
         params.setDeadmanOneName(mETDeadManName1.getText().toString());
         params.setDeadmanOneAge(mETDeadManName1.getText().toString());
@@ -263,7 +264,7 @@ public class DeadManInfoView extends BaseInfoView implements CetemeryTextSelectL
         params.setRemark(mETRemark.getText().toString());
 
         Utils.LogVPrint("DeadmanOneName:" + params.getDeadmanOneName());
-        Utils.LogVPrint("OrderedId" + params.getOrderedId());
+        Utils.LogVPrint("OrderedId" + params.getOrderId());
         Utils.LogVPrint("DeadmanOneAge:" + params.getDeadmanOneAge());
         Utils.LogVPrint("DeadmanOneSex:" + params.getDeadmanOneSex());
         Utils.LogVPrint("DeadmanOneState:" + params.getDeadmanOneState());
@@ -277,7 +278,7 @@ public class DeadManInfoView extends BaseInfoView implements CetemeryTextSelectL
         Utils.LogVPrint("DeadmanTwoDeadTime:" + params.getDeadmanTwoDeadTime());
         Utils.LogVPrint("getRemark" + params.getRemark());
 
-        if (params.getBespeakId() == -1 || params.getSaveType() == -1 || params.getOrderedId() == -1) {
+        if (params.getBespeakId() == -1 || params.getSaveType() == -1 || params.getOrderId() == -1) {
             ToastUtils.show(getContext(), "数据加载异常，请重新载入");
             return;
         }

@@ -557,7 +557,7 @@ public class CemeteryQTView extends BaseOrderView {
     private void queryDetailsInfo(CemeteryOrderModel model) {
         Intent intent = new Intent(getContext(), InfoDetailsActivity.class);
         intent.putExtra(TALK_INFO_ID, model.getBespeakId());
-        intent.putExtra(TALK_INFO_ORDER_ID, model.getOrderedId());
+        intent.putExtra(TALK_INFO_ORDER_ID, model.getOrderId());
         getContext().startActivity(intent);
     }
 
@@ -626,7 +626,7 @@ public class CemeteryQTView extends BaseOrderView {
         Intent intent = new Intent(getContext(), BuyCemeteryInfoActivity.class);
         intent.putExtra(TALK_CHANGE_INFO_STATE, 1);
         intent.putExtra(TALK_INFO_ID, model.getBespeakId());
-        intent.putExtra(TALK_INFO_ORDER_ID, model.getOrderedId());
+        intent.putExtra(TALK_INFO_ORDER_ID, model.getOrderId());
         if (model.getInfoStatus() == CemeteryOrderInfoStateEnum.notFillInfo.getCode()) {
             intent.putExtra(BUY_INFO, CemeteryOrderInfoStateEnum.notFillInfo.getCode());
         } else if (model.getInfoStatus() == CemeteryOrderInfoStateEnum.fillCemeteryOrdered.getCode()) {
@@ -646,7 +646,7 @@ public class CemeteryQTView extends BaseOrderView {
         Intent intent = new Intent(getContext(), CemeteryTalkFailActivity.class);
         intent.putExtra(TALK_INFO_STATE, value);
         intent.putExtra(TALK_INFO_ID, model.getBespeakId());
-        intent.putExtra(TALK_INFO_ORDER_ID, model.getOrderedId());
+        intent.putExtra(TALK_INFO_ORDER_ID, model.getOrderId());
 
         getContext().startActivity(intent);
     }

@@ -17,7 +17,7 @@ public class HpSaveCemeteryTalkData extends BaseHttpParams {
     private String ashLocation;//骨灰当前所在地
     private String relation;//联系人是使用者的
     private String talkPoint;//	洽谈要点
-    private boolean talkResult;//	洽谈结果(true:要预约二次洽谈，false:未预约)
+    private int talkResult;//	洽谈结果(true:要预约二次洽谈，false:未预约)
     private String orderTime;//预约时间
     private String personNum;//人数
     private String trafficWay;//	交通方式
@@ -96,11 +96,11 @@ public class HpSaveCemeteryTalkData extends BaseHttpParams {
         this.talkPoint = talkPoint;
     }
 
-    public boolean isTalkResult() {
+    public int getTalkResult() {
         return talkResult;
     }
 
-    public void setTalkResult(boolean talkResult) {
+    public void setTalkResult(int talkResult) {
         this.talkResult = talkResult;
     }
 

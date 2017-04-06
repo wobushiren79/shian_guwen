@@ -6,7 +6,7 @@ package com.shian.shianlife.provide.model;
 
 public class CemeteryOrderModel {
     private long bespeakId;//	咨询ID
-    private long orderedId;//订单ID
+    private long orderId;//订单ID
     private Integer bespeakStatus;//咨询状态:1：未接单，2：已接单，3：洽谈失败（未购墓），4：洽谈成功（购墓），5，服务结束
     private Integer talkFailResult;//"洽谈失败的结果：1.未洽谈，2洽谈失败，3，预约2次洽谈"
     private String customerName;//客户姓名
@@ -27,12 +27,12 @@ public class CemeteryOrderModel {
     private long bespeakAssignId;//咨询指派ID
     private Integer isEditInfo;//是否可编辑（1:可以编辑 0：不可编辑 ）
 
-    public long getOrderedId() {
-        return orderedId;
+    public long getOrderId() {
+        return orderId;
     }
 
-    public void setOrderedId(long orderedId) {
-        this.orderedId = orderedId;
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
     }
 
     public long getBespeakId() {

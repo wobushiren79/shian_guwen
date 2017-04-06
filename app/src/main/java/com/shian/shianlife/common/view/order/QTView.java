@@ -482,7 +482,7 @@ public class QTView extends BaseOrderView {
                     tvPay.setTextColor(getContext().getResources().getColor(R.color.zhy_text_color_12));
                     tvPay.setText("定金已付");
                 } else {
-                    shift.setVisibility(View.GONE);
+//                    shift.setVisibility(View.GONE);
                     tvPay.setBackgroundResource(R.drawable.zhy_button_state_item_yellow);
                     tvPay.setTextColor(getContext().getResources().getColor(R.color.white));
                     tvPay.setText("支付定金");
@@ -532,12 +532,12 @@ public class QTView extends BaseOrderView {
                     edit.setVisibility(View.GONE);
                 }
                 if (model.isShowFinishTalk()) {
-                    if (model.isHasPrepay()) {
+//                    if (model.isHasPrepay()) {
                         close.setVisibility(View.VISIBLE);
                         close.setOnClickListener(clickListener);
-                    } else {
-                        close.setVisibility(View.GONE);
-                    }
+//                    } else {
+//                        close.setVisibility(View.GONE);
+//                    }
                     if (model.getOrderId() == 0) {
                         close.setVisibility(View.VISIBLE);
                         close.setOnClickListener(clickListener);

@@ -46,6 +46,7 @@ public class BaseInfoView extends LinearLayout {
 
     public interface InfoCallBack{
         void SaveSuccess();
+        void getOrderId(long orderId);
     }
     public void getDataStart(){
 

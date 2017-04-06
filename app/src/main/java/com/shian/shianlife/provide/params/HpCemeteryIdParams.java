@@ -8,6 +8,15 @@ import com.shian.shianlife.provide.base.BaseHttpParams;
 
 public class HpCemeteryIdParams extends BaseHttpParams {
     long bespeakId;
+    long orderId;
+
+    public long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
+    }
 
     public long getBespeakId() {
         return bespeakId;

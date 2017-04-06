@@ -17,9 +17,12 @@ import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.model.CemeteryNameModel;
+import com.shian.shianlife.provide.model.CemeteryStructureModel;
+import com.shian.shianlife.provide.params.HpCemeteryStructureParams;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpSaveCemeteryBuildData;
 import com.shian.shianlife.provide.result.HrGetCemeteryBuildData;
+import com.shian.shianlife.provide.result.HrGetCemeteryStructure;
 import com.shian.shianlife.view.CetemeryTextSelectLayoutView;
 import com.shian.shianlife.view.MapSelectLayoutView;
 import com.shian.shianlife.view.SelectData;
@@ -41,7 +44,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
     EditText mETPersonNum;
     Button mBTSubmit;
 
-    List<CemeteryNameModel> ctemeryNameList = new ArrayList<>();
+    List<CemeteryStructureModel> ctemeryNameList = new ArrayList<>();
     List<String> trafficeWayList = new ArrayList<>();
 
 
@@ -88,24 +91,52 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         getData();
     }
 
-    private void getData() {
-        MHttpManagerFactory.getAccountManager().getCemeteryBuildData(BuildNewOrderActivity.this, new HttpResponseHandler<HrGetCemeteryBuildData>() {
+//    private void getData() {
+//        MHttpManagerFactory.getAccountManager().getCemeteryBuildData(BuildNewOrderActivity.this, new HttpResponseHandler<HrGetCemeteryBuildData>() {
+//            @Override
+//            public void onStart() {
+//
+//            }
+//
+//            @Override
+//            public void onSuccess(HrGetCemeteryBuildData result) {
+//                if (result != null) {
+//                    ctemeryNameList = result.getCemeteryLocationList();
+//                    List<String> list = new ArrayList<String>();
+//                    for (CemeteryNameModel model : ctemeryNameList) {
+//                        list.add(model.getCemeteryName());
+//                    }
+//                    mCetemeryNameSelectLayout.setData(list, 0, BuildNewOrderActivity.this);
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onError(String message) {
+//
+//            }
+//        });
+//    }
+    public void getData() {
+        HpCemeteryStructureParams params = new HpCemeteryStructureParams();
+//        params.setItemId(locationId);
+        params.setItemType(0);
+        MHttpManagerFactory.getAccountManager().getCemeteryStructure(BuildNewOrderActivity.this, params, new HttpResponseHandler<HrGetCemeteryStructure>() {
             @Override
             public void onStart() {
 
             }
 
             @Override
-            public void onSuccess(HrGetCemeteryBuildData result) {
+            public void onSuccess(HrGetCemeteryStructure result) {
                 if (result != null) {
-                    ctemeryNameList = result.getCemeteryLocationList();
+                    ctemeryNameList = result.getItems();
                     List<String> list = new ArrayList<String>();
-                    for (CemeteryNameModel model : ctemeryNameList) {
-                        list.add(model.getCemeteryName());
+                    for (CemeteryStructureModel model : ctemeryNameList) {
+                        list.add(model.getName());
                     }
                     mCetemeryNameSelectLayout.setData(list, 0, BuildNewOrderActivity.this);
                 }
-
             }
 
             @Override
@@ -114,7 +145,6 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
             }
         });
     }
-
     private void setRoles() {
         //赋予权限
         for (int i = 0; i < CemeteryFragment.LOGIN_ROLES_LIST.size(); i++) {

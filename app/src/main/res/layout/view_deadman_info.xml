@@ -254,7 +254,6 @@
             android:layout_height="@dimen/dimen_80dp"
             android:layout_weight="1"
             android:background="@drawable/bg_cemetery_item_et_1"
-            android:inputType="number"
             android:padding="@dimen/dimen_20dp" />
     </LinearLayout>
 </LinearLayout>

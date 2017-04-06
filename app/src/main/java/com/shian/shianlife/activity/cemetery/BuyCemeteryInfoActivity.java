@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.view.order.CemeteryQTView;
 import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.view.cemeteryinfoview.AgentManInfoView;
@@ -20,11 +21,11 @@ import static com.shian.shianlife.common.view.order.CemeteryQTView.TALK_CHANGE_I
 import static com.shian.shianlife.common.view.order.CemeteryQTView.TALK_INFO_ID;
 import static com.shian.shianlife.common.view.order.CemeteryQTView.TALK_INFO_ORDER_ID;
 
-public class BuyCemeteryInfoActivity extends BaseActivity implements BaseInfoView.InfoCallBack{
+public class BuyCemeteryInfoActivity extends BaseActivity implements BaseInfoView.InfoCallBack {
     int inType = -1;
-    int changeState=-1;//修改信息（1为洽谈 2为售后）
-    long beSpeakId=-1;
-    long orderId=-1;
+    int changeState = -1;//修改信息（1为洽谈 2为售后）
+    long beSpeakId = -1;
+    long orderId = -1;
     LinearLayout mLLContent;
 
 
@@ -37,9 +38,9 @@ public class BuyCemeteryInfoActivity extends BaseActivity implements BaseInfoVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy_cemetery_info);
         inType = getIntent().getIntExtra(BUY_INFO, -1);
-        changeState=getIntent().getIntExtra(TALK_CHANGE_INFO_STATE,-1);
-        beSpeakId=getIntent().getLongExtra(TALK_INFO_ID,-1);
-        orderId=getIntent().getLongExtra(TALK_INFO_ORDER_ID,-1);
+        changeState = getIntent().getIntExtra(TALK_CHANGE_INFO_STATE, -1);
+        beSpeakId = getIntent().getLongExtra(TALK_INFO_ID, -1);
+        orderId = getIntent().getLongExtra(TALK_INFO_ORDER_ID, -1);
         initView();
         initData();
     }
@@ -60,17 +61,17 @@ public class BuyCemeteryInfoActivity extends BaseActivity implements BaseInfoVie
             case 0:
                 setTitle("创建购墓订单");
                 setButton();
-                mBaseInfoView=new CemeteryInfoView(BuyCemeteryInfoActivity.this);
+                mBaseInfoView = new CemeteryInfoView(BuyCemeteryInfoActivity.this);
                 break;
             case 1:
                 setTitle("使用者信息");
                 setButton();
-                mBaseInfoView=new DeadManInfoView(BuyCemeteryInfoActivity.this);
+                mBaseInfoView = new DeadManInfoView(BuyCemeteryInfoActivity.this);
                 break;
             case 2:
                 setTitle("经办人信息");
                 setButton();
-                mBaseInfoView=new AgentManInfoView(BuyCemeteryInfoActivity.this);
+                mBaseInfoView = new AgentManInfoView(BuyCemeteryInfoActivity.this);
                 break;
         }
         mLLContent.addView(mBaseInfoView);
@@ -80,7 +81,6 @@ public class BuyCemeteryInfoActivity extends BaseActivity implements BaseInfoVie
         mBaseInfoView.setChangeState(changeState);
         mBaseInfoView.getDataStart();
     }
-
 
 
     private void setButton() {
@@ -131,7 +131,7 @@ public class BuyCemeteryInfoActivity extends BaseActivity implements BaseInfoVie
     @Override
     public void SaveSuccess() {
         mLLContent.removeAllViews();
-        CemeteryFragment.C_bOrder_isRefresh=true;
+        CemeteryFragment.C_bOrder_isRefresh = true;
         switch (inType) {
             case 0:
                 inType = 1;
@@ -146,5 +146,11 @@ public class BuyCemeteryInfoActivity extends BaseActivity implements BaseInfoVie
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public void getOrderId(long orderId) {
+        this.orderId = orderId;
+        mBaseInfoView.setOrderId(orderId);
     }
 }
