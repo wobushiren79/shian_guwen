@@ -64,7 +64,6 @@ public class FuneralSetmealOtherView extends LinearLayout {
                 }
             }
         newList.addAll(tempList);
-
         return newList;
     }
 
@@ -157,8 +156,15 @@ public class FuneralSetmealOtherView extends LinearLayout {
 
                     @Override
                     public void dataDelete(CreateOrderProductItemModel data) {
-                        mProductItemModels.remove(data);
-                        onFuneralChangeListener.onFuneralChange();
+                        if (data.getId() != null) {
+                            for (CreateOrderProductItemModel tempItem : mProductItemModels) {
+                                if (tempItem.getId() == data.getId()) {
+                                    tempItem.setStatusFlag(2);
+                                }
+                            }
+//                        mProductItemModels.remove(data);
+                            onFuneralChangeListener.onFuneralChange();
+                        }
                     }
 
 
@@ -176,7 +182,7 @@ public class FuneralSetmealOtherView extends LinearLayout {
                     if (productItems != null) {
                         tempList = new ArrayList<>();
                         if (mSetmealModels.get(position).getId() == result.getBoard().getSetmealFuneralId()) {
-                            addCtgItemView(showCtgItem,productItems, setMealItemsLayout);
+                            addCtgItemView(showCtgItem, productItems, setMealItemsLayout);
                         } else {
                             for (OrderProductItemModel data : productItems) {
                                 CreateOrderProductItemModel model = new CreateOrderProductItemModel();
@@ -212,8 +218,8 @@ public class FuneralSetmealOtherView extends LinearLayout {
         }
     };
 
-    private void addCtgItemView(CtgItemModel showCtgItem,List<OrderProductItemModel> productItems, SetMealItemsLayout setMealItemsLayout) {
-        setMealItemsLayout.setData(showCtgItem,productItems);
+    private void addCtgItemView(CtgItemModel showCtgItem, List<OrderProductItemModel> productItems, SetMealItemsLayout setMealItemsLayout) {
+        setMealItemsLayout.setData(showCtgItem, productItems);
     }
 
     private void addCtgItemView(SetMealItemsLayout setMealItemsLayout) {

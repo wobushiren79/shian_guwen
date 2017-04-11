@@ -6,7 +6,8 @@ import com.shian.shianlife.provide.result.HrLoginResult;
 public class AppContansts {
     public static final String BaseURL = "http://115.28.163.211:7080/shianlife-adviser-1.0-SNAPSHOT";
     public static final String OSSURL = "http://shianlife123.oss-cn-qingdao.aliyuncs.com/";
-    public static final String PhpURL = "http://192.168.0.170/shian_app_mgr";
+    public static final String PhpURL ="http://app.e-funeral.cn";
+//    public static final String PhpURL = "http://192.168.0.170/shian_app_mgr";
 
     public static final String siftsPHPURL = PhpURL + "/home/index/sifts";//精选
     public static final String helpsPHPURL = PhpURL + "/home/index/helps";//帮助

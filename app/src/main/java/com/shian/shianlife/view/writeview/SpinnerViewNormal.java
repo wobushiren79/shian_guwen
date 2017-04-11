@@ -72,6 +72,25 @@ public class SpinnerViewNormal extends BaseWriteView {
         });
     }
 
+    public void initSpinner(String[] array) {
+        province_adapter=new ArrayAdapter<CharSequence>(getContext(),R.layout.textview_spinner,array);
+        province_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mSpinner.setAdapter(province_adapter);
+        mSpinner.setSelection(0);
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (spinnerCallBack != null) {
+                    spinnerCallBack.itemSelected(position, province_adapter.getItem(position).toString());
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
     private void initData() {
         mTVTitleName.setText(titleName);
 //        mETInput.setInputType(inputType);

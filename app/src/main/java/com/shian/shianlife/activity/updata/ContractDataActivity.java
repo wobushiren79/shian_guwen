@@ -68,8 +68,8 @@ import java.util.List;
 public class ContractDataActivity extends BaseActivity {
 
     ScrollView theScrollView;
-
     ScrollListView mLSMain;
+    ScrollListView mLSFuneral;
     ScrollListView mLSProject;
 
     TextView mTVNext;
@@ -108,12 +108,14 @@ public class ContractDataActivity extends BaseActivity {
      * 用户之前提交的订单详情内容
      */
     List<ProjectItemModel> projectItems = new ArrayList<>();
+
     List<OrderCtgItemModel> projectDD = new ArrayList<>();
+    List<OrderCtgItemModel> funeralItems = new ArrayList<>();
     List<OrderCtgItemModel> ztcItems = new ArrayList<>();
+
     List<SetmealModel> mainSetmeals = new ArrayList<>();// 系统主套餐
     BordModel board;
     PayInfoModel payInfo;
-
     CustomDialog customDialog;
 
     @Override
@@ -159,6 +161,7 @@ public class ContractDataActivity extends BaseActivity {
         mTVDLLocation = (TextView) findViewById(R.id.tv_dlman);
 
         mLSMain = (ScrollListView) findViewById(R.id.ls_main);
+        mLSFuneral = (ScrollListView) findViewById(R.id.ls_funeral);
         mLSProject = (ScrollListView) findViewById(R.id.ls_project);
 
         mTVNext.setOnClickListener(onClickListener);
@@ -206,16 +209,16 @@ public class ContractDataActivity extends BaseActivity {
                         Utils.LogVPrint("deadmanName" + deadmanName);
                         Utils.LogVPrint("deadmanSex" + deadmanSex);
                         Utils.LogVPrint("deadmanState" + deadmanState);
-                        Utils.LogVPrint( "deadmanCardId" + deadmanCardId);
+                        Utils.LogVPrint("deadmanCardId" + deadmanCardId);
                         Utils.LogVPrint("deadmanAge" + deadmanAge);
                         Utils.LogVPrint("deadmanShoes" + deadmanShoes);
                         Utils.LogVPrint("agentmanPhone" + agentmanPhone);
-                        Utils.LogVPrint( "agentmanName" + agentmanName);
+                        Utils.LogVPrint("agentmanName" + agentmanName);
                         Utils.LogVPrint("agentmanEmail" + agentmanEmail);
                         Utils.LogVPrint("agentmanCardId" + agentmanCardId);
-                        Utils.LogVPrint( "agentmanLocation" + agentmanLocation);
-                        Utils.LogVPrint( "agentmanRelation" + agentmanRelation);
-                        Utils.LogVPrint( "zsLocation" + zsLocation);
+                        Utils.LogVPrint("agentmanLocation" + agentmanLocation);
+                        Utils.LogVPrint("agentmanRelation" + agentmanRelation);
+                        Utils.LogVPrint("zsLocation" + zsLocation);
                         Utils.LogVPrint("adviserName" + adviserName);
 
                         mTVFirstName.setText(agentmanName);
@@ -291,8 +294,8 @@ public class ContractDataActivity extends BaseActivity {
     };
 
     private void complete() {
-        if(dvPay.getDrawable()==null){
-            ToastUtils.showLongTime(ContractDataActivity.this,"还没有签名");
+        if (dvPay.getDrawable() == null) {
+            ToastUtils.showLongTime(ContractDataActivity.this, "还没有签名");
             return;
         }
         mTVNext.setVisibility(View.GONE);
@@ -302,7 +305,7 @@ public class ContractDataActivity extends BaseActivity {
         mTVNext.setVisibility(View.VISIBLE);
         mTVBack.setVisibility(View.VISIBLE);
         mTVComplete.setVisibility(View.VISIBLE);
-        final Bitmap bmp = Bitmap.createScaledBitmap(bitmap,  (int)(metrics.widthPixels / 2.5), (int)((bitmap.getHeight() * metrics.widthPixels / bitmap.getWidth()) / 2.5), true);
+        final Bitmap bmp = Bitmap.createScaledBitmap(bitmap, (int) (metrics.widthPixels / 2.5), (int) ((bitmap.getHeight() * metrics.widthPixels / bitmap.getWidth()) / 2.5), true);
         new Thread() {
             @Override
             public void run() {
@@ -330,7 +333,7 @@ public class ContractDataActivity extends BaseActivity {
                         add.setFileName(file);
                         add.setFileUrl(t.getNameMap().get(file).toString());
                         String FileUrl = AppContansts.OSSURL + add.getFileUrl();
-                        Utils.LogVPrint( "FileUrl:" + FileUrl);
+                        Utils.LogVPrint("FileUrl:" + FileUrl);
                         HpSaveContractData params = new HpSaveContractData();
                         params.setPicUrl(FileUrl);
                         params.setContractAmount(payInfo.getTotalAmount());
@@ -405,7 +408,7 @@ public class ContractDataActivity extends BaseActivity {
 //                .create();
 //        alertDialog.show();
 //        alertDialog.getWindow().setLayout(getResources().getDimensionPixelOffset(R.dimen.dimen_600dp), getResources().getDimensionPixelOffset(R.dimen.dimen_595dp));
-        SignDialog dialog=new SignDialog(ContractDataActivity.this,R.style.CustomDialog);
+        SignDialog dialog = new SignDialog(ContractDataActivity.this, R.style.CustomDialog);
         dialog.setCallBack(new SignDialog.CallBack() {
             @Override
             public void signComplete(Bitmap bitmapName) {
@@ -491,6 +494,83 @@ public class ContractDataActivity extends BaseActivity {
         }
     };
 
+
+    BaseAdapter funeralAdapter = new BaseAdapter() {
+        @Override
+        public int getCount() {
+            if (funeralItems != null) {
+                return funeralItems.size();
+            } else {
+                return 0;
+            }
+
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            ViewHolder holder;
+
+            if (view == null) {
+                view = LayoutInflater.from(ContractDataActivity.this).inflate(R.layout.layout_contract_item, null);
+                holder = new ViewHolder();
+                holder.name = (TextView) view.findViewById(R.id.tv_name);
+                holder.content = (ScrollListView) view.findViewById(R.id.tv_text);
+                view.setTag(holder);
+            } else {
+                holder = (ViewHolder) view.getTag();
+            }
+
+            String name = funeralItems.get(i).getName();
+            holder.name.setText(name + "：");
+            holder.name.setTextColor(getResources().getColor(R.color.blackgroundmain));
+            final List<OrderProductItemModel> listContent = funeralItems.get(i).getProductItems();
+            BaseAdapter baseAdapter = new BaseAdapter() {
+                @Override
+                public int getCount() {
+                    return listContent.size();
+                }
+
+                @Override
+                public Object getItem(int i) {
+                    return null;
+                }
+
+                @Override
+                public long getItemId(int i) {
+                    return 0;
+                }
+
+                @Override
+                public View getView(int p, View view, ViewGroup viewGroup) {
+                    TextView textView = new TextView(ContractDataActivity.this);
+                    textView.setTextColor(getResources().getColor(R.color.blackgroundmain));
+                    textView.setText(listContent.get(p).getName());
+                    return textView;
+                }
+            };
+            holder.content.setAdapter(baseAdapter);
+            ScrollListView.setListViewHeightBasedOnChildren(holder.content);
+
+            return view;
+        }
+
+        class ViewHolder {
+            TextView name;
+            ScrollListView content;
+        }
+    };
+
+
     BaseAdapter projectAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
@@ -528,7 +608,13 @@ public class ContractDataActivity extends BaseActivity {
                 holder.num.setTextColor(Color.BLACK);
                 holder.remark.setTextColor(Color.BLACK);
                 holder.all.setTextColor(Color.BLACK);
-            } else {
+
+                holder.name.setText("名称");
+                holder.money.setText("单价 ");
+                holder.num.setText("数量");
+                holder.all.setText( "总价");
+                holder.remark.setText("备注");
+            } else if (i > 0) {
                 OrderProductItemModel data = projectDD.get(i - 1).getProductItems().get(0);
                 String name = data.getName();
                 float price = data.getTotalPrice();
@@ -544,6 +630,8 @@ public class ContractDataActivity extends BaseActivity {
                 holder.num.setTextColor(getResources().getColor(R.color.blackgroundmain));
                 holder.remark.setTextColor(getResources().getColor(R.color.blackgroundmain));
                 holder.all.setTextColor(getResources().getColor(R.color.blackgroundmain));
+            }else{
+
             }
 
 
@@ -618,11 +706,14 @@ public class ContractDataActivity extends BaseActivity {
                             }
                         }
 
+
                         for (int i = 0; i < projectItems.size(); i++) {
                             if ("主套餐".equals(projectItems.get(i).getName())) {
                                 ztcItems = projectItems.get(i).getCtgItems();
                             } else if ("增值项目".equals(projectItems.get(i).getName())) {
                                 projectDD = projectItems.get(i).getCtgItems();
+                            } else if ("殡仪馆".equals(projectItems.get(i).getName())) {
+                                funeralItems = projectItems.get(i).getCtgItems();
                             }
                         }
 
@@ -632,12 +723,23 @@ public class ContractDataActivity extends BaseActivity {
                             mLSProject.addHeaderView(headTx);
                         }
 
+                        if (funeralItems.size() > 0) {
+                            TextView headTx = new TextView(ContractDataActivity.this);
+                            headTx.setText("治丧配套商品");
+                            mLSFuneral.addHeaderView(headTx);
+                        }
+
                         mLSMain.setAdapter(mainAdapter);
+
                         if (projectDD.size() > 0) {
                             mLSProject.setAdapter(projectAdapter);
                         }
+                        if (funeralItems.size() > 0) {
+                            mLSFuneral.setAdapter(funeralAdapter);
+                        }
 
                         ScrollListView.setListViewHeightBasedOnChildren(mLSMain);
+                        ScrollListView.setListViewHeightBasedOnChildren(mLSFuneral);
                         ScrollListView.setListViewHeightBasedOnChildren(mLSProject);
                         mainAdapter.notifyDataSetChanged();
 //                        projectAdapter.notifyDataSetChanged();

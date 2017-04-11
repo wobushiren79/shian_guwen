@@ -354,6 +354,11 @@
             android:layout_height="wrap_content"></com.shian.shianlife.view.ScrollListView>
 
         <com.shian.shianlife.view.ScrollListView
+            android:id="@+id/ls_funeral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.shian.shianlife.view.ScrollListView>
+
+        <com.shian.shianlife.view.ScrollListView
             android:id="@+id/ls_project"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></com.shian.shianlife.view.ScrollListView>
@@ -452,12 +457,12 @@
             android:text="经办人签字：" />
 
         <ImageView
-            android:layout_marginBottom="@dimen/dimen_8dp"
-            android:layout_marginTop="@dimen/dimen_8dp"
             android:id="@+id/dv_pay"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_400dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dimen_8dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
             android:background="@drawable/zhy_button_state_item_gray"
             android:scaleType="fitXY" />
 

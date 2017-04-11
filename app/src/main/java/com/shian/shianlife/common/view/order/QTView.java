@@ -132,8 +132,10 @@ public class QTView extends BaseOrderView {
             public void onClick(int positionButton) {
                 for (int i = 0; i < buildButtons.length; i++) {
                     if (positionButton == i) {
+                        mPopupButton.mainButton();
                         Intent intent = new Intent(getContext(), buildButtons[i].getActivity());
                         getContext().startActivity(intent);
+
                     }
                 }
             }
@@ -533,8 +535,8 @@ public class QTView extends BaseOrderView {
                 }
                 if (model.isShowFinishTalk()) {
 //                    if (model.isHasPrepay()) {
-                        close.setVisibility(View.VISIBLE);
-                        close.setOnClickListener(clickListener);
+                    close.setVisibility(View.VISIBLE);
+                    close.setOnClickListener(clickListener);
 //                    } else {
 //                        close.setVisibility(View.GONE);
 //                    }

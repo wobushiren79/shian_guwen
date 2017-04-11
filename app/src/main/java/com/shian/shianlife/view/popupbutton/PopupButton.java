@@ -28,6 +28,7 @@ public class PopupButton extends RelativeLayout {
 
     RelativeLayout mRLMain;
     ImageView mIVMianButton;
+    ImageView mIVBack;
 
     List<PopupButtonItem> listHItem = new ArrayList<>();
     List<PopupButtonItem> listVitem = new ArrayList<>();
@@ -53,8 +54,10 @@ public class PopupButton extends RelativeLayout {
     private void initView() {
         mRLMain = (RelativeLayout) view.findViewById(R.id.rl_main);
         mIVMianButton = (ImageView) view.findViewById(R.id.iv_buildnew);
+        mIVBack = (ImageView) view.findViewById(R.id.iv_back);
 
         mIVMianButton.setOnClickListener(onClickListener);
+        mIVBack.setOnClickListener(onClickListener);
     }
 
 
@@ -67,18 +70,24 @@ public class PopupButton extends RelativeLayout {
         public void onClick(View v) {
             if (v == mIVMianButton) {
                 mainButton();
+            } else if (v == mIVBack) {
+                mainButton();
             }
         }
     };
 
-    private void mainButton() {
+    public void mainButton() {
         if (isOpen) {
             closeAnim();
-            mRLMain.setBackgroundResource(0);
+//            mRLMain.setBackgroundResource(0);
+            mIVBack.setImageResource(0);
+            mIVBack.setVisibility(GONE);
             isOpen = false;
         } else {
             openAnim();
-            mRLMain.setBackgroundResource(R.drawable.zhy_build_order_back);
+//            mRLMain.setBackgroundResource(R.drawable.zhy_build_order_back);
+            mIVBack.setImageResource(R.drawable.zhy_build_order_back);
+            mIVBack.setVisibility(VISIBLE);
             isOpen = true;
         }
     }
@@ -189,8 +198,8 @@ public class PopupButton extends RelativeLayout {
         AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
         alphaAnimation.setDuration(500);
 
-        ScaleAnimation scaleAnimation=new ScaleAnimation
-                (0f,1f,0f,1f,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+        ScaleAnimation scaleAnimation = new ScaleAnimation
+                (0f, 1f, 0f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         scaleAnimation.setDuration(500);
 
         animationSet.addAnimation(alphaAnimation);
@@ -203,8 +212,8 @@ public class PopupButton extends RelativeLayout {
         AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
         alphaAnimation.setDuration(500);
 
-        ScaleAnimation scaleAnimation=new ScaleAnimation
-                (1f,0f,1f,0f,Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+        ScaleAnimation scaleAnimation = new ScaleAnimation
+                (1f, 0f, 1f, 0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         scaleAnimation.setDuration(500);
 
 

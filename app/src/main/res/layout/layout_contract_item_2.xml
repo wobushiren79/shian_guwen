@@ -14,7 +14,7 @@
 
     <TextView
         android:layout_width="@dimen/dimen_1dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/blackgroundmain" />
 
     <TextView
@@ -28,7 +28,7 @@
     <TextView
 
         android:layout_width="@dimen/dimen_1dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/blackgroundmain" />
 
     <TextView
@@ -41,7 +41,7 @@
 
     <TextView
         android:layout_width="@dimen/dimen_1dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/blackgroundmain" />
 
     <TextView
@@ -54,7 +54,7 @@
 
     <TextView
         android:layout_width="@dimen/dimen_1dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/blackgroundmain" />
 
     <TextView

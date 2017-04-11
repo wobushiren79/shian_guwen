@@ -356,6 +356,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         super.onStop();
     }
 
+
     @Override
     protected void onDestroy() {
         locationService.unregisterListener(mListener); // 注销掉监听
