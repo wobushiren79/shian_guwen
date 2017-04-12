@@ -13,6 +13,7 @@ import com.shian.shianlife.provide.params.HpCetemeryAcceptParams;
 import com.shian.shianlife.provide.params.HpCetemeryRejectParams;
 import com.shian.shianlife.provide.params.HpChangeLocation;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
+import com.shian.shianlife.provide.params.HpGetDictSelectParams;
 import com.shian.shianlife.provide.params.HpGetOrderDetailParams;
 import com.shian.shianlife.provide.params.HpLoginParams;
 import com.shian.shianlife.provide.params.HpOrderFeedback;
@@ -63,6 +64,7 @@ import com.shian.shianlife.provide.result.HrGetCustomerContract;
 import com.shian.shianlife.provide.result.HrGetCustomerFuneral;
 import com.shian.shianlife.provide.result.HrGetCustomerFuneralOther;
 import com.shian.shianlife.provide.result.HrGetCustomerPreready;
+import com.shian.shianlife.provide.result.HrGetDictSelectData;
 import com.shian.shianlife.provide.result.HrGetMsgNumberForUntreated;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
 import com.shian.shianlife.provide.result.HrGetOrderNote;
@@ -99,7 +101,15 @@ public interface MAccountManager extends HttpManager {
 
     public void loginout(Context context,
                          HttpResponseHandler<Object> handler);
-
+    /**
+     * 字典查询
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void getDictSelect(Context context, HpGetDictSelectParams params,
+                       HttpResponseHandler<HrGetDictSelectData> handler);
     /****************** 顾问 ***********************/
 
     /**

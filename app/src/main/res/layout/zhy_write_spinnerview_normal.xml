@@ -1,44 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dimen_80dp"
-    android:background="@color/white"
-    android:orientation="horizontal"
+    android:layout_height="@dimen/dimen_80dp">
 
-    android:paddingLeft="@dimen/dimen_32dp"
-    android:paddingRight="@dimen/dimen_32dp"
->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dimen_32dp"
+        android:paddingRight="@dimen/dimen_32dp">
+
+        <TextView
+            android:id="@+id/tv_important"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="*"
+            android:textColor="@color/zhy_text_color_10"
+            android:textSize="@dimen/dimen_24dp" />
+
+        <TextView
+            android:id="@+id/tv_titlename"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_4dp"
+            android:ems="7"
+            android:gravity="center_vertical"
+            android:textColor="@color/dimgray"
+            android:textSize="@dimen/dimen_28dp" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:textSize="@dimen/dimen_24dp" />
+
+        <ImageView
+            android:layout_width="@dimen/dimen_20dp"
+            android:layout_height="@dimen/dimen_20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/zhy_spinner_icon" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_important"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_mask"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="*"
-        android:textColor="@color/zhy_text_color_10"
-        android:textSize="@dimen/dimen_24dp" />
-
-    <TextView
-        android:id="@+id/tv_titlename"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/dimen_4dp"
-        android:ems="7"
-        android:gravity="center_vertical"
-        android:textColor="@color/dimgray"
-        android:textSize="@dimen/dimen_28dp" />
-
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="@dimen/dimen_0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="@null"
-        android:textSize="@dimen/dimen_24dp" />
-
-    <ImageView
-        android:layout_width="@dimen/dimen_20dp"
-        android:layout_height="@dimen/dimen_20dp"
-        android:layout_gravity="center"
-        android:src="@drawable/zhy_spinner_icon" />
-</LinearLayout>
+        android:visibility="gone" />
+</RelativeLayout>
