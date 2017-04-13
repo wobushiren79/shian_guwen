@@ -14,13 +14,13 @@ public class HpSaveCemeteryTalkSuccessOne extends BaseHttpParams {
     private String cemeteryName;//公墓名称
     private long cemeteryId;//公墓名称 id
     private String garden;//	墓园（苑）
-    private long tombsId;//墓园（苑）id
+    private long tombId;//墓园（苑）id
     private String district;//区
     private long parkId;//园区id
     private String platoon;//排
     private long rowNumber;//排号
     private String mark;//墓位
-    private long tombsPositionId;//墓位id
+    private long tombPositionId;//墓位id
     private String cemeteryType;//	墓型
     private String cemeteryProperties;//	墓穴属性
     private String planSale;//挂牌价
@@ -32,29 +32,12 @@ public class HpSaveCemeteryTalkSuccessOne extends BaseHttpParams {
     private String choiceService;//自选服务
     private String remark;//	备注
 
-
-    public long getCemeteryId() {
-        return cemeteryId;
+    public long getBespeakId() {
+        return bespeakId;
     }
 
-    public void setCemeteryId(long cemeteryId) {
-        this.cemeteryId = cemeteryId;
-    }
-
-    public void setTombsId(long tombsId) {
-        this.tombsId = tombsId;
-    }
-
-    public void setParkId(long parkId) {
-        this.parkId = parkId;
-    }
-
-    public void setRowNumber(long rowNumber) {
-        this.rowNumber = rowNumber;
-    }
-
-    public void setTombsPositionId(long tombsPositionId) {
-        this.tombsPositionId = tombsPositionId;
+    public void setBespeakId(long bespeakId) {
+        this.bespeakId = bespeakId;
     }
 
     public long getOrderedId() {
@@ -63,14 +46,6 @@ public class HpSaveCemeteryTalkSuccessOne extends BaseHttpParams {
 
     public void setOrderedId(long orderedId) {
         this.orderedId = orderedId;
-    }
-
-    public long getBespeakId() {
-        return bespeakId;
-    }
-
-    public void setBespeakId(long bespeakId) {
-        this.bespeakId = bespeakId;
     }
 
     public int getSaveType() {
@@ -97,12 +72,28 @@ public class HpSaveCemeteryTalkSuccessOne extends BaseHttpParams {
         this.cemeteryName = cemeteryName;
     }
 
+    public long getCemeteryId() {
+        return cemeteryId;
+    }
+
+    public void setCemeteryId(long cemeteryId) {
+        this.cemeteryId = cemeteryId;
+    }
+
     public String getGarden() {
         return garden;
     }
 
     public void setGarden(String garden) {
         this.garden = garden;
+    }
+
+    public long getTombId() {
+        return tombId;
+    }
+
+    public void setTombId(long tombId) {
+        this.tombId = tombId;
     }
 
     public String getDistrict() {
@@ -113,6 +104,14 @@ public class HpSaveCemeteryTalkSuccessOne extends BaseHttpParams {
         this.district = district;
     }
 
+    public long getParkId() {
+        return parkId;
+    }
+
+    public void setParkId(long parkId) {
+        this.parkId = parkId;
+    }
+
     public String getPlatoon() {
         return platoon;
     }
@@ -121,12 +120,28 @@ public class HpSaveCemeteryTalkSuccessOne extends BaseHttpParams {
         this.platoon = platoon;
     }
 
+    public long getRowNumber() {
+        return rowNumber;
+    }
+
+    public void setRowNumber(long rowNumber) {
+        this.rowNumber = rowNumber;
+    }
+
     public String getMark() {
         return mark;
     }
 
     public void setMark(String mark) {
         this.mark = mark;
+    }
+
+    public long getTombPositionId() {
+        return tombPositionId;
+    }
+
+    public void setTombPositionId(long tombPositionId) {
+        this.tombPositionId = tombPositionId;
     }
 
     public String getCemeteryType() {

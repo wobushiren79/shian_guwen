@@ -23,10 +23,10 @@ public class HrGetCemeteryTalkSuccessOne {
     private String choiceService;//自选服务
     private String remark;//备注
     private long cemeteryId;//	公墓名称 id
-    private long gardenId;//苑 id
-    private long districtId;//	区 id
-    private long platoonId;//	排 id
-    private long markId;//	号 id
+    private long tombId;//苑 id
+    private long parkId;//	区 id
+    private long rowNumber;//	排 id
+    private long tombPositionId;//	号 id
 
     public long getCemeteryId() {
         return cemeteryId;
@@ -36,36 +36,36 @@ public class HrGetCemeteryTalkSuccessOne {
         this.cemeteryId = cemeteryId;
     }
 
-    public long getGardenId() {
-        return gardenId;
+    public long getTombId() {
+        return tombId;
     }
 
-    public void setGardenId(long gardenId) {
-        this.gardenId = gardenId;
+    public void setTombId(long tombId) {
+        this.tombId = tombId;
     }
 
-    public long getDistrictId() {
-        return districtId;
+    public long getParkId() {
+        return parkId;
     }
 
-    public void setDistrictId(long districtId) {
-        this.districtId = districtId;
+    public void setParkId(long parkId) {
+        this.parkId = parkId;
     }
 
-    public long getPlatoonId() {
-        return platoonId;
+    public long getRowNumber() {
+        return rowNumber;
     }
 
-    public void setPlatoonId(long platoonId) {
-        this.platoonId = platoonId;
+    public void setRowNumber(long rowNumber) {
+        this.rowNumber = rowNumber;
     }
 
-    public long getMarkId() {
-        return markId;
+    public long getTombPositionId() {
+        return tombPositionId;
     }
 
-    public void setMarkId(long markId) {
-        this.markId = markId;
+    public void setTombPositionId(long tombPositionId) {
+        this.tombPositionId = tombPositionId;
     }
 
     public String getOrderNum() {

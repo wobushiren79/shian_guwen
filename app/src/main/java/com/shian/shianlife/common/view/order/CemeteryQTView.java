@@ -296,7 +296,7 @@ public class CemeteryQTView extends BaseOrderView {
                 holder.tv_line_5.setVisibility(GONE);
                 holder.tv_line_6.setVisibility(GONE);
 
-            } else if (data.getBespeakStatus() == 2 || data.getBespeakStatus() == 3) {
+            } else if (data.getBespeakStatus() == 2 || data.getBespeakStatus() == 3 || data.getBespeakStatus() == 6) {
                 if (data.getIsEditInfo() == TalkEditInfoEnum.canTalk.getCode()) {
                     holder.llStateAccept.setVisibility(GONE);
                     holder.llStateTalk.setVisibility(VISIBLE);

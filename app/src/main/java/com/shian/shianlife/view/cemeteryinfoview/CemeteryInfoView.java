@@ -120,16 +120,16 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
                         mSelectCemeteryName.setString(result.getCemeteryName(), result.getCemeteryId());
                     }
                     if (result.getGarden() != null) {
-                        mSelectLocation1.setString(result.getGarden(), result.getGardenId());
+                        mSelectLocation1.setString(result.getGarden(), result.getTombId());
                     }
                     if (result.getDistrict() != null) {
-                        mSelectLocation2.setString(result.getDistrict(), result.getDistrictId());
+                        mSelectLocation2.setString(result.getDistrict(), result.getParkId());
                     }
                     if (result.getPlatoon() != null) {
-                        mSelectLocation3.setString(result.getPlatoon(), result.getPlatoonId());
+                        mSelectLocation3.setString(result.getPlatoon(), result.getRowNumber());
                     }
                     if (result.getMark() != null) {
-                        mSelectLocation4.setString(result.getMark(), result.getMarkId());
+                        mSelectLocation4.setString(result.getMark(), result.getTombPositionId());
                     }
                     if (result.getCemeteryType() != null) {
                         mSelectCemeteryType.setString(result.getCemeteryType());
@@ -163,9 +163,9 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
                     }
                     mSelectCemeteryName.setLocationIdAndType(result.getCemeteryId(), 0);
                     mSelectLocation1.setLocationIdAndType(result.getCemeteryId(), 1);
-                    mSelectLocation2.setLocationIdAndType(result.getGardenId(), 2);
-                    mSelectLocation3.setLocationIdAndType(result.getDistrictId(), 3);
-                    mSelectLocation4.setLocationIdAndType(result.getPlatoonId(), 4);
+                    mSelectLocation2.setLocationIdAndType(result.getTombId(), 2);
+                    mSelectLocation3.setLocationIdAndType(result.getParkId(), 3);
+                    mSelectLocation4.setLocationIdAndType(result.getRowNumber(), 4);
                 }
 
             }
@@ -319,13 +319,13 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
         params.setCemeteryName(mSelectCemeteryName.getSelectedData());
         params.setCemeteryId(mSelectCemeteryName.getThisLocationId());
         params.setGarden(mSelectLocation1.getSelectedData());
-        params.setTombsId(mSelectLocation1.getThisLocationId());
+        params.setTombId(mSelectLocation1.getThisLocationId());
         params.setDistrict(mSelectLocation2.getSelectedData());
         params.setParkId(mSelectLocation2.getThisLocationId());
         params.setPlatoon(mSelectLocation3.getSelectedData());
         params.setRowNumber(mSelectLocation3.getThisLocationId());
         params.setMark(mSelectLocation4.getSelectedData());
-        params.setTombsPositionId(mSelectLocation4.getThisLocationId());
+        params.setTombPositionId(mSelectLocation4.getThisLocationId());
         params.setCemeteryType(mSelectCemeteryType.getSelectedData());
         params.setCemeteryProperties(mSelectCemeteryAttribute.getSelectedData());
         params.setPlanSale(mETPlanToMoney.getText().toString());
