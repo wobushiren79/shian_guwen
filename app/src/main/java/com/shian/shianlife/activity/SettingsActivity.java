@@ -83,7 +83,6 @@ public class SettingsActivity extends BaseActivity {
         } else {
             params.setAppStatus(2);
         }
-
         MHttpManagerFactory.getAccountManager().changeInfo(SettingsActivity.this, params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart() {

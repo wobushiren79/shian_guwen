@@ -48,6 +48,7 @@ public class BaiduMapActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_baidu_map);
         String location = getIntent().getStringExtra("pdrLocation");
@@ -57,12 +58,11 @@ public class BaiduMapActivity extends Activity {
         initView();
         //初始化地图
         initMap();
-//去掉百度图标
+        //去掉百度图标
         View child = mMapView.getChildAt(1);
         if (child != null && (child instanceof ImageView || child instanceof ZoomControls)) {
             child.setVisibility(View.INVISIBLE);
         }
-
     }
 
     private void initView() {

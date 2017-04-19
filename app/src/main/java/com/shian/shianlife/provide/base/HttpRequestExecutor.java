@@ -57,7 +57,7 @@ public class HttpRequestExecutor {
         httpClient.setTimeout(15000);
     }
 
-     CustomDialog pd = null;
+    CustomDialog pd = null;
 
     /**
      * Post请求
@@ -80,6 +80,7 @@ public class HttpRequestExecutor {
             // 判断是否有参数
             if (params != null) {
                 String httpParams = params.getHttpParams();
+                Log.e("tag", "httpParams:" + httpParams);
                 httpEntity = new StringEntity(httpParams, HTTP.UTF_8);
             }
             if (method.contains("doLogout") || method.contains("doLogin")
@@ -87,15 +88,18 @@ public class HttpRequestExecutor {
                     || method.contains("order/list/talk") || method.contains("order/list/waitService")
                     || method.contains("order/list/dispatch") || method.contains("order/list/waitAudit")
                     || method.contains("order/list/waitMoney") || method.contains("order/list/finish")
-                   ) {
+                    ) {
                 pd = null;
                 getSession(context);
             } else {
+
                 pd = new CustomDialog(context);
                 pd.setCanceledOnTouchOutside(false);
+
                 getSession(context);
             }
             Log.i("tag", "methed=" + C_sBaseUrl + "/" + method);
+
             httpClient.post(context, C_sBaseUrl + "/" + method, headers, httpEntity, "application/json",
                     new AsyncHttpResponseHandler() {
                         @Override

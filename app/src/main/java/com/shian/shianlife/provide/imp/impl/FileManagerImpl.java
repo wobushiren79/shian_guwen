@@ -24,7 +24,7 @@ public class FileManagerImpl implements FileManager {
 	private static FileManager manager;
 
 	private FileManagerImpl() {
-	};
+	}
 	public static FileManager getInstance() {
 		if (manager == null) {
 			manager = new FileManagerImpl();
@@ -39,9 +39,12 @@ public class FileManagerImpl implements FileManager {
 		SharedPreferences share = context.getSharedPreferences("SessionShare",
 				-1);
 		String sesseion = share.getString("SessionKey", "");
+
 		params.addHeader("Cookie","sid="+ sesseion);
 		params.addHeader("systemType", "2");
+
 		params.addBodyParameter(file, new File(path));
+
 		HttpUtils http = new HttpUtils();
 		http.send(HttpRequest.HttpMethod.POST, AppContansts.BaseURL
 				+ "/file/upload", params, new RequestCallBack<String>() {

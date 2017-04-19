@@ -33,6 +33,7 @@ public class AppAdvertisementLayout extends LinearLayout {
 
 
     private PHPHrGetAdvertisement result;
+
     public AppAdvertisementLayout(Context context) {
         this(context, null);
     }
@@ -55,11 +56,11 @@ public class AppAdvertisementLayout extends LinearLayout {
      * 获取数据
      */
     private void getData() {
-        RequestParams params=new RequestParams();
+        RequestParams params = new RequestParams();
         params.put("type", 4);
         params.put("number", 1);
         params.put("pagerNumber", 0);
-        MHttpManagerFactory.getPHPManager().getAdvertisement(getContext(),params, new HttpResponseHandler<PHPHrGetAdvertisement>() {
+        MHttpManagerFactory.getPHPManager().getAdvertisement(getContext(), params, new HttpResponseHandler<PHPHrGetAdvertisement>() {
             @Override
             public void onStart() {
 
@@ -67,7 +68,7 @@ public class AppAdvertisementLayout extends LinearLayout {
 
             @Override
             public void onSuccess(PHPHrGetAdvertisement result) {
-                AppAdvertisementLayout.this.result=result;
+                AppAdvertisementLayout.this.result = result;
                 mBTCancel.setOnClickListener(onClickListener);
                 mIVConent.setOnClickListener(onClickListener);
                 ImageLoader.getInstance().displayImage(AppContansts.PhpURL + result.getItems().get(0).getBanner(), mIVConent, new ImageLoadingListener() {
@@ -110,9 +111,9 @@ public class AppAdvertisementLayout extends LinearLayout {
             if (v == mBTCancel) {
                 callBack.cancelPic();
             } else if (v == mIVConent) {
-                if(result!=null){
-                    Intent intent=new Intent(getContext(), WebActivity.class);
-                    intent.putExtra("url",result.getItems().get(0).getUrl());
+                if (result != null) {
+                    Intent intent = new Intent(getContext(), WebActivity.class);
+                    intent.putExtra("url", result.getItems().get(0).getUrl());
                     getContext().startActivity(intent);
                 }
             }
@@ -121,6 +122,7 @@ public class AppAdvertisementLayout extends LinearLayout {
 
     public interface CallBack {
         void loadingComplete();
+
         void cancelPic();
     }
 }
