@@ -155,7 +155,7 @@ public class MainAPPItems extends LinearLayout {
 //        i.setComponent(cn);
 //        getContext().startActivity(i);
         Intent intent=new Intent(getContext(),WebActivity.class);
-        intent.putExtra("url","http://tools.2345.com/m/rili.htm");
+        intent.putExtra("url","http://m.wannianli.tianqi.com");
         getContext().startActivity(intent);
     }
 
@@ -219,7 +219,7 @@ public class MainAPPItems extends LinearLayout {
 //            ToastUtils.showLongTime(getContext(), "请先下载百度地图或高德地图");
 //        }
         Intent intent=new Intent(getContext(),WebActivity.class);
-        intent.putExtra("url","http://api.map.baidu.com/geocoder?address=天府广场&output=html&src=yhc");
+        intent.putExtra("url","http://map.baidu.com/mobile/webapp/index/index/");
         getContext().startActivity(intent);
 
     }
