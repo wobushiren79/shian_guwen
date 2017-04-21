@@ -93,6 +93,7 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
 
             @Override
             public void onSuccess(HrGetCemeteryTalkSuccessOne result) {
+
                 Utils.LogVPrint("getOrderNum:" + result.getOrderNum());
                 Utils.LogVPrint("isSaveCan:" + result.isSaveCan());
                 Utils.LogVPrint("getCemeteryName:" + result.getCemeteryName());

@@ -88,7 +88,7 @@ public class SaveTalkFailActivity extends BaseActivity {
         mWritePlanLocation.setNumView(1);
         mWriteTalkResult.setSpinnerCallBack(new SpinnerViewNormal.SpinnerCallBack() {
             @Override
-            public void itemSelected(int position, String name) {
+            public void itemSelected(int position, String name, SpinnerViewNormal viewNormal) {
                 if (position == 0) {
                     params.setResult(true);
                     mWriteTime.setVisibility(View.VISIBLE);
@@ -96,6 +96,11 @@ public class SaveTalkFailActivity extends BaseActivity {
                     params.setResult(false);
                     mWriteTime.setVisibility(View.GONE);
                 }
+            }
+
+            @Override
+            public void check(SpinnerViewNormal view) {
+
             }
         });
     }

@@ -219,7 +219,7 @@ public class MainAPPItems extends LinearLayout {
 //            ToastUtils.showLongTime(getContext(), "请先下载百度地图或高德地图");
 //        }
         Intent intent=new Intent(getContext(),WebActivity.class);
-        intent.putExtra("url","http://map.baidu.com/mobile/webapp/index/index/");
+        intent.putExtra("url","http://m.amap.com/");
         getContext().startActivity(intent);
 
     }

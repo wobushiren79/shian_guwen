@@ -466,10 +466,6 @@
             android:name=".activity.HotIssueListActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".activity.IdeaFeedbackActivity"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

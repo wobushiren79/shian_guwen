@@ -19,7 +19,6 @@ public abstract class BaseWriteView extends LinearLayout {
     protected boolean isLonger;
     protected int inputType;//1普通，2数字,14邮箱
 
-
     public BaseWriteView(Context context) {
         this(context, null);
     }

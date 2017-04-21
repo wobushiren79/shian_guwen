@@ -56,8 +56,13 @@ public class NewOrderActivity extends BaseActivity {
         writeSpinner.initSpinner(R.array.ywlx);
         writeSpinner.setSpinnerCallBack(new SpinnerViewNormal.SpinnerCallBack() {
             @Override
-            public void itemSelected(int position,String name) {
-                 params.setBusinessType(position+1);
+            public void itemSelected(int position, String name, SpinnerViewNormal viewNormal) {
+                params.setBusinessType(position+1);
+            }
+
+            @Override
+            public void check(SpinnerViewNormal view) {
+
             }
         });
     }
