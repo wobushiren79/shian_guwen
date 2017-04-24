@@ -24,6 +24,7 @@ import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.phpmodel.HotIssueData;
 import com.shian.shianlife.provide.phpresult.PHPHrGetHotIssue;
+import com.shian.shianlife.thisenum.HelpEnum;
 import com.shian.shianlife.view.ScrollListView;
 
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class HelpHotIssue extends LinearLayout {
      */
     private void getData() {
         RequestParams params = new RequestParams();
-        params.put("number ", showNumber);
+        params.put("number", showNumber);
         params.put("pagerNumber", 0);
         MHttpManagerFactory.getPHPManager().getHotIssue(getContext(), params, new HttpResponseHandler<PHPHrGetHotIssue>() {
             @Override
@@ -117,6 +118,8 @@ public class HelpHotIssue extends LinearLayout {
         public void onClick(View v) {
             if (v == mIVMore) {
                 Intent intent = new Intent(getContext(), HotIssueListActivity.class);
+                intent.putExtra("title", HelpEnum.ALL.getName());
+                intent.putExtra("code", HelpEnum.ALL.getCode());
                 getContext().startActivity(intent);
             }
         }

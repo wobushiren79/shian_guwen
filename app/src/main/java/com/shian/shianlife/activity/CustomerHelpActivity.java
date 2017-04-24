@@ -101,7 +101,7 @@ public class CustomerHelpActivity extends BaseActivity {
             AbsListView.LayoutParams layoutParams = new AbsListView.LayoutParams
                     (ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen.dimen_132dp));
             helpItemsLayout.setLayoutParams(layoutParams);
-            helpItemsLayout.setData(helpEna[position].getName(), helpEna[position].getPicId(), helpEna[position].getUrl());
+            helpItemsLayout.setData(helpEna[position].getName(), helpEna[position].getPicId(), helpEna[position].getCode());
             return helpItemsLayout;
         }
     };

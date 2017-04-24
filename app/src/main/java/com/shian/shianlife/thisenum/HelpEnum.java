@@ -7,21 +7,22 @@ import com.shian.shianlife.R;
  */
 
 public enum HelpEnum {
-    MONEY("财务结算", R.drawable.zhy_help_money, ""),
-    SYSTEMHELP("系统操作", R.drawable.zhy_help_systemhelp, ""),
-    PROJECTDETAILS("产品介绍", R.drawable.zhy_help_projectdetails, ""),
-    TALK("洽谈技巧", R.drawable.zhy_help_talk, ""),
-    PLATFORM("平台入驻", R.drawable.zhy_help_platform, ""),
-    OTHER("其它问题", R.drawable.zhy_help_other, "");
+    ALL("热门问题", R.drawable.zhy_help_other, 0),
+    MONEY("财务结算", R.drawable.zhy_help_money, 1),
+    SYSTEMHELP("系统操作", R.drawable.zhy_help_systemhelp, 2),
+    PROJECTDETAILS("产品介绍", R.drawable.zhy_help_projectdetails, 3),
+    TALK("洽谈技巧", R.drawable.zhy_help_talk, 4),
+    PLATFORM("平台入驻", R.drawable.zhy_help_platform, 5),
+    OTHER("其它问题", R.drawable.zhy_help_other, 6);
 
     private String name;
     private int picId;
-    private String url;
+    private int code;
 
-    HelpEnum(String name, int picId, String url) {
+    HelpEnum(String name, int picId, int code) {
         this.name = name;
         this.picId = picId;
-        this.url = url;
+        this.code = code;
     }
 
     public String getName() {
@@ -40,11 +41,11 @@ public enum HelpEnum {
         this.picId = picId;
     }
 
-    public String getUrl() {
-        return url;
+    public int getCode() {
+        return code;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setCode(int code) {
+        this.code = code;
     }
 }
