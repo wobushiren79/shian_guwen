@@ -20,9 +20,6 @@ import java.io.File;
  */
 
 public class UpDataService extends Service {
-    //乐视体育
-    // Uri.parse("http://122.228.237.132/apk.r1.market.hiapk.com/data/upload/apkres/2016/6_12/16/com.lesports.glivesports_040405.apk");
-    //百度音乐
     String downloadURL = "http://gdown.baidu.com/data/wisegame/fd84b7f6746f0b18/baiduyinyue_4802.apk";
     String downloadName="guwen.apk";
 

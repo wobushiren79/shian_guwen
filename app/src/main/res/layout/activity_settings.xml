@@ -213,6 +213,7 @@
 
     <LinearLayout
         android:id="@+id/ll_change"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_80dp"
         android:layout_below="@+id/ll_settting"

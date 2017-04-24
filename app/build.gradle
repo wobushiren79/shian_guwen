@@ -5,7 +5,7 @@ android {
     signingConfigs {
     }
     compileSdkVersion 23
-    buildToolsVersion '25.0.1'
+    buildToolsVersion '25.0.0'
     aaptOptions.cruncherEnabled = false
     aaptOptions.useNewCruncher = false
     defaultConfig {
@@ -54,7 +54,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23+'
+    compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.loopj.android:android-async-http:1.4.6'
     apt 'com.jakewharton:butterknife:6.0.0'
     compile 'com.google.code.gson:gson:2.3.1'

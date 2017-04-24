@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="@drawable/login_blackgourd_2">
+    android:background="@drawable/login_blackgourd_2"
+    android:orientation="vertical">
 
 
     <RelativeLayout
@@ -35,10 +35,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_marginLeft="@dimen/dimen_6dp"
                     android:layout_width="@dimen/dimen_40dp"
                     android:layout_height="@dimen/dimen_40dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/dimen_6dp"
                     android:src="@drawable/login_username" />
 
                 <EditText
@@ -69,10 +69,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_marginLeft="@dimen/dimen_6dp"
                     android:layout_width="@dimen/dimen_40dp"
                     android:layout_height="@dimen/dimen_40dp"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/dimen_6dp"
                     android:src="@drawable/login_password" />
 
                 <EditText
@@ -96,9 +96,9 @@
                 android:background="@color/zhy_line_4" />
 
             <LinearLayout
-                android:layout_marginBottom="@dimen/dimen_20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_20dp"
                 android:layout_marginLeft="@dimen/dimen_150dp"
                 android:layout_marginRight="@dimen/dimen_150dp"
                 android:layout_marginTop="@dimen/dimen_28dp"
@@ -130,54 +130,55 @@
             </LinearLayout>
 
 
-
             <com.shian.shianlife.view.customview.LoadingButton
-                android:layout_gravity="center"
                 android:id="@+id/btn_login"
                 android:layout_width="@dimen/dimen_500dp"
-                android:layout_height="@dimen/dimen_80dp"></com.shian.shianlife.view.customview.LoadingButton>
+                android:layout_height="@dimen/dimen_80dp"
+                android:layout_gravity="center"></com.shian.shianlife.view.customview.LoadingButton>
+
             <RadioGroup
-                android:layout_marginTop="@dimen/dimen_24dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:orientation="horizontal">
+                android:layout_marginTop="@dimen/dimen_24dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <RadioButton
-                    android:drawablePadding="@dimen/dimen_10dp"
-                    android:drawableLeft="@drawable/zhy_login_rb_1"
-                    android:button="@null"
-                    android:layout_gravity="center"
                     android:id="@+id/rb_state1"
-                    android:layout_marginRight="@dimen/dimen_20dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/dimen_20dp"
+                    android:button="@null"
                     android:checked="true"
+                    android:drawableLeft="@drawable/zhy_login_rb_1"
+                    android:drawablePadding="@dimen/dimen_10dp"
                     android:text="殡仪"
-                    android:textSize="@dimen/dimen_24dp"
-                    android:textColor="@color/zhy_text_color_2" />
+                    android:textColor="@color/zhy_text_color_2"
+                    android:textSize="@dimen/dimen_24dp" />
 
                 <RadioButton
-                    android:drawablePadding="@dimen/dimen_10dp"
-                    android:layout_marginLeft="@dimen/dimen_20dp"
-                    android:button="@null"
-                    android:layout_gravity="center"
-                    android:drawableLeft="@drawable/zhy_login_rb_1"
-                    android:textSize="@dimen/dimen_24dp"
                     android:id="@+id/rb_state2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/dimen_20dp"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/zhy_login_rb_1"
+                    android:drawablePadding="@dimen/dimen_10dp"
                     android:text="公墓"
-                    android:textColor="@color/zhy_text_color_2" />
+                    android:textColor="@color/zhy_text_color_2"
+                    android:textSize="@dimen/dimen_24dp" />
             </RadioGroup>
 
 
             <TextView
-                android:layout_marginTop="@dimen/dimen_24dp"
                 android:id="@+id/btn_login_web"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dimen_24dp"
                 android:text="手机账号快速登录>"
                 android:textColor="@color/gray_main_rb_bg_f"
                 android:textSize="@dimen/dimen_24dp" />

@@ -155,7 +155,7 @@ public class MainAPPItems extends LinearLayout {
 //        i.setComponent(cn);
 //        getContext().startActivity(i);
         Intent intent=new Intent(getContext(),WebActivity.class);
-        intent.putExtra("url","http://m.wannianli.tianqi.com");
+        intent.putExtra("url","http://m.laohuangli.net");
         getContext().startActivity(intent);
     }
 
