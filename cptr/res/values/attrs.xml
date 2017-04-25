@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources >
+
+    <declare-styleable name="CptrPtrFrameLayout">
+        <!-- Optional. If you put header and content in xml, you can you these to specify them. -->
+        <attr name="cptr_ptr_header" format="reference" />
+        <attr name="cptr_ptr_content" format="reference" />
+
+        <!-- the resistance when you are moving the frame -->
+        <attr name="cptr_ptr_resistance" format="float" />
+
+        <!-- the ration of the height of the header to trigger refresh -->
+        <attr name="cptr_ptr_ratio_of_header_height_to_refresh" format="float" />
+
+        <attr name="cptr_ptr_duration_to_close" format="integer" />
+        <attr name="cptr_ptr_duration_to_close_header" format="integer" />
+
+        <!-- pull to refresh, otherwise release to refresh, default is release to refresh -->
+        <attr name="cptr_ptr_pull_to_fresh" format="boolean" />
+
+        <!-- keep header when refreshing-->
+        <attr name="cptr_ptr_keep_header_when_refresh" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="CptrPtrClassicHeader">
+        <attr name="cptr_ptr_rotate_ani_time" format="integer" />
+    </declare-styleable>
+</resources>
