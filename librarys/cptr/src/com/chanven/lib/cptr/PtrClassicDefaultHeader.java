@@ -50,12 +50,12 @@ public class PtrClassicDefaultHeader extends FrameLayout implements PtrUIHandler
     }
 
     protected void initViews(AttributeSet attrs) {
-        TypedArray arr = getContext().obtainStyledAttributes(attrs, com.chanven.lib.cptr.R.styleable.PtrClassicHeader, 0, 0);
+        TypedArray arr = getContext().obtainStyledAttributes(attrs, com.chanven.lib.cptr.R.styleable.CptrPtrClassicHeader, 0, 0);
         if (arr != null) {
-            mRotateAniTime = arr.getInt(com.chanven.lib.cptr.R.styleable.PtrClassicHeader_ptr_rotate_ani_time, mRotateAniTime);
+            mRotateAniTime = arr.getInt(R.styleable.CptrPtrClassicHeader_cptr_ptr_rotate_ani_time, mRotateAniTime);
         }
         buildAnimation();
-        View header = LayoutInflater.from(getContext()).inflate(com.chanven.lib.cptr.R.layout.cube_ptr_classic_default_header, this);
+        View header = LayoutInflater.from(getContext()).inflate(com.chanven.lib.cptr.R.layout.cptr_cube_ptr_classic_default_header, this);
 
         mRotateView = header.findViewById(com.chanven.lib.cptr.R.id.ptr_classic_header_rotate_view);
 

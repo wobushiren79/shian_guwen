@@ -11,10 +11,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/PullToRefresh" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/cptr" />
             <option value="$PROJECT_DIR$/librarys" />
             <option value="$PROJECT_DIR$/librarys/AndroidSwipeLayout" />
             <option value="$PROJECT_DIR$/librarys/ImageSelector" />
-            <option value="$PROJECT_DIR$/librarys/cptr" />
             <option value="$PROJECT_DIR$/librarys/cycleViewPager" />
             <option value="$PROJECT_DIR$/librarys/dateTimerSelector" />
             <option value="$PROJECT_DIR$/librarys/viewpagerIndicator" />

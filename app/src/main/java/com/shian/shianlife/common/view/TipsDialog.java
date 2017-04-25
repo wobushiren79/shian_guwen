@@ -7,6 +7,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager.LayoutParams;
 import android.widget.TextView;
@@ -21,12 +22,14 @@ public class TipsDialog extends Dialog {
 
     @InjectView(R.id.tv_title)
     TextView tv_title;
-
+    @InjectView(R.id.tv_top)
+    TextView tv_top;
     @InjectView(R.id.tv_btn1)
     TextView tv_btn1;
-
     @InjectView(R.id.tv_btn2)
     TextView tv_btn2;
+
+    String top;
 
     String title;
 
@@ -48,6 +51,7 @@ public class TipsDialog extends Dialog {
         setContentView(R.layout.dialog_tips);
         ButterKnife.inject(this);
         tv_title.setText(title);
+        tv_top.setText(top);
         tv_btn1.setText(btn1Text);
         tv_btn2.setText(btn2Text);
     }
@@ -61,6 +65,16 @@ public class TipsDialog extends Dialog {
         this.title = title;
     }
 
+
+    /**
+     * 设置头
+     *
+     * @param top
+     */
+    public void setTop(String top) {
+        this.top = top;
+    }
+
     /**
      * 设置按钮1
      *
@@ -68,6 +82,7 @@ public class TipsDialog extends Dialog {
      * @param onClickListener
      */
     public void setTopButton(String text, OnClickListener onClickListener) {
+        tv_btn1.setVisibility(View.VISIBLE);
         btn1Text = text;
         topClickListener = onClickListener;
     }
@@ -79,6 +94,7 @@ public class TipsDialog extends Dialog {
      * @param onClickListener
      */
     public void setBottomButton(String text, OnClickListener onClickListener) {
+        tv_btn2.setVisibility(View.VISIBLE);
         btn2Text = text;
         bottomClickListener = onClickListener;
     }

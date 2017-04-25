@@ -7,13 +7,13 @@
 
     <TextView
         android:id="@+id/tv_top"
-        android:textColor="@color/black_item_shua_textcolor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimen_48dp"
         android:layout_marginTop="@dimen/dimen_48dp"
         android:gravity="center"
         android:text="确认提交？"
+        android:textColor="@color/black_item_shua_textcolor"
         android:textSize="@dimen/dimen_32dp"
         android:textStyle="bold" />
 
@@ -46,7 +46,8 @@
             android:layout_weight="1"
             android:background="@drawable/zhy_button_state_6"
             android:text="继续洽谈"
-            android:textColor="@color/zhy_text_color_11" />
+            android:textColor="@color/zhy_text_color_11"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="@dimen/dimen_1dp"
@@ -61,7 +62,8 @@
             android:layout_weight="1"
             android:background="@drawable/zhy_button_state_6"
             android:text="结束洽谈"
-            android:textColor="@color/zhy_text_color_1" />
+            android:textColor="@color/zhy_text_color_1"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

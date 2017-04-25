@@ -13,6 +13,8 @@ import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.shian.shianlife.thisenum.APPTypeEnum;
+
 import java.io.File;
 
 /**
@@ -20,12 +22,13 @@ import java.io.File;
  */
 
 public class UpDataService extends Service {
-    String downloadURL = "http://gdown.baidu.com/data/wisegame/fd84b7f6746f0b18/baiduyinyue_4802.apk";
-    String downloadName="guwen.apk";
+    String downloadURL = null;
+    String downloadName = APPTypeEnum.ADVISER.getName() + ".apk";
 
     boolean isDown = false;
 
     public UpDataService() {
+
     }
 
     /**
@@ -41,7 +44,7 @@ public class UpDataService extends Service {
      * 初始化下载器
      **/
     private void initDownManager() {
-        delFile("/download/"+downloadName);
+        delFile("/download/" + downloadName);
         isDown = true;
         manager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
         receiver = new DownloadCompleteReceiver();
@@ -67,10 +70,10 @@ public class UpDataService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // 调用下载
-        if (!isDown) {
+        downloadURL = intent.getStringExtra("updataUrl");
+        if (!isDown && downloadURL != null) {
             initDownManager();
         }
-
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -103,16 +106,16 @@ public class UpDataService extends Service {
                 int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
                 switch (status) {
                     case DownloadManager.STATUS_PAUSED:
-                        Log.v("down", "STATUS_PAUSED");
+                        Log.v("this", "STATUS_PAUSED");
                     case DownloadManager.STATUS_PENDING:
-                        Log.v("down", "STATUS_PENDING");
+                        Log.v("this", "STATUS_PENDING");
                     case DownloadManager.STATUS_RUNNING:
                         //正在下载，不做任何事情
-                        Log.v("down", "STATUS_RUNNING");
+                        Log.v("this", "STATUS_RUNNING");
                         break;
                     case DownloadManager.STATUS_SUCCESSFUL:
                         //完成
-                        Log.v("down", "下载完成");
+                        Log.v("this", "下载完成");
                         //自动安装apk
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
                             Uri uriForDownloadedFile = manager.getUriForDownloadedFile(downId);
@@ -121,7 +124,7 @@ public class UpDataService extends Service {
                         break;
                     case DownloadManager.STATUS_FAILED:
                         //清除已下载的内容，重新下载
-                        Log.v("down", "STATUS_FAILED");
+                        Log.v("this", "STATUS_FAILED");
                         manager.remove(downId);
                         break;
                 }
@@ -137,7 +140,7 @@ public class UpDataService extends Service {
 //                    installApkNew(uriForDownloadedFile);
 //                }
 //                //停止服务并关闭广播
-                UpDataService.this.stopSelf();
+            UpDataService.this.stopSelf();
 //            }
         }
 
@@ -155,11 +158,12 @@ public class UpDataService extends Service {
             startActivity(intent);
         }
     }
+
     //删除文件
-    public static void delFile(String fileName){
-        Log.v("down","Environment.getExternalStorageDirectory():"+Environment.getExternalStorageDirectory());
-        File file = new File(Environment.getExternalStorageDirectory() +fileName);
-        if(file.isFile()){
+    public static void delFile(String fileName) {
+        Log.v("down", "Environment.getExternalStorageDirectory():" + Environment.getExternalStorageDirectory());
+        File file = new File(Environment.getExternalStorageDirectory() + fileName);
+        if (file.isFile()) {
             file.delete();
         }
         file.exists();

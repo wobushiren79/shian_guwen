@@ -169,7 +169,8 @@ public class NewUserCenterFragment extends BaseFragment {
             } else if (v == mLLPlatform) {
 
             } else if (v == mLLVersion) {
-
+                //检测更新
+                Utils.checkUpData(getContext(), true);
             }
         }
     };
@@ -178,11 +179,11 @@ public class NewUserCenterFragment extends BaseFragment {
      * 意见反馈
      */
     private void idea() {
-        if(mHrUserInfo==null){
-            ToastUtils.show(getContext(),"数据异常，请重新登陆");
-        }else{
+        if (mHrUserInfo == null) {
+            ToastUtils.show(getContext(), "数据异常，请重新登陆");
+        } else {
             Intent intent = new Intent(getContext(), IdeaFeedbackActivity.class);
-            intent.putExtra("UserInfo",new String[]{mHrUserInfo.getName(),mHrUserInfo.getMobile()});
+            intent.putExtra("UserInfo", new String[]{mHrUserInfo.getName(), mHrUserInfo.getMobile()});
             startActivity(intent);
         }
     }

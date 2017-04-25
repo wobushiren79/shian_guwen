@@ -103,7 +103,8 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         initPermission();
 //        initLocation();
         startPushService();
-//        checkUpData();//检测更新
+        //检测更新
+//        Utils.checkUpData(this, false);
     }
 
 
@@ -453,14 +454,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 }
             });
         }
-    }
-
-    /**
-     * 检测是否有更新 并执行下载
-     */
-    public void checkUpData() {
-        Intent intent = new Intent(MainActivity.this, UpDataService.class);
-        startService(intent);
     }
 
 

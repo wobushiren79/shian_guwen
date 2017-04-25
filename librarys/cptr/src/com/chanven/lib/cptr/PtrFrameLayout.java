@@ -97,25 +97,25 @@ public class PtrFrameLayout extends ViewGroup {
 
         mPtrIndicator = new PtrIndicator();
 
-        TypedArray arr = context.obtainStyledAttributes(attrs, com.chanven.lib.cptr.R.styleable.PtrFrameLayout, 0, 0);
+        TypedArray arr = context.obtainStyledAttributes(attrs, com.chanven.lib.cptr.R.styleable.CptrPtrFrameLayout, 0, 0);
         if (arr != null) {
 
-            mHeaderId = arr.getResourceId(com.chanven.lib.cptr.R.styleable.PtrFrameLayout_ptr_header, mHeaderId);
-            mContainerId = arr.getResourceId(com.chanven.lib.cptr.R.styleable.PtrFrameLayout_ptr_content, mContainerId);
+            mHeaderId = arr.getResourceId(R.styleable.CptrPtrFrameLayout_cptr_ptr_header, mHeaderId);
+            mContainerId = arr.getResourceId(com.chanven.lib.cptr.R.styleable.CptrPtrFrameLayout_cptr_ptr_content, mContainerId);
 
             mPtrIndicator.setResistance(
-                    arr.getFloat(com.chanven.lib.cptr.R.styleable.PtrFrameLayout_ptr_resistance, mPtrIndicator.getResistance()));
+                    arr.getFloat(com.chanven.lib.cptr.R.styleable.CptrPtrFrameLayout_cptr_ptr_resistance, mPtrIndicator.getResistance()));
 
-            mDurationToClose = arr.getInt(com.chanven.lib.cptr.R.styleable.PtrFrameLayout_ptr_duration_to_close, mDurationToClose);
-            mDurationToCloseHeader = arr.getInt(com.chanven.lib.cptr.R.styleable.PtrFrameLayout_ptr_duration_to_close_header, mDurationToCloseHeader);
+            mDurationToClose = arr.getInt(com.chanven.lib.cptr.R.styleable.CptrPtrFrameLayout_cptr_ptr_duration_to_close, mDurationToClose);
+            mDurationToCloseHeader = arr.getInt(com.chanven.lib.cptr.R.styleable.CptrPtrFrameLayout_cptr_ptr_duration_to_close_header, mDurationToCloseHeader);
 
             float ratio = mPtrIndicator.getRatioOfHeaderToHeightRefresh();
-            ratio = arr.getFloat(com.chanven.lib.cptr.R.styleable.PtrFrameLayout_ptr_ratio_of_header_height_to_refresh, ratio);
+            ratio = arr.getFloat(com.chanven.lib.cptr.R.styleable.CptrPtrFrameLayout_cptr_ptr_ratio_of_header_height_to_refresh, ratio);
             mPtrIndicator.setRatioOfHeaderHeightToRefresh(ratio);
 
-            mKeepHeaderWhenRefresh = arr.getBoolean(com.chanven.lib.cptr.R.styleable.PtrFrameLayout_ptr_keep_header_when_refresh, mKeepHeaderWhenRefresh);
+            mKeepHeaderWhenRefresh = arr.getBoolean(com.chanven.lib.cptr.R.styleable.CptrPtrFrameLayout_cptr_ptr_keep_header_when_refresh, mKeepHeaderWhenRefresh);
 
-            mPullToRefresh = arr.getBoolean(com.chanven.lib.cptr.R.styleable.PtrFrameLayout_ptr_pull_to_fresh, mPullToRefresh);
+            mPullToRefresh = arr.getBoolean(com.chanven.lib.cptr.R.styleable.CptrPtrFrameLayout_cptr_ptr_pull_to_fresh, mPullToRefresh);
             arr.recycle();
         }
 

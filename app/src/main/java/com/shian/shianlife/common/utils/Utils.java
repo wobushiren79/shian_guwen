@@ -10,6 +10,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -26,17 +27,24 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.loopj.android.http.RequestParams;
 import com.shian.shianlife.activity.MainActivity;
 import com.shian.shianlife.activity.PgzxActivity;
 import com.shian.shianlife.base.SaBaseApplication;
 import com.shian.shianlife.common.contanst.AppContansts;
+import com.shian.shianlife.common.view.TipsDialog;
 import com.shian.shianlife.fragment.OrderFragment;
+import com.shian.shianlife.mapapi.CustomDialog;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpSaveTime;
 import com.shian.shianlife.provide.params.HpSkuIdParams;
+import com.shian.shianlife.provide.phpresult.PHPHrGetVersion;
 import com.shian.shianlife.provide.result.HrGetMsgNumberForUntreated;
 import com.shian.shianlife.provide.result.HrGetSKUDetails;
+import com.shian.shianlife.service.UpDataService;
+import com.shian.shianlife.thisenum.APPTypeEnum;
+import com.shian.shianlife.thisenum.UpDataImportantEnum;
 import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 import com.viewpagerindicator.TabPageIndicator;
 
@@ -225,11 +233,72 @@ public class Utils {
         try {
             PackageManager manager = context.getPackageManager();
             PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
-            int versioncode=info.versionCode;
+            int versioncode = info.versionCode;
             return versioncode;
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
         }
     }
+
+
+    /**
+     * 检测是否有更新 并执行下载
+     */
+    public static void checkUpData(final Context context, final boolean isToast) {
+        RequestParams params = new RequestParams();
+        params.put("appId", APPTypeEnum.ADVISER.getCode());
+        MHttpManagerFactory.getPHPManager().getVersion(context, params, new HttpResponseHandler<PHPHrGetVersion>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(final PHPHrGetVersion result) {
+                try {
+                    float versionOld = SharePerfrenceUtils.getVersion(context);
+                    float versionNew = Float.valueOf(result.getVersionNum());
+                    if (versionNew > versionOld) {
+                        TipsDialog dialog = new TipsDialog(context);
+                        dialog.setTop("新版本：" + result.getUpdataTitle());
+                        dialog.setTitle("" + result.getUpdataContent());
+                        dialog.setBottomButton("更新", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(context, UpDataService.class);
+                                intent.putExtra("updataUrl", result.getAppDownLoadUrl());
+                                context.startService(intent);
+                                dialog.cancel();
+                            }
+                        });
+                        if (result.getIsImportant() == UpDataImportantEnum.IMPORTANT.getCode()) {
+                            dialog.setCancelable(false);
+                        } else {
+                            dialog.setTopButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            });
+                        }
+                        dialog.show();
+                    } else {
+                        if (isToast) {
+                            ToastUtils.show(context, "当前已是最新版：" + versionNew);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    ToastUtils.show(context, "版本号获取异常");
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+
+            }
+        },isToast);
+    }
+
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
   <!-- 省、自治区、直辖市、特别行政区 -->
   <string-array name="province_item">
     <item value="479">北京</item>

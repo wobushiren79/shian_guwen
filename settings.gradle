@@ -1,5 +1,4 @@
-include ':app'
-include ':librarys:cptr'
+include ':app', ':cptr'
 include ':librarys:viewpagerTranform'
 include ':librarys:viewpagerIndicator'
 include ':librarys:cycleViewPager'

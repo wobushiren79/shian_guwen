@@ -11,6 +11,7 @@ import com.shian.shianlife.provide.phpresult.PHPHrGetAdvertisement;
 import com.shian.shianlife.provide.phpresult.PHPHrGetDynamic;
 import com.shian.shianlife.provide.phpresult.PHPHrGetHotIssue;
 import com.shian.shianlife.provide.phpresult.PHPHrGetSiftListData;
+import com.shian.shianlife.provide.phpresult.PHPHrGetVersion;
 
 /**
  * Created by Administrator on 2017/3/4.
@@ -65,6 +66,11 @@ public class PHPManagerImpl implements PHPManager {
     public void setOpinion(Context context, RequestParams params, HttpResponseHandler<Object> handler, boolean isDialog) {
         excutor.requestPHPGet(context, "Home/index/opinion", Object.class,
                 params, handler, isDialog);
+    }
+
+    @Override
+    public void getVersion(Context context, RequestParams params, HttpResponseHandler<PHPHrGetVersion> handler, boolean isDialog) {
+
     }
 
 }

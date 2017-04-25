@@ -41,7 +41,7 @@ public class DefaultLoadMoreFooter implements ILoadViewMoreFactory {
 
         @Override
         public void init(FootViewAdder footViewHolder, OnClickListener onClickRefreshListener) {
-            View view = footViewHolder.addFootView(R.layout.loadmore_default_footer);
+            View view = footViewHolder.addFootView(R.layout.cptr_loadmore_default_footer);
             footerTv = (TextView) view.findViewById(R.id.loadmore_default_footer_tv);
             footerBar = (ProgressBar) view.findViewById(R.id.loadmore_default_footer_progressbar);
             this.onClickRefreshListener = onClickRefreshListener;
