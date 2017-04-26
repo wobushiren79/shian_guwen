@@ -15,8 +15,6 @@ public class SharePerfrenceUtils {
     private static final String C_sShareLogin_channelId = "share_channelId";
     //新添加登录账号类型
     private static final String C_sShareLogin_Type = "share_type";
-    //新加自动更新版本号
-    private static final String C_sShareLogin_version = "share_version";
 
     public static void setLoginShare(Context c, String username,
                                      String password, boolean isRemeber, boolean isAuto, int loginType) {
@@ -53,27 +51,7 @@ public class SharePerfrenceUtils {
         return loginS;
     }
 
-    /**
-     * 设置版本号
-     *
-     * @param context
-     */
-    public static void setVersion(Context context) {
-        Editor editor = context.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE).edit();
-        editor.putFloat(C_sShareLogin_version, 0);
-        editor.commit();
-    }
 
-    /**
-     * 保存版本号
-     *
-     * @param context
-     * @return
-     */
-    public static float getVersion(Context context) {
-        SharedPreferences share = context.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE);
-        return share.getFloat(C_sShareLogin_version, 0f);
-    }
 
     public static void setShareChannelId(Context c, String channelId) {
         Editor editor = c.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE).edit();

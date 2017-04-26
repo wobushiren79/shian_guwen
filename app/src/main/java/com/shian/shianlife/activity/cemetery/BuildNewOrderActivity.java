@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.view.order.CemeteryQTView;
@@ -94,6 +95,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         HpCemeteryStructureParams params = new HpCemeteryStructureParams();
         params.setItemId(-1);
         params.setItemType(0);
+        params.setToken(AppContansts.userLoginInfo.getToken());
         MHttpManagerFactory.getAccountManager().getCemeteryStructure(BuildNewOrderActivity.this, params, new HttpResponseHandler<HrGetCemeteryStructure>() {
 
 
@@ -120,7 +122,6 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
 
             @Override
             public void onError(String message) {
-
             }
         });
     }
@@ -209,6 +210,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         params.setPersonNum(dataPersonNum);
         params.setCustomerLocation(dataUserLocation);
         params.setPlanCemeteryId(cemeteryId);
+        params.setToken(AppContansts.userLoginInfo.getToken());
         MHttpManagerFactory.getAccountManager().saveCemeteryBuildData(BuildNewOrderActivity.this, params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart() {

@@ -9,6 +9,18 @@ import com.shian.shianlife.provide.base.BaseHttpParams;
 
 public class HpGetDictSelectParams extends BaseHttpParams {
     private String dictCode;
+    /**
+     * 登录通行key
+     */
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public String getDictCode() {
         return dictCode;

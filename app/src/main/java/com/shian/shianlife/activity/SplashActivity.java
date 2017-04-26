@@ -77,6 +77,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
 
             @Override
             public void onSuccess(final PHPHrGetAdvertisement result) {
+
                 String picUrl = AppContansts.PhpURL + result.getItems().get(0).getBanner();
                 ImageLoader.getInstance().displayImage(picUrl, mIVAdvertising);
                 mIVAdvertising.setOnClickListener(new View.OnClickListener() {
@@ -226,6 +227,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
 
                             @Override
                             public void onSuccess(HrLoginResult result) {
+                                AppContansts.userLoginInfo = result;
                                 LoginActivity.cookie = result.getSessionId();
                                 HttpRequestExecutor.setSession(LoginActivity.cookie, SplashActivity.this);
                                 initView1(result);
@@ -255,6 +257,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
 
                             @Override
                             public void onSuccess(HrLoginResult result) {
+                                AppContansts.userLoginInfo = result;
                                 LoginActivity.cookie = result.getSessionId();
                                 HttpRequestExecutor.setSession(LoginActivity.cookie, SplashActivity.this);
                                 initView1(result);

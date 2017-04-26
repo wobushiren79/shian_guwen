@@ -10,6 +10,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpGetDictSelectParams;
@@ -78,6 +79,7 @@ public class SpinnerViewNormal extends BaseWriteView {
     private void getSelectData(String dictCode, final String isShowSpinnerData) {
         HpGetDictSelectParams params = new HpGetDictSelectParams();
         params.setDictCode(dictCode);
+        params.setToken(AppContansts.userLoginInfo.getToken());
         MHttpManagerFactory.getAccountManager().getDictSelect(getContext(), params, new HttpResponseHandler<HrGetDictSelectData>() {
 
 

@@ -42,6 +42,7 @@ import java.io.UnsupportedEncodingException;
 @SuppressWarnings("deprecation")
 public class HttpRequestExecutor {
     private static final String C_sBaseUrl = AppContansts.BaseURL;// "http://120.25.103.60:8080/hzrapi/";
+    private static final String C_sBaseCemeteryUrl = AppContansts.BaseCemeteryURL;// "http://120.25.103.60:8080/hzrapi/";
     private static final String C_sPhpUrl = AppContansts.PhpURL;
     private AsyncHttpClient httpClient = new AsyncHttpClient();
     private Header[] headers;
@@ -99,7 +100,6 @@ public class HttpRequestExecutor {
                 getSession(context);
             }
             Log.i("tag", "methed=" + C_sBaseUrl + "/" + method);
-
             httpClient.post(context, C_sBaseUrl + "/" + method, headers, httpEntity, "application/json",
                     new AsyncHttpResponseHandler() {
                         @Override
@@ -158,7 +158,104 @@ public class HttpRequestExecutor {
             }
         }
     }
+    /**
+     * 公墓Post请求
+     *
+     * @param context
+     * @param method
+     * @param c
+     * @param params
+     * @param response
+     */
+    public <T> void requestCemeteryPost(final Context context, final String method,
+                                final Class<T> c, BaseHttpParams params,
+                                final HttpResponseHandler<T> response) {
+        if (!isNetworkConnected(context)) {
+            onError(response, context.getString(R.string.net_work_off), context);
+            return;
+        }
+        HttpEntity httpEntity = null;
+        try {
+            // 判断是否有参数
+            if (params != null) {
+                String httpParams = params.getHttpParams();
+                Log.e("tag", "httpParams:" + httpParams);
+                httpEntity = new StringEntity(httpParams, HTTP.UTF_8);
+            }
+            if (method.contains("doLogout") || method.contains("doLogin")
+                    || method.contains("address/load") || method.contains("order/list/wating/handle/count")
+                    || method.contains("order/list/talk") || method.contains("order/list/waitService")
+                    || method.contains("order/list/dispatch") || method.contains("order/list/waitAudit")
+                    || method.contains("order/list/waitMoney") || method.contains("order/list/finish")
+                    ) {
+                pd = null;
+                getSession(context);
+            } else {
 
+                pd = new CustomDialog(context);
+                pd.setCanceledOnTouchOutside(false);
+
+                getSession(context);
+            }
+            Log.i("tag", "methed=" + C_sBaseCemeteryUrl + "/" + method);
+            httpClient.post(context, C_sBaseCemeteryUrl + "/" + method, headers, httpEntity, "application/json",
+                    new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onStart() {
+                            super.onStart();
+                            if (response != null) {
+                                if (pd != null && (context instanceof Activity) && !((Activity) context).isFinishing())
+                                    pd.show();
+                                response.onStart();
+                            }
+                        }
+
+                        @Override
+                        public void onSuccess(int arg0, Header[] arg1,
+                                              byte[] arg2) {
+//							setSession(arg1, context);
+                            if (pd != null) {
+                                pd.cancel();
+                            }
+                            if ((context instanceof Activity)
+                                    && !((Activity) context).isFinishing()
+                                    || method.contains("doLogout")) {
+                                if (pd != null && (context instanceof Activity) && !((Activity) context).isFinishing())
+                                    pd.cancel();
+                                response(context, method, c, response, arg2);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int arg0, Header[] arg1,
+                                              byte[] arg2, Throwable arg3) {
+                            if (pd != null) {
+                                pd.cancel();
+                            }
+                            String s = arg3.getMessage();
+                            if (s != null) {
+                                Log.e("tag", s);
+                            }
+                            // onError(response,
+                            // context.getString(R.string.servererror),
+                            // context);
+                            onError(response, s, context);
+
+                        }
+                    });
+        } catch (Exception e1) {
+            // onError(response, context.getString(R.string.servererror),
+            // context);
+            if (pd != null) {
+                pd.cancel();
+            }
+            onError(response, e1.getMessage(), context);
+        } finally {
+            if (pd != null) {
+                pd.cancel();
+            }
+        }
+    }
     /**
      * PHPPost请求
      *
@@ -237,9 +334,7 @@ public class HttpRequestExecutor {
             return;
         }
         try {
-
             Log.i("tag", "methed=" + C_sPhpUrl + "/" + method);
-
             httpClient.get(context, C_sPhpUrl + "/" + method, params, new AsyncHttpResponseHandler() {
 
                 @Override

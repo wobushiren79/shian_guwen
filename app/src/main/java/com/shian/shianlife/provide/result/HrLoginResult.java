@@ -11,6 +11,10 @@ public class HrLoginResult {
 
     private long userId;
 
+    /**
+     * 登录通行key
+     */
+    private String token;
 
     public long getUserId() {
         return userId;
@@ -52,4 +56,11 @@ public class HrLoginResult {
         this.startTimestamp = startTimestamp;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

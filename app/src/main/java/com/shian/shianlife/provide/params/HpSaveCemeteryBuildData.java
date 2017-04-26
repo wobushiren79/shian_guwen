@@ -16,6 +16,18 @@ public class HpSaveCemeteryBuildData extends BaseHttpParams {
     private String customerLocation;  //客户地址
     private String customerMobile;  //联系电话（客户电话）
     private long planCemeteryId;//参观公墓ID
+    /**
+     * 登录通行key
+     */
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public long getPlanCemeteryId() {
         return planCemeteryId;

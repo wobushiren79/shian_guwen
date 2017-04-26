@@ -70,7 +70,8 @@ public class PHPManagerImpl implements PHPManager {
 
     @Override
     public void getVersion(Context context, RequestParams params, HttpResponseHandler<PHPHrGetVersion> handler, boolean isDialog) {
-
+        excutor.requestPHPGet(context, "Home/index/edition", PHPHrGetVersion.class,
+                params, handler, isDialog);
     }
 
 }

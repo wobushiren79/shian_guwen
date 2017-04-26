@@ -104,7 +104,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 //        initLocation();
         startPushService();
         //检测更新
-//        Utils.checkUpData(this, false);
+        Utils.checkUpData(this, false);
     }
 
 

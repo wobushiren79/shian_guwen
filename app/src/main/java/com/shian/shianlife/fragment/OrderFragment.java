@@ -11,6 +11,7 @@ import com.shian.shianlife.common.utils.JSONUtil;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.utils.ViewPageAdapter;
 import com.shian.shianlife.common.view.order.BaseOrderView;
+import com.shian.shianlife.common.view.order.CemeteryBuildView;
 import com.shian.shianlife.common.view.order.CommonView;
 import com.shian.shianlife.common.view.order.ListFwpdzView;
 import com.shian.shianlife.common.view.order.OverServiceView;
@@ -50,6 +51,7 @@ public class OrderFragment extends BaseFragment {
 
     public static boolean C_bOrder_isRefresh;
     public static OrderFragmentCallBack orderFragmentCallBack;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,8 +59,6 @@ public class OrderFragment extends BaseFragment {
         ButterKnife.inject(this, v);
         return v;
     }
-
-
 
 
     @Override
@@ -71,34 +71,35 @@ public class OrderFragment extends BaseFragment {
         }
         setMsgCorner();
     }
-    public void setCallBack( OrderFragmentCallBack orderFragmentCallBack){
-        this.orderFragmentCallBack=orderFragmentCallBack;
+
+    public void setCallBack(OrderFragmentCallBack orderFragmentCallBack) {
+        this.orderFragmentCallBack = orderFragmentCallBack;
     }
 
     private void setMsgCorner() {
         List<TabPageIndicator.TabView> listTabView = indicator.getListTabView();
-        int cornerSize=getContext().getResources().getDimensionPixelSize(R.dimen.dimen_30dp);
+        int cornerSize = getContext().getResources().getDimensionPixelSize(R.dimen.dimen_30dp);
         if (AppContansts.MsgNumber != null) {
             for (TabPageIndicator.TabView tabview : listTabView) {
                 String titel = tabview.getText().toString();
                 switch (titel) {
                     case "洽谈":
-                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getTalk(),cornerSize);
+                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getTalk(), cornerSize);
                         break;
                     case "待服务":
-                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getService(),cornerSize);
+                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getService(), cornerSize);
                         break;
                     case "服务派单中":
-                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAssignment(),cornerSize);
+                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAssignment(), cornerSize);
                         break;
                     case "待评审":
-                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAuditing(),cornerSize);
+                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAuditing(), cornerSize);
                         break;
                     case "待收款":
-                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getUnpaid(),cornerSize);
+                        tabview.setMsgCornerNumber(AppContansts.MsgNumber.getUnpaid(), cornerSize);
                         break;
                     case "服务结束":
-                      //tabview.setMsgCornerNumber(AppContansts.MsgNumber.getEndService());
+                        //tabview.setMsgCornerNumber(AppContansts.MsgNumber.getEndService());
                         break;
                 }
             }
@@ -126,6 +127,7 @@ public class OrderFragment extends BaseFragment {
         arrTitles.clear();
         mLoginResult = JSONUtil.parseJSONString(getActivity().getIntent()
                 .getStringExtra("loginData"), HrLoginResult.class);
+        arrTitles.add("公墓单");
         for (Integer role : mLoginResult.getRoleIds()) {
             switch (role) {
                 case 1:
@@ -216,6 +218,9 @@ public class OrderFragment extends BaseFragment {
             } else if (n.equals("服务结束")) {
                 OverServiceView view = new OverServiceView(getActivity(), n);
                 views.add(view);
+            } else if (n.equals("公墓单")) {
+                CemeteryBuildView view = new CemeteryBuildView(getActivity());
+                views.add(view);
             }
         }
 
@@ -247,7 +252,8 @@ public class OrderFragment extends BaseFragment {
         // }
         // }
     }
-    public interface OrderFragmentCallBack{
+
+    public interface OrderFragmentCallBack {
         void changeMsgNum();
     }
 }

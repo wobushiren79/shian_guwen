@@ -135,7 +135,7 @@ public class MAccountManagerImpl implements MAccountManager {
 
     @Override
     public void getDictSelect(Context context, HpGetDictSelectParams params, HttpResponseHandler<HrGetDictSelectData> handler) {
-        excutor.requestPost(context, "marketing/dict/items/list", HrGetDictSelectData.class, params, handler);
+        excutor.requestCemeteryPost(context, "marketing/dict/items/list", HrGetDictSelectData.class, params, handler);
     }
 
     /**
@@ -692,7 +692,7 @@ public class MAccountManagerImpl implements MAccountManager {
 
     @Override
     public void saveCemeteryBuildData(Context context, HpSaveCemeteryBuildData params, HttpResponseHandler<Object> handler) {
-        excutor.requestPost(context, "marketing/bespeak/build/save", Object.class, params,
+        excutor.requestCemeteryPost(context, "marketing/bespeak/build/save", Object.class, params,
                 handler);
     }
 
@@ -759,7 +759,7 @@ public class MAccountManagerImpl implements MAccountManager {
 
     @Override
     public void getCemeteryStructure(Context context, HpCemeteryStructureParams params, HttpResponseHandler<HrGetCemeteryStructure> handler) {
-        excutor.requestPost(context, "marketing/cemetery/structure/list", HrGetCemeteryStructure.class, params,
+        excutor.requestCemeteryPost(context, "marketing/cemetery/structure/list", HrGetCemeteryStructure.class, params,
                 handler);
     }
 

@@ -41,6 +41,9 @@ public class TipsDialog extends Dialog {
 
     OnClickListener bottomClickListener;
 
+
+    boolean isBtn1V=false;
+    boolean isBtn2V=false;
     public TipsDialog(Context context) {
         super(context, R.style.tipsDialogStyle);
     }
@@ -50,6 +53,10 @@ public class TipsDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_tips);
         ButterKnife.inject(this);
+        if(isBtn1V)
+            tv_btn1.setVisibility(View.VISIBLE);
+        if(isBtn2V)
+            tv_btn2.setVisibility(View.VISIBLE);
         tv_title.setText(title);
         tv_top.setText(top);
         tv_btn1.setText(btn1Text);
@@ -82,7 +89,7 @@ public class TipsDialog extends Dialog {
      * @param onClickListener
      */
     public void setTopButton(String text, OnClickListener onClickListener) {
-        tv_btn1.setVisibility(View.VISIBLE);
+        isBtn1V=true;
         btn1Text = text;
         topClickListener = onClickListener;
     }
@@ -94,7 +101,7 @@ public class TipsDialog extends Dialog {
      * @param onClickListener
      */
     public void setBottomButton(String text, OnClickListener onClickListener) {
-        tv_btn2.setVisibility(View.VISIBLE);
+        isBtn2V=true;
         btn2Text = text;
         bottomClickListener = onClickListener;
     }

@@ -10,6 +10,18 @@ public class HpCemeteryStructureParams extends BaseHttpParams {
     private int itemType;//公墓结构项类型，值：0,公墓。1,苑，2,区，3排，4 号
     private long itemId;//
     private long parkIdTemp;//园区id，注：仅类型为4墓位号时，才启用园区id
+    /**
+     * 登录通行key
+     */
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public long getParkIdTemp() {
         return parkIdTemp;

@@ -16,7 +16,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Environment;
 
-import android.support.multidex.MultiDexApplication;
+
 import android.util.DisplayMetrics;
 import android.util.Log;
 
@@ -29,7 +29,7 @@ import com.shian.shianlife.common.local.LocationService;
 import com.shian.shianlife.common.utils.Utils;
 import com.tencent.bugly.crashreport.CrashReport;
 
-public class SaBaseApplication extends MultiDexApplication {
+public class SaBaseApplication extends Application {
     public static final Boolean LOGFLAG = true;
     public static final String DIR = Environment.getExternalStorageDirectory()
             .getAbsolutePath() + "/Victor/log/";

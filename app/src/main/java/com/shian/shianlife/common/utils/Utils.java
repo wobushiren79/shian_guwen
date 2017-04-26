@@ -257,22 +257,22 @@ public class Utils {
             @Override
             public void onSuccess(final PHPHrGetVersion result) {
                 try {
-                    float versionOld = SharePerfrenceUtils.getVersion(context);
-                    float versionNew = Float.valueOf(result.getVersionNum());
+                    float versionOld = Utils.getVersionCode(context);
+                    float versionNew = Float.valueOf(result.getItems().get(0).getVersionNum());
                     if (versionNew > versionOld) {
                         TipsDialog dialog = new TipsDialog(context);
-                        dialog.setTop("新版本：" + result.getUpdataTitle());
-                        dialog.setTitle("" + result.getUpdataContent());
+                        dialog.setTop("新版本：" + result.getItems().get(0).getUpdataTitle());
+                        dialog.setTitle("" + result.getItems().get(0).getUpdataContent());
                         dialog.setBottomButton("更新", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(context, UpDataService.class);
-                                intent.putExtra("updataUrl", result.getAppDownLoadUrl());
+                                intent.putExtra("updataUrl", AppContansts.PhpURL + result.getItems().get(0).getAppDownLoadUrl());
                                 context.startService(intent);
                                 dialog.cancel();
                             }
                         });
-                        if (result.getIsImportant() == UpDataImportantEnum.IMPORTANT.getCode()) {
+                        if (Integer.valueOf(result.getItems().get(0).getIsImportant()) == UpDataImportantEnum.IMPORTANT.getCode()) {
                             dialog.setCancelable(false);
                         } else {
                             dialog.setTopButton("取消", new DialogInterface.OnClickListener() {
@@ -298,7 +298,7 @@ public class Utils {
             public void onError(String message) {
 
             }
-        },isToast);
+        }, isToast);
     }
 
 }

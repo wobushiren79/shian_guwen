@@ -11,7 +11,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.IBinder;
+import android.text.TextUtils;
 import android.util.Log;
+import android.webkit.MimeTypeMap;
+import android.widget.Toast;
 
 import com.shian.shianlife.thisenum.APPTypeEnum;
 
@@ -70,7 +73,11 @@ public class UpDataService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // 调用下载
-        downloadURL = intent.getStringExtra("updataUrl");
+        try {
+            downloadURL = intent.getStringExtra("updataUrl");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (!isDown && downloadURL != null) {
             initDownManager();
         }
@@ -93,6 +100,8 @@ public class UpDataService extends Service {
 
     // 接受下载完成后的intent
     class DownloadCompleteReceiver extends BroadcastReceiver {
+        File targetApkFile = null;
+
         @Override
         public void onReceive(Context context, Intent intent) {
             //判断是否下载完成的广播
@@ -117,9 +126,22 @@ public class UpDataService extends Service {
                         //完成
                         Log.v("this", "下载完成");
                         //自动安装apk
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+//                            Uri uriForDownloadedFile = manager.getUriForDownloadedFile(downId);
+//                            installApkNew(uriForDownloadedFile);
+//                        }
+                        //6.0以上的更新处理
+                        if (Build.VERSION.SDK_INT < 23) {
                             Uri uriForDownloadedFile = manager.getUriForDownloadedFile(downId);
                             installApkNew(uriForDownloadedFile);
+                        } else {
+                            String uriString = c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
+                            if (!TextUtils.isEmpty(uriString)) {
+                                targetApkFile = new File(Uri.parse(uriString).getPath());
+                            }
+                            if (targetApkFile != null) {
+                                openFile(targetApkFile, context);
+                            }
                         }
                         break;
                     case DownloadManager.STATUS_FAILED:
@@ -154,8 +176,31 @@ public class UpDataService extends Service {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.setDataAndType(uri, "application/vnd.android.package-archive");
             //不加下面这句话是可以的，查考的里面说如果不加上这句的话在apk安装完成之后点击单开会崩溃
-            // android.os.Process.killProcess(android.os.Process.myPid());
+            android.os.Process.killProcess(android.os.Process.myPid());
             startActivity(intent);
+        }
+
+        private void openFile(File file, Context context) {
+            Intent intent = new Intent();
+            intent.addFlags(268435456);
+            intent.setAction("android.intent.action.VIEW");
+            String type = getMIMEType(file);
+            intent.setDataAndType(Uri.fromFile(file), type);
+            try {
+                context.startActivity(intent);
+            } catch (Exception var5) {
+                var5.printStackTrace();
+                Toast.makeText(context, "没有找到打开此类文件的程序", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+        private String getMIMEType(File var0) {
+            String var1 = "";
+            String var2 = var0.getName();
+            String var3 = var2.substring(var2.lastIndexOf(".") + 1, var2.length()).toLowerCase();
+            var1 = MimeTypeMap.getSingleton().getMimeTypeFromExtension(var3);
+            return var1;
         }
     }
 
