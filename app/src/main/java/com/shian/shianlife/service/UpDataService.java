@@ -131,10 +131,10 @@ public class UpDataService extends Service {
 //                            installApkNew(uriForDownloadedFile);
 //                        }
                         //6.0以上的更新处理
-                        if (Build.VERSION.SDK_INT < 23) {
-                            Uri uriForDownloadedFile = manager.getUriForDownloadedFile(downId);
-                            installApkNew(uriForDownloadedFile);
-                        } else {
+//                        if (Build.VERSION.SDK_INT < 23) {
+//                            Uri uriForDownloadedFile = manager.getUriForDownloadedFile(downId);
+//                            installApkNew(uriForDownloadedFile);
+//                        } else {
                             String uriString = c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
                             if (!TextUtils.isEmpty(uriString)) {
                                 targetApkFile = new File(Uri.parse(uriString).getPath());
@@ -142,7 +142,7 @@ public class UpDataService extends Service {
                             if (targetApkFile != null) {
                                 openFile(targetApkFile, context);
                             }
-                        }
+//                        }
                         break;
                     case DownloadManager.STATUS_FAILED:
                         //清除已下载的内容，重新下载

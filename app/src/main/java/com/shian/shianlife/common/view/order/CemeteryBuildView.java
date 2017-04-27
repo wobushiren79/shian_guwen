@@ -4,19 +4,26 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.chanven.lib.cptr.loadmore.OnLoadMoreListener;
 import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper;
 import com.shian.shianlife.R;
 import com.shian.shianlife.common.utils.TArrayListAdapter;
 import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.utils.ViewGropMap;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
+import com.shian.shianlife.provide.imp.impl.CemeteryOrderManagerImpl;
 import com.shian.shianlife.provide.imp.impl.OrderManagerImpl;
+import com.shian.shianlife.provide.model.CemeteryOrderModel;
 import com.shian.shianlife.provide.model.OrderListModel;
 import com.shian.shianlife.provide.params.HpGetOrderListParams;
+import com.shian.shianlife.provide.result.HrGetCemeteryListData;
 import com.shian.shianlife.provide.result.HrGetOrderListResult;
+import com.shian.shianlife.thisenum.CemeteryBeSpeakStateEnum;
 
 /**
  * Created by zm.
@@ -26,7 +33,7 @@ public class CemeteryBuildView extends BaseOrderView {
     View view;
     private SwipeRefreshLayout mSryt;
     private ListView mListView;
-    private TArrayListAdapter<OrderListModel> adapter;
+    private TArrayListAdapter<CemeteryOrderModel> adapter;
     private SwipeRefreshHelper mSwipeRefreshHelper;
     private int pageSize = 20;
     private int page = 1;
@@ -42,7 +49,7 @@ public class CemeteryBuildView extends BaseOrderView {
         mSryt = (SwipeRefreshLayout) view.findViewById(R.id.sryt_swipe_listview);
         mListView = (ListView) view.findViewById(R.id.lv_swipe_listview);
         mSryt.setColorSchemeColors(Color.BLUE);
-        adapter = new TArrayListAdapter<OrderListModel>(getContext());
+        adapter = new TArrayListAdapter<CemeteryOrderModel>(getContext());
     }
 
     private void initDate() {
@@ -66,15 +73,30 @@ public class CemeteryBuildView extends BaseOrderView {
     }
 
     private void initAdapter() {
-        adapter.setLayout(R.layout.view_item_overserver);
+        adapter.setLayout(R.layout.item_cemetery_build_list);
         adapter.setDrawViewEx(overDrawViewEx);
     }
 
-    TArrayListAdapter.IOnDrawViewEx<OrderListModel> overDrawViewEx = new TArrayListAdapter.IOnDrawViewEx<OrderListModel>() {
+    TArrayListAdapter.IOnDrawViewEx<CemeteryOrderModel> overDrawViewEx = new TArrayListAdapter.IOnDrawViewEx<CemeteryOrderModel>() {
 
         @Override
-        public void OnDrawViewEx(Context aContext, OrderListModel templateItem, ViewGropMap view, int aIndex) {
+        public void OnDrawViewEx(Context aContext, CemeteryOrderModel templateItem, ViewGropMap view, int aIndex) {
+            TextView tvAgentManName = (TextView) view.getView(R.id.tv_agentmanname);
+            TextView tvAgentManPhone = (TextView) view.getView(R.id.tv_agentmanphone);
+            TextView tvDeadManName = (TextView) view.getView(R.id.tv_deadmanname);
+            TextView tvCemeteryName = (TextView) view.getView(R.id.tv_cemeteryname);
+            TextView tvLocationName = (TextView) view.getView(R.id.tv_locationname);
+            TextView tvState = (TextView) view.getView(R.id.tv_state);
+            ImageView ivPhone = (ImageView)view.getView(R.id.iv_phone);
 
+            setState(tvState, templateItem);
+            tvAgentManName.setText(templateItem.getAgentmanName());
+            tvAgentManPhone.setText(templateItem.getAgentmanMoblie());
+            tvDeadManName.setText(templateItem.getDeadmanName());
+            tvCemeteryName.setText(templateItem.getChoiceCemeteryName());
+            tvLocationName.setText(templateItem.getDetailsLocation());
+
+            makePhone(ivPhone,templateItem);
         }
     };
 
@@ -83,11 +105,14 @@ public class CemeteryBuildView extends BaseOrderView {
         HpGetOrderListParams params = new HpGetOrderListParams();
         params.setPageNum(page);
         params.setPageSize(pageSize);
-//        OrderManagerImpl.getInstance().getOrderList(getContext(), params,
-//                orderType, new HttpResponseHandler<HrGetOrderListResult>() {
-//
-//                    @Override
-//                    public void onSuccess(HrGetOrderListResult result) {
+        CemeteryOrderManagerImpl.getInstance().getOrderList(getContext(), params, 1, new HttpResponseHandler<HrGetCemeteryListData>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(HrGetCemeteryListData result) {
 //                        if (result != null && result.getItems() != null
 //                                && result.getItems().size() > 0) {
 //                            adapter.addListData(result.getItems());
@@ -100,21 +125,13 @@ public class CemeteryBuildView extends BaseOrderView {
 //                        } else {
 //                            mSwipeRefreshHelper.loadMoreComplete(false);
 //                        }
-//
-//                    }
-//
-//                    @Override
-//                    public void onStart() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(String message) {
-//                        mSwipeRefreshHelper.loadMoreComplete(true);
-//                        mSwipeRefreshHelper.setLoadMoreEnable(true);
-//                    }
-//                });
+            }
 
+            @Override
+            public void onError(String message) {
+
+            }
+        });
     }
 
     protected void loadData() {
@@ -158,6 +175,35 @@ public class CemeteryBuildView extends BaseOrderView {
 //                    }
 //                });
 
+    }
+    /**
+     * 打电话
+     */
+    private void makePhone(View v, CemeteryOrderModel model) {
+        Utils.call(v, model.getCustomerMobile());
+    }
+
+    /**
+     * 设置状态
+     *
+     * @param tvState
+     */
+    private void setState(TextView tvState, CemeteryOrderModel data) {
+        CemeteryBeSpeakStateEnum[] beSpeakState = {
+                CemeteryBeSpeakStateEnum.undistributed,
+                CemeteryBeSpeakStateEnum.unassigned,
+                CemeteryBeSpeakStateEnum.unProcess,
+                CemeteryBeSpeakStateEnum.accepted,
+                CemeteryBeSpeakStateEnum.talkFail,
+                CemeteryBeSpeakStateEnum.talkSuccess,
+                CemeteryBeSpeakStateEnum.serviceOver
+        };
+        for (CemeteryBeSpeakStateEnum state : beSpeakState) {
+            if (data.getBespeakStatus() == state.getCode()) {
+                tvState.setText(state.getText());
+                return;
+            }
+        }
     }
 
     @Override

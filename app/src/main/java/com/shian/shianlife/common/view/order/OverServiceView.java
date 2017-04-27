@@ -206,11 +206,9 @@ public class OverServiceView extends BaseOrderView {
 			TextView tv_qt10 = (TextView) view.getView(R.id.tv_qt10);
 			TextView tv_qt20 = (TextView) view.getView(R.id.tv_qt20);
 			TextView tv_qt30 = (TextView) view.getView(R.id.tv_qt30);
-
 			// 订单编号
 			TextView tv_qt01 = (TextView) view.getView(R.id.tv_qt01);
 			tv_qt01.setText(model.getOrderNum());
-
 			// 治丧地址
 			TextView tv_qt11 = (TextView) view.getView(R.id.tv_qt11);
 			tv_qt11.setText(model.getFuneralAddress());

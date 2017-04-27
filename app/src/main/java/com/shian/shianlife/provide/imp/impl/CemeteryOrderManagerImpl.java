@@ -18,7 +18,7 @@ public class CemeteryOrderManagerImpl implements CemeteryOrderManager {
     private static volatile CemeteryOrderManagerImpl manager;
 
     private HttpRequestExecutor excutor;
-    private String[] getOrderListMethod = { "marketing/talks/overall/list", "cemetery/ordered/list/afterMarket", "cemetery/ordered/list/afterMarket" };
+    private String[] getOrderListMethod = { "marketing/talks/overall/list", "marketing/talks/overall/list"};
 
     private CemeteryOrderManagerImpl() {
         excutor = new HttpRequestExecutor();
@@ -41,7 +41,7 @@ public class CemeteryOrderManagerImpl implements CemeteryOrderManager {
      * @param context
      * @param params
      * @param orderType
-     *            0-洽谈列表 1-售后列表 2服务结束列表
+     *            0-洽谈列表 1-新建列表
      * @param response
      */
     @Override

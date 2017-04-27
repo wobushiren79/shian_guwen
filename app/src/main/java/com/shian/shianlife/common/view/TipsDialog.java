@@ -29,7 +29,7 @@ public class TipsDialog extends Dialog {
     @InjectView(R.id.tv_btn2)
     TextView tv_btn2;
 
-    String top;
+    String top="确认提交？";
 
     String title;
 

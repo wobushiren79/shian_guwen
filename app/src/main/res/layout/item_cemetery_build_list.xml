@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zhy_text_color_3"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimen_16dp"
+        android:layout_marginRight="@dimen/dimen_16dp"
+        android:layout_marginTop="@dimen/dimen_24dp"
+        android:background="@drawable/zhy_button_state_item_white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/ListItemTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="经办人" />
+
+            <TextView
+                android:id="@+id/tv_agentmanname"
+                style="@style/ListItemContent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_state"
+                style="@style/ListItemContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dimen_16dp"
+                android:layout_weight="0.1"
+                android:gravity="right"
+                android:textColor="@color/zhy_text_color_4" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_text_color_3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/ListItemTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="经办人电话" />
+
+            <TextView
+                android:id="@+id/tv_agentmanphone"
+                style="@style/ListItemContent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/iv_phone"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/dimen_16dp"
+                android:background="@drawable/ic_qt_phone" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_text_color_3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/ListItemTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="使用者" />
+
+            <TextView
+                android:id="@+id/tv_deadmanname"
+                style="@style/ListItemContent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_text_color_3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/ListItemTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="公墓名称" />
+
+            <TextView
+                android:id="@+id/tv_cemeteryname"
+                style="@style/ListItemContent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_text_color_3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/ListItemTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="园区名称" />
+
+            <TextView
+                android:id="@+id/tv_locationname"
+                style="@style/ListItemContent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
