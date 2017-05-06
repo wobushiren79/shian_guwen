@@ -20,6 +20,7 @@ import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper.OnSwipeRefreshListener;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.OrderDetailActivity;
 import com.shian.shianlife.activity.map.NewRoutePlanActivity;
+import com.shian.shianlife.activity.map.NewRoutePlanOtherActivity;
 import com.shian.shianlife.activity.updata.WaitServiceDataActivity;
 import com.shian.shianlife.common.utils.TArrayListAdapter;
 import com.shian.shianlife.common.utils.TArrayListAdapter.IOnDrawViewEx;
@@ -215,7 +216,7 @@ public class WaitServiceView extends BaseOrderView {
                 ivMap.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getContext(), NewRoutePlanActivity.class);
+                        Intent intent = new Intent(getContext(), NewRoutePlanOtherActivity.class);
                         intent.putExtra("LocationType",3);
                         intent.putExtra("ConsultId",model.getConsultId());
                         intent.putExtra("RoutePlanLocation", model.getUsageCurAddress());

@@ -7,6 +7,7 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.activity.OrderDetailActivity;
 import com.shian.shianlife.activity.PgzxActivity;
 import com.shian.shianlife.activity.map.NewRoutePlanActivity;
+import com.shian.shianlife.activity.map.NewRoutePlanOtherActivity;
 import com.shian.shianlife.activity.map.RoutePlanActivity;
 import com.shian.shianlife.common.utils.TArrayListAdapter;
 import com.shian.shianlife.common.utils.TArrayListAdapter.IOnDrawViewEx;
@@ -209,7 +210,7 @@ public class ListFwpdzView extends BaseOrderView {
                     button_map.setOnClickListener(new OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(getContext(),NewRoutePlanActivity.class);
+                            Intent intent = new Intent(getContext(),NewRoutePlanOtherActivity.class);
                             intent.putExtra("LocationType",2);
                             intent.putExtra("ConsultId",model.getConsultId());
                             intent.putExtra("RoutePlanLocation", model.getFuneralAddress());

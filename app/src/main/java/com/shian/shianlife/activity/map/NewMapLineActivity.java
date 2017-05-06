@@ -110,7 +110,7 @@ public class NewMapLineActivity extends Activity {
     }
 
     private void initData() {
-        SearchResult result = NewRoutePlanActivity.result;
+        SearchResult result = NewRoutePlanOtherActivity.result;
         endPointStr = getIntent().getStringExtra("MapLineEndPoint");
         if (result instanceof WalkingRouteResult) {
             lineType = 1;
@@ -183,6 +183,7 @@ public class NewMapLineActivity extends Activity {
         listData.addAll(walkResult.getRouteLines().get(position).getAllStep());
         int time = walkResult.getRouteLines().get(position).getDuration();
         int distance = walkResult.getRouteLines().get(position).getDistance();
+
         setHeadInfo(AppContansts.LOCAL_STREET + " 至 " + endPointStr, time, distance);
     }
 

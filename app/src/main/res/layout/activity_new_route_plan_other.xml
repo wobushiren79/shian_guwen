@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_new_route_plan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.shian.shianlife.activity.map.NewRoutePlanActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_600dp">
+
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/map"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="true" />
+
+        <ImageView
+            android:id="@+id/iv_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/zhy_map_point_2" />
+
+        <Button
+            android:id="@+id/map_back"
+            android:layout_width="@dimen/dimen_72dp"
+            android:layout_height="@dimen/dimen_72dp"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:background="@drawable/zhy_map_back" />
+
+        <Button
+            android:id="@+id/map_more"
+            android:layout_width="@dimen/dimen_72dp"
+            android:layout_height="@dimen/dimen_72dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:background="@drawable/zhy_map_more" />
+
+
+        <Button
+            android:id="@+id/map_mylocation"
+            android:layout_width="@dimen/dimen_72dp"
+            android:layout_height="@dimen/dimen_72dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dimen_20dp"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:background="@drawable/zhy_map_mylocation" />
+
+        <Button
+            android:layout_width="@dimen/dimen_72dp"
+            android:layout_height="@dimen/dimen_72dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/dimen_20dp"
+            android:layout_marginRight="@dimen/dimen_20dp"
+            android:background="@drawable/zhy_map_search_2" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_data"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_text_color_2" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:text="点击前往方式"
+            android:textColor="@color/zhy_title_color_1"
+            android:textSize="@dimen/dimen_30dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_21dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dimen_34dp"
+            android:layout_weight="1"
+            android:scaleType="fitStart"
+            android:src="@drawable/zhy_map_icon_other_1" />
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_120dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/map_walk"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:src="@drawable/zhy_map_walk_bt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:text="步行"
+                android:textColor="@color/zhy_text_color_1"
+                android:textSize="@dimen/dimen_20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_120dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/map_bus"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:src="@drawable/zhy_map_bus_bt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+
+                android:text="公交"
+                android:textColor="@color/zhy_text_color_1"
+                android:textSize="@dimen/dimen_20dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_120dp"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/map_drive"
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:src="@drawable/zhy_map_drive_bt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+
+                android:text="驾车"
+                android:textColor="@color/zhy_text_color_1"
+                android:textSize="@dimen/dimen_20dp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

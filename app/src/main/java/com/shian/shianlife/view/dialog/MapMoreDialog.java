@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.map.NewMapChoiceActivity;
-import com.shian.shianlife.activity.map.NewRoutePlanActivity;
+import com.shian.shianlife.activity.map.NewRoutePlanOtherActivity;
 import com.shian.shianlife.common.utils.ToastUtils;
 
 /**
@@ -66,7 +66,7 @@ public class MapMoreDialog extends Dialog {
     };
 
     private void changeLocation() {
-        if(NewRoutePlanActivity.consultId==-1||NewRoutePlanActivity.locationType==-1){
+        if(NewRoutePlanOtherActivity.consultId==-1||NewRoutePlanOtherActivity.locationType==-1){
             ToastUtils.show(getContext(),"不能更改当前地址");
         }else{
             Intent intent = new Intent(getContext(), NewMapChoiceActivity.class);

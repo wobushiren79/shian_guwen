@@ -2,8 +2,15 @@ package com.shian.shianlife.activity.map;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ZoomControls;
@@ -16,10 +23,21 @@ import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
 import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.Overlay;
 import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.map.Projection;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.model.LatLngBounds;
+import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
+import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiDetailResult;
+import com.baidu.mapapi.search.poi.PoiIndoorResult;
+import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
+import com.baidu.mapapi.search.poi.PoiResult;
+import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.search.route.BikingRouteResult;
 import com.baidu.mapapi.search.route.DrivingRouteLine;
 import com.baidu.mapapi.search.route.DrivingRoutePlanOption;
@@ -36,37 +54,41 @@ import com.baidu.mapapi.search.route.WalkingRouteLine;
 import com.baidu.mapapi.search.route.WalkingRoutePlanOption;
 import com.baidu.mapapi.search.route.WalkingRouteResult;
 import com.shian.shianlife.R;
+import com.shian.shianlife.adapter.MapSearchAdapter;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
-import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.mapapi.CustomDialog;
 import com.shian.shianlife.view.dialog.MapMoreDialog;
 
-public class NewRoutePlanActivity extends BaseActivity implements BaiduMap.OnMapClickListener, OnGetRoutePlanResultListener {
+import java.util.ArrayList;
+import java.util.List;
+
+public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.OnMapClickListener, OnGetRoutePlanResultListener, OnGetPoiSearchResultListener {
     Button mMapBack;
     Button mMapMore;
-    Button mResetLocation;
     Button mMapMyLocation;
 
-    ImageView mMapWalk;
-    ImageView mMapBus;
-    ImageView mMapDrive;
-
+    ImageView mIVCenter;
     MapView mMapView;
+
+    RecyclerView mListView;
 
     BaiduMap mBaiduMap;
 
     RoutePlanSearch mSearch = null;    // 搜索模块，也可去掉地图模块独立使用
+    PoiSearch mPoiSearch = null;
 
     private final static double mapCenterlatitude = 30.6634450000;
     private final static double mapCenterlongitude = 104.0722210000;
+
+    List<PoiInfo> searchListData = new ArrayList<>();
+    MapSearchAdapter mapSearchAdapter;
 
     String endPointStr;
     String checkEndPointStr;
     LatLng endPointLatLng;
     boolean isUseNumPoint = false;//是否使用经纬来搜索
-    boolean isFirstSearch = true;//是否是第一次搜索
 
     int nowSearchType = 3;//当前的搜索状态。0跨城公交 1开车 2公车 3走路 4自行车
 
@@ -78,7 +100,7 @@ public class NewRoutePlanActivity extends BaseActivity implements BaiduMap.OnMap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_route_plan);
+        setContentView(R.layout.activity_new_route_plan_other);
 
         initView();//初始化控件
         initMap();//初始化地图设置
@@ -101,32 +123,34 @@ public class NewRoutePlanActivity extends BaseActivity implements BaiduMap.OnMap
     private void initView() {
         mMapBack = (Button) findViewById(R.id.map_back);
         mMapMore = (Button) findViewById(R.id.map_more);
-        mResetLocation = (Button) findViewById(R.id.map_resetlocation);
         mMapMyLocation = (Button) findViewById(R.id.map_mylocation);
-
-        mMapWalk = (ImageView) findViewById(R.id.map_walk);
-        mMapBus = (ImageView) findViewById(R.id.map_bus);
-        mMapDrive = (ImageView) findViewById(R.id.map_drive);
-
+        mIVCenter = (ImageView) findViewById(R.id.iv_center);
         mMapView = (MapView) findViewById(R.id.map);
+        mListView = (RecyclerView) findViewById(R.id.list_data);
+
         mBaiduMap = mMapView.getMap();
 
         mMapBack.setOnClickListener(onClickListener);
         mMapMore.setOnClickListener(onClickListener);
-        mMapWalk.setOnClickListener(onClickListener);
-        mMapBus.setOnClickListener(onClickListener);
-        mMapDrive.setOnClickListener(onClickListener);
-        mResetLocation.setOnClickListener(onClickListener);
+
         mMapMyLocation.setOnClickListener(onClickListener);
+        mapSearchAdapter = new MapSearchAdapter(NewRoutePlanOtherActivity.this, searchListData);
+        mListView.setAdapter(mapSearchAdapter);
+        mListView.setLayoutManager(new LinearLayoutManager(NewRoutePlanOtherActivity.this));
     }
 
     /**
      * 初始化地图设置
      */
     private void initMap() {
+        //地图滑动事件
+        mBaiduMap.setOnMapStatusChangeListener(onMapStatusChangeListener);
         // 初始化搜索模块，注册事件监听
         mSearch = RoutePlanSearch.newInstance();
         mSearch.setOnGetRoutePlanResultListener(this);
+
+        mPoiSearch = PoiSearch.newInstance();
+        mPoiSearch.setOnGetPoiSearchResultListener(this);
         // 地图点击事件处理
         mBaiduMap.setOnMapClickListener(this);
         //设定中心点坐标
@@ -166,7 +190,7 @@ public class NewRoutePlanActivity extends BaseActivity implements BaiduMap.OnMap
         PlanNode enNode = null;
         if (isUseNumPoint) {
             if (endPointLatLng == null) {
-                ToastUtils.show(NewRoutePlanActivity.this, "还没有选择终点");
+                ToastUtils.show(NewRoutePlanOtherActivity.this, "还没有选择终点");
                 return;
             }
             enNode = PlanNode.withLocation(endPointLatLng);
@@ -206,7 +230,7 @@ public class NewRoutePlanActivity extends BaseActivity implements BaiduMap.OnMap
 //        }
         //绘制我的位置
         drawMyLocation();
-        dialog = new CustomDialog(NewRoutePlanActivity.this);
+        dialog = new CustomDialog(NewRoutePlanOtherActivity.this);
         dialog.show();
     }
 
@@ -214,7 +238,7 @@ public class NewRoutePlanActivity extends BaseActivity implements BaiduMap.OnMap
      * 更多操作
      */
     private void moreOperate() {
-        MapMoreDialog dialog = new MapMoreDialog(NewRoutePlanActivity.this, R.style.CustomDialog);
+        MapMoreDialog dialog = new MapMoreDialog(NewRoutePlanOtherActivity.this, R.style.CustomDialog);
         dialog.setDialogCallBack(new MapMoreDialog.DialogCallBack() {
             @Override
             public void changeLocation() {
@@ -235,34 +259,10 @@ public class NewRoutePlanActivity extends BaseActivity implements BaiduMap.OnMap
             } else if (v == mMapMyLocation) {
                 //返回我的位置
                 backMyLocation();
-            } else if (v == mResetLocation) {
-                setPointMode();
-            } else if (v == mMapWalk) {
-                searchProcess(mMapWalk);
-            } else if (v == mMapBus) {
-                searchProcess(mMapBus);
-            } else if (v == mMapDrive) {
-                searchProcess(mMapDrive);
             }
         }
     };
 
-
-    /**
-     * 切换模式
-     */
-    private void setPointMode() {
-        mBaiduMap.clear();
-        drawMyLocation();
-        endPointLatLng = null;
-        if (isUseNumPoint) {
-            isUseNumPoint = false;
-            mResetLocation.setBackgroundResource(R.drawable.zhy_map_getpoint);
-        } else {
-            isUseNumPoint = true;
-            mResetLocation.setBackgroundResource(R.drawable.zhy_map_getpoint_check);
-        }
-    }
 
     /**
      * 返回我的位置
@@ -295,7 +295,7 @@ public class NewRoutePlanActivity extends BaseActivity implements BaiduMap.OnMap
      *
      * @param locationLatLng
      */
-    private void drawLocation(LatLng locationLatLng) {
+    private Overlay drawLocation(LatLng locationLatLng) {
         //构建Marker图标
         BitmapDescriptor bitmap = BitmapDescriptorFactory
                 .fromResource(R.drawable.zhy_map_point_2);
@@ -304,7 +304,8 @@ public class NewRoutePlanActivity extends BaseActivity implements BaiduMap.OnMap
                 .position(locationLatLng)
                 .icon(bitmap);
         //在地图上添加Marker，并显示
-        mBaiduMap.addOverlay(option);
+        Overlay overlay = mBaiduMap.addOverlay(option);
+        return overlay;
     }
 
     @Override
@@ -360,28 +361,60 @@ public class NewRoutePlanActivity extends BaseActivity implements BaiduMap.OnMap
 
     }
 
+    @Override
+    public void onGetPoiResult(PoiResult poiResult) {
+        if (poiResult != null && poiResult.error == SearchResult.ERRORNO.NO_ERROR) {
+            searchListData.clear();
+            searchListData.addAll(poiResult.getAllPoi());
+            mapSearchAdapter.notifyDataSetChanged();
+            List<Overlay> listOverlay = new ArrayList<>();
+            for (PoiInfo data : searchListData) {
+                Overlay overlay = drawLocation(data.location);
+                listOverlay.add(overlay);
+            }
+//           zoomToSpan(listOverlay);
+        }
+    }
+
+    @Override
+    public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
+
+    }
+
+    @Override
+    public void onGetPoiIndoorResult(PoiIndoorResult poiIndoorResult) {
+        poiIndoorResult.getmArrayPoiInfo();
+    }
+
+
+    /**
+     * 交通工具结果处理
+     *
+     * @param result
+     */
     private void resultDeal(SearchResult result) {
         this.result = result;
         if (dialog != null) {
             dialog.cancel();
         }
-
+        LatLng latlng=new LatLng(AppContansts.LOCAL_latitude,AppContansts.LOCAL_longitude);
+        searchNearBy(latlng);
         if (result == null) {
             //没有找到地址
-            ToastUtils.showLongTime(NewRoutePlanActivity.this, "没有找到地址,请点击地图选择终点位置");
+            ToastUtils.showLongTime(NewRoutePlanOtherActivity.this, "没有找到地址,请点击地图选择终点位置");
             return;
         }
         if (result.error == SearchResult.ERRORNO.AMBIGUOUS_ROURE_ADDR) {
             // 起终点或途经点地址有岐义，通过以下接口获取建议查询信息
-            ToastUtils.showLongTime(NewRoutePlanActivity.this, "没有找到地址,请点击地图选择终点位置");
+            ToastUtils.showLongTime(NewRoutePlanOtherActivity.this, "没有找到地址,请点击地图选择终点位置");
             return;
         }
         if (result.error == SearchResult.ERRORNO.ST_EN_TOO_NEAR) {
-            ToastUtils.showLongTime(NewRoutePlanActivity.this, "目的地太近没有搜索到线路，请尝试其他搜索方式");
+            ToastUtils.showLongTime(NewRoutePlanOtherActivity.this, "目的地太近没有搜索到线路，请尝试其他搜索方式");
             return;
         }
         if (result.error == SearchResult.ERRORNO.RESULT_NOT_FOUND) {
-            ToastUtils.showLongTime(NewRoutePlanActivity.this, "没有找到可规划的路径");
+            ToastUtils.showLongTime(NewRoutePlanOtherActivity.this, "没有找到可规划的路径");
             return;
         }
         if (result.error == SearchResult.ERRORNO.NO_ERROR) {
@@ -401,7 +434,7 @@ public class NewRoutePlanActivity extends BaseActivity implements BaiduMap.OnMap
                 LatLng latLng = line.getTerminal().getLocation();
                 drawLocation(latLng);
             }
-            Intent intent = new Intent(NewRoutePlanActivity.this, NewMapLineActivity.class);
+            Intent intent = new Intent(NewRoutePlanOtherActivity.this, NewMapLineActivity.class);
             if (isUseNumPoint) {
                 intent.putExtra("MapLineEndPoint", checkEndPointStr);
             } else {
@@ -415,5 +448,73 @@ public class NewRoutePlanActivity extends BaseActivity implements BaiduMap.OnMap
     protected void onDestroy() {
         super.onDestroy();
         result = null;
+        mPoiSearch.destroy();
+    }
+
+    /**
+     * 地图滑动监听
+     */
+    BaiduMap.OnMapStatusChangeListener onMapStatusChangeListener = new BaiduMap.OnMapStatusChangeListener() {
+        @Override
+        public void onMapStatusChangeStart(MapStatus mapStatus) {
+
+        }
+
+        @Override
+        public void onMapStatusChangeFinish(MapStatus mapStatus) {
+            // 滑动搜索\
+            LatLng latlng = mapStatus.target;
+            searchNearBy(latlng);
+        }
+
+        @Override
+        public void onMapStatusChange(MapStatus mapStatus) {
+        }
+    };
+
+    /**
+     * 搜索附近
+     * @param latlng
+     */
+    private void searchNearBy(LatLng latlng) {
+        mBaiduMap.clear();
+        endPointLatLng = latlng;
+        iconAnim(mIVCenter);
+        mPoiSearch.searchNearby
+                (new PoiNearbySearchOption().location(endPointLatLng).radius(1000).keyword("小区"));
+    }
+
+    private void iconAnim(View view) {
+        TranslateAnimation animation = new TranslateAnimation
+                (Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0,
+                        Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, -0.3f);
+        animation.setDuration(200);
+        animation.setRepeatMode(Animation.REVERSE);
+        animation.setRepeatCount(1);
+        animation.setInterpolator(new LinearInterpolator());
+        view.startAnimation(animation);
+    }
+
+    /**
+     * 缩放地图，使所有Overlay都在合适的视野内
+     * <p>
+     * 注： 该方法只对Marker类型的overlay有效
+     * </p>
+     */
+    public void zoomToSpan(List<Overlay> mOverlayList) {
+        if (mBaiduMap == null) {
+            return;
+        }
+        if (mOverlayList.size() > 0) {
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (Overlay overlay : mOverlayList) {
+                // polyline 中的点可能太多，只按marker 缩放
+                if (overlay instanceof Marker) {
+                    builder.include(((Marker) overlay).getPosition());
+                }
+            }
+            mBaiduMap.setMapStatus(MapStatusUpdateFactory
+                    .newLatLngBounds(builder.build()));
+        }
     }
 }
