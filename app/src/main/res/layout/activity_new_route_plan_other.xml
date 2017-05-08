@@ -52,6 +52,7 @@
             android:background="@drawable/zhy_map_mylocation" />
 
         <Button
+            android:id="@+id/map_search"
             android:layout_width="@dimen/dimen_72dp"
             android:layout_height="@dimen/dimen_72dp"
             android:layout_alignParentBottom="true"
@@ -59,12 +60,61 @@
             android:layout_marginBottom="@dimen/dimen_20dp"
             android:layout_marginRight="@dimen/dimen_20dp"
             android:background="@drawable/zhy_map_search_2" />
+
+        <LinearLayout
+            android:id="@+id/ll_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_100dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/zhy_map_search_back"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dimen_32dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:textColor="@color/dimgray"
+                android:textSize="@dimen/dimen_32dp" />
+
+            <TextView
+                android:layout_width="@dimen/dimen_1dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:background="@color/zhy_line_2"
+                android:gravity="center_vertical" />
+
+            <LinearLayout
+                android:id="@+id/iv_search"
+                android:layout_width="@dimen/dimen_92dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_36dp"
+                    android:layout_height="@dimen/dimen_36dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/zhy_map_search" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_line_3" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_data"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1"></android.support.v7.widget.RecyclerView>
 
     <TextView
@@ -97,8 +147,10 @@
             android:src="@drawable/zhy_map_icon_other_1" />
 
         <LinearLayout
+            android:id="@+id/ll_walk"
             android:layout_width="@dimen/dimen_120dp"
             android:layout_height="match_parent"
+            android:background="@drawable/zhy_map_radio_back"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -106,22 +158,22 @@
                 android:id="@+id/map_walk"
                 android:layout_width="@dimen/dimen_40dp"
                 android:layout_height="@dimen/dimen_40dp"
-                android:layout_marginTop="@dimen/dimen_10dp"
-                android:src="@drawable/zhy_map_walk_bt" />
+                android:src="@drawable/zhy_map_walk_check" />
 
             <TextView
+                android:id="@+id/tv_walk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_10dp"
                 android:text="步行"
-                android:textColor="@color/zhy_text_color_1"
+                android:textColor="@color/white"
                 android:textSize="@dimen/dimen_20dp" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_bus"
             android:layout_width="@dimen/dimen_120dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -129,14 +181,12 @@
                 android:id="@+id/map_bus"
                 android:layout_width="@dimen/dimen_40dp"
                 android:layout_height="@dimen/dimen_40dp"
-                android:layout_marginTop="@dimen/dimen_10dp"
-                android:src="@drawable/zhy_map_bus_bt" />
+                android:src="@drawable/zhy_map_bus_uncheck" />
 
             <TextView
+                android:id="@+id/tv_bus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-
                 android:text="公交"
                 android:textColor="@color/zhy_text_color_1"
                 android:textSize="@dimen/dimen_20dp" />
@@ -144,9 +194,9 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_drive"
             android:layout_width="@dimen/dimen_120dp"
-            android:layout_height="wrap_content"
-
+            android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -154,14 +204,12 @@
                 android:id="@+id/map_drive"
                 android:layout_width="@dimen/dimen_40dp"
                 android:layout_height="@dimen/dimen_40dp"
-                android:layout_marginTop="@dimen/dimen_10dp"
-                android:src="@drawable/zhy_map_drive_bt" />
+                android:src="@drawable/zhy_map_drive_uncheck" />
 
             <TextView
+                android:id="@+id/tv_drive"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dimen_10dp"
-
                 android:text="驾车"
                 android:textColor="@color/zhy_text_color_1"
                 android:textSize="@dimen/dimen_20dp" />

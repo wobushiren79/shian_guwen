@@ -12,7 +12,10 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.ZoomControls;
 
 import com.baidu.mapapi.map.BaiduMap;
@@ -33,6 +36,7 @@ import com.baidu.mapapi.model.LatLngBounds;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiCitySearchOption;
 import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.baidu.mapapi.search.poi.PoiIndoorResult;
 import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
@@ -59,6 +63,7 @@ import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.mapapi.CustomDialog;
+import com.shian.shianlife.thisenum.MapLineStateEnum;
 import com.shian.shianlife.view.dialog.MapMoreDialog;
 
 import java.util.ArrayList;
@@ -68,7 +73,20 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
     Button mMapBack;
     Button mMapMore;
     Button mMapMyLocation;
+    Button mMapSearch;
+    ImageView mIVWalk;
+    ImageView mIVBus;
+    ImageView mIVDrive;
+    LinearLayout mIVSearch;
+    TextView mTVWalk;
+    TextView mTVBus;
+    TextView mTVDrive;
+    LinearLayout mLLWalk;
+    LinearLayout mLLBus;
+    LinearLayout mLLDrive;
 
+    EditText mETSearch;
+    LinearLayout mLLSearch;
     ImageView mIVCenter;
     MapView mMapView;
 
@@ -89,9 +107,8 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
     String checkEndPointStr;
     LatLng endPointLatLng;
     boolean isUseNumPoint = false;//是否使用经纬来搜索
-
-    int nowSearchType = 3;//当前的搜索状态。0跨城公交 1开车 2公车 3走路 4自行车
-
+    boolean isSearchMod = false;
+    int lineType = MapLineStateEnum.WALK.getCode();
     public static SearchResult result;
     public static int locationType = -1;//需要修改的地址类型 1经办人地址、2治丧地址、3往生者地址、4去世地址、5殡仪馆地址、6治丧约见地址、7出殡前地址、8出殡当天地址、9客户当前地址
     public static long consultId = -1;
@@ -106,7 +123,7 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
         initMap();//初始化地图设置
         initData();//初始化数据
         //开始搜索
-        searchProcess(null);
+        searchProcess();
     }
 
     private void initData() {
@@ -124,19 +141,48 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
         mMapBack = (Button) findViewById(R.id.map_back);
         mMapMore = (Button) findViewById(R.id.map_more);
         mMapMyLocation = (Button) findViewById(R.id.map_mylocation);
+        mMapSearch = (Button) findViewById(R.id.map_search);
         mIVCenter = (ImageView) findViewById(R.id.iv_center);
         mMapView = (MapView) findViewById(R.id.map);
         mListView = (RecyclerView) findViewById(R.id.list_data);
+        mIVSearch = (LinearLayout) findViewById(R.id.iv_search);
+        mIVWalk = (ImageView) findViewById(R.id.map_walk);
+        mIVBus = (ImageView) findViewById(R.id.map_bus);
+        mIVDrive = (ImageView) findViewById(R.id.map_drive);
+
+        mTVBus = (TextView) findViewById(R.id.tv_bus);
+        mTVWalk = (TextView) findViewById(R.id.tv_walk);
+        mTVDrive = (TextView) findViewById(R.id.tv_drive);
+
+        mLLWalk = (LinearLayout) findViewById(R.id.ll_walk);
+        mLLBus = (LinearLayout) findViewById(R.id.ll_bus);
+        mLLDrive = (LinearLayout) findViewById(R.id.ll_drive);
+        mLLSearch = (LinearLayout) findViewById(R.id.ll_search);
+        mETSearch = (EditText) findViewById(R.id.et_search);
 
         mBaiduMap = mMapView.getMap();
 
+        mIVSearch.setOnClickListener(onClickListener);
         mMapBack.setOnClickListener(onClickListener);
         mMapMore.setOnClickListener(onClickListener);
-
+        mMapSearch.setOnClickListener(onClickListener);
+        mLLWalk.setOnClickListener(onClickListener);
+        mLLBus.setOnClickListener(onClickListener);
+        mLLDrive.setOnClickListener(onClickListener);
+        mIVSearch.setOnClickListener(onClickListener);
         mMapMyLocation.setOnClickListener(onClickListener);
+
         mapSearchAdapter = new MapSearchAdapter(NewRoutePlanOtherActivity.this, searchListData);
         mListView.setAdapter(mapSearchAdapter);
         mListView.setLayoutManager(new LinearLayoutManager(NewRoutePlanOtherActivity.this));
+        mapSearchAdapter.setCallBack(new MapSearchAdapter.CallBack() {
+            @Override
+            public void onItemClick(PoiInfo data) {
+                endPointLatLng = data.location;
+                checkEndPointStr = data.name;
+                searchProcess();
+            }
+        });
     }
 
     /**
@@ -179,10 +225,8 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
 
     /**
      * 搜索
-     *
-     * @param v
      */
-    private void searchProcess(View v) {
+    private void searchProcess() {
         // 处理搜索按钮响应
         // 设置起终点信息，对于tranist search 来说，城市名无意义
         LatLng latLngStart = new LatLng(AppContansts.LOCAL_latitude, AppContansts.LOCAL_longitude);
@@ -200,22 +244,18 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
         // 重置浏览节点的路线数据
         mBaiduMap.clear();
         // 实际使用中请对起点终点城市进行正确的设定
-        if (v == null) {
+        if (lineType == MapLineStateEnum.WALK.getCode()) {
             mSearch.walkingSearch((new WalkingRoutePlanOption())
                     .from(stNode).to(enNode));
-            nowSearchType = 3;
-        } else if (v.getId() == R.id.map_drive) {
+        } else if (lineType == MapLineStateEnum.DRIVE.getCode()) {
             mSearch.drivingSearch((new DrivingRoutePlanOption())
                     .from(stNode).to(enNode));
-            nowSearchType = 1;
-        } else if (v.getId() == R.id.map_bus) {
+        } else if (lineType == MapLineStateEnum.BUS.getCode()) {
             mSearch.transitSearch((new TransitRoutePlanOption())
                     .from(stNode).city(AppContansts.LOCAL_CITY).to(enNode));
-            nowSearchType = 2;
-        } else if (v.getId() == R.id.map_walk) {
+        } else if (lineType == MapLineStateEnum.WALK.getCode()) {
             mSearch.walkingSearch((new WalkingRoutePlanOption())
                     .from(stNode).to(enNode));
-            nowSearchType = 3;
         }
         //        else if (v.getId() == R.id.mass) {
 //            PlanNode stMassNode = PlanNode.withCityNameAndPlaceName("北京", "天安门");
@@ -229,7 +269,7 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
 //            nowSearchType = 4;
 //        }
         //绘制我的位置
-        drawMyLocation();
+//        drawMyLocation();
         dialog = new CustomDialog(NewRoutePlanOtherActivity.this);
         dialog.show();
     }
@@ -259,10 +299,70 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
             } else if (v == mMapMyLocation) {
                 //返回我的位置
                 backMyLocation();
+            } else if (v == mMapSearch) {
+                changeSearchMode(true);
+            } else if (v == mLLWalk) {
+                changeState(MapLineStateEnum.WALK.getCode());
+            } else if (v == mLLBus) {
+                changeState(MapLineStateEnum.BUS.getCode());
+            } else if (v == mLLDrive) {
+                changeState(MapLineStateEnum.DRIVE.getCode());
+            } else if (v == mIVSearch) {
+                searchCity();
             }
         }
     };
 
+    void changeSearchMode(boolean isSearchMod) {
+        this.isSearchMod = isSearchMod;
+        if (isSearchMod) {
+            mMapMyLocation.setVisibility(View.GONE);
+            mMapSearch.setVisibility(View.GONE);
+            mLLSearch.setVisibility(View.VISIBLE);
+        } else {
+            mMapMyLocation.setVisibility(View.VISIBLE);
+            mMapSearch.setVisibility(View.VISIBLE);
+            mLLSearch.setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * 改变线路方式
+     */
+    private void changeState(int type) {
+        lineType = type;
+        if (type == MapLineStateEnum.WALK.getCode()) {
+            mIVWalk.setImageResource(R.drawable.zhy_map_walk_check);
+            mIVBus.setImageResource(R.drawable.zhy_map_bus_uncheck);
+            mIVDrive.setImageResource(R.drawable.zhy_map_drive_uncheck);
+            mTVWalk.setTextColor(getResources().getColor(R.color.white));
+            mTVBus.setTextColor(getResources().getColor(R.color.zhy_text_color_1));
+            mTVDrive.setTextColor(getResources().getColor(R.color.zhy_text_color_1));
+            mLLWalk.setBackgroundResource(R.drawable.zhy_map_radio_back);
+            mLLBus.setBackgroundResource(0);
+            mLLDrive.setBackgroundResource(0);
+        } else if (type == MapLineStateEnum.BUS.getCode()) {
+            mIVWalk.setImageResource(R.drawable.zhy_map_walk_uncheck);
+            mIVBus.setImageResource(R.drawable.zhy_map_bus_check);
+            mIVDrive.setImageResource(R.drawable.zhy_map_drive_uncheck);
+            mTVWalk.setTextColor(getResources().getColor(R.color.zhy_text_color_1));
+            mTVBus.setTextColor(getResources().getColor(R.color.white));
+            mTVDrive.setTextColor(getResources().getColor(R.color.zhy_text_color_1));
+            mLLWalk.setBackgroundResource(0);
+            mLLBus.setBackgroundResource(R.drawable.zhy_map_radio_back);
+            mLLDrive.setBackgroundResource(0);
+        } else if (type == MapLineStateEnum.DRIVE.getCode()) {
+            mIVWalk.setImageResource(R.drawable.zhy_map_walk_uncheck);
+            mIVBus.setImageResource(R.drawable.zhy_map_bus_uncheck);
+            mIVDrive.setImageResource(R.drawable.zhy_map_drive_check);
+            mTVWalk.setTextColor(getResources().getColor(R.color.zhy_text_color_1));
+            mTVBus.setTextColor(getResources().getColor(R.color.zhy_text_color_1));
+            mTVDrive.setTextColor(getResources().getColor(R.color.white));
+            mLLWalk.setBackgroundResource(0);
+            mLLBus.setBackgroundResource(0);
+            mLLDrive.setBackgroundResource(R.drawable.zhy_map_radio_back);
+        }
+    }
 
     /**
      * 返回我的位置
@@ -310,25 +410,27 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
 
     @Override
     public void onMapClick(LatLng latLng) {
+        changeSearchMode(false);
 //        mBaiduMap.hideInfoWindow();
     }
 
     @Override
     public boolean onMapPoiClick(MapPoi mapPoi) {
-        if (isUseNumPoint) {
-            //获取经纬度
-            double latitude = mapPoi.getPosition().latitude;
-            double longitude = mapPoi.getPosition().longitude;
-            checkEndPointStr = mapPoi.getName();
-            LatLng point = new LatLng(latitude, longitude);
-            this.endPointLatLng = point;
-            mBaiduMap.clear();
-            drawLocation(point);
-            drawMyLocation();
-            return false;
-        } else {
-            return false;
-        }
+//        if (isUseNumPoint) {
+//            //获取经纬度
+//            double latitude = mapPoi.getPosition().latitude;
+//            double longitude = mapPoi.getPosition().longitude;
+//            checkEndPointStr = mapPoi.getName();
+//            LatLng point = new LatLng(latitude, longitude);
+//            this.endPointLatLng = point;
+//            mBaiduMap.clear();
+//            drawLocation(point);
+//            drawMyLocation();
+//            return false;
+//        } else {
+//            return false;
+//        }
+        return false;
     }
 
     @Override
@@ -365,14 +467,24 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
     public void onGetPoiResult(PoiResult poiResult) {
         if (poiResult != null && poiResult.error == SearchResult.ERRORNO.NO_ERROR) {
             searchListData.clear();
+
+            PoiInfo myLocation = new PoiInfo();
+            myLocation.name = "当前位置";
+            myLocation.address = "当前地图中心所在位置";
+            myLocation.location = endPointLatLng;
+            searchListData.add(myLocation);
+
             searchListData.addAll(poiResult.getAllPoi());
             mapSearchAdapter.notifyDataSetChanged();
             List<Overlay> listOverlay = new ArrayList<>();
             for (PoiInfo data : searchListData) {
-                Overlay overlay = drawLocation(data.location);
-                listOverlay.add(overlay);
+                if (!data.address.equals("当前位置")) {
+                    Overlay overlay = drawLocation(data.location);
+                    listOverlay.add(overlay);
+                }
             }
-//           zoomToSpan(listOverlay);
+            if (isSearchMod)
+                zoomToSpan(listOverlay);
         }
     }
 
@@ -397,8 +509,13 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
         if (dialog != null) {
             dialog.cancel();
         }
-        LatLng latlng=new LatLng(AppContansts.LOCAL_latitude,AppContansts.LOCAL_longitude);
-        searchNearBy(latlng);
+
+        //第一次默认搜索
+        if (!isUseNumPoint) {
+            LatLng latlng = new LatLng(AppContansts.LOCAL_latitude, AppContansts.LOCAL_longitude);
+            searchNearBy(latlng);
+        }
+
         if (result == null) {
             //没有找到地址
             ToastUtils.showLongTime(NewRoutePlanOtherActivity.this, "没有找到地址,请点击地图选择终点位置");
@@ -417,6 +534,8 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
             ToastUtils.showLongTime(NewRoutePlanOtherActivity.this, "没有找到可规划的路径");
             return;
         }
+
+
         if (result.error == SearchResult.ERRORNO.NO_ERROR) {
             if (result instanceof WalkingRouteResult) {
                 WalkingRouteResult walkingRouteResult = (WalkingRouteResult) result;
@@ -441,6 +560,7 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
                 intent.putExtra("MapLineEndPoint", endPointStr);
             }
             startActivity(intent);
+            isUseNumPoint = true;
         }
     }
 
@@ -463,8 +583,10 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
         @Override
         public void onMapStatusChangeFinish(MapStatus mapStatus) {
             // 滑动搜索\
-            LatLng latlng = mapStatus.target;
-            searchNearBy(latlng);
+            if (!isSearchMod) {
+                endPointLatLng = mapStatus.target;
+                searchNearBy(endPointLatLng);
+            }
         }
 
         @Override
@@ -474,14 +596,23 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
 
     /**
      * 搜索附近
+     *
      * @param latlng
      */
     private void searchNearBy(LatLng latlng) {
         mBaiduMap.clear();
+        drawMyLocation();
         endPointLatLng = latlng;
         iconAnim(mIVCenter);
         mPoiSearch.searchNearby
                 (new PoiNearbySearchOption().location(endPointLatLng).radius(1000).keyword("小区"));
+    }
+
+    private void searchCity() {
+        mBaiduMap.clear();
+        drawMyLocation();
+        iconAnim((mIVCenter));
+        mPoiSearch.searchInCity(new PoiCitySearchOption().city(AppContansts.LOCAL_CITY + "").keyword(mETSearch.getText().toString()));
     }
 
     private void iconAnim(View view) {

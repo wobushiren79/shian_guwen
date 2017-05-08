@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="@dimen/dimen_100dp"
+    android:background="@drawable/zhy_button_state_ll_white"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dimen_32dp"
+        android:text="test"
+        android:textColor="@color/black_item_shua_textcolor"
+        android:textSize="@dimen/dimen_28dp" />
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp"
+        android:paddingLeft="@dimen/dimen_32dp"
+        android:text="test"
+        android:textColor="@color/dimgray"
+        android:textSize="@dimen/dimen_20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:layout_marginLeft="@dimen/dimen_32dp"
+        android:background="@color/zhy_line_3" />
 </LinearLayout>

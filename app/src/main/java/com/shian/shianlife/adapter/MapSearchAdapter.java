@@ -21,23 +21,41 @@ public class MapSearchAdapter extends RecyclerView.Adapter<MapSearchAdapter.View
     List<PoiInfo> searchListData = new ArrayList<>();
     Context context;
 
+    CallBack callBack;
+
     public MapSearchAdapter(Context context, List<PoiInfo> searchListData) {
         this.searchListData = searchListData;
         this.context = context;
     }
 
+    public void setCallBack(CallBack callBack) {
+        this.callBack = callBack;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         View view = LayoutInflater.from(context).inflate(R.layout.view_map_data, null);
+        view.setLayoutParams(layoutParams);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        PoiInfo data = searchListData.get(position);
-        holder.tvName.setText(data.address);
+        final PoiInfo data = searchListData.get(position);
+        holder.tvName.setText(data.name);
+        holder.tvContent.setText(data.address);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (callBack != null)
+                    callBack.onItemClick(data);
+            }
+        });
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -46,10 +64,16 @@ public class MapSearchAdapter extends RecyclerView.Adapter<MapSearchAdapter.View
 
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvName;
+        TextView tvContent;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvName = (TextView) itemView.findViewById(R.id.tv_name);
+            tvContent = (TextView) itemView.findViewById(R.id.tv_content);
         }
+    }
+
+    public interface CallBack {
+        void onItemClick(PoiInfo data);
     }
 }
