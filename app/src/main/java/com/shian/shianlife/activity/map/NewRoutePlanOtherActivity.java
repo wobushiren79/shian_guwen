@@ -478,7 +478,7 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
             mapSearchAdapter.notifyDataSetChanged();
             List<Overlay> listOverlay = new ArrayList<>();
             for (PoiInfo data : searchListData) {
-                if (!data.address.equals("当前位置")) {
+                if (!data.name.equals("当前位置")) {
                     Overlay overlay = drawLocation(data.location);
                     listOverlay.add(overlay);
                 }
@@ -514,6 +514,7 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
         if (!isUseNumPoint) {
             LatLng latlng = new LatLng(AppContansts.LOCAL_latitude, AppContansts.LOCAL_longitude);
             searchNearBy(latlng);
+            isUseNumPoint = true;
         }
 
         if (result == null) {
@@ -560,7 +561,7 @@ public class NewRoutePlanOtherActivity extends BaseActivity implements BaiduMap.
                 intent.putExtra("MapLineEndPoint", endPointStr);
             }
             startActivity(intent);
-            isUseNumPoint = true;
+
         }
     }
 
