@@ -8,13 +8,21 @@ public class HrLoginResult {
     private String lastAccessTime;
     private String startTimestamp;
     private ArrayList<Integer> roleIds;
-
+    private List<String> permitionCodes;
     private long userId;
 
     /**
      * 登录通行key
      */
     private String token;
+
+    public List<String> getPermitionCodes() {
+        return permitionCodes;
+    }
+
+    public void setPermitionCodes(List<String> permitionCodes) {
+        this.permitionCodes = permitionCodes;
+    }
 
     public long getUserId() {
         return userId;

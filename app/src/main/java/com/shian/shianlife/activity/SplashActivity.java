@@ -145,7 +145,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     }
 
 
-    private void initView1(final HrLoginResult result) {
+    private void loginSuccess(final HrLoginResult result) {
         this.result = result;
         new Thread(new Runnable() {
             @Override
@@ -213,6 +213,8 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     }
 
     private void initLogin(String channelId) {
+        AppContansts.userCemetery=null;
+        AppContansts.userLoginInfo=null;
         ShareLogin loginS = SharePerfrenceUtils.getLoginShare(this);
         if (loginS.isAutoLogin()) {
             if (loginS.getLoginType() == 0) {
@@ -230,7 +232,13 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
                                 AppContansts.userLoginInfo = result;
                                 LoginActivity.cookie = result.getSessionId();
                                 HttpRequestExecutor.setSession(LoginActivity.cookie, SplashActivity.this);
-                                initView1(result);
+                                if (result.getToken() != null && !result.getToken().equals("")) {
+                                    loginCemetery(result);
+                                } else {
+                                    loginSuccess(result);
+                                    SharePerfrenceUtils.setHasCemetery(SplashActivity.this, false);
+                                }
+
                             }
 
                             @Override
@@ -260,7 +268,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
                                 AppContansts.userLoginInfo = result;
                                 LoginActivity.cookie = result.getSessionId();
                                 HttpRequestExecutor.setSession(LoginActivity.cookie, SplashActivity.this);
-                                initView1(result);
+                                loginSuccess(result);
                             }
 
                             @Override
@@ -277,6 +285,35 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
         } else {
             initView();
         }
+    }
+
+
+    /**
+     * 登陆公墓
+     * @param result
+     */
+    private void loginCemetery(final HrLoginResult result) {
+        HpLoginParams paramsCemetery = new HpLoginParams();
+        paramsCemetery.setToken(result.getToken());
+        MHttpManagerFactory.getAccountManager().loginCemetery(SplashActivity.this, paramsCemetery, new HttpResponseHandler<HrLoginResult>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(HrLoginResult resultCemetery) {
+                AppContansts.userCemetery = resultCemetery;
+                loginSuccess(result);
+                SharePerfrenceUtils.setHasCemetery(SplashActivity.this, true);
+            }
+
+            @Override
+            public void onError(String message) {
+                loginSuccess(result);
+                SharePerfrenceUtils.setHasCemetery(SplashActivity.this, false);
+            }
+        });
     }
 
     private void initPush() {
@@ -313,6 +350,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     @Override
     public void onPush(String channelId) {
         // TODO Auto-generated method stub
+
         initLogin(channelId);
     }
 

@@ -3,49 +3,57 @@ package com.shian.shianlife.provide.params;
 import com.shian.shianlife.provide.base.BaseHttpParams;
 
 public class HpLoginParams extends BaseHttpParams {
-	private String username;
-	private String password;
-	private String channelId;
-	private String systemType;
+    private String username;
+    private String password;
+    private String channelId;
+    private String systemType;
+    private String token;
 
+    public String getToken() {
+        return token;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public void setToken(String token) {
+        this.token = token;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getChannelId() {
-		return channelId;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setChannelId(String channelId) {
-		this.channelId = channelId;
-	}
+    public String getChannelId() {
+        return channelId;
+    }
 
-	public String getSystemType() {
-		return systemType;
-	}
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
+    }
 
-	public void setSystemType(String systemType) {
-		this.systemType = systemType;
-	}
+    public String getSystemType() {
+        return systemType;
+    }
 
-	// @Override
-	// public String getHttpParams() {
-	// ContentParams<HpLoginParams> pa= new ContentParams<HpLoginParams>();
-	// pa.setContent(this);
-	// return JSONUtil.writeEntityToJSONString(pa);
-	// }
+    public void setSystemType(String systemType) {
+        this.systemType = systemType;
+    }
+
+    // @Override
+    // public String getHttpParams() {
+    // ContentParams<HpLoginParams> pa= new ContentParams<HpLoginParams>();
+    // pa.setContent(this);
+    // return JSONUtil.writeEntityToJSONString(pa);
+    // }
 
 }

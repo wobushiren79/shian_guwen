@@ -64,8 +64,8 @@ public class LoginActivity extends BaseActivity {
      */
     private void startAnim() {
         TranslateAnimation translateAnimation = new TranslateAnimation
-                (Animation.RELATIVE_TO_SELF,0,Animation.RELATIVE_TO_SELF,0,
-                        Animation.RELATIVE_TO_SELF,1f, Animation.RELATIVE_TO_SELF,0f);
+                (Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 0,
+                        Animation.RELATIVE_TO_SELF, 1f, Animation.RELATIVE_TO_SELF, 0f);
         translateAnimation.setDuration(1000);
         rlContent.setAnimation(translateAnimation);
         translateAnimation.start();
@@ -125,6 +125,8 @@ public class LoginActivity extends BaseActivity {
     public static String cookie;
 
     private void login(final String username, final String password) {
+        AppContansts.userCemetery=null;
+        AppContansts.userLoginInfo=null;
         if (!isCanLogin(username, password)) {
             return;
         }
@@ -135,7 +137,7 @@ public class LoginActivity extends BaseActivity {
         if (rbState1.isChecked()) {
             //登录状态为普通类型
             lbLogin.setLoading();
-            HpLoginParams params = new HpLoginParams();
+            final HpLoginParams params = new HpLoginParams();
             params.setPassword(etUserPassword.getText().toString());
             params.setUsername(etUserName.getText().toString());
             params.setSystemType("2");
@@ -143,19 +145,19 @@ public class LoginActivity extends BaseActivity {
             MHttpManagerFactory.getAccountManager().login(this, params, new HttpResponseHandler<HrLoginResult>() {
 
                 @Override
-                public void onSuccess(HrLoginResult result) {
+                public void onSuccess(final HrLoginResult result) {
                     AppContansts.userLoginInfo = result;
-                    lbLogin.setComplete();
                     cookie = result.getSessionId();
                     HttpRequestExecutor.setSession(cookie, LoginActivity.this);
                     SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, cbRe.isChecked(),
                             cbAuto.isChecked(), 0);
-                    ToastUtils.show(getBaseContext(), "登陆成功");
-                    Intent in = new Intent(LoginActivity.this, MainActivity.class);
-                    String resultBack = JSONUtil.writeEntityToJSONString(result);
-                    in.putExtra("loginData", resultBack);
-                    startActivity(in);
-                    finish();
+                    //判断是否要进行公墓登陆
+                    if (result.getToken() != null && !result.getToken().equals("")) {
+                        loginCemetery(result);
+                    } else {
+                        loginSuccess(result);
+                        SharePerfrenceUtils.setHasCemetery(LoginActivity.this, false);
+                    }
                 }
 
                 @Override
@@ -209,6 +211,50 @@ public class LoginActivity extends BaseActivity {
         }
 
 
+    }
+
+    /**
+     * 登陆公墓
+     *
+     * @param result
+     */
+    private void loginCemetery(final HrLoginResult result) {
+        HpLoginParams paramsCemetery = new HpLoginParams();
+        paramsCemetery.setToken(result.getToken());
+        MHttpManagerFactory.getAccountManager().loginCemetery(LoginActivity.this, paramsCemetery, new HttpResponseHandler<HrLoginResult>() {
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(HrLoginResult resultCemetery) {
+                AppContansts.userCemetery = resultCemetery;
+                loginSuccess(result);
+                SharePerfrenceUtils.setHasCemetery(LoginActivity.this, true);
+            }
+
+            @Override
+            public void onError(String message) {
+                loginSuccess(result);
+                SharePerfrenceUtils.setHasCemetery(LoginActivity.this, false);
+            }
+        });
+    }
+
+    /**
+     * 登陆成功跳转
+     *
+     * @param result
+     */
+    private void loginSuccess(HrLoginResult result) {
+        lbLogin.setComplete();
+        ToastUtils.show(getBaseContext(), "登陆成功");
+        Intent in = new Intent(LoginActivity.this, MainActivity.class);
+        String resultBack = JSONUtil.writeEntityToJSONString(result);
+        in.putExtra("loginData", resultBack);
+        startActivity(in);
+        finish();
     }
 
     private boolean isCanLogin(String username, String password) {

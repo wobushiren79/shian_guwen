@@ -23,6 +23,7 @@ import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.result.HrGetMsgNumberForUntreated;
 import com.shian.shianlife.provide.result.HrLoginResult;
+import com.shian.shianlife.thisenum.AppRolePermition;
 import com.viewpagerindicator.TabPageIndicator;
 
 import android.annotation.SuppressLint;
@@ -127,7 +128,14 @@ public class OrderFragment extends BaseFragment {
         arrTitles.clear();
         mLoginResult = JSONUtil.parseJSONString(getActivity().getIntent()
                 .getStringExtra("loginData"), HrLoginResult.class);
-        arrTitles.add("公墓单");
+        //检测权限
+        if (AppContansts.userCemetery != null) {
+            for (int i = 0; i < AppContansts.userCemetery.getPermitionCodes().size(); i++) {
+                if(AppContansts.userCemetery.getPermitionCodes().get(i).equals(AppRolePermition.ADVISOR.getCode())){
+                    arrTitles.add("公墓单");
+                }
+            }
+        }
         for (Integer role : mLoginResult.getRoleIds()) {
             switch (role) {
                 case 1:

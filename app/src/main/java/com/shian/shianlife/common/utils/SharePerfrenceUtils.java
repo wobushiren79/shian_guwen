@@ -15,6 +15,8 @@ public class SharePerfrenceUtils {
     private static final String C_sShareLogin_channelId = "share_channelId";
     //新添加登录账号类型
     private static final String C_sShareLogin_Type = "share_type";
+    //新添加登陆账号是否有公墓权限
+    private static final String C_sShareLogin_hasCemetery = "share_hasCemetery";
 
     public static void setLoginShare(Context c, String username,
                                      String password, boolean isRemeber, boolean isAuto, int loginType) {
@@ -34,6 +36,19 @@ public class SharePerfrenceUtils {
         editor.commit();
     }
 
+
+    //是否有公墓权限
+    public static void setHasCemetery(Context context, boolean hasCemetery) {
+        Editor editor = context.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE).edit();
+        editor.putBoolean(C_sShareLogin_hasCemetery, hasCemetery);
+        editor.commit();
+    }
+
+    public static boolean getHasCemetery(Context context) {
+        SharedPreferences share = context.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE);
+        return share.getBoolean(C_sShareLogin_hasCemetery, false);
+    }
+
     public static ShareLogin getLoginShare(Context c) {
         SharedPreferences share = c.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE);
         String username = share.getString(C_sShareLogin_username, "");
@@ -50,7 +65,6 @@ public class SharePerfrenceUtils {
         loginS.setLoginType(loginType);//新添加登录账号类型
         return loginS;
     }
-
 
 
     public static void setShareChannelId(Context c, String channelId) {

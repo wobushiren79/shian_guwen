@@ -1,6 +1,7 @@
 package com.shian.shianlife.common.view.order;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
@@ -23,7 +24,14 @@ import com.shian.shianlife.provide.model.OrderListModel;
 import com.shian.shianlife.provide.params.HpGetOrderListParams;
 import com.shian.shianlife.provide.result.HrGetCemeteryListData;
 import com.shian.shianlife.provide.result.HrGetOrderListResult;
+import com.shian.shianlife.thisenum.BuildOrderEnum;
 import com.shian.shianlife.thisenum.CemeteryBeSpeakStateEnum;
+import com.shian.shianlife.view.popupbutton.PopupButton;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.InjectView;
 
 /**
  * Created by zm.
@@ -31,6 +39,8 @@ import com.shian.shianlife.thisenum.CemeteryBeSpeakStateEnum;
 
 public class CemeteryBuildView extends BaseOrderView {
     View view;
+
+    private   PopupButton mPopupButton;
     private SwipeRefreshLayout mSryt;
     private ListView mListView;
     private TArrayListAdapter<CemeteryOrderModel> adapter;
@@ -48,8 +58,11 @@ public class CemeteryBuildView extends BaseOrderView {
     private void initView() {
         mSryt = (SwipeRefreshLayout) view.findViewById(R.id.sryt_swipe_listview);
         mListView = (ListView) view.findViewById(R.id.lv_swipe_listview);
+        mPopupButton= (PopupButton) view.findViewById(R.id.popupbutton);
         mSryt.setColorSchemeColors(Color.BLUE);
         adapter = new TArrayListAdapter<CemeteryOrderModel>(getContext());
+
+        initPopupButton();
     }
 
     private void initDate() {
@@ -77,6 +90,30 @@ public class CemeteryBuildView extends BaseOrderView {
         adapter.setDrawViewEx(overDrawViewEx);
     }
 
+    /**
+     * 初始化popup
+     */
+    private void initPopupButton() {
+        final List<BuildOrderEnum> buildButtons = new ArrayList<>();
+        buildButtons.add(BuildOrderEnum.GM);
+
+        for (int i = 0; i < buildButtons.size(); i++) {
+            mPopupButton.addHorizontalButton(buildButtons.get(i).getName(), buildButtons.get(i).getIconId(), i);
+        }
+
+        mPopupButton.setCallBack(new PopupButton.PopupButtonCallBack() {
+            @Override
+            public void onClick(int positionButton) {
+                for (int i = 0; i < buildButtons.size(); i++) {
+                    if (positionButton == i) {
+                        mPopupButton.mainButton();
+                        Intent intent = new Intent(getContext(), buildButtons.get(i).getActivity());
+                        getContext().startActivity(intent);
+                    }
+                }
+            }
+        });
+    }
     TArrayListAdapter.IOnDrawViewEx<CemeteryOrderModel> overDrawViewEx = new TArrayListAdapter.IOnDrawViewEx<CemeteryOrderModel>() {
 
         @Override

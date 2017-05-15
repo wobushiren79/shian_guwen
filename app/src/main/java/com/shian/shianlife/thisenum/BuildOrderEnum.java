@@ -1,6 +1,7 @@
 package com.shian.shianlife.thisenum;
 
 import android.app.Activity;
+import android.view.View;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.NewOrderActivity;

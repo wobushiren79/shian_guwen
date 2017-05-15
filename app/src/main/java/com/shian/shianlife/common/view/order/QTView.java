@@ -1,7 +1,9 @@
 package com.shian.shianlife.common.view.order;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import android.annotation.SuppressLint;
@@ -38,6 +40,7 @@ import com.shian.shianlife.activity.map.NewRoutePlanOtherActivity;
 import com.shian.shianlife.activity.updata.ContractDataActivity;
 import com.shian.shianlife.activity.updata.JBRDataActivity;
 import com.shian.shianlife.activity.updata.WSZDataActivity;
+import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.TArrayListAdapter;
 import com.shian.shianlife.common.utils.TArrayListAdapter.IOnDrawViewEx;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -120,21 +123,20 @@ public class QTView extends BaseOrderView {
      * 初始化popup
      */
     private void initPopupButton() {
-        final BuildOrderEnum[] buildButtons = {
-                BuildOrderEnum.BY,
-                BuildOrderEnum.GM
-        };
-        for (int i = 0; i < buildButtons.length; i++) {
-            mPopupButton.addHorizontalButton(buildButtons[i].getName(), buildButtons[i].getIconId(), i);
+        final List<BuildOrderEnum> buildButtons = new ArrayList<>();
+        buildButtons.add(BuildOrderEnum.BY);
+
+        for (int i = 0; i < buildButtons.size(); i++) {
+            mPopupButton.addHorizontalButton(buildButtons.get(i).getName(), buildButtons.get(i).getIconId(), i);
         }
 
         mPopupButton.setCallBack(new PopupButton.PopupButtonCallBack() {
             @Override
             public void onClick(int positionButton) {
-                for (int i = 0; i < buildButtons.length; i++) {
+                for (int i = 0; i < buildButtons.size(); i++) {
                     if (positionButton == i) {
                         mPopupButton.mainButton();
-                        Intent intent = new Intent(getContext(), buildButtons[i].getActivity());
+                        Intent intent = new Intent(getContext(), buildButtons.get(i).getActivity());
                         getContext().startActivity(intent);
 
                     }
