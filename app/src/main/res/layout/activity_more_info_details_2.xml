@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_more_info_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zhy_backgroud_1"
+    android:fillViewport="true">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_25dp"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/cemetery_text_style_title_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_32dp"
+                    android:layout_marginLeft="@dimen/dimen_35dp"
+                    android:layout_marginRight="@dimen/dimen_35dp"
+                    android:text="使用者信息" />
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_deadman"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:background="@color/zhy_line_3" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_25dp"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/cemetery_text_style_title_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_32dp"
+                    android:layout_marginLeft="@dimen/dimen_35dp"
+                    android:layout_marginRight="@dimen/dimen_35dp"
+                    android:text="经办人信息" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_agentman"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+</ScrollView>
+

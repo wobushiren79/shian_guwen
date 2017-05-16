@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_info_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zhy_backgroud_1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_25dp"
+            android:layout_marginLeft="@dimen/dimen_35dp"
+            android:layout_marginRight="@dimen/dimen_35dp"
+            android:layout_marginTop="@dimen/dimen_25dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/cemetery_text_style_title_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="订单信息"
+                android:textColor="@color/dimgray" />
+
+            <Button
+                android:id="@+id/bt_detailes"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_60dp"
+                android:background="@drawable/zhy_button_state_2"
+                android:text="客户详情"
+                android:textColor="@color/zhy_text_color_1" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+        <RelativeLayout
+            android:id="@+id/rl_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></RelativeLayout>
+    </LinearLayout>
+
+
+</ScrollView>

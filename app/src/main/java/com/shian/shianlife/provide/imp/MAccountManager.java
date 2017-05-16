@@ -25,6 +25,9 @@ import com.shian.shianlife.provide.params.HpRefundParams;
 import com.shian.shianlife.provide.params.HpRejectParams;
 import com.shian.shianlife.provide.params.HpSaveCemeteryBuildData;
 import com.shian.shianlife.provide.params.HpSaveCemeteryTalkData;
+import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessAgentMan;
+import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessContract;
+import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessDeadMan;
 import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessOne;
 import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessThree;
 import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessTwo;
@@ -55,6 +58,9 @@ import com.shian.shianlife.provide.result.HrConsultUsageResult;
 import com.shian.shianlife.provide.result.HrGetCemeteryBuildData;
 import com.shian.shianlife.provide.result.HrGetCemeteryStructure;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkData;
+import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessAgentMan;
+import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessContract;
+import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessDeadMan;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessOne;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessThree;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessTwo;
@@ -841,4 +847,34 @@ public interface MAccountManager extends HttpManager {
      * 改变地址
      */
     public void changeLocation(Context context, HpChangeLocation params, HttpResponseHandler<Object> handler);
+
+    /**
+     * 获取公墓洽谈成功合同信息
+     */
+    void getCemeteryTalkSuccessContract(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessContract> handler);
+
+    /**
+     * 保存公墓洽谈成功合同信息
+     */
+    void saveCemeteryTalkSuccessContract(Context context, HpSaveCemeteryTalkSuccessContract params, HttpResponseHandler<HrOrderIdResult> handler);
+
+    /**
+     * 获取公墓洽谈成功往生者信息
+     */
+    void getCemeteryTalkSuccessDeadMan(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessDeadMan> handler);
+
+    /**
+     * 保存公墓洽谈成功往生者信息
+     */
+    void saveCemeteryTalkSuccessDeadMan(Context context, HpSaveCemeteryTalkSuccessDeadMan params, HttpResponseHandler<Object> handler);
+
+    /**
+     * 获取公墓洽谈成功逝者信息
+     */
+    void getCemeteryTalkSuccessAgentMan(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessAgentMan> handler);
+
+    /**
+     * 保存公墓洽谈成功逝者信息
+     */
+    void saveCemeteryTalkSuccessAgentMan(Context context, HpSaveCemeteryTalkSuccessAgentMan params, HttpResponseHandler<Object> handler);
 }

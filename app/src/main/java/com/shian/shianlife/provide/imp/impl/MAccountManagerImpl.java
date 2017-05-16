@@ -27,6 +27,9 @@ import com.shian.shianlife.provide.params.HpRefundParams;
 import com.shian.shianlife.provide.params.HpRejectParams;
 import com.shian.shianlife.provide.params.HpSaveCemeteryBuildData;
 import com.shian.shianlife.provide.params.HpSaveCemeteryTalkData;
+import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessAgentMan;
+import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessContract;
+import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessDeadMan;
 import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessOne;
 import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessThree;
 import com.shian.shianlife.provide.params.HpSaveCemeteryTalkSuccessTwo;
@@ -58,6 +61,9 @@ import com.shian.shianlife.provide.result.HrConsultUsageResult;
 import com.shian.shianlife.provide.result.HrGetCemeteryBuildData;
 import com.shian.shianlife.provide.result.HrGetCemeteryStructure;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkData;
+import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessAgentMan;
+import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessContract;
+import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessDeadMan;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessOne;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessThree;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessTwo;
@@ -121,7 +127,7 @@ public class MAccountManagerImpl implements MAccountManager {
     @Override
     public void loginCemetery(Context context, HpLoginParams params, HttpResponseHandler<HrLoginResult> handler) {
         // TODO Auto-generated method stub
-        excutor.requestPost(context, "doLogin/cemetery", HrLoginResult.class, params,
+        excutor.requestCemeteryPost(context, "doLogin/marketing", HrLoginResult.class, params,
                 handler);
     }
 
@@ -775,5 +781,39 @@ public class MAccountManagerImpl implements MAccountManager {
                 handler);
     }
 
+    @Override
+    public void getCemeteryTalkSuccessContract(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessContract> handler) {
+        excutor.requestCemeteryPost(context, "marketing/order/buycemetery/get", HrGetCemeteryTalkSuccessContract.class, params,
+                handler);
+    }
 
+    @Override
+    public void saveCemeteryTalkSuccessContract(Context context, HpSaveCemeteryTalkSuccessContract params, HttpResponseHandler<HrOrderIdResult> handler) {
+        excutor.requestCemeteryPost(context, "marketing/order/buycemetery/save/or/update", HrOrderIdResult.class, params,
+                handler);
+    }
+
+    @Override
+    public void getCemeteryTalkSuccessDeadMan(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessDeadMan> handler) {
+        excutor.requestCemeteryPost(context, "marketing/order/deadinfo/get", HrGetCemeteryTalkSuccessDeadMan.class, params,
+                handler);
+    }
+
+    @Override
+    public void saveCemeteryTalkSuccessDeadMan(Context context, HpSaveCemeteryTalkSuccessDeadMan params, HttpResponseHandler<Object> handler) {
+        excutor.requestCemeteryPost(context, "marketing/order/deadinfo/save/or/update", Object.class, params,
+                handler);
+    }
+
+    @Override
+    public void getCemeteryTalkSuccessAgentMan(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessAgentMan> handler) {
+        excutor.requestCemeteryPost(context, "marketing/order/agentinfo/get", HrGetCemeteryTalkSuccessAgentMan.class, params,
+                handler);
+    }
+
+    @Override
+    public void saveCemeteryTalkSuccessAgentMan(Context context, HpSaveCemeteryTalkSuccessAgentMan params, HttpResponseHandler<Object> handler) {
+        excutor.requestCemeteryPost(context, "marketing/order/agentinfo/save/or/update", Object.class, params,
+                handler);
+    }
 }

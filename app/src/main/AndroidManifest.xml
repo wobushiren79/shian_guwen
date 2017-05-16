@@ -470,6 +470,21 @@
             android:name=".activity.map.NewRoutePlanOtherActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".activity.newcemetery.InfoDetailsActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
+        <activity
+            android:name=".activity.newcemetery.MoreInfoDetailsActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
+        <activity
+            android:name=".activity.newcemetery.TalkFailActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
     </application>
 
 </manifest>

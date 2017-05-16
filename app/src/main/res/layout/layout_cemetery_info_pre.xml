@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zhy_backgroud_1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/write_ordernumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:titleName="订单编号"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.SpinnerCemeteryLocation
+            android:id="@+id/write_locationdetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.shian.shianlife.view.writeview.SpinnerCemeteryLocation>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.SpinnerViewNormal
+            android:id="@+id/write_tombtype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            MyViewAttr:titleName="墓型"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3"
+            android:visibility="gone" />
+
+        <com.shian.shianlife.view.writeview.SpinnerViewNormal
+            android:id="@+id/write_tombattr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:titleName="墓穴使用性质"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/write_planprice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:titleName="挂牌价"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/write_dealprice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:titleName="成交价"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.SpinnerViewNormal
+            android:id="@+id/write_payinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            MyViewAttr:titleName="支付情况"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
+
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/write_paymoney"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:isImportant="true"
+            MyViewAttr:titleName="商议定金"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/write_cemeteryreception"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:titleName="公墓接待人"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/write_cemeterysales"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:titleName="公墓业务员"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/write_freegift"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:titleName="赠送服务"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/write_choiceservice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:titleName="自选附属服务"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/write_remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:titleName="备注"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_back"
+            android:layout_width="@dimen/dimen_266dp"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_marginBottom="@dimen/dimen_32dp"
+            android:layout_marginRight="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_32dp"
+            android:background="@drawable/zhy_button_state_2"
+            android:gravity="center"
+            android:text="返回"
+            android:textColor="@color/zhy_text_color_1"
+            android:textSize="@dimen/dimen_32dp" />
+
+        <TextView
+            android:id="@+id/tv_submit"
+            android:layout_width="@dimen/dimen_266dp"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_marginBottom="@dimen/dimen_32dp"
+            android:layout_marginLeft="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_32dp"
+            android:background="@drawable/zhy_button_state_5"
+            android:gravity="center"
+            android:text="填写逝者信息"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_32dp" />
+    </LinearLayout>
+
+</LinearLayout>

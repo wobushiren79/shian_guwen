@@ -20,13 +20,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_1_title"
                 style="@style/ListItemTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="经办人" />
+                android:layout_height="match_parent" />
 
             <TextView
-                android:id="@+id/tv_agentmanname"
+                android:id="@+id/tv_1_content"
                 style="@style/ListItemContent"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
@@ -53,13 +53,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_2_title"
                 style="@style/ListItemTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="经办人电话" />
+                android:layout_height="match_parent" />
 
             <TextView
-                android:id="@+id/tv_agentmanphone"
+                android:id="@+id/tv_2_content"
                 style="@style/ListItemContent"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
@@ -84,13 +84,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_3_title"
                 style="@style/ListItemTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="使用者" />
+                android:layout_height="match_parent" />
 
             <TextView
-                android:id="@+id/tv_deadmanname"
+                android:id="@+id/tv_3_content"
                 style="@style/ListItemContent"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
@@ -107,13 +107,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_4_title"
                 style="@style/ListItemTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="公墓名称" />
+                android:layout_height="match_parent" />
 
             <TextView
-                android:id="@+id/tv_cemeteryname"
+                android:id="@+id/tv_4_content"
                 style="@style/ListItemContent"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
@@ -131,16 +131,103 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/tv_5_title"
                 style="@style/ListItemTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="园区名称" />
+                android:layout_height="match_parent" />
 
             <TextView
-                android:id="@+id/tv_locationname"
+                android:id="@+id/tv_5_content"
                 style="@style/ListItemContent"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_text_color_3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_6_title"
+                style="@style/ListItemTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_6_content"
+                style="@style/ListItemContent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_text_color_3" />
+
+        <LinearLayout
+            android:id="@+id/ll_info_more"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_7_title"
+                style="@style/ListItemTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/tv_7_content"
+                style="@style/ListItemContent"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_info_more"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_text_color_3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_talkdetails"
+                android:layout_width="@dimen/dimen_133dp"
+                android:layout_height="@dimen/dimen_66dp"
+                android:layout_marginBottom="@dimen/dimen_24dp"
+                android:layout_marginTop="@dimen/dimen_24dp"
+                android:background="@drawable/zhy_button_state_2"
+                android:gravity="center"
+                android:text="洽谈详情"
+                android:textColor="@color/zhy_title_color_1"
+                android:textSize="@dimen/dimen_24dp" />
+
+            <TextView
+                android:id="@+id/tv_orderdetails"
+                android:layout_width="@dimen/dimen_133dp"
+                android:layout_height="@dimen/dimen_66dp"
+                android:layout_marginBottom="@dimen/dimen_24dp"
+                android:layout_marginTop="@dimen/dimen_24dp"
+                android:background="@drawable/zhy_button_state_2"
+                android:gravity="center"
+                android:text="订单详情"
+                android:textColor="@color/zhy_title_color_1"
+                android:textSize="@dimen/dimen_24dp" />
+        </LinearLayout>
+
+
     </LinearLayout>
 </LinearLayout>
