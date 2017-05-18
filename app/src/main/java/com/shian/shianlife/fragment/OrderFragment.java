@@ -129,14 +129,13 @@ public class OrderFragment extends BaseFragment {
         mLoginResult = JSONUtil.parseJSONString(getActivity().getIntent()
                 .getStringExtra("loginData"), HrLoginResult.class);
         //检测权限
-//        if (AppContansts.userCemetery != null) {
-//            for (int i = 0; i < AppContansts.userCemetery.getPermitionCodes().size(); i++) {
-//                if(AppContansts.userCemetery.getPermitionCodes().get(i).equals(AppRolePermition.ADVISOR.getCode())){
-//                    arrTitles.add("公墓单");
-//                }
-//            }
-//        }
-        arrTitles.add("公墓单");
+        if (AppContansts.userCemetery != null) {
+            for (int i = 0; i < AppContansts.userCemetery.getPermitionCodes().size(); i++) {
+                if(AppContansts.userCemetery.getPermitionCodes().get(i).equals(AppRolePermition.ADVISOR.getCode())){
+                    arrTitles.add("公墓单");
+                }
+            }
+        }
         for (Integer role : mLoginResult.getRoleIds()) {
             switch (role) {
                 case 1:

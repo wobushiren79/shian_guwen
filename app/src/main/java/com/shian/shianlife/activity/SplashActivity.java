@@ -213,8 +213,8 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     }
 
     private void initLogin(String channelId) {
-        AppContansts.userCemetery=null;
-        AppContansts.userLoginInfo=null;
+        AppContansts.userCemetery = null;
+        AppContansts.userLoginInfo = null;
         ShareLogin loginS = SharePerfrenceUtils.getLoginShare(this);
         if (loginS.isAutoLogin()) {
             if (loginS.getLoginType() == 0) {
@@ -230,8 +230,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
                             @Override
                             public void onSuccess(HrLoginResult result) {
                                 AppContansts.userLoginInfo = result;
-                                LoginActivity.cookie = result.getSessionId();
-                                HttpRequestExecutor.setSession(LoginActivity.cookie, SplashActivity.this);
                                 if (result.getToken() != null && !result.getToken().equals("")) {
                                     loginCemetery(result);
                                 } else {
@@ -253,43 +251,43 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
                         });
             } else if (loginS.getLoginType() == 1) {
                 //登录状态为公墓状态
-                HpLoginParams params = new HpLoginParams();
-                params.setPassword(loginS.getPassword());
-                params.setUsername(loginS.getUsername());
-                params.setSystemType("2");
-                params.setChannelId(channelId);
-
-
-                MHttpManagerFactory.getAccountManager().loginCemetery(this, params,
-                        new HttpResponseHandler<HrLoginResult>() {
-
-                            @Override
-                            public void onSuccess(HrLoginResult result) {
-                                AppContansts.userLoginInfo = result;
-                                LoginActivity.cookie = result.getSessionId();
-                                HttpRequestExecutor.setSession(LoginActivity.cookie, SplashActivity.this);
-                                loginSuccess(result);
-                            }
-
-                            @Override
-                            public void onStart() {
-
-                            }
-
-                            @Override
-                            public void onError(String message) {
-                                jumpLogin();
-                            }
-                        });
+//                HpLoginParams params = new HpLoginParams();
+//                params.setPassword(loginS.getPassword());
+//                params.setUsername(loginS.getUsername());
+//                params.setSystemType("2");
+//                params.setChannelId(channelId);
+//
+//
+//                MHttpManagerFactory.getAccountManager().loginCemetery(this, params,
+//                        new HttpResponseHandler<HrLoginResult>() {
+//
+//                            @Override
+//                            public void onSuccess(HrLoginResult result) {
+//                                AppContansts.userLoginInfo = result;
+//                                LoginActivity.cookie = result.getSessionId();
+//                                HttpRequestExecutor.setSession(LoginActivity.cookie, SplashActivity.this);
+//                                loginSuccess(result);
+//                            }
+//
+//                            @Override
+//                            public void onStart() {
+//
+//                            }
+//
+//                            @Override
+//                            public void onError(String message) {
+//                                jumpLogin();
+//                            }
+//                        });
             }
         } else {
             initView();
         }
     }
 
-
     /**
      * 登陆公墓
+     *
      * @param result
      */
     private void loginCemetery(final HrLoginResult result) {
@@ -315,6 +313,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
             }
         });
     }
+
 
     private void initPush() {
         Resources resource = this.getResources();

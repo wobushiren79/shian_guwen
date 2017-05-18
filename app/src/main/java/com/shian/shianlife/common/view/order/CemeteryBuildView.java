@@ -18,10 +18,12 @@ import com.shian.shianlife.activity.newcemetery.InfoDetailsActivity;
 import com.shian.shianlife.activity.newcemetery.TalkFailActivity;
 import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.TArrayListAdapter;
+import com.shian.shianlife.common.utils.TimeUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.utils.ViewGropMap;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
+import com.shian.shianlife.provide.imp.CemeteryOrderManager;
 import com.shian.shianlife.provide.imp.impl.CemeteryOrderManagerImpl;
 import com.shian.shianlife.provide.imp.impl.OrderManagerImpl;
 import com.shian.shianlife.provide.model.CemeteryOrderModel;
@@ -52,7 +54,7 @@ public class CemeteryBuildView extends BaseOrderView {
     private ListView mListView;
     private TArrayListAdapter<CemeteryOrderModel> adapter;
     private SwipeRefreshHelper mSwipeRefreshHelper;
-    private int pageSize = 20;
+    private int pageSize = 10;
     private int page = 1;
 
     public CemeteryBuildView(Context context) {
@@ -76,13 +78,13 @@ public class CemeteryBuildView extends BaseOrderView {
         initAdapter();
         mListView.setAdapter(adapter);
         mSwipeRefreshHelper = new SwipeRefreshHelper(mSryt);
-        mSwipeRefreshHelper
-                .setOnSwipeRefreshListener(new SwipeRefreshHelper.OnSwipeRefreshListener() {
-                    @Override
-                    public void onfresh() {
-                        loadData();
-                    }
-                });
+        mSwipeRefreshHelper.setLoadMoreEnable(true);
+        mSwipeRefreshHelper.setOnSwipeRefreshListener(new SwipeRefreshHelper.OnSwipeRefreshListener() {
+            @Override
+            public void onfresh() {
+                loadData();
+            }
+        });
 
         mSwipeRefreshHelper.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
@@ -147,51 +149,122 @@ public class CemeteryBuildView extends BaseOrderView {
 
             TextView tvTalkDetails = (TextView) view.getView(R.id.tv_talkdetails);
             TextView tvOrderDetails = (TextView) view.getView(R.id.tv_orderdetails);
+            ImageView ivPhone = (ImageView) view.getView(R.id.iv_phone);
 
-            int orderState = position;
 
-            switch (orderState) {
-                case 0:
-                    tv1_title.setText("客户姓名");
-                    tv2_title.setText("联系电话");
-                    tv3_title.setText("预约时间");
-                    tv4_title.setText("客户地址");
-                    tv5_title.setText("参观公墓");
-                    tv6_title.setText("交通方式");
-                    tv7_title.setText("人数");
+            int orderState = templateItem.getBespeakStatus();
+            if (orderState == CemeteryBeSpeakStateEnum.undistributed.getCode() ||
+                    orderState == CemeteryBeSpeakStateEnum.unassigned.getCode() ||
+                    orderState == CemeteryBeSpeakStateEnum.unProcess.getCode()) {
+                tv1_title.setText("客户姓名");
+                tv1_content.setText(templateItem.getCustomerName());
+                tv2_title.setText("联系电话");
+                tv2_content.setText(templateItem.getCustomerMobile());
+                tv3_title.setText("预约时间");
+                tv3_content.setText(templateItem.getPromiseTime());
+                tv4_title.setText("客户地址");
+                tv4_content.setText(templateItem.getCustomerLocation());
+                tv5_title.setText("参观公墓");
+                tv5_content.setText(templateItem.getPlanCemeteryLocation());
+                tv6_title.setText("交通方式");
+                tv6_content.setText(templateItem.getTrafficWay());
+                tv7_title.setText("人数");
+                tv7_content.setText(templateItem.getPersonNum());
 
-                    ll_info_more.setVisibility(VISIBLE);
-                    tv_info_more.setVisibility(VISIBLE);
-                    break;
-                case 1:
-                    tv1_title.setText("客户姓名");
-                    tv2_title.setText("联系电话");
-                    tv3_title.setText("预约时间");
-                    tv4_title.setText("客户地址");
-                    tv5_title.setText("参观公墓");
-                    tv6_title.setText("公墓接待");
+                ll_info_more.setVisibility(VISIBLE);
+                tv_info_more.setVisibility(VISIBLE);
+                tvTalkDetails.setVisibility(GONE);
+                tvOrderDetails.setVisibility(GONE);
 
-                    ll_info_more.setVisibility(GONE);
-                    tv_info_more.setVisibility(GONE);
-                    break;
-                case 2:
-                    tv1_title.setText("客户姓名");
-                    tv2_title.setText("联系电话");
-                    tv3_title.setText("客户地址");
-                    tv4_title.setText("定墓日期");
-                    tv5_title.setText("完款日期");
-                    tv6_title.setText("公墓名称");
+            } else if (orderState == CemeteryBeSpeakStateEnum.accepted.getCode()) {
+                tv1_title.setText("客户姓名");
+                tv1_content.setText(templateItem.getCustomerName());
+                tv2_title.setText("联系电话");
+                tv2_content.setText(templateItem.getCustomerMobile());
+                tv3_title.setText("预约时间");
+                tv3_content.setText(templateItem.getPromiseTime());
+                tv4_title.setText("客户地址");
+                tv4_content.setText(templateItem.getCustomerLocation());
+                tv5_title.setText("参观公墓");
+                tv5_content.setText(templateItem.getPlanCemeteryLocation());
+                tv6_title.setText("公墓接待");
+                tv6_content.setText(templateItem.getCemeteryReceive());
 
-                    ll_info_more.setVisibility(GONE);
-                    tv_info_more.setVisibility(GONE);
-                    break;
-                default:
-                    break;
+                ll_info_more.setVisibility(GONE);
+                tv_info_more.setVisibility(GONE);
+                tvTalkDetails.setVisibility(GONE);
+                tvOrderDetails.setVisibility(GONE);
+            } else if (orderState == CemeteryBeSpeakStateEnum.talkFail.getCode() ||
+                    orderState == CemeteryBeSpeakStateEnum.talkAgain.getCode()) {
+                tv1_title.setText("客户姓名");
+                tv1_content.setText(templateItem.getCustomerName());
+                tv2_title.setText("联系电话");
+                tv2_content.setText(templateItem.getCustomerMobile());
+                tv3_title.setText("预约时间");
+                tv3_content.setText(templateItem.getPromiseTime());
+                tv4_title.setText("客户地址");
+                tv4_content.setText(templateItem.getCustomerLocation());
+                tv5_title.setText("参观公墓");
+                tv5_content.setText(templateItem.getPlanCemeteryLocation());
+                tv6_title.setText("公墓接待");
+                tv6_content.setText(templateItem.getCemeteryReceive());
+
+                ll_info_more.setVisibility(GONE);
+                tv_info_more.setVisibility(GONE);
+                tvTalkDetails.setVisibility(VISIBLE);
+                tvOrderDetails.setVisibility(GONE);
+            } else if (orderState == CemeteryBeSpeakStateEnum.ready.getCode() ||
+                    orderState == CemeteryBeSpeakStateEnum.talkSuccess.getCode() ||
+                    orderState == CemeteryBeSpeakStateEnum.serviceOver.getCode()) {
+                tv1_title.setText("客户姓名");
+                tv1_content.setText(templateItem.getCustomerName());
+                tv2_title.setText("联系电话");
+                tv2_content.setText(templateItem.getCustomerMobile());
+                tv3_title.setText("客户地址");
+                tv3_content.setText(templateItem.getCustomerLocation());
+                tv4_title.setText("定墓日期");
+                if (templateItem.getOrderedTombDate() != 0)
+                    tv4_content.setText(TimeUtils.formatTime(templateItem.getOrderedTombDate()));
+                else
+                    tv4_content.setText("未定墓");
+
+                tv5_title.setText("完款日期");
+                if (templateItem.getPayOffTime() != 0)
+                    tv5_content.setText(TimeUtils.formatTime(templateItem.getPayOffTime()));
+                else {
+                    tv5_content.setText("未完款");
+                }
+                tv6_title.setText("公墓名称");
+                tv6_content.setText(templateItem.getDetailsLocation());
+
+                ll_info_more.setVisibility(GONE);
+                tv_info_more.setVisibility(GONE);
+                tvTalkDetails.setVisibility(GONE);
+                tvOrderDetails.setVisibility(VISIBLE);
+            } else {
+                tv1_title.setText("客户姓名");
+                tv1_content.setText(templateItem.getCustomerName());
+                tv2_title.setText("联系电话");
+                tv2_content.setText(templateItem.getCustomerMobile());
+                tv3_title.setText("预约时间");
+                tv3_content.setText(templateItem.getPromiseTime());
+                tv4_title.setText("客户地址");
+                tv4_content.setText(templateItem.getCustomerLocation());
+                tv5_title.setText("参观公墓");
+                tv5_content.setText(templateItem.getPlanCemeteryLocation());
+                tv6_title.setText("交通方式");
+                tv6_content.setText(templateItem.getTrafficWay());
+                tv7_title.setText("人数");
+                tv7_content.setText(templateItem.getPersonNum());
+
+                ll_info_more.setVisibility(GONE);
+                tv_info_more.setVisibility(GONE);
+                tvTalkDetails.setVisibility(GONE);
+                tvOrderDetails.setVisibility(GONE);
             }
 
-
-//            setState(tvState, templateItem);
-//            makePhone(ivPhone,templateItem);
+            setState(tvState, templateItem);
+            makePhone(ivPhone, templateItem);
 
             tvTalkDetails.setOnClickListener(new OnClickListener() {
                 @Override
@@ -216,41 +289,28 @@ public class CemeteryBuildView extends BaseOrderView {
         HpGetOrderListParams params = new HpGetOrderListParams();
         params.setPageNum(page);
         params.setPageSize(pageSize);
+        CemeteryOrderManagerImpl.getInstance().getOrderList(getContext(), params, 0, new HttpResponseHandler<HrGetCemeteryListData>() {
+            @Override
+            public void onStart() {
 
-        List<CemeteryOrderModel> list = new ArrayList<>();
-        list.add(new CemeteryOrderModel());
-        adapter.addListData(list);
-        adapter.addListData(list);
-        adapter.addListData(list);
-        adapter.notifyDataSetChanged();
-        mSwipeRefreshHelper.setLoadMoreEnable(true);
-//        CemeteryOrderManagerImpl.getInstance().getOrderList(getContext(), params, 1, new HttpResponseHandler<HrGetCemeteryListData>() {
-//            @Override
-//            public void onStart() {
-//
-//            }
-//
-//            @Override
-//            public void onSuccess(HrGetCemeteryListData result) {
-////                        if (result != null && result.getItems() != null
-////                                && result.getItems().size() > 0) {
-////                            adapter.addListData(result.getItems());
-////                            adapter.notifyDataSetChanged();
-////                            if (result.getItems().size() >= pageSize) {
-////                                mSwipeRefreshHelper.setLoadMoreEnable(true);
-////                            } else {
-////                                mSwipeRefreshHelper.setLoadMoreEnable(false);
-////                            }
-////                        } else {
-////                            mSwipeRefreshHelper.loadMoreComplete(false);
-////                        }
-//            }
-//
-//            @Override
-//            public void onError(String message) {
-//
-//            }
-//        });
+            }
+
+            @Override
+            public void onSuccess(HrGetCemeteryListData result) {
+                if (result.getPages() < page) {
+                    page = result.getPageNum();
+                } else {
+                    adapter.addListData(result.getList());
+                    adapter.notifyDataSetChanged();
+                }
+                mSwipeRefreshHelper.loadMoreComplete(true);
+            }
+
+            @Override
+            public void onError(String message) {
+                mSwipeRefreshHelper.loadMoreComplete(true);
+            }
+        });
     }
 
     /**
@@ -262,49 +322,33 @@ public class CemeteryBuildView extends BaseOrderView {
         page = 1;
         adapter.clear();
         adapter.notifyDataSetChanged();
+
         HpGetOrderListParams params = new HpGetOrderListParams();
         params.setPageNum(page);
         params.setPageSize(pageSize);
+        CemeteryOrderManagerImpl.getInstance().getOrderList(getContext(), params, 0, new HttpResponseHandler<HrGetCemeteryListData>() {
+            @Override
+            public void onStart() {
 
-        List<CemeteryOrderModel> list = new ArrayList<>();
-        list.add(new CemeteryOrderModel());
-        adapter.addListData(list);
-        adapter.addListData(list);
-        adapter.addListData(list);
-        adapter.notifyDataSetChanged();
-        mSwipeRefreshHelper.setLoadMoreEnable(true);
+            }
 
-//        OrderManagerImpl.getInstance().getOrderList(getContext(), params,
-//                orderType, new HttpResponseHandler<HrGetOrderListResult>() {
-//
-//                    @Override
-//                    public void onSuccess(HrGetOrderListResult result) {
-//                        if (result != null && result.getItems() != null
-//                                && result.getItems().size() > 0) {
-//                            adapter.addListData(result.getItems());
-//                            adapter.notifyDataSetChanged();
-//                            if (result.getItems().size() >= pageSize) {
-//                                mSwipeRefreshHelper.setLoadMoreEnable(true);
-//                            } else {
-//                                mSwipeRefreshHelper.setLoadMoreEnable(false);
-//                            }
-//                        } else {
-//                            // showNodataLayout();
-//                            ToastUtils.show(getContext(), "暂无订单");
-//                        }
-//                        mSwipeRefreshHelper.refreshComplete();
-//                    }
-//
-//                    @Override
-//                    public void onStart() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(String message) {
-//                        mSwipeRefreshHelper.refreshComplete();
-//                    }
-//                });
+            @Override
+            public void onSuccess(HrGetCemeteryListData result) {
+
+                if (result != null && result.getList() != null && result.getList().size() > 0) {
+                    adapter.addListData(result.getList());
+                    adapter.notifyDataSetChanged();
+                }
+                mSwipeRefreshHelper.refreshComplete();
+
+            }
+
+            @Override
+            public void onError(String message) {
+                mSwipeRefreshHelper.refreshComplete();
+            }
+        });
+
 
     }
 

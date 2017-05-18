@@ -125,8 +125,8 @@ public class LoginActivity extends BaseActivity {
     public static String cookie;
 
     private void login(final String username, final String password) {
-        AppContansts.userCemetery=null;
-        AppContansts.userLoginInfo=null;
+        AppContansts.userCemetery = null;
+        AppContansts.userLoginInfo = null;
         if (!isCanLogin(username, password)) {
             return;
         }
@@ -147,8 +147,6 @@ public class LoginActivity extends BaseActivity {
                 @Override
                 public void onSuccess(final HrLoginResult result) {
                     AppContansts.userLoginInfo = result;
-                    cookie = result.getSessionId();
-                    HttpRequestExecutor.setSession(cookie, LoginActivity.this);
                     SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, cbRe.isChecked(),
                             cbAuto.isChecked(), 0);
                     //判断是否要进行公墓登陆
@@ -173,41 +171,41 @@ public class LoginActivity extends BaseActivity {
         }
         if (rbState2.isChecked()) {
             //登录状态为公墓类型
-            lbLogin.setLoading();
-            HpLoginParams params = new HpLoginParams();
-            params.setPassword(etUserPassword.getText().toString());
-            params.setUsername(etUserName.getText().toString());
-            params.setSystemType("2");
-            params.setChannelId(SharePerfrenceUtils.getShareChannelId(this));
-
-            MHttpManagerFactory.getAccountManager().loginCemetery(this, params, new HttpResponseHandler<HrLoginResult>() {
-
-                @Override
-                public void onSuccess(HrLoginResult result) {
-                    AppContansts.userLoginInfo = result;
-                    lbLogin.setComplete();
-                    cookie = result.getSessionId();
-                    HttpRequestExecutor.setSession(cookie, LoginActivity.this);
-                    SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, cbRe.isChecked(),
-                            cbAuto.isChecked(), 1);
-                    ToastUtils.show(getBaseContext(), "登陆成功");
-                    Intent in = new Intent(LoginActivity.this, MainActivity.class);
-                    String resultBack = JSONUtil.writeEntityToJSONString(result);
-                    in.putExtra("loginData", resultBack);
-                    startActivity(in);
-                    finish();
-                }
-
-                @Override
-                public void onStart() {
-
-                }
-
-                @Override
-                public void onError(String message) {
-                    lbLogin.setNormal();
-                }
-            });
+//            lbLogin.setLoading();
+//            HpLoginParams params = new HpLoginParams();
+//            params.setPassword(etUserPassword.getText().toString());
+//            params.setUsername(etUserName.getText().toString());
+//            params.setSystemType("2");
+//            params.setChannelId(SharePerfrenceUtils.getShareChannelId(this));
+//
+//            MHttpManagerFactory.getAccountManager().loginCemetery(this, params, new HttpResponseHandler<HrLoginResult>() {
+//
+//                @Override
+//                public void onSuccess(HrLoginResult result) {
+//                    AppContansts.userLoginInfo = result;
+//                    lbLogin.setComplete();
+//                    cookie = result.getSessionId();
+//                    HttpRequestExecutor.setSession(cookie, LoginActivity.this);
+//                    SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, cbRe.isChecked(),
+//                            cbAuto.isChecked(), 1);
+//                    ToastUtils.show(getBaseContext(), "登陆成功");
+//                    Intent in = new Intent(LoginActivity.this, MainActivity.class);
+//                    String resultBack = JSONUtil.writeEntityToJSONString(result);
+//                    in.putExtra("loginData", resultBack);
+//                    startActivity(in);
+//                    finish();
+//                }
+//
+//                @Override
+//                public void onStart() {
+//
+//                }
+//
+//                @Override
+//                public void onError(String message) {
+//                    lbLogin.setNormal();
+//                }
+//            });
         }
 
 

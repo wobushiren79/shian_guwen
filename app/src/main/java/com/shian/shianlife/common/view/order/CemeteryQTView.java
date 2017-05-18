@@ -117,16 +117,16 @@ public class CemeteryQTView extends BaseOrderView {
 
             @Override
             public void onSuccess(HrGetCemeteryListData result) {
-                if (result.getItems() != null) {
-                    listData.addAll(result.getItems());
-                    if (result.getItems().size() == 0 && page != 1) {
-                        page--;
-                        mSwipeRefreshHelper.loadMoreComplete(false);
-                    }
-                    listAdapter.notifyDataSetChanged();
-                }
-                mSwipeRefreshHelper.refreshComplete();
-                mSwipeRefreshHelper.loadMoreComplete(true);
+//                if (result.getItems() != null) {
+//                    listData.addAll(result.getItems());
+//                    if (result.getItems().size() == 0 && page != 1) {
+//                        page--;
+//                        mSwipeRefreshHelper.loadMoreComplete(false);
+//                    }
+//                    listAdapter.notifyDataSetChanged();
+//            }
+//                mSwipeRefreshHelper.refreshComplete();
+//                mSwipeRefreshHelper.loadMoreComplete(true);
             }
 
             @Override
@@ -277,69 +277,69 @@ public class CemeteryQTView extends BaseOrderView {
                     break;
             }
             if (data.getBespeakStatus() == 1) {
-                if (data.getIsEditInfo() == TalkEditInfoEnum.canTalk.getCode()) {
-                    holder.llStateAccept.setVisibility(VISIBLE);
-                    holder.llStateTalk.setVisibility(GONE);
-                    holder.llDetailes.setVisibility(GONE);
-                } else {
-                    holder.llStateAccept.setVisibility(GONE);
-                    holder.llStateTalk.setVisibility(GONE);
-                    holder.llDetailes.setVisibility(GONE);
-                }
-                nameStrings = CEMETERY_LISTTYPE_1;
-                contentList.add(data.getCustomerName());
-                contentList.add(data.getCustomerMobile());
-                contentList.add(data.getCustomerLocation());
-                contentList.add(data.getPromiseTime());
-                contentList.add(data.getPlanCemeteryLocation());
-                holder.itemlayout_6.setVisibility(GONE);
-                holder.itemlayout_7.setVisibility(GONE);
-                holder.tv_line_5.setVisibility(GONE);
-                holder.tv_line_6.setVisibility(GONE);
+//                if (data.getIsEditInfo() == TalkEditInfoEnum.canTalk.getCode()) {
+//                    holder.llStateAccept.setVisibility(VISIBLE);
+//                    holder.llStateTalk.setVisibility(GONE);
+//                    holder.llDetailes.setVisibility(GONE);
+//                } else {
+//                    holder.llStateAccept.setVisibility(GONE);
+//                    holder.llStateTalk.setVisibility(GONE);
+//                    holder.llDetailes.setVisibility(GONE);
+//                }
+//                nameStrings = CEMETERY_LISTTYPE_1;
+//                contentList.add(data.getCustomerName());
+//                contentList.add(data.getCustomerMobile());
+//                contentList.add(data.getCustomerLocation());
+//                contentList.add(data.getPromiseTime());
+//                contentList.add(data.getPlanCemeteryLocation());
+//                holder.itemlayout_6.setVisibility(GONE);
+//                holder.itemlayout_7.setVisibility(GONE);
+//                holder.tv_line_5.setVisibility(GONE);
+//                holder.tv_line_6.setVisibility(GONE);
 
             } else if (data.getBespeakStatus() == 2 || data.getBespeakStatus() == 3 || data.getBespeakStatus() == 6) {
-                if (data.getIsEditInfo() == TalkEditInfoEnum.canTalk.getCode()) {
-                    holder.llStateAccept.setVisibility(GONE);
-                    holder.llStateTalk.setVisibility(VISIBLE);
-                    holder.llDetailes.setVisibility(GONE);
-                } else {
-                    holder.llStateAccept.setVisibility(GONE);
-                    holder.llStateTalk.setVisibility(GONE);
-                    holder.llDetailes.setVisibility(GONE);
-                }
-                nameStrings = CEMETERY_LISTTYPE_2;
-                contentList.add(data.getCustomerName());
-                contentList.add(data.getCustomerMobile());
-                contentList.add(data.getCustomerLocation());
-                contentList.add(data.getPromiseTime());
-                contentList.add(data.getPlanCemeteryLocation());
-                contentList.add(data.getTrafficWay());
-                contentList.add(data.getRemark());
-
-                holder.itemlayout_6.setVisibility(VISIBLE);
-                holder.itemlayout_7.setVisibility(VISIBLE);
-                holder.tv_line_5.setVisibility(VISIBLE);
-                holder.tv_line_6.setVisibility(VISIBLE);
+//                if (data.getIsEditInfo() == TalkEditInfoEnum.canTalk.getCode()) {
+//                    holder.llStateAccept.setVisibility(GONE);
+//                    holder.llStateTalk.setVisibility(VISIBLE);
+//                    holder.llDetailes.setVisibility(GONE);
+//                } else {
+//                    holder.llStateAccept.setVisibility(GONE);
+//                    holder.llStateTalk.setVisibility(GONE);
+//                    holder.llDetailes.setVisibility(GONE);
+//                }
+//                nameStrings = CEMETERY_LISTTYPE_2;
+//                contentList.add(data.getCustomerName());
+//                contentList.add(data.getCustomerMobile());
+//                contentList.add(data.getCustomerLocation());
+//                contentList.add(data.getPromiseTime());
+//                contentList.add(data.getPlanCemeteryLocation());
+//                contentList.add(data.getTrafficWay());
+//                contentList.add(data.getRemark());
+//
+//                holder.itemlayout_6.setVisibility(VISIBLE);
+//                holder.itemlayout_7.setVisibility(VISIBLE);
+//                holder.tv_line_5.setVisibility(VISIBLE);
+//                holder.tv_line_6.setVisibility(VISIBLE);
             } else {
-                if (data.getIsEditInfo() == 1) {
-                    holder.llStateAccept.setVisibility(GONE);
-                    holder.llStateTalk.setVisibility(GONE);
-                    holder.llDetailes.setVisibility(VISIBLE);
-                } else {
-                    holder.llStateAccept.setVisibility(GONE);
-                    holder.llStateTalk.setVisibility(GONE);
-                    holder.llDetailes.setVisibility(GONE);
-                }
-                nameStrings = CEMETERY_LISTTYPE_3;
-                contentList.add(data.getAgentmanName());
-                contentList.add(data.getAgentmanMoblie());
-                contentList.add(data.getDeadmanName());
-                contentList.add(data.getChoiceCemeteryName());
-                contentList.add(data.getDetailsLocation());
-                holder.itemlayout_6.setVisibility(GONE);
-                holder.itemlayout_7.setVisibility(GONE);
-                holder.tv_line_5.setVisibility(GONE);
-                holder.tv_line_6.setVisibility(GONE);
+//                if (data.getIsEditInfo() == 1) {
+//                    holder.llStateAccept.setVisibility(GONE);
+//                    holder.llStateTalk.setVisibility(GONE);
+//                    holder.llDetailes.setVisibility(VISIBLE);
+//                } else {
+//                    holder.llStateAccept.setVisibility(GONE);
+//                    holder.llStateTalk.setVisibility(GONE);
+//                    holder.llDetailes.setVisibility(GONE);
+//                }
+//                nameStrings = CEMETERY_LISTTYPE_3;
+//                contentList.add(data.getAgentmanName());
+//                contentList.add(data.getAgentmanMoblie());
+//                contentList.add(data.getDeadmanName());
+//                contentList.add(data.getChoiceCemeteryName());
+//                contentList.add(data.getDetailsLocation());
+//                holder.itemlayout_6.setVisibility(GONE);
+//                holder.itemlayout_7.setVisibility(GONE);
+//                holder.tv_line_5.setVisibility(GONE);
+//                holder.tv_line_6.setVisibility(GONE);
             }
 
             for (int i = 0; i < contentList.size(); i++) {
@@ -385,19 +385,19 @@ public class CemeteryQTView extends BaseOrderView {
                 } else {
                     phoneTV.setVisibility(GONE);
                 }
-
-                if (i == (nameStrings.length - 1) && data.getTalkFailResult() == 3) {
-                    detailsBT.setVisibility(VISIBLE);
-                    detailsBT.setOnClickListener(new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //订单详情
-                            queryTalkInfo(1, data);
-                        }
-                    });
-                } else {
-                    detailsBT.setVisibility(GONE);
-                }
+//
+//                if (i == (nameStrings.length - 1) && data.getTalkFailResult() == 3) {
+//                    detailsBT.setVisibility(VISIBLE);
+//                    detailsBT.setOnClickListener(new OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            //订单详情
+//                            queryTalkInfo(1, data);
+//                        }
+//                    });
+//                } else {
+//                    detailsBT.setVisibility(GONE);
+//                }
             }
 //            holder.listView.setAdapter(new BaseAdapter() {
 //                String[] nameStrings;
@@ -566,28 +566,28 @@ public class CemeteryQTView extends BaseOrderView {
      * 接单
      */
     private void acceptedOrder(CemeteryOrderModel model) {
-        HpCetemeryAcceptParams params = new HpCetemeryAcceptParams();
-        params.setBespeakAssignId(model.getBespeakAssignId());
-        params.setBespeakId(model.getBespeakId());
-        MHttpManagerFactory.getAccountManager().acceptCemetery(getContext(),
-                params, new HttpResponseHandler<Object>() {
-
-                    @Override
-                    public void onSuccess(Object result) {
-                        refresh();
-                        ToastUtils.show(getContext(), "接单成功");
-                    }
-
-                    @Override
-                    public void onStart() {
-
-                    }
-
-                    @Override
-                    public void onError(String message) {
-//                        ToastUtils.show(getContext(), "接单失败");
-                    }
-                });
+//        HpCetemeryAcceptParams params = new HpCetemeryAcceptParams();
+//        params.setBespeakAssignId(model.getBespeakAssignId());
+//        params.setBespeakId(model.getBespeakId());
+//        MHttpManagerFactory.getAccountManager().acceptCemetery(getContext(),
+//                params, new HttpResponseHandler<Object>() {
+//
+//                    @Override
+//                    public void onSuccess(Object result) {
+//                        refresh();
+//                        ToastUtils.show(getContext(), "接单成功");
+//                    }
+//
+//                    @Override
+//                    public void onStart() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(String message) {
+////                        ToastUtils.show(getContext(), "接单失败");
+//                    }
+//                });
 
     }
 
@@ -624,18 +624,18 @@ public class CemeteryQTView extends BaseOrderView {
      * 填写购墓信息
      */
     private void fillCetemeryInfo(CemeteryOrderModel model) {
-        Intent intent = new Intent(getContext(), BuyCemeteryInfoActivity.class);
-        intent.putExtra(TALK_CHANGE_INFO_STATE, 1);
-        intent.putExtra(TALK_INFO_ID, model.getBespeakId());
-        intent.putExtra(TALK_INFO_ORDER_ID, model.getOrderId());
-        if (model.getInfoStatus() == CemeteryOrderInfoStateEnum.notFillInfo.getCode()) {
-            intent.putExtra(BUY_INFO, CemeteryOrderInfoStateEnum.notFillInfo.getCode());
-        } else if (model.getInfoStatus() == CemeteryOrderInfoStateEnum.fillCemeteryOrdered.getCode()) {
-            intent.putExtra(BUY_INFO, CemeteryOrderInfoStateEnum.fillCemeteryOrdered.getCode());
-        } else if (model.getInfoStatus() == CemeteryOrderInfoStateEnum.fillCemeteryUserInfo.getCode()) {
-            intent.putExtra(BUY_INFO, CemeteryOrderInfoStateEnum.fillCemeteryUserInfo.getCode());
-        }
-        getContext().startActivity(intent);
+//        Intent intent = new Intent(getContext(), BuyCemeteryInfoActivity.class);
+//        intent.putExtra(TALK_CHANGE_INFO_STATE, 1);
+//        intent.putExtra(TALK_INFO_ID, model.getBespeakId());
+//        intent.putExtra(TALK_INFO_ORDER_ID, model.getOrderId());
+//        if (model.getInfoStatus() == CemeteryOrderInfoStateEnum.notFillInfo.getCode()) {
+//            intent.putExtra(BUY_INFO, CemeteryOrderInfoStateEnum.notFillInfo.getCode());
+//        } else if (model.getInfoStatus() == CemeteryOrderInfoStateEnum.fillCemeteryOrdered.getCode()) {
+//            intent.putExtra(BUY_INFO, CemeteryOrderInfoStateEnum.fillCemeteryOrdered.getCode());
+//        } else if (model.getInfoStatus() == CemeteryOrderInfoStateEnum.fillCemeteryUserInfo.getCode()) {
+//            intent.putExtra(BUY_INFO, CemeteryOrderInfoStateEnum.fillCemeteryUserInfo.getCode());
+//        }
+//        getContext().startActivity(intent);
     }
 
     /**

@@ -5,107 +5,21 @@ package com.shian.shianlife.provide.model;
  */
 
 public class CemeteryOrderModel {
-    private long bespeakId;//	咨询ID
-    private long orderId;//订单ID
-    private Integer bespeakStatus;//咨询状态:1：未接单，2：已接单，3：洽谈失败（未购墓），4：洽谈成功（购墓），5，服务结束
-    private Integer talkFailResult;//"洽谈失败的结果：1.未洽谈，2洽谈失败，3，预约2次洽谈"
-    private String customerName;//客户姓名
-    private String promiseTime;//	预约时间
-    private String planCemeteryLocation;//预约参观公墓
-    private String customerLocation;//	客户地址
-    private String customerMobile;//客户联系电话
-    private String trafficWay;//交通方式
-    private String remark;//备注
+    private String customerName;//string	客户姓名
+    private String customerMobile;//string	联系电话
+    private String promiseTime;//string	预约时间
+    private String customerLocation;//string	客户地址
+    private String planCemeteryLocation;//string	预约参观公墓
+    private String trafficWay;//string	交通方式
+    private String personNum;//string	人数
+    private long bespeakId;//	long	预约id
+    private int bespeakStatus;//int	预约洽谈状态，值：1未分配、2未指派、3未接单、4已接单、5再次洽谈、6洽谈失败（未购墓）、7已下单、8洽谈成功（购墓）、9服务结束
+    private String cemeteryReceive;//string	公墓接待
+    private long orderId;//long	订单id
+    private String detailsLocation;//公墓名称位置、
+    private long orderedTombDate;//date	订墓日期
+    private long payOffTime;//date	完款日期
 
-    private String agentmanName;//经办人姓名
-    private String agentmanMoblie;//经办人电话
-    private String deadmanName;//	使用者（往生者1）
-    private String choiceCemeteryName;//		选择的公墓名字
-    private String detailsLocation;//		园区详细地址
-
-    private Integer infoStatus;//资料填写状态：0，未填写信息。1，填写了购墓订单，2.填写了使用者信息，3填写了经办人信息
-    private long bespeakAssignId;//咨询指派ID
-    private Integer isEditInfo;//是否可编辑（1:可以编辑 0：不可编辑 ）
-
-    public long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
-    }
-
-    public long getBespeakId() {
-        return bespeakId;
-    }
-
-    public void setBespeakId(long bespeakId) {
-        this.bespeakId = bespeakId;
-    }
-
-    public Integer getBespeakStatus() {
-        return bespeakStatus;
-    }
-
-    public void setBespeakStatus(Integer bespeakStatus) {
-        this.bespeakStatus = bespeakStatus;
-    }
-
-    public long getBespeakAssignId() {
-        return bespeakAssignId;
-    }
-
-    public void setBespeakAssignId(long bespeakAssignId) {
-        this.bespeakAssignId = bespeakAssignId;
-    }
-
-    public String getAgentmanName() {
-        return agentmanName;
-    }
-
-    public void setAgentmanName(String agentmanName) {
-        this.agentmanName = agentmanName;
-    }
-
-    public String getAgentmanMoblie() {
-        return agentmanMoblie;
-    }
-
-    public void setAgentmanMoblie(String agentmanMoblie) {
-        this.agentmanMoblie = agentmanMoblie;
-    }
-
-    public String getPlanCemeteryLocation() {
-        return planCemeteryLocation;
-    }
-
-    public void setPlanCemeteryLocation(String planCemeteryLocation) {
-        this.planCemeteryLocation = planCemeteryLocation;
-    }
-
-    public String getCustomerLocation() {
-        return customerLocation;
-    }
-
-    public void setCustomerLocation(String customerLocation) {
-        this.customerLocation = customerLocation;
-    }
-
-    public String getDeadmanName() {
-        return deadmanName;
-    }
-
-    public void setDeadmanName(String deadmanName) {
-        this.deadmanName = deadmanName;
-    }
-
-    public String getChoiceCemeteryName() {
-        return choiceCemeteryName;
-    }
-
-    public void setChoiceCemeteryName(String choiceCemeteryName) {
-        this.choiceCemeteryName = choiceCemeteryName;
-    }
 
     public String getDetailsLocation() {
         return detailsLocation;
@@ -115,14 +29,20 @@ public class CemeteryOrderModel {
         this.detailsLocation = detailsLocation;
     }
 
-
-
-    public Integer getTalkFailResult() {
-        return talkFailResult;
+    public long getOrderedTombDate() {
+        return orderedTombDate;
     }
 
-    public void setTalkFailResult(Integer talkFailResult) {
-        this.talkFailResult = talkFailResult;
+    public void setOrderedTombDate(long orderedTombDate) {
+        this.orderedTombDate = orderedTombDate;
+    }
+
+    public long getPayOffTime() {
+        return payOffTime;
+    }
+
+    public void setPayOffTime(long payOffTime) {
+        this.payOffTime = payOffTime;
     }
 
     public String getCustomerName() {
@@ -133,6 +53,14 @@ public class CemeteryOrderModel {
         this.customerName = customerName;
     }
 
+    public String getCustomerMobile() {
+        return customerMobile;
+    }
+
+    public void setCustomerMobile(String customerMobile) {
+        this.customerMobile = customerMobile;
+    }
+
     public String getPromiseTime() {
         return promiseTime;
     }
@@ -141,13 +69,20 @@ public class CemeteryOrderModel {
         this.promiseTime = promiseTime;
     }
 
-
-    public String getCustomerMobile() {
-        return customerMobile;
+    public String getCustomerLocation() {
+        return customerLocation;
     }
 
-    public void setCustomerMobile(String customerMobile) {
-        this.customerMobile = customerMobile;
+    public void setCustomerLocation(String customerLocation) {
+        this.customerLocation = customerLocation;
+    }
+
+    public String getPlanCemeteryLocation() {
+        return planCemeteryLocation;
+    }
+
+    public void setPlanCemeteryLocation(String planCemeteryLocation) {
+        this.planCemeteryLocation = planCemeteryLocation;
     }
 
     public String getTrafficWay() {
@@ -158,27 +93,43 @@ public class CemeteryOrderModel {
         this.trafficWay = trafficWay;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getPersonNum() {
+        return personNum;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setPersonNum(String personNum) {
+        this.personNum = personNum;
     }
 
-    public Integer getInfoStatus() {
-        return infoStatus;
+    public long getBespeakId() {
+        return bespeakId;
     }
 
-    public void setInfoStatus(Integer infoStatus) {
-        this.infoStatus = infoStatus;
+    public void setBespeakId(long bespeakId) {
+        this.bespeakId = bespeakId;
     }
 
-    public Integer getIsEditInfo() {
-        return isEditInfo;
+    public int getBespeakStatus() {
+        return bespeakStatus;
     }
 
-    public void setIsEditInfo(Integer isEditInfo) {
-        this.isEditInfo = isEditInfo;
+    public void setBespeakStatus(int bespeakStatus) {
+        this.bespeakStatus = bespeakStatus;
+    }
+
+    public String getCemeteryReceive() {
+        return cemeteryReceive;
+    }
+
+    public void setCemeteryReceive(String cemeteryReceive) {
+        this.cemeteryReceive = cemeteryReceive;
+    }
+
+    public long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
     }
 }

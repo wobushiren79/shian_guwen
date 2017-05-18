@@ -157,8 +157,7 @@ public class QTView extends BaseOrderView {
         initAdapter();
         mListView.setAdapter(adapter);
         mSwipeRefreshHelper = new SwipeRefreshHelper(mSryt);
-        mSwipeRefreshHelper
-                .setOnSwipeRefreshListener(new OnSwipeRefreshListener() {
+        mSwipeRefreshHelper.setOnSwipeRefreshListener(new OnSwipeRefreshListener() {
                     @Override
                     public void onfresh() {
                         loadData();

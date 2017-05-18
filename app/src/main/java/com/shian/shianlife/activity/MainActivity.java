@@ -330,6 +330,24 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                     public void onError(String message) {
                     }
                 });
+
+        MHttpManagerFactory.getAccountManager().loginoutCemetery(this,
+                new HttpResponseHandler<Object>() {
+
+                    @Override
+                    public void onSuccess(Object result) {
+
+                    }
+
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                    }
+                });
     }
 
     @Override

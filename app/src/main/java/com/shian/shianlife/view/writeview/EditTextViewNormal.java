@@ -75,7 +75,7 @@ public class EditTextViewNormal extends BaseWriteView {
 
     public void setInputType(int inputType) {
         this.inputType = inputType;
-        initData();
+        mETInput.setInputType(inputType);
     }
 
     public void setData(String name) {

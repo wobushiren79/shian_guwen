@@ -26,6 +26,7 @@
                 android:id="@+id/write_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                MyViewAttr:isImportant="true"
                 MyViewAttr:titleName="客户姓名"></com.shian.shianlife.view.writeview.EditTextViewNormal>
 
             <TextView
@@ -38,6 +39,7 @@
                 android:id="@+id/write_userphone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                MyViewAttr:isImportant="true"
                 MyViewAttr:titleName="联系电话"></com.shian.shianlife.view.writeview.EditTextViewNormal>
 
             <TextView
@@ -50,6 +52,7 @@
                 android:id="@+id/write_meettime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                MyViewAttr:isImportant="true"
                 MyViewAttr:titleName="预约时间"></com.shian.shianlife.view.writeview.TimeSelectViewNormal>
 
             <TextView
@@ -62,6 +65,7 @@
                 android:id="@+id/write_personnum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                MyViewAttr:isImportant="true"
                 MyViewAttr:titleName="参观人数"></com.shian.shianlife.view.writeview.EditTextViewNormal>
 
             <TextView
@@ -74,6 +78,7 @@
                 android:id="@+id/write_cemeteryname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                MyViewAttr:isImportant="true"
                 MyViewAttr:titleName="预约参观公墓"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
 
             <TextView
@@ -86,6 +91,7 @@
                 android:id="@+id/write_traffic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                MyViewAttr:isImportant="true"
                 MyViewAttr:titleName="交通方式"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
 
             <TextView
@@ -98,6 +104,7 @@
                 android:id="@+id/write_userlocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                MyViewAttr:isImportant="true"
                 MyViewAttr:titleName="客户地址"></com.shian.shianlife.view.writeview.MapSelectViewNormal>
         </LinearLayout>
 

@@ -107,6 +107,9 @@ public interface MAccountManager extends HttpManager {
 
     public void loginout(Context context,
                          HttpResponseHandler<Object> handler);
+
+    public void loginoutCemetery(Context context,
+                         HttpResponseHandler<Object> handler);
     /**
      * 字典查询
      *

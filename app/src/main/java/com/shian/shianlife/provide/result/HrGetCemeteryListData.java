@@ -9,13 +9,49 @@ import java.util.List;
  */
 
 public class HrGetCemeteryListData {
-    List<CemeteryOrderModel> items;
+    List<CemeteryOrderModel> list;
+    private int total;
+    private int pageNum;
+    private int pageSize;
+    private int pages;
 
-    public List<CemeteryOrderModel> getItems() {
-        return items;
+    public int getTotal() {
+        return total;
     }
 
-    public void setItems(List<CemeteryOrderModel> items) {
-        this.items = items;
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
+    }
+
+    public List<CemeteryOrderModel> getList() {
+        return list;
+    }
+
+    public void setList(List<CemeteryOrderModel> list) {
+        this.list = list;
     }
 }

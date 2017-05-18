@@ -2,6 +2,7 @@ package com.shian.shianlife.activity.cemetery;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -79,6 +80,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         mUserLocation = (MapSelectViewNormal) findViewById(R.id.write_userlocation);
 
         mBTSubmit.setOnClickListener(onClickListener);
+        mPersonNum.setInputType(InputType.TYPE_CLASS_NUMBER);
     }
 
     private void initData() {
@@ -168,34 +170,39 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         String dataPersonNum = mPersonNum.getData();
         String dataUserLocation = mUserLocation.getData();
         long cemeteryId = ctemeryNameList.get(mCemeteryName.getSelectPosition()).getId();
-//        if (dataName.isEmpty()) {
-//            ToastUtils.show(BuildNewOrderActivity.this, "客户姓名不能为空");
-//            return;
-//        }
-//        if (!Utils.isPhoneNumber(dataPhone)) {
-//            ToastUtils.show(BuildNewOrderActivity.this, "联系电话格式错误");
-//            return;
-//        }
-//        if (dataTime.isEmpty()) {
-//            ToastUtils.show(BuildNewOrderActivity.this, "预约时间不能为空");
-//            return;
-//        }
-//        if (dataPersonNum.isEmpty()) {
-//            ToastUtils.show(BuildNewOrderActivity.this, "参观人数不能为空");
-//            return;
-//        }
+        if (dataName.isEmpty()) {
+            ToastUtils.show(BuildNewOrderActivity.this, "客户姓名不能为空");
+            return;
+        }
+        if (dataPhone.equals("")) {
+            ToastUtils.show(BuildNewOrderActivity.this, "电话不能为空");
+            return;
+
+        }
+        if (!Utils.isPhoneNumber(dataPhone)) {
+            ToastUtils.show(BuildNewOrderActivity.this, "联系电话格式错误");
+            return;
+        }
+        if (dataTime.isEmpty()) {
+            ToastUtils.show(BuildNewOrderActivity.this, "预约时间不能为空");
+            return;
+        }
+        if (dataPersonNum.isEmpty()) {
+            ToastUtils.show(BuildNewOrderActivity.this, "参观人数不能为空");
+            return;
+        }
         if (dataLocation.isEmpty()) {
             ToastUtils.show(BuildNewOrderActivity.this, "预约参观公墓不能为空");
             return;
         }
-//        if (dataTraffic.isEmpty()) {
-//            ToastUtils.show(BuildNewOrderActivity.this, "交通方式不能为空");
-//            return;
-//        }
-//        if (dataUserLocation.isEmpty()) {
-//            ToastUtils.show(BuildNewOrderActivity.this, "客户地址不能为空");
-//            return;
-//        }
+        if (dataTraffic.isEmpty()) {
+            ToastUtils.show(BuildNewOrderActivity.this, "交通方式不能为空");
+            return;
+        }
+        if (dataUserLocation.isEmpty()) {
+            ToastUtils.show(BuildNewOrderActivity.this, "客户地址不能为空");
+            return;
+        }
 
         if (rolesBuild && rolesTalk) {
             params.setSubmitType(1);

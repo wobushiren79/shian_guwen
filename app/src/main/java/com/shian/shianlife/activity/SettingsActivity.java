@@ -112,35 +112,51 @@ public class SettingsActivity extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                MHttpManagerFactory.getAccountManager().loginout(
-                        getBaseContext(), new HttpResponseHandler<Object>() {
+                MHttpManagerFactory.getAccountManager().loginout(getBaseContext(), new HttpResponseHandler<Object>() {
 
-                            @Override
-                            public void onSuccess(Object result) {
-                                // TODO Auto-generated method stub
-                                SharePerfrenceUtils.setShareAutoLogin(
-                                        getBaseContext(), false);
-                                PushManager.startWork(getApplicationContext(),
-                                        PushConstants.LOGIN_TYPE_API_KEY,
-                                        Utils.getMetaValue(SettingsActivity.this, "api_key"));
-                                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
-                                intent.putExtra("Settings", 0);
-                                setResult(1010, intent);
-                                finish();
-                            }
+                    @Override
+                    public void onSuccess(Object result) {
+                        SharePerfrenceUtils.setShareAutoLogin(
+                                getBaseContext(), false);
+                        PushManager.startWork(getApplicationContext(),
+                                PushConstants.LOGIN_TYPE_API_KEY,
+                                Utils.getMetaValue(SettingsActivity.this, "api_key"));
+                        Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
+                        intent.putExtra("Settings", 0);
+                        setResult(1010, intent);
+                        finish();
+                        // TODO Auto-generated method stub
 
-                            @Override
-                            public void onStart() {
-                                // TODO Auto-generated method stub
+                    }
 
-                            }
+                    @Override
+                    public void onStart() {
+                        // TODO Auto-generated method stub
 
-                            @Override
-                            public void onError(String message) {
-                                // TODO Auto-generated method stub
+                    }
 
-                            }
-                        });
+                    @Override
+                    public void onError(String message) {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
+                MHttpManagerFactory.getAccountManager().loginoutCemetery(SettingsActivity.this, new HttpResponseHandler<Object>() {
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(Object result) {
+
+                    }
+
+                    @Override
+                    public void onError(String message) {
+
+                    }
+                });
             }
         });
         mDialog.setBottomButton("否", new DialogInterface.OnClickListener() {

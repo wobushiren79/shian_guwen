@@ -464,6 +464,12 @@ public class MAccountManagerImpl implements MAccountManager {
     }
 
     @Override
+    public void loginoutCemetery(Context context, HttpResponseHandler<Object> handler) {
+        // TODO Auto-generated method stub
+        excutor.requestCemeteryPost(context, "doLogout", Object.class,
+                new BaseHttpParams(), handler);
+    }
+    @Override
     public void endService(Context context, HpAcceptParams params,
                            HttpResponseHandler<Object> handler) {
         // TODO Auto-generated method stub
