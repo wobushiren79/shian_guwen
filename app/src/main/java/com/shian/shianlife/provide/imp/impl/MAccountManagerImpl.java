@@ -723,49 +723,49 @@ public class MAccountManagerImpl implements MAccountManager {
 
     @Override
     public void getCemeteryTalkInfo(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkData> handler) {
-        excutor.requestPost(context, "marketing/talk/getTalkPlan", HrGetCemeteryTalkData.class, params,
+        excutor.requestCemeteryPost(context, "marketing/talk/getTalkPlan", HrGetCemeteryTalkData.class, params,
                 handler);
     }
 
     @Override
     public void saveCemeteryTalkInfo(Context context, HpSaveCemeteryTalkData params, HttpResponseHandler<Object> handler) {
-        excutor.requestPost(context, "marketing/talk/saveTalkPlan", Object.class, params,
+        excutor.requestCemeteryPost(context, "marketing/talk/saveTalkPlan", Object.class, params,
                 handler);
     }
 
     @Override
     public void getCemeteryTalkSuccessOne(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessOne> handler) {
-        excutor.requestPost(context, "marketing/order/buycemetery/get", HrGetCemeteryTalkSuccessOne.class, params,
+        excutor.requestCemeteryPost(context, "marketing/order/buycemetery/get", HrGetCemeteryTalkSuccessOne.class, params,
                 handler);
     }
 
     @Override
     public void saveCemeteryTalkSuccessOne(Context context, HpSaveCemeteryTalkSuccessOne params, HttpResponseHandler<HrOrderIdResult> handler) {
-        excutor.requestPost(context, "marketing/order/buycemetery/save/or/update", HrOrderIdResult.class, params,
+        excutor.requestCemeteryPost(context, "marketing/order/buycemetery/save/or/update", HrOrderIdResult.class, params,
                 handler);
     }
 
     @Override
     public void getCemeteryTalkSuccessTwo(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessTwo> handler) {
-        excutor.requestPost(context, "marketing/order/deadinfo/get", HrGetCemeteryTalkSuccessTwo.class, params,
+        excutor.requestCemeteryPost(context, "marketing/order/deadinfo/get", HrGetCemeteryTalkSuccessTwo.class, params,
                 handler);
     }
 
     @Override
     public void saveCemeteryTalkSuccessTwo(Context context, HpSaveCemeteryTalkSuccessTwo params, HttpResponseHandler<Object> handler) {
-        excutor.requestPost(context, "marketing/order/deadinfo/save/or/update", Object.class, params,
+        excutor.requestCemeteryPost(context, "marketing/order/deadinfo/save/or/update", Object.class, params,
                 handler);
     }
 
     @Override
     public void getCemeteryTalkSuccessThree(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessThree> handler) {
-        excutor.requestPost(context, "marketing/order/agentinfo/get", HrGetCemeteryTalkSuccessThree.class, params,
+        excutor.requestCemeteryPost(context, "marketing/order/agentinfo/get", HrGetCemeteryTalkSuccessThree.class, params,
                 handler);
     }
 
     @Override
     public void saveCemeteryTalkSuccessThree(Context context, HpSaveCemeteryTalkSuccessThree params, HttpResponseHandler<Object> handler) {
-        excutor.requestPost(context, "marketing/order/agentinfo/save/or/update", Object.class, params,
+        excutor.requestCemeteryPost(context, "marketing/order/agentinfo/save/or/update", Object.class, params,
                 handler);
     }
 

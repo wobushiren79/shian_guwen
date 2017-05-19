@@ -81,7 +81,7 @@ public class TalkFailActivity extends BaseActivity {
             @Override
             public void itemSelected(int position, String name, SpinnerViewNormal viewNormal) {
                 //预约二次洽谈
-                if (position == 1) {
+                if (position == 0) {
                     mLLOtherInfo.setVisibility(View.GONE);
                 } else {
                     mLLOtherInfo.setVisibility(View.VISIBLE);
@@ -154,13 +154,13 @@ public class TalkFailActivity extends BaseActivity {
      * 设置数据
      */
     private void setData() {
-        if (resultData.getPlanBuyCemetery() != null)
+        if (resultData.getPlanBuyCemetery() != null && !resultData.getPlanBuyCemetery().isEmpty())
             mWritePlanBuyType.setDataDict(resultData.getPlanBuyCemetery());
-        if (resultData.getUserOneState() != null)
+        if (resultData.getUserOneState() != null&& !resultData.getUserOneState().isEmpty())
             mWriteDeadState1.setDataDict(resultData.getUserOneState());
-        if (resultData.getUserTwoState() != null)
+        if (resultData.getUserTwoState() != null&& !resultData.getUserTwoState().isEmpty())
             mWriteDeadState2.setDataDict(resultData.getUserTwoState());
-        if (resultData.getRelation() != null)
+        if (resultData.getRelation() != null&& !resultData.getRelation().isEmpty())
             mWriteRelation.setDataDict(resultData.getRelation());
         if (resultData.getTrafficWay() != null)
             mWriteTraffic.setDataDict(resultData.getTrafficWay());
@@ -170,9 +170,11 @@ public class TalkFailActivity extends BaseActivity {
             mWriteMeetTime.setData(resultData.getOrderTime());
         if (resultData.getOrderLocation() != null)
             mWriteMeetLocation.setData(resultData.getOrderLocation());
-        if (resultData.getRemark() != null) {
+        if (resultData.getRemark() != null)
             mWriteRemark.setData(resultData.getRemark());
-        }
+        if (resultData.getTalkPoint() != null)
+            mWriteTalkPoint.setData(resultData.getTalkPoint());
+
         mWriteResult.setData(resultData.getTalkResult());
     }
 
