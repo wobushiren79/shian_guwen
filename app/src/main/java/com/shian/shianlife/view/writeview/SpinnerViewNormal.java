@@ -61,7 +61,7 @@ public class SpinnerViewNormal extends BaseWriteView {
 
     private void initData() {
         mTVTitleName.setText(titleName);
-
+        mTVTitleName.setEms(ems);
 //        mETInput.setInputType(inputType);
         if (isImportant) {
             mTVIsImportant.setVisibility(VISIBLE);
@@ -79,7 +79,6 @@ public class SpinnerViewNormal extends BaseWriteView {
     private void getSelectData(String dictCode, final String isShowSpinnerData) {
         HpGetDictSelectParams params = new HpGetDictSelectParams();
         params.setDictCode(dictCode);
-        params.setToken(AppContansts.userLoginInfo.getToken());
         MHttpManagerFactory.getAccountManager().getDictSelect(getContext(), params, new HttpResponseHandler<HrGetDictSelectData>() {
 
 
@@ -169,6 +168,7 @@ public class SpinnerViewNormal extends BaseWriteView {
     public void initSpinner(String[] array) {
         province_adapter = new ArrayAdapter<CharSequence>(getContext(), R.layout.textview_spinner, array);
         initString();
+
     }
 
     /**

@@ -13,6 +13,18 @@
         android:orientation="vertical">
 
         <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/write_ordernum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            MyViewAttr:titleName="app自编号"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
             android:id="@+id/write_ordernumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,13 +65,15 @@
             android:id="@+id/write_tombattr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             MyViewAttr:titleName="墓穴使用性质"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_1dp"
             android:layout_marginLeft="@dimen/dimen_32dp"
-            android:background="@color/zhy_line_3" />
+            android:background="@color/zhy_line_3"
+            android:visibility="gone" />
 
         <com.shian.shianlife.view.writeview.EditTextViewNormal
             android:id="@+id/write_planprice"
@@ -111,11 +125,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             MyViewAttr:titleName="公墓接待人"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_1dp"
             android:layout_marginLeft="@dimen/dimen_32dp"
             android:background="@color/zhy_line_3" />
+
         <com.shian.shianlife.view.writeview.EditTextViewNormal
             android:id="@+id/write_cemeterysales"
             android:layout_width="match_parent"

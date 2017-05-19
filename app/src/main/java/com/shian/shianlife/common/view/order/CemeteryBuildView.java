@@ -372,7 +372,8 @@ public class CemeteryBuildView extends BaseOrderView {
                 CemeteryBeSpeakStateEnum.accepted,
                 CemeteryBeSpeakStateEnum.talkFail,
                 CemeteryBeSpeakStateEnum.talkSuccess,
-                CemeteryBeSpeakStateEnum.serviceOver
+                CemeteryBeSpeakStateEnum.serviceOver,
+                CemeteryBeSpeakStateEnum.ready
         };
 
         for (CemeteryBeSpeakStateEnum state : beSpeakState) {

@@ -5,7 +5,8 @@ package com.shian.shianlife.provide.result;
  */
 
 public class HrGetCemeteryTalkSuccessContract {
-    private String orderNum;//订单编号
+    private String orderNum;//app订单编号
+    private String orderNumber;//后台订单编号
     private boolean saveCan;//售后是否提交过（true:提交过。false:没有提交过）
 
     private String cemeteryType;//墓型
@@ -30,6 +31,14 @@ public class HrGetCemeteryTalkSuccessContract {
     private String parkName;    //	园区名称
     private int num;//	墓位号
     private String cemeterySales;//	公墓业务员
+
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
 
     public String getCemeterySales() {
         return cemeterySales;

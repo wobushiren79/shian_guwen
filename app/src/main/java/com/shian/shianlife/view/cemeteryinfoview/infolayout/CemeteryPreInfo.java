@@ -29,6 +29,7 @@ import com.shian.shianlife.view.writeview.SpinnerViewNormal;
 public class CemeteryPreInfo extends BaseCemeteryInfo {
 
     EditTextViewNormal mWriteOrderNumber;
+    EditTextViewNormal mWriteOrderNum;
     SpinnerViewNormal mWriteTombType;
     SpinnerViewNormal mWriteTombAttr;
     EditTextViewNormal mWritePlanPrice;
@@ -63,8 +64,6 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         params.setBespeakId(beSpeakId);
         MHttpManagerFactory.getAccountManager().getCemeteryTalkSuccessContract
                 (getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessContract>() {
-
-
                     @Override
                     public void onStart() {
 
@@ -78,7 +77,9 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
                             mWriteLocationDetails.setData(result);
                         }
                         if (result.getOrderNum() != null)
-                            mWriteOrderNumber.setData(result.getOrderNum());
+                            mWriteOrderNum.setData(result.getOrderNum());
+                        if (result.getOrderNumber() != null)
+                            mWriteOrderNumber.setData(result.getOrderNumber());
                         if (result.getCemeteryType() != null)
                             mWriteTombType.setDataDict(result.getCemeteryType());
                         if (result.getTombUseProperty() != null)
@@ -101,6 +102,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
                             mWriteRemark.setData(result.getRemark());
                         if (result.getCemeterySales() != null)
                             mWriteCemeterySales.setData(result.getCemeterySales());
+
                     }
 
                     @Override
@@ -155,7 +157,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         params.setRowNumber(locationRowId);
         params.setTombPositionId(locationNumId);
 
-        params.setOrderNum(mWriteOrderNumber.getData());
+        params.setOrderNum(mWriteOrderNum.getData());
         params.setCemeteryType(mWriteTombType.getData());
         params.setTombUseProperty(mWriteTombAttr.getData());
         params.setPlanSale(mWritePlanPrice.getData());
@@ -192,6 +194,7 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
     @Override
     public void initView() {
         mWriteOrderNumber = (EditTextViewNormal) view.findViewById(R.id.write_ordernumber);
+        mWriteOrderNum = (EditTextViewNormal) view.findViewById(R.id.write_ordernum);
         mWriteTombType = (SpinnerViewNormal) view.findViewById(R.id.write_tombtype);
         mWriteTombAttr = (SpinnerViewNormal) view.findViewById(R.id.write_tombattr);
         mWritePlanPrice = (EditTextViewNormal) view.findViewById(R.id.write_planprice);
@@ -205,11 +208,13 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         mWriteRemark = (EditTextViewNormal) view.findViewById(R.id.write_remark);
         mWriteLocationDetails = (SpinnerCemeteryLocation) view.findViewById(R.id.write_locationdetails);
 
+        mWriteOrderNumber.setDisable(false);
         mWriteDealPrice.setInputType(InputType.TYPE_CLASS_NUMBER);
         mTVBack = (TextView) view.findViewById(R.id.tv_back);
         mTVSubmit = (TextView) view.findViewById(R.id.tv_submit);
         mLLButton = (LinearLayout) findViewById(R.id.ll_button);
         mWritePlanPrice.setDisable(false);
+        mWriteCemeterySales.setDisable(false);
         mWritePayMoney.setInputType(InputType.TYPE_CLASS_NUMBER);
         mTVSubmit.setOnClickListener(new OnClickListener() {
             @Override

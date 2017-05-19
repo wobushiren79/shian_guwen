@@ -72,6 +72,8 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
     }
 
     SpinnerViewNormal.SpinnerCallBack spinnerCallBack = new SpinnerViewNormal.SpinnerCallBack() {
+
+
         @Override
         public void itemSelected(int position, String name, SpinnerViewNormal viewNormal) {
             if (viewNormal.hasData) {
@@ -151,8 +153,6 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
                 getDataInfo(CemeteryLocationEnum.LOCATIONNUM.getCode(), locationId, parkIdTemp, mWriteLocationNum);
             }
         }
-
-
     };
 
     /**
@@ -172,6 +172,8 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
             params.setParkIdTemp(parkIdTemp);
         }
         MHttpManagerFactory.getAccountManager().getCemeteryStructure(getContext(), params, new HttpResponseHandler<HrGetCemeteryStructure>() {
+
+
             @Override
             public void onStart() {
 
