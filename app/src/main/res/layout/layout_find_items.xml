@@ -9,8 +9,9 @@
     <ImageView
         android:id="@+id/iv_pic"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_200dp"
-        android:scaleType="fitXY"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
         android:src="@drawable/zhy_find_default_icon" />
 
     <TextView

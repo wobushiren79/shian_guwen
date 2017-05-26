@@ -285,7 +285,7 @@ public class Utils {
                         dialog.show();
                     } else {
                         if (isToast) {
-                            ToastUtils.show(context, "当前已是最新版：" + versionNew);
+                            ToastUtils.show(context, "当前已是最新版" );
                         }
                     }
                 } catch (Exception e) {
