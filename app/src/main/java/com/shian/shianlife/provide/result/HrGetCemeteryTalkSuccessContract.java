@@ -23,13 +23,13 @@ public class HrGetCemeteryTalkSuccessContract {
     private long cemeteryId;//	公墓名称 id
     private long tombId;//苑 id
     private long parkId;//	区 id
-    private long rowNumber;//	排 id
+    private String rowNumber;//	排 id
     private long tombPositionId;//	号 id
 
     private String cemeteryName;    //		公墓名称
     private String tombName;    //	墓园(苑)名称
     private String parkName;    //	园区名称
-    private int num;//	墓位号
+    private String num;//	墓位号
     private String cemeterySales;//	公墓业务员
 
     public String getOrderNumber() {
@@ -168,11 +168,11 @@ public class HrGetCemeteryTalkSuccessContract {
         this.parkId = parkId;
     }
 
-    public long getRowNumber() {
+    public String getRowNumber() {
         return rowNumber;
     }
 
-    public void setRowNumber(long rowNumber) {
+    public void setRowNumber(String rowNumber) {
         this.rowNumber = rowNumber;
     }
 
@@ -208,11 +208,11 @@ public class HrGetCemeteryTalkSuccessContract {
         this.parkName = parkName;
     }
 
-    public int getNum() {
+    public String getNum() {
         return num;
     }
 
-    public void setNum(int num) {
+    public void setNum(String num) {
         this.num = num;
     }
 }

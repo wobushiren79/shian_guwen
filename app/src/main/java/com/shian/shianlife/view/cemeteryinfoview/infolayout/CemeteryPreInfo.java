@@ -122,23 +122,23 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         long locationRowId = mWriteLocationDetails.getData(CemeteryLocationEnum.LOCATIONROW.getCode());
         long locationNumId = mWriteLocationDetails.getData(CemeteryLocationEnum.LOCATIONNUM.getCode());
 
-        if (cemeteryNameId == -1) {
+        if (cemeteryNameId == 0) {
             ToastUtils.show(getContext(), "还没有选择公墓");
             return;
         }
-        if (locationGardenId == -1) {
+        if (locationGardenId == 0) {
             ToastUtils.show(getContext(), "还没有选择苑");
             return;
         }
-        if (locationAreaId == -1) {
+        if (locationAreaId == 0) {
             ToastUtils.show(getContext(), "还没有选择区");
             return;
         }
-        if (locationRowId == -1) {
+        if (locationRowId == 0) {
             ToastUtils.show(getContext(), "还没有选择排");
             return;
         }
-        if (locationNumId == -1) {
+        if (locationNumId == 0) {
             ToastUtils.show(getContext(), "还没有选择号");
             return;
         }

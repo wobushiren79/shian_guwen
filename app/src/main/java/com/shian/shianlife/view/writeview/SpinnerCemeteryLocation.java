@@ -89,26 +89,26 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
 
             mWriteLocationNum.clearData();
             resultLocationNum = null;
-            numId = -1;
+            numId = 0;
             numName = null;
             if (viewNormal == mWriteLocationRow)
                 return;
             mWriteLocationRow.clearData();
             resultLocationRow = null;
-            rowId = -1;
-            numId = -1;
+            rowId = null;
+            numId = 0;
             rowName = null;
             if (viewNormal == mWriteLocationArea)
                 return;
             mWriteLocationArea.clearData();
             resultLocationArea = null;
-            areaId = -1;
+            areaId = 0;
             areaName = null;
             if (viewNormal == mWriteLocationGarden)
                 return;
             mWriteLocationGarden.clearData();
             resultLocationGarden = null;
-            gardenId = -1;
+            gardenId = 0;
             gardenName = null;
             if (viewNormal == mWriteCemeteryName)
                 return;
@@ -118,8 +118,8 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
 
         @Override
         public void check(SpinnerViewNormal view) {
-            long locationId = -1;
-            long parkIdTemp = -1;
+            long locationId = 0;
+            long parkIdTemp = 0;
             if (view == mWriteCemeteryName) {
                 getDataInfo(CemeteryLocationEnum.CEMETERYNAME.getCode(), locationId, parkIdTemp, mWriteCemeteryName);
             } else if (view == mWriteLocationGarden) {
@@ -153,6 +153,8 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
                 getDataInfo(CemeteryLocationEnum.LOCATIONNUM.getCode(), locationId, parkIdTemp, mWriteLocationNum);
             }
         }
+
+
     };
 
     /**
@@ -218,11 +220,11 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
         });
     }
 
-    long cemeteryId = -1;
-    long gardenId = -1;
-    long areaId = -1;
-    long rowId = -1;
-    long numId = -1;
+    long cemeteryId = 0;
+    long gardenId = 0;
+    long areaId = 0;
+    String rowId = null;
+    long numId = 0;
     String cemeteryName;
     String gardenName;
     String areaName;
@@ -233,7 +235,7 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
      * 获取地址数据
      */
     public long getData(int type) {
-        long dataID = -1;
+        long dataID = 0;
         try {
             if (type == CemeteryLocationEnum.CEMETERYNAME.getCode()) {
                 cemeteryId = resultCemeteryName.getItems().get(mWriteCemeteryName.getSelectPosition()).getId();
@@ -242,7 +244,7 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
             } else if (type == CemeteryLocationEnum.LOCATIONAREA.getCode()) {
                 areaId = resultLocationArea.getItems().get(mWriteLocationArea.getSelectPosition()).getId();
             } else if (type == CemeteryLocationEnum.LOCATIONROW.getCode()) {
-                rowId = resultLocationRow.getItems().get(mWriteLocationRow.getSelectPosition()).getId();
+                rowId = resultLocationRow.getItems().get(mWriteLocationRow.getSelectPosition()).getId() + "";
             } else if (type == CemeteryLocationEnum.LOCATIONNUM.getCode()) {
                 numId = resultLocationNum.getItems().get(mWriteLocationNum.getSelectPosition()).getId();
             }
@@ -256,7 +258,7 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
             } else if (type == CemeteryLocationEnum.LOCATIONAREA.getCode()) {
                 dataID = areaId;
             } else if (type == CemeteryLocationEnum.LOCATIONROW.getCode()) {
-                dataID = rowId;
+                dataID = Long.valueOf(rowId);
             } else if (type == CemeteryLocationEnum.LOCATIONNUM.getCode()) {
                 dataID = numId;
             }
@@ -279,11 +281,11 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
         rowName = data.getRowNumber() + "";
         numName = data.getNum() + "";
 
-        getDataInfo(CemeteryLocationEnum.CEMETERYNAME.getCode(), -1, -1, mWriteCemeteryName);
-        getDataInfo(CemeteryLocationEnum.LOCATIONGARDEN.getCode(), cemeteryId, -1, mWriteLocationGarden);
-        getDataInfo(CemeteryLocationEnum.LOCATIONAREA.getCode(), gardenId, -1, mWriteLocationArea);
-        getDataInfo(CemeteryLocationEnum.LOCATIONROW.getCode(), areaId, -1, mWriteLocationRow);
-        getDataInfo(CemeteryLocationEnum.LOCATIONNUM.getCode(), rowId, areaId, mWriteLocationNum);
+        getDataInfo(CemeteryLocationEnum.CEMETERYNAME.getCode(), 0, 0, mWriteCemeteryName);
+        getDataInfo(CemeteryLocationEnum.LOCATIONGARDEN.getCode(), cemeteryId, 0, mWriteLocationGarden);
+        getDataInfo(CemeteryLocationEnum.LOCATIONAREA.getCode(), gardenId, 0, mWriteLocationArea);
+        getDataInfo(CemeteryLocationEnum.LOCATIONROW.getCode(), areaId, 0, mWriteLocationRow);
+        getDataInfo(CemeteryLocationEnum.LOCATIONNUM.getCode(), Long.valueOf(rowId), areaId, mWriteLocationNum);
     }
 
     public void setData(HrGetCemeteryTalkSuccessContract data, boolean isInit) {
@@ -308,9 +310,9 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
             return true;
         if (data.getParkName() == null)
             return true;
-        if (data.getRowNumber() == 0)
+        if (data.getRowNumber() == null)
             return true;
-        if (data.getNum() == 0)
+        if (data.getNum() == null)
             return true;
         return false;
     }
