@@ -8,6 +8,15 @@ public class CemeteryStructureModel {
     private String name;//名字
     private long id;//ID
     private long tombSalePrice;//墓位挂牌价，注：仅类型为4墓位号时，才启用
+    private String remark;//墓位备注
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     public String getName() {
         return name;

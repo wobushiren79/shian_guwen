@@ -247,6 +247,20 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
     }
 
     public void setShowMode() {
+        mWriteOrderNumber.setDisable(false);
+        mWriteOrderNum.setDisable(false);
+        mWriteTombType.setEnabled(false);
+        mWriteTombAttr.setEnabled(false);
+        mWritePlanPrice.setDisable(false);
+        mWriteDealPrice.setDisable(false);
+        mWritePayInfo.setEnabled(false);
+        mWritePayMoney.setDisable(false);
+        mWriteCemeteryReception.setDisable(false);
+        mWriteCemeterySales.setDisable(false);
+        mWriteFreeGift.setDisable(false);
+        mWriteChoiceService.setDisable(false);
+        mWriteRemark.setDisable(false);
+        mWriteLocationDetails.setDisable(false);
         mLLButton.setVisibility(GONE);
     }
 

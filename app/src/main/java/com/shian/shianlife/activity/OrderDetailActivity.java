@@ -57,8 +57,6 @@ public class OrderDetailActivity extends BaseActivity {
 		ll_parent.addView(mPayInfoView);
 		orderId = getIntent().getLongExtra("orderId", 0);
 		getData();
-		
-
 	}
 
 	private void getData() {
