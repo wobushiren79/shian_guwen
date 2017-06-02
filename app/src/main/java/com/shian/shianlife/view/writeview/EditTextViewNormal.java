@@ -26,7 +26,6 @@ public class EditTextViewNormal extends BaseWriteView {
 
     public EditTextViewNormal(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         view = View.inflate(context, R.layout.zhy_write_edittextview_normal, this);
         initView();
         initData();

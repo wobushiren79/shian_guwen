@@ -18,6 +18,7 @@ import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.phpmodel.SiftListData;
+import com.shian.shianlife.thisenum.SystemTypeEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,6 +141,7 @@ public class FindAdapter extends BaseAdapter {
         params.put("type", type);
         params.put("userid", AppContansts.userLoginInfo.getUserId());
         params.put("siftid", siftID);
+        params.put("userType", SystemTypeEnum.funeral.getCode());
         MHttpManagerFactory.getPHPManager().setSiftData(context, params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart() {

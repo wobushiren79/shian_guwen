@@ -18,6 +18,7 @@ import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.result.HrUserInfo;
+import com.shian.shianlife.thisenum.SystemTypeEnum;
 
 public class IdeaFeedbackActivity extends BaseActivity {
     EditText mEditText;
@@ -82,14 +83,15 @@ public class IdeaFeedbackActivity extends BaseActivity {
 
 
     private void submit() {
-        if(mEditText.getText().toString().equals("")){
-            ToastUtils.show(IdeaFeedbackActivity.this,"还没有填写反馈信息");
+        if (mEditText.getText().toString().equals("")) {
+            ToastUtils.show(IdeaFeedbackActivity.this, "还没有填写反馈信息");
             return;
         }
         RequestParams params = new RequestParams();
         params.put("user", UserInfo[0]);
         params.put("tel", UserInfo[1]);
         params.put("content", mEditText.getText().toString());
+        params.put("userType", SystemTypeEnum.funeral.getCode());
         MHttpManagerFactory.getPHPManager().setOpinion(IdeaFeedbackActivity.this, params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart() {
@@ -98,14 +100,14 @@ public class IdeaFeedbackActivity extends BaseActivity {
 
             @Override
             public void onSuccess(Object result) {
-                ToastUtils.show(IdeaFeedbackActivity.this,"提交成功");
+                ToastUtils.show(IdeaFeedbackActivity.this, "提交成功");
                 finish();
             }
 
             @Override
             public void onError(String message) {
-              ToastUtils.show(IdeaFeedbackActivity.this,"提交失败");
+                ToastUtils.show(IdeaFeedbackActivity.this, "提交失败");
             }
-        },true);
+        }, true);
     }
 }

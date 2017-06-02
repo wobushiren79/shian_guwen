@@ -14,6 +14,7 @@ import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.phpmodel.SiftListData;
 import com.shian.shianlife.provide.phpresult.PHPHrGetSiftListData;
+import com.shian.shianlife.thisenum.SystemTypeEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class MyCollectionActivity extends BaseActivity {
             @Override
             public void run() {
                 mListView.setRefreshing(true);
-                pagerNumber=0;
+                pagerNumber = 0;
                 getData(true);
             }
         }, 500);
@@ -58,7 +59,7 @@ public class MyCollectionActivity extends BaseActivity {
     PullToRefreshBase.OnRefreshListener2 onRefreshListener2 = new PullToRefreshBase.OnRefreshListener2() {
         @Override
         public void onPullDownToRefresh(PullToRefreshBase refreshView) {
-            pagerNumber=0;
+            pagerNumber = 0;
             getData(true);
         }
 
@@ -75,6 +76,7 @@ public class MyCollectionActivity extends BaseActivity {
         params.put("userid", (int) AppContansts.userLoginInfo.getUserId());
         params.put("number", number);
         params.put("pagerNumber", pagerNumber);
+        params.put("userType", SystemTypeEnum.platform.getCode());
         MHttpManagerFactory.getPHPManager().getSiftListData(MyCollectionActivity.this, params, new HttpResponseHandler<PHPHrGetSiftListData>() {
             @Override
             public void onStart() {
