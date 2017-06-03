@@ -33,224 +33,93 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class SplashActivity extends BaseActivity implements OnPushListener {
-    private int sleepTime = 2500;//loading时间
-    private int advertisementTime = 5000;//广告时间
+    private int SLEEPTIME = 2500;//loading时间
     HrLoginResult result = null;
-
     Timer timerIntent;//定时跳转
-    Button mBTJump;
-    ImageView mIVAdvertising;
-
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 0) {
-                advertisementSet();
-            }
-        }
-    };
-
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_splash);
-        init();
         initPush();
-        initAdvertisement();
     }
 
     /**
-     * 获取广告图
+     * 休眠2秒
      */
-    private void initAdvertisement() {
-        RequestParams params = new RequestParams();
-        params.put("type", 1);
-        params.put("number", 1);
-        params.put("pagerNumber", 0);
-        MHttpManagerFactory.getPHPManager().getAdvertisement(SplashActivity.this, params, new HttpResponseHandler<PHPHrGetAdvertisement>() {
+    private void sleepActivity(final int type) {
+        timerIntent = new Timer();
+        timerIntent.schedule(new TimerTask() {
             @Override
-            public void onStart() {
-
+            public void run() {
+                jumpActivity(type);
             }
-
-            @Override
-            public void onSuccess(final PHPHrGetAdvertisement result) {
-
-                String picUrl = AppContansts.PhpURL + result.getItems().get(0).getBanner();
-                ImageLoader.getInstance().displayImage(picUrl, mIVAdvertising);
-                mIVAdvertising.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mBTJump.setText("跳转");
-                        jumpWeb(result);
-                    }
-                });
-            }
-
-
-            @Override
-            public void onError(String message) {
-
-            }
-        });
+        }, SLEEPTIME);
     }
 
 
-    private void init() {
-        mBTJump = (Button) findViewById(R.id.bt_jump);
-        mIVAdvertising = (ImageView) findViewById(R.id.iv_advertising);
-
-        mBTJump.setOnClickListener(onClickListener);
-    }
-
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (v == mBTJump) {
-                jumpActivity();
-            }
-        }
-    };
-
-    private void jumpActivity() {
-        ShareLogin loginS = SharePerfrenceUtils.getLoginShare(this);
-        if (loginS.isAutoLogin()) {
-            jumpMain(result);
+    private void initData(String channelId) {
+        //自动登陆
+        SharePerfrenceUtils.ShareLogin shareLogin = SharePerfrenceUtils.getLoginShare(SplashActivity.this);
+        if (shareLogin.isAutoLogin()) {
+            login(shareLogin.getUsername(), shareLogin.getPassword(), channelId);
         } else {
-            jumpLogin();
+            sleepActivity(1);
         }
     }
 
-    private void initView() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(sleepTime);
-                    isOpenAdvertisement(true);
-                    timerIntent = new Timer();
-                    timerIntent.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            jumpLogin();
-                        }
-                    }, advertisementTime);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
-
-    private void loginSuccess(final HrLoginResult result) {
-        this.result = result;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(sleepTime);
-                    isOpenAdvertisement(true);
-                    timerIntent = new Timer();
-                    timerIntent.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            jumpMain(result);
-                        }
-                    }, advertisementTime);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
 
     /**
-     * 跳转主界面
-     *
-     * @param result
+     * 跳转界面
      */
-    private void jumpMain(HrLoginResult result) {
-        cancelTimer();
-        Intent in = new Intent(SplashActivity.this, MainActivity.class);
-        in.putExtra("loginData", JSONUtil.writeEntityToJSONString(result));
-        startActivity(in);
-        finish();
-    }
-
-    /**
-     * 跳转登录界面
-     */
-    private void jumpLogin() {
-        cancelTimer();
-        Intent in = new Intent(SplashActivity.this, LoginActivity.class);
-        startActivity(in);
-        finish();
-    }
-
-    /**
-     * 跳转网页界面
-     *
-     * @param result
-     */
-    private void jumpWeb(PHPHrGetAdvertisement result) {
-        cancelTimer();
-        Intent intent = new Intent(SplashActivity.this, WebActivity.class);
-        intent.putExtra("url", result.getItems().get(0).getUrl());
+    private void jumpActivity(int type) {
+        Intent intent = new Intent(SplashActivity.this, LoginAdvertActivity.class);
+        if (type == 0) {
+            intent.putExtra("advert", LoginAdvertActivity.MAIN);
+        } else {
+            intent.putExtra("advert", LoginAdvertActivity.LOGIN);
+        }
         startActivity(intent);
+        finish();
     }
 
-    /**
-     * 关闭定时器
-     */
-    private void cancelTimer() {
-        if (timerIntent != null) {
-            timerIntent.cancel();
-        }
-
-    }
-
-    private void initLogin(String channelId) {
+    private void login(String userName, String passWord, String channelId) {
         AppContansts.userCemetery = null;
         AppContansts.userLoginInfo = null;
         ShareLogin loginS = SharePerfrenceUtils.getLoginShare(this);
-        if (loginS.isAutoLogin()) {
-            if (loginS.getLoginType() == 0) {
-                //登录状态为普通状态
-                HpLoginParams params = new HpLoginParams();
-                params.setPassword(loginS.getPassword());
-                params.setUsername(loginS.getUsername());
-                params.setSystemType("2");
-                params.setChannelId(channelId);
-                MHttpManagerFactory.getAccountManager().login(this, params,
-                        new HttpResponseHandler<HrLoginResult>() {
+        if (loginS.getLoginType() == 0) {
+            //登录状态为普通状态
+            HpLoginParams params = new HpLoginParams();
+            params.setPassword(passWord);
+            params.setUsername(userName);
+            params.setSystemType("2");
+            params.setChannelId(channelId);
+            MHttpManagerFactory.getAccountManager().login(this, params,
+                    new HttpResponseHandler<HrLoginResult>() {
 
-                            @Override
-                            public void onSuccess(HrLoginResult result) {
-                                AppContansts.userLoginInfo = result;
-                                if (result.getToken() != null && !result.getToken().equals("")) {
-                                    loginCemetery(result);
-                                } else {
-                                    loginSuccess(result);
-                                    SharePerfrenceUtils.setHasCemetery(SplashActivity.this, false);
-                                }
-
+                        @Override
+                        public void onSuccess(HrLoginResult result) {
+                            AppContansts.userLoginInfo = result;
+                            if (result.getToken() != null && !result.getToken().equals("")) {
+                                loginCemetery(result);
+                            } else {
+                                SharePerfrenceUtils.setHasCemetery(SplashActivity.this, false);
+                                sleepActivity(0);
                             }
+                        }
 
-                            @Override
-                            public void onStart() {
+                        @Override
+                        public void onStart() {
 
-                            }
+                        }
 
-                            @Override
-                            public void onError(String message) {
-                                jumpLogin();
-                            }
-                        });
-            } else if (loginS.getLoginType() == 1) {
-                //登录状态为公墓状态
+                        @Override
+                        public void onError(String message) {
+                            sleepActivity(1);
+                        }
+                    });
+        } else if (loginS.getLoginType() == 1) {
+            //登录状态为公墓状态
 //                HpLoginParams params = new HpLoginParams();
 //                params.setPassword(loginS.getPassword());
 //                params.setUsername(loginS.getUsername());
@@ -279,9 +148,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
 //                                jumpLogin();
 //                            }
 //                        });
-            }
-        } else {
-            initView();
         }
     }
 
@@ -302,14 +168,14 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
             @Override
             public void onSuccess(HrLoginResult resultCemetery) {
                 AppContansts.userCemetery = resultCemetery;
-                loginSuccess(result);
                 SharePerfrenceUtils.setHasCemetery(SplashActivity.this, true);
+                sleepActivity(0);
             }
 
             @Override
             public void onError(String message) {
-                loginSuccess(result);
                 SharePerfrenceUtils.setHasCemetery(SplashActivity.this, false);
+                sleepActivity(0);
             }
         });
     }
@@ -349,33 +215,13 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     @Override
     public void onPush(String channelId) {
         // TODO Auto-generated method stub
-
-        initLogin(channelId);
-    }
-
-
-    /**
-     * 是否开启广告
-     *
-     * @param isOpen
-     */
-    public void isOpenAdvertisement(boolean isOpen) throws InterruptedException {
-        if (isOpen == false) {
-            return;
-        } else {
-            handler.obtainMessage(0).sendToTarget();
-        }
-    }
-
-    private void advertisementSet() {
-        mBTJump.setVisibility(View.VISIBLE);
-        mIVAdvertising.setVisibility(View.VISIBLE);
-
+        initData(channelId);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        cancelTimer();
+        if (timerIntent != null)
+            timerIntent.cancel();
     }
 }
