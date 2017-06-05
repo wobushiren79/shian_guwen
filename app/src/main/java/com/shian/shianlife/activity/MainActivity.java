@@ -143,16 +143,28 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         String name = SharePerfrenceUtils.getLoginShare(this).getUsername();
         UserInfo userInfo = new UserInfo();
         userInfo.name = name;
-        byte[] ips = name.getBytes();
-        StringBuffer sb = new StringBuffer();
-        sb.append("18030");
-        for (byte b : ips) {
-            int i = b;
-            sb.append("" + i);
-        }
-        sb.append("00000000000000");//防止账号过短
+//        byte[] ips = name.getBytes();
+//        StringBuffer sb = new StringBuffer();
+//        sb.append("18030");
+//        for (byte b : ips) {
+//            int i = b;
+//            sb.append("" + i);
+//        }
+//        sb.append("00000000000000");//防止账号过短
+        //        byte[] ips = name.getBytes();
+//        StringBuffer sb = new StringBuffer();
+//        sb.append("18030");
+//        for (byte b : ips) {
+//            int i = b;
+//            sb.append("" + i);
+//        }
+//        userInfo.sdkName = "来自世安工单";
+//        if (sb.toString().length() > 11)
+//            userInfo.phone = sb.toString().substring(0, 11);
+//        else
+//            userInfo.phone = sb.toString().substring(0, sb.toString().length() - 1);
+        userInfo.phone="15008420243";
         userInfo.sdkName = "来自世安工单";
-        userInfo.phone = sb.toString().substring(0, 11);
         userInfo.helpAddress = "wenshikai.kf5.com";
         userInfo.email = name + "@sina.com";
         userInfo.deviceToken = name;

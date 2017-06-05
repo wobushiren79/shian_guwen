@@ -133,7 +133,7 @@ public class MainAPPItems extends LinearLayout {
         List<PackageInfo> packlist = pManager.getInstalledPackages(0);
         for (int i = 0; i < packlist.size(); i++) {
             PackageInfo pak = (PackageInfo) packlist.get(i);
-            if (pak.packageName.contains(app_flag_1) || pak.packageName.contains(app_flag_2)) {
+            if (pak.packageName.contains(app_flag_1) || pak.packageName.contains(app_flag_2) && !pak.packageName.contains("theme")) {
                 return pak;
             }
         }

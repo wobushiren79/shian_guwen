@@ -9,8 +9,8 @@ import com.shian.shianlife.common.contanst.AppContansts;
 
 public enum APPEnum {
     ALL("全部应用", R.drawable.zhy_myapp_allapp, "all"),//其他APP
-    ZSPROJECT("治丧产品", R.drawable.zhy_myapp_zsproject, "http://www.e-funeral.cn/Home/Plan/lst.html"),//治丧产品
-    CEMETERY("公墓", R.drawable.zhy_myapp_cemetery, "http://www.e-funeral.cn/Home/Goods/index.html"),//公墓
+    ZSPROJECT("治丧产品", R.drawable.zhy_myapp_zsproject, "http://m.e-funeral.cn/Plan/index.html"),//治丧产品
+    CEMETERY("公墓", R.drawable.zhy_myapp_cemetery, "http://m.e-funeral.cn/Goods/index.html"),//公墓
     BEFORECONTRACT("生前契约", R.drawable.zhy_myapp_beforecontract, ""),//生前契约
     MICROMALL("微商城", R.drawable.zhy_myapp_micromall, "https://kdt.im/AHSojr"),//微商城
     NAVIGATION("导航", R.drawable.zhy_myapp_navigation, "navigation"),//导航
