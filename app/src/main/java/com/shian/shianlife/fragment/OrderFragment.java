@@ -126,8 +126,6 @@ public class OrderFragment extends BaseFragment {
 
     private void initStates() {
         arrTitles.clear();
-        mLoginResult = JSONUtil.parseJSONString(getActivity().getIntent()
-                .getStringExtra("loginData"), HrLoginResult.class);
         //检测权限
         if (AppContansts.userCemetery != null) {
             for (int i = 0; i < AppContansts.userCemetery.getPermitionCodes().size(); i++) {
@@ -136,7 +134,7 @@ public class OrderFragment extends BaseFragment {
                 }
             }
         }
-        for (Integer role : mLoginResult.getRoleIds()) {
+        for (Integer role : AppContansts.userLoginInfo.getRoleIds()) {
             switch (role) {
                 case 1:
                     arrTitles.add("洽谈");
