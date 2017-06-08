@@ -6,8 +6,8 @@ package com.shian.shianlife.thisenum;
 
 public enum MapLineStateEnum {
     WALK(1, "步行"),
-    BUS(2, "步行"),
-    DRIVE(3, "步行");
+    BUS(2, "公交"),
+    DRIVE(3, "驾车");
 
     private int code;
     private String name;
