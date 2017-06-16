@@ -13,4 +13,6 @@ public class SelectDictCode {
     public final static String TOMB_USE_PROPERTY = "tombUseProperty";//墓穴使用性质
     public final static String ORDER_PAY_PURPOSE = "orderPayPurpose";//支付情况
     public final static String PERSONNEL_SEX = "personnelSex";//性別
+
+    public final static String USE_CAR_REASON= "carsUsingPurpose";//yongche yuanyin
 }

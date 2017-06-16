@@ -7,6 +7,7 @@ import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpAcceptParams;
 import com.shian.shianlife.provide.params.HpAddConsultParams;
 import com.shian.shianlife.provide.params.HpAuditOrder;
+import com.shian.shianlife.provide.params.HpCarBuildOrder;
 import com.shian.shianlife.provide.params.HpCemeteryIdParams;
 import com.shian.shianlife.provide.params.HpCemeteryStructureParams;
 import com.shian.shianlife.provide.params.HpCetemeryAcceptParams;
@@ -55,6 +56,7 @@ import com.shian.shianlife.provide.result.HrConsultAgentman;
 import com.shian.shianlife.provide.result.HrConsultCemetery;
 import com.shian.shianlife.provide.result.HrConsultFuneral;
 import com.shian.shianlife.provide.result.HrConsultUsageResult;
+import com.shian.shianlife.provide.result.HrGetCarDetails;
 import com.shian.shianlife.provide.result.HrGetCemeteryBuildData;
 import com.shian.shianlife.provide.result.HrGetCemeteryStructure;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkData;
@@ -880,4 +882,22 @@ public interface MAccountManager extends HttpManager {
      * 保存公墓洽谈成功逝者信息
      */
     void saveCemeteryTalkSuccessAgentMan(Context context, HpSaveCemeteryTalkSuccessAgentMan params, HttpResponseHandler<Object> handler);
+
+
+
+    /**
+     * 保存派车单信息
+     * @param context
+     * @param params
+     * @param handler
+     */
+    void saveCarBuildData(Context context, HpCarBuildOrder params, HttpResponseHandler<Object> handler);
+
+    /**
+     * 获取订单详情
+     * @param context
+     * @param params
+     * @param handler
+     */
+    void getCarBuildData(Context context,HpCarBuildOrder params,HttpResponseHandler<HrGetCarDetails> handler);
 }

@@ -156,7 +156,7 @@ public class AuditActivity extends BaseActivity {
 							@Override
 							public void onError(String message) {
 								// TODO Auto-generated method stub
-
+								ToastUtils.show(getBaseContext(), "提交失败:"+message);
 							}
 						});
 			}

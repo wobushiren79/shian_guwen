@@ -381,6 +381,7 @@ public class ContractDataActivity extends BaseActivity {
                         if (customDialog != null) {
                             customDialog.cancel();
                         }
+                        ToastUtils.show(ContractDataActivity.this, "上传签名图片失败");
                     }
                 });
     }
@@ -612,7 +613,7 @@ public class ContractDataActivity extends BaseActivity {
                 holder.name.setText("名称");
                 holder.money.setText("单价 ");
                 holder.num.setText("数量");
-                holder.all.setText( "总价");
+                holder.all.setText("总价");
                 holder.remark.setText("备注");
             } else if (i > 0) {
                 OrderProductItemModel data = projectDD.get(i - 1).getProductItems().get(0);
@@ -630,7 +631,7 @@ public class ContractDataActivity extends BaseActivity {
                 holder.num.setTextColor(getResources().getColor(R.color.blackgroundmain));
                 holder.remark.setTextColor(getResources().getColor(R.color.blackgroundmain));
                 holder.all.setTextColor(getResources().getColor(R.color.blackgroundmain));
-            }else{
+            } else {
 
             }
 

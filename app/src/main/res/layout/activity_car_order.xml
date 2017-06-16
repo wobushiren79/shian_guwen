@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:DataReadAttr="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zhy_backgroud_1"
+>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.shian.shianlife.view.writeview.TimeSelectViewNormal
+            android:id="@+id/car_use_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:isImportant="true"
+            DataReadAttr:titleName="预约用车时间"></com.shian.shianlife.view.writeview.TimeSelectViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/car_send_person"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:isImportant="true"
+            DataReadAttr:titleName="申请人"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/car_send_person_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:isImportant="true"
+            DataReadAttr:titleName="申请人电话"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/car_user_person"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:isImportant="true"
+            DataReadAttr:titleName="用车人"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/car_user_person_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:isImportant="true"
+            DataReadAttr:titleName="用车人电话"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.SpinnerViewNormal
+            android:id="@+id/car_use_reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:isImportant="true"
+            DataReadAttr:titleName="用车理由"></com.shian.shianlife.view.writeview.SpinnerViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/car_personnum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:isImportant="true"
+            DataReadAttr:titleName="乘车人数"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.MapSelectViewNormal
+            android:id="@+id/car_get_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:isImportant="true"
+            DataReadAttr:titleName="预约上车地点"></com.shian.shianlife.view.writeview.MapSelectViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.MapSelectViewNormal
+            android:id="@+id/car_arrive_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:isImportant="true"
+            DataReadAttr:titleName="前往目的地"></com.shian.shianlife.view.writeview.MapSelectViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginLeft="@dimen/dimen_32dp"
+            android:background="@color/zhy_line_3" />
+
+        <com.shian.shianlife.view.writeview.EditTextViewNormal
+            android:id="@+id/car_remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            DataReadAttr:titleName="备注"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+        <TextView
+            android:id="@+id/tv_submit"
+            android:layout_width="@dimen/dimen_688dp"
+            android:layout_height="@dimen/dimen_80dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dimen_24dp"
+            android:layout_marginTop="@dimen/dimen_24dp"
+            android:background="@drawable/zhy_button_state_5"
+            android:gravity="center"
+            android:text="提交申请"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_32dp" />
+    </LinearLayout>
+</ScrollView>

@@ -19,7 +19,7 @@ public class HpSaveCemeteryTalkSuccessContract extends BaseHttpParams {
     private String district;//区
     private long parkId;//园区id
     private String platoon;//排
-    private long rowNumber;//排号
+    private String rowNumber;//排号
     private String mark;//墓位
     private long tombPositionId;//墓位id
     private String cemeteryType;//	墓型
@@ -33,6 +33,15 @@ public class HpSaveCemeteryTalkSuccessContract extends BaseHttpParams {
     private String choiceService;//自选服务
     private String remark;//	备注
     private String cemeterySales;//	公墓业务员
+
+
+    public String getRowNumber() {
+        return rowNumber;
+    }
+
+    public void setRowNumber(String rowNumber) {
+        this.rowNumber = rowNumber;
+    }
 
     public String getCemeterySales() {
         return cemeterySales;
@@ -130,13 +139,6 @@ public class HpSaveCemeteryTalkSuccessContract extends BaseHttpParams {
         this.platoon = platoon;
     }
 
-    public long getRowNumber() {
-        return rowNumber;
-    }
-
-    public void setRowNumber(long rowNumber) {
-        this.rowNumber = rowNumber;
-    }
 
     public String getMark() {
         return mark;

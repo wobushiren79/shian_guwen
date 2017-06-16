@@ -9,6 +9,7 @@ import com.shian.shianlife.provide.imp.MAccountManager;
 import com.shian.shianlife.provide.params.HpAcceptParams;
 import com.shian.shianlife.provide.params.HpAddConsultParams;
 import com.shian.shianlife.provide.params.HpAuditOrder;
+import com.shian.shianlife.provide.params.HpCarBuildOrder;
 import com.shian.shianlife.provide.params.HpCemeteryIdParams;
 import com.shian.shianlife.provide.params.HpCemeteryStructureParams;
 import com.shian.shianlife.provide.params.HpCetemeryAcceptParams;
@@ -58,6 +59,7 @@ import com.shian.shianlife.provide.result.HrConsultAgentman;
 import com.shian.shianlife.provide.result.HrConsultCemetery;
 import com.shian.shianlife.provide.result.HrConsultFuneral;
 import com.shian.shianlife.provide.result.HrConsultUsageResult;
+import com.shian.shianlife.provide.result.HrGetCarDetails;
 import com.shian.shianlife.provide.result.HrGetCemeteryBuildData;
 import com.shian.shianlife.provide.result.HrGetCemeteryStructure;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkData;
@@ -821,5 +823,15 @@ public class MAccountManagerImpl implements MAccountManager {
     public void saveCemeteryTalkSuccessAgentMan(Context context, HpSaveCemeteryTalkSuccessAgentMan params, HttpResponseHandler<Object> handler) {
         excutor.requestCemeteryPost(context, "marketing/order/agentinfo/save/or/update", Object.class, params,
                 handler);
+    }
+
+    @Override
+    public void saveCarBuildData(Context context, HpCarBuildOrder params, HttpResponseHandler<Object> handler) {
+        excutor.requestCemeteryPost(context, "cars/apply/using", Object.class, params, handler, true);
+    }
+
+    @Override
+    public void getCarBuildData(Context context, HpCarBuildOrder params, HttpResponseHandler<HrGetCarDetails> handler) {
+        excutor.requestCemeteryPost(context, "cars/apply/handle/info", HrGetCarDetails.class, params, handler, true);
     }
 }

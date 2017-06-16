@@ -3,6 +3,7 @@ package com.shian.shianlife.common.view.order;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import com.chanven.lib.cptr.loadmore.OnLoadMoreListener;
 import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper;
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.car.CarOrderActivity;
+import com.shian.shianlife.activity.car.CarOrderDetailsActivity;
 import com.shian.shianlife.activity.newcemetery.InfoDetailsActivity;
 import com.shian.shianlife.activity.newcemetery.TalkFailActivity;
 import com.shian.shianlife.common.contanst.IntentName;
@@ -35,6 +38,7 @@ import com.shian.shianlife.thisenum.BuildOrderEnum;
 import com.shian.shianlife.thisenum.CemeteryBeSpeakStateEnum;
 import com.shian.shianlife.view.popupbutton.PopupButton;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,7 +155,8 @@ public class CemeteryBuildView extends BaseOrderView {
             TextView tvOrderDetails = (TextView) view.getView(R.id.tv_orderdetails);
             ImageView ivPhone = (ImageView) view.getView(R.id.iv_phone);
 
-
+            TextView tv_car = (TextView) view.getView(R.id.tv_car);
+            takeCar(tv_car, templateItem);
             int orderState = templateItem.getBespeakStatus();
             if (orderState == CemeteryBeSpeakStateEnum.undistributed.getCode() ||
                     orderState == CemeteryBeSpeakStateEnum.unassigned.getCode() ||
@@ -223,14 +228,13 @@ public class CemeteryBuildView extends BaseOrderView {
                 tv3_title.setText("客户地址");
                 tv3_content.setText(templateItem.getCustomerLocation());
                 tv4_title.setText("定墓日期");
-                if (templateItem.getOrderedTombDate() != 0)
-                    tv4_content.setText(TimeUtils.formatTime(templateItem.getOrderedTombDate()));
+                if (templateItem.getOrderedTombDate() != null)
+                    tv4_content.setText(templateItem.getOrderedTombDate());
                 else
                     tv4_content.setText("未定墓");
-
                 tv5_title.setText("完款日期");
-                if (templateItem.getPayOffTime() != 0)
-                    tv5_content.setText(TimeUtils.formatTime(templateItem.getPayOffTime()));
+                if (templateItem.getPayOffTime() != null)
+                    tv5_content.setText(templateItem.getPayOffTime());
                 else {
                     tv5_content.setText("未完款");
                 }
@@ -280,6 +284,36 @@ public class CemeteryBuildView extends BaseOrderView {
             });
         }
     };
+
+
+    private void takeCar(TextView tvCar, final CemeteryOrderModel data) {
+        if (data.getIsSentCar() == 0) {
+            tvCar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), CarOrderActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("data", data);
+                    intent.putExtras(bundle);
+                    getContext().startActivity(intent);
+                }
+            });
+        } else {
+            tvCar.setVisibility(View.VISIBLE);
+            tvCar.setText("用车记录");
+            tvCar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), CarOrderDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("data",  data);
+                    intent.putExtras(bundle);
+                    getContext().startActivity(intent);
+                }
+            });
+        }
+    }
+
 
     /**
      * 加载更多

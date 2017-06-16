@@ -32,7 +32,8 @@ public class MapSelectViewNormal extends BaseWriteView {
     private ArrayAdapter<String> arrayAdapter;
     private int numView;
     public static String THE_ACTION = "MapLocationData";
-
+    private String longitude = "";
+    private String latitude = "";
     public MapSelectViewNormal(Context context) {
         this(context, null);
     }
@@ -87,7 +88,13 @@ public class MapSelectViewNormal extends BaseWriteView {
     public String getData() {
         return mAutoTextView.getText().toString();
     }
+    public String getLongitude() {
+        return longitude;
+    }
 
+    public String getLatitude() {
+        return latitude;
+    }
     public void setData(String location) {
         mAutoTextView.setText(location);
     }
@@ -116,6 +123,8 @@ public class MapSelectViewNormal extends BaseWriteView {
             int num = intent.getIntExtra("numView", 0);
             if (num == numView) {
                 String location = intent.getStringExtra("location");
+                longitude = intent.getStringExtra("longitude");
+                latitude = intent.getStringExtra("latitude");
                 mAutoTextView.setText(location);
             }
         }

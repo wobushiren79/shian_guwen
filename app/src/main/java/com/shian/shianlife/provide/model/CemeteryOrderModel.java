@@ -1,10 +1,12 @@
 package com.shian.shianlife.provide.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2017/1/18.
  */
 
-public class CemeteryOrderModel {
+public class CemeteryOrderModel implements Serializable{
     private String customerName;//string	客户姓名
     private String customerMobile;//string	联系电话
     private String promiseTime;//string	预约时间
@@ -17,9 +19,18 @@ public class CemeteryOrderModel {
     private String cemeteryReceive;//string	公墓接待
     private long orderId;//long	订单id
     private String detailsLocation;//公墓名称位置、
-    private long orderedTombDate;//date	订墓日期
-    private long payOffTime;//date	完款日期
+    private String orderedTombDate;//date	订墓日期
+    private String payOffTime;//date	完款日期
 
+    private int isSentCar;//0未申请过派车 1申请过派车
+
+    public int getIsSentCar() {
+        return isSentCar;
+    }
+
+    public void setIsSentCar(int isSentCar) {
+        this.isSentCar = isSentCar;
+    }
 
     public String getDetailsLocation() {
         return detailsLocation;
@@ -29,19 +40,19 @@ public class CemeteryOrderModel {
         this.detailsLocation = detailsLocation;
     }
 
-    public long getOrderedTombDate() {
+    public String getOrderedTombDate() {
         return orderedTombDate;
     }
 
-    public void setOrderedTombDate(long orderedTombDate) {
+    public void setOrderedTombDate(String orderedTombDate) {
         this.orderedTombDate = orderedTombDate;
     }
 
-    public long getPayOffTime() {
+    public String getPayOffTime() {
         return payOffTime;
     }
 
-    public void setPayOffTime(long payOffTime) {
+    public void setPayOffTime(String payOffTime) {
         this.payOffTime = payOffTime;
     }
 
