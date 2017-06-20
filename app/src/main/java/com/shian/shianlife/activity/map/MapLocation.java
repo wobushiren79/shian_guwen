@@ -45,6 +45,8 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
     private final static double mapCenterlatitude = 30.6634450000;
     private final static double mapCenterlongitude = 104.0722210000;
 
+    String longitude = "";
+    String latitude = "";
 
     PoiSearch poiSearch;
     String locationPoint = AppContansts.LOCAL_ADDRESS;
@@ -86,7 +88,8 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
 
 
     private void initMap() {
-
+        longitude = AppContansts.LOCAL_latitude + "";
+        latitude = AppContansts.LOCAL_longitude + "";
         setCenter(AppContansts.LOCAL_latitude, AppContansts.LOCAL_longitude);
         poiSearch = PoiSearch.newInstance();
         poiSearch.setOnGetPoiSearchResultListener(poiListener);
@@ -163,7 +166,7 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
         super.onDestroy();
         mMapView.onDestroy();
         poiSearch.destroy();
-        if(customDialog!=null){
+        if (customDialog != null) {
             customDialog.cancel();
         }
     }
@@ -190,6 +193,8 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
         Intent intent = new Intent(MapSelectLayoutView.THE_ACTION);
         intent.putExtra("numView", numView);
         intent.putExtra("location", locationPoint);
+        intent.putExtra("longitude", longitude);
+        intent.putExtra("latitude", latitude);
         sendBroadcast(intent);
         finish();
 
@@ -209,6 +214,8 @@ public class MapLocation extends BaseActivity implements BaiduMap.OnMapClickList
         //获取经纬度
         double latitude = latLng.getPosition().latitude;
         double longitude = latLng.getPosition().longitude;
+        this.longitude = longitude + "";
+        this.latitude = latitude + "";
         LatLng point = new LatLng(latitude, longitude);
         mBaiduMap.clear();
         //构建Marker图标

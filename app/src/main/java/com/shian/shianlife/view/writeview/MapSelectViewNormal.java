@@ -88,6 +88,7 @@ public class MapSelectViewNormal extends BaseWriteView {
     public String getData() {
         return mAutoTextView.getText().toString();
     }
+
     public String getLongitude() {
         return longitude;
     }

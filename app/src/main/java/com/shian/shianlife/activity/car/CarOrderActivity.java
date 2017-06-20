@@ -71,6 +71,7 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
 
         mSubmit.setOnClickListener(this);
         mSubmitPersonPhone.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mPersonNum.setInputType(InputType.TYPE_CLASS_NUMBER);
         mUsePersonPhone.setInputType(InputType.TYPE_CLASS_NUMBER);
         mUseReason.initSpinner(SelectDictCode.USE_CAR_REASON);
 
