@@ -1,6 +1,8 @@
 package com.shian.shianlife.activity.car;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
@@ -34,6 +36,10 @@ public class CarOrderDetailsActivity extends BaseActivity {
     EditTextViewNormal mCarDriver;
     EditTextViewNormal mCarPhone;
 
+
+    EditTextViewNormal mCancelReason;
+    LinearLayout mLLCancelReason;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +58,9 @@ public class CarOrderDetailsActivity extends BaseActivity {
         mUsePersonMobile = (EditTextViewNormal) findViewById(R.id.driver_order_useperson_mobile);
         mGoLocation = (EditTextViewNormal) findViewById(R.id.driver_order_golocation);
         mArriveLocation = (EditTextViewNormal) findViewById(R.id.driver_order_arrivelocation);
+        mRemark = (EditTextViewNormal) findViewById(R.id.driver_order_remark);
+        mCancelReason = (EditTextViewNormal) findViewById(R.id.driver_cancel_reason);
+        mLLCancelReason = (LinearLayout) findViewById(R.id.ll_cancel_reason);
 
         mCarNum = (EditTextViewNormal) findViewById(R.id.car_num);
         mCarColor = (EditTextViewNormal) findViewById(R.id.car_color);
@@ -59,6 +68,25 @@ public class CarOrderDetailsActivity extends BaseActivity {
         mCarSeat = (EditTextViewNormal) findViewById(R.id.car_seat);
         mCarDriver = (EditTextViewNormal) findViewById(R.id.car_driver);
         mCarPhone = (EditTextViewNormal) findViewById(R.id.car_phone);
+
+
+        mOrderState.setDisable(false);
+        mOrderState.setTextColor(getResources().getColor(R.color.zhy_text_color_4));
+        mOrderTime.setDisable(false);
+        mPersonNum.setDisable(false);
+        mPurpose.setDisable(false);
+        mUsePerson.setDisable(false);
+        mUsePersonMobile.setDisable(false);
+        mGoLocation.setDisable(false);
+        mArriveLocation.setDisable(false);
+        mRemark.setDisable(false);
+
+        mCarNum.setDisable(false);
+        mCarColor.setDisable(false);
+        mCarType.setDisable(false);
+        mCarSeat.setDisable(false);
+        mCarDriver.setDisable(false);
+        mCarPhone.setDisable(false);
     }
 
     private void initData() {
@@ -107,6 +135,10 @@ public class CarOrderDetailsActivity extends BaseActivity {
                         mArriveLocation.setData(carorder.getTarget());
                     if (carorder.getRemark() != null)
                         mRemark.setData(carorder.getRemark());
+                    if (carorder.getCancelReason() != null) {
+                        mLLCancelReason.setVisibility(View.VISIBLE);
+                        mCancelReason.setData(carorder.getCancelReason());
+                    }
                 }
 
                 if (result.getAutocar() != null) {

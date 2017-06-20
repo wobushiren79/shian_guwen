@@ -17,6 +17,7 @@
         android:orientation="vertical"
         tools:context="com.shian.shianlife.activity.cemetery.BuildNewOrderActivity">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +40,6 @@
                 android:id="@+id/write_userphone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                MyViewAttr:isImportant="true"
                 MyViewAttr:titleName="联系电话"></com.shian.shianlife.view.writeview.EditTextViewNormal>
 
             <TextView
@@ -106,6 +106,19 @@
                 android:layout_height="wrap_content"
                 MyViewAttr:isImportant="true"
                 MyViewAttr:titleName="客户地址"></com.shian.shianlife.view.writeview.MapSelectViewNormal>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:layout_marginLeft="@dimen/dimen_32dp"
+                android:background="@color/zhy_line_3" />
+
+            <com.shian.shianlife.view.writeview.EditTextViewNormal
+                android:id="@+id/write_remark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                MyViewAttr:titleName="备注"></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
         </LinearLayout>
 
         <TextView
@@ -123,5 +136,6 @@
             android:layout_marginTop="@dimen/dimen_32dp"
             android:background="@drawable/zhy_button_state_5"
             android:visibility="gone" />
+
     </LinearLayout>
 </ScrollView>

@@ -11,6 +11,8 @@ import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.contanst.SelectDictCode;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.fragment.CemeteryFragment;
+import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.model.CemeteryOrderModel;
@@ -167,6 +169,7 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onSuccess(Object result) {
                 ToastUtils.show(CarOrderActivity.this, "申请成功");
+                OrderFragment.C_bOrder_isRefresh = true;
                 finish();
             }
 

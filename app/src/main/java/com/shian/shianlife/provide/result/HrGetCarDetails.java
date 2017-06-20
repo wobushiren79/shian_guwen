@@ -46,6 +46,7 @@ public class HrGetCarDetails {
 
     public static class CarOrder extends CarBaseEntity {
 
+
         /**
          * 系统外订单编号
          */
@@ -157,6 +158,18 @@ public class HrGetCarDetails {
          * 申请人电话
          */
         private String proposerMobile;
+        /**
+         * 取消订单原因
+         */
+        private String cancelReason;
+
+        public String getCancelReason() {
+            return cancelReason;
+        }
+
+        public void setCancelReason(String cancelReason) {
+            this.cancelReason = cancelReason;
+        }
 
         public String getOrderNo() {
             return orderNo;

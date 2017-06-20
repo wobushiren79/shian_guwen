@@ -85,6 +85,7 @@ public class EditTextViewNormal extends BaseWriteView {
     public String getData() {
         return mETInput.getText().toString();
     }
+
     /**
      * 是否禁止点击
      *
@@ -92,5 +93,9 @@ public class EditTextViewNormal extends BaseWriteView {
      */
     public void setDisable(boolean isD) {
         mETInput.setEnabled(isD);
+    }
+
+    public void setTextColor(int color) {
+        mETInput.setTextColor(color);
     }
 }

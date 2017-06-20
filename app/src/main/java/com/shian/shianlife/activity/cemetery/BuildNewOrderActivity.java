@@ -16,6 +16,7 @@ import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.view.order.CemeteryQTView;
 import com.shian.shianlife.fragment.CemeteryFragment;
+import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.model.CemeteryNameModel;
@@ -46,6 +47,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
     EditTextViewNormal mUserName;
     EditTextViewNormal mUserPhone;
     EditTextViewNormal mPersonNum;
+    EditTextViewNormal mRemark;
     TimeSelectViewNormal mMeetTime;
     SpinnerViewNormal mTraffic;
     SpinnerViewNormal mCemeteryName;
@@ -74,6 +76,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         mUserName = (EditTextViewNormal) findViewById(R.id.write_username);
         mUserPhone = (EditTextViewNormal) findViewById(R.id.write_userphone);
         mPersonNum = (EditTextViewNormal) findViewById(R.id.write_personnum);
+        mRemark = (EditTextViewNormal) findViewById(R.id.write_remark);
         mMeetTime = (TimeSelectViewNormal) findViewById(R.id.write_meettime);
         mTraffic = (SpinnerViewNormal) findViewById(R.id.write_traffic);
         mCemeteryName = (SpinnerViewNormal) findViewById(R.id.write_cemeteryname);
@@ -174,14 +177,11 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
             ToastUtils.show(BuildNewOrderActivity.this, "客户姓名不能为空");
             return;
         }
-        if (dataPhone.equals("")) {
-            ToastUtils.show(BuildNewOrderActivity.this, "电话不能为空");
-            return;
-
-        }
-        if (!Utils.isPhoneNumber(dataPhone)) {
-            ToastUtils.show(BuildNewOrderActivity.this, "联系电话格式错误");
-            return;
+        if (!dataPhone.equals("")) {
+            if (!Utils.isPhoneNumber(dataPhone)) {
+                ToastUtils.show(BuildNewOrderActivity.this, "联系电话格式错误");
+                return;
+            }
         }
         if (dataTime.isEmpty()) {
             ToastUtils.show(BuildNewOrderActivity.this, "预约时间不能为空");
@@ -218,6 +218,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         params.setCustomerLocation(dataUserLocation);
         params.setPlanCemeteryId(cemeteryId);
         params.setToken(AppContansts.userLoginInfo.getToken());
+        params.setRemarks(mRemark.getData());
         MHttpManagerFactory.getAccountManager().saveCemeteryBuildData(BuildNewOrderActivity.this, params, new HttpResponseHandler<Object>() {
             @Override
             public void onStart() {
@@ -227,7 +228,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
             @Override
             public void onSuccess(Object result) {
                 ToastUtils.show(BuildNewOrderActivity.this, "创建成功");
-                CemeteryFragment.C_bOrder_isRefresh = true;
+                OrderFragment.C_bOrder_isRefresh = true;
                 finish();
             }
 

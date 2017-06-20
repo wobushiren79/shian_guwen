@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
->
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,6 +17,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             DataReadAttr:titleName="服务状态："></com.shian.shianlife.view.writeview.EditTextViewNormal>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/ll_cancel_reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:layout_marginLeft="@dimen/dimen_32dp"
+                android:background="@color/zhy_line_3" />
+
+            <com.shian.shianlife.view.writeview.EditTextViewNormal
+                android:id="@+id/driver_cancel_reason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                DataReadAttr:titleName="取消原因："></com.shian.shianlife.view.writeview.EditTextViewNormal>
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"

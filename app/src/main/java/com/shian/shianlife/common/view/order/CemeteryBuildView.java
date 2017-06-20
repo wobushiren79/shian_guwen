@@ -288,6 +288,7 @@ public class CemeteryBuildView extends BaseOrderView {
 
     private void takeCar(TextView tvCar, final CemeteryOrderModel data) {
         if (data.getIsSentCar() == 0) {
+            tvCar.setText("申请用车");
             tvCar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -299,7 +300,6 @@ public class CemeteryBuildView extends BaseOrderView {
                 }
             });
         } else {
-            tvCar.setVisibility(View.VISIBLE);
             tvCar.setText("用车记录");
             tvCar.setOnClickListener(new View.OnClickListener() {
                 @Override
