@@ -35,7 +35,7 @@ public class CarOrderDetailsActivity extends BaseActivity {
     EditTextViewNormal mCarSeat;
     EditTextViewNormal mCarDriver;
     EditTextViewNormal mCarPhone;
-
+    EditTextViewNormal mCarLocation;
 
     EditTextViewNormal mCancelReason;
     LinearLayout mLLCancelReason;
@@ -61,6 +61,7 @@ public class CarOrderDetailsActivity extends BaseActivity {
         mRemark = (EditTextViewNormal) findViewById(R.id.driver_order_remark);
         mCancelReason = (EditTextViewNormal) findViewById(R.id.driver_cancel_reason);
         mLLCancelReason = (LinearLayout) findViewById(R.id.ll_cancel_reason);
+        mCarLocation = (EditTextViewNormal) findViewById(R.id.driver_car_location);
 
         mCarNum = (EditTextViewNormal) findViewById(R.id.car_num);
         mCarColor = (EditTextViewNormal) findViewById(R.id.car_color);
@@ -157,6 +158,8 @@ public class CarOrderDetailsActivity extends BaseActivity {
                         }
                     if (autocar.getSeats() != null)
                         mCarSeat.setData(autocar.getSeats() + "");
+                    if (autocar.getLastPosition() != null)
+                        mCarLocation.setData(autocar.getLastPosition());
                 }
 
                 if (result.getDriver() != null) {

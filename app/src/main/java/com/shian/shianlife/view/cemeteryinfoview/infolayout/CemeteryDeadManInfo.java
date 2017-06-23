@@ -17,6 +17,9 @@ import com.shian.shianlife.view.writeview.EditTextViewNormal;
 import com.shian.shianlife.view.writeview.SpinnerViewNormal;
 import com.shian.shianlife.view.writeview.TimeSelectViewNormal;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by Administrator on 2017/4/12.
@@ -44,6 +47,9 @@ public class CemeteryDeadManInfo extends BaseCemeteryInfo {
 
     CallBack thisCallBack;
 
+    private Long deadmanOneId;
+    private Long deadmanTwoId;
+
     public CemeteryDeadManInfo(Context context, long orderId, long bespeakId) {
         super(context, orderId, bespeakId, R.layout.layout_cemetery_info_deadman, false);
     }
@@ -69,34 +75,46 @@ public class CemeteryDeadManInfo extends BaseCemeteryInfo {
 
             @Override
             public void onSuccess(HrGetCemeteryTalkSuccessDeadMan result) {
-                if (result.getDeadmanOneName() != null)
-                    mUserName1.setData(result.getDeadmanOneName());
-                if (result.getDeadmanTwoName() != null)
-                    mUserName2.setData(result.getDeadmanTwoName());
-                if (result.getDeadmanOneAge() != null)
-                    mUserAge1.setData(result.getDeadmanOneAge());
-                if (result.getDeadmanTwoAge() != null)
-                    mUserAge2.setData(result.getDeadmanTwoAge());
-                if (result.getDeadmanOneSex() != null&&!result.getDeadmanOneSex().isEmpty())
-                    mUserSex1.setDataDict(result.getDeadmanOneSex());
-                if (result.getDeadmanTwoSex() != null&&!result.getDeadmanTwoSex().isEmpty())
-                    mUserSex2.setDataDict(result.getDeadmanTwoSex());
-                if (result.getDeadmanOneState() != null&&!result.getDeadmanOneState().isEmpty())
-                    mUserState1.setDataDict(result.getDeadmanOneState());
-                if (result.getDeadmanTwoState() != null&&!result.getDeadmanTwoState().isEmpty())
-                    mUserState2.setDataDict(result.getDeadmanTwoState());
-                if (result.getDeadmanOneCardId() != null)
-                    mUserCardId1.setData(result.getDeadmanOneCardId());
-                if (result.getDeadmanTwoCardId() != null)
-                    mUserCardId2.setData(result.getDeadmanTwoCardId());
-                if (result.getDeadmanOneDeadTime() != null)
-                    mUserDeadTime1.setData(result.getDeadmanOneDeadTime());
-                if (result.getDeadmanTwoDeadTime() != null)
-                    mUserDeadTime2.setData(result.getDeadmanTwoDeadTime());
-                if (result.getRemark() != null)
-                    mRemark.setData(result.getRemark());
-                if (thisCallBack != null)
-                    thisCallBack.initDataSuccess();
+                if (result.getList() == null || result.getList().size() == 0) {
+
+                } else {
+                    if (result.getList().get(0).getName() != null)
+                        mUserName1.setData(result.getList().get(0).getName());
+                    if (result.getList().get(1) != null && result.getList().get(1).getName() != null)
+                        mUserName2.setData(result.getList().get(1).getName());
+                    if (result.getList().get(0).getAge() != null)
+                        mUserAge1.setData(result.getList().get(0).getAge());
+                    if (result.getList().get(1) != null && result.getList().get(1).getAge() != null)
+                        mUserAge2.setData(result.getList().get(1).getAge());
+                    if (result.getList().get(0).getSex() != null && !result.getList().get(0).getSex().isEmpty())
+                        mUserSex1.setDataDict(result.getList().get(0).getSex());
+                    if (result.getList().get(1) != null && result.getList().get(1).getSex() != null && !result.getList().get(1).getSex().isEmpty())
+                        mUserSex2.setDataDict(result.getList().get(1).getSex());
+                    if (result.getList().get(0).getStatus() != null && !result.getList().get(0).getStatus().isEmpty())
+                        mUserState1.setDataDict(result.getList().get(0).getStatus());
+                    if (result.getList().get(1) != null && result.getList().get(1).getStatus() != null && !result.getList().get(1).getStatus().isEmpty())
+                        mUserState2.setDataDict(result.getList().get(1).getStatus());
+                    if (result.getList().get(0).getIdCardNo() != null)
+                        mUserCardId1.setData(result.getList().get(0).getIdCardNo());
+                    if (result.getList().get(1) != null && result.getList().get(1).getIdCardNo() != null)
+                        mUserCardId2.setData(result.getList().get(1).getIdCardNo());
+                    if (result.getList().get(0).getDeathTime() != null)
+                        mUserDeadTime1.setData(result.getList().get(0).getDeathTime());
+                    if (result.getList().get(1) != null && result.getList().get(1).getDeathTime() != null)
+                        mUserDeadTime2.setData(result.getList().get(1).getDeathTime());
+                    if (result.getList().get(0).getRemark() != null)
+                        mRemark.setData(result.getList().get(0).getRemark());
+
+                    if (result.getList().get(0).getDeadId() != null) {
+                        deadmanOneId = result.getList().get(0).getDeadId();
+                    }
+                    if (result.getList().get(1) != null && result.getList().get(1).getDeadId() != null) {
+                        deadmanTwoId = result.getList().get(1).getDeadId();
+                    }
+                    if (thisCallBack != null)
+                        thisCallBack.initDataSuccess();
+                }
+
             }
 
             @Override
@@ -112,23 +130,34 @@ public class CemeteryDeadManInfo extends BaseCemeteryInfo {
             ToastUtils.show(getContext(), "使用者1不能为空");
             return;
         }
-        HpSaveCemeteryTalkSuccessDeadMan params = new HpSaveCemeteryTalkSuccessDeadMan();
-        params.setBespeakId(beSpeakId);
-        params.setOrderId(orderId);
-//        params.setSaveType(changeState);
-        params.setDeadmanOneName(mUserName1.getData());
-        params.setDeadmanTwoName(mUserName2.getData());
-        params.setDeadmanOneAge(mUserAge1.getData());
-        params.setDeadmanTwoAge(mUserAge2.getData());
-        params.setDeadmanOneSex(mUserSex1.getData());
-        params.setDeadmanTwoSex(mUserSex2.getData());
-        params.setDeadmanOneState(mUserState1.getData());
-        params.setDeadmanTwoState(mUserState2.getData());
-        params.setDeadmanOneCardId(mUserCardId1.getData());
-        params.setDeadmanTwoCardId(mUserCardId2.getData());
-        params.setDeadmanOneDeadTime(mUserDeadTime1.getData());
-        params.setDeadmanTwoDeadTime(mUserDeadTime2.getData());
-        params.setRemark(mRemark.getData());
+        HpSaveCemeteryTalkSuccessDeadMan params=new HpSaveCemeteryTalkSuccessDeadMan();
+        List<HpSaveCemeteryTalkSuccessDeadMan.OrderDeath> list=new ArrayList<>();
+        HpSaveCemeteryTalkSuccessDeadMan.OrderDeath itemOne = new HpSaveCemeteryTalkSuccessDeadMan.OrderDeath();
+        itemOne.setName(mUserName1.getData());
+        itemOne.setOrderId(orderId);
+        itemOne.setAge(mUserAge1.getData());
+        itemOne.setSex(mUserSex1.getData());
+        itemOne.setStatus(mUserState1.getData());
+        itemOne.setIdCardNo(mUserCardId1.getData());
+        itemOne.setDeathTime(mUserDeadTime1.getData());
+        if (deadmanOneId != null) {
+            itemOne.setDeadId(deadmanOneId);
+        }
+
+        HpSaveCemeteryTalkSuccessDeadMan.OrderDeath itemTwo = new HpSaveCemeteryTalkSuccessDeadMan.OrderDeath();
+        itemTwo.setName(mUserName2.getData());
+        itemTwo.setOrderId(orderId);
+        itemTwo.setAge(mUserAge2.getData());
+        itemTwo.setSex(mUserSex2.getData());
+        itemTwo.setStatus(mUserState2.getData());
+        itemTwo.setIdCardNo(mUserCardId2.getData());
+        itemTwo.setDeathTime(mUserDeadTime2.getData());
+        if (deadmanTwoId != null) {
+            itemTwo.setDeadId(deadmanTwoId);
+        }
+        list.add(itemOne);
+        list.add(itemTwo);
+        params.setList(list);
 
         MHttpManagerFactory.getAccountManager().saveCemeteryTalkSuccessDeadMan(getContext(), params, new HttpResponseHandler<Object>() {
 

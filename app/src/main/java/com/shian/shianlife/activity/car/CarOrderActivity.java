@@ -53,6 +53,10 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
             mUsePerson.setData(data.getCustomerName());
             mUsePersonPhone.setData(data.getCustomerMobile());
         }
+        if (AppContansts.userCemetery.getUserData() != null) {
+            mSubmitPerson.setData(AppContansts.userCemetery.getUserData().getName());
+            mSubmitPersonPhone.setData(AppContansts.userCemetery.getUserData().getMobile());
+        }
     }
 
     private void initView() {

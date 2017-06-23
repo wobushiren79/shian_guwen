@@ -803,13 +803,13 @@ public class MAccountManagerImpl implements MAccountManager {
 
     @Override
     public void getCemeteryTalkSuccessDeadMan(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessDeadMan> handler) {
-        excutor.requestCemeteryPost(context, "marketing/order/deadinfo/get", HrGetCemeteryTalkSuccessDeadMan.class, params,
+        excutor.requestCemeteryPost(context, "marketing/order/dead/get", HrGetCemeteryTalkSuccessDeadMan.class, params,
                 handler);
     }
 
     @Override
     public void saveCemeteryTalkSuccessDeadMan(Context context, HpSaveCemeteryTalkSuccessDeadMan params, HttpResponseHandler<Object> handler) {
-        excutor.requestCemeteryPost(context, "marketing/order/deadinfo/save/or/update", Object.class, params,
+        excutor.requestCemeteryPost(context, "marketing/order/dead/save/or/update", Object.class, params,
                 handler);
     }
 

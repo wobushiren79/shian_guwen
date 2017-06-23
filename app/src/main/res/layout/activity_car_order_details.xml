@@ -19,11 +19,29 @@
             DataReadAttr:titleName="服务状态："></com.shian.shianlife.view.writeview.EditTextViewNormal>
 
         <LinearLayout
-            android:visibility="gone"
-            android:id="@+id/ll_cancel_reason"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:layout_marginLeft="@dimen/dimen_32dp"
+                android:background="@color/zhy_line_3" />
+
+            <com.shian.shianlife.view.writeview.EditTextViewNormal
+                android:id="@+id/driver_car_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                DataReadAttr:titleName="最新位置："></com.shian.shianlife.view.writeview.EditTextViewNormal>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_cancel_reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="match_parent"

@@ -288,17 +288,22 @@ public class CemeteryBuildView extends BaseOrderView {
 
     private void takeCar(TextView tvCar, final CemeteryOrderModel data) {
         if (data.getIsSentCar() == 0) {
-            tvCar.setText("申请用车");
-            tvCar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), CarOrderActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("data", data);
-                    intent.putExtras(bundle);
-                    getContext().startActivity(intent);
-                }
-            });
+            if (data.getBespeakStatus() == CemeteryBeSpeakStateEnum.undistributed.getCode()
+                    || data.getBespeakStatus() == CemeteryBeSpeakStateEnum.unassigned.getCode()) {
+                tvCar.setText("申请用车");
+                tvCar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getContext(), CarOrderActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("data", data);
+                        intent.putExtras(bundle);
+                        getContext().startActivity(intent);
+                    }
+                });
+            } else {
+                tvCar.setVisibility(GONE);
+            }
         } else {
             tvCar.setText("用车记录");
             tvCar.setOnClickListener(new View.OnClickListener() {
@@ -306,7 +311,7 @@ public class CemeteryBuildView extends BaseOrderView {
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), CarOrderDetailsActivity.class);
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("data",  data);
+                    bundle.putSerializable("data", data);
                     intent.putExtras(bundle);
                     getContext().startActivity(intent);
                 }
