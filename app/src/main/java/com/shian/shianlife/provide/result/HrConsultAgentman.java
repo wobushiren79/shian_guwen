@@ -21,7 +21,7 @@ public class HrConsultAgentman {
         private long consultId;
         private String relation;
         private String linkInfo;
-        private long birthday;
+        private String birthday;
         private String address;
         private int addressArea;
         private int addressCity;
@@ -118,11 +118,11 @@ public class HrConsultAgentman {
             this.linkInfo = linkInfo;
         }
 
-        public long getBirthday() {
+        public String getBirthday() {
             return birthday;
         }
 
-        public void setBirthday(long birthday) {
+        public void setBirthday(String birthday) {
             this.birthday = birthday;
         }
 

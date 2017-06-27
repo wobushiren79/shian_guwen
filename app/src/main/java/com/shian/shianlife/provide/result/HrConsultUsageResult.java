@@ -21,13 +21,13 @@ public class HrConsultUsageResult {
          * "sex":2, "shoeSize":"string", "state":2, "will":"string"
          */
         private String age;
-        private long birthday;
+        private String birthday;
         private String curAddress;
         private int curAddressArea;
         private int curAddressCity;
         private int curAddressProvince;
         private String curAddressSuffix;
-        private long dieTime;
+        private String dieTime;
         private String height;
         private long id;
         private String intimeReady;
@@ -104,9 +104,6 @@ public class HrConsultUsageResult {
             this.age = age;
         }
 
-        public long getBirthday() {
-            return birthday;
-        }
 
         public String getLocation() {
             return location;
@@ -116,9 +113,7 @@ public class HrConsultUsageResult {
             this.location = location;
         }
 
-        public void setBirthday(long birthday) {
-            this.birthday = birthday;
-        }
+
 
         public String getCurAddress() {
             return curAddress;
@@ -160,11 +155,19 @@ public class HrConsultUsageResult {
             this.curAddressSuffix = curAddressSuffix;
         }
 
-        public long getDieTime() {
+        public String getBirthday() {
+            return birthday;
+        }
+
+        public void setBirthday(String birthday) {
+            this.birthday = birthday;
+        }
+
+        public String getDieTime() {
             return dieTime;
         }
 
-        public void setDieTime(long dieTime) {
+        public void setDieTime(String dieTime) {
             this.dieTime = dieTime;
         }
 

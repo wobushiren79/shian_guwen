@@ -73,12 +73,12 @@ public class PayInfoView extends FrameLayout {
 		PayInfoModel payInfo = result.getPayInfo();
 		tv_totalAmount.setText("￥"+payInfo.getTotalAmount() );
 		tv_prepayAmount.append(payInfo.getPrepayAmount() + "");
-		if(payInfo.getPrepayEndTime()!=0)
-		tv_prepayEndTime.append(TimeUtils.formatTime(payInfo.getPrepayEndTime()));
+		if(payInfo.getPrepayEndTime()!=null)
+		tv_prepayEndTime.append(payInfo.getPrepayEndTime());
 		tv_restPayAmount.append(payInfo.getReceivableAmount()+ "");
 		tv.append(payInfo.getRestPayAmount()+"");
-		if(payInfo.getRestPayEndTime()!=0)
-		tv_restPayEndTime.append(TimeUtils.formatTime(payInfo.getRestPayEndTime()));
+		if(payInfo.getRestPayEndTime()!=null)
+		tv_restPayEndTime.append(payInfo.getRestPayEndTime());
 		tv_restPayeeName.append(payInfo.getRestPayeeName());
 		tv_restPayeePhone.append(payInfo.getRestPayeePhone());
 		tvRefundMoney.append(payInfo.getRefundAmount()+"");

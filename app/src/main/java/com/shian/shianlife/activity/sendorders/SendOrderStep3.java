@@ -153,14 +153,14 @@ public class SendOrderStep3 extends BaseSendOrder {
                 if(result.getBodiesPark()!=null){
                     mWriteBodiespark.setData(result.getBodiesPark());
                 }
-                if (result.getFireTime() != 0) {
-                    mWriteFireTime.setData(TransitionDate.DateToStr(new Date(result.getFireTime()), "yyyy-MM-dd HH:ss"));
+                if (result.getFireTime() != null) {
+                    mWriteFireTime.setData(result.getFireTime());
                 }
-                if (result.getFuneralTime() != 0) {
-                    mWriteFuneralTime.setData(TransitionDate.DateToStr(new Date(result.getFuneralTime()), "yyyy-MM-dd HH:ss"));
+                if (result.getFuneralTime() != null) {
+                    mWriteFuneralTime.setData(result.getFuneralTime());
                 }
-                if (result.getBodiesByeTime() != 0) {
-                    mWriteBodiesByeTime.setData(TransitionDate.DateToStr(new Date(result.getBodiesByeTime()), "yyyy-MM-dd HH:ss"));
+                if (result.getBodiesByeTime() != null) {
+                    mWriteBodiesByeTime.setData(result.getBodiesByeTime());
                 }
                 if (result.getFuneralRemark() != null) {
                     mWriteRemark.setData(result.getFuneralRemark());

@@ -10,9 +10,9 @@ public class HrGetSendOrderDataFour {
     private String serviceWindows;//服务窗口
     private String bodiesPark;//遗体停放类型
     private String bodiesParkName;//遗体停放厅名字
-    private long fireTime;//火化时间
-    private long bodiesByeTime;// 遗体告别仪式时间
-    private long funeralTime;//出殡时间
+    private String fireTime;//火化时间
+    private String bodiesByeTime;// 遗体告别仪式时间
+    private String funeralTime;//出殡时间
     private String funeralRemark;//备注
 
     public String getZsLocation() {
@@ -55,27 +55,27 @@ public class HrGetSendOrderDataFour {
         this.bodiesParkName = bodiesParkName;
     }
 
-    public long getFireTime() {
+    public String getFireTime() {
         return fireTime;
     }
 
-    public void setFireTime(long fireTime) {
+    public void setFireTime(String fireTime) {
         this.fireTime = fireTime;
     }
 
-    public long getBodiesByeTime() {
+    public String getBodiesByeTime() {
         return bodiesByeTime;
     }
 
-    public void setBodiesByeTime(long bodiesByeTime) {
+    public void setBodiesByeTime(String bodiesByeTime) {
         this.bodiesByeTime = bodiesByeTime;
     }
 
-    public long getFuneralTime() {
+    public String getFuneralTime() {
         return funeralTime;
     }
 
-    public void setFuneralTime(long funeralTime) {
+    public void setFuneralTime(String funeralTime) {
         this.funeralTime = funeralTime;
     }
 

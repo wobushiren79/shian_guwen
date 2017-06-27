@@ -445,8 +445,7 @@ public class QTView extends BaseOrderView {
                     tv_qt01.setTextColor(getContext().getResources().getColor(R.color.zhy_text_color_9));
 
                     if (!TextUtils.isEmpty(promiseTime)) {
-                        tv_qt11.setText(mDateFormat.format(new Date(Long
-                                .parseLong(model.getPromiseTime()))));
+                        tv_qt11.setText(model.getPromiseTime());
                     } else {
                         tv_qt11.setText("");
                     }

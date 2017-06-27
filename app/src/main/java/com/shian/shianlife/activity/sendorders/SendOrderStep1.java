@@ -216,8 +216,8 @@ public class SendOrderStep1 extends BaseSendOrder {
                         if (result.getTrafficWay() != null) {
                             mWriteFireWay.setData(result.getTrafficWay());
                         }
-                        if (result.getMeetTime() != 0) {
-                            mWriteTimeSelect.setData(TransitionDate.DateToStr(new Date(result.getMeetTime()), "yyyy-MM-dd HH:ss"));
+                        if (result.getMeetTime() != null) {
+                            mWriteTimeSelect.setData(result.getMeetTime());
                         }
                         if (result.getAgentmanLocation() != null) {
                             listData.add(result.getAgentmanLocation());

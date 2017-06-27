@@ -229,7 +229,7 @@ public class MessageListView extends LinearLayout {
                 }
             }
             holder.tvTitle.setText(data.getHead());
-            holder.tvTime.setText(TimeUtils.formatTime(data.getServerCreateTime()));
+            holder.tvTime.setText(data.getServerCreateTime());
             holder.tvContent.setText(data.getBody());
             if (data.getReadStatus() == 1) {
                 holder.ivRead.setVisibility(VISIBLE);

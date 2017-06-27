@@ -68,7 +68,7 @@ public class SendOrderStep0 extends BaseSendOrder {
                             mSelectLayoutView.setData(result.getZsLocation());
                         }
                         mSelectLayoutView.initAutoTextView(listData);
-                        String Time = TransitionDate.DateToStr(new Date(result.getDeadTime()), "yyyy-MM-dd");
+                        String Time = result.getDeadTime();
                         Intent intent = new Intent(SendOrderActivity.UPDATA_ACTION);
                         ArrayList<String> data = new ArrayList<String>();
                         data.add(Time + "");

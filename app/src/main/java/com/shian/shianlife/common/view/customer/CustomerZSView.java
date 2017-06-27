@@ -69,15 +69,9 @@ public class CustomerZSView extends BaseCustomerView {
 							lbsList.get(1).setLocalParams(0, 0, 0);
 							lbsList.get(2).setLocalParams(0, 0, 0);
 						}
-						tvList.get(0).setText(
-								Utils.getDateUtils(result.getOrderFuneral()
-										.getDieTime()));
-						tvList.get(1).setText(
-								Utils.getDateUtils(result.getOrderFuneral()
-										.getCremationTime()));
-						tvList.get(2).setText(
-								Utils.getDateUtils(result.getOrderFuneral()
-										.getFuneralTime()));
+						tvList.get(0).setText(result.getOrderFuneral().getDieTime());
+						tvList.get(1).setText(result.getOrderFuneral().getCremationTime());
+						tvList.get(2).setText(result.getOrderFuneral().getFuneralTime());
 						lbsList.get(0).setLocalParams(
 								result.getOrderFuneral()
 										.getDieAddressProvince(),

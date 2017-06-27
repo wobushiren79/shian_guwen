@@ -72,7 +72,7 @@ public class CemeteryDetailInfoView extends FrameLayout {
 	public void setData(HrConsultCemetery result) {
 		HrConsultCemeterys cemetery = result.getConsultCemetery();
 		tv_address.setText(cemetery.getAddress());
-		tv_buryTime.setText(TimeUtils.formatTime(cemetery.getBuryTime()));
+		tv_buryTime.setText(cemetery.getBuryTime());
 		tv_buyAmount.setText("￥" + cemetery.getBuyAmount());
 		int flag=cemetery.getBuyFlag();
 		if(flag==1){

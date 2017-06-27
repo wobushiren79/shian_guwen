@@ -58,17 +58,14 @@ public class ShenheActivity extends BaseActivity {
 								"治丧地址：" + mData.getFuneralAddress() + "");
 						tvList.get(5).setText(
 								"接单时间："
-										+ Utils.getDateUtils(mData
-												.getAcceptTime()) + "");
+										+mData.getAcceptTime());
 						tvList.get(6).setText(
 								"开始执行时间："
-										+ Utils.getDateUtils(mData
-												.getStartTime()) + "");
+										+mData.getStartTime());
 						tvList.get(7)
 								.setText(
 										"执行完成时间："
-												+ Utils.getDateUtils(mData
-														.getEndTime()) + "");
+												+ mData.getEndTime());
 						tvList.get(8).setText(
 								"白事顾问评价：" + mData.getExecutorNote() + "");
 					}

@@ -76,17 +76,17 @@ public class FunneralDetailInfoOtherView extends FrameLayout {
         tv_deadlocation.setText(result.getDeadLocation());
         tv_zslocation.setText(result.getZsLocation());
         tv_funerallocation.setText(result.getFuneralLocation());
-        if (result.getDeadTime() != 0) {
-            tv_deadtime.setText(TimeUtils.formatTime(result.getDeadTime()));
+        if (result.getDeadTime() != null) {
+            tv_deadtime.setText(result.getDeadTime());
         }
-        if (result.getFuneralTime() != 0) {
-            tv_funeraltime.setText(TimeUtils.formatTime(result.getFuneralTime()));
+        if (result.getFuneralTime() != null) {
+            tv_funeraltime.setText(result.getFuneralTime());
         }
-        if (result.getFireTime() != 0) {
-            tv_firetime.setText(TimeUtils.formatTime(result.getFireTime()));
+        if (result.getFireTime() != null) {
+            tv_firetime.setText(result.getFireTime());
         }
-        if (result.getBodiesByeTime() != 0) {
-            tv_bodiesbyetime.setText(TimeUtils.formatTime(result.getBodiesByeTime()));
+        if (result.getBodiesByeTime() != null) {
+            tv_bodiesbyetime.setText(result.getBodiesByeTime());
         }
     }
 }

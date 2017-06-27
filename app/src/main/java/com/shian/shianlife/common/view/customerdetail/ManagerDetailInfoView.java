@@ -63,7 +63,7 @@ public class ManagerDetailInfoView extends FrameLayout {
     public void setData(HrConsultAgentman result) {
         HrConsultAgentmans agentman = result.getConsultAgentman();
         tv_address.setText(agentman.getLocation());
-        tv_birthday.setText(TimeUtils.formatTime(agentman.getBirthday()));
+        tv_birthday.setText((agentman.getBirthday()));
         tv_linkInfo.setText(agentman.getLinkInfo());
         tv_name.setText(agentman.getName());
         tv_relation.setText(agentman.getRelation() + "");

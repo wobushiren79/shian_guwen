@@ -11,9 +11,9 @@ public class HrGetSendOrderDataSix {
 
     private String funeralCarNum;//出殡车辆
     private String funeralPersonNum;// 出殡人数
-    private long fireTime;//火化时间
-    private long bodiesByeTime;// 遗体告别仪式时间
-    private long funeralTime;//出殡时间
+    private String fireTime;//火化时间
+    private String bodiesByeTime;// 遗体告别仪式时间
+    private String funeralTime;//出殡时间
 
     public String getFuneralCarNum() {
         return funeralCarNum;
@@ -55,27 +55,27 @@ public class HrGetSendOrderDataSix {
         this.bodiesPark = bodiesPark;
     }
 
-    public long getFireTime() {
+    public String getFireTime() {
         return fireTime;
     }
 
-    public void setFireTime(long fireTime) {
+    public void setFireTime(String fireTime) {
         this.fireTime = fireTime;
     }
 
-    public long getBodiesByeTime() {
+    public String getBodiesByeTime() {
         return bodiesByeTime;
     }
 
-    public void setBodiesByeTime(long bodiesByeTime) {
+    public void setBodiesByeTime(String bodiesByeTime) {
         this.bodiesByeTime = bodiesByeTime;
     }
 
-    public long getFuneralTime() {
+    public String getFuneralTime() {
         return funeralTime;
     }
 
-    public void setFuneralTime(long funeralTime) {
+    public void setFuneralTime(String funeralTime) {
         this.funeralTime = funeralTime;
     }
 }

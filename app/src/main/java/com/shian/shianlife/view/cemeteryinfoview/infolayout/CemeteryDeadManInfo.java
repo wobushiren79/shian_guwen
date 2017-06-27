@@ -1,6 +1,7 @@
 package com.shian.shianlife.view.cemeteryinfoview.infolayout;
 
 import android.content.Context;
+import android.text.InputType;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -201,7 +202,8 @@ public class CemeteryDeadManInfo extends BaseCemeteryInfo {
         mTVNext = (TextView) view.findViewById(R.id.tv_submit);
         mTVBack = (TextView) view.findViewById(R.id.tv_back);
         mLLButton = (LinearLayout) view.findViewById(R.id.ll_button);
-
+        mUserAge1.setInputType(InputType.TYPE_CLASS_NUMBER);
+        mUserAge2.setInputType(InputType.TYPE_CLASS_NUMBER);
         mTVNext.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

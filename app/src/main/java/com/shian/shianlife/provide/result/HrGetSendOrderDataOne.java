@@ -5,17 +5,17 @@ package com.shian.shianlife.provide.result;
  */
 
 public class HrGetSendOrderDataOne {
-    private long deadTime;
+    private String deadTime;
     private String deadLocation;//去世地址，String
     private String agentmanLocation;//经办人地点，String
     private String deadmanLocation; //往生者地址，String
     private String zsLocation;//治丧地址，String
 
-    public long getDeadTime() {
+    public String getDeadTime() {
         return deadTime;
     }
 
-    public void setDeadTime(long deadTime) {
+    public void setDeadTime(String deadTime) {
         this.deadTime = deadTime;
     }
 

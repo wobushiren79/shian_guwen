@@ -9,7 +9,7 @@ public class HrGetSendOrderDataThree {
     private String funeralLocation;//殡仪馆地址
     private String fireWay;// 火化手续办理方式
     private String trafficWay;//交通方式
-    private long meetTime;//约定见面时间
+    private String meetTime;//约定见面时间
     private String meetLocation;//约定见面地点
     private String procedureName;//手续证件
     private String firstDayRemark;// 备注
@@ -43,11 +43,11 @@ public class HrGetSendOrderDataThree {
         this.trafficWay = trafficWay;
     }
 
-    public long getMeetTime() {
+    public String getMeetTime() {
         return meetTime;
     }
 
-    public void setMeetTime(long meetTime) {
+    public void setMeetTime(String meetTime) {
         this.meetTime = meetTime;
     }
 

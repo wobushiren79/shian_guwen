@@ -60,12 +60,12 @@ public class FunneralDetailInfoView extends FrameLayout {
 
 	public void setData(HrGetCustomerFuneral result) {
 		OrderFuneral funeral = result.getOrderFuneral();
-		tv_cremationTime.setText(TimeUtils.formatTime(funeral.getCremationTime()));
+		tv_cremationTime.setText(funeral.getCremationTime());
 		tv_dieAddress.setText(funeral.getDieAddress());
-		tv_dieTime.setText(TimeUtils.formatTime(funeral.getDieTime()));
+		tv_dieTime.setText(funeral.getDieTime());
 		tv_funeralAddress.setText(funeral.getFuneralAddress());
 		tv_funeralParlorAddress.setText(funeral.getFuneralParlorAddress());
-		tv_funeralTime.setText(TimeUtils.formatTime(funeral.getFuneralTime()));
+		tv_funeralTime.setText(funeral.getFuneralTime());
 		tv_note.setText(funeral.getNote());
 	}
 

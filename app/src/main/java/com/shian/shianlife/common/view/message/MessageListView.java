@@ -138,7 +138,7 @@ public class MessageListView extends FrameLayout {
             TextView tv_qt11 = (TextView) view.getView(R.id.tv_msg_content);
             tv_qt11.setText(model.getBody());
             TextView tv_qt21 = (TextView) view.getView(R.id.tv_msg_date);
-            tv_qt21.setText(Utils.getDateUtils(model.getServerCreateTime()));
+            tv_qt21.setText(model.getServerCreateTime());
             ImageView ivMsg = (ImageView) view.getView(R.id.iv_message);
             if (model.getReadStatus() == 1) {
                 ivMsg.setVisibility(View.VISIBLE);

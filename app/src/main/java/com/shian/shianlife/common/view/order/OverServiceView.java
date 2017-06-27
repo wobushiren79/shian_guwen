@@ -230,8 +230,8 @@ public class OverServiceView extends BaseOrderView {
 				tv_qt10.setText("治丧地址：");
 				tv_qt11.setText(model.getFuneralAddress());
 				tv_qt20.setText("服务时间：");
-				tv_qt21.setText(Utils.getDateUtils(model.getStartTime()) + "至"
-						+ Utils.getDateUtils(model.getEndTime()));
+				tv_qt21.setText(model.getStartTime() + "至"
+						+ model.getEndTime());
 				tv_qt30.setText("服务满意度");
 				tv_qt31.setText(model.getSatTotal() + "");
 				state = "服务完成";
@@ -239,9 +239,9 @@ public class OverServiceView extends BaseOrderView {
 				tv_qt10.setText("治丧地址：");
 				tv_qt11.setText(model.getFuneralAddress());
 				tv_qt20.setText("服务开始时间：");
-				tv_qt21.setText(Utils.getDateUtils(model.getStartTime()));
+				tv_qt21.setText(model.getStartTime());
 				tv_qt30.setText("服务结束时间：");
-				tv_qt31.setText(Utils.getDateUtils(model.getEndTime()));
+				tv_qt31.setText(model.getEndTime());
 				state = "待回访";
 			} else {
 				rlKuName.setVisibility(View.VISIBLE);

@@ -26,9 +26,9 @@ public class HrGetCustomerFuneral {
 		private long orderId;
 		private long cityId;
 		private long funeralParlorId;
-		private long funeralTime;
-		private long cremationTime;
-		private long dieTime;
+		private String funeralTime;
+		private String cremationTime;
+		private String dieTime;
 		private String dieAddress;
 		private int dieAddressProvince;
 		private int dieAddressCity;
@@ -122,27 +122,27 @@ public class HrGetCustomerFuneral {
 			this.funeralParlorId = funeralParlorId;
 		}
 
-		public long getFuneralTime() {
+		public String getFuneralTime() {
 			return funeralTime;
 		}
 
-		public void setFuneralTime(long funeralTime) {
+		public void setFuneralTime(String funeralTime) {
 			this.funeralTime = funeralTime;
 		}
 
-		public long getCremationTime() {
+		public String getCremationTime() {
 			return cremationTime;
 		}
 
-		public void setCremationTime(long cremationTime) {
+		public void setCremationTime(String cremationTime) {
 			this.cremationTime = cremationTime;
 		}
 
-		public long getDieTime() {
+		public String getDieTime() {
 			return dieTime;
 		}
 
-		public void setDieTime(long dieTime) {
+		public void setDieTime(String dieTime) {
 			this.dieTime = dieTime;
 		}
 

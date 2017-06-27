@@ -17,7 +17,7 @@ public class TalkListModel {
 	private int talkAddressProvince;
 	private String talkAddressSuffix;
 	private String talkGpsAddress;
-	private long talkUpdateTime;
+	private String talkUpdateTime;
 
 	public long getConsultId() {
 		return consultId;
@@ -139,12 +139,11 @@ public class TalkListModel {
 		this.talkGpsAddress = talkGpsAddress;
 	}
 
-	public long getTalkUpdateTime() {
-		return talkUpdateTime;
-	}
-
-	public void setTalkUpdateTime(long talkUpdateTime) {
+	public void setTalkUpdateTime(String talkUpdateTime) {
 		this.talkUpdateTime = talkUpdateTime;
 	}
 
+	public String getTalkUpdateTime() {
+		return talkUpdateTime;
+	}
 }

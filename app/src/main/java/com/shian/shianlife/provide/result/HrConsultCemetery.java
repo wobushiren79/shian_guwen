@@ -27,7 +27,7 @@ public class HrConsultCemetery {
 		private String buyIntention;
 		private String graveAddress;
 		private float buyAmount;
-		private long buryTime;
+		private String buryTime;
 		private int cemeteryUsageStatus;
 		private String note;
 
@@ -103,11 +103,11 @@ public class HrConsultCemetery {
 			this.buyAmount = buyAmount;
 		}
 
-		public long getBuryTime() {
+		public String getBuryTime() {
 			return buryTime;
 		}
 
-		public void setBuryTime(long buryTime) {
+		public void setBuryTime(String buryTime) {
 			this.buryTime = buryTime;
 		}
 

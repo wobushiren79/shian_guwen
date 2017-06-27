@@ -38,11 +38,11 @@ public class MessageDetailActviity extends BaseActivity {
         message = JSONUtil.parseJSONString(getIntent()
                 .getStringExtra("message"), MessageList.class);
         tvList.get(0).setText(message.getHead());
-        if (message.getServerCreateTime() == 0) {
+        if (message.getServerCreateTime() == null) {
             tvList.get(1).setVisibility(View.GONE);
         }
         tvList.get(1)
-                .setText(Utils.getDateUtils(message.getServerCreateTime()));
+                .setText(message.getServerCreateTime());
         tvList.get(2).setText(message.getBody());
         boolean isB = getIntent().getBooleanExtra("isBroadcast", false);
         if (!isB) {

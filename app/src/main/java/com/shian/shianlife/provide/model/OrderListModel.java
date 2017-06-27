@@ -31,8 +31,8 @@ public class OrderListModel {
 	String payeeName;// 收款员
 
 	int restMoneyStatus;// 收款状态
-	long startTime;// 服务开始时间
-	long endTime;// 服务结束时间
+	String startTime;// 服务开始时间
+	String endTime;// 服务结束时间
 	int satTotal;// 服务满意度
 	boolean auditPass;
 	
@@ -48,6 +48,14 @@ public class OrderListModel {
 	int financeStatus;
 
 	int step;//填写资料的步骤
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
 
 	public int getStep() {
 		return step;
@@ -338,21 +346,14 @@ public class OrderListModel {
 	}
 
 
-	public long getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(long startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public long getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(long endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
+
 
 	public int getSatTotal() {
 		return satTotal;

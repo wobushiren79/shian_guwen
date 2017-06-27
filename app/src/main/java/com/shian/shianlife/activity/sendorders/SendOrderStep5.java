@@ -106,9 +106,9 @@ public class SendOrderStep5 extends BaseSendOrder {
                 data.add(result.getFuneralLocation() + "");
                 data.add(result.getCrematorName() + "");
                 data.add(result.getBodiesPark() + "");
-                data.add(TransitionDate.DateToStr(new Date(result.getFireTime()), "yyyy-MM-dd HH:ss"));
-                data.add(TransitionDate.DateToStr(new Date(result.getBodiesByeTime()), "yyyy-MM-dd HH:ss"));
-                data.add(TransitionDate.DateToStr(new Date(result.getFuneralTime()), "yyyy-MM-dd HH:ss"));
+                data.add(result.getFireTime());
+                data.add(result.getBodiesByeTime());
+                data.add(result.getFuneralTime());
                 intent.putStringArrayListExtra("data", data);
                 getContext().sendBroadcast(intent);
 

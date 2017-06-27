@@ -94,7 +94,7 @@ public class SendOrderStep2 extends BaseSendOrder {
                 data.add(result.getFuneralLocation());
                 data.add(result.getFireWay());
                 data.add(result.getTrafficWay());
-                data.add(TransitionDate.DateToStr(new Date(result.getMeetTime()), "yyyy-MM-dd HH:ss"));
+                data.add(result.getMeetTime());
                 data.add(result.getMeetLocation());
                 data.add(result.getProcedureName());
                 data.add(result.getFirstDayRemark());

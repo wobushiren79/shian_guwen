@@ -80,7 +80,7 @@ public class CustomerDeadInfoView extends FrameLayout {
     public void setData(HrConsultUsageResult result) {
         HrConsultUsageResults usage = result.getConsultUsage();
         tv_age.setText(usage.getAge());
-        tv_birthday.setText(TimeUtils.formatTime(usage.getBirthday()));
+        tv_birthday.setText(usage.getBirthday());
         tv_curAddress.setText(usage.getLocation());
         tv_height.setText(usage.getHeight());
         tv_intimeReady.setText(usage.getIntimeReady());

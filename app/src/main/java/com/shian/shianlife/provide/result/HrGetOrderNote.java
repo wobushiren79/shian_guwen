@@ -28,9 +28,9 @@ public class HrGetOrderNote {
 	private String funeralAddress;
 	private String skuName;
 	private String executorName;
-	private long acceptTime;
-	private long startTime;
-	private long endTime;
+	private String acceptTime;
+	private String startTime;
+	private String endTime;
 	private String executorNote;
 	private String adviserNote;
 	private String auditNote;
@@ -86,27 +86,27 @@ public class HrGetOrderNote {
 		this.executorName = executorName;
 	}
 
-	public long getAcceptTime() {
+	public String getAcceptTime() {
 		return acceptTime;
 	}
 
-	public void setAcceptTime(long acceptTime) {
+	public void setAcceptTime(String acceptTime) {
 		this.acceptTime = acceptTime;
 	}
 
-	public long getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(long startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public long getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(long endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 

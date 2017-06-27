@@ -23,7 +23,7 @@ public class HrMessageList {
 		private long id;
 		private int readStatus;//1 为未读
 		private long receiver;
-		private long serverCreateTime;
+		private String serverCreateTime;
 		private int type;
 
 		public String getBody() {
@@ -66,11 +66,11 @@ public class HrMessageList {
 			this.receiver = receiver;
 		}
 
-		public long getServerCreateTime() {
+		public String getServerCreateTime() {
 			return serverCreateTime;
 		}
 
-		public void setServerCreateTime(long serverCreateTime) {
+		public void setServerCreateTime(String serverCreateTime) {
 			this.serverCreateTime = serverCreateTime;
 		}
 

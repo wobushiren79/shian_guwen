@@ -10,15 +10,15 @@ public class BordModel {
 
 	String visitNum="";// 客户编号
 	String orderNum="";// 订单编号
-	long orderTime;// 订单时间
+	String orderTime;// 订单时间
 	String agentmanName="";// 经办人姓名
 	String agentmanlinkInfo="";// 经办人电话
 	String contractNo="";// 合同编号
 	String contractAmount="";// 合同金额
 	String usageName="";// 逝者姓名
-	long funeralTime;// 出殡时间
-	long startTime;// 开始时间
-	long endTime;// 结束时间
+	String funeralTime;// 出殡时间
+	String startTime;// 开始时间
+	String endTime;// 结束时间
 	long talkerId;// 白事顾问ID
 	String talkerName="";// 白事顾问
 	long performerId;// 治丧指导ID
@@ -41,6 +41,15 @@ public class BordModel {
 	String prepayAmount;
 	float refundAmount;
 	float restAmount;
+
+
+	public String getOrderTime() {
+		return orderTime;
+	}
+
+	public void setOrderTime(String orderTime) {
+		this.orderTime = orderTime;
+	}
 
 	public float getRestAmount() {
 		return restAmount;
@@ -122,13 +131,6 @@ public class BordModel {
 		this.orderNum = orderNum;
 	}
 
-	public long getOrderTime() {
-		return orderTime;
-	}
-
-	public void setOrderTime(long orderTime) {
-		this.orderTime = orderTime;
-	}
 
 	public String getAgentmanName() {
 		return agentmanName;
@@ -170,27 +172,27 @@ public class BordModel {
 		this.usageName = usageName;
 	}
 
-	public long getFuneralTime() {
+	public String getFuneralTime() {
 		return funeralTime;
 	}
 
-	public void setFuneralTime(long funeralTime) {
+	public void setFuneralTime(String funeralTime) {
 		this.funeralTime = funeralTime;
 	}
 
-	public long getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(long startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public long getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(long endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 

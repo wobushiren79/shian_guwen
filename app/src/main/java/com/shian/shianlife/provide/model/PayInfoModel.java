@@ -4,9 +4,9 @@ public class PayInfoModel {
 
 	float totalAmount;// 总金额
 	float prepayAmount;// 已经支付定金金额
-	long prepayEndTime;// 定金支付时间
+	String prepayEndTime;// 定金支付时间
 	float restPayAmount;// 应支付余款
-	long restPayEndTime;// 余款支付时间
+	String restPayEndTime;// 余款支付时间
 	String restPayeeName="";// 收款员
 	String restPayeePhone="";// 联系电话
 	String signUrl="";// 客户签字
@@ -19,6 +19,22 @@ public class PayInfoModel {
 
 	public void setReceivableAmount(float receivableAmount) {
 		this.receivableAmount = receivableAmount;
+	}
+
+	public String getPrepayEndTime() {
+		return prepayEndTime;
+	}
+
+	public void setPrepayEndTime(String prepayEndTime) {
+		this.prepayEndTime = prepayEndTime;
+	}
+
+	public String getRestPayEndTime() {
+		return restPayEndTime;
+	}
+
+	public void setRestPayEndTime(String restPayEndTime) {
+		this.restPayEndTime = restPayEndTime;
 	}
 
 	public float getRefundAmount() {
@@ -45,13 +61,7 @@ public class PayInfoModel {
 		this.prepayAmount = prepayAmount;
 	}
 
-	public long getPrepayEndTime() {
-		return prepayEndTime;
-	}
 
-	public void setPrepayEndTime(long prepayEndTime) {
-		this.prepayEndTime = prepayEndTime;
-	}
 
 	public float getRestPayAmount() {
 		return restPayAmount;
@@ -61,13 +71,7 @@ public class PayInfoModel {
 		this.restPayAmount = restPayAmount;
 	}
 
-	public long getRestPayEndTime() {
-		return restPayEndTime;
-	}
 
-	public void setRestPayEndTime(long restPayEndTime) {
-		this.restPayEndTime = restPayEndTime;
-	}
 
 	public String getRestPayeeName() {
 		return restPayeeName;
