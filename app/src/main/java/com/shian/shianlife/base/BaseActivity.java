@@ -7,11 +7,15 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,17 +39,23 @@ import com.shian.shianlife.activity.NewMessageListActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.FilePathUtils;
 import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.view.drawerlayout.MainDrawerLayout;
+import com.shian.shianlife.view.drawerlayout.MainDrawerLayoutListener;
 import com.yongchun.library.view.ImageSelectorActivity;
 
 public class BaseActivity extends FragmentActivity {
 
+
     FrameLayout flContent;
+
     protected View v;
+    protected MainDrawerLayout mainDrawerLayout;
     protected Context mContext = this;
     private PushReciver mPushReciver;
     protected boolean LOGFLAG = SaBaseApplication.LOGFLAG;
 
     public LinearLayout mMain;
+    protected DrawerLayout drawerLayout;
 
     public static DisplayMetrics metrics = new DisplayMetrics();
 
@@ -54,11 +64,12 @@ public class BaseActivity extends FragmentActivity {
         super.onCreate(arg0);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.setContentView(R.layout.activity_base);
-        mMain= (LinearLayout) findViewById(R.id.mainll);
+        mMain = (LinearLayout) findViewById(R.id.mainll);
         flContent = (FrameLayout) findViewById(R.id.fl_base);
+        drawerLayout = (DrawerLayout) findViewById(R.id.main_drawerlayout);
         ((SaBaseApplication) getApplicationContext()).addActivity(this);
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        Utils.setWindowStatusBarColor(this,R.color.zhy_title_color_1);//设置状态栏颜色
+        Utils.setWindowStatusBarColor(this, R.color.zhy_title_color_1);//设置状态栏颜色
     }
 
     @Override
@@ -91,6 +102,19 @@ public class BaseActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * 增加抽屉布局
+     */
+    public void addMainDrawerLayout() {
+        mainDrawerLayout = new MainDrawerLayout(this);
+        int dp120 = this.getResources().getDimensionPixelOffset(R.dimen.dimen_120dp);
+        DrawerLayout.LayoutParams layoutPrams = new DrawerLayout.LayoutParams(metrics.widthPixels - dp120, LayoutParams.MATCH_PARENT, Gravity.START);
+        mainDrawerLayout.setLayoutParams(layoutPrams);
+        drawerLayout.addView(mainDrawerLayout);
+        drawerLayout.addDrawerListener(new MainDrawerLayoutListener(this, drawerLayout, metrics.widthPixels, metrics.heightPixels));
+        drawerLayout.setScrimColor(Color.TRANSPARENT);
+    }
+
     public void setMessageVisible(int visible) {
         View tvHeadRight = findViewById(R.id.tv_head_right);
         tvHeadRight.setVisibility(visible);
@@ -104,14 +128,14 @@ public class BaseActivity extends FragmentActivity {
 
     public void setTitleLocation(String titleLocation) {
         TextView tvHeadLocation = (TextView) findViewById(R.id.title_location);
-            tvHeadLocation.setText(titleLocation);
+        tvHeadLocation.setText(titleLocation);
     }
 
     public void setTitle(String title) {
         findViewById(R.id.rl_head).setVisibility(View.VISIBLE);
 //        TextView tvHeadLeft = (TextView) findViewById(R.id.tv_head_left);
         TextView tvHeadTitle = (TextView) findViewById(R.id.tv_head_title);
-        TextView back= (TextView) findViewById(R.id.back);
+        TextView back = (TextView) findViewById(R.id.back);
         ImageView ivHeadTitle = (ImageView) findViewById(R.id.iv_head_title);
         TextView tvHeadLocation = (TextView) findViewById(R.id.title_location);
 //        ImageView logo= (ImageView) findViewById(R.id.logo);
@@ -159,7 +183,7 @@ public class BaseActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Intent in = new Intent(getBaseContext(),NewMessageListActivity.class);
+                Intent in = new Intent(getBaseContext(), NewMessageListActivity.class);
                 startActivity(in);
             }
         });

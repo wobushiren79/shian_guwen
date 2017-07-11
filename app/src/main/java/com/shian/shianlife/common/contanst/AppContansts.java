@@ -1,14 +1,15 @@
 package com.shian.shianlife.common.contanst;
 
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoResultBean;
 import com.shian.shianlife.provide.result.HrGetMsgNumberForUntreated;
 import com.shian.shianlife.provide.result.HrLoginResult;
 
 public class AppContansts {
-//        public static final String BaseCemeteryURL = "http://192.168.0.37:8088/app";
-//    public static final String BaseCemeteryURL = "http://192.168.0.35:8100/advisor";
-    public static final String BaseCemeteryURL = "http://115.28.163.211:7088/shianlife-advisor-cemetery-1.0-SNAPSHOT";
+    public static final String BaseCemeteryURL = "http://192.168.0.37:8088/app";
+    //    public static final String BaseCemeteryURL = "http://192.168.0.35:8100/advisor";
+//    public static final String BaseCemeteryURL = "http://115.28.163.211:7088/shianlife-advisor-cemetery-1.0-SNAPSHOT";
     public static final String BaseURL = "http://115.28.163.211:7088/shianlife-adviser-1.0-SNAPSHOT";
-//    public static final String BaseURL = "http://192.168.0.37:8088/adviser";
+    //    public static final String BaseURL = "http://192.168.0.37:8088/adviser";
     public static final String OSSURL = "http://shianlife123.oss-cn-qingdao.aliyuncs.com/";
     public static final String PhpURL = "http://app.e-funeral.cn";
 //    public static final String PhpURL = "http://192.168.0.170/shian_app_mgr";
@@ -36,4 +37,6 @@ public class AppContansts {
 
     public static HrLoginResult userLoginInfo = null;
     public static HrLoginResult userCemetery = null;
+
+    public static UserInfoResultBean userInfoData;
 }

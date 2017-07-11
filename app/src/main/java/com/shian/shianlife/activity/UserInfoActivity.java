@@ -7,8 +7,10 @@ import android.widget.TextView;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.JSONUtil;
 import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoResultBean;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
@@ -36,18 +38,20 @@ public class UserInfoActivity extends BaseActivity {
     }
 
     private void initData() {
-        final HrUserInfo userInfo = JSONUtil.parseJSONString(getIntent().getStringExtra("data"), HrUserInfo.class);
-        tvList.get(0).append(userInfo.getName()==null?"":userInfo.getName());
-        tvList.get(1).append(userInfo.getMobile()==null?"":userInfo.getMobile());
-        tvList.get(2).append(userInfo.getServiceArea()==null?"":userInfo.getServiceArea());
-        tvList.get(3).append(userInfo.getJobNo()==null?"":userInfo.getJobNo());
-        etList.get(0).setText(userInfo.getEmail()==null?"":userInfo.getEmail());
-        etList.get(1).setText(userInfo.getIntroduce());
+        final UserInfoResultBean userInfo = AppContansts.userInfoData;
+        if (userInfo != null) {
+            tvList.get(0).append(userInfo.getName() == null ? "" : userInfo.getName());
+            tvList.get(1).append(userInfo.getMobile() == null ? "" : userInfo.getMobile());
+            tvList.get(2).append(userInfo.getServiceArea() == null ? "" : userInfo.getServiceArea());
+            tvList.get(3).append(userInfo.getJobNo() == null ? "" : userInfo.getJobNo());
+            etList.get(0).setText(userInfo.getEmail() == null ? "" : userInfo.getEmail());
+            etList.get(1).setText(userInfo.getIntroduce());
+        }
         findViewById(R.id.tv_editorder).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 HpConsultIdParams params = new HpConsultIdParams();
-                params.setAppStatus(getSharedPreferences("settings",-1).getBoolean("rb",true)?1:2);
+                params.setAppStatus(getSharedPreferences("settings", -1).getBoolean("rb", true) ? 1 : 2);
                 params.setEmail(etList.get(0).getText().toString());
                 params.setIntroduce(etList.get(1).getText().toString());
                 MHttpManagerFactory.getAccountManager().changeInfo(UserInfoActivity.this, params, new HttpResponseHandler<Object>() {

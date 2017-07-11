@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_drawerlayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/mainll"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <include
-        layout="@layout/view_head"
-        android:visibility="gone" />
-
-    <FrameLayout
-        android:id="@+id/fl_base"
+    <LinearLayout
+        android:id="@+id/mainll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <include
+            layout="@layout/view_head"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@+id/fl_base"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></FrameLayout>
+    </LinearLayout>
+
+
+</android.support.v4.widget.DrawerLayout>

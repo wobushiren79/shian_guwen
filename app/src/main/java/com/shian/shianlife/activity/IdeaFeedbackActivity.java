@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.loopj.android.http.RequestParams;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
@@ -26,13 +27,13 @@ public class IdeaFeedbackActivity extends BaseActivity {
     TextView mTVTextNum;
 
 
-    String[] UserInfo;
+//    String[] UserInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_idea_feedback);
-        UserInfo = getIntent().getStringArrayExtra("UserInfo");
+//        UserInfo = getIntent().getStringArrayExtra("UserInfo");
         setTitle("意见反馈");
         initView();
     }
@@ -87,9 +88,15 @@ public class IdeaFeedbackActivity extends BaseActivity {
             ToastUtils.show(IdeaFeedbackActivity.this, "还没有填写反馈信息");
             return;
         }
+        if (AppContansts.userInfoData == null ||
+                AppContansts.userInfoData.getName() == null ||
+                AppContansts.userInfoData.getMobile() == null) {
+            ToastUtils.show(IdeaFeedbackActivity.this, "账号错误 请重新登陆");
+            return;
+        }
         RequestParams params = new RequestParams();
-        params.put("user", UserInfo[0]);
-        params.put("tel", UserInfo[1]);
+        params.put("user", AppContansts.userInfoData.getName());
+        params.put("tel", AppContansts.userInfoData.getMobile());
         params.put("content", mEditText.getText().toString());
         params.put("userType", SystemTypeEnum.funeral.getCode());
         MHttpManagerFactory.getPHPManager().setOpinion(IdeaFeedbackActivity.this, params, new HttpResponseHandler<Object>() {

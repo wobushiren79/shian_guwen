@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/zhy_drawer_back"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:paddingRight="@dimen/dimen_40dp"
+        android:paddingTop="@dimen/dimen_40dp">
+
+        <ImageView
+            android:id="@+id/iv_sign"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:src="@drawable/zhy_drawer_sign" />
+
+        <TextView
+            android:id="@+id/tv_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:gravity="center_vertical"
+            android:text="@string/drawer_sign"
+            android:textColor="@color/zhy_title_color_1"
+            android:textSize="@dimen/dimen_24dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_140dp"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/dimen_72dp">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="@dimen/dimen_160dp"
+            android:layout_height="@dimen/dimen_160dp"
+            android:src="@drawable/zhy_user_icon" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_58dp"
+            android:layout_marginTop="@dimen/dimen_50dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/zhy_text_color_13"
+                android:textSize="@dimen/dimen_42dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_12dp"
+                android:layout_marginTop="@dimen/dimen_12dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_24dp"
+                    android:layout_height="@dimen/dimen_30dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/zhy_user_point" />
+
+                <TextView
+                    android:id="@+id/tv_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dimen_18dp"
+                    android:text="0.0"
+                    android:textColor="@color/zhy_text_color_13"
+                    android:textSize="@dimen/dimen_32dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/zhy_text_color_13"
+                android:textSize="@dimen/dimen_32dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:background="@drawable/zhy_button_bg_check_gray"
+            android:id="@+id/ll_help"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimen_72dp">
+
+            <ImageView
+                style="@style/zhy_drawer_item_icon"
+                android:layout_width="@dimen/dimen_32dp"
+                android:layout_height="@dimen/dimen_32dp"
+                android:src="@drawable/zhy_user_center_help" />
+
+            <TextView
+                style="@style/zhy_drawer_item_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/zhy_user_center_help" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@drawable/zhy_button_bg_check_gray"
+            android:id="@+id/ll_collection"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimen_72dp">
+
+            <ImageView
+                style="@style/zhy_drawer_item_icon"
+                android:layout_width="@dimen/dimen_32dp"
+                android:layout_height="@dimen/dimen_32dp"
+                android:src="@drawable/zhy_user_center_collection" />
+
+            <TextView
+                style="@style/zhy_drawer_item_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/zhy_user_center_collection" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@drawable/zhy_button_bg_check_gray"
+            android:id="@+id/ll_idea"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimen_72dp">
+
+            <ImageView
+                style="@style/zhy_drawer_item_icon"
+                android:layout_width="@dimen/dimen_32dp"
+                android:layout_height="@dimen/dimen_32dp"
+                android:src="@drawable/zhy_user_center_idea" />
+
+            <TextView
+                style="@style/zhy_drawer_item_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/zhy_user_center_idea" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@drawable/zhy_button_bg_check_gray"
+            android:id="@+id/ll_platform"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimen_72dp">
+
+            <ImageView
+                style="@style/zhy_drawer_item_icon"
+                android:layout_width="@dimen/dimen_32dp"
+                android:layout_height="@dimen/dimen_32dp"
+                android:src="@drawable/zhy_user_center_platform" />
+
+            <TextView
+                style="@style/zhy_drawer_item_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/zhy_user_center_platform" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@drawable/zhy_button_bg_check_gray"
+            android:id="@+id/ll_version"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimen_72dp">
+
+            <ImageView
+                style="@style/zhy_drawer_item_icon"
+                android:layout_width="@dimen/dimen_32dp"
+                android:layout_height="@dimen/dimen_32dp"
+                android:src="@drawable/zhy_user_center_version" />
+
+            <TextView
+                android:id="@+id/tv_version"
+                style="@style/zhy_drawer_item_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/zhy_user_center_version" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_28dp"
+        android:layout_marginLeft="@dimen/dimen_34dp"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:background="@drawable/zhy_button_bg_check_gray"
+            android:id="@+id/ll_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/dimen_53dp"
+                android:layout_height="@dimen/dimen_53dp"
+                android:src="@drawable/zhy_user_center_setting_2" />
+
+            <TextView
+                style="@style/zhy_drawer_item_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_12dp"
+                android:text="@string/zhy_user_center_setting" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@drawable/zhy_button_bg_check_gray"
+            android:id="@+id/ll_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_64dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/dimen_53dp"
+                android:layout_height="@dimen/dimen_53dp"
+                android:src="@drawable/zhy_user_center_edit" />
+
+            <TextView
+                style="@style/zhy_drawer_item_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_12dp"
+                android:text="@string/zhy_user_center_edit" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

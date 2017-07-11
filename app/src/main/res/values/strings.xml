@@ -214,4 +214,14 @@
     <string name="texturemap_hint">\t\t名称：TextureMapView（实现地图由TextureView 渲染）\n\n \t\t前提：Android 4.0以上系统，并开启加速功能，才能使用TextureMapView \n\n \t\t用法：解决原MapView基于系统GLSurfaceView导致tabhost切换或滚动闪屏、白边等问题</string>
     <string name="tileoverlay_online_urlhint">放入图片URL，点击在线</string>
     <string name="hide_poiinfo">隐藏地图上的poi标注</string>
+
+
+    <string name="drawer_sign">签到</string>
+    <string name="zhy_user_center_help">客服帮助</string>
+    <string name="zhy_user_center_collection">我的收藏</string>
+    <string name="zhy_user_center_idea">意见反馈</string>
+    <string name="zhy_user_center_platform">入驻平台</string>
+    <string name="zhy_user_center_version">版本号：</string>
+    <string name="zhy_user_center_setting">设置</string>
+    <string name="zhy_user_center_edit">编辑</string>
 </resources>

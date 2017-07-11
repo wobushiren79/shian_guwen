@@ -2,6 +2,7 @@ package com.shian.shianlife.activity;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Rect;
@@ -42,6 +43,9 @@ import com.shian.shianlife.fragment.NewUserCenterFragment;
 import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.fragment.UserCenterFragment;
 import com.shian.shianlife.mapapi.CustomDialog;
+import com.shian.shianlife.mvp.userinfo.presenter.IUserInfoPresenter;
+import com.shian.shianlife.mvp.userinfo.presenter.impl.UserInfoPresenterImpl;
+import com.shian.shianlife.mvp.userinfo.view.IUserInfoView;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
@@ -60,7 +64,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
-public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, OrderFragment.OrderFragmentCallBack {
+public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, OrderFragment.OrderFragmentCallBack, IUserInfoView {
 
     int loginType;//0殡仪 1.公墓
     @InjectView(R.id.fl_main)
@@ -92,6 +96,8 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 //    public LocationClient mLocationClient = null;
 //    public BDLocationListener myListener = new MyLocationListener();
 
+    private IUserInfoPresenter userInfoPresenter;
+
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
@@ -105,6 +111,8 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         startPushService();
         //检测更新
         Utils.checkUpData(this, false);
+
+
     }
 
 
@@ -163,7 +171,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 //            userInfo.phone = sb.toString().substring(0, 11);
 //        else
 //            userInfo.phone = sb.toString().substring(0, sb.toString().length() - 1);
-        userInfo.phone="15008420243";
+        userInfo.phone = "15008420243";
         userInfo.sdkName = "来自世安工单";
         userInfo.helpAddress = "wenshikai.kf5.com";
         userInfo.email = name + "@sina.com";
@@ -183,9 +191,13 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     private void initDate() {
         loginType = SharePerfrenceUtils.getLoginShare(this).getLoginType();
         mFragmentManager = getSupportFragmentManager();
+        userInfoPresenter = new UserInfoPresenterImpl(this);
+        userInfoPresenter.getUserInfoData();
     }
 
     private void initView() {
+        addMainDrawerLayout();
+
         setTitle("title");
         rbMain1.setOnCheckedChangeListener(new RBCheckListener());
         rbMain2.setOnCheckedChangeListener(new RBCheckListener());
@@ -289,6 +301,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     public void changeMsgNum() {
         getMsgNumber();
     }
+
 
     class RBCheckListener implements OnCheckedChangeListener {
 
@@ -550,5 +563,39 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 
             }
         });
+    }
+
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public void ChangeHeadImage(String imageUrl) {
+        if (mainDrawerLayout != null) {
+            mainDrawerLayout.changeHeadImg(imageUrl);
+        }
+    }
+
+    @Override
+    public void ChangeName(String name) {
+        if (mainDrawerLayout != null) {
+            mainDrawerLayout.changeName(name);
+        }
+    }
+
+    @Override
+    public void ChangePhone(String phone) {
+        if (mainDrawerLayout != null) {
+            mainDrawerLayout.changePhone(phone);
+        }
+    }
+
+    @Override
+    public void ChangePoint(String point) {
+        if (mainDrawerLayout != null) {
+            mainDrawerLayout.changePoint(point);
+        }
     }
 }

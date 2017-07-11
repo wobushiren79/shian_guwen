@@ -2,6 +2,7 @@ package com.shian.shianlife.provide.imp;
 
 import android.content.Context;
 
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoResultBean;
 import com.shian.shianlife.provide.base.HttpManager;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpAcceptParams;
@@ -105,13 +106,14 @@ public interface MAccountManager extends HttpManager {
                       HttpResponseHandler<HrLoginResult> handler);
 
     public void loginCemetery(Context context, HpLoginParams params,
-                      HttpResponseHandler<HrLoginResult> handler);
+                              HttpResponseHandler<HrLoginResult> handler);
 
     public void loginout(Context context,
                          HttpResponseHandler<Object> handler);
 
     public void loginoutCemetery(Context context,
-                         HttpResponseHandler<Object> handler);
+                                 HttpResponseHandler<Object> handler);
+
     /**
      * 字典查询
      *
@@ -120,7 +122,7 @@ public interface MAccountManager extends HttpManager {
      * @param handler
      */
     public void getDictSelect(Context context, HpGetDictSelectParams params,
-                       HttpResponseHandler<HrGetDictSelectData> handler);
+                              HttpResponseHandler<HrGetDictSelectData> handler);
     /****************** 顾问 ***********************/
 
     /**
@@ -330,6 +332,7 @@ public interface MAccountManager extends HttpManager {
      */
     public void getCustomerFuneral(Context context, HpOrderIdParams params,
                                    HttpResponseHandler<HrGetCustomerFuneral> handler);
+
     /**
      * 获取预备信息2
      *
@@ -338,7 +341,8 @@ public interface MAccountManager extends HttpManager {
      * @param handler
      */
     public void getCustomerFuneralOther(Context context, HpConsultIdParams params,
-                                   HttpResponseHandler<HrGetCustomerFuneralOther> handler);
+                                        HttpResponseHandler<HrGetCustomerFuneralOther> handler);
+
     /**
      * 保存预备信息
      *
@@ -560,6 +564,9 @@ public interface MAccountManager extends HttpManager {
     public void getUserInfo(Context context,
                             HttpResponseHandler<HrUserInfo> handler);
 
+    public void getUserInfoData(Context context,
+                            HttpResponseHandler<UserInfoResultBean> handler);
+
     public void changeCurAddress
             (Context context, HpConsultIdParams params,
              HttpResponseHandler<Object> handler);
@@ -746,6 +753,7 @@ public interface MAccountManager extends HttpManager {
 
     /**
      * 获取商品详情
+     *
      * @param context
      * @param params
      * @param handler
@@ -778,7 +786,7 @@ public interface MAccountManager extends HttpManager {
      * @param handler
      */
     public void acceptCemetery(Context context, HpCetemeryAcceptParams params,
-                       HttpResponseHandler<Object> handler);
+                               HttpResponseHandler<Object> handler);
 
     /**
      * 公墓系统拒单
@@ -788,7 +796,7 @@ public interface MAccountManager extends HttpManager {
      * @param handler
      */
     public void rejectCemetery(Context context, HpCetemeryRejectParams params,
-                       HttpResponseHandler<Object> handler);
+                               HttpResponseHandler<Object> handler);
 
     /**
      * 获取公墓洽谈信息
@@ -839,7 +847,6 @@ public interface MAccountManager extends HttpManager {
 
     /**
      * 获取公墓墓位结构
-     *
      */
     public void getCemeteryStructure(Context context, HpCemeteryStructureParams params, HttpResponseHandler<HrGetCemeteryStructure> handler);
 
@@ -884,9 +891,9 @@ public interface MAccountManager extends HttpManager {
     void saveCemeteryTalkSuccessAgentMan(Context context, HpSaveCemeteryTalkSuccessAgentMan params, HttpResponseHandler<Object> handler);
 
 
-
     /**
      * 保存派车单信息
+     *
      * @param context
      * @param params
      * @param handler
@@ -895,9 +902,10 @@ public interface MAccountManager extends HttpManager {
 
     /**
      * 获取订单详情
+     *
      * @param context
      * @param params
      * @param handler
      */
-    void getCarBuildData(Context context,HpCarBuildOrder params,HttpResponseHandler<HrGetCarDetails> handler);
+    void getCarBuildData(Context context, HpCarBuildOrder params, HttpResponseHandler<HrGetCarDetails> handler);
 }

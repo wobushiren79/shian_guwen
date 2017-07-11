@@ -2,6 +2,7 @@ package com.shian.shianlife.provide.imp.impl;
 
 import android.content.Context;
 
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoResultBean;
 import com.shian.shianlife.provide.base.BaseHttpParams;
 import com.shian.shianlife.provide.base.HttpRequestExecutor;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
@@ -563,6 +564,12 @@ public class MAccountManagerImpl implements MAccountManager {
     @Override
     public void getUserInfo(Context context, HttpResponseHandler<HrUserInfo> handler) {
         excutor.requestPost(context, "user/info/get", HrUserInfo.class, new BaseHttpParams(),
+                handler);
+    }
+
+    @Override
+    public void getUserInfoData(Context context, HttpResponseHandler<UserInfoResultBean> handler) {
+        excutor.requestPost(context, "user/info/get", UserInfoResultBean.class, new BaseHttpParams(),
                 handler);
     }
 

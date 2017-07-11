@@ -24,6 +24,7 @@ import com.baidu.android.pushservice.PushManager;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.push.Utils;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -52,7 +53,11 @@ public class SettingsActivity extends BaseActivity {
         setContentView(R.layout.activity_settings);
         setTitle("设置");
         share = getSharedPreferences("settings", -1);
-        if (getIntent().getIntExtra("state", 1) == 1) {
+        int state = 1;
+        if (AppContansts.userInfoData != null) {
+            state = AppContansts.userInfoData.getAppStatus();
+        }
+        if (state == 1) {
             switchButton.setChecked(true);
             rbList.get(0).setChecked(true);
             tvSwitch.setText("当前状态为空闲");
