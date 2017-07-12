@@ -2,7 +2,7 @@
 <com.handmark.pulltorefresh.library.PullToRefreshScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/zhy_backgroud_1"
+    android:background="@color/white"
     android:orientation="vertical"
     android:scrollbars="none">
 
@@ -16,6 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></com.shian.shianlife.view.customview.UserInfoLayout>
 
+        <com.shian.shianlife.view.customview.MainAPP
+            android:id="@+id/mainapp_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_18dp"
+            android:layout_marginTop="@dimen/dimen_18dp"></com.shian.shianlife.view.customview.MainAPP>
+
         <com.shian.shianlife.view.customview.MainAdvertisementLayout
             android:id="@+id/mainadvertisement_layout"
             android:layout_width="match_parent"
@@ -27,14 +34,9 @@
             android:id="@+id/maindynamic_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:layout_marginTop="@dimen/dimen_18dp"></com.shian.shianlife.view.customview.MainDynamic>
+            android:layout_marginTop="@dimen/dimen_18dp"
+            android:visibility="gone"></com.shian.shianlife.view.customview.MainDynamic>
 
-        <com.shian.shianlife.view.customview.MainAPP
-            android:id="@+id/mainapp_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dimen_18dp"
-            android:layout_marginTop="@dimen/dimen_18dp"></com.shian.shianlife.view.customview.MainAPP>
+
     </LinearLayout>
 </com.handmark.pulltorefresh.library.PullToRefreshScrollView>

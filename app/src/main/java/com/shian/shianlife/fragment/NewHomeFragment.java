@@ -11,6 +11,7 @@ import android.view.animation.TranslateAnimation;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.base.BaseFragment;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.view.customview.MainAPP;
 import com.shian.shianlife.view.customview.MainAdvertisementLayout;
@@ -28,6 +29,23 @@ public class NewHomeFragment extends BaseFragment {
     MainAdvertisementLayout mMainAdvertisementLayout;//主页广告布局
     MainDynamic mMainDynamicLayout;//重要动态
     MainAPP mMainAPP;//我的APP
+
+
+    public void changeUserInfoName(String name) {
+        if (mUserInfoLayout != null)
+            mUserInfoLayout.changeName(name);
+    }
+
+    public void changeUserInfoOrderNum(String orderNum) {
+        if (mUserInfoLayout != null)
+            mUserInfoLayout.changeOrderNum(orderNum);
+    }
+
+    public void changeUserInfoPoint(String point) {
+        if (mUserInfoLayout != null)
+            mUserInfoLayout.changePoint(point);
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,13 +71,6 @@ public class NewHomeFragment extends BaseFragment {
         mMainDynamicLayout.setCallBack(mainDynamicCallBack);
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-
-        }
-    };
 
     /**
      * 广告加载完毕与取消动画

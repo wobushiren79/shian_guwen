@@ -14,10 +14,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
@@ -285,7 +288,7 @@ public class Utils {
                         dialog.show();
                     } else {
                         if (isToast) {
-                            ToastUtils.show(context, "当前已是最新版" );
+                            ToastUtils.show(context, "当前已是最新版");
                         }
                     }
                 } catch (Exception e) {
@@ -301,4 +304,15 @@ public class Utils {
         }, isToast);
     }
 
+    /**
+     * 改变颜色
+     * @param drawable
+     * @param colors
+     * @return
+     */
+    public static Drawable tintDrawable(Drawable drawable, ColorStateList colors) {
+        final Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
+        DrawableCompat.setTintList(wrappedDrawable, colors);
+        return wrappedDrawable;
+    }
 }

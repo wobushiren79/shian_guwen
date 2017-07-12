@@ -16,4 +16,6 @@ public interface IUserInfoView {
     void ChangePhone(String phone);
 
     void ChangePoint(String point);
+
+    void ChangeOrderNum(String num);
 }

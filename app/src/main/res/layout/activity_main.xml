@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/main_blackground">
+            android:background="@color/white">
 
         </FrameLayout>
 
@@ -58,10 +58,9 @@
                     android:id="@+id/rb_main_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_weight="1"
                     android:button="@null"
-                    android:drawableTop="@drawable/ic_bar_order_selector_2"
+                    android:drawableTop="@drawable/ic_bar_store_selector_2"
                     android:gravity="center_horizontal"
                     android:text="@string/main_2"
                     android:textColor="@color/main_rb_text_color"
@@ -73,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:button="@null"
-                    android:drawableTop="@drawable/ic_bar_find_selector_2"
+                    android:drawableTop="@drawable/ic_bar_order_selector_2"
                     android:gravity="center_horizontal"
                     android:text="@string/main_3"
                     android:textColor="@color/main_rb_text_color"
@@ -85,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:button="@null"
-                    android:drawableTop="@drawable/ic_bar_my_selector_2"
+                    android:drawableTop="@drawable/ic_bar_find_selector_2"
                     android:gravity="center_horizontal"
                     android:text="@string/main_4"
                     android:textColor="@color/main_rb_text_color"
@@ -103,6 +102,10 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
 
+                <TextView
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
                 <RelativeLayout
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="match_parent"
@@ -123,10 +126,6 @@
                         android:visibility="gone" />
                 </RelativeLayout>
 
-                <TextView
-                    android:layout_width="@dimen/dimen_0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
 
                 <TextView
                     android:layout_width="@dimen/dimen_0dp"

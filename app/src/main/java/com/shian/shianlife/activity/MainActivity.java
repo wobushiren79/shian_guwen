@@ -32,6 +32,7 @@ import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.base.SaBaseApplication;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.local.LocationService;
+import com.shian.shianlife.common.utils.PicassoUD;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
@@ -41,6 +42,8 @@ import com.shian.shianlife.fragment.HomeFragment;
 import com.shian.shianlife.fragment.NewHomeFragment;
 import com.shian.shianlife.fragment.NewUserCenterFragment;
 import com.shian.shianlife.fragment.OrderFragment;
+import com.shian.shianlife.fragment.StoreFragment;
+import com.shian.shianlife.fragment.TheOrderFragment;
 import com.shian.shianlife.fragment.UserCenterFragment;
 import com.shian.shianlife.mapapi.CustomDialog;
 import com.shian.shianlife.mvp.userinfo.presenter.IUserInfoPresenter;
@@ -86,9 +89,11 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     //    private HomeFragment homeFragment;
     private NewHomeFragment homeFragment;
     private FindFragment findFragment;
-    private OrderFragment orderFragment;
+    private StoreFragment storeFragment;
+//    private OrderFragment orderFragment;
+    private TheOrderFragment theOrderFragment;
     //    private UserCenterFragment userFragment;
-    private NewUserCenterFragment userFragment;
+//    private NewUserCenterFragment userFragment;
     private CemeteryFragment cemeteryFragment;//新增公墓服务界面
 
     List<RadioButton> listRB = new ArrayList<>();
@@ -262,33 +267,36 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 transcation.replace(R.id.fl_main, homeFragment);
                 break;
             case R.id.rb_main_2:
-                if (loginType == 0) {
-                    //普通账号
-                    if (orderFragment == null) {
-                        orderFragment = new OrderFragment();
-                        orderFragment.setCallBack(this);
-                    }
-                    transcation.replace(R.id.fl_main, orderFragment);
-                } else if (loginType == 1) {
-                    //公墓账号
-                    if (cemeteryFragment == null) {
-                        cemeteryFragment = new CemeteryFragment();
-                    }
-                    transcation.replace(R.id.fl_main, cemeteryFragment);
+                if (storeFragment == null) {
+                    storeFragment = new StoreFragment();
                 }
-
+                transcation.replace(R.id.fl_main, storeFragment);
                 break;
             case R.id.rb_main_3:
+//                if (loginType == 0) {
+//                    //普通账号
+//                    if (orderFragment == null) {
+//                        orderFragment = new OrderFragment();
+//                        orderFragment.setCallBack(this);
+//                    }
+//                    transcation.replace(R.id.fl_main, orderFragment);
+//                } else if (loginType == 1) {
+//                    //公墓账号
+//                    if (cemeteryFragment == null) {
+//                        cemeteryFragment = new CemeteryFragment();
+//                    }
+//                    transcation.replace(R.id.fl_main, cemeteryFragment);
+//                }
+                if (theOrderFragment == null) {
+                    theOrderFragment = new TheOrderFragment();
+                }
+                transcation.replace(R.id.fl_main, theOrderFragment);
+                break;
+            case R.id.rb_main_4:
                 if (findFragment == null) {
                     findFragment = new FindFragment();
                 }
                 transcation.replace(R.id.fl_main, findFragment);
-                break;
-            case R.id.rb_main_4:
-                if (userFragment == null) {
-                    userFragment = new NewUserCenterFragment();
-                }
-                transcation.replace(R.id.fl_main, userFragment);
                 break;
 
             default:
@@ -529,33 +537,33 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                     tvMsgNumber.setText(AppContansts.MsgNumberTotal + "");
                 }
                 ShortcutBadger.applyCount(MainActivity.this, AppContansts.MsgNumberTotal);
-                if (orderFragment != null) {
-                    List<TabPageIndicator.TabView> listTabView = orderFragment.indicator.getListTabView();
-                    int cornerSize = MainActivity.this.getResources().getDimensionPixelSize(R.dimen.dimen_30dp);
-                    for (TabPageIndicator.TabView tabview : listTabView) {
-                        String titel = tabview.getText().toString();
-                        switch (titel) {
-                            case "洽谈":
-                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getTalk(), cornerSize);
-                                break;
-                            case "待服务":
-                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getService(), cornerSize);
-                                break;
-                            case "服务派单中":
-                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAssignment(), cornerSize);
-                                break;
-                            case "待评审":
-                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAuditing(), cornerSize);
-                                break;
-                            case "待收款":
-                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getUnpaid(), cornerSize);
-                                break;
-                            case "服务结束":
-//                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getEndService());
-                                break;
-                        }
-                    }
-                }
+//                if (orderFragment != null) {
+//                    List<TabPageIndicator.TabView> listTabView = orderFragment.indicator.getListTabView();
+//                    int cornerSize = MainActivity.this.getResources().getDimensionPixelSize(R.dimen.dimen_30dp);
+//                    for (TabPageIndicator.TabView tabview : listTabView) {
+//                        String titel = tabview.getText().toString();
+//                        switch (titel) {
+//                            case "洽谈":
+//                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getTalk(), cornerSize);
+//                                break;
+//                            case "待服务":
+//                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getService(), cornerSize);
+//                                break;
+//                            case "服务派单中":
+//                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAssignment(), cornerSize);
+//                                break;
+//                            case "待评审":
+//                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAuditing(), cornerSize);
+//                                break;
+//                            case "待收款":
+//                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getUnpaid(), cornerSize);
+//                                break;
+//                            case "服务结束":
+////                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getEndService());
+//                                break;
+//                        }
+//                    }
+//                }
             }
 
             @Override
@@ -573,29 +581,38 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 
     @Override
     public void ChangeHeadImage(String imageUrl) {
-        if (mainDrawerLayout != null) {
+        if (mainDrawerLayout != null)
             mainDrawerLayout.changeHeadImg(imageUrl);
-        }
+        if (ivHeadTitle != null)
+            PicassoUD.loadImage(this, imageUrl, ivHeadTitle);
     }
 
     @Override
     public void ChangeName(String name) {
-        if (mainDrawerLayout != null) {
+        if (mainDrawerLayout != null)
             mainDrawerLayout.changeName(name);
-        }
+        if (homeFragment != null)
+            homeFragment.changeUserInfoName(name);
     }
 
     @Override
     public void ChangePhone(String phone) {
-        if (mainDrawerLayout != null) {
+        if (mainDrawerLayout != null)
             mainDrawerLayout.changePhone(phone);
-        }
+
     }
 
     @Override
     public void ChangePoint(String point) {
-        if (mainDrawerLayout != null) {
+        if (mainDrawerLayout != null)
             mainDrawerLayout.changePoint(point);
-        }
+        if (homeFragment != null)
+            homeFragment.changeUserInfoPoint(point);
+    }
+
+    @Override
+    public void ChangeOrderNum(String num) {
+        if (homeFragment != null)
+            homeFragment.changeUserInfoOrderNum(num);
     }
 }

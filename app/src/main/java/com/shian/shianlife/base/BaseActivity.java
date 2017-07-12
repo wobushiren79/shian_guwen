@@ -50,6 +50,7 @@ public class BaseActivity extends FragmentActivity {
 
     protected View v;
     protected MainDrawerLayout mainDrawerLayout;
+    protected ImageView ivHeadTitle;
     protected Context mContext = this;
     private PushReciver mPushReciver;
     protected boolean LOGFLAG = SaBaseApplication.LOGFLAG;
@@ -136,7 +137,7 @@ public class BaseActivity extends FragmentActivity {
 //        TextView tvHeadLeft = (TextView) findViewById(R.id.tv_head_left);
         TextView tvHeadTitle = (TextView) findViewById(R.id.tv_head_title);
         TextView back = (TextView) findViewById(R.id.back);
-        ImageView ivHeadTitle = (ImageView) findViewById(R.id.iv_head_title);
+        ivHeadTitle = (ImageView) findViewById(R.id.iv_head_title);
         TextView tvHeadLocation = (TextView) findViewById(R.id.title_location);
 //        ImageView logo= (ImageView) findViewById(R.id.logo);
         View tvHeadRight = findViewById(R.id.tv_head_right);
@@ -151,6 +152,7 @@ public class BaseActivity extends FragmentActivity {
             tvHeadTitle.setText(title);
             tvHeadTitle.setBackgroundColor(getResources().getColor(
                     R.color.transparent));
+
 //            Drawable drawable = getResources().getDrawable(
 //                    R.drawable.ic_back_default);
 //            // / 这一步必须要做,否则不会显示.
@@ -175,8 +177,20 @@ public class BaseActivity extends FragmentActivity {
         } else {
             back.setVisibility(View.GONE);
 //            logo.setVisibility(View.VISIBLE);
-            ivHeadTitle.setVisibility(View.GONE);
+            ivHeadTitle.setVisibility(View.VISIBLE);
             tvHeadTitle.setVisibility(View.GONE);
+            ivHeadTitle.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (drawerLayout != null && mainDrawerLayout != null) {
+                        if (drawerLayout.isDrawerOpen(mainDrawerLayout)) {
+                            drawerLayout.closeDrawers();
+                        } else {
+                            drawerLayout.openDrawer(mainDrawerLayout);
+                        }
+                    }
+                }
+            });
         }
         tvHeadRight.setOnClickListener(new OnClickListener() {
 

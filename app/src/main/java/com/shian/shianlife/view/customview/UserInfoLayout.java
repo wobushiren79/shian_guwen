@@ -33,11 +33,18 @@ public class UserInfoLayout extends LinearLayout {
 
     LinearLayout mLLSign;
 
-    UserInfoPointLayout mUserInfoPointLayoutIntegral;
-    UserInfoPointLayout mUserInfoPointLayoutMoney;
-    UserInfoPointLayout mUserInfoPointLayoutOrder;
+//    UserInfoPointLayout mUserInfoPointLayoutIntegral;
+//    UserInfoPointLayout mUserInfoPointLayoutMoney;
+//    UserInfoPointLayout mUserInfoPointLayoutOrder;
 
-    private HrUserInfo mHrUserInfo;
+    TextView tvMoney;
+    TextView tvIntegral;
+    TextView tvOrderNum;
+
+    LinearLayout llMoney;
+    LinearLayout llIntegral;
+    LinearLayout llOrderNum;
+
 
     public UserInfoLayout(Context context) {
         this(context, null);
@@ -47,7 +54,6 @@ public class UserInfoLayout extends LinearLayout {
         super(context, attrs);
         view = View.inflate(context, R.layout.view_userinfo_layout, this);
         initView();
-        getUserInfo();
     }
 
     private void initView() {
@@ -59,17 +65,26 @@ public class UserInfoLayout extends LinearLayout {
         mIVSignIcon = (ImageView) view.findViewById(R.id.iv_sign_icon);
         mLLSign = (LinearLayout) view.findViewById(R.id.ll_sign);
 
-        mUserInfoPointLayoutIntegral = (UserInfoPointLayout) view.findViewById(R.id.pointlayout_integral);
-        mUserInfoPointLayoutMoney = (UserInfoPointLayout) view.findViewById(R.id.pointlayout_money);
-        mUserInfoPointLayoutOrder = (UserInfoPointLayout) view.findViewById(R.id.pointlayout_order);
+        tvMoney = (TextView) view.findViewById(R.id.tv_money);
+        tvIntegral = (TextView) view.findViewById(R.id.tv_integral);
+        tvOrderNum = (TextView) view.findViewById(R.id.tv_order_num);
 
-        mUserInfoPointLayoutIntegral.initLayout(R.drawable.zhy_userinfo_integral, "积分", "0");
-        mUserInfoPointLayoutMoney.initLayout(R.drawable.zhy_userinfo_money, "钱包", "0");
-        mUserInfoPointLayoutOrder.initLayout(R.drawable.zhy_userinfo_order, "服务单", "0");
-
-        mUserInfoPointLayoutIntegral.setOnClickListener(onClickListener);
-        mUserInfoPointLayoutMoney.setOnClickListener(onClickListener);
-
+        llMoney = (LinearLayout) view.findViewById(R.id.ll_money);
+        llIntegral = (LinearLayout) view.findViewById(R.id.ll_integral);
+        llOrderNum = (LinearLayout) view.findViewById(R.id.ll_order_num);
+//        mUserInfoPointLayoutIntegral = (UserInfoPointLayout) view.findViewById(R.id.pointlayout_integral);
+//        mUserInfoPointLayoutMoney = (UserInfoPointLayout) view.findViewById(R.id.pointlayout_money);
+//        mUserInfoPointLayoutOrder = (UserInfoPointLayout) view.findViewById(R.id.pointlayout_order);
+//
+//        mUserInfoPointLayoutIntegral.initLayout(R.drawable.zhy_userinfo_integral, "积分", "0");
+//        mUserInfoPointLayoutMoney.initLayout(R.drawable.zhy_userinfo_money, "钱包", "0");
+//        mUserInfoPointLayoutOrder.initLayout(R.drawable.zhy_userinfo_order, "服务单", "0");
+//
+//        mUserInfoPointLayoutIntegral.setOnClickListener(onClickListener);
+//        mUserInfoPointLayoutMoney.setOnClickListener(onClickListener);
+        mLLSign.setOnClickListener(onClickListener);
+        llMoney.setOnClickListener(onClickListener);
+        llIntegral.setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -77,11 +92,16 @@ public class UserInfoLayout extends LinearLayout {
         public void onClick(View v) {
             if (v == mLLSign) {
                 sign();
-            } else if (v == mUserInfoPointLayoutIntegral) {
-                integralActivity();
-            } else if (v == mUserInfoPointLayoutMoney) {
+            } else if (v == llMoney) {
                 moneyActivity();
+            } else if (v == llIntegral) {
+                integralActivity();
             }
+//            else if (v == mUserInfoPointLayoutIntegral) {
+//                integralActivity();
+//            } else if (v == mUserInfoPointLayoutMoney) {
+//                moneyActivity();
+//            }
         }
     };
 
@@ -109,37 +129,31 @@ public class UserInfoLayout extends LinearLayout {
         mTVSignName.setTextColor(getResources().getColor(R.color.zhy_text_color_5));
     }
 
+    /**
+     * 更改名字
+     *
+     * @param name
+     */
+    public void changeName(String name) {
+        mTVName.setText(name);
+    }
 
     /**
-     * 获取用户信息
+     * 改变分数
+     *
+     * @param point
      */
-    private void getUserInfo() {
-        MHttpManagerFactory.getAccountManager().getUserInfo(getContext(), new HttpResponseHandler<HrUserInfo>() {
-            @Override
-            public void onStart() {
-
-            }
-
-            @Override
-            public void onSuccess(final HrUserInfo result) {
-                mHrUserInfo = result;
-                PicassoUD.loadImage(getContext(), AppContansts.OSSURL + result.getHeadImg(), mIVUserPic);
-                mTVName.setText(result.getName());
-                mTVStatus.setText("");
-                for (int i = 0; i < result.getRoles().size(); i++) {
-                    mTVStatus.append(result.getRoles().get(i).getName() + " \n");
-                }
-                mTVScore.setText(result.getAvgSatis() + "");
-                mUserInfoPointLayoutOrder.setPoint(result.getServiceSuccessSum() + "");
-                mLLSign.setOnClickListener(onClickListener);
-            }
-
-            @Override
-            public void onError(String message) {
-
-            }
-        });
+    public void changePoint(String point) {
+        mTVStatus.setText("评分：" + point);
     }
 
 
+    /**
+     * 改变订单数量
+     *
+     * @param orderNum
+     */
+    public void changeOrderNum(String orderNum) {
+        tvOrderNum.setText(orderNum);
+    }
 }
