@@ -301,6 +301,7 @@ public class CemeteryBuildView extends BaseOrderView {
                         getContext().startActivity(intent);
                     }
                 });
+                tvCar.setVisibility(VISIBLE);
             } else {
                 tvCar.setVisibility(GONE);
             }
@@ -316,6 +317,7 @@ public class CemeteryBuildView extends BaseOrderView {
                     getContext().startActivity(intent);
                 }
             });
+            tvCar.setVisibility(VISIBLE);
         }
     }
 
