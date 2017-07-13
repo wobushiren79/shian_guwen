@@ -17,7 +17,10 @@ import android.widget.TextView;
 import com.shian.shianlife.R;
 import com.shian.shianlife.adapter.base.BaseRCAdapter;
 import com.shian.shianlife.adapter.base.BaseViewHolder;
+import com.shian.shianlife.common.utils.AnimUtils;
 import com.shian.shianlife.mvp.order.bean.OrderShowResultBean;
+
+import static com.shian.shianlife.common.utils.Utils.setClickZoomEffect;
 
 
 /**
@@ -48,68 +51,10 @@ public class OrderShowListAdapter extends BaseRCAdapter<OrderShowResultBean.Item
         llContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                setClickZoomEffect(v);
+                AnimUtils.startScaleToSelf(v, 100,1f,0.95f,1f,0.95f);
             }
         });
     }
 
-    /**
-     * 设置点击放大效果。
-     */
-    public static void setClickZoomEffect(final View view) {
-        if (view != null) {
-            view.setOnTouchListener(new View.OnTouchListener() {
-                boolean cancelled;
-                Rect rect = new Rect();
 
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    switch (event.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            scaleTo(v, 0.8f);
-                            break;
-                        case MotionEvent.ACTION_MOVE:
-                            if (rect.isEmpty()) {
-                                v.getDrawingRect(rect);
-                            }
-                            if (!rect.contains((int) event.getX(), (int) event.getY())) {
-                                scaleTo(v, 1);
-                                cancelled = true;
-                            }
-                            break;
-                        case MotionEvent.ACTION_UP:
-                        case MotionEvent.ACTION_CANCEL: {
-                            if (!cancelled) {
-                                scaleTo(v, 1);
-                            } else {
-                                cancelled = false;
-                            }
-                            break;
-                        }
-                    }
-                    return false;
-                }
-            });
-        }
-    }
-
-    /**
-     * 对view进行缩放。
-     */
-    @SuppressLint("NewApi")
-    public static void scaleTo(View v, float scale) {
-        if (Build.VERSION.SDK_INT >= 11) {
-            v.setScaleX(scale);
-            v.setScaleY(scale);
-        } else {
-            float oldScale = 1;
-            if (v.getTag(Integer.MIN_VALUE) != null) {
-                oldScale = (Float) v.getTag(Integer.MIN_VALUE);
-            }
-            final ViewGroup.LayoutParams params = v.getLayoutParams();
-            params.width = (int) ((params.width / oldScale) * scale);
-            params.height = (int) ((params.height / oldScale) * scale);
-            v.setTag(Integer.MIN_VALUE, scale);
-        }
-    }
 }

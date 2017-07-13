@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -15,6 +16,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -24,8 +26,10 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -314,5 +318,66 @@ public class Utils {
         final Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
         DrawableCompat.setTintList(wrappedDrawable, colors);
         return wrappedDrawable;
+    }
+
+
+    /**
+     * 设置点击放大效果。
+     */
+    public static void setClickZoomEffect(final View view) {
+        if (view != null) {
+            view.setOnTouchListener(new View.OnTouchListener() {
+                boolean cancelled;
+                Rect rect = new Rect();
+
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            scaleTo(v, 0.9f);
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            if (rect.isEmpty()) {
+                                v.getDrawingRect(rect);
+                            }
+                            if (!rect.contains((int) event.getX(), (int) event.getY())) {
+                                scaleTo(v, 1);
+                                cancelled = true;
+                            }
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL: {
+                            if (!cancelled) {
+                                scaleTo(v, 1);
+                            } else {
+                                cancelled = false;
+                            }
+                            break;
+                        }
+                    }
+                    return false;
+                }
+            });
+        }
+    }
+
+    /**
+     * 对view进行缩放。
+     */
+    @SuppressLint("NewApi")
+    public static void scaleTo(View v, float scale) {
+        if (Build.VERSION.SDK_INT >= 11) {
+            v.setScaleX(scale);
+            v.setScaleY(scale);
+        } else {
+            float oldScale = 1;
+            if (v.getTag(Integer.MIN_VALUE) != null) {
+                oldScale = (Float) v.getTag(Integer.MIN_VALUE);
+            }
+            final ViewGroup.LayoutParams params = v.getLayoutParams();
+            params.width = (int) ((params.width / oldScale) * scale);
+            params.height = (int) ((params.height / oldScale) * scale);
+            v.setTag(Integer.MIN_VALUE, scale);
+        }
     }
 }
