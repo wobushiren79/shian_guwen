@@ -16,6 +16,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.order.FuneralServiceActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
@@ -137,7 +138,7 @@ public class NewOrderActivity extends BaseActivity {
                                         in.putExtra("consultId", result.getConsultId());
                                         startActivity(in);
                                     }
-                                    OrderFragment.C_bOrder_isRefresh = true;
+                                    FuneralServiceActivity.C_bOrder_isRefresh = true;
                                     finish();
                                 }
                             }

@@ -167,13 +167,13 @@ public class BaseActivity extends FragmentActivity {
 //                    finish();
 //                }
 //            });
-
             back.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     finish();
                 }
             });
+            setMessageVisible(View.GONE);
         } else {
             back.setVisibility(View.GONE);
 //            logo.setVisibility(View.VISIBLE);

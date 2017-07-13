@@ -37,6 +37,7 @@ import com.shian.shianlife.activity.RefundActivity;
 import com.shian.shianlife.activity.map.NewRoutePlanActivity;
 import com.shian.shianlife.activity.SaveTalkFailActivity;
 import com.shian.shianlife.activity.map.NewRoutePlanOtherActivity;
+import com.shian.shianlife.activity.order.FuneralServiceActivity;
 import com.shian.shianlife.activity.updata.ContractDataActivity;
 import com.shian.shianlife.activity.updata.JBRDataActivity;
 import com.shian.shianlife.activity.updata.WSZDataActivity;
@@ -158,11 +159,11 @@ public class QTView extends BaseOrderView {
         mListView.setAdapter(adapter);
         mSwipeRefreshHelper = new SwipeRefreshHelper(mSryt);
         mSwipeRefreshHelper.setOnSwipeRefreshListener(new OnSwipeRefreshListener() {
-                    @Override
-                    public void onfresh() {
-                        loadData();
-                    }
-                });
+            @Override
+            public void onfresh() {
+                loadData();
+            }
+        });
 
         mSwipeRefreshHelper.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
@@ -718,7 +719,6 @@ public class QTView extends BaseOrderView {
          * 转待服务
          */
         private void shift() {
-
             TipsDialog mDialog = new TipsDialog(getContext());
             mDialog.setTitle("转待服务后治丧指导可进行下一步的客户服务，请确认是否转待服务。");
             mDialog.setBottomButton("确认", new DialogInterface.OnClickListener() {
@@ -737,7 +737,8 @@ public class QTView extends BaseOrderView {
 
                                 @Override
                                 public void onSuccess(Object result) {
-                                    orderFragmentCallBack.changeMsgNum();
+                                    if (FuneralServiceActivity.orderFragmentCallBack != null)
+                                        FuneralServiceActivity.orderFragmentCallBack.changeMsgNum();
                                     refresh();
                                 }
 

@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.baidu.mapapi.map.Text;
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.order.FuneralServiceActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -345,7 +346,7 @@ public class ContractDataActivity extends BaseActivity {
                                     public void onSuccess(Object result) {
                                         // TODO Auto-generated method stub
                                         ToastUtils.show(ContractDataActivity.this, "上传成功");
-                                        OrderFragment.C_bOrder_isRefresh = true;
+                                        FuneralServiceActivity.C_bOrder_isRefresh = true;
                                         finish();
 
                                     }

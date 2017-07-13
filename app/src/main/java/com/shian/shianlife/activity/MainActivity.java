@@ -67,7 +67,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
-public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, OrderFragment.OrderFragmentCallBack, IUserInfoView {
+public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, IUserInfoView {
 
     int loginType;//0殡仪 1.公墓
     @InjectView(R.id.fl_main)
@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     private NewHomeFragment homeFragment;
     private FindFragment findFragment;
     private StoreFragment storeFragment;
-//    private OrderFragment orderFragment;
+    private OrderFragment orderFragment;
     private TheOrderFragment theOrderFragment;
     //    private UserCenterFragment userFragment;
 //    private NewUserCenterFragment userFragment;
@@ -305,11 +305,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         transcation.commit();
     }
 
-    @Override
-    public void changeMsgNum() {
-        getMsgNumber();
-    }
-
 
     class RBCheckListener implements OnCheckedChangeListener {
 
@@ -507,6 +502,10 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         }
     }
 
+//    @Override
+//    public void changeMsgNum() {
+//        getMsgNumber();
+//    }
 
     /**
      * 获取未处理订单消息
@@ -591,8 +590,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     public void ChangeName(String name) {
         if (mainDrawerLayout != null)
             mainDrawerLayout.changeName(name);
-        if (homeFragment != null)
-            homeFragment.changeUserInfoName(name);
     }
 
     @Override
@@ -606,13 +603,10 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     public void ChangePoint(String point) {
         if (mainDrawerLayout != null)
             mainDrawerLayout.changePoint(point);
-        if (homeFragment != null)
-            homeFragment.changeUserInfoPoint(point);
     }
 
     @Override
     public void ChangeOrderNum(String num) {
-        if (homeFragment != null)
-            homeFragment.changeUserInfoOrderNum(num);
+
     }
 }

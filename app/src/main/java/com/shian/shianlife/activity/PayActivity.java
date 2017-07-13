@@ -29,6 +29,7 @@ import butterknife.OnClick;
 
 import com.bumptech.glide.util.Util;
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.order.FuneralServiceActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -419,7 +420,7 @@ public class PayActivity extends BaseActivity {
                     public void onSuccess(Object result) {
                         // TODO Auto-generated method stub
                         ToastUtils.show(getBaseContext(), "提交成功");
-                        OrderFragment.C_bOrder_isRefresh = true;
+                        FuneralServiceActivity.C_bOrder_isRefresh = true;
                         finish();
                     }
 

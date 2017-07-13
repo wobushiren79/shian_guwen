@@ -3,6 +3,7 @@ package com.shian.shianlife.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build;
 import android.view.MotionEvent;
@@ -40,7 +41,7 @@ public class OrderShowListAdapter extends BaseRCAdapter<OrderShowResultBean.Item
 
 
     @Override
-    public void convert(BaseViewHolder holder, OrderShowResultBean.Item orderShowItemBean, int index) {
+    public void convert(BaseViewHolder holder, final OrderShowResultBean.Item orderShowItemBean, int index) {
         TextView tvTitle = holder.getView(R.id.tv_title);
         ImageView ivIcon = holder.getView(R.id.iv_icon);
         LinearLayout llContent = holder.getView(R.id.ll_content);
@@ -51,7 +52,9 @@ public class OrderShowListAdapter extends BaseRCAdapter<OrderShowResultBean.Item
         llContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnimUtils.startScaleToSelf(v, 100,1f,0.95f,1f,0.95f);
+                AnimUtils.startScaleToSelf(v, 100, 1f, 0.95f, 1f, 0.95f);
+                Intent intent = new Intent(mContext, orderShowItemBean.getIntentClass());
+                mContext.startActivity(intent);
             }
         });
     }

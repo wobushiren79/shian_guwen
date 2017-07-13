@@ -14,6 +14,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.order.FuneralServiceActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.view.TipsDialog;
@@ -386,7 +387,7 @@ public class EditOrderActivity extends BaseActivity {
 
                         @Override
                         public void onSuccess(HrOderId result) {
-                            OrderFragment.C_bOrder_isRefresh = true;
+                            FuneralServiceActivity.C_bOrder_isRefresh = true;
                             if (pgzx == 1) {
                                 sendBroadcast(new Intent(PgzxActivity.PGZX_ACTION));
                             }
@@ -418,7 +419,7 @@ public class EditOrderActivity extends BaseActivity {
 
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            OrderFragment.C_bOrder_isRefresh = true;
+                            FuneralServiceActivity.C_bOrder_isRefresh = true;
                             OrderManagerImpl.getInstance().createOrder(EditOrderActivity.this, params,
                                     new HttpResponseHandler<HrOderId>() {
 

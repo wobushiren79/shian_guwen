@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.order.FuneralServiceActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.view.TipsDialog;
@@ -182,7 +183,7 @@ public class SaveTalkFailActivity extends BaseActivity {
                                                         @Override
                                                         public void onSuccess(Object result) {
                                                             Toast.makeText(SaveTalkFailActivity.this, "提交成功，结束洽谈", Toast.LENGTH_LONG).show();
-                                                            OrderFragment.C_bOrder_isRefresh = true;
+                                                            FuneralServiceActivity.C_bOrder_isRefresh = true;
                                                             finish();
                                                         }
 
@@ -193,7 +194,7 @@ public class SaveTalkFailActivity extends BaseActivity {
                                                     });
                                         } else {
                                             Toast.makeText(SaveTalkFailActivity.this, "提交成功，结束洽谈", Toast.LENGTH_LONG).show();
-                                            OrderFragment.C_bOrder_isRefresh = true;
+                                            FuneralServiceActivity.C_bOrder_isRefresh = true;
                                             finish();
                                         }
                                     }

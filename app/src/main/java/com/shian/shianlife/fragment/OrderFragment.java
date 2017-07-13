@@ -45,12 +45,10 @@ public class OrderFragment extends BaseFragment {
     @InjectView(R.id.pager)
     ViewPager viewPager;
     private View v;
-    private HrLoginResult mLoginResult;
-
     private String[] titles = {"洽谈", "待服务", "服务派单中", "待审核", "待付款", "服务结束"};
     private List<String> arrTitles = new ArrayList<String>();
 
-    public static boolean C_bOrder_isRefresh;
+    public static boolean C_bOrder_isRefresh_Change;
     public static OrderFragmentCallBack orderFragmentCallBack;
 
     @Override
@@ -112,7 +110,7 @@ public class OrderFragment extends BaseFragment {
     public void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
-        if (views.size() > 0 && C_bOrder_isRefresh) {
+        if (views.size() > 0 && C_bOrder_isRefresh_Change) {
             orderFragmentCallBack.changeMsgNum();
             ((BaseOrderView) views.get(mIndex)).refresh();
         }
@@ -121,7 +119,7 @@ public class OrderFragment extends BaseFragment {
     @Override
     public void onPause() {
         super.onPause();
-        C_bOrder_isRefresh = false;
+        C_bOrder_isRefresh_Change = false;
     }
 
     private void initStates() {

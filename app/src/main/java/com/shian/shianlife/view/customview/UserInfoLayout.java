@@ -13,6 +13,9 @@ import com.shian.shianlife.activity.UserInfoIntegralActivity;
 import com.shian.shianlife.activity.UserInfoMoneyActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.PicassoUD;
+import com.shian.shianlife.mvp.userinfo.presenter.IUserInfoPresenter;
+import com.shian.shianlife.mvp.userinfo.presenter.impl.UserInfoPresenterImpl;
+import com.shian.shianlife.mvp.userinfo.view.IUserInfoView;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.result.HrUserInfo;
@@ -21,7 +24,7 @@ import com.shian.shianlife.provide.result.HrUserInfo;
  * Created by Administrator
  */
 
-public class UserInfoLayout extends LinearLayout {
+public class UserInfoLayout extends LinearLayout implements IUserInfoView {
     View view;
     TextView mTVName;
     TextView mTVStatus;
@@ -45,6 +48,7 @@ public class UserInfoLayout extends LinearLayout {
     LinearLayout llIntegral;
     LinearLayout llOrderNum;
 
+    private IUserInfoPresenter userInfoPresenter;
 
     public UserInfoLayout(Context context) {
         this(context, null);
@@ -85,6 +89,9 @@ public class UserInfoLayout extends LinearLayout {
         mLLSign.setOnClickListener(onClickListener);
         llMoney.setOnClickListener(onClickListener);
         llIntegral.setOnClickListener(onClickListener);
+
+        userInfoPresenter = new UserInfoPresenterImpl(this);
+        userInfoPresenter.getUserInfoData();
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -134,7 +141,7 @@ public class UserInfoLayout extends LinearLayout {
      *
      * @param name
      */
-    public void changeName(String name) {
+    public void setName(String name) {
         mTVName.setText(name);
     }
 
@@ -143,7 +150,7 @@ public class UserInfoLayout extends LinearLayout {
      *
      * @param point
      */
-    public void changePoint(String point) {
+    public void setPoint(String point) {
         mTVStatus.setText("评分：" + point);
     }
 
@@ -153,7 +160,33 @@ public class UserInfoLayout extends LinearLayout {
      *
      * @param orderNum
      */
-    public void changeOrderNum(String orderNum) {
+    public void setOrderNum(String orderNum) {
         tvOrderNum.setText(orderNum);
+    }
+
+
+    @Override
+    public void ChangeHeadImage(String imageUrl) {
+
+    }
+
+    @Override
+    public void ChangeName(String name) {
+        setName(name);
+    }
+
+    @Override
+    public void ChangePhone(String phone) {
+
+    }
+
+    @Override
+    public void ChangePoint(String point) {
+        setPoint(point);
+    }
+
+    @Override
+    public void ChangeOrderNum(String num) {
+        setOrderNum(num);
     }
 }

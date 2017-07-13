@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.order.FuneralServiceActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.TransitionDate;
@@ -264,7 +265,7 @@ public class JBRDataActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        OrderFragment.C_bOrder_isRefresh = true;
+        FuneralServiceActivity.C_bOrder_isRefresh = true;
     }
 
 }

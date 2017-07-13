@@ -13,6 +13,8 @@ import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.base.BaseFragment;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.mvp.userinfo.presenter.IUserInfoPresenter;
+import com.shian.shianlife.mvp.userinfo.view.IUserInfoView;
 import com.shian.shianlife.view.customview.MainAPP;
 import com.shian.shianlife.view.customview.MainAdvertisementLayout;
 import com.shian.shianlife.view.customview.MainDynamic;
@@ -22,29 +24,13 @@ import com.shian.shianlife.view.customview.UserInfoLayout;
  * Created by Administrator
  */
 
-public class NewHomeFragment extends BaseFragment {
+public class NewHomeFragment extends BaseFragment  {
     View view;
 
     UserInfoLayout mUserInfoLayout;//用户资料布局
     MainAdvertisementLayout mMainAdvertisementLayout;//主页广告布局
     MainDynamic mMainDynamicLayout;//重要动态
     MainAPP mMainAPP;//我的APP
-
-
-    public void changeUserInfoName(String name) {
-        if (mUserInfoLayout != null)
-            mUserInfoLayout.changeName(name);
-    }
-
-    public void changeUserInfoOrderNum(String orderNum) {
-        if (mUserInfoLayout != null)
-            mUserInfoLayout.changeOrderNum(orderNum);
-    }
-
-    public void changeUserInfoPoint(String point) {
-        if (mUserInfoLayout != null)
-            mUserInfoLayout.changePoint(point);
-    }
 
 
     @Override
@@ -58,7 +44,6 @@ public class NewHomeFragment extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
     }
 
     private void initView() {
@@ -134,4 +119,5 @@ public class NewHomeFragment extends BaseFragment {
             mMainDynamicLayout.setVisibility(View.VISIBLE);
         }
     };
+
 }

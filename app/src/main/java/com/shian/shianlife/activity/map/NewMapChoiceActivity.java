@@ -23,6 +23,8 @@ import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.route.RoutePlanSearch;
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.order.CemeteryServiceActivity;
+import com.shian.shianlife.activity.order.FuneralServiceActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.fragment.CemeteryFragment;
@@ -127,8 +129,8 @@ public class NewMapChoiceActivity extends Activity implements BaiduMap.OnMapClic
             @Override
             public void onSuccess(Object result) {
                 ToastUtils.show(NewMapChoiceActivity.this, "修改地址成功");
-                OrderFragment.C_bOrder_isRefresh = true;
-                CemeteryFragment.C_bOrder_isRefresh = true;
+                FuneralServiceActivity.C_bOrder_isRefresh = true;
+                CemeteryServiceActivity.C_bOrder_isRefresh = true;
                 finish();
             }
 

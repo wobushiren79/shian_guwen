@@ -30,6 +30,7 @@ public class OrderShowModelImpl implements IOrderShowModel {
         OrderShowResultBean.Item item = new OrderShowResultBean.Item();
         item.setName(itemShowEnum.getName());
         item.setPicId(itemShowEnum.getItemPic());
+        item.setIntentClass(itemShowEnum.getIntentClass());
         return item;
     }
 }

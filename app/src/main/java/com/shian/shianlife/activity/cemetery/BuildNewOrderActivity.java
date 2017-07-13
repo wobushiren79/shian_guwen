@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.order.CemeteryServiceActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -228,7 +229,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
             @Override
             public void onSuccess(Object result) {
                 ToastUtils.show(BuildNewOrderActivity.this, "创建成功");
-                OrderFragment.C_bOrder_isRefresh = true;
+                CemeteryServiceActivity.C_bOrder_isRefresh = true;
                 finish();
             }
 

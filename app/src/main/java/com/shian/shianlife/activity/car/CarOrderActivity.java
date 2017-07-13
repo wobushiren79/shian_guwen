@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.order.CemeteryServiceActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.contanst.SelectDictCode;
@@ -174,7 +175,7 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onSuccess(Object result) {
                 ToastUtils.show(CarOrderActivity.this, "申请成功");
-                OrderFragment.C_bOrder_isRefresh = true;
+                CemeteryServiceActivity.C_bOrder_isRefresh = true;
                 finish();
             }
 

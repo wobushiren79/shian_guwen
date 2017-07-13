@@ -20,6 +20,15 @@ public class OrderShowResultBean {
     public static class Item {
         private String name;
         private int picId;
+        private Class<?> intentClass;
+
+        public Class<?> getIntentClass() {
+            return intentClass;
+        }
+
+        public void setIntentClass(Class<?> intentClass) {
+            this.intentClass = intentClass;
+        }
 
         public String getName() {
             return name;

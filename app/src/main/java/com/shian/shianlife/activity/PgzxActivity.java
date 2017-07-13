@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.order.FuneralServiceActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.PicassoUD;
@@ -825,7 +826,7 @@ public class PgzxActivity extends BaseActivity {
                                 // TODO Auto-generated method stub
                                 ToastUtils.show(PgzxActivity.this, "结束派单成功");
                                 finish();
-                                OrderFragment.C_bOrder_isRefresh = true;
+                                FuneralServiceActivity.C_bOrder_isRefresh = true;
                             }
 
                             @Override
