@@ -27,6 +27,7 @@
 
     <com.shian.shianlife.view.popupbutton.PopupButton
         android:id="@+id/popupbutton"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></com.shian.shianlife.view.popupbutton.PopupButton>
 </RelativeLayout>

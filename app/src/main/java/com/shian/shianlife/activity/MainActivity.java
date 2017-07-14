@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     private NewHomeFragment homeFragment;
     private FindFragment findFragment;
     private StoreFragment storeFragment;
-    private OrderFragment orderFragment;
+//    private OrderFragment orderFragment;
     private TheOrderFragment theOrderFragment;
     //    private UserCenterFragment userFragment;
 //    private NewUserCenterFragment userFragment;
