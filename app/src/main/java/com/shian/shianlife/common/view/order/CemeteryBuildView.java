@@ -73,8 +73,7 @@ public class CemeteryBuildView extends BaseOrderView {
         mListView = (ListView) view.findViewById(R.id.lv_swipe_listview);
         mPopupButton = (PopupButton) view.findViewById(R.id.popupbutton);
         mSryt.setColorSchemeColors(Color.BLUE);
-        adapter = new TArrayListAdapter<CemeteryOrderModel>(getContext());
-
+        adapter = new TArrayListAdapter<>(getContext());
         initPopupButton();
     }
 
@@ -89,7 +88,6 @@ public class CemeteryBuildView extends BaseOrderView {
                 loadData();
             }
         });
-
         mSwipeRefreshHelper.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void loadMore() {

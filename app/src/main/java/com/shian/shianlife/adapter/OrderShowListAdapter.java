@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -52,9 +53,23 @@ public class OrderShowListAdapter extends BaseRCAdapter<OrderShowResultBean.Item
         llContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnimUtils.startScaleToSelf(v, 100, 1f, 0.95f, 1f, 0.95f);
-                Intent intent = new Intent(mContext, orderShowItemBean.getIntentClass());
-                mContext.startActivity(intent);
+                AnimUtils.startScaleToSelf(v, 100, 1f, 0.95f, 1f, 0.95f, new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        Intent intent = new Intent(mContext, orderShowItemBean.getIntentClass());
+                        mContext.startActivity(intent);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
             }
         });
     }

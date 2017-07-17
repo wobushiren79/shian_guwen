@@ -714,7 +714,7 @@ public class MAccountManagerImpl implements MAccountManager {
     @Override
     public void saveCemeteryBuildData(Context context, HpSaveCemeteryBuildData params, HttpResponseHandler<Object> handler) {
         excutor.requestCemeteryPost(context, "marketing/bespeak/build/save", Object.class, params,
-                handler);
+                handler,true);
     }
 
     @Override
