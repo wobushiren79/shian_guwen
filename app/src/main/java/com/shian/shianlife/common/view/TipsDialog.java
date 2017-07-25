@@ -53,10 +53,14 @@ public class TipsDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_tips);
         ButterKnife.inject(this);
-        if(isBtn1V)
+        if (isBtn1V)
             tv_btn1.setVisibility(View.VISIBLE);
-        if(isBtn2V)
+        else
+            tv_btn1.setVisibility(View.GONE);
+        if (isBtn2V)
             tv_btn2.setVisibility(View.VISIBLE);
+        else
+            tv_btn2.setVisibility(View.GONE);
         tv_title.setText(title);
         tv_top.setText(top);
         tv_btn1.setText(btn1Text);
