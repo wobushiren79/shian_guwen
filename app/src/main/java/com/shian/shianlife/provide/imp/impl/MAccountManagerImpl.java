@@ -11,6 +11,7 @@ import com.shian.shianlife.provide.params.HpAcceptParams;
 import com.shian.shianlife.provide.params.HpAddConsultParams;
 import com.shian.shianlife.provide.params.HpAuditOrder;
 import com.shian.shianlife.provide.params.HpCarBuildOrder;
+import com.shian.shianlife.provide.params.HpCemeteryBeSpeakCancelParams;
 import com.shian.shianlife.provide.params.HpCemeteryIdParams;
 import com.shian.shianlife.provide.params.HpCemeteryStructureParams;
 import com.shian.shianlife.provide.params.HpCetemeryAcceptParams;
@@ -841,4 +842,11 @@ public class MAccountManagerImpl implements MAccountManager {
     public void getCarBuildData(Context context, HpCarBuildOrder params, HttpResponseHandler<HrGetCarDetails> handler) {
         excutor.requestCemeteryPost(context, "cars/apply/handle/info", HrGetCarDetails.class, params, handler, true);
     }
+
+    @Override
+    public void cancelCemeteryBeSpeak(Context context, HpCemeteryBeSpeakCancelParams params, HttpResponseHandler<Object> handler) {
+        excutor.requestCemeteryPost(context, "marketing/bespeak/build/cancel", Object.class, params, handler, true);
+    }
+
+
 }

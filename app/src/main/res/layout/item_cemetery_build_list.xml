@@ -239,6 +239,19 @@
                 android:text="申请用车"
                 android:textColor="@color/white"
                 android:textSize="@dimen/dimen_24dp" />
+
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="@dimen/dimen_132dp"
+                android:layout_height="@dimen/dimen_66dp"
+                android:layout_marginLeft="@dimen/dimen_24dp"
+                android:background="@drawable/zhy_button_state_5"
+                android:gravity="center"
+                android:text="申请取消"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_24dp"
+                android:visibility="gone" />
         </LinearLayout>
 
 

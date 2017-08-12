@@ -537,8 +537,10 @@ public class HttpRequestExecutor {
      */
     private <T> void onError(HttpResponseHandler<T> response, String error,
                              Context context) {
-        if (response != null && ((context instanceof Activity) && !((Activity) context)
-                .isFinishing()) && error != null) {
+        if (response != null
+//                && ((context instanceof Activity)
+//                  && !((Activity) context).isFinishing())
+                && error != null) {
             if (showToast(context, error)) {
                 response.onError(error);
             }

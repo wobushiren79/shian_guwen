@@ -72,7 +72,7 @@ public class Utils {
     public static void call(final View v, final String phone) {
         if (!TextUtils.isEmpty(phone)) {
             v.setVisibility(View.VISIBLE);
-            v.setOnClickListener(new OnClickListener() {
+                v.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View vv) {
                     // TODO Auto-generated method stub

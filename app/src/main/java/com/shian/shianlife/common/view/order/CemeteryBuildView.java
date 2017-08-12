@@ -1,11 +1,14 @@
 package com.shian.shianlife.common.view.order;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -25,15 +28,18 @@ import com.shian.shianlife.common.utils.TimeUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.utils.ViewGropMap;
+import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.CemeteryOrderManager;
 import com.shian.shianlife.provide.imp.impl.CemeteryOrderManagerImpl;
 import com.shian.shianlife.provide.imp.impl.OrderManagerImpl;
 import com.shian.shianlife.provide.model.CemeteryOrderModel;
 import com.shian.shianlife.provide.model.OrderListModel;
+import com.shian.shianlife.provide.params.HpCemeteryBeSpeakCancelParams;
 import com.shian.shianlife.provide.params.HpGetOrderListParams;
 import com.shian.shianlife.provide.result.HrGetCemeteryListData;
 import com.shian.shianlife.provide.result.HrGetOrderListResult;
+import com.shian.shianlife.thisenum.BespeakCancelStatusEnum;
 import com.shian.shianlife.thisenum.BuildOrderEnum;
 import com.shian.shianlife.thisenum.CemeteryBeSpeakStateEnum;
 import com.shian.shianlife.view.popupbutton.PopupButton;
@@ -154,7 +160,11 @@ public class CemeteryBuildView extends BaseOrderView {
             ImageView ivPhone = (ImageView) view.getView(R.id.iv_phone);
 
             TextView tv_car = (TextView) view.getView(R.id.tv_car);
+            TextView tv_cancel = (TextView) view.getView(R.id.tv_cancel);
+
             takeCar(tv_car, templateItem);
+            cancelBeSpeak(tv_cancel, templateItem);
+
             int orderState = templateItem.getBespeakStatus();
             if (orderState == CemeteryBeSpeakStateEnum.undistributed.getCode() ||
                     orderState == CemeteryBeSpeakStateEnum.unassigned.getCode() ||
@@ -282,6 +292,79 @@ public class CemeteryBuildView extends BaseOrderView {
             });
         }
     };
+
+    /**
+     * 取消咨询单
+     *
+     * @param tv_cancel
+     * @param orderModel
+     */
+    private void cancelBeSpeak(TextView tv_cancel, final CemeteryOrderModel orderModel) {
+        //取消订单--------------------------------------------------------------------------
+        if (orderModel.getBespeakStatus() == CemeteryBeSpeakStateEnum.undistributed.getCode() ||
+                orderModel.getBespeakStatus() == CemeteryBeSpeakStateEnum.unassigned.getCode()) {
+            if (orderModel.getCancelStatus() == BespeakCancelStatusEnum.UN_PROCESS.getCode()) {
+                tv_cancel.setText("申请取消");
+                tv_cancel.setTextColor(Color.WHITE);
+                tv_cancel.setBackgroundResource(R.drawable.zhy_button_state_5);
+                tv_cancel.setVisibility(VISIBLE);
+                tv_cancel.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final EditText editText = new EditText(getContext());
+                        editText.setHint("请填写取消原因");
+                        AlertDialog alertDialog = new AlertDialog.Builder(getContext())
+                                .setTitle("申请取消咨询单")
+                                .setView(editText)
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        HpCemeteryBeSpeakCancelParams params = new HpCemeteryBeSpeakCancelParams();
+                                        params.setBespeakId(orderModel.getBespeakId());
+                                        params.setBespeakStatus(orderModel.getBespeakStatus());
+                                        params.setCancelReason(editText.getText().toString());
+                                        MHttpManagerFactory.getAccountManager().cancelCemeteryBeSpeak(getContext(), params, new HttpResponseHandler<Object>() {
+                                            @Override
+                                            public void onStart() {
+
+                                            }
+
+                                            @Override
+                                            public void onSuccess(Object result) {
+                                                refresh();
+                                                ToastUtils.show(getContext(), "申请取消成功，请等待审核");
+                                            }
+
+                                            @Override
+                                            public void onError(String message) {
+                                                ToastUtils.show(getContext(), "申请取消失败");
+                                            }
+                                        });
+                                    }
+                                })
+                                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .create();
+                        alertDialog.show();
+                    }
+                });
+            }else{
+                tv_cancel.setVisibility(VISIBLE);
+                tv_cancel.setText("取消受理中");
+                tv_cancel.setTextColor(getResources().getColor(R.color.zhy_text_color_1));
+                tv_cancel.setBackgroundResource(R.drawable.zhy_button_state_2);
+                tv_cancel.setOnClickListener(null);
+            }
+
+        } else {
+            tv_cancel.setVisibility(GONE);
+        }
+        //取消订单--------------------------------------------------------------------------
+    }
 
 
     private void takeCar(TextView tvCar, final CemeteryOrderModel data) {

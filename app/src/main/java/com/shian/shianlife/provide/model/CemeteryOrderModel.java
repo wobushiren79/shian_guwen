@@ -23,6 +23,18 @@ public class CemeteryOrderModel implements Serializable{
     private String payOffTime;//date	完款日期
 
     private int isSentCar;//0未申请过派车 1申请过派车
+    /**
+     * 取消状态
+     */
+    private int cancelStatus;
+
+    public int getCancelStatus() {
+        return cancelStatus;
+    }
+
+    public void setCancelStatus(int cancelStatus) {
+        this.cancelStatus = cancelStatus;
+    }
 
     public int getIsSentCar() {
         return isSentCar;

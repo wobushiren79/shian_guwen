@@ -9,6 +9,7 @@ import com.shian.shianlife.provide.params.HpAcceptParams;
 import com.shian.shianlife.provide.params.HpAddConsultParams;
 import com.shian.shianlife.provide.params.HpAuditOrder;
 import com.shian.shianlife.provide.params.HpCarBuildOrder;
+import com.shian.shianlife.provide.params.HpCemeteryBeSpeakCancelParams;
 import com.shian.shianlife.provide.params.HpCemeteryIdParams;
 import com.shian.shianlife.provide.params.HpCemeteryStructureParams;
 import com.shian.shianlife.provide.params.HpCetemeryAcceptParams;
@@ -908,4 +909,10 @@ public interface MAccountManager extends HttpManager {
      * @param handler
      */
     void getCarBuildData(Context context, HpCarBuildOrder params, HttpResponseHandler<HrGetCarDetails> handler);
+
+
+    /**
+     * 取消公墓咨询单
+     */
+    void cancelCemeteryBeSpeak(Context context, HpCemeteryBeSpeakCancelParams params, HttpResponseHandler<Object> handler);
 }

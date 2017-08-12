@@ -21,7 +21,6 @@ import butterknife.ButterKnife;
 /**
  * Created by zm.
  */
-
 public class TheOrderFragment extends BaseFragment implements IOrderShowView {
 
     RecyclerView rcContent;
