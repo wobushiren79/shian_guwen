@@ -11,7 +11,7 @@ public enum APPEnum {
     ALL("全部应用", R.drawable.zhy_myapp_allapp, "all"),//其他APP
     ZSPROJECT("治丧产品", R.drawable.zhy_myapp_zsproject, "http://m.e-funeral.cn/Plan/index.html"),//治丧产品
     CEMETERY("公墓", R.drawable.zhy_myapp_cemetery, "http://m.e-funeral.cn/Goods/index.html"),//公墓
-    BEFORECONTRACT("培训", R.drawable.zhy_myapp_beforecontract, ""),//生前契约
+    BEFORECONTRACT("培训", R.drawable.zhy_myapp_beforecontract, "http://mp.weixin.qq.com/mp/homepage?__biz=MzIwNjgyNTcxNQ==&hid=7&sn=4ff0d15183c5cb85b35223d44bfea708&scene=18#wechat_redirect"),//培训
     MICROMALL("微商城", R.drawable.zhy_myapp_micromall, "https://kdt.im/AHSojr"),//微商城
     NAVIGATION("导航", R.drawable.zhy_myapp_navigation, "navigation"),//导航
     CALENDAR("万年历", R.drawable.zhy_myapp_calendar, "calendar"),//万年历
