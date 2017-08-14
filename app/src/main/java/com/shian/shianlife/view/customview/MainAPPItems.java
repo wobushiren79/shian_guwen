@@ -82,7 +82,7 @@ public class MainAPPItems extends LinearLayout {
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         if (url.equals("")) {
-
+                            ToastUtils.show(getContext(),"敬请期待！");
                         } else if (url.contains("all")) {
                             Intent intent = new Intent(getContext(), AllAppActivity.class);
                             getContext().startActivity(intent);

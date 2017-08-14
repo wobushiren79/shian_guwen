@@ -11,14 +11,15 @@ public enum APPEnum {
     ALL("全部应用", R.drawable.zhy_myapp_allapp, "all"),//其他APP
     ZSPROJECT("治丧产品", R.drawable.zhy_myapp_zsproject, "http://m.e-funeral.cn/Plan/index.html"),//治丧产品
     CEMETERY("公墓", R.drawable.zhy_myapp_cemetery, "http://m.e-funeral.cn/Goods/index.html"),//公墓
-    BEFORECONTRACT("生前契约", R.drawable.zhy_myapp_beforecontract, ""),//生前契约
+    BEFORECONTRACT("培训", R.drawable.zhy_myapp_beforecontract, ""),//生前契约
     MICROMALL("微商城", R.drawable.zhy_myapp_micromall, "https://kdt.im/AHSojr"),//微商城
     NAVIGATION("导航", R.drawable.zhy_myapp_navigation, "navigation"),//导航
     CALENDAR("万年历", R.drawable.zhy_myapp_calendar, "calendar"),//万年历
     CALCULATOR("计算器", R.drawable.zhy_myapp_calculator, "calculator"),//计算器
     COMMUNICATION("通讯宝", R.drawable.zhy_myapp_phone, AppContansts.phonePHPURL),//通讯宝
     DIDI("滴滴打车", R.drawable.zhy_myapp_didi, "http://webapp.diditaxi.com.cn"),//
-    INTEGRALMALL("积分商城", R.drawable.zhy_myapp_integralmall, ""); //积分商城
+    INTEGRALMALL("积分商城", R.drawable.zhy_myapp_integralmall, ""), //积分商城
+    VRCEMETERY("VR看墓", R.drawable.zhy_myapp_vrcemetery, "http://x.eqxiu.com/s/c47nsoiO"); //VR看墓
 
     private String name;
     private int picId;
