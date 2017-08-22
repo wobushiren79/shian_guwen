@@ -114,8 +114,18 @@ public class HpCarBuildOrder extends BaseHttpParams {
      * 申请人电话
      */
     private String proposerMobile;
+    /**
+     * 备份数据（用以记录非重要数据）
+     */
+    private String backupData;
 
+    public String getBackupData() {
+        return backupData;
+    }
 
+    public void setBackupData(String backupData) {
+        this.backupData = backupData;
+    }
 
     public String getCurLongitude() {
         return curLongitude;

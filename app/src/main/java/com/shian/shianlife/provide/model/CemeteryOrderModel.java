@@ -28,6 +28,20 @@ public class CemeteryOrderModel implements Serializable{
      */
     private int cancelStatus;
 
+    /**
+     * 咨询单编号
+     */
+    private String consultNumber;
+
+
+    public String getConsultNumber() {
+        return consultNumber;
+    }
+
+    public void setConsultNumber(String consultNumber) {
+        this.consultNumber = consultNumber;
+    }
+
     public int getCancelStatus() {
         return cancelStatus;
     }

@@ -13,4 +13,16 @@
         android:layout_marginLeft="@dimen/dimen_16dp"
         android:layout_marginRight="@dimen/dimen_16dp"
         android:layout_marginTop="@dimen/dimen_12dp"></com.shian.shianlife.view.searchview.SearchView>
+
+    <Button
+        android:id="@+id/bt_cemetery_build"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="公墓新建" />
+
+    <Button
+        android:id="@+id/bt_funeral_build"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="殡仪新建" />
 </LinearLayout>

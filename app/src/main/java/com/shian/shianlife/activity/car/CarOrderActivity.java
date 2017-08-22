@@ -10,6 +10,7 @@ import com.shian.shianlife.activity.order.CemeteryServiceActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.contanst.SelectDictCode;
+import com.shian.shianlife.common.utils.StringUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.fragment.CemeteryFragment;
@@ -23,6 +24,9 @@ import com.shian.shianlife.view.writeview.EditTextViewNormal;
 import com.shian.shianlife.view.writeview.MapSelectViewNormal;
 import com.shian.shianlife.view.writeview.SpinnerViewNormal;
 import com.shian.shianlife.view.writeview.TimeSelectViewNormal;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class CarOrderActivity extends BaseActivity implements View.OnClickListener {
@@ -82,7 +86,6 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
 
         mGetLocation.setNumView(0);
         mArriveLocation.setNumView(1);
-
     }
 
 
@@ -164,9 +167,15 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
         params.setTargetLatitude(mArriveLocation.getLatitude());
         params.setAppointmentTime(mUseTime.getData() + ":00");
         params.setRemark(mRemark.getData());
+
+        //增加备份数据
+        Map<String, String> backUpData = new HashMap<>();
+        if (data != null && data.getConsultNumber() != null)
+            backUpData.put("consultNumber", data.getConsultNumber());
+        String backUpString = StringUtils.getStringFromMap(backUpData);
+        params.setBackupData(backUpString);
+
         MHttpManagerFactory.getAccountManager().saveCarBuildData(this, params, new HttpResponseHandler<Object>() {
-
-
             @Override
             public void onStart() {
 
