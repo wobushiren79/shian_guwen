@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.order.FuneralServiceActivity;
@@ -58,7 +59,7 @@ public class NewOrderActivity extends BaseActivity {
         writeSpinner.setSpinnerCallBack(new SpinnerViewNormal.SpinnerCallBack() {
             @Override
             public void itemSelected(int position, String name, SpinnerViewNormal viewNormal) {
-                params.setBusinessType(position+1);
+                params.setBusinessType(position + 1);
             }
 
             @Override
@@ -126,8 +127,13 @@ public class NewOrderActivity extends BaseActivity {
 //				params.setCustomerAddress(ad);
                 params.setCustomerAddressNew(address);
                 params.setDescription(bz);
-                MHttpManagerFactory.getAccountManager().addConsult(NewOrderActivity.this, params,
+                MHttpManagerFactory.getFuneralManager().addConsult(NewOrderActivity.this, params,
                         new HttpResponseHandler<HrAddConsultResult>() {
+
+                            @Override
+                            public void onStart(Request request, int id) {
+
+                            }
 
                             @Override
                             public void onSuccess(HrAddConsultResult result) {
@@ -143,10 +149,6 @@ public class NewOrderActivity extends BaseActivity {
                                 }
                             }
 
-                            @Override
-                            public void onStart() {
-
-                            }
 
                             @Override
                             public void onError(String message) {

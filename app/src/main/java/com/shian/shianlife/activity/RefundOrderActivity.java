@@ -2,32 +2,20 @@ package com.shian.shianlife.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
-import com.shian.shianlife.common.utils.ToastUtils;
-import com.shian.shianlife.common.view.orderdetail.AddedDetailView;
-import com.shian.shianlife.common.view.orderdetail.CemeteryDetailView;
-import com.shian.shianlife.common.view.orderdetail.CustomDetailView;
-import com.shian.shianlife.common.view.orderdetail.CustomDetailView.OnCallBack;
-import com.shian.shianlife.common.view.orderdetail.FuneralDetailView;
-import com.shian.shianlife.common.view.orderdetail.MainDetailView;
-import com.shian.shianlife.common.view.orderdetail.PayInfoView;
 import com.shian.shianlife.common.view.refund.AddedDetailRefundView;
-import com.shian.shianlife.common.view.refund.CemeteryDetailRefundView;
 import com.shian.shianlife.common.view.refund.FuneralDetailRefundView;
 import com.shian.shianlife.common.view.refund.MainDetailRefundView;
 import com.shian.shianlife.common.view.refund.PayInfoRefundView;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
-import com.shian.shianlife.provide.imp.impl.OrderManagerImpl;
 import com.shian.shianlife.provide.model.BordModel;
 import com.shian.shianlife.provide.model.PayInfoModel;
-import com.shian.shianlife.provide.params.HpGetOrderDetailParams;
 import com.shian.shianlife.provide.params.HpOrderIdParams;
 import com.shian.shianlife.provide.params.HpRefundParams;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
@@ -36,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
+import okhttp3.Request;
 
 public class RefundOrderActivity extends BaseActivity {
 
@@ -91,7 +80,12 @@ public class RefundOrderActivity extends BaseActivity {
 		HpOrderIdParams params = new HpOrderIdParams();
 		params.setOrderId(orderId);
 		params.setReturnOnlyRefund(isDetailFlag);
-		MHttpManagerFactory.getAccountManager().getRefundOrder(this, params, new HttpResponseHandler<HrGetOrderDetailResult>() {
+		MHttpManagerFactory.getFuneralManager().getRefundOrder(this, params, new HttpResponseHandler<HrGetOrderDetailResult>() {
+
+			@Override
+			public void onStart(Request request, int id) {
+
+			}
 
 			@Override
 			public void onSuccess(HrGetOrderDetailResult result) {
@@ -102,10 +96,6 @@ public class RefundOrderActivity extends BaseActivity {
 				mPayInfoView.setData(result);
 			}
 
-			@Override
-			public void onStart() {
-
-			}
 
 			@Override
 			public void onError(String message) {

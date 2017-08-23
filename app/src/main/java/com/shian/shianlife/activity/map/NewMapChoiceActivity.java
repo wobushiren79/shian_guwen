@@ -34,6 +34,8 @@ import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpChangeLocation;
 import com.shian.shianlife.view.dialog.MapEditModeDialog;
 
+import okhttp3.Request;
+
 public class NewMapChoiceActivity extends Activity implements BaiduMap.OnMapClickListener {
 
     MapView mMapView;
@@ -120,9 +122,10 @@ public class NewMapChoiceActivity extends Activity implements BaiduMap.OnMapClic
         params.setConsultId(NewRoutePlanOtherActivity.consultId);
         params.setOperationType(NewRoutePlanOtherActivity.locationType);
         params.setAddressDetail(location);
-        MHttpManagerFactory.getAccountManager().changeLocation(NewMapChoiceActivity.this, params, new HttpResponseHandler<Object>() {
+        MHttpManagerFactory.getFuneralManager().changeLocation(NewMapChoiceActivity.this, params, new HttpResponseHandler<Object>() {
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

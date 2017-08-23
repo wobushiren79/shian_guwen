@@ -26,6 +26,7 @@ import android.widget.TextView;
 import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 import com.bumptech.glide.util.Util;
 import com.shian.shianlife.R;
@@ -113,8 +114,13 @@ public class PayActivity extends BaseActivity {
         initSp0(1);
         HpOrderIdParams params = new HpOrderIdParams();
         params.setOrderId(orderId);
-        MHttpManagerFactory.getAccountManager().getOrderInvoic(this, params,
+        MHttpManagerFactory.getFuneralManager().getOrderInvoic(this, params,
                 new HttpResponseHandler<HrOrderInvoic>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrOrderInvoic result) {
@@ -137,12 +143,6 @@ public class PayActivity extends BaseActivity {
                                 .getRecAddressArea());
                         etOther.setText(result.getInvoice()
                                 .getRecAddressSuffix());
-                    }
-
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
                     }
 
                     @Override
@@ -190,8 +190,13 @@ public class PayActivity extends BaseActivity {
         params.setRecName(etList.get(3).getText().toString());
         params.setRecPhone(etList.get(4).getText().toString());
         params.setRecAddress(lbs.getTalkAddress());
-        MHttpManagerFactory.getAccountManager().saveOrderInvoic(this, params,
+        MHttpManagerFactory.getFuneralManager().saveOrderInvoic(this, params,
                 new HttpResponseHandler<HrCommentResult>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrCommentResult result) {
@@ -199,11 +204,6 @@ public class PayActivity extends BaseActivity {
 
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -264,8 +264,13 @@ public class PayActivity extends BaseActivity {
     private void frePay() {
         HpOrderIdParams params = new HpOrderIdParams();
         params.setOrderId(orderId);
-        MHttpManagerFactory.getAccountManager().creatFrePay(this, params,
+        MHttpManagerFactory.getFuneralManager().creatFrePay(this, params,
                 new HttpResponseHandler<HrCommentResult>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrCommentResult result) {
@@ -275,11 +280,6 @@ public class PayActivity extends BaseActivity {
                         payID = result.getPayId();
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -313,8 +313,13 @@ public class PayActivity extends BaseActivity {
         //支付宝
         HpOrderIdParams params = new HpOrderIdParams();
         params.setPayId(payId);
-        MHttpManagerFactory.getAccountManager().creatZhiFuBaoEwm(this, params,
+        MHttpManagerFactory.getFuneralManager().creatZhiFuBaoEwm(this, params,
                 new HttpResponseHandler<HrCommentResult>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrCommentResult result) {
@@ -329,10 +334,7 @@ public class PayActivity extends BaseActivity {
                         finish();
                     }
 
-                    @Override
-                    public void onStart() {
 
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -345,8 +347,13 @@ public class PayActivity extends BaseActivity {
         HpOrderIdParams params = new HpOrderIdParams();
         params.setPayId(payId);
         params.setPayAmount(payAmount);
-        MHttpManagerFactory.getAccountManager().creatPosEwm(this, params,
+        MHttpManagerFactory.getFuneralManager().creatPosEwm(this, params,
                 new HttpResponseHandler<HrCommentResult>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrCommentResult result) {
@@ -361,10 +368,6 @@ public class PayActivity extends BaseActivity {
                         finish();
                     }
 
-                    @Override
-                    public void onStart() {
-
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -376,8 +379,13 @@ public class PayActivity extends BaseActivity {
     private void weixinEwm(final long payId) {
         HpOrderIdParams params = new HpOrderIdParams();
         params.setPayId(payId);
-        MHttpManagerFactory.getAccountManager().creatWeinxinEwm(this, params,
+        MHttpManagerFactory.getFuneralManager().creatWeinxinEwm(this, params,
                 new HttpResponseHandler<HrCommentResult>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrCommentResult result) {
@@ -392,10 +400,6 @@ public class PayActivity extends BaseActivity {
                         finish();
                     }
 
-                    @Override
-                    public void onStart() {
-
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -413,8 +417,13 @@ public class PayActivity extends BaseActivity {
         HpOrderIdParams params = new HpOrderIdParams();
         params.setPayId(payId);
         params.setInvoiceNo(cash);
-        MHttpManagerFactory.getAccountManager().payCrash(this, params,
+        MHttpManagerFactory.getFuneralManager().payCrash(this, params,
                 new HttpResponseHandler<Object>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(Object result) {
@@ -424,11 +433,7 @@ public class PayActivity extends BaseActivity {
                         finish();
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
 
-                    }
 
                     @Override
                     public void onError(String message) {

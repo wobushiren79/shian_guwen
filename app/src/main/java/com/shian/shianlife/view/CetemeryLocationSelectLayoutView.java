@@ -17,6 +17,8 @@ import com.shian.shianlife.provide.result.HrGetCemeteryStructure;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Request;
+
 /**
  * Created by Administrator on 2017/2/9.
  */
@@ -124,9 +126,11 @@ public class CetemeryLocationSelectLayoutView extends CetemeryTextSelectLayoutVi
         if(itemType==4){
             params.setParkIdTemp(parkIdTemp);
         }
-        MHttpManagerFactory.getAccountManager().getCemeteryStructure(getContext(), params, new HttpResponseHandler<HrGetCemeteryStructure>() {
+        MHttpManagerFactory.getCemeteryManager().getCemeteryStructure(getContext(), params, new HttpResponseHandler<HrGetCemeteryStructure>() {
+
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

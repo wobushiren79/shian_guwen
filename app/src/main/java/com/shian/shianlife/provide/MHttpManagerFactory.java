@@ -1,13 +1,21 @@
 package com.shian.shianlife.provide;
 
+import com.shian.shianlife.provide.imp.CarManager;
+import com.shian.shianlife.provide.imp.CemeteryManager;
 import com.shian.shianlife.provide.imp.FileManager;
-import com.shian.shianlife.provide.imp.MAccountManager;
-import com.shian.shianlife.provide.imp.MUserManager;
+import com.shian.shianlife.provide.imp.FuneralManager;
+import com.shian.shianlife.provide.imp.FuneralOrderManager;
 import com.shian.shianlife.provide.imp.PHPManager;
+import com.shian.shianlife.provide.imp.ProductManager;
+import com.shian.shianlife.provide.imp.SystemManager;
+import com.shian.shianlife.provide.imp.impl.CarManagerImpl;
+import com.shian.shianlife.provide.imp.impl.CemeteryManagerImpl;
 import com.shian.shianlife.provide.imp.impl.FileManagerImpl;
-import com.shian.shianlife.provide.imp.impl.MAccountManagerImpl;
-import com.shian.shianlife.provide.imp.impl.MUserManagerImpl;
+import com.shian.shianlife.provide.imp.impl.FuneralManagerImpl;
+import com.shian.shianlife.provide.imp.impl.FuneralOrderManagerImpl;
 import com.shian.shianlife.provide.imp.impl.PHPManagerImpl;
+import com.shian.shianlife.provide.imp.impl.ProductManagerImpl;
+import com.shian.shianlife.provide.imp.impl.SystemManagerImpl;
 
 /**
  * 接口工厂
@@ -20,12 +28,30 @@ public class MHttpManagerFactory {
      *
      * @return
      */
-    public static MAccountManager getAccountManager() {
-        return MAccountManagerImpl.getInstance();
+    //殡仪
+    public static FuneralManager getFuneralManager() {
+        return FuneralManagerImpl.getInstance();
     }
 
-    public static MUserManager getMUserManager() {
-        return MUserManagerImpl.getInstance();
+    //殡仪订单
+    public static FuneralOrderManager getFuneralOrderManager() {
+        return FuneralOrderManagerImpl.getInstance();
+    }
+
+    //殡仪商品
+    public static ProductManager getProductManager() {
+        return ProductManagerImpl.getInstance();
+    }
+
+
+    //公墓
+    public static CemeteryManager getCemeteryManager() {
+        return CemeteryManagerImpl.getInstance();
+    }
+
+    //派車
+    public static CarManager getCarManager() {
+        return CarManagerImpl.getInstance();
     }
 
     public static FileManager getFileManager() {
@@ -34,5 +60,10 @@ public class MHttpManagerFactory {
 
     public static PHPManager getPHPManager() {
         return PHPManagerImpl.getInstance();
+    }
+
+    //登陆
+    public static SystemManager getSystemManager() {
+        return SystemManagerImpl.getInstance();
     }
 }

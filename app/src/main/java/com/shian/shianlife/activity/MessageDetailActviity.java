@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import butterknife.InjectViews;
 import me.leolin.shortcutbadger.ShortcutBadger;
+import okhttp3.Request;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
@@ -46,8 +47,13 @@ public class MessageDetailActviity extends BaseActivity {
         tvList.get(2).setText(message.getBody());
         boolean isB = getIntent().getBooleanExtra("isBroadcast", false);
         if (!isB) {
-            MHttpManagerFactory.getAccountManager().getMessageCount(this,
+            MHttpManagerFactory.getFuneralManager().getMessageCount(this,
                     new HttpResponseHandler<HrCommentResult>() {
+
+                        @Override
+                        public void onStart(Request request, int id) {
+
+                        }
 
                         @Override
                         public void onSuccess(HrCommentResult result) {
@@ -55,11 +61,6 @@ public class MessageDetailActviity extends BaseActivity {
                             AppContansts.MessageCount = result.getCount();
                         }
 
-                        @Override
-                        public void onStart() {
-                            // TODO Auto-generated method stub
-
-                        }
 
                         @Override
                         public void onError(String message) {
@@ -71,8 +72,13 @@ public class MessageDetailActviity extends BaseActivity {
             List<Long> l = new ArrayList<Long>();
             l.add(message.getId());
             params.setMsgIds(l);
-            MHttpManagerFactory.getAccountManager().readMessage(this, params,
+            MHttpManagerFactory.getFuneralManager().readMessage(this, params,
                     new HttpResponseHandler<Object>() {
+
+                        @Override
+                        public void onStart(Request request, int id) {
+
+                        }
 
                         @Override
                         public void onSuccess(Object result) {
@@ -80,11 +86,7 @@ public class MessageDetailActviity extends BaseActivity {
 
                         }
 
-                        @Override
-                        public void onStart() {
-                            // TODO Auto-generated method stub
 
-                        }
 
                         @Override
                         public void onError(String message) {

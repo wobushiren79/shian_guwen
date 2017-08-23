@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.shian.shianlife.mvp.login.bean.UserLoginConfig;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class SharePerfrenceUtils {
@@ -13,20 +15,15 @@ public class SharePerfrenceUtils {
     private static final String C_sShareLogin_isAutoLogin = "share_isAutoLogin";
     private static final String C_sShareLogin_isRemeberPassword = "share_isRePassword";
     private static final String C_sShareLogin_channelId = "share_channelId";
-    //新添加登录账号类型
-    private static final String C_sShareLogin_Type = "share_type";
-    //新添加登陆账号是否有公墓权限
-    private static final String C_sShareLogin_hasCemetery = "share_hasCemetery";
+
 
     public static void setLoginShare(Context c, String username,
-                                     String password, boolean isRemeber, boolean isAuto, int loginType) {
+                                     String password, boolean isRemeber, boolean isAuto) {
         Editor editor = c.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE).edit();
         editor.putString(C_sShareLogin_username, username);
         editor.putString(C_sShareLogin_password, password);
         editor.putBoolean(C_sShareLogin_isRemeberPassword, isRemeber);
         editor.putBoolean(C_sShareLogin_isAutoLogin, isAuto);
-
-        editor.putInt(C_sShareLogin_Type, loginType);//新添加登录账号类型
         editor.commit();
     }
 
@@ -37,17 +34,27 @@ public class SharePerfrenceUtils {
     }
 
 
-    //是否有公墓权限
-    public static void setHasCemetery(Context context, boolean hasCemetery) {
-        Editor editor = context.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE).edit();
-        editor.putBoolean(C_sShareLogin_hasCemetery, hasCemetery);
-        editor.commit();
+    /**
+     * 获取账号信息
+     *
+     * @param content
+     * @return
+     */
+    public static UserLoginConfig getLoginShareSys(Context content) {
+        SharedPreferences share = content.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE);
+        String username = share.getString(C_sShareLogin_username, "");
+        String password = share.getString(C_sShareLogin_password, "");
+        boolean isRember = share.getBoolean(C_sShareLogin_isRemeberPassword,
+                false);
+        boolean isAuto = share.getBoolean(C_sShareLogin_isAutoLogin, false);
+        UserLoginConfig loginS = new UserLoginConfig();
+        loginS.setUserName(username);
+        loginS.setPassWord(password);
+        loginS.setKeepAccount(isRember);
+        loginS.setAutoLogin(isAuto);
+        return loginS;
     }
 
-    public static boolean getHasCemetery(Context context) {
-        SharedPreferences share = context.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE);
-        return share.getBoolean(C_sShareLogin_hasCemetery, false);
-    }
 
     public static ShareLogin getLoginShare(Context c) {
         SharedPreferences share = c.getSharedPreferences(C_sShare_Login_F, MODE_PRIVATE);
@@ -56,13 +63,11 @@ public class SharePerfrenceUtils {
         boolean isRember = share.getBoolean(C_sShareLogin_isRemeberPassword,
                 false);
         boolean isAuto = share.getBoolean(C_sShareLogin_isAutoLogin, false);
-        int loginType = share.getInt(C_sShareLogin_Type, MODE_PRIVATE);//新添加登录账号类型
         ShareLogin loginS = new ShareLogin();
         loginS.setUsername(username);
         loginS.setPassword(password);
         loginS.setRemeberPassword(isRember);
         loginS.setAutoLogin(isAuto);
-        loginS.setLoginType(loginType);//新添加登录账号类型
         return loginS;
     }
 
@@ -83,15 +88,6 @@ public class SharePerfrenceUtils {
         private String password;
         private boolean isAutoLogin;
         private boolean isRemeberPassword;
-        private int loginType;//新增登录类型
-
-        public int getLoginType() {
-            return loginType;
-        }
-
-        public void setLoginType(int loginType) {
-            this.loginType = loginType;
-        }
 
         public String getUsername() {
             return username;

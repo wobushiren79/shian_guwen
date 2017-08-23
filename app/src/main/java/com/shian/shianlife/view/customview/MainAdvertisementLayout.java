@@ -18,7 +18,10 @@ import com.shian.shianlife.activity.WebActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
+import com.shian.shianlife.provide.phpparams.PHPHpAdvertisementParams;
 import com.shian.shianlife.provide.phpresult.PHPHrGetAdvertisement;
+
+import okhttp3.Request;
 
 /**
  * Created by Administrator on 2017/3/5.
@@ -31,6 +34,7 @@ public class MainAdvertisementLayout extends LinearLayout {
 
     private CallBack callBack;
     private PHPHrGetAdvertisement result;
+
     public MainAdvertisementLayout(Context context) {
         this(context, null);
     }
@@ -51,22 +55,24 @@ public class MainAdvertisementLayout extends LinearLayout {
      * 获取数据
      */
     private void getData() {
-        RequestParams params=new RequestParams();
-        params.put("type", 2);
-        params.put("number", 1);
-        params.put("pagerNumber", 0);
-        MHttpManagerFactory.getPHPManager().getAdvertisement(getContext(),params, new HttpResponseHandler<PHPHrGetAdvertisement>() {
+        PHPHpAdvertisementParams params = new PHPHpAdvertisementParams();
+        params.setType(2);
+        params.setNumber(1);
+        params.setPagerNumber(0);
+        MHttpManagerFactory.getPHPManager().getAdvertisement(getContext(), params, new HttpResponseHandler<PHPHrGetAdvertisement>() {
+
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
             @Override
             public void onSuccess(PHPHrGetAdvertisement result) {
-                MainAdvertisementLayout.this.result=result;
+                MainAdvertisementLayout.this.result = result;
                 mBTCancel.setOnClickListener(onClickListener);
                 mIVConent.setOnClickListener(onClickListener);
-                ImageLoader.getInstance().displayImage(AppContansts.PhpURL + result.getItems().get(0).getBanner(), mIVConent, new ImageLoadingListener() {
+                ImageLoader.getInstance().displayImage(AppContansts.PHP_BaseUrl + result.getItems().get(0).getBanner(), mIVConent, new ImageLoadingListener() {
                     @Override
                     public void onLoadingStarted(String imageUri, View view) {
 
@@ -79,7 +85,7 @@ public class MainAdvertisementLayout extends LinearLayout {
 
                     @Override
                     public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                            callBack.loadingComplete();
+                        callBack.loadingComplete();
                     }
 
                     @Override
@@ -106,9 +112,9 @@ public class MainAdvertisementLayout extends LinearLayout {
             if (v == mBTCancel) {
                 callBack.cancelPic();
             } else if (v == mIVConent) {
-                if(result!=null){
-                    Intent intent=new Intent(getContext(), WebActivity.class);
-                    intent.putExtra("url",result.getItems().get(0).getUrl());
+                if (result != null) {
+                    Intent intent = new Intent(getContext(), WebActivity.class);
+                    intent.putExtra("url", result.getItems().get(0).getUrl());
                     getContext().startActivity(intent);
                 }
             }
@@ -117,6 +123,7 @@ public class MainAdvertisementLayout extends LinearLayout {
 
     public interface CallBack {
         void loadingComplete();
+
         void cancelPic();
     }
 }

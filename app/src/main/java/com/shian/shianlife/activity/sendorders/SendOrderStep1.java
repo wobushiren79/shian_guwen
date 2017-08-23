@@ -36,6 +36,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.Request;
+
 /**
  * Created by Administrator on 2016/12/21.
  */
@@ -160,9 +162,10 @@ public class SendOrderStep1 extends BaseSendOrder {
         Utils.LogVPrint("DeadPic:" + params.getDeadPic());
         Utils.LogVPrint("FirstDayRemark:" + params.getFirstDayRemark());
 
-        MHttpManagerFactory.getAccountManager().saveSendOrderDataTwo(getContext(), params, new HttpResponseHandler<Object>() {
+        MHttpManagerFactory.getFuneralManager().saveSendOrderDataTwo(getContext(), params, new HttpResponseHandler<Object>() {
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -187,8 +190,13 @@ public class SendOrderStep1 extends BaseSendOrder {
     public void getData() {
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId(consultId);
-        MHttpManagerFactory.getAccountManager().getSendOrderDataTwo(context, params,
+        MHttpManagerFactory.getFuneralManager().getSendOrderDataTwo(context, params,
                 new HttpResponseHandler<HrGetSendOrderDataTwo>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrGetSendOrderDataTwo result) {
@@ -264,11 +272,6 @@ public class SendOrderStep1 extends BaseSendOrder {
                         getContext().sendBroadcast(intent);
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
                     @Override
                     public void onError(String message) {

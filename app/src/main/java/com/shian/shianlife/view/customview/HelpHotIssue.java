@@ -23,12 +23,15 @@ import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.phpmodel.HotIssueData;
+import com.shian.shianlife.provide.phpparams.PHPHpHotIssuseParams;
 import com.shian.shianlife.provide.phpresult.PHPHrGetHotIssue;
 import com.shian.shianlife.thisenum.HelpEnum;
 import com.shian.shianlife.view.ScrollListView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Request;
 
 /**
  * Created by Administrator on 2017/3/14.
@@ -66,18 +69,20 @@ public class HelpHotIssue extends LinearLayout {
      * 获取数据
      */
     private void getData() {
-        RequestParams params = new RequestParams();
-        params.put("number", showNumber);
-        params.put("pagerNumber", 0);
+        PHPHpHotIssuseParams params = new PHPHpHotIssuseParams();
+        params.setNumber(showNumber);
+        params.setPagerNumber(0);
         MHttpManagerFactory.getPHPManager().getHotIssue(getContext(), params, new HttpResponseHandler<PHPHrGetHotIssue>() {
+
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
             @Override
             public void onSuccess(PHPHrGetHotIssue result) {
-                if(result.getItems().size()>0){
+                if (result.getItems().size() > 0) {
                     listData = result.getItems();
                     callBack.loadingComplete();
                     adapter.notifyDataSetChanged();
@@ -107,8 +112,8 @@ public class HelpHotIssue extends LinearLayout {
     AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent=new Intent(getContext(),WebActivity.class);
-            intent.putExtra("url", AppContansts.helpsPHPURL+"?id="+listData.get(position).getId());
+            Intent intent = new Intent(getContext(), WebActivity.class);
+            intent.putExtra("url", AppContansts.helpsPHPURL + "?id=" + listData.get(position).getId());
             getContext().startActivity(intent);
         }
     };

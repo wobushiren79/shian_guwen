@@ -21,6 +21,8 @@ import com.shian.shianlife.view.writeview.TimeSelectViewNormal;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Request;
+
 
 /**
  * Created by Administrator on 2017/4/12.
@@ -67,10 +69,10 @@ public class CemeteryDeadManInfo extends BaseCemeteryInfo {
         HpCemeteryIdParams params = new HpCemeteryIdParams();
         params.setBespeakId(beSpeakId);
         params.setOrderId(orderId);
-        MHttpManagerFactory.getAccountManager().getCemeteryTalkSuccessDeadMan(getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessDeadMan>() {
+        MHttpManagerFactory.getCemeteryManager().getCemeteryTalkSuccessDeadMan(getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessDeadMan>() {
 
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -160,11 +162,10 @@ public class CemeteryDeadManInfo extends BaseCemeteryInfo {
         list.add(itemTwo);
         params.setList(list);
 
-        MHttpManagerFactory.getAccountManager().saveCemeteryTalkSuccessDeadMan(getContext(), params, new HttpResponseHandler<Object>() {
-
+        MHttpManagerFactory.getCemeteryManager().saveCemeteryTalkSuccessDeadMan(getContext(), params, new HttpResponseHandler<Object>() {
 
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

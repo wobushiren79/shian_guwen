@@ -18,7 +18,10 @@ import com.shian.shianlife.activity.WebActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
+import com.shian.shianlife.provide.phpparams.PHPHpAdvertisementParams;
 import com.shian.shianlife.provide.phpresult.PHPHrGetAdvertisement;
+
+import okhttp3.Request;
 
 /**
  * Created by Administrator on 2017/3/11.
@@ -56,13 +59,15 @@ public class AppAdvertisementLayout extends LinearLayout {
      * 获取数据
      */
     private void getData() {
-        RequestParams params = new RequestParams();
-        params.put("type", 4);
-        params.put("number", 1);
-        params.put("pagerNumber", 0);
+        PHPHpAdvertisementParams  params=new PHPHpAdvertisementParams();
+        params.setType(4);
+        params.setNumber(1);
+        params.setPagerNumber(0);
         MHttpManagerFactory.getPHPManager().getAdvertisement(getContext(), params, new HttpResponseHandler<PHPHrGetAdvertisement>() {
+
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -71,7 +76,7 @@ public class AppAdvertisementLayout extends LinearLayout {
                 AppAdvertisementLayout.this.result = result;
                 mBTCancel.setOnClickListener(onClickListener);
                 mIVConent.setOnClickListener(onClickListener);
-                ImageLoader.getInstance().displayImage(AppContansts.PhpURL + result.getItems().get(0).getBanner(), mIVConent, new ImageLoadingListener() {
+                ImageLoader.getInstance().displayImage(AppContansts.PHP_BaseUrl + result.getItems().get(0).getBanner(), mIVConent, new ImageLoadingListener() {
                     @Override
                     public void onLoadingStarted(String imageUri, View view) {
 

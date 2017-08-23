@@ -2,7 +2,6 @@ package com.shian.shianlife.common.view.order;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,14 +11,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chanven.lib.cptr.loadmore.OnLoadMoreListener;
 import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper;
 import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper.OnSwipeRefreshListener;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.OrderDetailActivity;
-import com.shian.shianlife.activity.map.NewRoutePlanActivity;
 import com.shian.shianlife.activity.map.NewRoutePlanOtherActivity;
 import com.shian.shianlife.activity.updata.WaitServiceDataActivity;
 import com.shian.shianlife.common.utils.TArrayListAdapter;
@@ -27,15 +24,16 @@ import com.shian.shianlife.common.utils.TArrayListAdapter.IOnDrawViewEx;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.utils.ViewGropMap;
-import com.shian.shianlife.common.view.TipsDialog;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
-import com.shian.shianlife.provide.imp.impl.OrderManagerImpl;
+import com.shian.shianlife.provide.imp.impl.FuneralOrderManagerImpl;
 import com.shian.shianlife.provide.model.OrderListModel;
 import com.shian.shianlife.provide.params.HpAcceptParams;
 import com.shian.shianlife.provide.params.HpGetOrderListParams;
 import com.shian.shianlife.provide.params.HpRejectParams;
 import com.shian.shianlife.provide.result.HrGetOrderListResult;
+
+import okhttp3.Request;
 
 /**
  * 待服务订单列表
@@ -104,37 +102,37 @@ public class WaitServiceView extends BaseOrderView {
         HpGetOrderListParams params = new HpGetOrderListParams();
         params.setPageNum(page);
         params.setPageSize(pageSize);
-        OrderManagerImpl.getInstance().getOrderList(getContext(), params,
-                orderType, new HttpResponseHandler<HrGetOrderListResult>() {
+        MHttpManagerFactory.getFuneralOrderManager().getOrderList(getContext(), params, orderType, new HttpResponseHandler<HrGetOrderListResult>() {
 
-                    @Override
-                    public void onSuccess(HrGetOrderListResult result) {
-                        if (result != null && result.getItems() != null
-                                && result.getItems().size() > 0) {
-                            adapter.addListData(result.getItems());
-                            adapter.notifyDataSetChanged();
-                            if (result.getItems().size() >= pageSize) {
-                                mSwipeRefreshHelper.setLoadMoreEnable(true);
-                            } else {
-                                mSwipeRefreshHelper.setLoadMoreEnable(false);
-                            }
-                        } else {
-                            mSwipeRefreshHelper.loadMoreComplete(false);
-                        }
+            @Override
+            public void onStart(Request request, int id) {
 
-                    }
+            }
 
-                    @Override
-                    public void onStart() {
-
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        mSwipeRefreshHelper.loadMoreComplete(true);
+            @Override
+            public void onSuccess(HrGetOrderListResult result) {
+                if (result != null && result.getItems() != null
+                        && result.getItems().size() > 0) {
+                    adapter.addListData(result.getItems());
+                    adapter.notifyDataSetChanged();
+                    if (result.getItems().size() >= pageSize) {
                         mSwipeRefreshHelper.setLoadMoreEnable(true);
+                    } else {
+                        mSwipeRefreshHelper.setLoadMoreEnable(false);
                     }
-                });
+                } else {
+                    mSwipeRefreshHelper.loadMoreComplete(false);
+                }
+
+            }
+
+
+            @Override
+            public void onError(String message) {
+                mSwipeRefreshHelper.loadMoreComplete(true);
+                mSwipeRefreshHelper.setLoadMoreEnable(true);
+            }
+        });
 
     }
 
@@ -147,37 +145,37 @@ public class WaitServiceView extends BaseOrderView {
         HpGetOrderListParams params = new HpGetOrderListParams();
         params.setPageNum(page);
         params.setPageSize(pageSize);
-        OrderManagerImpl.getInstance().getOrderList(getContext(), params,
-                orderType, new HttpResponseHandler<HrGetOrderListResult>() {
+        MHttpManagerFactory.getFuneralOrderManager().getOrderList(getContext(), params, orderType, new HttpResponseHandler<HrGetOrderListResult>() {
 
-                    @Override
-                    public void onSuccess(HrGetOrderListResult result) {
-                        if (result != null && result.getItems() != null
-                                && result.getItems().size() > 0) {
-                            adapter.addListData(result.getItems());
-                            adapter.notifyDataSetChanged();
-                            if (result.getItems().size() >= pageSize) {
-                                mSwipeRefreshHelper.setLoadMoreEnable(true);
-                            } else {
-                                mSwipeRefreshHelper.setLoadMoreEnable(false);
-                            }
-                        } else {
-                            // showNodataLayout();
-                            ToastUtils.show(getContext(), "暂无订单");
-                        }
-                        mSwipeRefreshHelper.refreshComplete();
+            @Override
+            public void onStart(Request request, int id) {
+
+            }
+
+            @Override
+            public void onSuccess(HrGetOrderListResult result) {
+                if (result != null && result.getItems() != null
+                        && result.getItems().size() > 0) {
+                    adapter.addListData(result.getItems());
+                    adapter.notifyDataSetChanged();
+                    if (result.getItems().size() >= pageSize) {
+                        mSwipeRefreshHelper.setLoadMoreEnable(true);
+                    } else {
+                        mSwipeRefreshHelper.setLoadMoreEnable(false);
                     }
+                } else {
+                    // showNodataLayout();
+                    ToastUtils.show(getContext(), "暂无订单");
+                }
+                mSwipeRefreshHelper.refreshComplete();
+            }
 
-                    @Override
-                    public void onStart() {
 
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        mSwipeRefreshHelper.refreshComplete();
-                    }
-                });
+            @Override
+            public void onError(String message) {
+                mSwipeRefreshHelper.refreshComplete();
+            }
+        });
 
     }
 
@@ -206,7 +204,7 @@ public class WaitServiceView extends BaseOrderView {
             tv_qt21.setText(model.getTalkerName());
             // 逝者所在地
             TextView tv_qt31 = (TextView) view.getView(R.id.tv_qt31);
-            ImageView ivMap= (ImageView) view.getView(R.id.iv_map);
+            ImageView ivMap = (ImageView) view.getView(R.id.iv_map);
             if (model.getUsageCurAddress() == null) {
                 tv_qt31.setText("");
                 ivMap.setVisibility(GONE);
@@ -217,8 +215,8 @@ public class WaitServiceView extends BaseOrderView {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getContext(), NewRoutePlanOtherActivity.class);
-                        intent.putExtra("LocationType",3);
-                        intent.putExtra("ConsultId",model.getConsultId());
+                        intent.putExtra("LocationType", 3);
+                        intent.putExtra("ConsultId", model.getConsultId());
                         intent.putExtra("RoutePlanLocation", model.getUsageCurAddress());
                         getContext().startActivity(intent);
                     }
@@ -376,28 +374,27 @@ public class WaitServiceView extends BaseOrderView {
             HpRejectParams params = new HpRejectParams();
             params.setId(model.getAssignId());
             params.setOrderId(model.getOrderId());
-            MHttpManagerFactory.getAccountManager().rejectZ(getContext(),
-                    params, new HttpResponseHandler<Object>() {
+            MHttpManagerFactory.getFuneralManager().rejectZ(getContext(), params, new HttpResponseHandler<Object>() {
 
-                        @Override
-                        public void onSuccess(Object result) {
-                            // TODO Auto-generated method stub
-                            ToastUtils.show(getContext(), "拒单成功");
-                            refresh();
-                        }
+                @Override
+                public void onStart(Request request, int id) {
 
-                        @Override
-                        public void onStart() {
-                            // TODO Auto-generated method stub
+                }
 
-                        }
+                @Override
+                public void onSuccess(Object result) {
+                    // TODO Auto-generated method stub
+                    ToastUtils.show(getContext(), "拒单成功");
+                    refresh();
+                }
 
-                        @Override
-                        public void onError(String message) {
-                            // TODO Auto-generated method stub
 
-                        }
-                    });
+                @Override
+                public void onError(String message) {
+                    // TODO Auto-generated method stub
+
+                }
+            });
         }
 
         /**
@@ -409,28 +406,27 @@ public class WaitServiceView extends BaseOrderView {
             params.setId(id);
             params.setOrderId(orderID);
             params.setTalkGpsAddress("北京-北京-东城区");
-            MHttpManagerFactory.getAccountManager().acceptZ(getContext(),
-                    params, new HttpResponseHandler<Object>() {
+            MHttpManagerFactory.getFuneralManager().acceptZ(getContext(), params, new HttpResponseHandler<Object>() {
 
-                        @Override
-                        public void onSuccess(Object result) {
-                            // TODO Auto-generated method stub
-                            ToastUtils.show(getContext(), "接单成功");
-                            refresh();
-                        }
+                @Override
+                public void onStart(Request request, int id) {
 
-                        @Override
-                        public void onStart() {
-                            // TODO Auto-generated method stub
+                }
 
-                        }
+                @Override
+                public void onSuccess(Object result) {
+                    // TODO Auto-generated method stub
+                    ToastUtils.show(getContext(), "接单成功");
+                    refresh();
+                }
 
-                        @Override
-                        public void onError(String message) {
-                            // TODO Auto-generated method stub
 
-                        }
-                    });
+                @Override
+                public void onError(String message) {
+                    // TODO Auto-generated method stub
+
+                }
+            });
         }
 
     }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
@@ -40,8 +41,13 @@ public class ShenheActivity extends BaseActivity {
 	private void initData() {
 		HpOrderIdParams params = new HpOrderIdParams();
 		params.setOrderItemId(orderItemId);
-		MHttpManagerFactory.getAccountManager().getOrderItem(this, params,
+		MHttpManagerFactory.getFuneralManager().getOrderItem(this, params,
 				new HttpResponseHandler<HrOrderItenNote>() {
+
+					@Override
+					public void onStart(Request request, int id) {
+
+					}
 
 					@Override
 					public void onSuccess(HrOrderItenNote mData) {
@@ -70,11 +76,6 @@ public class ShenheActivity extends BaseActivity {
 								"白事顾问评价：" + mData.getExecutorNote() + "");
 					}
 
-					@Override
-					public void onStart() {
-						// TODO Auto-generated method stub
-
-					}
 
 					@Override
 					public void onError(String message) {

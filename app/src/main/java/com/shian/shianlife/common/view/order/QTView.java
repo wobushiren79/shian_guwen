@@ -2,7 +2,6 @@ package com.shian.shianlife.common.view.order;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -34,14 +33,12 @@ import com.shian.shianlife.activity.NewOrderActivity;
 import com.shian.shianlife.activity.OrderDetailActivity;
 import com.shian.shianlife.activity.PayActivity;
 import com.shian.shianlife.activity.RefundActivity;
-import com.shian.shianlife.activity.map.NewRoutePlanActivity;
 import com.shian.shianlife.activity.SaveTalkFailActivity;
 import com.shian.shianlife.activity.map.NewRoutePlanOtherActivity;
 import com.shian.shianlife.activity.order.FuneralServiceActivity;
 import com.shian.shianlife.activity.updata.ContractDataActivity;
 import com.shian.shianlife.activity.updata.JBRDataActivity;
 import com.shian.shianlife.activity.updata.WSZDataActivity;
-import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.TArrayListAdapter;
 import com.shian.shianlife.common.utils.TArrayListAdapter.IOnDrawViewEx;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -50,7 +47,7 @@ import com.shian.shianlife.common.utils.ViewGropMap;
 import com.shian.shianlife.common.view.TipsDialog;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
-import com.shian.shianlife.provide.imp.impl.OrderManagerImpl;
+import com.shian.shianlife.provide.imp.impl.FuneralOrderManagerImpl;
 import com.shian.shianlife.provide.model.OrderListModel;
 import com.shian.shianlife.provide.params.HpAcceptParams;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
@@ -63,7 +60,7 @@ import com.shian.shianlife.thisenum.BuildOrderEnum;
 import com.shian.shianlife.view.popupbutton.PopupButton;
 import com.shian.shianlife.view.TalkDataDialog;
 
-import static com.shian.shianlife.fragment.OrderFragment.orderFragmentCallBack;
+import okhttp3.Request;
 
 @SuppressLint("InflateParams")
 public class QTView extends BaseOrderView {
@@ -178,37 +175,37 @@ public class QTView extends BaseOrderView {
         HpGetOrderListParams params = new HpGetOrderListParams();
         params.setPageNum(page);
         params.setPageSize(pageSize);
-        OrderManagerImpl.getInstance().getOrderList(getContext(), params, 0,
-                new HttpResponseHandler<HrGetOrderListResult>() {
+        MHttpManagerFactory.getFuneralOrderManager().getOrderList(getContext(), params, 0, new HttpResponseHandler<HrGetOrderListResult>() {
 
-                    @Override
-                    public void onSuccess(HrGetOrderListResult result) {
-                        if (result != null && result.getItems() != null
-                                && result.getItems().size() > 0) {
-                            adapter.addListData(result.getItems());
-                            adapter.notifyDataSetChanged();
-                            if (result.getItems().size() >= pageSize) {
-                                mSwipeRefreshHelper.setLoadMoreEnable(true);
-                            } else {
-                                mSwipeRefreshHelper.setLoadMoreEnable(false);
-                            }
-                        } else {
-                            mSwipeRefreshHelper.loadMoreComplete(false);
-                        }
+            @Override
+            public void onStart(Request request, int id) {
 
-                    }
+            }
 
-                    @Override
-                    public void onStart() {
-
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        mSwipeRefreshHelper.loadMoreComplete(true);
+            @Override
+            public void onSuccess(HrGetOrderListResult result) {
+                if (result != null && result.getItems() != null
+                        && result.getItems().size() > 0) {
+                    adapter.addListData(result.getItems());
+                    adapter.notifyDataSetChanged();
+                    if (result.getItems().size() >= pageSize) {
                         mSwipeRefreshHelper.setLoadMoreEnable(true);
+                    } else {
+                        mSwipeRefreshHelper.setLoadMoreEnable(false);
                     }
-                });
+                } else {
+                    mSwipeRefreshHelper.loadMoreComplete(false);
+                }
+
+            }
+
+
+            @Override
+            public void onError(String message) {
+                mSwipeRefreshHelper.loadMoreComplete(true);
+                mSwipeRefreshHelper.setLoadMoreEnable(true);
+            }
+        });
 
     }
 
@@ -221,36 +218,36 @@ public class QTView extends BaseOrderView {
         HpGetOrderListParams params = new HpGetOrderListParams();
         params.setPageNum(page);
         params.setPageSize(pageSize);
-        OrderManagerImpl.getInstance().getOrderList(getContext(), params, 0,
-                new HttpResponseHandler<HrGetOrderListResult>() {
+        MHttpManagerFactory.getFuneralOrderManager().getOrderList(getContext(), params, 0, new HttpResponseHandler<HrGetOrderListResult>() {
 
-                    @Override
-                    public void onSuccess(HrGetOrderListResult result) {
-                        if (result != null && result.getItems() != null
-                                && result.getItems().size() > 0) {
-                            adapter.addListData(result.getItems());
-                            adapter.notifyDataSetChanged();
-                            if (result.getItems().size() >= pageSize) {
-                                mSwipeRefreshHelper.setLoadMoreEnable(true);
-                            } else {
-                                mSwipeRefreshHelper.setLoadMoreEnable(false);
-                            }
-                        } else {
-                            showNodataLayout();
-                        }
-                        mSwipeRefreshHelper.refreshComplete();
+            @Override
+            public void onStart(Request request, int id) {
+
+            }
+
+            @Override
+            public void onSuccess(HrGetOrderListResult result) {
+                if (result != null && result.getItems() != null
+                        && result.getItems().size() > 0) {
+                    adapter.addListData(result.getItems());
+                    adapter.notifyDataSetChanged();
+                    if (result.getItems().size() >= pageSize) {
+                        mSwipeRefreshHelper.setLoadMoreEnable(true);
+                    } else {
+                        mSwipeRefreshHelper.setLoadMoreEnable(false);
                     }
+                } else {
+                    showNodataLayout();
+                }
+                mSwipeRefreshHelper.refreshComplete();
+            }
 
-                    @Override
-                    public void onStart() {
 
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        mSwipeRefreshHelper.refreshComplete();
-                    }
-                });
+            @Override
+            public void onError(String message) {
+                mSwipeRefreshHelper.refreshComplete();
+            }
+        });
     }
 
     protected void showNodataLayout() {
@@ -626,28 +623,27 @@ public class QTView extends BaseOrderView {
                     //二次洽谈资料
                     HpConsultIdParams params = new HpConsultIdParams();
                     params.setConsultId(model.getConsultId());
-                    MHttpManagerFactory.getAccountManager().getTalkFailData(getContext(),
-                            params, new HttpResponseHandler<HrGetTalkFail>() {
+                    MHttpManagerFactory.getFuneralManager().getTalkFailData(getContext(), params, new HttpResponseHandler<HrGetTalkFail>() {
 
-                                @Override
-                                public void onSuccess(HrGetTalkFail result) {
-                                    // TODO Auto-generated method stub
-                                    TalkDataDialog dialog = new TalkDataDialog(getContext(), R.style.CustomDialog, result);
-                                    dialog.show();
-                                }
+                        @Override
+                        public void onStart(Request request, int id) {
 
-                                @Override
-                                public void onStart() {
-                                    // TODO Auto-generated method stub
+                        }
 
-                                }
+                        @Override
+                        public void onSuccess(HrGetTalkFail result) {
+                            // TODO Auto-generated method stub
+                            TalkDataDialog dialog = new TalkDataDialog(getContext(), R.style.CustomDialog, result);
+                            dialog.show();
+                        }
 
-                                @Override
-                                public void onError(String message) {
-                                    // TODO Auto-generated method stub
 
-                                }
-                            });
+                        @Override
+                        public void onError(String message) {
+                            // TODO Auto-generated method stub
+
+                        }
+                    });
 
                     break;
             }
@@ -666,27 +662,25 @@ public class QTView extends BaseOrderView {
         private void assignNotify() {
             HpOrderIdParams params = new HpOrderIdParams();
             params.setOrderId(model.getOrderId());
-            MHttpManagerFactory.getAccountManager().assignNotify(getContext(),
-                    params, new HttpResponseHandler<Object>() {
+            MHttpManagerFactory.getFuneralManager().assignNotify(getContext(), params, new HttpResponseHandler<Object>() {
 
-                        @Override
-                        public void onSuccess(Object result) {
-                            // TODO Auto-generated method stub
-                            ToastUtils.show(getContext(), "申请分配成功");
-                        }
+                @Override
+                public void onStart(Request request, int id) {
 
-                        @Override
-                        public void onStart() {
-                            // TODO Auto-generated method stub
+                }
 
-                        }
+                @Override
+                public void onSuccess(Object result) {
+                    // TODO Auto-generated method stub
+                    ToastUtils.show(getContext(), "申请分配成功");
+                }
 
-                        @Override
-                        public void onError(String message) {
-                            // TODO Auto-generated method stub
+                @Override
+                public void onError(String message) {
+                    // TODO Auto-generated method stub
 
-                        }
-                    });
+                }
+            });
         }
 
         /**
@@ -728,25 +722,25 @@ public class QTView extends BaseOrderView {
 
                     HpConsultIdParams params = new HpConsultIdParams();
                     params.setConsultId(model.getConsultId());
-                    MHttpManagerFactory.getAccountManager().switch2waitService(
-                            getContext(), params,
-                            new HttpResponseHandler<Object>() {
-                                @Override
-                                public void onStart() {
-                                }
+                    MHttpManagerFactory.getFuneralManager().switch2waitService(getContext(), params, new HttpResponseHandler<Object>() {
 
-                                @Override
-                                public void onSuccess(Object result) {
-                                    if (FuneralServiceActivity.orderFragmentCallBack != null)
-                                        FuneralServiceActivity.orderFragmentCallBack.changeMsgNum();
-                                    refresh();
-                                }
+                        @Override
+                        public void onStart(Request request, int id) {
 
-                                @Override
-                                public void onError(String message) {
+                        }
 
-                                }
-                            });
+                        @Override
+                        public void onSuccess(Object result) {
+                            if (FuneralServiceActivity.orderFragmentCallBack != null)
+                                FuneralServiceActivity.orderFragmentCallBack.changeMsgNum();
+                            refresh();
+                        }
+
+                        @Override
+                        public void onError(String message) {
+
+                        }
+                    });
 
                 }
             });
@@ -865,25 +859,25 @@ public class QTView extends BaseOrderView {
             params.setId(model.getConsultAssignId());
             params.setConsultId(model.getConsultId());
             params.setOrderId(model.getOrderId());
-            MHttpManagerFactory.getAccountManager().reject(getContext(),
-                    params, new HttpResponseHandler<Object>() {
+            MHttpManagerFactory.getFuneralManager().reject(getContext(), params, new HttpResponseHandler<Object>() {
 
-                        @Override
-                        public void onSuccess(Object result) {
-                            refresh();
-                            ToastUtils.show(getContext(), "拒单成功");
-                        }
+                @Override
+                public void onStart(Request request, int id) {
 
-                        @Override
-                        public void onStart() {
+                }
 
-                        }
+                @Override
+                public void onSuccess(Object result) {
+                    refresh();
+                    ToastUtils.show(getContext(), "拒单成功");
+                }
 
-                        @Override
-                        public void onError(String message) {
 
-                        }
-                    });
+                @Override
+                public void onError(String message) {
+
+                }
+            });
 
         }
 
@@ -896,28 +890,27 @@ public class QTView extends BaseOrderView {
             params.setConsultId(model.getConsultId());
             params.setOrderId(model.getOrderId());
             params.setTalkGpsAddress("北京");
-            MHttpManagerFactory.getAccountManager().accept(getContext(),
-                    params, new HttpResponseHandler<Object>() {
+            MHttpManagerFactory.getFuneralManager().accept(getContext(), params, new HttpResponseHandler<Object>() {
 
-                        @Override
-                        public void onSuccess(Object result) {
-                            // TODO Auto-generated method stub
-                            refresh();
-                            ToastUtils.show(getContext(), "接单成功");
-                        }
+                @Override
+                public void onStart(Request request, int id) {
 
-                        @Override
-                        public void onStart() {
-                            // TODO Auto-generated method stub
+                }
 
-                        }
+                @Override
+                public void onSuccess(Object result) {
+                    // TODO Auto-generated method stub
+                    refresh();
+                    ToastUtils.show(getContext(), "接单成功");
+                }
 
-                        @Override
-                        public void onError(String message) {
-                            // TODO Auto-generated method stub
 
-                        }
-                    });
+                @Override
+                public void onError(String message) {
+                    // TODO Auto-generated method stub
+
+                }
+            });
         }
 
         /**

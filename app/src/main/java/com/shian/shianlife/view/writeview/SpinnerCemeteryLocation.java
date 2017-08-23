@@ -15,6 +15,8 @@ import com.shian.shianlife.provide.result.HrGetCemeteryStructure;
 import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessContract;
 import com.shian.shianlife.thisenum.CemeteryLocationEnum;
 
+import okhttp3.Request;
+
 
 /**
  * Created by Administrator on 2017/4/13.
@@ -201,11 +203,10 @@ public class SpinnerCemeteryLocation extends BaseWriteView {
             params.setParkIdTemp(parkIdTemp);
             params.setRowTemp(rowTemp);
         }
-        MHttpManagerFactory.getAccountManager().getCemeteryStructure(getContext(), params, new HttpResponseHandler<HrGetCemeteryStructure>() {
-
+        MHttpManagerFactory.getCemeteryManager().getCemeteryStructure(getContext(), params, new HttpResponseHandler<HrGetCemeteryStructure>() {
 
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.shian.shianlife.R;
 import com.shian.shianlife.adapter.SetMealProductAdapter;
 import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.impl.ProductManagerImpl;
 import com.shian.shianlife.provide.model.AddedCtgModel;
@@ -28,6 +29,8 @@ import com.shian.shianlife.view.dialog.AddedSetMealSelectDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Request;
 
 /**
  * Created by Administrator on 2017/3/20.
@@ -145,6 +148,11 @@ public class AddedSetmealOtherView extends LinearLayout {
                 new HttpResponseHandler<HrGetAddedCtgListResult>() {
 
                     @Override
+                    public void onStart(Request request, int id) {
+
+                    }
+
+                    @Override
                     public void onSuccess(HrGetAddedCtgListResult result) {
                         if (result != null && result.getCtgItems() != null && result.getCtgItems().size() > 0) {
                             mAddedCtgModels = result.getCtgItems();
@@ -154,9 +162,6 @@ public class AddedSetmealOtherView extends LinearLayout {
                         }
                     }
 
-                    @Override
-                    public void onStart() {
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -189,8 +194,13 @@ public class AddedSetmealOtherView extends LinearLayout {
     protected void getGoodsList(final AddedCtgModel addedCtgModel) {
         HpGetGoodsListParams params = new HpGetGoodsListParams();
         params.setCtgId(addedCtgModel.getId());
-        ProductManagerImpl.getInstance().getGoodsList(getContext(), params,
+        MHttpManagerFactory.getProductManager().getGoodsList(getContext(), params,
                 new HttpResponseHandler<HrGetGoodsListResult>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrGetGoodsListResult result) {
@@ -199,11 +209,6 @@ public class AddedSetmealOtherView extends LinearLayout {
                         }
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -279,8 +284,13 @@ public class AddedSetmealOtherView extends LinearLayout {
     private void getGoodsList(final OrderCtgItemModel mOrderCtgItemModel) {
         HpGetGoodsListParams params = new HpGetGoodsListParams();
         params.setCtgId(mOrderCtgItemModel.getId());
-        ProductManagerImpl.getInstance().getGoodsList(getContext(), params,
+        MHttpManagerFactory.getProductManager().getGoodsList(getContext(), params,
                 new HttpResponseHandler<HrGetGoodsListResult>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrGetGoodsListResult result) {
@@ -291,11 +301,6 @@ public class AddedSetmealOtherView extends LinearLayout {
                         }
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
                     @Override
                     public void onError(String message) {

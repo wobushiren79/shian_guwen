@@ -30,6 +30,8 @@ import com.shian.shianlife.view.writeview.SpinnerViewEdit;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Request;
+
 
 public class JBRDataActivity extends BaseActivity {
     TextView mTVBack;
@@ -171,8 +173,13 @@ public class JBRDataActivity extends BaseActivity {
         Utils.LogVPrint("Remark:" + params.getRemark());
         Utils.LogVPrint("Relation:" + params.getRelation());
 
-        MHttpManagerFactory.getAccountManager().saveCustomerAgentman(JBRDataActivity.this, params,
+        MHttpManagerFactory.getFuneralManager().saveCustomerAgentman(JBRDataActivity.this, params,
                 new HttpResponseHandler<Object>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(Object result) {
@@ -185,11 +192,6 @@ public class JBRDataActivity extends BaseActivity {
                         finish();
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -205,8 +207,13 @@ public class JBRDataActivity extends BaseActivity {
         orderId = getIntent().getLongExtra("orderId", 0);
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId((JBRDataActivity.this).getIntent().getLongExtra("consultId", 0));
-        MHttpManagerFactory.getAccountManager().getCustomerAgentman(JBRDataActivity.this, params,
+        MHttpManagerFactory.getFuneralManager().getCustomerAgentman(JBRDataActivity.this, params,
                 new HttpResponseHandler<HrConsultAgentman>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrConsultAgentman result) {
@@ -245,12 +252,6 @@ public class JBRDataActivity extends BaseActivity {
                         }
                         mWriteMapSelectAgentLocation.initAutoTextView(listLocationData);
                         mWriteMapSelectZSLocation.initAutoTextView(listLocationData);
-                    }
-
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
                     }
 
                     @Override

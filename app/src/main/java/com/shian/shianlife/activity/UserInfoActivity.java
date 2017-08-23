@@ -19,6 +19,7 @@ import com.shian.shianlife.provide.result.HrUserInfo;
 import java.util.List;
 
 import butterknife.InjectViews;
+import okhttp3.Request;
 
 /**
  * Created by asus on 2016/7/9.
@@ -54,9 +55,10 @@ public class UserInfoActivity extends BaseActivity {
                 params.setAppStatus(getSharedPreferences("settings", -1).getBoolean("rb", true) ? 1 : 2);
                 params.setEmail(etList.get(0).getText().toString());
                 params.setIntroduce(etList.get(1).getText().toString());
-                MHttpManagerFactory.getAccountManager().changeInfo(UserInfoActivity.this, params, new HttpResponseHandler<Object>() {
+                MHttpManagerFactory.getFuneralManager().changeInfo(UserInfoActivity.this, params, new HttpResponseHandler<Object>() {
+
                     @Override
-                    public void onStart() {
+                    public void onStart(Request request, int id) {
 
                     }
 

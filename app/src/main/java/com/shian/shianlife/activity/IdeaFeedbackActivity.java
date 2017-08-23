@@ -18,8 +18,11 @@ import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
+import com.shian.shianlife.provide.phpparams.PHPHpOpinionParams;
 import com.shian.shianlife.provide.result.HrUserInfo;
 import com.shian.shianlife.thisenum.SystemTypeEnum;
+
+import okhttp3.Request;
 
 public class IdeaFeedbackActivity extends BaseActivity {
     EditText mEditText;
@@ -94,14 +97,16 @@ public class IdeaFeedbackActivity extends BaseActivity {
             ToastUtils.show(IdeaFeedbackActivity.this, "账号错误 请重新登陆");
             return;
         }
-        RequestParams params = new RequestParams();
-        params.put("user", AppContansts.userInfoData.getName());
-        params.put("tel", AppContansts.userInfoData.getMobile());
-        params.put("content", mEditText.getText().toString());
-        params.put("userType", SystemTypeEnum.funeral.getCode());
+        PHPHpOpinionParams params = new PHPHpOpinionParams();
+        params.setUser(AppContansts.userInfoData.getName());
+        params.setTel(AppContansts.userInfoData.getMobile());
+        params.setContent(mEditText.getText().toString());
+        params.setUserType(SystemTypeEnum.funeral.getCode());
         MHttpManagerFactory.getPHPManager().setOpinion(IdeaFeedbackActivity.this, params, new HttpResponseHandler<Object>() {
+
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

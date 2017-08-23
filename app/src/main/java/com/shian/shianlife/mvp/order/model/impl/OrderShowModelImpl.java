@@ -32,7 +32,7 @@ public class OrderShowModelImpl implements IOrderShowModel {
         }
 
         listData.add(getItem(OrderItemShowEnum.funeral));
-        listData.add(getItem(OrderItemShowEnum.store));
+//        listData.add(getItem(OrderItemShowEnum.store));
 
         
         resultBean.setList(listData);

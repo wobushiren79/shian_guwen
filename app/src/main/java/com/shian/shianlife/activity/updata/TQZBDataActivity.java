@@ -41,6 +41,7 @@ import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
+import okhttp3.Request;
 
 public class TQZBDataActivity extends BaseActivity {
     private View v;
@@ -90,8 +91,13 @@ public class TQZBDataActivity extends BaseActivity {
     public void initData() {
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId(consultId);
-        MHttpManagerFactory.getAccountManager().getCustomerPreready(TQZBDataActivity.this, params,
+        MHttpManagerFactory.getFuneralManager().getCustomerPreready(TQZBDataActivity.this, params,
                 new HttpResponseHandler<HrGetCustomerPreready>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrGetCustomerPreready result) {
@@ -104,11 +110,6 @@ public class TQZBDataActivity extends BaseActivity {
                         }
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -295,8 +296,13 @@ public class TQZBDataActivity extends BaseActivity {
         params.setOrderId(orderId);
         params.setConsultId(consultId);
         params.setContractNo(et0.getText().toString());
-        MHttpManagerFactory.getAccountManager().saveCustomerPreready(TQZBDataActivity.this, params,
+        MHttpManagerFactory.getFuneralManager().saveCustomerPreready(TQZBDataActivity.this, params,
                 new HttpResponseHandler<Object>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(Object result) {
@@ -305,11 +311,6 @@ public class TQZBDataActivity extends BaseActivity {
                         finish();
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
                     @Override
                     public void onError(String message) {

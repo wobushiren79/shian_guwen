@@ -33,6 +33,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 public class CustomerJBRView extends BaseCustomerView {
 	private View v;
@@ -61,8 +62,13 @@ public class CustomerJBRView extends BaseCustomerView {
 		// lbs.setETVisiable(View.GONE);
 		HpConsultIdParams params = new HpConsultIdParams();
 		params.setConsultId(((Activity) getContext()).getIntent().getLongExtra("consultId", 0));
-		MHttpManagerFactory.getAccountManager().getCustomerAgentman(getContext(), params,
+		MHttpManagerFactory.getFuneralManager().getCustomerAgentman(getContext(), params,
 				new HttpResponseHandler<HrConsultAgentman>() {
+
+					@Override
+					public void onStart(Request request, int id) {
+
+					}
 
 					@Override
 					public void onSuccess(HrConsultAgentman result) {
@@ -87,11 +93,6 @@ public class CustomerJBRView extends BaseCustomerView {
 //						etList.get(3).setText(result.getConsultAgentman().getAddressSuffix());
 					}
 
-					@Override
-					public void onStart() {
-						// TODO Auto-generated method stub
-
-					}
 
 					@Override
 					public void onError(String message) {
@@ -172,8 +173,13 @@ public class CustomerJBRView extends BaseCustomerView {
 		params.setConsultId(((Activity) getContext()).getIntent().getLongExtra("consultId", 0));
 		params.setLinkInfo(phone);
 		params.setName(name);
-		MHttpManagerFactory.getAccountManager().saveCustomerAgentman(getContext(), params,
+		MHttpManagerFactory.getFuneralManager().saveCustomerAgentman(getContext(), params,
 				new HttpResponseHandler<Object>() {
+
+					@Override
+					public void onStart(Request request, int id) {
+
+					}
 
 					@Override
 					public void onSuccess(Object result) {
@@ -181,11 +187,6 @@ public class CustomerJBRView extends BaseCustomerView {
 						ToastUtils.show(getContext(), "保存成功");
 					}
 
-					@Override
-					public void onStart() {
-						// TODO Auto-generated method stub
-
-					}
 
 					@Override
 					public void onError(String message) {

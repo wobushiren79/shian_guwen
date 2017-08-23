@@ -16,6 +16,7 @@ import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 import com.baidu.android.pushservice.BasicPushNotificationBuilder;
 import com.baidu.android.pushservice.CustomPushNotificationBuilder;
@@ -88,9 +89,10 @@ public class SettingsActivity extends BaseActivity {
         } else {
             params.setAppStatus(2);
         }
-        MHttpManagerFactory.getAccountManager().changeInfo(SettingsActivity.this, params, new HttpResponseHandler<Object>() {
+        MHttpManagerFactory.getFuneralManager().changeInfo(SettingsActivity.this, params, new HttpResponseHandler<Object>() {
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
                 switchButton.setEnabled(false);
             }
 
@@ -117,7 +119,12 @@ public class SettingsActivity extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                MHttpManagerFactory.getAccountManager().loginout(getBaseContext(), new HttpResponseHandler<Object>() {
+                MHttpManagerFactory.getFuneralManager().loginout(getBaseContext(), new HttpResponseHandler<Object>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(Object result) {
@@ -134,11 +141,6 @@ public class SettingsActivity extends BaseActivity {
 
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -146,9 +148,10 @@ public class SettingsActivity extends BaseActivity {
 
                     }
                 });
-                MHttpManagerFactory.getAccountManager().loginoutCemetery(SettingsActivity.this, new HttpResponseHandler<Object>() {
+                MHttpManagerFactory.getCemeteryManager().loginoutCemetery(SettingsActivity.this, new HttpResponseHandler<Object>() {
+
                     @Override
-                    public void onStart() {
+                    public void onStart(Request request, int id) {
 
                     }
 
@@ -182,8 +185,13 @@ public class SettingsActivity extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                MHttpManagerFactory.getAccountManager().loginout(
+                MHttpManagerFactory.getFuneralManager().loginout(
                         getBaseContext(), new HttpResponseHandler<Object>() {
+
+                            @Override
+                            public void onStart(Request request, int id) {
+
+                            }
 
                             @Override
                             public void onSuccess(Object result) {
@@ -197,12 +205,6 @@ public class SettingsActivity extends BaseActivity {
                                 intent.putExtra("Settings", 1);
                                 setResult(1010, intent);
                                 finish();
-                            }
-
-                            @Override
-                            public void onStart() {
-                                // TODO Auto-generated method stub
-
                             }
 
                             @Override
@@ -234,9 +236,10 @@ public class SettingsActivity extends BaseActivity {
 
         params.setAppStatus(1);
 
-        MHttpManagerFactory.getAccountManager().changeInfo(this, params, new HttpResponseHandler<Object>() {
+        MHttpManagerFactory.getFuneralManager().changeInfo(this, params, new HttpResponseHandler<Object>() {
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -260,9 +263,9 @@ public class SettingsActivity extends BaseActivity {
         HpConsultIdParams params = new HpConsultIdParams();
 
         params.setAppStatus(2);
-        MHttpManagerFactory.getAccountManager().changeInfo(this, params, new HttpResponseHandler<Object>() {
+        MHttpManagerFactory.getFuneralManager().changeInfo(this, params, new HttpResponseHandler<Object>() {
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

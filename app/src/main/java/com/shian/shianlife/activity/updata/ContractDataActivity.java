@@ -1,63 +1,43 @@
 package com.shian.shianlife.activity.updata;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.baidu.mapapi.map.Text;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.order.FuneralServiceActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
-import com.shian.shianlife.common.view.customer.PicImageView;
-import com.shian.shianlife.common.view.finger.DrawView;
-import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.mapapi.CustomDialog;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.FileHttpResponseHandler;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
-import com.shian.shianlife.provide.imp.impl.OrderManagerImpl;
+import com.shian.shianlife.provide.imp.impl.FuneralOrderManagerImpl;
 import com.shian.shianlife.provide.imp.impl.ProductManagerImpl;
 import com.shian.shianlife.provide.model.BordModel;
-import com.shian.shianlife.provide.model.CemeteryModel;
 import com.shian.shianlife.provide.model.OrderCtgItemModel;
 import com.shian.shianlife.provide.model.OrderProductItemModel;
 import com.shian.shianlife.provide.model.PayInfoModel;
-import com.shian.shianlife.provide.model.ProductItemModel;
 import com.shian.shianlife.provide.model.ProjectItemModel;
 import com.shian.shianlife.provide.model.SetmealModel;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
-import com.shian.shianlife.provide.params.HpGetGoodsListParams;
 import com.shian.shianlife.provide.params.HpGetOrderDetailParams;
-import com.shian.shianlife.provide.params.HpOrderIdParams;
 import com.shian.shianlife.provide.params.HpSaveContractData;
 import com.shian.shianlife.provide.params.HpSaveCustomerContract;
-import com.shian.shianlife.provide.result.HrConsultAgentman;
-import com.shian.shianlife.provide.result.HrGetCemeteryResult;
 import com.shian.shianlife.provide.result.HrGetContractData;
-import com.shian.shianlife.provide.result.HrGetFuneralSetmealResult;
-import com.shian.shianlife.provide.result.HrGetGoodsListResult;
 import com.shian.shianlife.provide.result.HrGetMainSetmealResult;
 import com.shian.shianlife.provide.result.HrGetOrderDetailResult;
-import com.shian.shianlife.provide.result.HrOrderFeedback;
 import com.shian.shianlife.provide.result.HrUploadFile;
 import com.shian.shianlife.view.ScreenShot;
 import com.shian.shianlife.view.ScrollListView;
@@ -65,6 +45,8 @@ import com.shian.shianlife.view.dialog.SignDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Request;
 
 public class ContractDataActivity extends BaseActivity {
 
@@ -182,8 +164,13 @@ public class ContractDataActivity extends BaseActivity {
     private void getData() {
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId((ContractDataActivity.this).getIntent().getLongExtra("consultId", 0));
-        MHttpManagerFactory.getAccountManager().getContractData(ContractDataActivity.this, params,
+        MHttpManagerFactory.getFuneralManager().getContractData(ContractDataActivity.this, params,
                 new HttpResponseHandler<HrGetContractData>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrGetContractData result) {
@@ -256,11 +243,6 @@ public class ContractDataActivity extends BaseActivity {
                         mTVDLLocation.setText(adviserName);
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
 
                     @Override
@@ -339,8 +321,13 @@ public class ContractDataActivity extends BaseActivity {
                         params.setPicUrl(FileUrl);
                         params.setContractAmount(payInfo.getTotalAmount());
                         params.setConsultId(consultId);
-                        MHttpManagerFactory.getAccountManager().saveContractData(ContractDataActivity.this, params,
+                        MHttpManagerFactory.getFuneralManager().saveContractData(ContractDataActivity.this, params,
                                 new HttpResponseHandler<Object>() {
+
+                                    @Override
+                                    public void onStart(Request request, int id) {
+
+                                    }
 
                                     @Override
                                     public void onSuccess(Object result) {
@@ -348,12 +335,6 @@ public class ContractDataActivity extends BaseActivity {
                                         ToastUtils.show(ContractDataActivity.this, "上传成功");
                                         FuneralServiceActivity.C_bOrder_isRefresh = true;
                                         finish();
-
-                                    }
-
-                                    @Override
-                                    public void onStart() {
-                                        // TODO Auto-generated method stub
 
                                     }
 
@@ -658,15 +639,16 @@ public class ContractDataActivity extends BaseActivity {
                 new HttpResponseHandler<HrGetMainSetmealResult>() {
 
                     @Override
+                    public void onStart(Request request, int id) {
+
+                    }
+
+                    @Override
                     public void onSuccess(HrGetMainSetmealResult result) {
                         mainSetmeals = result.getMains();
                         getOrderDetail();
                     }
 
-                    @Override
-                    public void onStart() {
-
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -683,8 +665,13 @@ public class ContractDataActivity extends BaseActivity {
     protected void getOrderDetail() {
         HpGetOrderDetailParams params = new HpGetOrderDetailParams();
         params.setOrderId(orderId);
-        OrderManagerImpl.getInstance().getOrderDetail(this, params,
+        FuneralOrderManagerImpl.getInstance().getOrderDetail(this, params,
                 new HttpResponseHandler<HrGetOrderDetailResult>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrGetOrderDetailResult result) {
@@ -747,10 +734,6 @@ public class ContractDataActivity extends BaseActivity {
 //                        projectAdapter.notifyDataSetChanged();
                     }
 
-                    @Override
-                    public void onStart() {
-
-                    }
 
                     @Override
                     public void onError(String message) {

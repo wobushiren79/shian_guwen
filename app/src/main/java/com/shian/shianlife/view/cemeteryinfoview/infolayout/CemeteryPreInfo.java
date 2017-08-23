@@ -21,6 +21,8 @@ import com.shian.shianlife.view.writeview.EditTextViewNormal;
 import com.shian.shianlife.view.writeview.SpinnerCemeteryLocation;
 import com.shian.shianlife.view.writeview.SpinnerViewNormal;
 
+import okhttp3.Request;
+
 
 /**
  * Created by Administrator
@@ -62,10 +64,11 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
     public void getData() {
         HpCemeteryIdParams params = new HpCemeteryIdParams();
         params.setBespeakId(beSpeakId);
-        MHttpManagerFactory.getAccountManager().getCemeteryTalkSuccessContract
-                (getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessContract>() {
+        MHttpManagerFactory.getCemeteryManager().getCemeteryTalkSuccessContract(getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessContract>() {
+
+
                     @Override
-                    public void onStart() {
+                    public void onStart(Request request, int id) {
 
                     }
 
@@ -169,11 +172,11 @@ public class CemeteryPreInfo extends BaseCemeteryInfo {
         params.setChoiceService(mWriteChoiceService.getData());
         params.setRemark(mWriteRemark.getData());
         params.setCemeterySales(mWriteCemeterySales.getData());
-        MHttpManagerFactory.getAccountManager().saveCemeteryTalkSuccessContract(getContext(), params, new HttpResponseHandler<HrOrderIdResult>() {
+        MHttpManagerFactory.getCemeteryManager().saveCemeteryTalkSuccessContract(getContext(), params, new HttpResponseHandler<HrOrderIdResult>() {
 
 
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

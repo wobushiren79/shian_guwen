@@ -22,6 +22,7 @@ import android.widget.TextView;
 import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
@@ -83,8 +84,13 @@ public class EvaluateActivity extends BaseActivity {
         HpOrderIdParams params = new HpOrderIdParams();
         params.setOrderId(orderId);
         params.setOrderItemId(orderItemId);
-        MHttpManagerFactory.getAccountManager().getOrderComment(this, params,
+        MHttpManagerFactory.getFuneralManager().getOrderComment(this, params,
                 new HttpResponseHandler<HrGetComment>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrGetComment result) {
@@ -121,11 +127,6 @@ public class EvaluateActivity extends BaseActivity {
 
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -171,8 +172,13 @@ public class EvaluateActivity extends BaseActivity {
         params.setStarLevel((int) rb.getRating());
         params.setOrderId(orderId);
         params.setOrderItemId(orderItemId);
-        MHttpManagerFactory.getAccountManager().saveOrderComment(this, params,
+        MHttpManagerFactory.getFuneralManager().saveOrderComment(this, params,
                 new HttpResponseHandler<Object>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(Object result) {
@@ -182,11 +188,7 @@ public class EvaluateActivity extends BaseActivity {
                         finish();
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
 
-                    }
 
                     @Override
                     public void onError(String message) {

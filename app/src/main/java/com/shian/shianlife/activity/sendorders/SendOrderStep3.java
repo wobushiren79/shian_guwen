@@ -28,6 +28,8 @@ import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 import java.util.ArrayList;
 import java.util.Date;
 
+import okhttp3.Request;
+
 /**
  * Created by apple on 2016/12/21.
  */
@@ -100,9 +102,9 @@ public class SendOrderStep3 extends BaseSendOrder {
         params.setFuneralRemark(mWriteRemark.getData());
 
 
-        MHttpManagerFactory.getAccountManager().saveSendOrderDataFour(getContext(), params, new HttpResponseHandler<Object>() {
+        MHttpManagerFactory.getFuneralManager().saveSendOrderDataFour(getContext(), params, new HttpResponseHandler<Object>() {
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -126,9 +128,9 @@ public class SendOrderStep3 extends BaseSendOrder {
     public void getData() {
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId(consultId);
-        MHttpManagerFactory.getAccountManager().getSendOrderDataFour(getContext(), params, new HttpResponseHandler<HrGetSendOrderDataFour>() {
+        MHttpManagerFactory.getFuneralManager().getSendOrderDataFour(getContext(), params, new HttpResponseHandler<HrGetSendOrderDataFour>() {
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

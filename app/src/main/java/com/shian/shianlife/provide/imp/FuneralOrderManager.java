@@ -11,7 +11,7 @@ import com.shian.shianlife.provide.result.HrOderId;
 
 import android.content.Context;
 
-public interface OrderManager extends HttpManager {
+public interface FuneralOrderManager extends HttpManager {
 
 	// /**
 	// * 获取洽谈列表

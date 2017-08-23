@@ -98,6 +98,8 @@ dependencies {
     compile 'com.android.support:support-v4:23.4.0'
     compile 'com.github.zcweng:switch-button:0.0.2@aar'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.zhy:okhttputils:2.6.2'
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife:6.0.0'
 }

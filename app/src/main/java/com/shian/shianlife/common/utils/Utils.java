@@ -46,6 +46,7 @@ import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpSaveTime;
 import com.shian.shianlife.provide.params.HpSkuIdParams;
+import com.shian.shianlife.provide.phpparams.PHPHpAppVersionParams;
 import com.shian.shianlife.provide.phpresult.PHPHrGetVersion;
 import com.shian.shianlife.provide.result.HrGetMsgNumberForUntreated;
 import com.shian.shianlife.provide.result.HrGetSKUDetails;
@@ -56,6 +57,7 @@ import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 import com.viewpagerindicator.TabPageIndicator;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
+import okhttp3.Request;
 
 public class Utils {
 
@@ -72,7 +74,7 @@ public class Utils {
     public static void call(final View v, final String phone) {
         if (!TextUtils.isEmpty(phone)) {
             v.setVisibility(View.VISIBLE);
-                v.setOnClickListener(new OnClickListener() {
+            v.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View vv) {
                     // TODO Auto-generated method stub
@@ -149,9 +151,10 @@ public class Utils {
         //获取商品详情
         HpSkuIdParams params = new HpSkuIdParams();
         params.setSkuId(id);
-        MHttpManagerFactory.getAccountManager().getSKUDetails(context, params, new HttpResponseHandler<HrGetSKUDetails>() {
+        MHttpManagerFactory.getFuneralManager().getSKUDetails(context, params, new HttpResponseHandler<HrGetSKUDetails>() {
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -253,11 +256,11 @@ public class Utils {
      * 检测是否有更新 并执行下载
      */
     public static void checkUpData(final Context context, final boolean isToast) {
-        RequestParams params = new RequestParams();
-        params.put("appId", APPTypeEnum.ADVISER.getCode());
+        PHPHpAppVersionParams params = new PHPHpAppVersionParams();
+        params.setAppId(APPTypeEnum.ADVISER.getCode());
         MHttpManagerFactory.getPHPManager().getVersion(context, params, new HttpResponseHandler<PHPHrGetVersion>() {
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -274,7 +277,7 @@ public class Utils {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(context, UpDataService.class);
-                                intent.putExtra("updataUrl", AppContansts.PhpURL + result.getItems().get(0).getAppDownLoadUrl());
+                                intent.putExtra("updataUrl", AppContansts.PHP_BaseUrl + result.getItems().get(0).getAppDownLoadUrl());
                                 context.startService(intent);
                                 dialog.cancel();
                             }
@@ -310,6 +313,7 @@ public class Utils {
 
     /**
      * 改变颜色
+     *
      * @param drawable
      * @param colors
      * @return

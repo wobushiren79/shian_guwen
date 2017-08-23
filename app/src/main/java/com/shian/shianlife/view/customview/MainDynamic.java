@@ -25,11 +25,14 @@ import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.phpmodel.DynamicItemsInfo;
+import com.shian.shianlife.provide.phpparams.PHPHpDynamicInfoParams;
 import com.shian.shianlife.provide.phpresult.PHPHrGetDynamic;
 import com.shian.shianlife.view.ScrollListView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Request;
 
 /**
  * Created by Administrator on 2017/3/6.
@@ -67,12 +70,14 @@ public class MainDynamic extends LinearLayout {
      * 获取数据
      */
     private void getData() {
-        RequestParams requestParams = new RequestParams();
-        requestParams.put("number", showNumber);
-        requestParams.put("pagerNumber", 0);
-        MHttpManagerFactory.getPHPManager().getDynamicInfo(getContext(), requestParams, new HttpResponseHandler<PHPHrGetDynamic>() {
+        PHPHpDynamicInfoParams params=new PHPHpDynamicInfoParams();
+        params.setNumber(showNumber);
+        params.setPagerNumber( 0);
+        MHttpManagerFactory.getPHPManager().getDynamicInfo(getContext(), params, new HttpResponseHandler<PHPHrGetDynamic>() {
+
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 public class PayInfoRefundView extends LinearLayout {
 
@@ -72,17 +73,19 @@ public class PayInfoRefundView extends LinearLayout {
     void submit(View v) {
         HpRefundParams params = new HpRefundParams();
         params.setRefundItems((ArrayList<HpRefundParams.RefundItem>) ((RefundOrderActivity) getContext()).getRefundItems());
-        MHttpManagerFactory.getAccountManager().refundOrder(getContext(), params, new HttpResponseHandler<Object>() {
+        MHttpManagerFactory.getFuneralManager().refundOrder(getContext(), params, new HttpResponseHandler<Object>() {
+            @Override
+            public void onStart(Request request, int id) {
+
+            }
+
             @Override
             public void onSuccess(Object result) {
                 ToastUtils.show(getContext(),"提交成功");
                 ((RefundOrderActivity) getContext()).finish();
             }
 
-            @Override
-            public void onStart() {
 
-            }
 
             @Override
             public void onError(String message) {

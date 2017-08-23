@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.chanven.lib.cptr.loadmore.OnLoadMoreListener;
@@ -24,33 +23,25 @@ import com.shian.shianlife.activity.newcemetery.InfoDetailsActivity;
 import com.shian.shianlife.activity.newcemetery.TalkFailActivity;
 import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.TArrayListAdapter;
-import com.shian.shianlife.common.utils.TimeUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.utils.ViewGropMap;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
-import com.shian.shianlife.provide.imp.CemeteryOrderManager;
-import com.shian.shianlife.provide.imp.impl.CemeteryOrderManagerImpl;
-import com.shian.shianlife.provide.imp.impl.OrderManagerImpl;
+import com.shian.shianlife.provide.imp.impl.CemeteryManagerImpl;
 import com.shian.shianlife.provide.model.CemeteryOrderModel;
-import com.shian.shianlife.provide.model.OrderListModel;
 import com.shian.shianlife.provide.params.HpCemeteryBeSpeakCancelParams;
 import com.shian.shianlife.provide.params.HpGetOrderListParams;
 import com.shian.shianlife.provide.result.HrGetCemeteryListData;
-import com.shian.shianlife.provide.result.HrGetOrderListResult;
 import com.shian.shianlife.thisenum.BespeakCancelStatusEnum;
 import com.shian.shianlife.thisenum.BuildOrderEnum;
 import com.shian.shianlife.thisenum.CemeteryBeSpeakStateEnum;
 import com.shian.shianlife.view.popupbutton.PopupButton;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.transform.Templates;
-
-import butterknife.InjectView;
+import okhttp3.Request;
 
 /**
  * Created by zm.
@@ -323,9 +314,11 @@ public class CemeteryBuildView extends BaseOrderView {
                                         params.setBespeakId(orderModel.getBespeakId());
                                         params.setBespeakStatus(orderModel.getBespeakStatus());
                                         params.setCancelReason(editText.getText().toString());
-                                        MHttpManagerFactory.getAccountManager().cancelCemeteryBeSpeak(getContext(), params, new HttpResponseHandler<Object>() {
+                                        MHttpManagerFactory.getCemeteryManager().cancelCemeteryBeSpeak(getContext(), params, new HttpResponseHandler<Object>() {
+
+
                                             @Override
-                                            public void onStart() {
+                                            public void onStart(Request request, int id) {
 
                                             }
 
@@ -411,9 +404,9 @@ public class CemeteryBuildView extends BaseOrderView {
         HpGetOrderListParams params = new HpGetOrderListParams();
         params.setPageNum(page);
         params.setPageSize(pageSize);
-        CemeteryOrderManagerImpl.getInstance().getOrderList(getContext(), params, 0, new HttpResponseHandler<HrGetCemeteryListData>() {
+        MHttpManagerFactory.getCemeteryManager().getOrderList(getContext(), params, 0, new HttpResponseHandler<HrGetCemeteryListData>() {
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -448,9 +441,10 @@ public class CemeteryBuildView extends BaseOrderView {
         HpGetOrderListParams params = new HpGetOrderListParams();
         params.setPageNum(page);
         params.setPageSize(pageSize);
-        CemeteryOrderManagerImpl.getInstance().getOrderList(getContext(), params, 0, new HttpResponseHandler<HrGetCemeteryListData>() {
+        MHttpManagerFactory.getCemeteryManager().getOrderList(getContext(), params, 0, new HttpResponseHandler<HrGetCemeteryListData>() {
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

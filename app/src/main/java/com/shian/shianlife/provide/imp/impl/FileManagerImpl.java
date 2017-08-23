@@ -49,7 +49,7 @@ public class FileManagerImpl implements FileManager {
         params.addBodyParameter(file, new File(path));
 
         HttpUtils http = new HttpUtils();
-        http.send(HttpRequest.HttpMethod.POST, AppContansts.BaseURL
+        http.send(HttpRequest.HttpMethod.POST, AppContansts.Funeral_BaseUrl
                 + "/file/upload", params, new RequestCallBack<String>() {
 
             @Override

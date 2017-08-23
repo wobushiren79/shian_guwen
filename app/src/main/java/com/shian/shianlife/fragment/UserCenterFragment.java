@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 
 import com.kf5sdk.init.KF5SDKConfig;
@@ -104,9 +105,9 @@ public class UserCenterFragment extends BaseFragment {
     private HrUserInfo mHrUserInfo;
 
     private void getUserInfo() {
-        MHttpManagerFactory.getAccountManager().getUserInfo(getActivity(), new HttpResponseHandler<HrUserInfo>() {
+        MHttpManagerFactory.getFuneralManager().getUserInfo(getActivity(), new HttpResponseHandler<HrUserInfo>() {
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

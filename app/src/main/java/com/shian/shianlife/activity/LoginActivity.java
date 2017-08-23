@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
@@ -38,10 +39,7 @@ public class LoginActivity extends BaseActivity {
     CheckBox cbRe;
     @InjectView(R.id.cb_login_auto)
     CheckBox cbAuto;
-    @InjectView(R.id.rb_state1)
-    RadioButton rbState1;
-    @InjectView(R.id.rb_state2)
-    RadioButton rbState2;
+
     @InjectView(R.id.btn_login)
     LoadingButton lbLogin;
     @InjectView(R.id.rl_content)
@@ -75,12 +73,6 @@ public class LoginActivity extends BaseActivity {
     private void changeState() {
         int isChange = getIntent().getIntExtra("loginStateChange", -1);
         if (isChange == 1) {
-            int loginType = loginS.getLoginType();
-            if (loginType == 0) {
-                rbState2.setChecked(true);
-            } else if (loginType == 1) {
-                rbState1.setChecked(true);
-            }
             String username = etUserName.getText().toString();
             String password = etUserPassword.getText().toString();
             login(username, password);
@@ -95,21 +87,10 @@ public class LoginActivity extends BaseActivity {
         if (loginS.isRemeberPassword()) {
             cbRe.setChecked(true);
             etUserPassword.setText(loginS.getPassword());
-            if (loginS.getLoginType() == 0) {
-                rbState1.setChecked(true);
-            } else if (loginS.getLoginType() == 1) {
-                rbState2.setChecked(true);
-            }
-
         }
 
         if (loginS.isAutoLogin()) {
             cbAuto.setChecked(true);
-            if (loginS.getLoginType() == 0) {
-                rbState1.setChecked(true);
-            } else if (loginS.getLoginType() == 1) {
-                rbState2.setChecked(true);
-            }
             login(loginS.getUsername(), loginS.getPassword());
         }
 
@@ -134,79 +115,39 @@ public class LoginActivity extends BaseActivity {
             ToastUtils.show(this, "消息推送正在初始化，请稍后。。。");
             return;
         }
-        if (rbState1.isChecked()) {
-            //登录状态为普通类型
-            lbLogin.setLoading();
-            final HpLoginParams params = new HpLoginParams();
-            params.setPassword(etUserPassword.getText().toString());
-            params.setUsername(etUserName.getText().toString());
-            params.setSystemType("2");
-            params.setChannelId(SharePerfrenceUtils.getShareChannelId(this));
-            MHttpManagerFactory.getAccountManager().login(this, params, new HttpResponseHandler<HrLoginResult>() {
 
-                @Override
-                public void onSuccess(final HrLoginResult result) {
-                    AppContansts.userLoginInfo = result;
-                    SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, cbRe.isChecked(),
-                            cbAuto.isChecked(), 0);
-                    //判断是否要进行公墓登陆
-                    if (result.getToken() != null && !result.getToken().equals("")) {
-                        loginCemetery(result);
-                    } else {
-                        loginSuccess(result);
-                        SharePerfrenceUtils.setHasCemetery(LoginActivity.this, false);
-                    }
+        //登录状态为普通类型
+        lbLogin.setLoading();
+        final HpLoginParams params = new HpLoginParams();
+        params.setPassword(etUserPassword.getText().toString());
+        params.setUsername(etUserName.getText().toString());
+        params.setSystemType("2");
+        params.setChannelId(SharePerfrenceUtils.getShareChannelId(this));
+        MHttpManagerFactory.getFuneralManager().login(this, params, new HttpResponseHandler<HrLoginResult>() {
+
+            @Override
+            public void onStart(Request request, int id) {
+
+            }
+
+            @Override
+            public void onSuccess(final HrLoginResult result) {
+                AppContansts.userLoginInfo = result;
+                SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, cbRe.isChecked(), cbAuto.isChecked());
+                //判断是否要进行公墓登陆
+                if (result.getToken() != null && !result.getToken().equals("")) {
+                    loginCemetery(result);
+                } else {
+                    loginSuccess(result);
                 }
+            }
 
-                @Override
-                public void onStart() {
 
-                }
-
-                @Override
-                public void onError(String message) {
-                    lbLogin.setNormal();
-                }
-            });
-        }
-        if (rbState2.isChecked()) {
-            //登录状态为公墓类型
-//            lbLogin.setLoading();
-//            HpLoginParams params = new HpLoginParams();
-//            params.setPassword(etUserPassword.getText().toString());
-//            params.setUsername(etUserName.getText().toString());
-//            params.setSystemType("2");
-//            params.setChannelId(SharePerfrenceUtils.getShareChannelId(this));
-//
-//            MHttpManagerFactory.getAccountManager().loginCemetery(this, params, new HttpResponseHandler<HrLoginResult>() {
-//
-//                @Override
-//                public void onSuccess(HrLoginResult result) {
-//                    AppContansts.userLoginInfo = result;
-//                    lbLogin.setComplete();
-//                    cookie = result.getSessionId();
-//                    HttpRequestExecutor.setSession(cookie, LoginActivity.this);
-//                    SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, cbRe.isChecked(),
-//                            cbAuto.isChecked(), 1);
-//                    ToastUtils.show(getBaseContext(), "登陆成功");
-//                    Intent in = new Intent(LoginActivity.this, MainActivity.class);
-//                    String resultBack = JSONUtil.writeEntityToJSONString(result);
-//                    in.putExtra("loginData", resultBack);
-//                    startActivity(in);
-//                    finish();
-//                }
-//
-//                @Override
-//                public void onStart() {
-//
-//                }
-//
-//                @Override
-//                public void onError(String message) {
-//                    lbLogin.setNormal();
-//                }
-//            });
-        }
+            @Override
+            public void onError(String message) {
+                lbLogin.setNormal();
+            }
+        });
 
 
     }
@@ -219,9 +160,11 @@ public class LoginActivity extends BaseActivity {
     private void loginCemetery(final HrLoginResult result) {
         HpLoginParams paramsCemetery = new HpLoginParams();
         paramsCemetery.setToken(result.getToken());
-        MHttpManagerFactory.getAccountManager().loginCemetery(LoginActivity.this, paramsCemetery, new HttpResponseHandler<HrLoginResult>() {
+        MHttpManagerFactory.getCemeteryManager().loginCemetery(LoginActivity.this, paramsCemetery, new HttpResponseHandler<HrLoginResult>() {
+
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -229,13 +172,12 @@ public class LoginActivity extends BaseActivity {
             public void onSuccess(HrLoginResult resultCemetery) {
                 AppContansts.userCemetery = resultCemetery;
                 loginSuccess(result);
-                SharePerfrenceUtils.setHasCemetery(LoginActivity.this, true);
+
             }
 
             @Override
             public void onError(String message) {
                 loginSuccess(result);
-                SharePerfrenceUtils.setHasCemetery(LoginActivity.this, false);
             }
         });
     }

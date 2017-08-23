@@ -29,6 +29,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 public class CustomerQtView extends BaseCustomerView {
 	private View v;
@@ -61,8 +62,13 @@ public class CustomerQtView extends BaseCustomerView {
 				"consultId", 0));
 		initSp0("佛教");
 		initSp1("简办");
-		MHttpManagerFactory.getAccountManager().getCustomerTalk(getContext(),
+		MHttpManagerFactory.getFuneralManager().getCustomerTalk(getContext(),
 				params, new HttpResponseHandler<HrConsultFuneral>() {
+
+					@Override
+					public void onStart(Request request, int id) {
+
+					}
 
 					@Override
 					public void onSuccess(HrConsultFuneral result) {
@@ -96,11 +102,7 @@ public class CustomerQtView extends BaseCustomerView {
 								.getTalkAddressSuffix());
 					}
 
-					@Override
-					public void onStart() {
-						// TODO Auto-generated method stub
 
-					}
 
 					@Override
 					public void onError(String message) {
@@ -179,19 +181,18 @@ public class CustomerQtView extends BaseCustomerView {
 		params.setOther(etList.get(3).getText().toString());
 		params.setTalkGpsAddress(etList.get(0).getText().toString());
 		params.setTalkAddress(lbsView.getTalkAddress());
-		MHttpManagerFactory.getAccountManager().saveCustomerTalk(getContext(),
+		MHttpManagerFactory.getFuneralManager().saveCustomerTalk(getContext(),
 				params, new HttpResponseHandler<Object>() {
+
+					@Override
+					public void onStart(Request request, int id) {
+
+					}
 
 					@Override
 					public void onSuccess(Object result) {
 						// TODO Auto-generated method stub
 						ToastUtils.show(getContext(), "保存成功");
-					}
-
-					@Override
-					public void onStart() {
-						// TODO Auto-generated method stub
-
 					}
 
 					@Override

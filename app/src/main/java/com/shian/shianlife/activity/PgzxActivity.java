@@ -54,6 +54,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
+import okhttp3.Request;
 
 public class PgzxActivity extends BaseActivity {
     @InjectView(R.id.tv_neworder1)
@@ -462,9 +463,13 @@ public class PgzxActivity extends BaseActivity {
                                     public void onClick(DialogInterface dialog, int which) {
                                         HpAcceptParams params = new HpAcceptParams();
                                         params.setOrderItemId(templateItem.getId());
-                                        MHttpManagerFactory.getAccountManager()
-                                                .applyDispatch(PgzxActivity.this, params,
+                                        MHttpManagerFactory.getFuneralManager().applyDispatch(PgzxActivity.this, params,
                                                         new HttpResponseHandler<Object>() {
+
+                                                            @Override
+                                                            public void onStart(Request request, int id) {
+
+                                                            }
 
                                                             @Override
                                                             public void onSuccess(
@@ -479,12 +484,6 @@ public class PgzxActivity extends BaseActivity {
                                                                 templateItem.setItemStatus(2);
                                                             }
 
-                                                            @Override
-                                                            public void onStart() {
-                                                                // TODO Auto-generated
-                                                                // method stub
-
-                                                            }
 
                                                             @Override
                                                             public void onError(
@@ -574,8 +573,13 @@ public class PgzxActivity extends BaseActivity {
     private void getOrderList() {
         HpAcceptParams params = new HpAcceptParams();
         params.setOrderId(getIntent().getLongExtra("orderId", 0));
-        MHttpManagerFactory.getAccountManager().getOrderItemList(this, params,
+        MHttpManagerFactory.getFuneralManager().getOrderItemList(this, params,
                 new HttpResponseHandler<HrOrderItenList>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrOrderItenList result) {
@@ -614,11 +618,6 @@ public class PgzxActivity extends BaseActivity {
                     }
 
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -783,19 +782,20 @@ public class PgzxActivity extends BaseActivity {
         params.setAddAdditions(addList);
         params.setOrderItemId(id);
         params.setNote(note);
-        MHttpManagerFactory.getAccountManager().saveItemNote(this, params,
+        MHttpManagerFactory.getFuneralManager().saveItemNote(this, params,
                 new HttpResponseHandler<Object>() {
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
+
                     @Override
                     public void onSuccess(Object result) {
                         // TODO Auto-generated method stub
                         ToastUtils.show(getBaseContext(), "保存备注和图片成功");
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
 
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -818,8 +818,12 @@ public class PgzxActivity extends BaseActivity {
             public void onClick(DialogInterface dialog, int which) {
                 HpAcceptParams params = new HpAcceptParams();
                 params.setOrderId(orderId);
-                MHttpManagerFactory.getAccountManager().endService(PgzxActivity.this, params,
-                        new HttpResponseHandler<Object>() {
+                MHttpManagerFactory.getFuneralManager().endService(PgzxActivity.this, params, new HttpResponseHandler<Object>() {
+
+                            @Override
+                            public void onStart(Request request, int id) {
+
+                            }
 
                             @Override
                             public void onSuccess(Object result) {
@@ -829,11 +833,7 @@ public class PgzxActivity extends BaseActivity {
                                 FuneralServiceActivity.C_bOrder_isRefresh = true;
                             }
 
-                            @Override
-                            public void onStart() {
-                                // TODO Auto-generated method stub
 
-                            }
 
                             @Override
                             public void onError(String message) {

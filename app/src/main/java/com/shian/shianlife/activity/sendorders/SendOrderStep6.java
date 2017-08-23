@@ -24,6 +24,8 @@ import com.shian.shianlife.view.writeview.SpinnerViewNormal;
 
 import java.util.ArrayList;
 
+import okhttp3.Request;
+
 /**
  * Created by apple on 2016/12/21.
  */
@@ -69,9 +71,9 @@ public class SendOrderStep6 extends BaseSendOrder {
         params.setDeadmanIdentity(mWriteDeadmanIdentity.getData());
         params.setConsultId(consultId);
         params.setCemeteryName(mWriteCemeteryName.getData());
-        MHttpManagerFactory.getAccountManager().saveSendOrderDataSeven(getContext(), params, new HttpResponseHandler<Object>() {
+        MHttpManagerFactory.getFuneralManager().saveSendOrderDataSeven(getContext(), params, new HttpResponseHandler<Object>() {
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -94,9 +96,9 @@ public class SendOrderStep6 extends BaseSendOrder {
     public void getData() {
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId(consultId);
-        MHttpManagerFactory.getAccountManager().getSendOrderDataSeven(getContext(), params, new HttpResponseHandler<HrGetSendOrderDataSeven>() {
+        MHttpManagerFactory.getFuneralManager().getSendOrderDataSeven(getContext(), params, new HttpResponseHandler<HrGetSendOrderDataSeven>() {
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

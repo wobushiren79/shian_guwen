@@ -18,6 +18,8 @@ import com.shian.shianlife.view.writeview.EditTextViewNormal;
 import com.shian.shianlife.view.writeview.MapSelectViewNormal;
 import com.shian.shianlife.view.writeview.SpinnerViewNormal;
 
+import okhttp3.Request;
+
 
 /**
  * Created by Administrator on 2017/4/12.
@@ -54,11 +56,10 @@ public class CemeteryAgentManInfo extends BaseCemeteryInfo {
         HpCemeteryIdParams params = new HpCemeteryIdParams();
         params.setBespeakId(beSpeakId);
         params.setOrderId(orderId);
-        MHttpManagerFactory.getAccountManager().getCemeteryTalkSuccessAgentMan(getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessAgentMan>() {
-
+        MHttpManagerFactory.getCemeteryManager().getCemeteryTalkSuccessAgentMan(getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessAgentMan>() {
 
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -114,11 +115,10 @@ public class CemeteryAgentManInfo extends BaseCemeteryInfo {
         params.setAgentmanCardId(mAgentManCardId.getData());
         params.setAgentmanEmail(mAgentManEmail.getData());
         params.setRemark(mRemark.getData());
-        MHttpManagerFactory.getAccountManager().saveCemeteryTalkSuccessAgentMan(getContext(), params, new HttpResponseHandler<Object>() {
-
+        MHttpManagerFactory.getCemeteryManager().saveCemeteryTalkSuccessAgentMan(getContext(), params, new HttpResponseHandler<Object>() {
 
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

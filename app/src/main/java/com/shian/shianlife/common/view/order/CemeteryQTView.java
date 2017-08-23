@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +19,8 @@ import android.widget.TextView;
 import com.chanven.lib.cptr.loadmore.OnLoadMoreListener;
 import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper;
 import com.shian.shianlife.R;
-import com.shian.shianlife.activity.map.NewRoutePlanActivity;
 import com.shian.shianlife.activity.map.NewRoutePlanOtherActivity;
-import com.shian.shianlife.activity.map.RoutePlanActivity;
 import com.shian.shianlife.activity.cemetery.BuildNewOrderActivity;
-import com.shian.shianlife.activity.cemetery.BuyCemeteryInfoActivity;
 import com.shian.shianlife.activity.cemetery.CemeteryTalkFailActivity;
 import com.shian.shianlife.activity.cemetery.InfoDetailsActivity;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -32,17 +28,15 @@ import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
-import com.shian.shianlife.provide.imp.impl.CemeteryOrderManagerImpl;
+import com.shian.shianlife.provide.imp.impl.CemeteryManagerImpl;
 import com.shian.shianlife.provide.model.CemeteryOrderModel;
-import com.shian.shianlife.provide.params.HpCetemeryAcceptParams;
-import com.shian.shianlife.provide.params.HpCetemeryRejectParams;
 import com.shian.shianlife.provide.params.HpGetOrderListParams;
 import com.shian.shianlife.provide.result.HrGetCemeteryListData;
-import com.shian.shianlife.thisenum.CemeteryOrderInfoStateEnum;
-import com.shian.shianlife.thisenum.TalkEditInfoEnum;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Request;
 
 
 @SuppressLint("InflateParams")
@@ -109,9 +103,10 @@ public class CemeteryQTView extends BaseOrderView {
         HpGetOrderListParams params = new HpGetOrderListParams();
         params.setPageNum(page);
         params.setPageSize(pageSize);
-        CemeteryOrderManagerImpl.getInstance().getOrderList(getContext(), params, 0, new HttpResponseHandler<HrGetCemeteryListData>() {
+        MHttpManagerFactory.getCemeteryManager().getOrderList(getContext(), params, 0, new HttpResponseHandler<HrGetCemeteryListData>() {
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

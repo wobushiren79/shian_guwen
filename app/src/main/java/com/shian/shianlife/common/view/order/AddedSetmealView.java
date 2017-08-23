@@ -16,6 +16,7 @@ import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.view.editor.SetmealProductItemView;
 import com.shian.shianlife.common.view.order.AddedItemView.OnChangeListener;
 import com.shian.shianlife.common.view.order.AddedItemView.OnDeleteListener;
+import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.impl.ProductManagerImpl;
 import com.shian.shianlife.provide.model.AddedCtgModel;
@@ -36,297 +37,299 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 /**
  * 增值服务
- * 
- * @author w9433
  *
+ * @author w9433
  */
 @SuppressLint("InflateParams")
 public class AddedSetmealView extends FrameLayout {
 
-	@InjectView(R.id.tv_additem)
-	TextView tv_additem;
+    @InjectView(R.id.tv_additem)
+    TextView tv_additem;
 
-	/**
-	 * 所有的增值服务产品列表
-	 */
-	List<AddedCtgModel> mAddedCtgModels;
+    /**
+     * 所有的增值服务产品列表
+     */
+    List<AddedCtgModel> mAddedCtgModels;
 
-	ProjectItemModel mProjectItemModel;
+    ProjectItemModel mProjectItemModel;
 
-	int addedNum;
+    int addedNum;
 
-	private LinearLayout mLinearLayout;
+    private LinearLayout mLinearLayout;
 
-	List<CreateOrderProductItemModel> mProductItemModels;
+    List<CreateOrderProductItemModel> mProductItemModels;
 
-	public AddedSetmealView(Context context, AttributeSet attrs, int defStyleAttr) {
-		super(context, attrs, defStyleAttr);
-		initView();
-	}
+    public AddedSetmealView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        initView();
+    }
 
-	public AddedSetmealView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		initView();
-	}
+    public AddedSetmealView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        initView();
+    }
 
-	public AddedSetmealView(Context context) {
-		super(context);
-		initView();
-	}
+    public AddedSetmealView(Context context) {
+        super(context);
+        initView();
+    }
 
-	private void initView() {
-		mLinearLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_addedsetmeal, null);
-		addView(mLinearLayout);
-		ButterKnife.inject(this);
-		mProductItemModels = new ArrayList<CreateOrderProductItemModel>();
-	}
+    private void initView() {
+        mLinearLayout = (LinearLayout) LayoutInflater.from(getContext()).inflate(R.layout.view_addedsetmeal, null);
+        addView(mLinearLayout);
+        ButterKnife.inject(this);
+        mProductItemModels = new ArrayList<CreateOrderProductItemModel>();
+    }
 
-	@OnClick(R.id.tv_additem)
-	void addAddedCtg() {
-		if (mAddedCtgModels == null) {
-			getAddedCtgList();
-		} else {
-			showSelectAddedCtg();
-		}
-	}
+    @OnClick(R.id.tv_additem)
+    void addAddedCtg() {
+        if (mAddedCtgModels == null) {
+            getAddedCtgList();
+        } else {
+            showSelectAddedCtg();
+        }
+    }
 
-	/**
-	 * 获取增值产品分类
-	 */
-	private void getAddedCtgList() {
-		HpGetAddedCtgListParams params = new HpGetAddedCtgListParams();
-		params.setProjectId(4);
-		ProductManagerImpl.getInstance().getAddedCtgList(getContext(), params,
-				new HttpResponseHandler<HrGetAddedCtgListResult>() {
+    /**
+     * 获取增值产品分类
+     */
+    private void getAddedCtgList() {
+        HpGetAddedCtgListParams params = new HpGetAddedCtgListParams();
+        params.setProjectId(4);
+        MHttpManagerFactory.getProductManager().getAddedCtgList(getContext(), params,
+                new HttpResponseHandler<HrGetAddedCtgListResult>() {
 
-					@Override
-					public void onSuccess(HrGetAddedCtgListResult result) {
-						if (result != null && result.getCtgItems() != null && result.getCtgItems().size() > 0) {
-							mAddedCtgModels = result.getCtgItems();
-							showSelectAddedCtg();
-						} else {
-							ToastUtils.show(getContext(), "暂无增值服务产品");
-						}
-					}
+                    @Override
+                    public void onStart(Request request, int id) {
 
-					@Override
-					public void onStart() {
-					}
+                    }
 
-					@Override
-					public void onError(String message) {
-					}
-				});
-	}
-
-	/**
-	 * 选择增值服务产品
-	 */
-	protected void showSelectAddedCtg() {
-		ArrayAdapter<AddedCtgModel> adapter = new ArrayAdapter<AddedCtgModel>(getContext(),
-				android.R.layout.simple_list_item_1, mAddedCtgModels);
-		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-		builder.setTitle("选择增值服务产品");
-		builder.setSingleChoiceItems(adapter, 0, new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.dismiss();
-				getGoodsList(mAddedCtgModels.get(which));
-			}
-		});
-		builder.show();
-	}
-
-	/**
-	 * 根据产品获取商品列表
-	 * 
-	 * @param addedCtgModel
-	 */
-	protected void getGoodsList(final AddedCtgModel addedCtgModel) {
-		HpGetGoodsListParams params = new HpGetGoodsListParams();
-		params.setCtgId(addedCtgModel.getId());
-		ProductManagerImpl.getInstance().getGoodsList(getContext(), params,
-				new HttpResponseHandler<HrGetGoodsListResult>() {
-
-					@Override
-					public void onSuccess(HrGetGoodsListResult result) {
-						if (result != null && result.getProductItems() != null && result.getProductItems().size() > 0) {
-							addAddedCtgView(result.getProductItems(), addedCtgModel);
-						}
-					}
-
-					@Override
-					public void onStart() {
-						// TODO Auto-generated method stub
-
-					}
-
-					@Override
-					public void onError(String message) {
-						// TODO Auto-generated method stub
-
-					}
-				});
-	}
+                    @Override
+                    public void onSuccess(HrGetAddedCtgListResult result) {
+                        if (result != null && result.getCtgItems() != null && result.getCtgItems().size() > 0) {
+                            mAddedCtgModels = result.getCtgItems();
+                            showSelectAddedCtg();
+                        } else {
+                            ToastUtils.show(getContext(), "暂无增值服务产品");
+                        }
+                    }
 
 
+                    @Override
+                    public void onError(String message) {
+                    }
+                });
+    }
+
+    /**
+     * 选择增值服务产品
+     */
+    protected void showSelectAddedCtg() {
+        ArrayAdapter<AddedCtgModel> adapter = new ArrayAdapter<AddedCtgModel>(getContext(),
+                android.R.layout.simple_list_item_1, mAddedCtgModels);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("选择增值服务产品");
+        builder.setSingleChoiceItems(adapter, 0, new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                getGoodsList(mAddedCtgModels.get(which));
+            }
+        });
+        builder.show();
+    }
+
+    /**
+     * 根据产品获取商品列表
+     *
+     * @param addedCtgModel
+     */
+    protected void getGoodsList(final AddedCtgModel addedCtgModel) {
+        HpGetGoodsListParams params = new HpGetGoodsListParams();
+        params.setCtgId(addedCtgModel.getId());
+        MHttpManagerFactory.getProductManager().getGoodsList(getContext(), params,
+                new HttpResponseHandler<HrGetGoodsListResult>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(HrGetGoodsListResult result) {
+                        if (result != null && result.getProductItems() != null && result.getProductItems().size() > 0) {
+                            addAddedCtgView(result.getProductItems(), addedCtgModel);
+                        }
+                    }
 
 
-	/**
-	 * 添加一款产品
-	 * 
-	 * @param productItems
-	 * @param addedCtgModel
-	 */
-	protected void addAddedCtgView(List<GoodsModel> productItems, AddedCtgModel addedCtgModel) {
-		final CreateOrderProductItemModel model = new CreateOrderProductItemModel();
-		model.setCategoryId(addedCtgModel.getId());
-		model.setProjectId(4);
-		mProductItemModels.add(model);
-		final AddedItemView addedItemView = new AddedItemView(getContext(), productItems, addedCtgModel, model);
-		addedItemView.setOnChangeListener(new OnChangeListener() {
+                    @Override
+                    public void onError(String message) {
+                        // TODO Auto-generated method stub
 
-			@Override
-			public void onChange(boolean isFirst) {
-				if (onAddedChangeListener != null) {
-					onAddedChangeListener.onChange();
-				}
-			}
-		});
-		addedItemView.setOnDeleteListener(new OnDeleteListener() {
+                    }
+                });
+    }
 
-			@Override
-			public void onDelete(CreateOrderProductItemModel model) {
-				mProductItemModels.remove(model);
-				mLinearLayout.removeView(addedItemView);
-				if (onAddedChangeListener != null) {
-					onAddedChangeListener.onChange();
-				}
-			}
-		});
-		mLinearLayout.addView(addedItemView, mLinearLayout.getChildCount() - 1);
-	}
 
-	public List<CreateOrderProductItemModel> getProductItemModels() {
-		List<CreateOrderProductItemModel> newList=new ArrayList<CreateOrderProductItemModel>();
-		if(mProductItemModels!=null)
-		for(CreateOrderProductItemModel m:mProductItemModels){
-			if(!m.isChange()){
-				newList.add(m);
-			}
-		}
-		return newList;
-	}
-	public List<CreateOrderProductItemModel> getProductItemModelsT() {
-		List<CreateOrderProductItemModel> newList=new ArrayList<CreateOrderProductItemModel>();
-		if(mProductItemModels!=null)
-			for(CreateOrderProductItemModel m:mProductItemModels){
-				if(m.getStatusFlag()!=2){
-					newList.add(m);
-				}
-			}
-		return newList;
-	}
-	OnAddedChangeListener onAddedChangeListener;
+    /**
+     * 添加一款产品
+     *
+     * @param productItems
+     * @param addedCtgModel
+     */
+    protected void addAddedCtgView(List<GoodsModel> productItems, AddedCtgModel addedCtgModel) {
+        final CreateOrderProductItemModel model = new CreateOrderProductItemModel();
+        model.setCategoryId(addedCtgModel.getId());
+        model.setProjectId(4);
+        mProductItemModels.add(model);
+        final AddedItemView addedItemView = new AddedItemView(getContext(), productItems, addedCtgModel, model);
+        addedItemView.setOnChangeListener(new OnChangeListener() {
 
-	public void setOnAddedChangeListener(OnAddedChangeListener onAddedChangeListener) {
-		this.onAddedChangeListener = onAddedChangeListener;
-	}
+            @Override
+            public void onChange(boolean isFirst) {
+                if (onAddedChangeListener != null) {
+                    onAddedChangeListener.onChange();
+                }
+            }
+        });
+        addedItemView.setOnDeleteListener(new OnDeleteListener() {
 
-	public interface OnAddedChangeListener {
-		public void onChange();
-	}
+            @Override
+            public void onDelete(CreateOrderProductItemModel model) {
+                mProductItemModels.remove(model);
+                mLinearLayout.removeView(addedItemView);
+                if (onAddedChangeListener != null) {
+                    onAddedChangeListener.onChange();
+                }
+            }
+        });
+        mLinearLayout.addView(addedItemView, mLinearLayout.getChildCount() - 1);
+    }
 
-	public void setCtgItems(HrGetOrderDetailResult result) {
-		for (ProjectItemModel mProjectItemModel : result.getProjectItems()) {
-			if ("增值项目".equals(mProjectItemModel.getName())) {
-				this.mProjectItemModel = mProjectItemModel;
-				for (OrderCtgItemModel mOrderCtgItemModel : mProjectItemModel.getCtgItems()) {
-					getGoodsList(mOrderCtgItemModel);
-				}
-				break;
-			}
-		}
+    public List<CreateOrderProductItemModel> getProductItemModels() {
+        List<CreateOrderProductItemModel> newList = new ArrayList<CreateOrderProductItemModel>();
+        if (mProductItemModels != null)
+            for (CreateOrderProductItemModel m : mProductItemModels) {
+                if (!m.isChange()) {
+                    newList.add(m);
+                }
+            }
+        return newList;
+    }
 
-	}
+    public List<CreateOrderProductItemModel> getProductItemModelsT() {
+        List<CreateOrderProductItemModel> newList = new ArrayList<CreateOrderProductItemModel>();
+        if (mProductItemModels != null)
+            for (CreateOrderProductItemModel m : mProductItemModels) {
+                if (m.getStatusFlag() != 2) {
+                    newList.add(m);
+                }
+            }
+        return newList;
+    }
 
-	private void getGoodsList(final OrderCtgItemModel mOrderCtgItemModel) {
-		HpGetGoodsListParams params = new HpGetGoodsListParams();
-		params.setCtgId(mOrderCtgItemModel.getId());
-		ProductManagerImpl.getInstance().getGoodsList(getContext(), params,
-				new HttpResponseHandler<HrGetGoodsListResult>() {
+    OnAddedChangeListener onAddedChangeListener;
 
-					@Override
-					public void onSuccess(HrGetGoodsListResult result) {
-						if (result != null && result.getProductItems() != null && result.getProductItems().size() > 0) {
-							for (OrderProductItemModel mOrderProductItemModel : mOrderCtgItemModel.getProductItems()) {
-								addAddedCtgView(result.getProductItems(), mOrderCtgItemModel, mOrderProductItemModel);
-							}
-						}
-					}
+    public void setOnAddedChangeListener(OnAddedChangeListener onAddedChangeListener) {
+        this.onAddedChangeListener = onAddedChangeListener;
+    }
 
-					@Override
-					public void onStart() {
-						// TODO Auto-generated method stub
+    public interface OnAddedChangeListener {
+        public void onChange();
+    }
 
-					}
+    public void setCtgItems(HrGetOrderDetailResult result) {
+        for (ProjectItemModel mProjectItemModel : result.getProjectItems()) {
+            if ("增值项目".equals(mProjectItemModel.getName())) {
+                this.mProjectItemModel = mProjectItemModel;
+                for (OrderCtgItemModel mOrderCtgItemModel : mProjectItemModel.getCtgItems()) {
+                    getGoodsList(mOrderCtgItemModel);
+                }
+                break;
+            }
+        }
 
-					@Override
-					public void onError(String message) {
-						// TODO Auto-generated method stub
+    }
 
-					}
-				});
+    private void getGoodsList(final OrderCtgItemModel mOrderCtgItemModel) {
+        HpGetGoodsListParams params = new HpGetGoodsListParams();
+        params.setCtgId(mOrderCtgItemModel.getId());
+        MHttpManagerFactory.getProductManager().getGoodsList(getContext(), params,
+                new HttpResponseHandler<HrGetGoodsListResult>() {
 
-	}
+                    @Override
+                    public void onStart(Request request, int id) {
 
-	protected void addAddedCtgView(List<GoodsModel> productItems, OrderCtgItemModel mOrderCtgItemModel,
-			OrderProductItemModel mOrderProductItemModel) {
-		final CreateOrderProductItemModel model = new CreateOrderProductItemModel();
-		model.setProjectId(4);
-		model.setCategoryId(mOrderCtgItemModel.getId());
-		model.setNumber(mOrderProductItemModel.getNumber());
-		model.setPrice(mOrderProductItemModel.getPrice());
-		model.setSkuId(mOrderProductItemModel.getSkuId());
-		model.setTotalPrice(mOrderProductItemModel.getTotalPrice());
-		model.setId(mOrderProductItemModel.getId());
-		model.setStatusFlag(1);
-		model.setChange(true);
-		mProductItemModels.add(model);
-		final AddedItemView addedItemView = new AddedItemView(getContext(), productItems, mOrderCtgItemModel, model);
+                    }
 
-		addedItemView.setEnableEdit(mOrderProductItemModel.isCanEdit());
-		addedItemView.setOnChangeListener(new OnChangeListener() {
+                    @Override
+                    public void onSuccess(HrGetGoodsListResult result) {
+                        if (result != null && result.getProductItems() != null && result.getProductItems().size() > 0) {
+                            for (OrderProductItemModel mOrderProductItemModel : mOrderCtgItemModel.getProductItems()) {
+                                addAddedCtgView(result.getProductItems(), mOrderCtgItemModel, mOrderProductItemModel);
+                            }
+                        }
+                    }
 
-			@Override
-			public void onChange(boolean isFirst) {
-				if (!isFirst) {
-					model.setChange(false);
-				}
-				if (onAddedChangeListener != null) {
-					onAddedChangeListener.onChange();
-				}
-			}
-		});
-		addedItemView.setOnDeleteListener(new OnDeleteListener() {
 
-			@Override
-			public void onDelete(CreateOrderProductItemModel model) {
-				// mProductItemModels.remove(model);
-				model.setChange(false);
-				model.setStatusFlag(2);
-				mLinearLayout.removeView(addedItemView);
-				if (onAddedChangeListener != null) {
-					onAddedChangeListener.onChange();
-				}
-			}
-		});
-		mLinearLayout.addView(addedItemView, mLinearLayout.getChildCount() - 1);
+                    @Override
+                    public void onError(String message) {
+                        // TODO Auto-generated method stub
 
-	}
+                    }
+                });
+
+    }
+
+    protected void addAddedCtgView(List<GoodsModel> productItems, OrderCtgItemModel mOrderCtgItemModel,
+                                   OrderProductItemModel mOrderProductItemModel) {
+        final CreateOrderProductItemModel model = new CreateOrderProductItemModel();
+        model.setProjectId(4);
+        model.setCategoryId(mOrderCtgItemModel.getId());
+        model.setNumber(mOrderProductItemModel.getNumber());
+        model.setPrice(mOrderProductItemModel.getPrice());
+        model.setSkuId(mOrderProductItemModel.getSkuId());
+        model.setTotalPrice(mOrderProductItemModel.getTotalPrice());
+        model.setId(mOrderProductItemModel.getId());
+        model.setStatusFlag(1);
+        model.setChange(true);
+        mProductItemModels.add(model);
+        final AddedItemView addedItemView = new AddedItemView(getContext(), productItems, mOrderCtgItemModel, model);
+
+        addedItemView.setEnableEdit(mOrderProductItemModel.isCanEdit());
+        addedItemView.setOnChangeListener(new OnChangeListener() {
+
+            @Override
+            public void onChange(boolean isFirst) {
+                if (!isFirst) {
+                    model.setChange(false);
+                }
+                if (onAddedChangeListener != null) {
+                    onAddedChangeListener.onChange();
+                }
+            }
+        });
+        addedItemView.setOnDeleteListener(new OnDeleteListener() {
+
+            @Override
+            public void onDelete(CreateOrderProductItemModel model) {
+                // mProductItemModels.remove(model);
+                model.setChange(false);
+                model.setStatusFlag(2);
+                mLinearLayout.removeView(addedItemView);
+                if (onAddedChangeListener != null) {
+                    onAddedChangeListener.onChange();
+                }
+            }
+        });
+        mLinearLayout.addView(addedItemView, mLinearLayout.getChildCount() - 1);
+
+    }
 
 }

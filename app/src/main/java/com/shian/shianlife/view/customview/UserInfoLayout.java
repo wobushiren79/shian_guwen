@@ -2,6 +2,9 @@ package com.shian.shianlife.view.customview;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +16,7 @@ import com.shian.shianlife.activity.UserInfoIntegralActivity;
 import com.shian.shianlife.activity.UserInfoMoneyActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.PicassoUD;
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.mvp.userinfo.presenter.IUserInfoPresenter;
 import com.shian.shianlife.mvp.userinfo.presenter.impl.UserInfoPresenterImpl;
 import com.shian.shianlife.mvp.userinfo.view.IUserInfoView;
@@ -89,6 +93,7 @@ public class UserInfoLayout extends LinearLayout implements IUserInfoView {
         mLLSign.setOnClickListener(onClickListener);
         llMoney.setOnClickListener(onClickListener);
         llIntegral.setOnClickListener(onClickListener);
+        llOrderNum.setOnClickListener(onClickListener);
 
         userInfoPresenter = new UserInfoPresenterImpl(this);
         userInfoPresenter.getUserInfoData();
@@ -103,6 +108,8 @@ public class UserInfoLayout extends LinearLayout implements IUserInfoView {
                 moneyActivity();
             } else if (v == llIntegral) {
                 integralActivity();
+            } else if (v == llOrderNum) {
+                ToastUtils.show(getContext(), "敬请期待！");
             }
 //            else if (v == mUserInfoPointLayoutIntegral) {
 //                integralActivity();
@@ -133,6 +140,9 @@ public class UserInfoLayout extends LinearLayout implements IUserInfoView {
      */
     private void sign() {
         mIVSignIcon.setImageResource(R.drawable.zhy_main_sign_check);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mIVSignIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.zhy_text_color_5)));
+        }
         mTVSignName.setTextColor(getResources().getColor(R.color.zhy_text_color_5));
     }
 

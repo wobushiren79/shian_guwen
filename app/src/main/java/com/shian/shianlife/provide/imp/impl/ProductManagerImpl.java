@@ -1,6 +1,8 @@
 package com.shian.shianlife.provide.imp.impl;
 
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.provide.base.BaseHttpParams;
+import com.shian.shianlife.provide.base.BaseManagerImpl;
 import com.shian.shianlife.provide.base.HttpRequestExecutor;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.ProductManager;
@@ -14,14 +16,12 @@ import com.shian.shianlife.provide.result.HrGetMainSetmealResult;
 
 import android.content.Context;
 
-public class ProductManagerImpl implements ProductManager {
-
+public class ProductManagerImpl extends BaseManagerImpl implements ProductManager {
 	private static volatile ProductManagerImpl manager;
-
-	private HttpRequestExecutor excutor;
-
+	
 	private ProductManagerImpl() {
-		excutor = new HttpRequestExecutor();
+		super();
+		baseUrl = AppContansts.Funeral_BaseUrl;
 	}
 
 	public static ProductManagerImpl getInstance() {
@@ -37,33 +37,28 @@ public class ProductManagerImpl implements ProductManager {
 
 	@Override
 	public void getMainSetmeal(Context context, HttpResponseHandler<HrGetMainSetmealResult> response) {
-		BaseHttpParams params = new BaseHttpParams();
-		excutor.requestPost(context, "setmeal/main/get", HrGetMainSetmealResult.class, params, response);
+		requestPost(context, "setmeal/main/get", HrGetMainSetmealResult.class, new BaseHttpParams(), response);
 	}
 
 	@Override
 	public void getFuneralsSetmeal(Context context, HttpResponseHandler<HrGetFuneralSetmealResult> response) {
-		BaseHttpParams params = new BaseHttpParams();
-		excutor.requestPost(context, "setmeal/funeral/get", HrGetFuneralSetmealResult.class, params, response);
+		requestPost(context, "setmeal/funeral/get", HrGetFuneralSetmealResult.class, new BaseHttpParams(), response);
 	}
 
 	@Override
 	public void getCemeteryResult(Context context, HttpResponseHandler<HrGetCemeteryResult> respsone) {
-		BaseHttpParams params = new BaseHttpParams();
-		excutor.requestPost(context, "setmeal/cemetery/get", HrGetCemeteryResult.class, params, respsone);
+		requestPost(context, "setmeal/cemetery/get", HrGetCemeteryResult.class, new BaseHttpParams(), respsone);
 
 	}
 
 	@Override
-	public void getAddedCtgList(Context context, HpGetAddedCtgListParams params,
-			HttpResponseHandler<HrGetAddedCtgListResult> response) {
-		excutor.requestPost(context, "sku/category/get", HrGetAddedCtgListResult.class, params, response);
+	public void getAddedCtgList(Context context, HpGetAddedCtgListParams params, HttpResponseHandler<HrGetAddedCtgListResult> response) {
+		requestPost(context, "sku/category/get", HrGetAddedCtgListResult.class, params, response);
 	}
 
 	@Override
-	public void getGoodsList(Context context, HpGetGoodsListParams params,
-			HttpResponseHandler<HrGetGoodsListResult> response) {
-		excutor.requestPost(context, "sku/product/get", HrGetGoodsListResult.class, params, response);
+	public void getGoodsList(Context context, HpGetGoodsListParams params, HttpResponseHandler<HrGetGoodsListResult> response) {
+		requestPost(context, "sku/product/get", HrGetGoodsListResult.class, params, response);
 	}
 
 }

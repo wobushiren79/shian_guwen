@@ -24,255 +24,256 @@ import com.shian.shianlife.common.utils.TArrayListAdapter.IOnDrawViewEx;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.utils.ViewGropMap;
+import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
-import com.shian.shianlife.provide.imp.impl.OrderManagerImpl;
+import com.shian.shianlife.provide.imp.impl.FuneralOrderManagerImpl;
 import com.shian.shianlife.provide.model.OrderListModel;
 import com.shian.shianlife.provide.params.HpGetOrderListParams;
 import com.shian.shianlife.provide.result.HrGetOrderListResult;
 
+import okhttp3.Request;
+
 /**
  * 待付款订单列表
- * 
- * @author w9433
  *
+ * @author w9433
  */
 @SuppressLint("InflateParams")
 public class WaitMoneyView extends BaseOrderView {
-	private SwipeRefreshLayout mSryt;
-	private ListView mListView;
-	private TArrayListAdapter<OrderListModel> adapter;
+    private SwipeRefreshLayout mSryt;
+    private ListView mListView;
+    private TArrayListAdapter<OrderListModel> adapter;
 
-	private SwipeRefreshHelper mSwipeRefreshHelper;
-	private int pageSize = 20;
-	private int page = 0;
-	private View v;
-	private int orderType = 4;
+    private SwipeRefreshHelper mSwipeRefreshHelper;
+    private int pageSize = 20;
+    private int page = 0;
+    private View v;
+    private int orderType = 4;
 
-	public WaitMoneyView(Context context, String orderName) {
-		super(context, null);
-		v = LayoutInflater.from(context).inflate(R.layout.view_order_common, null, false);
-		addView(v);
-		initView();
-		initDate();
-	}
+    public WaitMoneyView(Context context, String orderName) {
+        super(context, null);
+        v = LayoutInflater.from(context).inflate(R.layout.view_order_common, null, false);
+        addView(v);
+        initView();
+        initDate();
+    }
 
-	public void refresh() {
-		mSryt.post(new Runnable() {
-			@Override
-			public void run() {
-				mSwipeRefreshHelper.autoRefresh();
-			}
-		});
-	}
+    public void refresh() {
+        mSryt.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshHelper.autoRefresh();
+            }
+        });
+    }
 
-	private void initView() {
-		mSryt = (SwipeRefreshLayout) v.findViewById(R.id.sryt_swipe_listview);
-		mListView = (ListView) v.findViewById(R.id.lv_swipe_listview);
-		mSryt.setColorSchemeColors(Color.BLUE);
-		adapter = new TArrayListAdapter<OrderListModel>(getContext());
-	}
+    private void initView() {
+        mSryt = (SwipeRefreshLayout) v.findViewById(R.id.sryt_swipe_listview);
+        mListView = (ListView) v.findViewById(R.id.lv_swipe_listview);
+        mSryt.setColorSchemeColors(Color.BLUE);
+        adapter = new TArrayListAdapter<OrderListModel>(getContext());
+    }
 
-	private void initDate() {
-		initAdapter();
-		mListView.setAdapter(adapter);
-		mSwipeRefreshHelper = new SwipeRefreshHelper(mSryt);
-		mSwipeRefreshHelper.setOnSwipeRefreshListener(new OnSwipeRefreshListener() {
-			@Override
-			public void onfresh() {
-				loadData();
-			}
-		});
+    private void initDate() {
+        initAdapter();
+        mListView.setAdapter(adapter);
+        mSwipeRefreshHelper = new SwipeRefreshHelper(mSryt);
+        mSwipeRefreshHelper.setOnSwipeRefreshListener(new OnSwipeRefreshListener() {
+            @Override
+            public void onfresh() {
+                loadData();
+            }
+        });
 
-		mSwipeRefreshHelper.setOnLoadMoreListener(new OnLoadMoreListener() {
-			@Override
-			public void loadMore() {
-				loadMoreData();
-			}
-		});
-	}
+        mSwipeRefreshHelper.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void loadMore() {
+                loadMoreData();
+            }
+        });
+    }
 
-	protected void loadMoreData() {
-		page++;
-		HpGetOrderListParams params = new HpGetOrderListParams();
-		params.setPageNum(page);
-		params.setPageSize(pageSize);
-		OrderManagerImpl.getInstance().getOrderList(getContext(), params, orderType,
-				new HttpResponseHandler<HrGetOrderListResult>() {
+    protected void loadMoreData() {
+        page++;
+        HpGetOrderListParams params = new HpGetOrderListParams();
+        params.setPageNum(page);
+        params.setPageSize(pageSize);
+        MHttpManagerFactory.getFuneralOrderManager().getOrderList(getContext(), params, orderType, new HttpResponseHandler<HrGetOrderListResult>() {
 
-					@Override
-					public void onSuccess(HrGetOrderListResult result) {
-						if (result != null && result.getItems() != null && result.getItems().size() > 0) {
-							adapter.addListData(result.getItems());
-							adapter.notifyDataSetChanged();
-							if (result.getItems().size() >= pageSize) {
-								mSwipeRefreshHelper.setLoadMoreEnable(true);
-							} else {
-								mSwipeRefreshHelper.setLoadMoreEnable(false);
-							}
-						} else {
-							mSwipeRefreshHelper.loadMoreComplete(false);
-						}
+            @Override
+            public void onStart(Request request, int id) {
 
-					}
+            }
 
-					@Override
-					public void onStart() {
+            @Override
+            public void onSuccess(HrGetOrderListResult result) {
+                if (result != null && result.getItems() != null && result.getItems().size() > 0) {
+                    adapter.addListData(result.getItems());
+                    adapter.notifyDataSetChanged();
+                    if (result.getItems().size() >= pageSize) {
+                        mSwipeRefreshHelper.setLoadMoreEnable(true);
+                    } else {
+                        mSwipeRefreshHelper.setLoadMoreEnable(false);
+                    }
+                } else {
+                    mSwipeRefreshHelper.loadMoreComplete(false);
+                }
 
-					}
+            }
 
-					@Override
-					public void onError(String message) {
-						mSwipeRefreshHelper.loadMoreComplete(true);
-						mSwipeRefreshHelper.setLoadMoreEnable(true);
-					}
-				});
 
-	}
+            @Override
+            public void onError(String message) {
+                mSwipeRefreshHelper.loadMoreComplete(true);
+                mSwipeRefreshHelper.setLoadMoreEnable(true);
+            }
+        });
 
-	protected void loadData() {
-		// rl_order_qt0.setVisibility(View.GONE);
-		// ll_order_qt0.setVisibility(View.VISIBLE);
-		page = 0;
-		adapter.clear();
-		adapter.notifyDataSetChanged();
-		HpGetOrderListParams params = new HpGetOrderListParams();
-		params.setPageNum(page);
-		params.setPageSize(pageSize);
-		OrderManagerImpl.getInstance().getOrderList(getContext(), params, orderType,
-				new HttpResponseHandler<HrGetOrderListResult>() {
+    }
 
-					@Override
-					public void onSuccess(HrGetOrderListResult result) {
-						if (result != null && result.getItems() != null && result.getItems().size() > 0) {
-							adapter.addListData(result.getItems());
-							adapter.notifyDataSetChanged();
-							if (result.getItems().size() >= pageSize) {
-								mSwipeRefreshHelper.setLoadMoreEnable(true);
-							} else {
-								mSwipeRefreshHelper.setLoadMoreEnable(false);
-							}
-						} else {
-							// showNodataLayout();
-							ToastUtils.show(getContext(), "暂无订单");
-						}
-						mSwipeRefreshHelper.refreshComplete();
-					}
+    protected void loadData() {
+        // rl_order_qt0.setVisibility(View.GONE);
+        // ll_order_qt0.setVisibility(View.VISIBLE);
+        page = 0;
+        adapter.clear();
+        adapter.notifyDataSetChanged();
+        HpGetOrderListParams params = new HpGetOrderListParams();
+        params.setPageNum(page);
+        params.setPageSize(pageSize);
+        MHttpManagerFactory.getFuneralOrderManager().getOrderList(getContext(), params, orderType, new HttpResponseHandler<HrGetOrderListResult>() {
 
-					@Override
-					public void onStart() {
+            @Override
+            public void onStart(Request request, int id) {
 
-					}
+            }
 
-					@Override
-					public void onError(String message) {
-						mSwipeRefreshHelper.refreshComplete();
-					}
-				});
+            @Override
+            public void onSuccess(HrGetOrderListResult result) {
+                if (result != null && result.getItems() != null && result.getItems().size() > 0) {
+                    adapter.addListData(result.getItems());
+                    adapter.notifyDataSetChanged();
+                    if (result.getItems().size() >= pageSize) {
+                        mSwipeRefreshHelper.setLoadMoreEnable(true);
+                    } else {
+                        mSwipeRefreshHelper.setLoadMoreEnable(false);
+                    }
+                } else {
+                    // showNodataLayout();
+                    ToastUtils.show(getContext(), "暂无订单");
+                }
+                mSwipeRefreshHelper.refreshComplete();
+            }
 
-	}
+            @Override
+            public void onError(String message) {
+                mSwipeRefreshHelper.refreshComplete();
+            }
+        });
 
-	private void initAdapter() {
-		adapter.setLayout(R.layout.view_item_waitmoney);
-		adapter.setDrawViewEx(waitMoneyDrawViewEx);
-	}
+    }
 
-	/**
-	 * 待付款
-	 */
-	IOnDrawViewEx<OrderListModel> waitMoneyDrawViewEx = new IOnDrawViewEx<OrderListModel>() {
+    private void initAdapter() {
+        adapter.setLayout(R.layout.view_item_waitmoney);
+        adapter.setDrawViewEx(waitMoneyDrawViewEx);
+    }
 
-		@Override
-		public void OnDrawViewEx(Context aContext, OrderListModel model, ViewGropMap view, int aIndex) {
-			// 订单编号
-			TextView tv_qt01 = (TextView) view.getView(R.id.tv_qt01);
-			tv_qt01.setText(model.getOrderNum());
-			// 经办人
-			TextView tv_qt11 = (TextView) view.getView(R.id.tv_qt11);
-			tv_qt11.setText(model.getAgentmanName());
-			// 白事顾问
-			TextView tv_qt21 = (TextView) view.getView(R.id.tv_qt21);
-			tv_qt21.setText(model.getTalkerName());
-			// 治丧指导
-			TextView tv_qt31 = (TextView) view.getView(R.id.tv_qt31);
-			tv_qt31.setText(model.getPerformerName());
-			ImageView ivPhone1=(ImageView)view.getView(R.id.iv_qt12);
-			ImageView ivPhone2=(ImageView)view.getView(R.id.iv_qt22);
-			ImageView ivPhone3=(ImageView)view.getView(R.id.iv_qt32);
-			Utils.call(ivPhone1, model.getAgentmanLinkInfo());
-			Utils.call(ivPhone2, model.getTalkerMobile());
-			Utils.call(ivPhone3, model.getPerformerMobile());
-			OrderListBtnClick clickListener = new OrderListBtnClick(model, aIndex);
-			View executelist = view.getView(R.id.fl_executelist);
-			View detail = view.getView(R.id.fl_detail);
-			View pay = view.getView(R.id.fl_pay);
-			executelist.setOnClickListener(clickListener);
-			detail.setOnClickListener(clickListener);
-			pay.setOnClickListener(clickListener);
-			
-			TextView tvPay = ((TextView) ((ViewGroup) pay).getChildAt(0));
-			if (model.isHasRest()) {
-				pay.setEnabled(false);
+    /**
+     * 待付款
+     */
+    IOnDrawViewEx<OrderListModel> waitMoneyDrawViewEx = new IOnDrawViewEx<OrderListModel>() {
+
+        @Override
+        public void OnDrawViewEx(Context aContext, OrderListModel model, ViewGropMap view, int aIndex) {
+            // 订单编号
+            TextView tv_qt01 = (TextView) view.getView(R.id.tv_qt01);
+            tv_qt01.setText(model.getOrderNum());
+            // 经办人
+            TextView tv_qt11 = (TextView) view.getView(R.id.tv_qt11);
+            tv_qt11.setText(model.getAgentmanName());
+            // 白事顾问
+            TextView tv_qt21 = (TextView) view.getView(R.id.tv_qt21);
+            tv_qt21.setText(model.getTalkerName());
+            // 治丧指导
+            TextView tv_qt31 = (TextView) view.getView(R.id.tv_qt31);
+            tv_qt31.setText(model.getPerformerName());
+            ImageView ivPhone1 = (ImageView) view.getView(R.id.iv_qt12);
+            ImageView ivPhone2 = (ImageView) view.getView(R.id.iv_qt22);
+            ImageView ivPhone3 = (ImageView) view.getView(R.id.iv_qt32);
+            Utils.call(ivPhone1, model.getAgentmanLinkInfo());
+            Utils.call(ivPhone2, model.getTalkerMobile());
+            Utils.call(ivPhone3, model.getPerformerMobile());
+            OrderListBtnClick clickListener = new OrderListBtnClick(model, aIndex);
+            View executelist = view.getView(R.id.fl_executelist);
+            View detail = view.getView(R.id.fl_detail);
+            View pay = view.getView(R.id.fl_pay);
+            executelist.setOnClickListener(clickListener);
+            detail.setOnClickListener(clickListener);
+            pay.setOnClickListener(clickListener);
+
+            TextView tvPay = ((TextView) ((ViewGroup) pay).getChildAt(0));
+            if (model.isHasRest()) {
+                pay.setEnabled(false);
 
 //				tvPay.setBackgroundColor(getResources().getColor(
 //						R.color.gray_common));
-				tvPay.setBackgroundResource(R.drawable.zhy_button_state_item_gray);
-				tvPay.setText("余款已支付");
-			} else {
-				tvPay.setBackgroundResource(R.drawable.zhy_button_state_item_yellow);
-				tvPay.setText("支付余款");
-				pay.setEnabled(true);
-			}
-		}
-	};
+                tvPay.setBackgroundResource(R.drawable.zhy_button_state_item_gray);
+                tvPay.setText("余款已支付");
+            } else {
+                tvPay.setBackgroundResource(R.drawable.zhy_button_state_item_yellow);
+                tvPay.setText("支付余款");
+                pay.setEnabled(true);
+            }
+        }
+    };
 
-	class OrderListBtnClick implements OnClickListener {
+    class OrderListBtnClick implements OnClickListener {
 
-		OrderListModel model;
-		int position;
+        OrderListModel model;
+        int position;
 
-		public OrderListBtnClick(OrderListModel model, int position) {
-			this.model = model;
-			this.position = position;
-		}
+        public OrderListBtnClick(OrderListModel model, int position) {
+            this.model = model;
+            this.position = position;
+        }
 
-		@Override
-		public void onClick(View v) {
-			switch (v.getId()) {
-			case R.id.fl_executelist:
-				executelist();
-				break;
-			case R.id.fl_detail:
-				detail();
-				break;
-			case R.id.fl_pay:
-				pay();
-				break;
-			}
-		}
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.fl_executelist:
+                    executelist();
+                    break;
+                case R.id.fl_detail:
+                    detail();
+                    break;
+                case R.id.fl_pay:
+                    pay();
+                    break;
+            }
+        }
 
-		private void pay() {
-			// TODO Auto-generated method stub
-			Intent in=new Intent(getContext(),PayShouActivity.class);
-			in.putExtra("orderId", model.getOrderId());
-			in.putExtra("consultId", model.getConsultId());
-			getContext().startActivity(in);
-		}
+        private void pay() {
+            // TODO Auto-generated method stub
+            Intent in = new Intent(getContext(), PayShouActivity.class);
+            in.putExtra("orderId", model.getOrderId());
+            in.putExtra("consultId", model.getConsultId());
+            getContext().startActivity(in);
+        }
 
-		private void detail() {
-			// TODO Auto-generated method stub
-			Intent in = new Intent(getContext(), OrderDetailActivity.class);
-			in.putExtra("orderId", model.getOrderId());
-			in.putExtra("consultId", model.getConsultId());
-			getContext().startActivity(in);
-		}
+        private void detail() {
+            // TODO Auto-generated method stub
+            Intent in = new Intent(getContext(), OrderDetailActivity.class);
+            in.putExtra("orderId", model.getOrderId());
+            in.putExtra("consultId", model.getConsultId());
+            getContext().startActivity(in);
+        }
 
-		private void executelist() {
-			// TODO Auto-generated method stub
-			Intent in=new Intent(getContext(),PgzxActivity.class);
-			in.putExtra("orderId", model.getOrderId());
-			in.putExtra("isShoukuan", true);
-			getContext().startActivity(in);
-		}
-	}
+        private void executelist() {
+            // TODO Auto-generated method stub
+            Intent in = new Intent(getContext(), PgzxActivity.class);
+            in.putExtra("orderId", model.getOrderId());
+            in.putExtra("isShoukuan", true);
+            getContext().startActivity(in);
+        }
+    }
 
 }

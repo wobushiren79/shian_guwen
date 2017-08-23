@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.Request;
+
 /**
  * Created by apple on 2016/12/21.
  */
@@ -44,9 +46,11 @@ public class SendOrderStep2 extends BaseSendOrder {
         }
         params.setConsultId(consultId);
         params.setAfterLocation(mWriteLocation.getData());
-        MHttpManagerFactory.getAccountManager().saveSendOrderDataThree(getContext(), params, new HttpResponseHandler<Object>() {
+        MHttpManagerFactory.getFuneralManager().saveSendOrderDataThree(getContext(), params, new HttpResponseHandler<Object>() {
+
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -69,9 +73,10 @@ public class SendOrderStep2 extends BaseSendOrder {
     public void getData() {
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId(consultId);
-        MHttpManagerFactory.getAccountManager().getSendOrderDataThree(getContext(), params, new HttpResponseHandler<HrGetSendOrderDataThree>() {
+        MHttpManagerFactory.getFuneralManager().getSendOrderDataThree(getContext(), params, new HttpResponseHandler<HrGetSendOrderDataThree>() {
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

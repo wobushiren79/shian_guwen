@@ -6,9 +6,7 @@ import com.chanven.lib.cptr.loadmore.SwipeRefreshHelper.OnSwipeRefreshListener;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.OrderDetailActivity;
 import com.shian.shianlife.activity.PgzxActivity;
-import com.shian.shianlife.activity.map.NewRoutePlanActivity;
 import com.shian.shianlife.activity.map.NewRoutePlanOtherActivity;
-import com.shian.shianlife.activity.map.RoutePlanActivity;
 import com.shian.shianlife.common.utils.TArrayListAdapter;
 import com.shian.shianlife.common.utils.TArrayListAdapter.IOnDrawViewEx;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -17,7 +15,7 @@ import com.shian.shianlife.common.utils.ViewGropMap;
 import com.shian.shianlife.common.view.TipsDialog;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
-import com.shian.shianlife.provide.imp.impl.OrderManagerImpl;
+import com.shian.shianlife.provide.imp.impl.FuneralOrderManagerImpl;
 import com.shian.shianlife.provide.model.OrderListModel;
 import com.shian.shianlife.provide.params.HpAcceptParams;
 import com.shian.shianlife.provide.params.HpGetOrderListParams;
@@ -35,6 +33,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import okhttp3.Request;
 
 @SuppressLint("InflateParams")
 public class ListFwpdzView extends BaseOrderView {
@@ -91,8 +91,13 @@ public class ListFwpdzView extends BaseOrderView {
         HpGetOrderListParams params = new HpGetOrderListParams();
         params.setPageNum(page);
         params.setPageSize(pageSize);
-        OrderManagerImpl.getInstance().getOrderList(getContext(), params, 2,
+        MHttpManagerFactory.getFuneralOrderManager().getOrderList(getContext(), params, 2,
                 new HttpResponseHandler<HrGetOrderListResult>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrGetOrderListResult result) {
@@ -107,11 +112,6 @@ public class ListFwpdzView extends BaseOrderView {
                         } else {
                             mSwipeRefreshHelper.loadMoreComplete(false);
                         }
-
-                    }
-
-                    @Override
-                    public void onStart() {
 
                     }
 
@@ -133,8 +133,13 @@ public class ListFwpdzView extends BaseOrderView {
         HpGetOrderListParams params = new HpGetOrderListParams();
         params.setPageNum(page);
         params.setPageSize(pageSize);
-        OrderManagerImpl.getInstance().getOrderList(getContext(), params, 2,
+        MHttpManagerFactory.getFuneralOrderManager().getOrderList(getContext(), params, 2,
                 new HttpResponseHandler<HrGetOrderListResult>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrGetOrderListResult result) {
@@ -153,10 +158,7 @@ public class ListFwpdzView extends BaseOrderView {
                         mSwipeRefreshHelper.refreshComplete();
                     }
 
-                    @Override
-                    public void onStart() {
 
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -283,20 +285,19 @@ public class ListFwpdzView extends BaseOrderView {
                 public void onClick(DialogInterface dialog, int which) {
                     HpAcceptParams params = new HpAcceptParams();
                     params.setOrderId(model.getOrderId());
-                    MHttpManagerFactory.getAccountManager().endService(getContext(), params,
+                    MHttpManagerFactory.getFuneralManager().endService(getContext(), params,
                             new HttpResponseHandler<Object>() {
+
+                                @Override
+                                public void onStart(Request request, int id) {
+
+                                }
 
                                 @Override
                                 public void onSuccess(Object result) {
                                     // TODO Auto-generated method stub
                                     ToastUtils.show(getContext(), "结束派单成功");
                                     refresh();
-                                }
-
-                                @Override
-                                public void onStart() {
-                                    // TODO Auto-generated method stub
-
                                 }
 
                                 @Override

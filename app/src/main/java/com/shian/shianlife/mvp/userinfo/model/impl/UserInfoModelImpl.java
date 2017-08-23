@@ -18,6 +18,8 @@ import com.shian.shianlife.provide.result.HrUserInfo;
 
 import org.codehaus.jackson.map.util.BeanUtil;
 
+import okhttp3.Request;
+
 /**
  * Created by zm.
  */
@@ -25,9 +27,10 @@ import org.codehaus.jackson.map.util.BeanUtil;
 public class UserInfoModelImpl implements IUserInfoModel {
     @Override
     public void getUserInfoData(Context context, UserInfoBean params, final OnGetDataListener<UserInfoResultBean> listener) {
-        MHttpManagerFactory.getAccountManager().getUserInfoData(context, new HttpResponseHandler<UserInfoResultBean>() {
+        MHttpManagerFactory.getFuneralManager().getUserInfoData(context, new HttpResponseHandler<UserInfoResultBean>() {
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

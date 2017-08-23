@@ -18,10 +18,13 @@ import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.phpmodel.SiftListData;
+import com.shian.shianlife.provide.phpparams.PHPHpSiftDataParams;
 import com.shian.shianlife.thisenum.SystemTypeEnum;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Request;
 
 /**
  * Created by Administrator on 2017/3/11.
@@ -69,14 +72,14 @@ public class FindAdapter extends BaseAdapter {
             holder.tvPraise = (TextView) convertView.findViewById(R.id.tv_praise);
             holder.ivCollection = (ImageView) convertView.findViewById(R.id.iv_collection);
             holder.ivPraise = (ImageView) convertView.findViewById(R.id.iv_praise);
-            holder.llCollection= (LinearLayout) convertView.findViewById(R.id.ll_collection);
-            holder.llPraise= (LinearLayout) convertView.findViewById(R.id.ll_praise);
+            holder.llCollection = (LinearLayout) convertView.findViewById(R.id.ll_collection);
+            holder.llPraise = (LinearLayout) convertView.findViewById(R.id.ll_praise);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         final SiftListData data = listDatas.get(position);
-        PicassoUD.loadImage(context, AppContansts.PhpURL + data.getImg(), holder.ivPic);
+        PicassoUD.loadImage(context, AppContansts.PHP_BaseUrl + data.getImg(), holder.ivPic);
         holder.tvTitle.setText(data.getTitle());
         holder.tvTime.setText(data.getTime());
         holder.tvCollection.setText(data.getCollectionNum() + "");
@@ -88,7 +91,7 @@ public class FindAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, WebActivity.class);
                 intent.putExtra("url", AppContansts.siftsPHPURL + "?id=" + data.getId());
                 intent.putExtra("isCollection", true);
-                intent.putExtra("shareData",data);
+                intent.putExtra("shareData", data);
                 context.startActivity(intent);
             }
         });
@@ -137,14 +140,15 @@ public class FindAdapter extends BaseAdapter {
      * @param type （1.为点赞   2.为收藏）
      */
     private void setData(int type, int siftID) {
-        RequestParams params = new RequestParams();
-        params.put("type", type);
-        params.put("userid", AppContansts.userLoginInfo.getUserId());
-        params.put("siftid", siftID);
-        params.put("userType", SystemTypeEnum.funeral.getCode());
+        PHPHpSiftDataParams params = new PHPHpSiftDataParams();
+        params.setType(type);
+        params.setUserid(AppContansts.userLoginInfo.getUserId());
+        params.setSiftID(siftID);
+        params.setUserType(SystemTypeEnum.funeral.getCode());
         MHttpManagerFactory.getPHPManager().setSiftData(context, params, new HttpResponseHandler<Object>() {
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

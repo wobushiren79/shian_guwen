@@ -22,6 +22,8 @@ import com.shian.shianlife.view.writeview.MapSelectViewNormal;
 import com.shian.shianlife.view.writeview.SpinnerViewNormal;
 import com.shian.shianlife.view.writeview.TimeSelectViewNormal;
 
+import okhttp3.Request;
+
 
 public class TalkFailActivity extends BaseActivity {
     SpinnerViewNormal mWritePlanBuyType;
@@ -113,11 +115,10 @@ public class TalkFailActivity extends BaseActivity {
     private void getData() {
         HpCemeteryIdParams params = new HpCemeteryIdParams();
         params.setBespeakId(beSpeakId);
-        MHttpManagerFactory.getAccountManager().getCemeteryTalkInfo(TalkFailActivity.this, params, new HttpResponseHandler<HrGetCemeteryTalkData>() {
-
+        MHttpManagerFactory.getCemeteryManager().getCemeteryTalkInfo(TalkFailActivity.this, params, new HttpResponseHandler<HrGetCemeteryTalkData>() {
 
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

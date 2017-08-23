@@ -15,10 +15,13 @@ import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.phpmodel.AdvertisementData;
+import com.shian.shianlife.provide.phpparams.PHPHpAdvertisementParams;
 import com.shian.shianlife.provide.phpresult.PHPHrGetAdvertisement;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import okhttp3.Request;
 
 
 public class LoginAdvertActivity extends BaseActivity implements View.OnClickListener {
@@ -63,15 +66,15 @@ public class LoginAdvertActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void getData() {
-        RequestParams params = new RequestParams();
-        params.put("type", 1);
-        params.put("number", 1);
-        params.put("pagerNumber", 0);
+        PHPHpAdvertisementParams params = new PHPHpAdvertisementParams();
+        params.setType(1);
+        params.setNumber(1);
+        params.setPagerNumber(0);
         MHttpManagerFactory.getPHPManager().getAdvertisement(this, params, new HttpResponseHandler<PHPHrGetAdvertisement>() {
 
 
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -80,7 +83,7 @@ public class LoginAdvertActivity extends BaseActivity implements View.OnClickLis
                 if (result.getItems() != null && result.getItems().size() > 0) {
                     rlContent.setVisibility(View.VISIBLE);
                     advertData = result.getItems().get(0);
-                    ImageLoader.getInstance().displayImage(AppContansts.PhpURL + result.getItems().get(0).getBanner(), ivContent);
+                    ImageLoader.getInstance().displayImage(AppContansts.PHP_BaseUrl + result.getItems().get(0).getBanner(), ivContent);
                     startThread();
 
                 } else {

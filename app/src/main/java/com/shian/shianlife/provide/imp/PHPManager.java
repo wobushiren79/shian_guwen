@@ -2,7 +2,8 @@ package com.shian.shianlife.provide.imp;
 
 import android.content.Context;
 
-import com.loopj.android.http.RequestParams;
+
+import com.shian.shianlife.provide.base.BaseHttpParams;
 import com.shian.shianlife.provide.base.HttpManager;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.phpresult.PHPHrGetAdvertisement;
@@ -26,7 +27,7 @@ public interface PHPManager extends HttpManager {
      * @param params
      * @param handler
      */
-    public void getAdvertisement(Context context, RequestParams params, HttpResponseHandler<PHPHrGetAdvertisement> handler);
+    public void getAdvertisement(Context context, BaseHttpParams params, HttpResponseHandler<PHPHrGetAdvertisement> handler);
 
     /**
      * 获取重要通知
@@ -35,7 +36,7 @@ public interface PHPManager extends HttpManager {
      * @param params
      * @param handler
      */
-    public void getDynamicInfo(Context context, RequestParams params, HttpResponseHandler<PHPHrGetDynamic> handler);
+    public void getDynamicInfo(Context context, BaseHttpParams params, HttpResponseHandler<PHPHrGetDynamic> handler);
 
 
     /**
@@ -45,7 +46,7 @@ public interface PHPManager extends HttpManager {
      * @param params
      * @param handler
      */
-    public void getSiftListData(Context context, RequestParams params, HttpResponseHandler<PHPHrGetSiftListData> handler);
+    public void getSiftListData(Context context, BaseHttpParams params, HttpResponseHandler<PHPHrGetSiftListData> handler);
 
 
     /**
@@ -54,7 +55,7 @@ public interface PHPManager extends HttpManager {
      * @param context
      * @param params
      */
-    public void setSiftData(Context context, RequestParams params, HttpResponseHandler<Object> handler);
+    public void setSiftData(Context context, BaseHttpParams params, HttpResponseHandler<Object> handler);
 
     /**
      * 获取热门问题
@@ -63,7 +64,7 @@ public interface PHPManager extends HttpManager {
      * @param params
      * @param handler
      */
-    public void getHotIssue(Context context, RequestParams params, HttpResponseHandler<PHPHrGetHotIssue> handler);
+    public void getHotIssue(Context context, BaseHttpParams params, HttpResponseHandler<PHPHrGetHotIssue> handler);
 
 
     /**
@@ -73,7 +74,7 @@ public interface PHPManager extends HttpManager {
      * @param params
      * @param handler
      */
-    public void setOpinion(Context context, RequestParams params, HttpResponseHandler<Object> handler, boolean isDialog);
+    public void setOpinion(Context context, BaseHttpParams params, HttpResponseHandler<Object> handler, boolean isDialog);
 
 
     /**
@@ -82,5 +83,5 @@ public interface PHPManager extends HttpManager {
      * @param params
      * @param handler
      */
-    public void getVersion(Context context, RequestParams params, HttpResponseHandler<PHPHrGetVersion> handler, boolean isDialog);
+    public void getVersion(Context context, BaseHttpParams params, HttpResponseHandler<PHPHrGetVersion> handler, boolean isDialog);
 }

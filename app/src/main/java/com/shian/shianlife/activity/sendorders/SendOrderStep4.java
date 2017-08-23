@@ -20,6 +20,8 @@ import com.shian.shianlife.view.writeview.MapSelectViewNormal;
 import java.util.ArrayList;
 import java.util.Date;
 
+import okhttp3.Request;
+
 /**
  * Created by apple on 2016/12/21.
  */
@@ -47,9 +49,9 @@ public class SendOrderStep4 extends BaseSendOrder {
             return;
         }
         params.setTheDayLocation(mapSelectViewNormal.getData());
-        MHttpManagerFactory.getAccountManager().saveSendOrderDataFive(getContext(), params, new HttpResponseHandler<Object>() {
+        MHttpManagerFactory.getFuneralManager().saveSendOrderDataFive(getContext(), params, new HttpResponseHandler<Object>() {
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -73,9 +75,9 @@ public class SendOrderStep4 extends BaseSendOrder {
     public void getData() {
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId(consultId);
-        MHttpManagerFactory.getAccountManager().getSendOrderDataFive(getContext(), params, new HttpResponseHandler<HrGetSendOrderDataFive>() {
+        MHttpManagerFactory.getFuneralManager().getSendOrderDataFive(getContext(), params, new HttpResponseHandler<HrGetSendOrderDataFive>() {
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

@@ -66,10 +66,11 @@ import java.util.List;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import me.leolin.shortcutbadger.ShortcutBadger;
+import okhttp3.Request;
 
 public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, IUserInfoView {
 
-    int loginType;//0殡仪 1.公墓
+
     @InjectView(R.id.fl_main)
     View flMain;
     @InjectView(R.id.rb_main_1)
@@ -90,7 +91,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     private NewHomeFragment homeFragment;
     private FindFragment findFragment;
     private StoreFragment storeFragment;
-//    private OrderFragment orderFragment;
+    //    private OrderFragment orderFragment;
     private TheOrderFragment theOrderFragment;
     //    private UserCenterFragment userFragment;
 //    private NewUserCenterFragment userFragment;
@@ -194,7 +195,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     }
 
     private void initDate() {
-        loginType = SharePerfrenceUtils.getLoginShare(this).getLoginType();
         mFragmentManager = getSupportFragmentManager();
         userInfoPresenter = new UserInfoPresenterImpl(this);
         userInfoPresenter.getUserInfoData();
@@ -209,33 +209,32 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         rbMain3.setOnCheckedChangeListener(new RBCheckListener());
         rbMain4.setOnCheckedChangeListener(new RBCheckListener());
         showFragment(R.id.rb_main_1);
-        MHttpManagerFactory.getAccountManager().getMessageCount(this,
-                new HttpResponseHandler<HrCommentResult>() {
-                    @Override
-                    public void onSuccess(HrCommentResult result) {
-                        // TODO Auto-generated method stub
-                        AppContansts.MessageCount = result.getCount();
-                        if (result.getCount() == 0) {
-                            setMessageIconVisible(View.GONE);
-                        } else {
-                            setMessageIconVisible(View.VISIBLE);
-                        }
-                        if (loginType == 0) {
-                            getMsgNumber();
-                        }
-                    }
+        MHttpManagerFactory.getFuneralManager().getMessageCount(this, new HttpResponseHandler<HrCommentResult>() {
+            @Override
+            public void onStart(Request request, int id) {
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
+            }
 
-                    }
+            @Override
+            public void onSuccess(HrCommentResult result) {
+                // TODO Auto-generated method stub
+                AppContansts.MessageCount = result.getCount();
+                if (result.getCount() == 0) {
+                    setMessageIconVisible(View.GONE);
+                } else {
+                    setMessageIconVisible(View.VISIBLE);
+                }
 
-                    @Override
-                    public void onError(String message) {
-                        // TODO Auto-generated method stub
-                    }
-                });
+                getMsgNumber();
+
+            }
+
+
+            @Override
+            public void onError(String message) {
+                // TODO Auto-generated method stub
+            }
+        });
         initRB();
     }
 
@@ -341,36 +340,38 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 
     private void exitApp() {
         finish();
-        MHttpManagerFactory.getAccountManager().loginout(this,
+        MHttpManagerFactory.getFuneralManager().loginout(this,
                 new HttpResponseHandler<Object>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(Object result) {
 
                     }
 
-                    @Override
-                    public void onStart() {
-
-                    }
 
                     @Override
                     public void onError(String message) {
                     }
                 });
 
-        MHttpManagerFactory.getAccountManager().loginoutCemetery(this,
+        MHttpManagerFactory.getCemeteryManager().loginoutCemetery(this,
                 new HttpResponseHandler<Object>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(Object result) {
 
                     }
 
-                    @Override
-                    public void onStart() {
-
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -483,14 +484,15 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         if (!curAddress.equals(AppContansts.LocalString)) {
             HpConsultIdParams params = new HpConsultIdParams();
             params.setCurAddress(curAddress);
-            MHttpManagerFactory.getAccountManager().changeCurAddress(this, params, new HttpResponseHandler<Object>() {
+            MHttpManagerFactory.getFuneralManager().changeCurAddress(this, params, new HttpResponseHandler<Object>() {
+
                 @Override
-                public void onStart() {
+                public void onError(String message) {
 
                 }
 
                 @Override
-                public void onError(String message) {
+                public void onStart(Request request, int id) {
 
                 }
 
@@ -511,9 +513,11 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
      * 获取未处理订单消息
      */
     public void getMsgNumber() {
-        MHttpManagerFactory.getAccountManager().getMsgNumberForUntreated(MainActivity.this, new HttpResponseHandler<HrGetMsgNumberForUntreated>() {
+        MHttpManagerFactory.getFuneralManager().getMsgNumberForUntreated(MainActivity.this, new HttpResponseHandler<HrGetMsgNumberForUntreated>() {
+
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

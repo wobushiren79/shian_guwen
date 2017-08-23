@@ -32,6 +32,8 @@ import com.shian.shianlife.provide.result.HrMessageList;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Request;
+
 /**
  * Created by Administrator on 2017/3/10.
  */
@@ -94,35 +96,35 @@ public class MessageListView extends LinearLayout {
         params.setPageNum(page);
         params.setPageSize(pageSize);
         params.setCtgId(type + 1);//1.全部 2.服务。3 通知
-        MHttpManagerFactory.getAccountManager().getMessageList(getContext(),
-                params, new HttpResponseHandler<HrMessageList>() {
+        MHttpManagerFactory.getFuneralManager().getMessageList(getContext(), params, new HttpResponseHandler<HrMessageList>() {
 
-                    @Override
-                    public void onSuccess(HrMessageList result) {
-                        if (isRefresh) {
-                            listOrderData.clear();
-                        }
-                        listOrderData.addAll(result.getList());
-                        listOrderUnReadData.clear();
-                        for (HrMessageList.MessageList item : listOrderData) {
-                            if (item.getReadStatus() == 1) {
-                                listOrderUnReadData.add(item);
-                            }
-                        }
-                        baseAdapter.notifyDataSetChanged();
-                        listView.onRefreshComplete();
+            @Override
+            public void onStart(Request request, int id) {
+
+            }
+
+            @Override
+            public void onSuccess(HrMessageList result) {
+                if (isRefresh) {
+                    listOrderData.clear();
+                }
+                listOrderData.addAll(result.getList());
+                listOrderUnReadData.clear();
+                for (HrMessageList.MessageList item : listOrderData) {
+                    if (item.getReadStatus() == 1) {
+                        listOrderUnReadData.add(item);
                     }
+                }
+                baseAdapter.notifyDataSetChanged();
+                listView.onRefreshComplete();
+            }
 
-                    @Override
-                    public void onStart() {
 
-                    }
-
-                    @Override
-                    public void onError(String message) {
-                        listView.onRefreshComplete();
-                    }
-                });
+            @Override
+            public void onError(String message) {
+                listView.onRefreshComplete();
+            }
+        });
     }
 
 
@@ -170,7 +172,6 @@ public class MessageListView extends LinearLayout {
 
         }
     }
-
 
 
     BaseAdapter baseAdapter = new BaseAdapter() {
@@ -264,17 +265,17 @@ public class MessageListView extends LinearLayout {
             Intent in = new Intent(getContext(),
                     MessageDetailActviity.class);
             if (readState == 0) {
-                listOrderData.get(position-1).setReadStatus(0);
-                in.putExtra("message", JSONUtil.writeEntityToJSONString(listOrderData.get(position-1)));
+                listOrderData.get(position - 1).setReadStatus(0);
+                in.putExtra("message", JSONUtil.writeEntityToJSONString(listOrderData.get(position - 1)));
             } else if (readState == 1) {
-                listOrderUnReadData.get(position-1).setReadStatus(0);
-                in.putExtra("message", JSONUtil.writeEntityToJSONString(listOrderUnReadData.get(position-1)));
+                listOrderUnReadData.get(position - 1).setReadStatus(0);
+                in.putExtra("message", JSONUtil.writeEntityToJSONString(listOrderUnReadData.get(position - 1)));
             }
             getContext().startActivity(in);
         }
     };
 
-   public void notifyDataSetChanged(){
-       baseAdapter.notifyDataSetChanged();
-   }
+    public void notifyDataSetChanged() {
+        baseAdapter.notifyDataSetChanged();
+    }
 }

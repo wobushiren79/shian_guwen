@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.order.FuneralServiceActivity;
@@ -28,11 +29,9 @@ import com.shian.shianlife.common.view.editor.MainSetmealOtherView;
 import com.shian.shianlife.common.view.editor.MainSetmealView;
 import com.shian.shianlife.common.view.editor.MainSetmealView.OnMainChangeListener;
 import com.shian.shianlife.common.view.order.AddedSetmealView;
-import com.shian.shianlife.common.view.order.AddedSetmealView.OnAddedChangeListener;
-import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
-import com.shian.shianlife.provide.imp.impl.OrderManagerImpl;
+import com.shian.shianlife.provide.imp.impl.FuneralOrderManagerImpl;
 import com.shian.shianlife.provide.imp.impl.ProductManagerImpl;
 import com.shian.shianlife.provide.model.CemeteryModel;
 import com.shian.shianlife.provide.model.CreateOrderProductItemModel;
@@ -40,7 +39,6 @@ import com.shian.shianlife.provide.model.OrderCtgItemModel;
 import com.shian.shianlife.provide.model.OrderProductItemModel;
 import com.shian.shianlife.provide.model.ProjectItemModel;
 import com.shian.shianlife.provide.model.SetmealModel;
-import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpCreateOrderParams;
 import com.shian.shianlife.provide.params.HpGetOrderDetailParams;
 import com.shian.shianlife.provide.result.HrGetCemeteryResult;
@@ -116,25 +114,25 @@ public class EditOrderActivity extends BaseActivity {
      * 获取套餐信息
      */
     private void getMainSetmeals() {
-        ProductManagerImpl.getInstance().getMainSetmeal(this,
-                new HttpResponseHandler<HrGetMainSetmealResult>() {
+        MHttpManagerFactory.getProductManager().getMainSetmeal(this, new HttpResponseHandler<HrGetMainSetmealResult>() {
 
-                    @Override
-                    public void onSuccess(HrGetMainSetmealResult result) {
-                        mainSetmeals = result.getMains();
-                        getFuneralSetmeals();
-                    }
+            @Override
+            public void onStart(Request request, int id) {
 
-                    @Override
-                    public void onStart() {
+            }
 
-                    }
+            @Override
+            public void onSuccess(HrGetMainSetmealResult result) {
+                mainSetmeals = result.getMains();
+                getFuneralSetmeals();
+            }
 
-                    @Override
-                    public void onError(String message) {
-                        System.out.println();
-                    }
-                });
+
+            @Override
+            public void onError(String message) {
+                System.out.println();
+            }
+        });
 
     }
 
@@ -142,53 +140,54 @@ public class EditOrderActivity extends BaseActivity {
      * 获取殡仪馆信息
      */
     protected void getFuneralSetmeals() {
-        ProductManagerImpl.getInstance().getFuneralsSetmeal(this,
-                new HttpResponseHandler<HrGetFuneralSetmealResult>() {
+        MHttpManagerFactory.getProductManager().getFuneralsSetmeal(this, new HttpResponseHandler<HrGetFuneralSetmealResult>() {
 
-                    @Override
-                    public void onSuccess(HrGetFuneralSetmealResult result) {
-                        funeralSetmeals = result.getFunerals();
-                        getCemeterys();
-                    }
+            @Override
+            public void onStart(Request request, int id) {
 
-                    @Override
-                    public void onStart() {
-                    }
+            }
 
-                    @Override
-                    public void onError(String message) {
-                        System.out.println();
-                    }
-                });
+            @Override
+            public void onSuccess(HrGetFuneralSetmealResult result) {
+                funeralSetmeals = result.getFunerals();
+                getCemeterys();
+            }
+
+
+            @Override
+            public void onError(String message) {
+                System.out.println();
+            }
+        });
     }
 
     /**
      * 获取公墓信息
      */
     protected void getCemeterys() {
-        ProductManagerImpl.getInstance().getCemeteryResult(this,
-                new HttpResponseHandler<HrGetCemeteryResult>() {
+        MHttpManagerFactory.getProductManager().getCemeteryResult(this, new HttpResponseHandler<HrGetCemeteryResult>() {
 
-                    @Override
-                    public void onSuccess(HrGetCemeteryResult result) {
-                        cemeteries = result.getRetCemeteries();
-                        if (orderId != -1) {
-                            getOrderDetail();
-                        } else {
-                            initOrderView();
-                        }
-                    }
+            @Override
+            public void onStart(Request request, int id) {
 
-                    @Override
-                    public void onStart() {
+            }
 
-                    }
+            @Override
+            public void onSuccess(HrGetCemeteryResult result) {
+                cemeteries = result.getRetCemeteries();
+                if (orderId != -1) {
+                    getOrderDetail();
+                } else {
+                    initOrderView();
+                }
+            }
 
-                    @Override
-                    public void onError(String message) {
-                        System.out.println();
-                    }
-                });
+
+            @Override
+            public void onError(String message) {
+                System.out.println();
+            }
+        });
 
     }
 
@@ -198,25 +197,25 @@ public class EditOrderActivity extends BaseActivity {
     protected void getOrderDetail() {
         HpGetOrderDetailParams params = new HpGetOrderDetailParams();
         params.setOrderId(orderId);
-        OrderManagerImpl.getInstance().getOrderDetail(this, params,
-                new HttpResponseHandler<HrGetOrderDetailResult>() {
+        MHttpManagerFactory.getFuneralOrderManager().getOrderDetail(this, params, new HttpResponseHandler<HrGetOrderDetailResult>() {
 
-                    @Override
-                    public void onSuccess(HrGetOrderDetailResult result) {
-                        projectItems = result.getProjectItems();
-                        initOrderView(result);
-                    }
+            @Override
+            public void onStart(Request request, int id) {
 
-                    @Override
-                    public void onStart() {
+            }
 
-                    }
+            @Override
+            public void onSuccess(HrGetOrderDetailResult result) {
+                projectItems = result.getProjectItems();
+                initOrderView(result);
+            }
 
-                    @Override
-                    public void onError(String message) {
 
-                    }
-                });
+            @Override
+            public void onError(String message) {
+
+            }
+        });
     }
 
     private void initOrderView() {
@@ -258,11 +257,11 @@ public class EditOrderActivity extends BaseActivity {
         cemeterySetmealView.setCtgItems("公墓项目", cemeteries);
         cemeterySetmealView.setOnCemeteryChangeListener(new OnCemeteryChangeListener() {
 
-                    @Override
-                    public void onCemeteryChange() {
-                        change();
-                    }
-                });
+            @Override
+            public void onCemeteryChange() {
+                change();
+            }
+        });
 //        addedSetmealView.setOnAddedChangeListener(new OnAddedChangeListener() {
 //
 //            @Override
@@ -382,28 +381,28 @@ public class EditOrderActivity extends BaseActivity {
 //        params.setSetmealMain(mainSetmealView.getMainID());
         params.setSetmealMain(mainSetmealOtherView.getMainID());
         if (orderId != -1) {
-            OrderManagerImpl.getInstance().editOrder(this, params,
-                    new HttpResponseHandler<HrOderId>() {
+            MHttpManagerFactory.getFuneralOrderManager().editOrder(this, params, new HttpResponseHandler<HrOderId>() {
 
-                        @Override
-                        public void onSuccess(HrOderId result) {
-                            FuneralServiceActivity.C_bOrder_isRefresh = true;
-                            if (pgzx == 1) {
-                                sendBroadcast(new Intent(PgzxActivity.PGZX_ACTION));
-                            }
-                            finish();
-                        }
+                @Override
+                public void onStart(Request request, int id) {
 
-                        @Override
-                        public void onStart() {
+                }
 
-                        }
+                @Override
+                public void onSuccess(HrOderId result) {
+                    FuneralServiceActivity.C_bOrder_isRefresh = true;
+                    if (pgzx == 1) {
+                        sendBroadcast(new Intent(PgzxActivity.PGZX_ACTION));
+                    }
+                    finish();
+                }
 
-                        @Override
-                        public void onError(String message) {
 
-                        }
-                    });
+                @Override
+                public void onError(String message) {
+
+                }
+            });
         } else {
             TipsDialog mDialog = new TipsDialog(this);
             mDialog.setTitle("请确认客户选择由圆满人生进行全程服务，创建订单后不可取消。");
@@ -420,24 +419,24 @@ public class EditOrderActivity extends BaseActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             FuneralServiceActivity.C_bOrder_isRefresh = true;
-                            OrderManagerImpl.getInstance().createOrder(EditOrderActivity.this, params,
-                                    new HttpResponseHandler<HrOderId>() {
+                            MHttpManagerFactory.getFuneralOrderManager().createOrder(EditOrderActivity.this, params, new HttpResponseHandler<HrOderId>() {
 
-                                        @Override
-                                        public void onSuccess(HrOderId result) {
-                                            finish();
-                                        }
+                                @Override
+                                public void onStart(Request request, int id) {
 
-                                        @Override
-                                        public void onStart() {
+                                }
 
-                                        }
+                                @Override
+                                public void onSuccess(HrOderId result) {
+                                    finish();
+                                }
 
-                                        @Override
-                                        public void onError(String message) {
 
-                                        }
-                                    });
+                                @Override
+                                public void onError(String message) {
+
+                                }
+                            });
                         }
                     });
             mDialog.show();

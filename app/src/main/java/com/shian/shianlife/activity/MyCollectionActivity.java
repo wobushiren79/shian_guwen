@@ -13,11 +13,14 @@ import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.phpmodel.SiftListData;
+import com.shian.shianlife.provide.phpparams.PHPHpSiftListParams;
 import com.shian.shianlife.provide.phpresult.PHPHrGetSiftListData;
 import com.shian.shianlife.thisenum.SystemTypeEnum;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Request;
 
 public class MyCollectionActivity extends BaseActivity {
 
@@ -71,15 +74,18 @@ public class MyCollectionActivity extends BaseActivity {
     };
 
     private void getData(final boolean isClean) {
-        RequestParams params = new RequestParams();
-        params.put("type", "2");
-        params.put("userid", (int) AppContansts.userLoginInfo.getUserId());
-        params.put("number", number);
-        params.put("pagerNumber", pagerNumber);
-        params.put("userType", SystemTypeEnum.platform.getCode());
+        PHPHpSiftListParams params = new PHPHpSiftListParams();
+
+        params.setType(2);
+        params.setUserid(AppContansts.userLoginInfo.getUserId());
+        params.setNumber(number);
+        params.setPagerNumber(pagerNumber);
+        params.setUserType(SystemTypeEnum.platform.getCode());
         MHttpManagerFactory.getPHPManager().getSiftListData(MyCollectionActivity.this, params, new HttpResponseHandler<PHPHrGetSiftListData>() {
+
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

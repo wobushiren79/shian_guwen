@@ -45,6 +45,7 @@ import java.util.List;
 import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 public class PayShouActivity extends BaseActivity {
     @InjectView(R.id.iv_sign)
@@ -104,8 +105,13 @@ public class PayShouActivity extends BaseActivity {
     private void getMoney() {
         HpOrderIdParams params = new HpOrderIdParams();
         params.setOrderId(getIntent().getLongExtra("orderId", 0));
-        MHttpManagerFactory.getAccountManager().getOrderFeedback(this, params,
+        MHttpManagerFactory.getFuneralManager().getOrderFeedback(this, params,
                 new HttpResponseHandler<HrOrderFeedback>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrOrderFeedback result) {
@@ -128,11 +134,6 @@ public class PayShouActivity extends BaseActivity {
                                 result.getPayFeedback().getSatSku()});
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -279,8 +280,13 @@ public class PayShouActivity extends BaseActivity {
         HpOrderIdParams params = new HpOrderIdParams();
         params.setOrderId(orderId);
         params.setPayAmount(mAmount);
-        MHttpManagerFactory.getAccountManager().creatRestPay(this, params,
+        MHttpManagerFactory.getFuneralManager().creatRestPay(this, params,
                 new HttpResponseHandler<HrCommentResult>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrCommentResult result) {
@@ -288,11 +294,7 @@ public class PayShouActivity extends BaseActivity {
                         toPay(path, result.getPayId());
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
 
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -306,8 +308,13 @@ public class PayShouActivity extends BaseActivity {
         params.setOpinion(etOp.getText().toString());
         params.setOrderId(orderId);
         params.setSignUrl(path);
-        MHttpManagerFactory.getAccountManager().saveOrderFeedback(this, params,
+        MHttpManagerFactory.getFuneralManager().saveOrderFeedback(this, params,
                 new HttpResponseHandler<HrCommentResult>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrCommentResult result) {
@@ -324,11 +331,6 @@ public class PayShouActivity extends BaseActivity {
                         finish();
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
                     @Override
                     public void onError(String message) {

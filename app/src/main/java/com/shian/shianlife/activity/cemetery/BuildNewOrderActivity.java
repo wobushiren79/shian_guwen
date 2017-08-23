@@ -39,6 +39,8 @@ import com.shian.shianlife.view.writeview.TimeSelectViewNormal;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Request;
+
 import static com.shian.shianlife.common.contanst.SelectDictCode.CONSULT_TRAFFICWAY;
 
 
@@ -102,11 +104,10 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         params.setItemId(-1);
         params.setItemType(0);
         params.setToken(AppContansts.userLoginInfo.getToken());
-        MHttpManagerFactory.getAccountManager().getCemeteryStructure(BuildNewOrderActivity.this, params, new HttpResponseHandler<HrGetCemeteryStructure>() {
-
+        MHttpManagerFactory.getCemeteryManager().getCemeteryStructure(BuildNewOrderActivity.this, params, new HttpResponseHandler<HrGetCemeteryStructure>() {
 
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -220,9 +221,10 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         params.setPlanCemeteryId(cemeteryId);
         params.setToken(AppContansts.userLoginInfo.getToken());
         params.setRemarks(mRemark.getData());
-        MHttpManagerFactory.getAccountManager().saveCemeteryBuildData(BuildNewOrderActivity.this, params, new HttpResponseHandler<Object>() {
+        MHttpManagerFactory.getCemeteryManager().saveCemeteryBuildData(BuildNewOrderActivity.this, params, new HttpResponseHandler<Object>() {
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

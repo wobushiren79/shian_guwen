@@ -28,6 +28,8 @@ import com.shian.shianlife.view.writeview.TimeSelectViewNormal;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.Request;
+
 
 public class CarOrderActivity extends BaseActivity implements View.OnClickListener {
     TimeSelectViewNormal mUseTime;
@@ -175,9 +177,10 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
         String backUpString = StringUtils.getStringFromMap(backUpData);
         params.setBackupData(backUpString);
 
-        MHttpManagerFactory.getAccountManager().saveCarBuildData(this, params, new HttpResponseHandler<Object>() {
+        MHttpManagerFactory.getCarManager().saveCarBuildData(this, params, new HttpResponseHandler<Object>() {
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

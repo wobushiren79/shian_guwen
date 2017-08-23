@@ -38,6 +38,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.Request;
+
 
 public class WSZDataActivity extends BaseActivity {
     TextView mTVNext;
@@ -105,8 +107,13 @@ public class WSZDataActivity extends BaseActivity {
     private void initData() {
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId(consultId);
-        MHttpManagerFactory.getAccountManager().getCustomerUsage(WSZDataActivity.this,
+        MHttpManagerFactory.getFuneralManager().getCustomerUsage(WSZDataActivity.this,
                 params, new HttpResponseHandler<HrConsultUsageResult>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrConsultUsageResult result) {
@@ -157,12 +164,6 @@ public class WSZDataActivity extends BaseActivity {
                                 "yyyy-MM-dd"));
                         mWriteMapSelectNow.setData(result.getConsultUsage().getLocation());
                         mWriteRemark.setData(result.getConsultUsage().getNote());
-                    }
-
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
                     }
 
                     @Override
@@ -286,8 +287,13 @@ public class WSZDataActivity extends BaseActivity {
         Utils.LogVPrint("OtherHealth:" + params.getOtherHealth());
         Utils.LogVPrint("Note:" + params.getNote());
 
-        MHttpManagerFactory.getAccountManager().saveCustomerUsage(WSZDataActivity.this,
+        MHttpManagerFactory.getFuneralManager().saveCustomerUsage(WSZDataActivity.this,
                 params, new HttpResponseHandler<Object>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(Object result) {
@@ -300,11 +306,6 @@ public class WSZDataActivity extends BaseActivity {
                         finish();
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
                     @Override
                     public void onError(String message) {

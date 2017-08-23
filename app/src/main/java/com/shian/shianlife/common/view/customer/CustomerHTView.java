@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectViews;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
+import okhttp3.Request;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shian.shianlife.R;
@@ -71,9 +72,14 @@ public class CustomerHTView extends BaseCustomerView {
 				0);
 		HpOrderIdParams params = new HpOrderIdParams();
 		params.setOrderId(orderId);
-		MHttpManagerFactory.getAccountManager().getCustomerContract(
+		MHttpManagerFactory.getFuneralManager().getCustomerContract(
 				getContext(), params,
 				new HttpResponseHandler<HrGetCustomerContract>() {
+
+					@Override
+					public void onStart(Request request, int id) {
+
+					}
 
 					@Override
 					public void onSuccess(HrGetCustomerContract result) {
@@ -102,10 +108,6 @@ public class CustomerHTView extends BaseCustomerView {
 								result.getOrderContract().getNote());
 					}
 
-					@Override
-					public void onStart() {
-
-					}
 
 					@Override
 					public void onError(String message) {
@@ -271,8 +273,13 @@ public class CustomerHTView extends BaseCustomerView {
 		params.setAddAdditions(addList);
 		params.setRemoveAdditions(removeList);
 		params.setNote(note);
-		MHttpManagerFactory.getAccountManager().saveCustomerContract(
+		MHttpManagerFactory.getFuneralManager().saveCustomerContract(
 				getContext(), params, new HttpResponseHandler<Object>() {
+
+					@Override
+					public void onStart(Request request, int id) {
+
+					}
 
 					@Override
 					public void onSuccess(Object result) {
@@ -280,11 +287,7 @@ public class CustomerHTView extends BaseCustomerView {
 						ToastUtils.show(getContext(), "保存成功");
 					}
 
-					@Override
-					public void onStart() {
-						// TODO Auto-generated method stub
 
-					}
 
 					@Override
 					public void onError(String message) {

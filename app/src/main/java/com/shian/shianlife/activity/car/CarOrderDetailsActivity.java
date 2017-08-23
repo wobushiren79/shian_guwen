@@ -16,6 +16,8 @@ import com.shian.shianlife.thisenum.CarBusiTypeEnum;
 import com.shian.shianlife.thisenum.DriverStateEnum;
 import com.shian.shianlife.view.writeview.EditTextViewNormal;
 
+import okhttp3.Request;
+
 
 public class CarOrderDetailsActivity extends BaseActivity {
     private CemeteryOrderModel data;
@@ -103,10 +105,11 @@ public class CarOrderDetailsActivity extends BaseActivity {
         HpCarBuildOrder params = new HpCarBuildOrder();
         params.setBusiId(data.getBespeakId());
         params.setBusiType(CarBusiTypeEnum.cemetery_bespeakid.getText());
-        MHttpManagerFactory.getAccountManager().getCarBuildData(this, params, new HttpResponseHandler<HrGetCarDetails>() {
+        MHttpManagerFactory.getCarManager().getCarBuildData(this, params, new HttpResponseHandler<HrGetCarDetails>() {
+
 
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

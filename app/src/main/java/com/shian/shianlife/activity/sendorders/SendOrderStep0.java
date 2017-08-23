@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.Request;
+
 /**
  * Created by Administrator on 2016/12/21.
  */
@@ -40,8 +42,13 @@ public class SendOrderStep0 extends BaseSendOrder {
     public void getData() {
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId(consultId);
-        MHttpManagerFactory.getAccountManager().getSendOrderDataOne(context, params,
+        MHttpManagerFactory.getFuneralManager().getSendOrderDataOne(context, params,
                 new HttpResponseHandler<HrGetSendOrderDataOne>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(HrGetSendOrderDataOne result) {
@@ -78,11 +85,6 @@ public class SendOrderStep0 extends BaseSendOrder {
                         getContext().sendBroadcast(intent);
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
-
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -110,9 +112,11 @@ public class SendOrderStep0 extends BaseSendOrder {
         HpSaveSendOrderDataOne params = new HpSaveSendOrderDataOne();
         params.setConsultId(consultId);
         params.setZsLocation(mSelectLayoutView.getData());
-        MHttpManagerFactory.getAccountManager().saveSendOrderDataOne(getContext(), params, new HttpResponseHandler<Object>() {
+        MHttpManagerFactory.getFuneralManager().saveSendOrderDataOne(getContext(), params, new HttpResponseHandler<Object>() {
+
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

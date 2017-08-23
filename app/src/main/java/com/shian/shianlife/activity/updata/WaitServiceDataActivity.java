@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.Request;
+
 public class WaitServiceDataActivity extends BaseActivity {
     TextView mTVNext;
     TextView mTVBack;
@@ -65,10 +67,12 @@ public class WaitServiceDataActivity extends BaseActivity {
     private void initData() {
         HpConsultIdParams params = new HpConsultIdParams();
         params.setConsultId(consultId);
-        MHttpManagerFactory.getAccountManager().getWaitServicePostData(WaitServiceDataActivity.this,
+        MHttpManagerFactory.getFuneralManager().getWaitServicePostData(WaitServiceDataActivity.this,
                 params, new HttpResponseHandler<HrGetWaitServicePostData>() {
+
+
                     @Override
-                    public void onStart() {
+                    public void onStart(Request request, int id) {
 
                     }
 
@@ -135,8 +139,13 @@ public class WaitServiceDataActivity extends BaseActivity {
         params.setDeadLocation(location);
         params.setDeadTime(TransitionDate.StrToDate(time, "yyyy-MM-dd")
                 .getTime());
-        MHttpManagerFactory.getAccountManager().saveWaitServicePostData(WaitServiceDataActivity.this, params,
+        MHttpManagerFactory.getFuneralManager().saveWaitServicePostData(WaitServiceDataActivity.this, params,
                 new HttpResponseHandler<Object>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
 
                     @Override
                     public void onSuccess(Object result) {
@@ -146,11 +155,7 @@ public class WaitServiceDataActivity extends BaseActivity {
                         finish();
                     }
 
-                    @Override
-                    public void onStart() {
-                        // TODO Auto-generated method stub
 
-                    }
 
                     @Override
                     public void onError(String message) {

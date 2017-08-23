@@ -26,6 +26,8 @@ import com.shian.shianlife.view.SelectData;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Request;
+
 
 /**
  * Created by Administrator on 2017/1/11.
@@ -85,9 +87,10 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
         }
         HpCemeteryIdParams params = new HpCemeteryIdParams();
         params.setBespeakId(beSpeakId);
-        MHttpManagerFactory.getAccountManager().getCemeteryTalkSuccessOne(getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessOne>() {
+        MHttpManagerFactory.getCemeteryManager().getCemeteryTalkSuccessOne(getContext(), params, new HttpResponseHandler<HrGetCemeteryTalkSuccessOne>() {
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -402,9 +405,9 @@ public class CemeteryInfoView extends BaseInfoView implements CetemeryTextSelect
             ToastUtils.show(getContext(), "自选附属服务不能为空");
             return;
         }
-        MHttpManagerFactory.getAccountManager().saveCemeteryTalkSuccessOne(getContext(), params, new HttpResponseHandler<HrOrderIdResult>() {
+        MHttpManagerFactory.getCemeteryManager().saveCemeteryTalkSuccessOne(getContext(), params, new HttpResponseHandler<HrOrderIdResult>() {
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

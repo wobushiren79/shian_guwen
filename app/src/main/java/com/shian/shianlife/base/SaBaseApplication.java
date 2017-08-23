@@ -7,10 +7,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
+import java.security.cert.CertificateException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.app.Application;
@@ -25,9 +28,20 @@ import com.kf5sdk.init.KF5SDKInitializer;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.local.LocationService;
 import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.provide.base.SSLSocketFactoryCompat;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.zhy.http.okhttp.OkHttpUtils;
+
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.X509TrustManager;
+
+import okhttp3.Cookie;
+import okhttp3.CookieJar;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 
 public class SaBaseApplication extends Application {
     public static final Boolean LOGFLAG = true;
@@ -60,6 +74,80 @@ public class SaBaseApplication extends Application {
         // calculatedDispdpi();
         CrashReport.initCrashReport(getApplicationContext(), "58aeede7f2", false);
         KF5SDKInitializer.initialize(this);
+        initOkHttp();
+    }
+
+    /**
+     * 初始化Okhttp
+     */
+    private void initOkHttp() {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+//                .addInterceptor(new LoggerInterceptor("TAG"));
+        try {
+            // 自定义一个信任所有证书的TrustManager，添加SSLSocketFactory的时候要用到
+            final X509TrustManager trustAllCert =
+                    new X509TrustManager() {
+                        @Override
+                        public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                        }
+
+                        @Override
+                        public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
+                        }
+
+                        @Override
+                        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                            return new java.security.cert.X509Certificate[]{};
+                        }
+                    };
+            final SSLSocketFactory sslSocketFactory = new SSLSocketFactoryCompat(trustAllCert);
+            builder.sslSocketFactory(sslSocketFactory, trustAllCert);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+//        CookieJarImpl cookieJar = new CookieJarImpl(new PersistentCookieStore(getApplicationContext()));
+        OkHttpClient okHttpClient = builder.connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                //其他配置
+                .followRedirects(true)
+                .followSslRedirects(true)
+                .cookieJar(new LocalCookieJar())
+                .build();
+        OkHttpUtils.initClient(okHttpClient);
+    }
+
+    //CookieJar是用于保存Cookie的
+    class LocalCookieJar implements CookieJar {
+        @Override
+        public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+            String tempUrl = getBaseUrl(url.toString());
+            AppContansts.cookieStore.put(tempUrl, cookies);
+            //新增添加子系统KEY
+            if (tempUrl.contains(AppContansts.Login_BaseUrl) && cookies.size() >= 2) {
+                String setCookies = cookies.get(1).toString();
+                String[] cookiesList = setCookies.split(";");
+                for (String cookie : cookiesList) {
+                    if (cookie.contains("KI4SO_SERVER_EC")) {
+                        AppContansts.System_Ki4so_Client_Ec = cookie;
+                    }
+                }
+            }
+        }
+
+        @Override
+        public List<Cookie> loadForRequest(HttpUrl url) {
+            String tempUrl = getBaseUrl(url.toString());
+            List<Cookie> cookies = AppContansts.cookieStore.get(tempUrl);
+            return cookies != null ? cookies : new ArrayList<Cookie>();
+        }
+
+        private String getBaseUrl(String url) {
+            int hostLocation = url.indexOf("/", 8);
+            int urlLocation = url.indexOf("/", hostLocation + 1);
+            String temp = url.substring(0, urlLocation);
+            return temp;
+        }
     }
 
     /**
@@ -184,7 +272,6 @@ public class SaBaseApplication extends Application {
         Log.i("GlobalApplication", str);
 
     }
-
 
 
 }

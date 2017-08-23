@@ -3,7 +3,6 @@ package com.shian.shianlife.provide.imp;
 import android.content.Context;
 
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoResultBean;
-import com.shian.shianlife.provide.base.HttpManager;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpAcceptParams;
 import com.shian.shianlife.provide.params.HpAddConsultParams;
@@ -18,6 +17,7 @@ import com.shian.shianlife.provide.params.HpChangeLocation;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.params.HpGetDictSelectParams;
 import com.shian.shianlife.provide.params.HpGetOrderDetailParams;
+import com.shian.shianlife.provide.params.HpLoadAddressParams;
 import com.shian.shianlife.provide.params.HpLoginParams;
 import com.shian.shianlife.provide.params.HpOrderFeedback;
 import com.shian.shianlife.provide.params.HpOrderIdParams;
@@ -52,6 +52,7 @@ import com.shian.shianlife.provide.params.HpSaveSendOrderDataTwo;
 import com.shian.shianlife.provide.params.HpSaveWaitServicePostData;
 import com.shian.shianlife.provide.params.HpSkuIdParams;
 import com.shian.shianlife.provide.params.HpTalkFailParams;
+import com.shian.shianlife.provide.result.HpLoadAddressResult;
 import com.shian.shianlife.provide.result.HrAddConsultResult;
 import com.shian.shianlife.provide.result.HrCommentResult;
 import com.shian.shianlife.provide.result.HrConsultAgentman;
@@ -98,32 +99,20 @@ import com.shian.shianlife.provide.result.HrOrderItenNote;
 import com.shian.shianlife.provide.result.HrUserInfo;
 
 /**
- * 账户接口
- *
- * @author Administrator
+ * Created by zm.
  */
-public interface MAccountManager extends HttpManager {
+
+public interface FuneralManager {
     public void login(Context context, HpLoginParams params,
                       HttpResponseHandler<HrLoginResult> handler);
 
-    public void loginCemetery(Context context, HpLoginParams params,
-                              HttpResponseHandler<HrLoginResult> handler);
 
     public void loginout(Context context,
                          HttpResponseHandler<Object> handler);
 
-    public void loginoutCemetery(Context context,
-                                 HttpResponseHandler<Object> handler);
+    //获取地址
+    public void loadAddress(Context mContext, HpLoadAddressParams mParams, HttpResponseHandler<HpLoadAddressResult> handler);
 
-    /**
-     * 字典查询
-     *
-     * @param context
-     * @param params
-     * @param handler
-     */
-    public void getDictSelect(Context context, HpGetDictSelectParams params,
-                              HttpResponseHandler<HrGetDictSelectData> handler);
     /****************** 顾问 ***********************/
 
     /**
@@ -259,26 +248,7 @@ public interface MAccountManager extends HttpManager {
                                      HpSaveCustomerAgentmanParams params,
                                      HttpResponseHandler<Object> handler);
 
-    /**
-     * 获取公墓信息
-     *
-     * @param context
-     * @param params
-     * @param handler
-     */
-    public void getCustomerCemetery(Context context, HpConsultIdParams params,
-                                    HttpResponseHandler<HrConsultCemetery> handler);
 
-    /**
-     * 报错公墓信息
-     *
-     * @param context
-     * @param params
-     * @param handler
-     */
-    public void saveCustomerCemetery(Context context,
-                                     HpSaveCustomerCemeteryParams params,
-                                     HttpResponseHandler<Object> handler);
 
     /**
      * 获取合同信息
@@ -566,7 +536,7 @@ public interface MAccountManager extends HttpManager {
                             HttpResponseHandler<HrUserInfo> handler);
 
     public void getUserInfoData(Context context,
-                            HttpResponseHandler<UserInfoResultBean> handler);
+                                HttpResponseHandler<UserInfoResultBean> handler);
 
     public void changeCurAddress
             (Context context, HpConsultIdParams params,
@@ -763,95 +733,6 @@ public interface MAccountManager extends HttpManager {
 
 
     /**
-     * 获取公墓预约单信息
-     *
-     * @param context
-     * @param handler
-     */
-    public void getCemeteryBuildData(Context context, HttpResponseHandler<HrGetCemeteryBuildData> handler);
-
-    /**
-     * 保存公墓预约单信息
-     *
-     * @param context
-     * @param params
-     * @param handler
-     */
-    public void saveCemeteryBuildData(Context context, HpSaveCemeteryBuildData params, HttpResponseHandler<Object> handler);
-
-    /**
-     * 公墓系统接单
-     *
-     * @param context
-     * @param params
-     * @param handler
-     */
-    public void acceptCemetery(Context context, HpCetemeryAcceptParams params,
-                               HttpResponseHandler<Object> handler);
-
-    /**
-     * 公墓系统拒单
-     *
-     * @param context
-     * @param params
-     * @param handler
-     */
-    public void rejectCemetery(Context context, HpCetemeryRejectParams params,
-                               HttpResponseHandler<Object> handler);
-
-    /**
-     * 获取公墓洽谈信息
-     *
-     * @param context
-     * @param handler
-     */
-    public void getCemeteryTalkInfo(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkData> handler);
-
-    /**
-     * 保存公墓洽谈信息
-     *
-     * @param context
-     * @param params
-     * @param handler
-     */
-    public void saveCemeteryTalkInfo(Context context, HpSaveCemeteryTalkData params, HttpResponseHandler<Object> handler);
-
-    /**
-     * 获取公墓洽谈成功第一步信息
-     */
-    public void getCemeteryTalkSuccessOne(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessOne> handler);
-
-    /**
-     * 保存公墓洽谈成功第一步信息
-     */
-    public void saveCemeteryTalkSuccessOne(Context context, HpSaveCemeteryTalkSuccessOne params, HttpResponseHandler<HrOrderIdResult> handler);
-
-    /**
-     * 获取公墓洽谈成功第二步信息
-     */
-    public void getCemeteryTalkSuccessTwo(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessTwo> handler);
-
-    /**
-     * 保存公墓洽谈成功第二步信息
-     */
-    public void saveCemeteryTalkSuccessTwo(Context context, HpSaveCemeteryTalkSuccessTwo params, HttpResponseHandler<Object> handler);
-
-    /**
-     * 获取公墓洽谈成功第三步信息
-     */
-    public void getCemeteryTalkSuccessThree(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessThree> handler);
-
-    /**
-     * 保存公墓洽谈成功第三步信息
-     */
-    public void saveCemeteryTalkSuccessThree(Context context, HpSaveCemeteryTalkSuccessThree params, HttpResponseHandler<Object> handler);
-
-    /**
-     * 获取公墓墓位结构
-     */
-    public void getCemeteryStructure(Context context, HpCemeteryStructureParams params, HttpResponseHandler<HrGetCemeteryStructure> handler);
-
-    /**
      * 订单待处理计数提示功能
      */
     public void getMsgNumberForUntreated(Context context, HttpResponseHandler<HrGetMsgNumberForUntreated> handler);
@@ -861,58 +742,6 @@ public interface MAccountManager extends HttpManager {
      */
     public void changeLocation(Context context, HpChangeLocation params, HttpResponseHandler<Object> handler);
 
-    /**
-     * 获取公墓洽谈成功合同信息
-     */
-    void getCemeteryTalkSuccessContract(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessContract> handler);
-
-    /**
-     * 保存公墓洽谈成功合同信息
-     */
-    void saveCemeteryTalkSuccessContract(Context context, HpSaveCemeteryTalkSuccessContract params, HttpResponseHandler<HrOrderIdResult> handler);
-
-    /**
-     * 获取公墓洽谈成功往生者信息
-     */
-    void getCemeteryTalkSuccessDeadMan(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessDeadMan> handler);
-
-    /**
-     * 保存公墓洽谈成功往生者信息
-     */
-    void saveCemeteryTalkSuccessDeadMan(Context context, HpSaveCemeteryTalkSuccessDeadMan params, HttpResponseHandler<Object> handler);
-
-    /**
-     * 获取公墓洽谈成功逝者信息
-     */
-    void getCemeteryTalkSuccessAgentMan(Context context, HpCemeteryIdParams params, HttpResponseHandler<HrGetCemeteryTalkSuccessAgentMan> handler);
-
-    /**
-     * 保存公墓洽谈成功逝者信息
-     */
-    void saveCemeteryTalkSuccessAgentMan(Context context, HpSaveCemeteryTalkSuccessAgentMan params, HttpResponseHandler<Object> handler);
 
 
-    /**
-     * 保存派车单信息
-     *
-     * @param context
-     * @param params
-     * @param handler
-     */
-    void saveCarBuildData(Context context, HpCarBuildOrder params, HttpResponseHandler<Object> handler);
-
-    /**
-     * 获取订单详情
-     *
-     * @param context
-     * @param params
-     * @param handler
-     */
-    void getCarBuildData(Context context, HpCarBuildOrder params, HttpResponseHandler<HrGetCarDetails> handler);
-
-
-    /**
-     * 取消公墓咨询单
-     */
-    void cancelCemeteryBeSpeak(Context context, HpCemeteryBeSpeakCancelParams params, HttpResponseHandler<Object> handler);
 }

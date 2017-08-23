@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.InjectViews;
 import butterknife.OnClick;
+import okhttp3.Request;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -80,8 +81,13 @@ public class CustomerSZView extends BaseCustomerView {
 		HpConsultIdParams params = new HpConsultIdParams();
 		params.setConsultId(((Activity) getContext()).getIntent().getLongExtra(
 				"consultId", 0));
-		MHttpManagerFactory.getAccountManager().getCustomerUsage(getContext(),
+		MHttpManagerFactory.getFuneralManager().getCustomerUsage(getContext(),
 				params, new HttpResponseHandler<HrConsultUsageResult>() {
+
+					@Override
+					public void onStart(Request request, int id) {
+
+					}
 
 					@Override
 					public void onSuccess(HrConsultUsageResult result) {
@@ -110,11 +116,6 @@ public class CustomerSZView extends BaseCustomerView {
 
 					}
 
-					@Override
-					public void onStart() {
-						// TODO Auto-generated method stub
-
-					}
 
 					@Override
 					public void onError(String message) {
@@ -229,19 +230,18 @@ public class CustomerSZView extends BaseCustomerView {
 		params.setNote(bz);
 		params.setShoeSize(size);
 
-		MHttpManagerFactory.getAccountManager().saveCustomerUsage(getContext(),
+		MHttpManagerFactory.getFuneralManager().saveCustomerUsage(getContext(),
 				params, new HttpResponseHandler<Object>() {
+
+					@Override
+					public void onStart(Request request, int id) {
+
+					}
 
 					@Override
 					public void onSuccess(Object result) {
 						// TODO Auto-generated method stub
 						ToastUtils.show(getContext(), "保存成功");
-					}
-
-					@Override
-					public void onStart() {
-						// TODO Auto-generated method stub
-
 					}
 
 					@Override

@@ -20,10 +20,13 @@ import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.phpmodel.DynamicItemsInfo;
+import com.shian.shianlife.provide.phpparams.PHPHpDynamicInfoParams;
 import com.shian.shianlife.provide.phpresult.PHPHrGetDynamic;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Request;
 
 public class NoticeListActivity extends BaseActivity {
 
@@ -65,7 +68,7 @@ public class NoticeListActivity extends BaseActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(NoticeListActivity.this, WebActivity.class);
-            intent.putExtra("url", AppContansts.dynamicsPHPURL+"?id="+data.get(position-1).getId());
+            intent.putExtra("url", AppContansts.dynamicsPHPURL + "?id=" + data.get(position - 1).getId());
             startActivity(intent);
         }
     };
@@ -88,12 +91,14 @@ public class NoticeListActivity extends BaseActivity {
      * 获取数据
      */
     private void getData(final boolean isClean) {
-        RequestParams requestParams = new RequestParams();
-        requestParams.put("number", pageNumber);
-        requestParams.put("pagerNumber", page);
-        MHttpManagerFactory.getPHPManager().getDynamicInfo(NoticeListActivity.this, requestParams, new HttpResponseHandler<PHPHrGetDynamic>() {
+        PHPHpDynamicInfoParams params = new PHPHpDynamicInfoParams();
+        params.setNumber(pageNumber);
+        params.setPagerNumber(page);
+        MHttpManagerFactory.getPHPManager().getDynamicInfo(NoticeListActivity.this, params, new HttpResponseHandler<PHPHrGetDynamic>() {
+
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

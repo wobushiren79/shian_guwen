@@ -28,6 +28,8 @@ import com.shian.shianlife.view.SelectData;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Request;
+
 
 public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTextSelectLayoutView.onSelectedListener {
     int inType = -1;
@@ -75,9 +77,9 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
     private void getData() {
         HpCemeteryIdParams params = new HpCemeteryIdParams();
         params.setBespeakId(beSpeakId);
-        MHttpManagerFactory.getAccountManager().getCemeteryTalkInfo(CemeteryTalkFailActivity.this, params, new HttpResponseHandler<HrGetCemeteryTalkData>() {
+        MHttpManagerFactory.getCemeteryManager().getCemeteryTalkInfo(CemeteryTalkFailActivity.this, params, new HttpResponseHandler<HrGetCemeteryTalkData>() {
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
@@ -214,9 +216,10 @@ public class CemeteryTalkFailActivity extends BaseActivity implements CetemeryTe
         Utils.LogVPrint( "OrderLocation:" + params.getOrderLocation());
         Utils.LogVPrint( "getRemark:" + params.getRemark());
 
-        MHttpManagerFactory.getAccountManager().saveCemeteryTalkInfo(CemeteryTalkFailActivity.this, params, new HttpResponseHandler<Object>() {
+        MHttpManagerFactory.getCemeteryManager().saveCemeteryTalkInfo(CemeteryTalkFailActivity.this, params, new HttpResponseHandler<Object>() {
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

@@ -1,24 +1,35 @@
 package com.shian.shianlife.common.contanst;
 
+import com.shian.shianlife.mvp.login.bean.SystemLoginResultBean;
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoResultBean;
 import com.shian.shianlife.provide.result.HrGetMsgNumberForUntreated;
 import com.shian.shianlife.provide.result.HrLoginResult;
 
-public class AppContansts {
-    public static final String BaseCemeteryURL = "http://192.168.0.37:8088/app";
-//    public static final String BaseCemeteryURL = "http://192.168.0.200:8000/shianlife-advisor-cemetery-1.0-SNAPSHOT";
-    //    public static final String BaseCemeteryURL = "http://192.168.0.35:8100/advisor";
-//    public static final String BaseCemeteryURL = "http://115.28.163.211:7088/shianlife-advisor-cemetery-1.0-SNAPSHOT";
-    public static final String BaseURL = "http://115.28.163.211:7088/shianlife-adviser-1.0-SNAPSHOT";
-    //    public static final String BaseURL = "http://192.168.0.37:8088/adviser";
-    public static final String OSSURL = "http://shianlife123.oss-cn-qingdao.aliyuncs.com/";
-    public static final String PhpURL = "http://app.e-funeral.cn";
-//    public static final String PhpURL = "http://192.168.0.170/shian_app_mgr";
+import java.util.HashMap;
+import java.util.List;
 
-    public static final String siftsPHPURL = PhpURL + "/home/index/sifts";//精选
-    public static final String helpsPHPURL = PhpURL + "/home/index/helps";//帮助
-    public static final String dynamicsPHPURL = PhpURL + "/home/index/dynamics";//动态
-    public static final String phonePHPURL = PhpURL + "/home/index/phone";//通讯宝
+import okhttp3.Cookie;
+
+public class AppContansts {
+    //登陆地址
+    public static final String Login_BaseUrl = "http://192.168.0.37:8080/ki4so-web";
+    //单项地址
+    public static final String Store_BaseUrl = "http://192.168.0.37:8089/goods";
+    //殡仪地址
+    public static final String Funeral_BaseUrl = "http://115.28.163.211:7088/shianlife-adviser-1.0-SNAPSHOT";
+    //公墓地址
+//    public static final String Cemetery_BaseUrl = "http://192.168.0.200:8000/shianlife-advisor-cemetery-1.0-SNAPSHOT";
+//  public static final String Cemetery_BaseUrl = "http://115.28.163.211:7088/shianlife-advisor-cemetery-1.0-SNAPSHOT";
+  public static final String Cemetery_BaseUrl = "http://192.168.0.37:8088/app";
+
+
+    public static final String OSSURL = "http://shianlife123.oss-cn-qingdao.aliyuncs.com/";
+
+    public static final String PHP_BaseUrl = "http://app.e-funeral.cn";
+    public static final String siftsPHPURL = PHP_BaseUrl + "/home/index/sifts";//精选
+    public static final String helpsPHPURL = PHP_BaseUrl + "/home/index/helps";//帮助
+    public static final String dynamicsPHPURL = PHP_BaseUrl + "/home/index/dynamics";//动态
+    public static final String phonePHPURL = PHP_BaseUrl + "/home/index/phone";//通讯宝
     public static final String DiDichannel = "55455";//滴滴渠道号
 
     public static int MessageCount = 0;
@@ -40,4 +51,14 @@ public class AppContansts {
     public static HrLoginResult userCemetery = null;
 
     public static UserInfoResultBean userInfoData;
+
+    //平台用户数据
+    public static SystemLoginResultBean systemLoginInfo;
+    //登陆系统KEY
+    public static String System_Ki4so_Client_Ec;
+    //子系统-单项  登陆地址
+    public static final String Login_Store_Url = Store_BaseUrl + "/login_sys_api";
+    //cookie保存
+    public static final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
+
 }

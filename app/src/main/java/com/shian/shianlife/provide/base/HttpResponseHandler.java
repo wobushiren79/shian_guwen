@@ -1,14 +1,15 @@
 package com.shian.shianlife.provide.base;
 
+import okhttp3.Request;
+
 public abstract class HttpResponseHandler<T>
 {
-    public abstract void onStart();
+    public abstract void onStart(Request request, int id);
 
     public abstract void onSuccess(T result);
 
     public abstract void onError(String message);
 
-    public void onOffLine(T result)
-    {
+    public void onOffLine(T result) {
     }
 }

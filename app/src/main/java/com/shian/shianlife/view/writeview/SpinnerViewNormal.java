@@ -16,6 +16,8 @@ import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpGetDictSelectParams;
 import com.shian.shianlife.provide.result.HrGetDictSelectData;
 
+import okhttp3.Request;
+
 /**
  * Created by Administrator on 2017/3/14.
  */
@@ -81,11 +83,11 @@ public class SpinnerViewNormal extends BaseWriteView {
     private void getSelectData(String dictCode, final String isShowSpinnerData) {
         HpGetDictSelectParams params = new HpGetDictSelectParams();
         params.setDictCode(dictCode);
-        MHttpManagerFactory.getAccountManager().getDictSelect(getContext(), params, new HttpResponseHandler<HrGetDictSelectData>() {
+        MHttpManagerFactory.getCemeteryManager().getDictSelect(getContext(), params, new HttpResponseHandler<HrGetDictSelectData>() {
 
 
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 

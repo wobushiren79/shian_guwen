@@ -35,6 +35,8 @@ import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 
 import java.util.ArrayList;
 
+import okhttp3.Request;
+
 public class SaveTalkFailActivity extends BaseActivity {
     Long ConsultId;
     TextView mSubmit;
@@ -163,20 +165,27 @@ public class SaveTalkFailActivity extends BaseActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        MHttpManagerFactory.getAccountManager().saveTalkFailData(SaveTalkFailActivity.this, params,
+                        MHttpManagerFactory.getFuneralManager().saveTalkFailData(SaveTalkFailActivity.this, params,
                                 new HttpResponseHandler<Object>() {
+                                    @Override
+                                    public void onStart(Request request, int id) {
+
+                                    }
+
                                     @Override
                                     public void onSuccess(Object result) {
                                         // TODO Auto-generated method stub
                                         if (!params.isResult()) {
                                             HpConsultIdParams params = new HpConsultIdParams();
                                             params.setConsultId(ConsultId);
-                                            MHttpManagerFactory.getAccountManager().talkFinish(
+                                            MHttpManagerFactory.getFuneralManager().talkFinish(
                                                     SaveTalkFailActivity.this, params,
                                                     new HttpResponseHandler<Object>() {
 
+
+
                                                         @Override
-                                                        public void onStart() {
+                                                        public void onStart(Request request, int id) {
 
                                                         }
 
@@ -199,11 +208,6 @@ public class SaveTalkFailActivity extends BaseActivity {
                                         }
                                     }
 
-                                    @Override
-                                    public void onStart() {
-                                        // TODO Auto-generated method stub
-
-                                    }
 
                                     @Override
                                     public void onError(String message) {

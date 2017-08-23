@@ -32,6 +32,8 @@ import com.shian.shianlife.provide.result.HrLoginResult;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import okhttp3.Request;
+
 public class SplashActivity extends BaseActivity implements OnPushListener {
     private int SLEEPTIME = 2500;//loading时间
     HrLoginResult result = null;
@@ -87,68 +89,37 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
         AppContansts.userCemetery = null;
         AppContansts.userLoginInfo = null;
         ShareLogin loginS = SharePerfrenceUtils.getLoginShare(this);
-        if (loginS.getLoginType() == 0) {
-            //登录状态为普通状态
-            HpLoginParams params = new HpLoginParams();
-            params.setPassword(passWord);
-            params.setUsername(userName);
-            params.setSystemType("2");
-            params.setChannelId(channelId);
-            MHttpManagerFactory.getAccountManager().login(this, params,
-                    new HttpResponseHandler<HrLoginResult>() {
 
-                        @Override
-                        public void onSuccess(HrLoginResult result) {
-                            AppContansts.userLoginInfo = result;
-                            if (result.getToken() != null && !result.getToken().equals("")) {
-                                loginCemetery(result);
-                            } else {
-                                SharePerfrenceUtils.setHasCemetery(SplashActivity.this, false);
-                                sleepActivity(0);
-                            }
+        //登录状态为普通状态
+        HpLoginParams params = new HpLoginParams();
+        params.setPassword(passWord);
+        params.setUsername(userName);
+        params.setSystemType("2");
+        params.setChannelId(channelId);
+        MHttpManagerFactory.getFuneralManager().login(this, params,
+                new HttpResponseHandler<HrLoginResult>() {
+
+                    @Override
+                    public void onStart(Request request, int id) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(HrLoginResult result) {
+                        AppContansts.userLoginInfo = result;
+                        if (result.getToken() != null && !result.getToken().equals("")) {
+                            loginCemetery(result);
+                        } else {
+                            sleepActivity(0);
                         }
+                    }
 
-                        @Override
-                        public void onStart() {
+                    @Override
+                    public void onError(String message) {
+                        sleepActivity(1);
+                    }
+                });
 
-                        }
-
-                        @Override
-                        public void onError(String message) {
-                            sleepActivity(1);
-                        }
-                    });
-        } else if (loginS.getLoginType() == 1) {
-            //登录状态为公墓状态
-//                HpLoginParams params = new HpLoginParams();
-//                params.setPassword(loginS.getPassword());
-//                params.setUsername(loginS.getUsername());
-//                params.setSystemType("2");
-//                params.setChannelId(channelId);
-//
-//
-//                MHttpManagerFactory.getAccountManager().loginCemetery(this, params,
-//                        new HttpResponseHandler<HrLoginResult>() {
-//
-//                            @Override
-//                            public void onSuccess(HrLoginResult result) {
-//                                AppContansts.userLoginInfo = result;
-//                                LoginActivity.cookie = result.getSessionId();
-//                                HttpRequestExecutor.setSession(LoginActivity.cookie, SplashActivity.this);
-//                                loginSuccess(result);
-//                            }
-//
-//                            @Override
-//                            public void onStart() {
-//
-//                            }
-//
-//                            @Override
-//                            public void onError(String message) {
-//                                jumpLogin();
-//                            }
-//                        });
-        }
     }
 
     /**
@@ -159,22 +130,22 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     private void loginCemetery(final HrLoginResult result) {
         HpLoginParams paramsCemetery = new HpLoginParams();
         paramsCemetery.setToken(result.getToken());
-        MHttpManagerFactory.getAccountManager().loginCemetery(SplashActivity.this, paramsCemetery, new HttpResponseHandler<HrLoginResult>() {
+        MHttpManagerFactory.getCemeteryManager().loginCemetery(SplashActivity.this, paramsCemetery, new HttpResponseHandler<HrLoginResult>() {
+
+
             @Override
-            public void onStart() {
+            public void onStart(Request request, int id) {
 
             }
 
             @Override
             public void onSuccess(HrLoginResult resultCemetery) {
                 AppContansts.userCemetery = resultCemetery;
-                SharePerfrenceUtils.setHasCemetery(SplashActivity.this, true);
                 sleepActivity(0);
             }
 
             @Override
             public void onError(String message) {
-                SharePerfrenceUtils.setHasCemetery(SplashActivity.this, false);
                 sleepActivity(0);
             }
         });
