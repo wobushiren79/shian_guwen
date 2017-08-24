@@ -12,17 +12,23 @@
         android:layout_marginBottom="@dimen/dimen_12dp"
         android:layout_marginLeft="@dimen/dimen_16dp"
         android:layout_marginRight="@dimen/dimen_16dp"
-        android:layout_marginTop="@dimen/dimen_12dp"></com.shian.shianlife.view.searchview.SearchView>
+        android:layout_marginTop="@dimen/dimen_12dp"
+        android:visibility="gone"></com.shian.shianlife.view.searchview.SearchView>
 
-    <Button
-        android:id="@+id/bt_cemetery_build"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="公墓新建" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_6dp" />
 
-    <Button
-        android:id="@+id/bt_funeral_build"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="殡仪新建" />
+    <include
+        android:id="@+id/layout_build_cemetery"
+        layout="@layout/layout_build_order_button"
+        android:visibility="gone"></include>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_18dp" />
+
+    <include
+        android:id="@+id/layout_build_funeral"
+        layout="@layout/layout_build_order_button"></include>
 </LinearLayout>

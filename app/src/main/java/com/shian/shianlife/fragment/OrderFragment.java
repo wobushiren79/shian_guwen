@@ -223,7 +223,7 @@ public class OrderFragment extends BaseFragment {
                 OverServiceView view = new OverServiceView(getActivity(), n);
                 views.add(view);
             } else if (n.equals("公墓单")) {
-                CemeteryBuildView view = new CemeteryBuildView(getActivity());
+                CemeteryBuildView view = new CemeteryBuildView(getActivity(),0);
                 views.add(view);
             }
         }

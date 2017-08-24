@@ -42,16 +42,14 @@ import com.shian.shianlife.provide.result.HrGetCemeteryTalkSuccessTwo;
 import com.shian.shianlife.provide.result.HrGetDictSelectData;
 import com.shian.shianlife.provide.result.HrLoginResult;
 import com.shian.shianlife.provide.result.HrOrderIdResult;
+import com.shian.shianlife.thisenum.CemeteryBuildListTypeEnum;
 
 /**
  * Created by Administrator on 2017/1/18.
  */
 
 public class CemeteryManagerImpl extends BaseManagerImpl implements CemeteryManager {
-
     private static volatile CemeteryManagerImpl manager;
-
-    private String[] getOrderListMethod = {"marketing/bespeak/build/list", "marketing/talks/overall/list"};
 
     private CemeteryManagerImpl() {
         super();
@@ -94,7 +92,8 @@ public class CemeteryManagerImpl extends BaseManagerImpl implements CemeteryMana
     @Override
     public void getOrderList(Context context, HpGetOrderListParams params, int orderType,
                              HttpResponseHandler<HrGetCemeteryListData> response) {
-        requestPost(context, getOrderListMethod[orderType], HrGetCemeteryListData.class, params, response, false);
+        String url = CemeteryBuildListTypeEnum.getUrlFromCode(orderType);
+        requestPost(context, url, HrGetCemeteryListData.class, params, response, false);
     }
 
 

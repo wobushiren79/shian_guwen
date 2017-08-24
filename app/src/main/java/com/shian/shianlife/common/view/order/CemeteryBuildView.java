@@ -57,13 +57,16 @@ public class CemeteryBuildView extends BaseOrderView {
     private SwipeRefreshHelper mSwipeRefreshHelper;
     private int pageSize = 10;
     private int page = 1;
+    private int listType = 0;
 
-    public CemeteryBuildView(Context context) {
+    public CemeteryBuildView(Context context,int listType) {
         super(context, null);
+        this.listType=listType;
         view = View.inflate(context, R.layout.view_order_cemetery_build, this);
         initView();
         initDate();
     }
+
 
     private void initView() {
         mSryt = (SwipeRefreshLayout) view.findViewById(R.id.sryt_swipe_listview);
@@ -345,7 +348,7 @@ public class CemeteryBuildView extends BaseOrderView {
                         alertDialog.show();
                     }
                 });
-            }else{
+            } else {
                 tv_cancel.setVisibility(VISIBLE);
                 tv_cancel.setText("取消受理中");
                 tv_cancel.setTextColor(getResources().getColor(R.color.zhy_text_color_1));
@@ -404,7 +407,7 @@ public class CemeteryBuildView extends BaseOrderView {
         HpGetOrderListParams params = new HpGetOrderListParams();
         params.setPageNum(page);
         params.setPageSize(pageSize);
-        MHttpManagerFactory.getCemeteryManager().getOrderList(getContext(), params, 0, new HttpResponseHandler<HrGetCemeteryListData>() {
+        MHttpManagerFactory.getCemeteryManager().getOrderList(getContext(), params, listType, new HttpResponseHandler<HrGetCemeteryListData>() {
             @Override
             public void onStart(Request request, int id) {
 
@@ -441,7 +444,7 @@ public class CemeteryBuildView extends BaseOrderView {
         HpGetOrderListParams params = new HpGetOrderListParams();
         params.setPageNum(page);
         params.setPageSize(pageSize);
-        MHttpManagerFactory.getCemeteryManager().getOrderList(getContext(), params, 0, new HttpResponseHandler<HrGetCemeteryListData>() {
+        MHttpManagerFactory.getCemeteryManager().getOrderList(getContext(), params, listType, new HttpResponseHandler<HrGetCemeteryListData>() {
 
             @Override
             public void onStart(Request request, int id) {

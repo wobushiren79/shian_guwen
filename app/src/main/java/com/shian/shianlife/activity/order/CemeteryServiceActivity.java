@@ -18,6 +18,7 @@ import com.shian.shianlife.common.view.order.WaitAuditView;
 import com.shian.shianlife.common.view.order.WaitMoneyView;
 import com.shian.shianlife.common.view.order.WaitServiceView;
 import com.shian.shianlife.thisenum.AppRolePermition;
+import com.shian.shianlife.thisenum.CemeteryBuildListTypeEnum;
 import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.ArrayList;
@@ -60,7 +61,10 @@ public class CemeteryServiceActivity extends BaseActivity {
         if (AppContansts.userCemetery != null) {
             for (int i = 0; i < AppContansts.userCemetery.getPermitionCodes().size(); i++) {
                 if (AppContansts.userCemetery.getPermitionCodes().get(i).equals(AppRolePermition.ADVISOR.getCode())) {
-                    arrTitles.add("公墓单");
+                    arrTitles.add(CemeteryBuildListTypeEnum.wait_look.getName());
+                    arrTitles.add(CemeteryBuildListTypeEnum.look_ing.getName());
+                    arrTitles.add(CemeteryBuildListTypeEnum.has_order.getName());
+                    arrTitles.add(CemeteryBuildListTypeEnum.no_order.getName());
                 }
             }
         }
@@ -127,10 +131,21 @@ public class CemeteryServiceActivity extends BaseActivity {
 
     private void initPagerAdapter(List<View> views) {
         for (String n : arrTitles) {
-            if (n.equals("公墓单")) {
-                CemeteryBuildView view = new CemeteryBuildView(this);
-                views.add(view);
+            CemeteryBuildView view;
+            if (n.equals(CemeteryBuildListTypeEnum.confirm_build.getName())) {
+                view = new CemeteryBuildView(this, CemeteryBuildListTypeEnum.confirm_build.getCode());
+            } else if (n.equals(CemeteryBuildListTypeEnum.wait_look.getName())) {
+                view = new CemeteryBuildView(this, CemeteryBuildListTypeEnum.wait_look.getCode());
+            } else if (n.equals(CemeteryBuildListTypeEnum.look_ing.getName())) {
+                view = new CemeteryBuildView(this, CemeteryBuildListTypeEnum.look_ing.getCode());
+            } else if (n.equals(CemeteryBuildListTypeEnum.has_order.getName())) {
+                view = new CemeteryBuildView(this, CemeteryBuildListTypeEnum.has_order.getCode());
+            } else if (n.equals(CemeteryBuildListTypeEnum.no_order.getName())) {
+                view = new CemeteryBuildView(this, CemeteryBuildListTypeEnum.no_order.getCode());
+            } else {
+                view = new CemeteryBuildView(this, CemeteryBuildListTypeEnum.all.getCode());
             }
+            views.add(view);
         }
     }
 
