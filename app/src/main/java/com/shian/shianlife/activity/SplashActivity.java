@@ -96,6 +96,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
         params.setUsername(userName);
         params.setSystemType("2");
         params.setChannelId(channelId);
+        AppContansts.cookieStore.clear();
         MHttpManagerFactory.getFuneralManager().login(this, params,
                 new HttpResponseHandler<HrLoginResult>() {
 

@@ -159,8 +159,9 @@
             android:theme="@style/StyledIndicators" />
         <activity
             android:name=".activity.UserInfoActivity"
-            android:configChanges="orientation|screenSize"
+            android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/StyledIndicators" />
         <activity
             android:name=".activity.RefundOrderActivity"

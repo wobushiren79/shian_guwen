@@ -10,9 +10,9 @@ import com.shian.shianlife.activity.order.StoreServiceActivity;
  */
 
 public enum OrderItemShowEnum {
-    cemetery(1, "公墓服务", R.drawable.order_cemetery_icon, CemeteryServiceActivity.class),
-    funeral(2, "殡仪服务", R.drawable.order_funeral_icon, FuneralServiceActivity.class),
-    store(3, "单项服务", R.drawable.order_store_icon, StoreServiceActivity.class);
+    cemetery(1, "圆满-公墓", R.drawable.order_cemetery_icon, CemeteryServiceActivity.class),
+    funeral(2, "圆满-白事", R.drawable.order_funeral_icon, FuneralServiceActivity.class),
+    store(3, "圆满-商城", R.drawable.order_store_icon, StoreServiceActivity.class);
 
     private int code;
     private String name;

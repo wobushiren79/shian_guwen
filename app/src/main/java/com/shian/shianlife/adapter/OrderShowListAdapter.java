@@ -17,8 +17,10 @@ import android.widget.TextView;
 
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.WebActivity;
 import com.shian.shianlife.adapter.base.BaseRCAdapter;
 import com.shian.shianlife.adapter.base.BaseViewHolder;
+import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.AnimUtils;
 import com.shian.shianlife.mvp.order.bean.OrderShowResultBean;
 
@@ -61,8 +63,16 @@ public class OrderShowListAdapter extends BaseRCAdapter<OrderShowResultBean.Item
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        Intent intent = new Intent(mContext, orderShowItemBean.getIntentClass());
-                        mContext.startActivity(intent);
+                        if (!orderShowItemBean.getName().contains("白事")) {
+                            Intent intent = new Intent(mContext, orderShowItemBean.getIntentClass());
+                            mContext.startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(mContext, WebActivity.class);
+                            intent.putExtra(IntentName.INTENT_URL,"http://www.baidu.com");
+                            mContext.startActivity(intent);
+                        }
+
+
                     }
 
                     @Override

@@ -32,8 +32,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
 import com.loopj.android.http.RequestParams;
 import com.shian.shianlife.activity.MainActivity;
 import com.shian.shianlife.activity.PgzxActivity;
@@ -60,6 +64,28 @@ import me.leolin.shortcutbadger.ShortcutBadger;
 import okhttp3.Request;
 
 public class Utils {
+    /**
+     * 加载图片
+     *
+     * @param context
+     * @param imageView
+     * @param imgPath
+     */
+    public static void loadPic(Context context, ImageView imageView, String imgPath) {
+        Glide.with(context).load(imgPath).crossFade().into(imageView);
+    }
+
+    public static void loadPic(Context context, ImageView imageView, int imgId) {
+        Glide.with(context).load(imgId).crossFade().into(imageView);
+    }
+
+    public static void loadPic(Context context, ImageView imageView, String imgPath, int placeholderId) {
+        Glide.with(context).load(imgPath).crossFade().placeholder(placeholderId).into(imageView);
+    }
+
+    public static void loadPic(Context context, ImageView imageView, String imgPath, RequestListener<String, GlideDrawable> listener) {
+        Glide.with(context).load(imgPath).crossFade().listener(listener).into(imageView);
+    }
 
     public static void LogVPrint(String content) {
         if (SaBaseApplication.LOGFLAG) {

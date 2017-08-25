@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.app.Application;
+import android.os.Build;
 import android.os.Environment;
 
 
@@ -73,7 +74,13 @@ public class SaBaseApplication extends Application {
         SDKInitializer.initialize(getApplicationContext());
         // calculatedDispdpi();
         CrashReport.initCrashReport(getApplicationContext(), "58aeede7f2", false);
-        KF5SDKInitializer.initialize(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            try {
+                KF5SDKInitializer.initialize(this);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         initOkHttp();
     }
 

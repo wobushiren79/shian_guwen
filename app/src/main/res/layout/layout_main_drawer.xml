@@ -35,7 +35,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_140dp"
+        android:layout_marginTop="@dimen/dimen_100dp"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/dimen_72dp">
 
@@ -103,10 +103,10 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:background="@drawable/zhy_button_bg_check_gray"
             android:id="@+id/ll_help"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_80dp"
+            android:background="@drawable/zhy_button_bg_check_gray"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dimen_72dp">
 
@@ -124,10 +124,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:background="@drawable/zhy_button_bg_check_gray"
             android:id="@+id/ll_collection"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_80dp"
+            android:background="@drawable/zhy_button_bg_check_gray"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dimen_72dp">
 
@@ -145,10 +145,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:background="@drawable/zhy_button_bg_check_gray"
             android:id="@+id/ll_idea"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_80dp"
+            android:background="@drawable/zhy_button_bg_check_gray"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dimen_72dp">
 
@@ -166,10 +166,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:background="@drawable/zhy_button_bg_check_gray"
             android:id="@+id/ll_platform"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_80dp"
+            android:background="@drawable/zhy_button_bg_check_gray"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dimen_72dp">
 
@@ -186,11 +186,35 @@
                 android:text="@string/zhy_user_center_platform" />
         </LinearLayout>
 
+
+
         <LinearLayout
+            android:id="@+id/ll_userinfo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
             android:background="@drawable/zhy_button_bg_check_gray"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimen_72dp">
+
+            <ImageView
+                style="@style/zhy_drawer_item_icon"
+                android:layout_width="@dimen/dimen_32dp"
+                android:layout_height="@dimen/dimen_32dp"
+                android:src="@drawable/zhy_user_center_version" />
+
+            <TextView
+                android:id="@+id/tv_userinfo"
+                style="@style/zhy_drawer_item_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/zhy_user_center_userinfo" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/ll_version"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_80dp"
+            android:background="@drawable/zhy_button_bg_check_gray"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dimen_72dp">
 
@@ -219,10 +243,10 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:background="@drawable/zhy_button_bg_check_gray"
             android:id="@+id/ll_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/zhy_button_bg_check_gray"
             android:orientation="horizontal">
 
             <ImageView
@@ -239,11 +263,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:background="@drawable/zhy_button_bg_check_gray"
             android:id="@+id/ll_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_64dp"
+            android:background="@drawable/zhy_button_bg_check_gray"
             android:orientation="horizontal">
 
             <ImageView

@@ -17,8 +17,10 @@ public class IntentName {
     public static String INTENT_CODE = "INTENT_CODE";//设置code
     public static String INTENT_TITLE = "INTENT_TITLE";//设置title
 
-    public static String INTENT_FRAGMENT_USERINFO="INTENT_FRAGMENT_USERINFO";
-    public static String INTENT_LOCATION_NUMVIEW="INTENT_LOCATION_NUMVIEW";
+    public static String INTENT_FRAGMENT_USERINFO = "INTENT_FRAGMENT_USERINFO";
+    public static String INTENT_LOCATION_NUMVIEW = "INTENT_LOCATION_NUMVIEW";
 
-    public static String INTENT_URL="INTENT_URL";//URL
+    public static String INTENT_URL = "url";//URL
+
+    public static String INTENT_TYPE = "INTENT_TYPE";//传递类型
 }

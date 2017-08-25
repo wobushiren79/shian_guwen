@@ -1,6 +1,7 @@
 package com.shian.shianlife.view.searchview;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -15,14 +16,14 @@ import com.shian.shianlife.R;
  * Created by zm.
  */
 
-public class SearchView extends android.widget.SearchView implements android.widget.SearchView.OnQueryTextListener {
+public class CustomSearchView extends android.widget.SearchView implements android.widget.SearchView.OnQueryTextListener {
     private CallBack callBack;
 
-    public SearchView(Context context) {
+    public CustomSearchView(Context context) {
         this(context, null);
     }
 
-    public SearchView(Context context, AttributeSet attrs) {
+    public CustomSearchView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView();
     }
@@ -44,7 +45,7 @@ public class SearchView extends android.widget.SearchView implements android.wid
         this.setBackgroundResource(R.drawable.zhy_search_view_background_white);
         int searchPlateId = getContext().getResources().getIdentifier("android:id/search_plate", null, null);
         LinearLayout searchPlate = (LinearLayout) this.findViewById(searchPlateId);
-        searchPlate.setBackgroundDrawable(null);
+        searchPlate.setBackgroundColor(Color.TRANSPARENT);
     }
 
     private void initSearchButton() {
@@ -57,7 +58,7 @@ public class SearchView extends android.widget.SearchView implements android.wid
         searchButton.setImageResource(R.drawable.zhy_seach_icon);
         //设置imageView大小
         int dp36 = this.getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_36dp);
-        LayoutParams searchButtonLayout = new LayoutParams(dp36, dp36);
+        LinearLayout.LayoutParams searchButtonLayout = new LinearLayout.LayoutParams(dp36, dp36);
         searchButtonLayout.gravity = Gravity.CENTER_VERTICAL;
         searchButton.setLayoutParams(searchButtonLayout);
     }
@@ -75,7 +76,7 @@ public class SearchView extends android.widget.SearchView implements android.wid
         textView.setTextColor(getResources().getColor(R.color.zhy_text_color_16));
         //设置提示文字颜色
         textView.setHintTextColor(getResources().getColor(R.color.zhy_text_color_15));
-        LayoutParams textViewLayout = new LayoutParams(0,ViewGroup.LayoutParams.MATCH_PARENT,1);
+        LinearLayout.LayoutParams textViewLayout = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
         textViewLayout.gravity = Gravity.CENTER_VERTICAL;
         textView.setLayoutParams(textViewLayout);
     }

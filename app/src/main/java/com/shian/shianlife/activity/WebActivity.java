@@ -23,6 +23,7 @@ import com.loopj.android.http.RequestParams;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
+import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
@@ -72,8 +73,7 @@ public class WebActivity extends BaseActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
-        Utils.LogVPrint(getIntent().getStringExtra("url"));
-        url = getIntent().getStringExtra("url");
+        url = getIntent().getStringExtra(IntentName.INTENT_URL);
         mWebView.loadUrl(url);
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override

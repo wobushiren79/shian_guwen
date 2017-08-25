@@ -17,9 +17,11 @@ import com.shian.shianlife.activity.MyCollectionActivity;
 import com.shian.shianlife.activity.SettingsActivity;
 import com.shian.shianlife.activity.UserInfoActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
+import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.JSONUtil;
 import com.shian.shianlife.common.utils.PicassoUD;
 import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.thisenum.ShowModeEnum;
 
 
 /**
@@ -41,6 +43,8 @@ public class MainDrawerLayout extends LinearLayout implements View.OnClickListen
     LinearLayout llVersion;
     LinearLayout llSetting;
     LinearLayout llEdit;
+    LinearLayout llUserInfo;
+
 
     public MainDrawerLayout(Context context) {
         this(context, null);
@@ -66,6 +70,7 @@ public class MainDrawerLayout extends LinearLayout implements View.OnClickListen
         llVersion = (LinearLayout) findViewById(R.id.ll_version);
         llSetting = (LinearLayout) findViewById(R.id.ll_setting);
         llEdit = (LinearLayout) findViewById(R.id.ll_edit);
+        llUserInfo = (LinearLayout) findViewById(R.id.ll_userinfo);
 
         llSign.setOnClickListener(this);
         llHelp.setOnClickListener(this);
@@ -74,6 +79,7 @@ public class MainDrawerLayout extends LinearLayout implements View.OnClickListen
         llVersion.setOnClickListener(this);
         llSetting.setOnClickListener(this);
         llEdit.setOnClickListener(this);
+        llUserInfo.setOnClickListener(this);
 
         tvVersion.setText(getContext().getString(R.string.zhy_user_center_version) + Utils.getVersion(getContext()));
     }
@@ -96,6 +102,19 @@ public class MainDrawerLayout extends LinearLayout implements View.OnClickListen
             setting();
         } else if (view == llEdit) {
             edit();
+        } else if (view == llUserInfo) {
+            userInfo();
+        }
+    }
+
+    /**
+     * 我的资料
+     */
+    private void userInfo() {
+        if (AppContansts.userInfoData != null) {
+            Intent intent = new Intent(getContext(), UserInfoActivity.class);
+            intent.putExtra(IntentName.INTENT_TYPE, ShowModeEnum.show.getCode());
+            getContext().startActivity(intent);
         }
     }
 
@@ -140,9 +159,9 @@ public class MainDrawerLayout extends LinearLayout implements View.OnClickListen
     private void edit() {
         if (AppContansts.userInfoData != null) {
             Intent intent = new Intent(getContext(), UserInfoActivity.class);
+            intent.putExtra(IntentName.INTENT_TYPE, ShowModeEnum.edit.getCode());
             getContext().startActivity(intent);
         }
-
     }
 
 

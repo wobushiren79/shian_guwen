@@ -123,6 +123,7 @@ public class LoginActivity extends BaseActivity {
         params.setUsername(etUserName.getText().toString());
         params.setSystemType("2");
         params.setChannelId(SharePerfrenceUtils.getShareChannelId(this));
+        AppContansts.cookieStore.clear();
         MHttpManagerFactory.getFuneralManager().login(this, params, new HttpResponseHandler<HrLoginResult>() {
 
             @Override

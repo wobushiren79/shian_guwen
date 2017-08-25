@@ -5,21 +5,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
-import com.shian.shianlife.activity.cemetery.BuildNewOrderActivity;
 import com.shian.shianlife.base.BaseFragment;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.thisenum.AppRolePermition;
 import com.shian.shianlife.thisenum.BuildOrderEnum;
-import com.shian.shianlife.view.searchview.SearchView;
+import com.shian.shianlife.view.searchview.CustomSearchView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 
 /**
  * Created by zm.
@@ -29,7 +26,7 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener 
     View mLayoutView;
 
     @InjectView(R.id.search_view)
-    SearchView searchView;
+    CustomSearchView searchView;
 
     private View layoutBuildCemetery;
     private View layoutBuildFuneral;
@@ -37,8 +34,8 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mLayoutView = inflater.inflate(R.layout.fragment_store, null, false);
-        ButterKnife.inject(this, mLayoutView);
         initView();
+        ButterKnife.inject(this, mLayoutView);
         return mLayoutView;
     }
 

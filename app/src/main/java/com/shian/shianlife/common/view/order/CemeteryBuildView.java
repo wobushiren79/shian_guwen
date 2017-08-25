@@ -495,12 +495,15 @@ public class CemeteryBuildView extends BaseOrderView {
                 CemeteryBeSpeakStateEnum.ready
         };
 
+
+
         for (CemeteryBeSpeakStateEnum state : beSpeakState) {
             if (data.getBespeakStatus() == state.getCode()) {
-                tvState.setText(state.getText());
+                tvState.setText(state.getOtherName());
                 return;
             }
         }
+
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.shian.shianlife.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import com.kf5sdk.init.KF5SDKConfig;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.thisenum.HelpEnum;
 import com.shian.shianlife.view.ScrollGridView;
@@ -74,7 +76,11 @@ public class CustomerHelpActivity extends BaseActivity {
             if (v == mLLPhoneHelp) {
                 Utils.call(v, "4009679678");
             } else if (v == mLLLineHelp) {
-                KF5SDKConfig.INSTANCE.startKF5ChatActivity(CustomerHelpActivity.this);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    KF5SDKConfig.INSTANCE.startKF5ChatActivity(CustomerHelpActivity.this);
+                } else {
+                    ToastUtils.show(CustomerHelpActivity.this, "安卓系统版本太低，无法使用此功能");
+                }
             }
         }
     };
