@@ -6,5 +6,5 @@ import com.shian.shianlife.provide.base.BaseHttpParams;
  * Created by zm.
  */
 
-public class GoodsClassAttrMainBean extends BaseHttpParams {
+public class GoodsChannelBean extends BaseHttpParams {
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.shian.shianlife"
-   >
+    package="com.shian.shianlife">
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -161,8 +160,8 @@
             android:name=".activity.UserInfoActivity"
             android:configChanges="orientation|screenSize|keyboard|keyboardHidden"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            android:theme="@style/StyledIndicators" />
+            android:theme="@style/StyledIndicators"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activity.RefundOrderActivity"
             android:configChanges="orientation|screenSize"
@@ -511,7 +510,11 @@
             android:name=".activity.order.StoreServiceActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/StyledIndicators"></activity>
+            android:theme="@style/StyledIndicators" />
+        <activity
+            android:name=".activity.goods.GoodsClassAttrDetailsActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

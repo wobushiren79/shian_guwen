@@ -48,12 +48,16 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener 
 
         TextView cemeteryName = (TextView) layoutBuildCemetery.findViewById(R.id.tv_build_name);
         TextView funeralName = (TextView) layoutBuildFuneral.findViewById(R.id.tv_build_name);
+        TextView cemeteryContent = (TextView) layoutBuildCemetery.findViewById(R.id.tv_build_content);
+        TextView funeralContent = (TextView) layoutBuildFuneral.findViewById(R.id.tv_build_content);
 
         cemeteryIcon.setImageResource(R.drawable.zhy_build_cemetery_icon);
         funeralIcon.setImageResource(R.drawable.zhy_build_funeral_icon);
 
         cemeteryName.setText("选购公墓");
         funeralName.setText("选购治丧方案");
+        cemeteryContent.setText("为客户选择墓地|专车接送");
+        funeralContent.setText("为客户选择治丧方案|生前契约");
 
         layoutBuildCemetery.setOnClickListener(this);
         layoutBuildFuneral.setOnClickListener(this);

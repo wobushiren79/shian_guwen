@@ -5,6 +5,7 @@ import com.shian.shianlife.provide.imp.CemeteryManager;
 import com.shian.shianlife.provide.imp.FileManager;
 import com.shian.shianlife.provide.imp.FuneralManager;
 import com.shian.shianlife.provide.imp.FuneralOrderManager;
+import com.shian.shianlife.provide.imp.GoodsManager;
 import com.shian.shianlife.provide.imp.PHPManager;
 import com.shian.shianlife.provide.imp.ProductManager;
 import com.shian.shianlife.provide.imp.SystemManager;
@@ -13,6 +14,7 @@ import com.shian.shianlife.provide.imp.impl.CemeteryManagerImpl;
 import com.shian.shianlife.provide.imp.impl.FileManagerImpl;
 import com.shian.shianlife.provide.imp.impl.FuneralManagerImpl;
 import com.shian.shianlife.provide.imp.impl.FuneralOrderManagerImpl;
+import com.shian.shianlife.provide.imp.impl.GoodsManagerImpl;
 import com.shian.shianlife.provide.imp.impl.PHPManagerImpl;
 import com.shian.shianlife.provide.imp.impl.ProductManagerImpl;
 import com.shian.shianlife.provide.imp.impl.SystemManagerImpl;
@@ -58,6 +60,7 @@ public class MHttpManagerFactory {
         return FileManagerImpl.getInstance();
     }
 
+    //PHP管理
     public static PHPManager getPHPManager() {
         return PHPManagerImpl.getInstance();
     }
@@ -65,5 +68,10 @@ public class MHttpManagerFactory {
     //登陆
     public static SystemManager getSystemManager() {
         return SystemManagerImpl.getInstance();
+    }
+
+    //商品管理
+    public static GoodsManager getGoodsManager() {
+        return GoodsManagerImpl.getInstance();
     }
 }

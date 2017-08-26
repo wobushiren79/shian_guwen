@@ -1,11 +1,15 @@
 package com.shian.shianlife.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.goods.GoodsClassAttrDetailsActivity;
 import com.shian.shianlife.adapter.base.BaseRCAdapter;
 import com.shian.shianlife.adapter.base.BaseViewHolder;
 import com.shian.shianlife.common.utils.Utils;
@@ -18,8 +22,6 @@ import butterknife.InjectView;
  */
 
 public class GoodsClassAttrMainAdapter extends BaseRCAdapter<GoodsClassAttrMainResultBean> {
-
-
     /**
      * 单布局初始化
      *
@@ -31,6 +33,7 @@ public class GoodsClassAttrMainAdapter extends BaseRCAdapter<GoodsClassAttrMainR
 
     @Override
     public void convert(BaseViewHolder holder, GoodsClassAttrMainResultBean goodsClassAttrMainResultBean, int index) {
+        LinearLayout llContent = holder.getView(R.id.ll_content);
         ImageView ivIcon = holder.getView(R.id.iv_icon);
         TextView tvName = holder.getView(R.id.tv_name);
 
@@ -44,5 +47,14 @@ public class GoodsClassAttrMainAdapter extends BaseRCAdapter<GoodsClassAttrMainR
         if (name != null && !name.isEmpty())
             tvName.setText(name);
 
+        llContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, GoodsClassAttrDetailsActivity.class);
+                mContext.startActivity(intent);
+            }
+        });
     }
+
+
 }

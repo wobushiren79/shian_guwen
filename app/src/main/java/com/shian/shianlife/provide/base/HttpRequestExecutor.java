@@ -11,6 +11,9 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.FileAsyncHttpResponseHandler;
@@ -20,6 +23,7 @@ import com.shian.shianlife.activity.LoginActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.CheckUtils;
 import com.shian.shianlife.common.utils.FilePathUtils;
+import com.shian.shianlife.common.utils.GsonTools;
 import com.shian.shianlife.common.utils.ObjectMapperFactory;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.Utils;
@@ -40,6 +44,7 @@ import org.codehaus.jackson.JsonNode;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
@@ -74,7 +79,8 @@ public class HttpRequestExecutor {
                                final HttpResponseHandler<T> responseHandler,
                                final boolean isShowDialog,
                                final String baseUrl,
-                               final Map<String, String> header) {
+                               final Map<String, String> header,
+                               final String dataName) {
         if (checkNetWorkAndDialog(context, responseHandler, isShowDialog)) return;
 
         Log.v("tag", baseUrl + "/" + method);
@@ -109,7 +115,13 @@ public class HttpRequestExecutor {
             @Override
             public void onResponse(String response, int id) {
                 Log.v("tag", response);
-                dataToJson(context, response, data, responseHandler);
+                if (dataName.equals("list")) {
+                    dataToJsonForList(context, response, data, responseHandler);
+                } else if (dataName.equals("content")) {
+                    dataToJsonForContent(context, response, data, responseHandler);
+                } else {
+                    onErrorCallBack(responseHandler, "数据解析异常", context);
+                }
                 if (dialog != null)
                     dialog.cancel();
                 dialog = null;
@@ -129,25 +141,35 @@ public class HttpRequestExecutor {
      * @param responseHandler
      * @param <T>
      */
-    public <T> void requestPost(final Context context,
-                                final String method,
-                                final Class<T> data,
-                                final BaseHttpParams params,
-                                final HttpResponseHandler<T> responseHandler,
-                                final boolean isShowDialog,
-                                final String baseUrl,
-                                final Map<String, String> header) {
+    public <T, E> void requestPost(final Context context,
+                                   final String method,
+                                   final Class<T> data,
+                                   final BaseHttpParams params,
+                                   final HttpResponseHandler<E> responseHandler,
+                                   final boolean isShowDialog,
+                                   final String baseUrl,
+                                   final Map<String, String> header,
+                                   final String dataName,
+                                   boolean hasConentParams) {
         if (checkNetWorkAndDialog(context, responseHandler, isShowDialog)) return;
 
         Log.v("tag", baseUrl + "/" + method);
-        Log.e("tag", params.getContentJson());
+
 
         PostStringBuilder getBuilder = OkHttpUtils.postString();
         getBuilder.url(baseUrl + "/" + method);
         if (header != null)
             getBuilder.headers(header);
         getBuilder.mediaType(MediaType.parse("application/json; charset=utf-8"));
-        getBuilder.content(params.getContentJson());
+        //判断请求参数是否需要套上content
+        if (hasConentParams) {
+            Log.e("tag", params.getContentJson());
+            getBuilder.content(params.getContentJson());
+        } else {
+            Log.e("tag", params.getJsonParams());
+            getBuilder.content(params.getJsonParams());
+        }
+
         getBuilder.addHeader("client-Type", "wechatapp");
         getBuilder.addHeader("systemType", "2");
         RequestCall requestCall = getBuilder.build();
@@ -172,7 +194,13 @@ public class HttpRequestExecutor {
             @Override
             public void onResponse(String response, int id) {
                 Log.v("tag", response);
-                dataToJson(context, response, data, responseHandler);
+                if (dataName.equals("list")) {
+                    dataToJsonForList(context, response, data, responseHandler);
+                } else if (dataName.equals("content")) {
+                    dataToJsonForContent(context, response, data, responseHandler);
+                } else {
+                    onErrorCallBack(responseHandler, "数据解析异常", context);
+                }
                 if (dialog != null)
                     dialog.cancel();
                 dialog = null;
@@ -229,8 +257,41 @@ public class HttpRequestExecutor {
     }
 
 
+    /**
+     * 数据处理
+     *
+     * @param context
+     * @param response
+     * @param data
+     * @param responseHandler
+     * @param <T>
+     */
+    private <T, E> void dataToJsonForContent(Context context, String response, final Class<T> data, HttpResponseHandler<E> responseHandler) {
+        if (response != null) {
+            try {
+                Gson gson = new Gson();
+                JsonParser parser = new JsonParser();
+                JsonElement jsonElement = parser.parse(response);
+                Map<String, Object> map = gson.fromJson(jsonElement, Map.class);
 
+                double code = (double) map.get("code");
+                int codeInt = (int) code;
+                if (codeInt == 1000) {
+                    T result = GsonTools.getObjectByMapKey("content", map, data.newInstance());
+                    responseHandler.onSuccess((E) result);
+                } else if ("1009".equals(codeInt)) {
+                    jumpLogin(context);
+                } else {
+                    String msg = (String) map.get("message");
+                    CrashReport.putUserData(context, response, msg);
+                    onErrorCallBack(responseHandler, msg, context);
+                }
 
+            } catch (Exception e) {
+                onErrorCallBack(responseHandler, "数据解析异常", context);
+            }
+        }
+    }
 
     /**
      * 数据处理
@@ -241,32 +302,52 @@ public class HttpRequestExecutor {
      * @param responseHandler
      * @param <T>
      */
-    private <T> void dataToJson(Context context, String response, final Class<T> data, HttpResponseHandler<T> responseHandler) {
+    private <T, E> void dataToJsonForList(Context context, String response, final Class<T> data, HttpResponseHandler<E> responseHandler) {
         if (response != null) {
             try {
-                JsonNode node = ObjectMapperFactory.getInstance().readTree(new String(response));
-                String code = node.findValue("code").toString();
-                String errorMsg = node.findValue("message").toString();
-                if ("1000".equals(code)) {
-                    JsonNode jn = node.findValue("content");
-                    if (jn == null)
-                        responseHandler.onSuccess(null);
-                    else {
-                        T result = ObjectMapperFactory.getInstance().readValue(
-                                jn, data);
-                        responseHandler.onSuccess(result);
-                    }
-                } else if ("1009".equals(code)) {
+                Gson gson = new Gson();
+                JsonParser parser = new JsonParser();
+                JsonElement jsonElement = parser.parse(response);
+                Map<String, Object> map = gson.fromJson(jsonElement, Map.class);
+
+                double code = (double) map.get("code");
+                int codeInt = (int) code;
+                if (codeInt == 1000) {
+                    List<T> result = GsonTools.getListByMapKey("list", map, data.newInstance());
+                    responseHandler.onSuccess((E) result);
+                } else if ("1009".equals(codeInt)) {
                     jumpLogin(context);
                 } else {
-                    CrashReport.putUserData(context, response, errorMsg);
-                    onErrorCallBack(responseHandler, errorMsg, context);
+                    String msg = (String) map.get("message");
+                    CrashReport.putUserData(context, response, msg);
+                    onErrorCallBack(responseHandler, msg, context);
                 }
+
             } catch (Exception e) {
-                onErrorCallBack(responseHandler, "", context);
+                onErrorCallBack(responseHandler, "数据解析异常", context);
             }
         }
     }
-
-
+//            try {
+//                JsonNode node = ObjectMapperFactory.getInstance().readTree(new String(response));
+//                String code = node.findValue("code").toString();
+//                String errorMsg = node.findValue("message").toString();
+//                if ("1000".equals(code)) {
+//                    JsonNode jn = node.findValue(dataName);
+//                    if (jn == null)
+//                        responseHandler.onSuccess(null);
+//                    else {
+//                        T result = ObjectMapperFactory.getInstance().readValue(
+//                                jn, data);
+//                        responseHandler.onSuccess(result);
+//                    }
+//                } else if ("1009".equals(code)) {
+//                    jumpLogin(context);
+//                } else {
+//                    CrashReport.putUserData(context, response, errorMsg);
+//                    onErrorCallBack(responseHandler, errorMsg, context);
+//                }
+//            } catch (Exception e) {
+//                onErrorCallBack(responseHandler, "", context);
+//            }
 }

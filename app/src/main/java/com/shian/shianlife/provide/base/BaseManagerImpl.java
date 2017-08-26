@@ -18,7 +18,15 @@ public class BaseManagerImpl {
                                    Class<T> cls,
                                    BaseHttpParams params,
                                    HttpResponseHandler<T> response) {
-        excutor.requestPost(context, method, cls, params, response, false, baseUrl, null);
+        excutor.requestPost(context, method, cls, params, response, false, baseUrl, null, "content", true);
+    }
+
+    protected <T,E> void requestPostToList(Context context,
+                                         String method,
+                                         Class<T> cls,
+                                         BaseHttpParams params,
+                                         HttpResponseHandler<E> response) {
+        excutor.requestPost(context, method, cls, params, response, false, baseUrl, null, "list", false);
     }
 
     protected <T> void requestPost(Context context,
@@ -27,15 +35,25 @@ public class BaseManagerImpl {
                                    BaseHttpParams params,
                                    HttpResponseHandler<T> response,
                                    boolean isDialog) {
-        excutor.requestPost(context, method, cls, params, response, isDialog, baseUrl, null);
+        excutor.requestPost(context, method, cls, params, response, isDialog, baseUrl, null, "content", true);
     }
+
+    protected <T,E> void requestPostToList(Context context,
+                                         String method,
+                                         Class<T> cls,
+                                         BaseHttpParams params,
+                                         HttpResponseHandler<E> response,
+                                         boolean isDialog) {
+        excutor.requestPost(context, method, cls, params, response, isDialog, baseUrl, null, "list", false);
+    }
+
 
     protected <T> void requestGet(Context context,
                                   String method,
                                   Class<T> cls,
                                   BaseHttpParams params,
                                   HttpResponseHandler<T> response) {
-        excutor.requestGet(context, method, cls, params, response, false, baseUrl, null);
+        excutor.requestGet(context, method, cls, params, response, false, baseUrl, null, "content");
     }
 
 
@@ -45,6 +63,6 @@ public class BaseManagerImpl {
                                   BaseHttpParams params,
                                   HttpResponseHandler<T> response,
                                   boolean isDialog) {
-        excutor.requestGet(context, method, cls, params, response, isDialog, baseUrl, null);
+        excutor.requestGet(context, method, cls, params, response, isDialog, baseUrl, null, "content");
     }
 }
