@@ -5,6 +5,8 @@ import android.content.Context;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.mvp.goods.bean.GoodsChannelBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsChannelResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassResultBean;
 import com.shian.shianlife.provide.base.BaseManagerImpl;
@@ -44,5 +46,10 @@ public class GoodsManagerImpl extends BaseManagerImpl implements GoodsManager {
     @Override
     public void getGoodsClass(Context context, GoodsClassBean params, HttpResponseHandler<List<GoodsClassResultBean>> handler) {
         requestPostToList(context, "Api/Goods/goodsclass", GoodsClassResultBean.class, params, handler, true);
+    }
+
+    @Override
+    public void getGoodsClassAttr(Context context, GoodsClassAttrBean params, HttpResponseHandler<List<GoodsClassAttrResultBean>> handler) {
+        requestPostToList(context, "Api/Goods/classattr", GoodsClassAttrResultBean.class, params, handler, true);
     }
 }

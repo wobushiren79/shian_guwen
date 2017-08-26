@@ -23,7 +23,7 @@ public class GsonTools {
             String jsonObjStr = gson.toJson(map.get(key));
             return (T) gson.fromJson(jsonObjStr, t.getClass());
         } else {
-            throw new Exception("key值无效");
+            return null;
         }
     }
 
@@ -45,7 +45,7 @@ public class GsonTools {
 
                 return newList;
             } else {
-                throw new Exception("key值无效");
+                return null;
             }
         }
     }

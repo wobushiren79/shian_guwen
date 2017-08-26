@@ -7,12 +7,17 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 import com.shian.shianlife.adapter.GoodsClassAttrAdapter;
+import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrResultBean;
+import com.shian.shianlife.mvp.goods.view.IGoodsClassAttrView;
+
+import java.util.List;
 
 /**
  * Created by zm.
  */
 
-public class GoodsClassAttrListView extends RecyclerView {
+public class GoodsClassAttrListView extends RecyclerView implements IGoodsClassAttrView{
+
     private GoodsClassAttrAdapter goodsClassAttrAdapter;
 
     public GoodsClassAttrListView(Context context) {
@@ -25,5 +30,24 @@ public class GoodsClassAttrListView extends RecyclerView {
         goodsClassAttrAdapter = new GoodsClassAttrAdapter(context);
         this.setAdapter(goodsClassAttrAdapter);
         this.setLayoutManager(new GridLayoutManager(context, 3));
+    }
+
+    public void getData() {
+
+    }
+
+    @Override
+    public void showToast(String msg) {
+
+    }
+
+    @Override
+    public void getGoodsClassAttrDataSuccess(List<GoodsClassAttrResultBean> listData) {
+
+    }
+
+    @Override
+    public void getGoodsClassAttrDataFail(String msg) {
+
     }
 }

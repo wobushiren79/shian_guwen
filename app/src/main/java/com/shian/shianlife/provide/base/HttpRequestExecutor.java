@@ -278,7 +278,11 @@ public class HttpRequestExecutor {
                 int codeInt = (int) code;
                 if (codeInt == 1000) {
                     T result = GsonTools.getObjectByMapKey("content", map, data.newInstance());
-                    responseHandler.onSuccess((E) result);
+                    if (result != null) {
+                        responseHandler.onSuccess((E) result);
+                    } else {
+                        responseHandler.onSuccess(null);
+                    }
                 } else if ("1009".equals(codeInt)) {
                     jumpLogin(context);
                 } else {
@@ -314,7 +318,11 @@ public class HttpRequestExecutor {
                 int codeInt = (int) code;
                 if (codeInt == 1000) {
                     List<T> result = GsonTools.getListByMapKey("list", map, data.newInstance());
-                    responseHandler.onSuccess((E) result);
+                    if (result != null) {
+                        responseHandler.onSuccess((E) result);
+                    } else {
+                        responseHandler.onSuccess(null);
+                    }
                 } else if ("1009".equals(codeInt)) {
                     jumpLogin(context);
                 } else {

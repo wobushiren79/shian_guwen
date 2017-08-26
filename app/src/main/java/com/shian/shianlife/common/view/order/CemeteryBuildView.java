@@ -328,7 +328,7 @@ public class CemeteryBuildView extends BaseOrderView {
                                             @Override
                                             public void onSuccess(Object result) {
                                                 refresh();
-                                                ToastUtils.show(getContext(), "申请取消成功，请等待审核");
+                                                ToastUtils.show(getContext(), "取消受理中");
                                             }
 
                                             @Override
