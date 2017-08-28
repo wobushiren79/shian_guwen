@@ -88,7 +88,14 @@ public class GoodsClassAttrDetailsActivity extends BaseActivity implements IGood
         if (view == goodsClassList) {
             if (!StringUtils.isEmpty(data.getName()))
                 setClassTitle(data.getName());
-//            goodsClassAttrList.getContext()
+
+            if (!StringUtils.isEmpty(data.getId()))
+                getClassAttrData(data.getId());
         }
+    }
+
+    private void getClassAttrData(Long classID) {
+        goodsClassAttrList.setClassId(classID);
+        goodsClassAttrList.getData();
     }
 }

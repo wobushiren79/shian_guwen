@@ -9,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.WebActivity;
 import com.shian.shianlife.base.BaseFragment;
 import com.shian.shianlife.common.contanst.AppContansts;
+import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.thisenum.AppRolePermition;
 import com.shian.shianlife.thisenum.BuildOrderEnum;
 import com.shian.shianlife.view.searchview.CustomSearchView;
@@ -81,7 +83,10 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         if (v == layoutBuildFuneral) {
-            Intent intent = new Intent(getContext(), BuildOrderEnum.BY.getActivity());
+//            Intent intent = new Intent(getContext(), BuildOrderEnum.BY.getActivity());
+//            startActivity(intent);
+            Intent intent = new Intent(getContext(), WebActivity.class);
+            intent.putExtra(IntentName.INTENT_URL, AppContansts.Temp_Funeral_BaseUrl);
             startActivity(intent);
         } else if (v == layoutBuildCemetery) {
             Intent intent = new Intent(getContext(), BuildOrderEnum.GM.getActivity());

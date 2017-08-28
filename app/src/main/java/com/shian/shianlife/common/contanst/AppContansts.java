@@ -21,12 +21,14 @@ public class AppContansts {
     public static final String Funeral_BaseUrl = "http://115.28.163.211:7088/shianlife-adviser-1.0-SNAPSHOT";
     //公墓地址
 //    public static final String Cemetery_BaseUrl = "http://192.168.0.200:8000/shianlife-advisor-cemetery-1.0-SNAPSHOT";
-  public static final String Cemetery_BaseUrl = "http://115.28.163.211:7088/shianlife-advisor-cemetery-1.0-SNAPSHOT";
+    public static final String Cemetery_BaseUrl = "http://115.28.163.211:7088/shianlife-advisor-cemetery-1.0-SNAPSHOT";
 //    public static final String Cemetery_BaseUrl = "http://192.168.0.37:8088/app";
 //    public static final String Cemetery_BaseUrl = "http://192.168.0.73:8088/app";
 
     //商品地址
     public static final String Goods_BaseUrl = "http://goodsmgr.e-funeral.cn";
+    //临时用殡仪地址
+    public static final String Temp_Funeral_BaseUrl=Goods_BaseUrl+"/home";
 
 
     public static final String OSSURL = "http://shianlife123.oss-cn-qingdao.aliyuncs.com/";

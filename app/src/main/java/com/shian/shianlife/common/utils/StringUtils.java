@@ -41,6 +41,7 @@ public class StringUtils {
         }
         return buffer;
     }
+
     /**
      * 替换指定字符到自定字符的string
      *
@@ -62,5 +63,13 @@ public class StringUtils {
 
     public static boolean isEmpty(String str) {
         return str == null || str.length() == 0;
+    }
+
+    public static boolean isEmpty(Integer str) {
+        return str == null || str == -1;
+    }
+
+    public static boolean isEmpty(Long str) {
+        return str == null || str == -1;
     }
 }

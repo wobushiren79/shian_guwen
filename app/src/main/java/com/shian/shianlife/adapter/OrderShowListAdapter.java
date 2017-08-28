@@ -20,6 +20,7 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.activity.WebActivity;
 import com.shian.shianlife.adapter.base.BaseRCAdapter;
 import com.shian.shianlife.adapter.base.BaseViewHolder;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.AnimUtils;
 import com.shian.shianlife.mvp.order.bean.OrderShowResultBean;
@@ -68,7 +69,7 @@ public class OrderShowListAdapter extends BaseRCAdapter<OrderShowResultBean.Item
                             mContext.startActivity(intent);
                         } else {
                             Intent intent = new Intent(mContext, WebActivity.class);
-                            intent.putExtra(IntentName.INTENT_URL,"http://www.baidu.com");
+                            intent.putExtra(IntentName.INTENT_URL, AppContansts.Temp_Funeral_BaseUrl);
                             mContext.startActivity(intent);
                         }
 

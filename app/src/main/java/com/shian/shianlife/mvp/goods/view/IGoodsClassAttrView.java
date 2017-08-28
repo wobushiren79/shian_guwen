@@ -13,4 +13,6 @@ public interface IGoodsClassAttrView extends BaseMVPView {
     void getGoodsClassAttrDataSuccess(List<GoodsClassAttrResultBean> listData);
 
     void getGoodsClassAttrDataFail(String msg);
+
+    Long getGoodsClassId();
 }

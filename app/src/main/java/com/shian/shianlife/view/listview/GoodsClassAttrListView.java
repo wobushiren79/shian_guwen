@@ -7,7 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 import com.shian.shianlife.adapter.GoodsClassAttrAdapter;
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrResultBean;
+import com.shian.shianlife.mvp.goods.presenter.IGoodsClassAttrPresenter;
+import com.shian.shianlife.mvp.goods.presenter.impl.GoodsClassAttrPresenterImpl;
 import com.shian.shianlife.mvp.goods.view.IGoodsClassAttrView;
 
 import java.util.List;
@@ -16,9 +19,10 @@ import java.util.List;
  * Created by zm.
  */
 
-public class GoodsClassAttrListView extends RecyclerView implements IGoodsClassAttrView{
-
+public class GoodsClassAttrListView extends RecyclerView implements IGoodsClassAttrView {
+    private Long classId;//分类ID
     private GoodsClassAttrAdapter goodsClassAttrAdapter;
+    private IGoodsClassAttrPresenter goodsClassAttrPresenter;
 
     public GoodsClassAttrListView(Context context) {
         this(context, null);
@@ -28,26 +32,36 @@ public class GoodsClassAttrListView extends RecyclerView implements IGoodsClassA
         super(context, attrs);
 
         goodsClassAttrAdapter = new GoodsClassAttrAdapter(context);
+        goodsClassAttrPresenter = new GoodsClassAttrPresenterImpl(this);
         this.setAdapter(goodsClassAttrAdapter);
         this.setLayoutManager(new GridLayoutManager(context, 3));
     }
 
-    public void getData() {
+    public void setClassId(Long classId) {
+        this.classId = classId;
+    }
 
+    public void getData() {
+        goodsClassAttrPresenter.getGoodsClassAttrData();
     }
 
     @Override
     public void showToast(String msg) {
-
+        ToastUtils.show(getContext(), msg);
     }
 
     @Override
     public void getGoodsClassAttrDataSuccess(List<GoodsClassAttrResultBean> listData) {
-
+        goodsClassAttrAdapter.setData(listData);
     }
 
     @Override
     public void getGoodsClassAttrDataFail(String msg) {
+        ToastUtils.show(getContext(), msg);
+    }
 
+    @Override
+    public Long getGoodsClassId() {
+        return classId;
     }
 }
