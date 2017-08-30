@@ -9,6 +9,7 @@ import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.JSONUtil;
 import com.shian.shianlife.common.utils.PicassoUD;
 import com.shian.shianlife.mvp.base.OnGetDataListener;
+import com.shian.shianlife.mvp.login.bean.SystemLoginResultBean;
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoBean;
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoResultBean;
 import com.shian.shianlife.mvp.userinfo.model.IUserInfoModel;
@@ -26,23 +27,28 @@ import okhttp3.Request;
 
 public class UserInfoModelImpl implements IUserInfoModel {
     @Override
-    public void getUserInfoData(Context context, UserInfoBean params, final OnGetDataListener<UserInfoResultBean> listener) {
-        MHttpManagerFactory.getFuneralManager().getUserInfoData(context, new HttpResponseHandler<UserInfoResultBean>() {
-
-            @Override
-            public void onStart(Request request, int id) {
-
-            }
-
-            @Override
-            public void onSuccess(final UserInfoResultBean result) {
-                listener.getDataSuccess(result);
-            }
-
-            @Override
-            public void onError(String message) {
-                listener.getDataFail(message);
-            }
-        });
+    public void getUserInfoData(Context context, UserInfoBean params, final OnGetDataListener<SystemLoginResultBean.UserObject> listener) {
+//        MHttpManagerFactory.getFuneralManager().getUserInfoData(context, new HttpResponseHandler<UserInfoResultBean>() {
+//
+//            @Override
+//            public void onStart(Request request, int id) {
+//
+//            }
+//
+//            @Override
+//            public void onSuccess(final UserInfoResultBean result) {
+//                listener.getDataSuccess(result);
+//            }
+//
+//            @Override
+//            public void onError(String message) {
+//                listener.getDataFail(message);
+//            }
+//        });
+        if (AppContansts.systemLoginInfo != null && AppContansts.systemLoginInfo.getUserObj() != null) {
+            listener.getDataSuccess(AppContansts.systemLoginInfo.getUserObj());
+        } else {
+            listener.getDataFail("获取个人资料失败");
+        }
     }
 }

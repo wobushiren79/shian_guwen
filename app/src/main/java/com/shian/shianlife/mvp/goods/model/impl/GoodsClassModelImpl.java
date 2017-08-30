@@ -21,31 +21,22 @@ import okhttp3.Request;
 public class GoodsClassModelImpl implements IGoodsClassModel {
     @Override
     public void getGoodsClassData(Context context, GoodsClassBean params, final OnGetDataListener listener) {
+        MHttpManagerFactory.getGoodsManager().getGoodsClass(context, params, new HttpResponseHandler<List<GoodsClassResultBean>>() {
+            @Override
+            public void onStart(Request request, int id) {
 
-        List<GoodsClassResultBean> listData=new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            GoodsClassResultBean item=new GoodsClassResultBean();
-            item.setName("测试"+i);
-            listData.add(item);
-        }
-        listener.getDataSuccess(listData);
+            }
 
-//        MHttpManagerFactory.getGoodsManager().getGoodsClass(context, params, new HttpResponseHandler<List<GoodsClassResultBean>>() {
-//            @Override
-//            public void onStart(Request request, int id) {
-//
-//            }
-//
-//            @Override
-//            public void onSuccess(List<GoodsClassResultBean> result) {
-//                listener.getDataSuccess(result);
-//            }
-//
-//
-//            @Override
-//            public void onError(String message) {
-//                listener.getDataFail(message);
-//            }
-//        });
+            @Override
+            public void onSuccess(List<GoodsClassResultBean> result) {
+                listener.getDataSuccess(result);
+            }
+
+
+            @Override
+            public void onError(String message) {
+                listener.getDataFail(message);
+            }
+        });
     }
 }

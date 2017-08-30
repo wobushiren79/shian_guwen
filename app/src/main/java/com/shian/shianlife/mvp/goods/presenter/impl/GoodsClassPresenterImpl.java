@@ -1,6 +1,7 @@
 package com.shian.shianlife.mvp.goods.presenter.impl;
 
 import com.shian.shianlife.common.contanst.AppContansts;
+import com.shian.shianlife.common.utils.CheckUtils;
 import com.shian.shianlife.mvp.base.OnGetDataListener;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassResultBean;
@@ -37,7 +38,10 @@ public class GoodsClassPresenterImpl implements IGoodsClassPresenter {
         //        Long userId = AppContansts.systemLoginInfo.getUserId();
         Integer channelId = goodsClassView.getChannelId();
 
-
+        if (CheckUtils.isEmpty(channelId)) {
+            goodsClassView.showToast("数据错误");
+            return;
+        }
         GoodsClassBean goodsClassBean = new GoodsClassBean();
         goodsClassBean.setChannel_id(channelId);
 //        goodsClassBean.setUser_id(userId);

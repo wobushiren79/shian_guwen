@@ -91,15 +91,14 @@ public class IdeaFeedbackActivity extends BaseActivity {
             ToastUtils.show(IdeaFeedbackActivity.this, "还没有填写反馈信息");
             return;
         }
-        if (AppContansts.userInfoData == null ||
-                AppContansts.userInfoData.getName() == null ||
-                AppContansts.userInfoData.getMobile() == null) {
+        if (AppContansts.systemLoginInfo == null ||
+                AppContansts.systemLoginInfo.getUserObj() == null) {
             ToastUtils.show(IdeaFeedbackActivity.this, "账号错误 请重新登陆");
             return;
         }
         PHPHpOpinionParams params = new PHPHpOpinionParams();
-        params.setUser(AppContansts.userInfoData.getName());
-        params.setTel(AppContansts.userInfoData.getMobile());
+        params.setUser(AppContansts.systemLoginInfo.getUserObj().getName());
+        params.setTel(AppContansts.systemLoginInfo.getUserObj().getPhone());
         params.setContent(mEditText.getText().toString());
         params.setUserType(SystemTypeEnum.funeral.getCode());
         MHttpManagerFactory.getPHPManager().setOpinion(IdeaFeedbackActivity.this, params, new HttpResponseHandler<Object>() {

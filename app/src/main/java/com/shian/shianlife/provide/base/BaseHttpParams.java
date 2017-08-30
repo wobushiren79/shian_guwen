@@ -14,75 +14,91 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.shian.shianlife.common.utils.JSONUtil;
 import com.shian.shianlife.provide.params.ContentParams;
+import com.zhy.http.okhttp.builder.PostFormBuilder;
 
 /**
  * 接口参数
- * 
+ *
  * @author Administrator
- * 
  */
-public class BaseHttpParams
-{
+public class BaseHttpParams {
 
-	/**
-	 * 将实体类转换成请求参数,json字符串形式返回
-	 *
-	 * @return
-	 */
-	public String getJsonParams() {
-		String jsonStr = new Gson().toJson(this);
-		if (TextUtils.isEmpty(jsonStr)) {
-			jsonStr = "";
-		}
-		return jsonStr;
-	}
+    /**
+     * 将实体类转换成请求参数,json字符串形式返回
+     *
+     * @return
+     */
+    public String getJsonParams() {
+        String jsonStr = new Gson().toJson(this);
+        if (TextUtils.isEmpty(jsonStr)) {
+            jsonStr = "";
+        }
+        return jsonStr;
+    }
 
-	/**
-	 * 将实体类转换成请求参数,以map<k,v>形式返回
-	 *
-	 * @return
-	 */
-	public Map<String, String> getMapParams() {
+    /**
+     * 将实体类转换成请求参数,以map<k,v>形式返回
+     *
+     * @return
+     */
+    public Map<String, String> getMapParams() {
 
-		Class<? extends BaseHttpParams> clazz = this.getClass();
-		Class<? extends Object> superclass = clazz.getSuperclass();
+        Class<? extends BaseHttpParams> clazz = this.getClass();
+        Class<? extends Object> superclass = clazz.getSuperclass();
 
-		Field[] fields = clazz.getDeclaredFields();
-		Field[] superFields = superclass.getDeclaredFields();
+        Field[] fields = clazz.getDeclaredFields();
+        Field[] superFields = superclass.getDeclaredFields();
 
-		if (fields == null || fields.length == 0) {
-			return Collections.emptyMap();
-		}
+        if (fields == null || fields.length == 0) {
+            return Collections.emptyMap();
+        }
 
-		Map<String, String> params = new HashMap<String, String>();
-		try {
-			for (Field field : fields) {
-				field.setAccessible(true);
-				params.put(field.getName(), String.valueOf(field.get(this)));
-			}
+        Map<String, String> params = new HashMap<String, String>();
+        try {
+            for (Field field : fields) {
+                field.setAccessible(true);
+                params.put(field.getName(), String.valueOf(field.get(this)));
+            }
 
-			for (Field superField : superFields) {
-				superField.setAccessible(true);
-				params.put(superField.getName(), String.valueOf(superField.get(this)));
-			}
+            for (Field superField : superFields) {
+                superField.setAccessible(true);
+                params.put(superField.getName(), String.valueOf(superField.get(this)));
+            }
 
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		}
-		return params;
-	}
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return params;
+    }
 
-	/**
-	 * 套上Content
-	 *
-	 * @return
-	 */
-	public String getContentJson() {
-		BaseRequestParams<BaseHttpParams> baseData = new BaseRequestParams<>();
-		baseData.setContent(this);
-		return baseData.getJsonParams();
-	}
+    /**
+     * 套上Content
+     *
+     * @return
+     */
+    public String getContentJson() {
+        BaseRequestParams<BaseHttpParams> baseData = new BaseRequestParams<>();
+        baseData.setContent(this);
+        return baseData.getJsonParams();
+    }
+
+
+    /**
+     * 装上form
+     *
+     * @param postFormBuilder
+     */
+    public void setFormParams(PostFormBuilder postFormBuilder) throws Exception {
+        Class baseClass = this.getClass();
+        Field[] fields = baseClass.getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            Object obj = field.get(this);
+            String value = String.valueOf(obj);
+            postFormBuilder.addParams(field.getName(), value);
+        }
+    }
 
 }

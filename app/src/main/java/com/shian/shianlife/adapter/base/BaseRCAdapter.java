@@ -91,5 +91,9 @@ public abstract class BaseRCAdapter<T> extends RecyclerView.Adapter<BaseViewHold
         return this.mDatas;
     }
 
+    public List<T> getData() {
+        return mDatas;
+    }
+
     public abstract void convert(BaseViewHolder holder, T t, int index);
 }

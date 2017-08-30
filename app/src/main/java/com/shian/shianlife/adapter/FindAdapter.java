@@ -14,6 +14,7 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.activity.WebActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.PicassoUD;
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
@@ -140,9 +141,13 @@ public class FindAdapter extends BaseAdapter {
      * @param type （1.为点赞   2.为收藏）
      */
     private void setData(int type, int siftID) {
+        if (AppContansts.systemLoginInfo == null && AppContansts.systemLoginInfo.getUserId() == null) {
+            ToastUtils.show(context, "账号未登录，请退出重新登陆");
+            return;
+        }
         PHPHpSiftDataParams params = new PHPHpSiftDataParams();
         params.setType(type);
-        params.setUserid(AppContansts.userLoginInfo.getUserId());
+        params.setUserid(AppContansts.systemLoginInfo.getUserId());
         params.setSiftID(siftID);
         params.setUserType(SystemTypeEnum.funeral.getCode());
         MHttpManagerFactory.getPHPManager().setSiftData(context, params, new HttpResponseHandler<Object>() {

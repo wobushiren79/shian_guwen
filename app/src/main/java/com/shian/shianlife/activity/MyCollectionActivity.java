@@ -10,6 +10,7 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.adapter.FindAdapter;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.phpmodel.SiftListData;
@@ -74,10 +75,13 @@ public class MyCollectionActivity extends BaseActivity {
     };
 
     private void getData(final boolean isClean) {
+        if (AppContansts.systemLoginInfo == null && AppContansts.systemLoginInfo.getUserId() == null) {
+            ToastUtils.show(this, "账号未登录，请退出重新登陆");
+            return;
+        }
         PHPHpSiftListParams params = new PHPHpSiftListParams();
-
         params.setType(2);
-        params.setUserid(AppContansts.userLoginInfo.getUserId());
+        params.setUserid(AppContansts.systemLoginInfo.getUserId());
         params.setNumber(number);
         params.setPagerNumber(pagerNumber);
         params.setUserType(SystemTypeEnum.platform.getCode());

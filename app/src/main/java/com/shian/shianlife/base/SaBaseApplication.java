@@ -150,9 +150,16 @@ public class SaBaseApplication extends Application {
         }
 
         private String getBaseUrl(String url) {
-            int hostLocation = url.indexOf("/", 8);
-            int urlLocation = url.indexOf("/", hostLocation + 1);
-            String temp = url.substring(0, urlLocation);
+            String temp = "";
+            if (!url.contains("https")) {
+                int hostLocation = url.indexOf("/", 8);
+                int urlLocation = url.indexOf("/", hostLocation + 1);
+                if (urlLocation != -1)
+                    temp = url.substring(0, urlLocation);
+            } else {
+                int hostLocation = url.indexOf("/", 8);
+                temp = url.substring(0, hostLocation);
+            }
             return temp;
         }
     }

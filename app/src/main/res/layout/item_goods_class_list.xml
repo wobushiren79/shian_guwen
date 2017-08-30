@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/dimen_35dp"
-        android:layout_marginLeft="@dimen/dimen_36dp"
-        android:layout_marginRight="@dimen/dimen_36dp"
+        android:layout_marginLeft="@dimen/dimen_8dp"
+        android:layout_marginRight="@dimen/dimen_8dp"
         android:layout_marginTop="@dimen/dimen_35dp"
         android:textColor="@color/zhy_text_color_16"
         android:textSize="@dimen/dimen_30dp" />

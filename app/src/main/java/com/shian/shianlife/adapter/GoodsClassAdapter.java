@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.shian.shianlife.R;
 import com.shian.shianlife.adapter.base.BaseRCAdapter;
 import com.shian.shianlife.adapter.base.BaseViewHolder;
+import com.shian.shianlife.common.utils.CheckUtils;
 import com.shian.shianlife.common.utils.StringUtils;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassResultBean;
 
@@ -39,7 +40,7 @@ public class GoodsClassAdapter extends BaseRCAdapter<GoodsClassResultBean> {
         LinearLayout llContent = holder.getView(R.id.ll_content);
         TextView tvName = holder.getView(R.id.tv_name);
         String name = goodsClassResultBean.getName();
-        if (!StringUtils.isEmpty(name))
+        if (!CheckUtils.isEmpty(name))
             tvName.setText(name);
         else
             tvName.setText("未知");

@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.shian.shianlife.adapter.GoodsClassAdapter;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassResultBean;
 import com.shian.shianlife.mvp.goods.presenter.IGoodsClassPresenter;
@@ -21,12 +22,9 @@ import java.util.List;
  */
 
 public class GoodsClassListView extends RecyclerView implements IGoodsClassView, GoodsClassAdapter.CallBack {
-
     private GoodsClassAdapter classAdapter;
     private IGoodsClassPresenter goodsClassPresenter;
-    private Integer channerId;
     private CallBack callBack;
-
 
     public GoodsClassListView(Context context) {
         this(context, null);
@@ -69,16 +67,13 @@ public class GoodsClassListView extends RecyclerView implements IGoodsClassView,
 
     @Override
     public Integer getChannelId() {
-        return channerId;
+        return AppContansts.goodsChannelId;
     }
 
     public void getData() {
         goodsClassPresenter.getGoodsClassData();
     }
 
-    public void setChannerId(Integer channerId) {
-        this.channerId = channerId;
-    }
 
     @Override
     public void selectItem(int index, GoodsClassResultBean data) {

@@ -42,9 +42,9 @@
             android:background="@drawable/user_down_line" />
 
         <LinearLayout
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
@@ -72,9 +72,9 @@
             android:background="@drawable/user_down_line" />
 
         <LinearLayout
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
@@ -102,9 +102,9 @@
             android:background="@drawable/user_down_line" />
 
         <LinearLayout
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
@@ -146,9 +146,9 @@
             android:background="@drawable/user_down_line" />
 
         <LinearLayout
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
@@ -181,9 +181,9 @@
             android:background="@drawable/user_down_line" />
 
         <LinearLayout
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_160dp"
+            android:background="@color/white"
             android:orientation="horizontal">
 
             <TextView
@@ -224,12 +224,13 @@
             android:layout_width="@dimen/dimen_688dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
+            android:background="@drawable/zhy_button_state_5"
+            android:gravity="center"
             android:paddingBottom="@dimen/dimen_24dp"
             android:paddingTop="@dimen/dimen_24dp"
-            android:gravity="center"
             android:text="保存"
-            android:background="@drawable/zhy_button_state_5"
             android:textColor="@color/white"
-            android:textSize="@dimen/dimen_32dp" />
+            android:textSize="@dimen/dimen_32dp"
+            android:visibility="gone" />
     </LinearLayout>
 </ScrollView>

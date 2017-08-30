@@ -95,6 +95,12 @@ public class CustomSearchView extends android.widget.SearchView implements andro
         return false;
     }
 
+    public void setData(String data) {
+        int id = getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
+        TextView textView = (TextView) this.findViewById(id);
+        textView.setText(data);
+    }
+
 
     public interface CallBack {
         boolean onQueryTextSubmit(String query);

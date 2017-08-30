@@ -1,5 +1,6 @@
 package com.shian.shianlife.mvp.goods.presenter.impl;
 
+import com.shian.shianlife.common.utils.CheckUtils;
 import com.shian.shianlife.common.utils.StringUtils;
 import com.shian.shianlife.mvp.base.OnGetDataListener;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrBean;
@@ -30,7 +31,7 @@ public class GoodsClassAttrPresenterImpl implements IGoodsClassAttrPresenter {
             goodsClassAttrView.showToast("数据错误");
             return;
         }
-        if(StringUtils.isEmpty(goodsClassAttrView.getGoodsClassId())){
+        if(CheckUtils.isEmpty(goodsClassAttrView.getGoodsClassId())){
             goodsClassAttrView.showToast("数据错误");
             return;
         }

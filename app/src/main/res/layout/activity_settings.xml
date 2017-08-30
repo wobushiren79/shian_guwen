@@ -18,7 +18,8 @@
             android:background="@color/white"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dimen_32dp"
-            android:paddingRight="@dimen/dimen_16dp">
+            android:paddingRight="@dimen/dimen_16dp"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -213,13 +214,13 @@
 
     <LinearLayout
         android:id="@+id/ll_change"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_80dp"
         android:layout_below="@+id/ll_settting"
         android:layout_marginTop="@dimen/dimen_16dp"
         android:background="@color/white"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tv_change"

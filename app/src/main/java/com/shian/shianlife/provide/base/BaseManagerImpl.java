@@ -21,12 +21,20 @@ public class BaseManagerImpl {
         excutor.requestPost(context, method, cls, params, response, false, baseUrl, null, "content", true);
     }
 
-    protected <T,E> void requestPostToList(Context context,
+    protected <T> void requestPostToList(Context context,
                                          String method,
                                          Class<T> cls,
                                          BaseHttpParams params,
-                                         HttpResponseHandler<E> response) {
+                                         HttpResponseHandler<T> response) {
         excutor.requestPost(context, method, cls, params, response, false, baseUrl, null, "list", false);
+    }
+
+    protected <T, E> void requestPostFormToList(Context context,
+                                                String method,
+                                                Class<T> cls,
+                                                BaseHttpParams params,
+                                                HttpResponseHandler<E> response) {
+        excutor.requestPostForm(context, method, cls, params, response, false, baseUrl, null, "list");
     }
 
     protected <T> void requestPost(Context context,
@@ -38,13 +46,22 @@ public class BaseManagerImpl {
         excutor.requestPost(context, method, cls, params, response, isDialog, baseUrl, null, "content", true);
     }
 
-    protected <T,E> void requestPostToList(Context context,
+    protected <T> void requestPostToList(Context context,
                                          String method,
                                          Class<T> cls,
                                          BaseHttpParams params,
-                                         HttpResponseHandler<E> response,
+                                         HttpResponseHandler<T> response,
                                          boolean isDialog) {
         excutor.requestPost(context, method, cls, params, response, isDialog, baseUrl, null, "list", false);
+    }
+
+    protected <T, E> void requestPostFormToList(Context context,
+                                                String method,
+                                                Class<T> cls,
+                                                BaseHttpParams params,
+                                                HttpResponseHandler<E> response,
+                                                boolean isDialog) {
+        excutor.requestPostForm(context, method, cls, params, response, isDialog, baseUrl, null, "list");
     }
 
 

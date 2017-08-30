@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_drawerlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.shian.shianlife.activity.goods.GoodsQueryActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.shian.shianlife.view.searchview.CustomSearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_80dp"
+                android:layout_marginBottom="@dimen/dimen_12dp"
+                android:layout_marginLeft="@dimen/dimen_16dp"
+                android:layout_marginRight="@dimen/dimen_16dp"
+                android:layout_marginTop="@dimen/dimen_12dp"></com.shian.shianlife.view.searchview.CustomSearchView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_82dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <com.shian.shianlife.view.goods.GoodsQueryConditionButton
+                    android:id="@+id/query_volume_condition"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    MyViewAttr:titleName="销量"></com.shian.shianlife.view.goods.GoodsQueryConditionButton>
+
+                <com.shian.shianlife.view.goods.GoodsQueryConditionButton
+                    android:id="@+id/query_price_condition"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    MyViewAttr:titleName="价格"></com.shian.shianlife.view.goods.GoodsQueryConditionButton>
+
+                <TextView
+                    android:id="@+id/tv_filtrate"
+                    android:layout_width="@dimen/dimen_0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="筛选"
+                    android:textColor="@color/zhy_text_color_22"
+                    android:textSize="@dimen/dimen_34dp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:background="@color/zhy_backgroud_1" />
+
+            <com.shian.shianlife.view.listview.GoodsQueryListView
+                android:id="@+id/goods_query_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></com.shian.shianlife.view.listview.GoodsQueryListView>
+        </LinearLayout>
+
+        <com.shian.shianlife.view.goods.GoodsShoppingCartButton
+            android:id="@+id/bt_goods_shopping_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"></com.shian.shianlife.view.goods.GoodsShoppingCartButton>
+    </RelativeLayout>
+
+    <com.shian.shianlife.view.drawerlayout.GoodsQueryDrawerLayout
+        android:id="@+id/goods_query_drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"></com.shian.shianlife.view.drawerlayout.GoodsQueryDrawerLayout>
+
+</android.support.v4.widget.DrawerLayout>

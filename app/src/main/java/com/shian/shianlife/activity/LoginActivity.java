@@ -1,5 +1,6 @@
 package com.shian.shianlife.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,6 +24,11 @@ import com.shian.shianlife.common.utils.JSONUtil;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils.ShareLogin;
 import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.mvp.login.bean.SystemLoginResultBean;
+import com.shian.shianlife.mvp.login.presenter.IUserLoginPresenter;
+import com.shian.shianlife.mvp.login.presenter.impl.UserLoginPresenterImpl;
+import com.shian.shianlife.mvp.login.view.IUserLoginView;
+import com.shian.shianlife.mvp.userinfo.view.IUserInfoView;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpRequestExecutor;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
@@ -30,7 +36,7 @@ import com.shian.shianlife.provide.params.HpLoginParams;
 import com.shian.shianlife.provide.result.HrLoginResult;
 import com.shian.shianlife.view.customview.LoadingButton;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements IUserLoginView {
     @InjectView(R.id.et_login_username)
     EditText etUserName;
     @InjectView(R.id.et_login_password)
@@ -46,15 +52,20 @@ public class LoginActivity extends BaseActivity {
     RelativeLayout rlContent;
 
 
-    ShareLogin loginS;
+    private IUserLoginPresenter userLoginPresenter;
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_login);
-        initView();
-        changeState();
+        initData();
+        startAnim();
 
+    }
+
+    private void initData() {
+        userLoginPresenter = new UserLoginPresenterImpl(this, null);
+        userLoginPresenter.getLoginConfig();
     }
 
     /**
@@ -69,41 +80,13 @@ public class LoginActivity extends BaseActivity {
         translateAnimation.start();
     }
 
-    //切换账号处理
-    private void changeState() {
-        int isChange = getIntent().getIntExtra("loginStateChange", -1);
-        if (isChange == 1) {
-            String username = etUserName.getText().toString();
-            String password = etUserPassword.getText().toString();
-            login(username, password);
-        } else {
-            startAnim();
-        }
-    }
-
-    private void initView() {
-        loginS = SharePerfrenceUtils.getLoginShare(this);
-        etUserName.setText(loginS.getUsername());
-        if (loginS.isRemeberPassword()) {
-            cbRe.setChecked(true);
-            etUserPassword.setText(loginS.getPassword());
-        }
-
-        if (loginS.isAutoLogin()) {
-            cbAuto.setChecked(true);
-            login(loginS.getUsername(), loginS.getPassword());
-        }
-
-    }
 
     @OnClick(R.id.btn_login)
     void loginClick(View v) {
-        String username = etUserName.getText().toString();
-        String password = etUserPassword.getText().toString();
-        login(username, password);
+        lbLogin.setLoading();
+        userLoginPresenter.loginSystem();
     }
 
-    public static String cookie;
 
     private void login(final String username, final String password) {
         AppContansts.userCemetery = null;
@@ -117,13 +100,11 @@ public class LoginActivity extends BaseActivity {
         }
 
         //登录状态为普通类型
-        lbLogin.setLoading();
         final HpLoginParams params = new HpLoginParams();
         params.setPassword(etUserPassword.getText().toString());
         params.setUsername(etUserName.getText().toString());
         params.setSystemType("2");
         params.setChannelId(SharePerfrenceUtils.getShareChannelId(this));
-        AppContansts.cookieStore.clear();
         MHttpManagerFactory.getFuneralManager().login(this, params, new HttpResponseHandler<HrLoginResult>() {
 
             @Override
@@ -134,19 +115,18 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onSuccess(final HrLoginResult result) {
                 AppContansts.userLoginInfo = result;
-                SharePerfrenceUtils.setLoginShare(LoginActivity.this, username, password, cbRe.isChecked(), cbAuto.isChecked());
                 //判断是否要进行公墓登陆
                 if (result.getToken() != null && !result.getToken().equals("")) {
                     loginCemetery(result);
                 } else {
-                    loginSuccess(result);
+                    loginSuccess();
                 }
             }
 
 
             @Override
             public void onError(String message) {
-                lbLogin.setNormal();
+                loginSuccess();
             }
         });
 
@@ -172,13 +152,13 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onSuccess(HrLoginResult resultCemetery) {
                 AppContansts.userCemetery = resultCemetery;
-                loginSuccess(result);
+                loginSuccess();
 
             }
 
             @Override
             public void onError(String message) {
-                loginSuccess(result);
+                loginSuccess();
             }
         });
     }
@@ -186,14 +166,10 @@ public class LoginActivity extends BaseActivity {
     /**
      * 登陆成功跳转
      *
-     * @param result
      */
-    private void loginSuccess(HrLoginResult result) {
+    private void loginSuccess() {
         lbLogin.setComplete();
-        ToastUtils.show(getBaseContext(), "登陆成功");
         Intent in = new Intent(LoginActivity.this, MainActivity.class);
-        String resultBack = JSONUtil.writeEntityToJSONString(result);
-        in.putExtra("loginData", resultBack);
         startActivity(in);
         finish();
     }
@@ -216,4 +192,59 @@ public class LoginActivity extends BaseActivity {
         startActivity(in);
     }
 
+    @Override
+    public String getUserName() {
+        return etUserName.getText().toString();
+    }
+
+    @Override
+    public void setUserName(String userName) {
+        etUserName.setText(userName);
+    }
+
+    @Override
+    public String getPassWord() {
+        return etUserPassword.getText().toString();
+    }
+
+    @Override
+    public void setPassWord(String passWord) {
+        etUserPassword.setText(passWord);
+    }
+
+    @Override
+    public boolean getIsAutoLogin() {
+        return cbAuto.isChecked();
+    }
+
+    @Override
+    public void setIsAutoLogin(boolean isAutoLogin) {
+        cbAuto.setChecked(isAutoLogin);
+    }
+
+    @Override
+    public boolean getIsKeepAccount() {
+        return cbRe.isChecked();
+    }
+
+    @Override
+    public void setIsKeepAccount(boolean isKeepAccount) {
+        cbRe.setChecked(isKeepAccount);
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public void loginSystemSuccess(SystemLoginResultBean result) {
+        userLoginPresenter.saveLoginConfig();
+        login(etUserName.getText().toString(), etUserPassword.getText().toString());
+    }
+
+    @Override
+    public void loginSystemFail(String message) {
+        ToastUtils.show(this, message);
+    }
 }

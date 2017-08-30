@@ -1,5 +1,6 @@
 package com.shian.shianlife.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -22,6 +23,10 @@ import com.shian.shianlife.common.push.Utils;
 import com.shian.shianlife.common.utils.JSONUtil;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils.ShareLogin;
+import com.shian.shianlife.mvp.login.bean.SystemLoginResultBean;
+import com.shian.shianlife.mvp.login.presenter.IUserLoginPresenter;
+import com.shian.shianlife.mvp.login.presenter.impl.UserLoginPresenterImpl;
+import com.shian.shianlife.mvp.login.view.IUserLoginView;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpRequestExecutor;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
@@ -34,10 +39,15 @@ import java.util.TimerTask;
 
 import okhttp3.Request;
 
-public class SplashActivity extends BaseActivity implements OnPushListener {
+public class SplashActivity extends BaseActivity implements OnPushListener, IUserLoginView {
     private int SLEEPTIME = 2500;//loading时间
-    HrLoginResult result = null;
     Timer timerIntent;//定时跳转
+
+    private IUserLoginPresenter userLoginPresenter;
+    private String userName;
+    private String userPassWord;
+    private Boolean isAuto;
+    private Boolean isRe;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -61,13 +71,9 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
 
 
     private void initData(String channelId) {
-        //自动登陆
-        SharePerfrenceUtils.ShareLogin shareLogin = SharePerfrenceUtils.getLoginShare(SplashActivity.this);
-        if (shareLogin.isAutoLogin()) {
-            login(shareLogin.getUsername(), shareLogin.getPassword(), channelId);
-        } else {
-            sleepActivity(1);
-        }
+        AppContansts.pushChannelId = channelId;
+        userLoginPresenter = new UserLoginPresenterImpl(this, null);
+        userLoginPresenter.getLoginConfig();
     }
 
 
@@ -76,11 +82,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
      */
     private void jumpActivity(int type) {
         Intent intent = new Intent(SplashActivity.this, LoginAdvertActivity.class);
-        if (type == 0) {
-            intent.putExtra("advert", LoginAdvertActivity.MAIN);
-        } else {
-            intent.putExtra("advert", LoginAdvertActivity.LOGIN);
-        }
+        intent.putExtra("advert", type);
         startActivity(intent);
         finish();
     }
@@ -88,7 +90,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
     private void login(String userName, String passWord, String channelId) {
         AppContansts.userCemetery = null;
         AppContansts.userLoginInfo = null;
-        ShareLogin loginS = SharePerfrenceUtils.getLoginShare(this);
 
         //登录状态为普通状态
         HpLoginParams params = new HpLoginParams();
@@ -96,7 +97,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
         params.setUsername(userName);
         params.setSystemType("2");
         params.setChannelId(channelId);
-        AppContansts.cookieStore.clear();
         MHttpManagerFactory.getFuneralManager().login(this, params,
                 new HttpResponseHandler<HrLoginResult>() {
 
@@ -111,13 +111,13 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
                         if (result.getToken() != null && !result.getToken().equals("")) {
                             loginCemetery(result);
                         } else {
-                            sleepActivity(0);
+                            sleepActivity(LoginAdvertActivity.MAIN);
                         }
                     }
 
                     @Override
                     public void onError(String message) {
-                        sleepActivity(1);
+                        sleepActivity(LoginAdvertActivity.MAIN);
                     }
                 });
 
@@ -142,12 +142,12 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
             @Override
             public void onSuccess(HrLoginResult resultCemetery) {
                 AppContansts.userCemetery = resultCemetery;
-                sleepActivity(0);
+                sleepActivity(LoginAdvertActivity.MAIN);
             }
 
             @Override
             public void onError(String message) {
-                sleepActivity(0);
+                sleepActivity(LoginAdvertActivity.MAIN);
             }
         });
     }
@@ -195,5 +195,65 @@ public class SplashActivity extends BaseActivity implements OnPushListener {
         super.onDestroy();
         if (timerIntent != null)
             timerIntent.cancel();
+    }
+
+    @Override
+    public String getUserName() {
+        return userName;
+    }
+
+    @Override
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    @Override
+    public String getPassWord() {
+        return userPassWord;
+    }
+
+    @Override
+    public void setPassWord(String passWord) {
+        this.userPassWord = passWord;
+    }
+
+    @Override
+    public boolean getIsAutoLogin() {
+        return isAuto;
+    }
+
+    @Override
+    public void setIsAutoLogin(boolean isAutoLogin) {
+        this.isAuto = isAutoLogin;
+        if (isAuto) {
+            userLoginPresenter.loginSystem();
+        } else {
+            sleepActivity(LoginAdvertActivity.LOGIN);
+        }
+    }
+
+    @Override
+    public boolean getIsKeepAccount() {
+        return isRe;
+    }
+
+    @Override
+    public void setIsKeepAccount(boolean isKeepAccount) {
+        this.isRe = isKeepAccount;
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public void loginSystemSuccess(SystemLoginResultBean result) {
+        login(userName, userPassWord, AppContansts.pushChannelId);
+    }
+
+    @Override
+    public void loginSystemFail(String message) {
+        sleepActivity(LoginAdvertActivity.LOGIN);
     }
 }

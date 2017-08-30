@@ -42,8 +42,6 @@ public class CheckUtils {
     }
 
 
-
-
     /**
      * 檢測是否有獲取照片權限
      *
@@ -122,5 +120,22 @@ public class CheckUtils {
             }
         }
         return false;
+    }
+
+
+    public static boolean isEmpty(String str) {
+        return str == null || str.length() == 0;
+    }
+
+    public static boolean isEmpty(Integer str) {
+        return str == null || str == -1;
+    }
+
+    public static boolean isEmpty(Long str) {
+        return str == null || str == -1;
+    }
+
+    public static boolean isEmpty(Float str) {
+        return str == null ;
     }
 }

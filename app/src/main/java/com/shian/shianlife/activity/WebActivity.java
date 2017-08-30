@@ -194,12 +194,16 @@ public class WebActivity extends BaseActivity {
      * @param type （1.为点赞   2.为收藏）
      */
     private void setData(int type, int siftID) {
+        if (AppContansts.systemLoginInfo == null && AppContansts.systemLoginInfo.getUserId() == null) {
+            ToastUtils.show(this, "账号未登录，请退出重新登陆");
+            return;
+        }
         mIVCollection.setImageResource(R.drawable.zhy_find_collection_2);
         mIVCollection.setClickable(false);
         ToastUtils.show(WebActivity.this, "收藏成功");
         PHPHpSiftDataParams params = new PHPHpSiftDataParams();
         params.setType(type);
-        params.setUserid(AppContansts.userLoginInfo.getUserId());
+        params.setUserid(AppContansts.systemLoginInfo.getUserId());
         params.setSiftID(siftID);
         params.setUserType(SystemTypeEnum.funeral.getCode());
         MHttpManagerFactory.getPHPManager().setSiftData(WebActivity.this, params, new HttpResponseHandler<Object>() {

@@ -7,6 +7,7 @@ import com.shian.shianlife.mvp.order.bean.OrderShowResultBean;
 import com.shian.shianlife.mvp.order.model.IOrderShowModel;
 import com.shian.shianlife.thisenum.AppRolePermition;
 import com.shian.shianlife.thisenum.OrderItemShowEnum;
+import com.shian.shianlife.thisenum.RoleEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,18 +24,18 @@ public class OrderShowModelImpl implements IOrderShowModel {
         List<OrderShowResultBean.Item> listData = new ArrayList<>();
 
         //是否有公墓权限
-        if (AppContansts.userCemetery != null) {
-            for (int i = 0; i < AppContansts.userCemetery.getPermitionCodes().size(); i++) {
-                if (AppContansts.userCemetery.getPermitionCodes().get(i).equals(AppRolePermition.ADVISOR.getCode())) {
+        if (AppContansts.systemLoginInfo != null && AppContansts.systemLoginInfo.getResourceCodes() != null) {
+            for (String roleCode : AppContansts.systemLoginInfo.getResourceCodes()) {
+                if (roleCode.equals(RoleEnum.Funeral_Advisor.getCode())) {
+                    listData.add(getItem(OrderItemShowEnum.funeral));
+                } else if (roleCode.equals(RoleEnum.Cemetery_Advisor.getCode())) {
                     listData.add(getItem(OrderItemShowEnum.cemetery));
+                } else if (roleCode.equals(RoleEnum.Goods_Advisor.getCode())) {
+                    listData.add(getItem(OrderItemShowEnum.store));
                 }
             }
         }
 
-        listData.add(getItem(OrderItemShowEnum.funeral));
-//        listData.add(getItem(OrderItemShowEnum.store));
-
-        
         resultBean.setList(listData);
         listener.getDataSuccess(resultBean);
     }

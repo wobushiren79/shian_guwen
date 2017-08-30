@@ -31,6 +31,7 @@ import com.shian.shianlife.mapapi.CustomDialog;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.GetBuilder;
+import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.builder.PostStringBuilder;
 import com.zhy.http.okhttp.callback.StringCallback;
 import com.zhy.http.okhttp.request.RequestCall;
@@ -44,6 +45,7 @@ import org.codehaus.jackson.JsonNode;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -94,40 +96,7 @@ public class HttpRequestExecutor {
             getBuilder.headers(header);
         getBuilder.params(params.getMapParams());
         RequestCall requestCall = getBuilder.build();
-        requestCall.execute(new StringCallback() {
-            @Override
-            public void onBefore(Request request, int id) {
-                super.onBefore(request, id);
-                if (responseHandler != null) {
-                    responseHandler.onStart(request, id);
-                }
-            }
-
-            @Override
-            public void onError(Call call, Exception e, int id) {
-                String errorMessage = e.getMessage();
-                onErrorCallBack(responseHandler, errorMessage, context);
-                if (dialog != null)
-                    dialog.cancel();
-                dialog = null;
-            }
-
-            @Override
-            public void onResponse(String response, int id) {
-                Log.v("tag", response);
-                if (dataName.equals("list")) {
-                    dataToJsonForList(context, response, data, responseHandler);
-                } else if (dataName.equals("content")) {
-                    dataToJsonForContent(context, response, data, responseHandler);
-                } else {
-                    onErrorCallBack(responseHandler, "数据解析异常", context);
-                }
-                if (dialog != null)
-                    dialog.cancel();
-                dialog = null;
-            }
-
-        });
+        startExecute(context, data, responseHandler, dataName, requestCall);
     }
 
 
@@ -155,7 +124,6 @@ public class HttpRequestExecutor {
 
         Log.v("tag", baseUrl + "/" + method);
 
-
         PostStringBuilder getBuilder = OkHttpUtils.postString();
         getBuilder.url(baseUrl + "/" + method);
         if (header != null)
@@ -169,10 +137,59 @@ public class HttpRequestExecutor {
             Log.e("tag", params.getJsonParams());
             getBuilder.content(params.getJsonParams());
         }
+        getBuilder.addHeader("client-Type", "wechatapp");
+        getBuilder.addHeader("systemType", "2");
+        RequestCall requestCall = getBuilder.build();
+        startExecute(context, data, responseHandler, dataName, requestCall);
+    }
+
+    /**
+     * POST请求
+     *
+     * @param context
+     * @param method
+     * @param data
+     * @param params
+     * @param responseHandler
+     * @param <T>
+     */
+    public <T, E> void requestPostForm(final Context context,
+                                       final String method,
+                                       final Class<T> data,
+                                       final BaseHttpParams params,
+                                       final HttpResponseHandler<E> responseHandler,
+                                       final boolean isShowDialog,
+                                       final String baseUrl,
+                                       final Map<String, String> header,
+                                       final String dataName) {
+        if (checkNetWorkAndDialog(context, responseHandler, isShowDialog)) return;
+
+        Log.v("tag", baseUrl + "/" + method);
+
+        PostFormBuilder getBuilder = OkHttpUtils.post();
+        getBuilder.url(baseUrl + "/" + method);
+        if (header != null)
+            getBuilder.headers(header);
+        //裝上form
+        try {
+            params.setFormParams(getBuilder);
+        } catch (Exception e) {
+            e.printStackTrace();
+            onErrorCallBack(responseHandler, "参数错误", context);
+        }
 
         getBuilder.addHeader("client-Type", "wechatapp");
         getBuilder.addHeader("systemType", "2");
         RequestCall requestCall = getBuilder.build();
+        startExecute(context, data, responseHandler, dataName, requestCall);
+
+    }
+
+    private <T, E> void startExecute(final Context context,
+                                     final Class<T> data,
+                                     final HttpResponseHandler<E> responseHandler,
+                                     final String dataName,
+                                     RequestCall requestCall) {
         requestCall.execute(new StringCallback() {
             @Override
             public void onBefore(Request request, int id) {
@@ -207,7 +224,6 @@ public class HttpRequestExecutor {
             }
 
         });
-
     }
 
     /**
@@ -221,7 +237,7 @@ public class HttpRequestExecutor {
      */
     private <T> boolean checkNetWorkAndDialog(Context context, HttpResponseHandler<T> responseHandler, boolean isShowDialog) {
         if (!CheckUtils.isNetworkConnected(context)) {
-            onErrorCallBack(responseHandler, context.getString(R.string.net_work_off), context);
+            onErrorCallBack(responseHandler, "网络未连接", context);
             return true;
         }
         if (isShowDialog && dialog == null) {
@@ -318,11 +334,10 @@ public class HttpRequestExecutor {
                 int codeInt = (int) code;
                 if (codeInt == 1000) {
                     List<T> result = GsonTools.getListByMapKey("list", map, data.newInstance());
-                    if (result != null) {
-                        responseHandler.onSuccess((E) result);
-                    } else {
-                        responseHandler.onSuccess(null);
+                    if (result == null) {
+                        result = new ArrayList<>();
                     }
+                    responseHandler.onSuccess((E) result);
                 } else if ("1009".equals(codeInt)) {
                     jumpLogin(context);
                 } else {

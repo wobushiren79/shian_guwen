@@ -514,7 +514,12 @@
         <activity
             android:name=".activity.goods.GoodsClassAttrDetailsActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.goods.GoodsQueryActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.goods.GoodsDetailsActivity"></activity>
     </application>
 
 </manifest>

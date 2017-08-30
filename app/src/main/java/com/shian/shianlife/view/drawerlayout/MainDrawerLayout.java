@@ -111,11 +111,9 @@ public class MainDrawerLayout extends LinearLayout implements View.OnClickListen
      * 我的资料
      */
     private void userInfo() {
-        if (AppContansts.userInfoData != null) {
-            Intent intent = new Intent(getContext(), UserInfoActivity.class);
-            intent.putExtra(IntentName.INTENT_TYPE, ShowModeEnum.show.getCode());
-            getContext().startActivity(intent);
-        }
+        Intent intent = new Intent(getContext(), UserInfoActivity.class);
+        intent.putExtra(IntentName.INTENT_TYPE, ShowModeEnum.show.getCode());
+        getContext().startActivity(intent);
     }
 
     /**
@@ -146,22 +144,19 @@ public class MainDrawerLayout extends LinearLayout implements View.OnClickListen
      * 设置
      */
     private void setting() {
-        if (AppContansts.userInfoData != null) {
-            Intent in = new Intent(getContext(), SettingsActivity.class);
-            Activity activity = (Activity) getContext();
-            activity.startActivityForResult(in, 101);
-        }
+        Intent in = new Intent(getContext(), SettingsActivity.class);
+        Activity activity = (Activity) getContext();
+        activity.startActivityForResult(in, 101);
     }
 
     /**
      * 編輯個人資料
      */
     private void edit() {
-        if (AppContansts.userInfoData != null) {
-            Intent intent = new Intent(getContext(), UserInfoActivity.class);
-            intent.putExtra(IntentName.INTENT_TYPE, ShowModeEnum.edit.getCode());
-            getContext().startActivity(intent);
-        }
+        Intent intent = new Intent(getContext(), UserInfoActivity.class);
+        intent.putExtra(IntentName.INTENT_TYPE, ShowModeEnum.edit.getCode());
+        getContext().startActivity(intent);
+
     }
 
 

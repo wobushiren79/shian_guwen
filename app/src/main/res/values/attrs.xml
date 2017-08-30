@@ -6,6 +6,10 @@
         <attr name="isImportant" format="boolean" />
         <attr name="inputType" format="integer" />
         <attr name="isLonger" format="boolean" />
+        <attr name="layoutType" format="integer" />
+        <attr name="contentText" format="string" />
+        <attr name="hintText" format="string" />
+        <attr name="showMode" format="boolean" />
     </declare-styleable>
 
 

@@ -3,6 +3,7 @@ package com.shian.shianlife.mvp.login.model.impl;
 import android.content.Context;
 
 
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.mvp.base.OnGetDataListener;
 import com.shian.shianlife.mvp.login.bean.SystemLoginBean;
@@ -25,6 +26,7 @@ public class UserLoginModelImpl implements IUserLoginModel {
 
     @Override
     public void loginSystem(Context context, SystemLoginBean params, final OnGetDataListener<SystemLoginResultBean> listener) {
+        AppContansts.cookieStore.clear();
         MHttpManagerFactory.getSystemManager().loginSystem(context, params, new HttpResponseHandler<SystemLoginResultBean>() {
             @Override
             public void onStart(Request request, int id) {

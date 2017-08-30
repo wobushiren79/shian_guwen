@@ -68,11 +68,6 @@ public interface IUserLoginView {
 
 
     /**
-     * 设置登陆设置
-     */
-    void setLoginConfig();
-
-    /**
      * 获取上下文对象
      *
      * @return

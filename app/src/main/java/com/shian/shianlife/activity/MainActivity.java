@@ -106,9 +106,8 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_main);
-
-        initDate();
         initView();
+        initDate();
         initIM();
         initPermission();
 //        initLocation();
@@ -199,46 +198,46 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     }
 
     private void initDate() {
-        mFragmentManager = getSupportFragmentManager();
         userInfoPresenter = new UserInfoPresenterImpl(this);
         userInfoPresenter.getUserInfoData();
     }
 
     private void initView() {
+        mFragmentManager = getSupportFragmentManager();
         addMainDrawerLayout();
-
         setTitle("title");
         rbMain1.setOnCheckedChangeListener(new RBCheckListener());
         rbMain2.setOnCheckedChangeListener(new RBCheckListener());
         rbMain3.setOnCheckedChangeListener(new RBCheckListener());
         rbMain4.setOnCheckedChangeListener(new RBCheckListener());
         showFragment(R.id.rb_main_1);
-        MHttpManagerFactory.getFuneralManager().getMessageCount(this, new HttpResponseHandler<HrCommentResult>() {
-            @Override
-            public void onStart(Request request, int id) {
+        if (AppContansts.userLoginInfo != null)
+            MHttpManagerFactory.getFuneralManager().getMessageCount(this, new HttpResponseHandler<HrCommentResult>() {
+                @Override
+                public void onStart(Request request, int id) {
 
-            }
-
-            @Override
-            public void onSuccess(HrCommentResult result) {
-                // TODO Auto-generated method stub
-                AppContansts.MessageCount = result.getCount();
-                if (result.getCount() == 0) {
-                    setMessageIconVisible(View.GONE);
-                } else {
-                    setMessageIconVisible(View.VISIBLE);
                 }
 
-                getMsgNumber();
+                @Override
+                public void onSuccess(HrCommentResult result) {
+                    // TODO Auto-generated method stub
+                    AppContansts.MessageCount = result.getCount();
+                    if (result.getCount() == 0) {
+                        setMessageIconVisible(View.GONE);
+                    } else {
+                        setMessageIconVisible(View.VISIBLE);
+                    }
 
-            }
+                    getMsgNumber();
+
+                }
 
 
-            @Override
-            public void onError(String message) {
-                // TODO Auto-generated method stub
-            }
-        });
+                @Override
+                public void onError(String message) {
+                    // TODO Auto-generated method stub
+                }
+            });
         initRB();
     }
 
@@ -485,7 +484,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     };
 
     private void location(final String curAddress) {
-        if (!curAddress.equals(AppContansts.LocalString)) {
+        if (!curAddress.equals(AppContansts.LocalString) && AppContansts.userLoginInfo != null) {
             HpConsultIdParams params = new HpConsultIdParams();
             params.setCurAddress(curAddress);
             MHttpManagerFactory.getFuneralManager().changeCurAddress(this, params, new HttpResponseHandler<Object>() {
@@ -544,33 +543,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                     tvMsgNumber.setText(AppContansts.MsgNumberTotal + "");
                 }
                 ShortcutBadger.applyCount(MainActivity.this, AppContansts.MsgNumberTotal);
-//                if (orderFragment != null) {
-//                    List<TabPageIndicator.TabView> listTabView = orderFragment.indicator.getListTabView();
-//                    int cornerSize = MainActivity.this.getResources().getDimensionPixelSize(R.dimen.dimen_30dp);
-//                    for (TabPageIndicator.TabView tabview : listTabView) {
-//                        String titel = tabview.getText().toString();
-//                        switch (titel) {
-//                            case "洽谈":
-//                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getTalk(), cornerSize);
-//                                break;
-//                            case "待服务":
-//                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getService(), cornerSize);
-//                                break;
-//                            case "服务派单中":
-//                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAssignment(), cornerSize);
-//                                break;
-//                            case "待评审":
-//                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getAuditing(), cornerSize);
-//                                break;
-//                            case "待收款":
-//                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getUnpaid(), cornerSize);
-//                                break;
-//                            case "服务结束":
-////                                tabview.setMsgCornerNumber(AppContansts.MsgNumber.getEndService());
-//                                break;
-//                        }
-//                    }
-//                }
             }
 
             @Override

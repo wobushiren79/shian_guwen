@@ -13,10 +13,12 @@ import okhttp3.Cookie;
 public class AppContansts {
     //登陆地址
 //    public static final String Login_BaseUrl = "http://192.168.0.37:8080/ki4so-web";
-    public static final String Login_BaseUrl = "http://192.168.0.73:8080/ki4so-web";
+//    public static final String Login_BaseUrl = "http://192.168.0.73:8080/ki4so-web";
+    public static final String Login_BaseUrl = "https://platform.shianlife.cn";
     //单项地址
 //    public static final String Store_BaseUrl = "http://192.168.0.37:8089/goods";
-    public static final String Store_BaseUrl = "http://192.168.0.73:8089/goods";
+//    public static final String Store_BaseUrl = "http://192.168.0.73:8089/goods";
+    public static final String Store_BaseUrl = "https://goods.shianlife.cn";
     //殡仪地址
     public static final String Funeral_BaseUrl = "http://115.28.163.211:7088/shianlife-adviser-1.0-SNAPSHOT";
     //公墓地址
@@ -27,8 +29,10 @@ public class AppContansts {
 
     //商品地址
     public static final String Goods_BaseUrl = "http://goodsmgr.e-funeral.cn";
+    //商品图片地址
+    public static final String Goods_PicUrl = Goods_BaseUrl + "/Public/Uploads";
     //临时用殡仪地址
-    public static final String Temp_Funeral_BaseUrl=Goods_BaseUrl+"/home";
+    public static final String Temp_Funeral_BaseUrl = Goods_BaseUrl + "/home";
 
 
     public static final String OSSURL = "http://shianlife123.oss-cn-qingdao.aliyuncs.com/";
@@ -57,9 +61,12 @@ public class AppContansts {
 
     public static HrLoginResult userLoginInfo = null;
     public static HrLoginResult userCemetery = null;
+//
 
-    public static UserInfoResultBean userInfoData;
-
+    //商品渠道ID
+    public static Integer goodsChannelId;
+    //推送渠道ID
+    public static String pushChannelId;
     //平台用户数据
     public static SystemLoginResultBean systemLoginInfo;
     //登陆系统KEY

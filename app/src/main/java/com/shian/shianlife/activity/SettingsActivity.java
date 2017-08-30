@@ -42,8 +42,8 @@ public class SettingsActivity extends BaseActivity {
     private SharedPreferences share;
     @InjectViews({R.id.rb1, R.id.rb2})
     List<RadioButton> rbList;
-    @InjectView(R.id.st_switch)
-    SwitchButton switchButton;
+//    @InjectView(R.id.st_switch)
+//    SwitchButton switchButton;
     @InjectView(R.id.tv_switch)
     TextView tvSwitch;
 
@@ -54,62 +54,62 @@ public class SettingsActivity extends BaseActivity {
         setContentView(R.layout.activity_settings);
         setTitle("设置");
         share = getSharedPreferences("settings", -1);
-        int state = 1;
-        if (AppContansts.userInfoData != null) {
-            state = AppContansts.userInfoData.getAppStatus();
-        }
-        if (state == 1) {
-            switchButton.setChecked(true);
-            rbList.get(0).setChecked(true);
-            tvSwitch.setText("当前状态为空闲");
-        } else {
-            switchButton.setChecked(false);
-            rbList.get(1).setChecked(true);
-            tvSwitch.setText("当前状态为忙碌");
-        }
-
-        switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if (isChecked) {
-                    tvSwitch.setText("当前状态为空闲");
-                    setSwitchState(isChecked);
-                } else {
-                    tvSwitch.setText("当前状态为忙碌");
-                    setSwitchState(isChecked);
-                }
-            }
-        });
+//        int state = 1;
+//        if (AppContansts.userInfoData != null) {
+//            state = AppContansts.userInfoData.getAppStatus();
+//        }
+//        if (state == 1) {
+//            switchButton.setChecked(true);
+//            rbList.get(0).setChecked(true);
+//            tvSwitch.setText("当前状态为空闲");
+//        } else {
+//            switchButton.setChecked(false);
+//            rbList.get(1).setChecked(true);
+//            tvSwitch.setText("当前状态为忙碌");
+//        }
+//
+//        switchButton.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(SwitchButton view, boolean isChecked) {
+//                if (isChecked) {
+//                    tvSwitch.setText("当前状态为空闲");
+//                    setSwitchState(isChecked);
+//                } else {
+//                    tvSwitch.setText("当前状态为忙碌");
+//                    setSwitchState(isChecked);
+//                }
+//            }
+//        });
     }
 
-    private void setSwitchState(final boolean isCheck) {
-        HpConsultIdParams params = new HpConsultIdParams();
-        if (isCheck) {
-            params.setAppStatus(1);
-        } else {
-            params.setAppStatus(2);
-        }
-        MHttpManagerFactory.getFuneralManager().changeInfo(SettingsActivity.this, params, new HttpResponseHandler<Object>() {
-
-            @Override
-            public void onStart(Request request, int id) {
-                switchButton.setEnabled(false);
-            }
-
-            @Override
-            public void onSuccess(Object result) {
-                switchButton.setEnabled(true);
-                SharedPreferences.Editor editor = share.edit();
-                editor.putBoolean("rb", isCheck);
-                editor.commit();
-            }
-
-            @Override
-            public void onError(String message) {
-                switchButton.setEnabled(true);
-            }
-        });
-    }
+//    private void setSwitchState(final boolean isCheck) {
+//        HpConsultIdParams params = new HpConsultIdParams();
+//        if (isCheck) {
+//            params.setAppStatus(1);
+//        } else {
+//            params.setAppStatus(2);
+//        }
+//        MHttpManagerFactory.getFuneralManager().changeInfo(SettingsActivity.this, params, new HttpResponseHandler<Object>() {
+//
+//            @Override
+//            public void onStart(Request request, int id) {
+//                switchButton.setEnabled(false);
+//            }
+//
+//            @Override
+//            public void onSuccess(Object result) {
+//                switchButton.setEnabled(true);
+//                SharedPreferences.Editor editor = share.edit();
+//                editor.putBoolean("rb", isCheck);
+//                editor.commit();
+//            }
+//
+//            @Override
+//            public void onError(String message) {
+//                switchButton.setEnabled(true);
+//            }
+//        });
+//    }
 
     @OnClick(R.id.tv_editorder)
     void logout(View v) {

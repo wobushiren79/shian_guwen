@@ -79,19 +79,9 @@ public class UserLoginPresenterImpl implements IUserLoginPresenter {
     @Override
     public void getLoginConfig() {
         UserLoginConfig loginConfig = userLoginModel.getLoginConfig(userLoginView.getContext());
-        if (loginConfig.isKeepAccount()) {
-            userLoginView.setUserName(loginConfig.getUserName());
-            userLoginView.setPassWord(loginConfig.getPassWord());
-            userLoginView.setIsAutoLogin(loginConfig.isAutoLogin());
-            userLoginView.setIsKeepAccount(loginConfig.isKeepAccount());
-        }
-        if (loginConfig.isAutoLogin()) {
-            userLoginView.setUserName(loginConfig.getUserName());
-            userLoginView.setPassWord(loginConfig.getPassWord());
-            userLoginView.setIsAutoLogin(loginConfig.isKeepAccount());
-            loginSystem();
-        }
-        if (!loginConfig.isAutoLogin())
-            userLoginView.setLoginConfig();
+        userLoginView.setUserName(loginConfig.getUserName());
+        userLoginView.setPassWord(loginConfig.getPassWord());
+        userLoginView.setIsKeepAccount(loginConfig.isKeepAccount());
+        userLoginView.setIsAutoLogin(loginConfig.isAutoLogin());
     }
 }

@@ -110,9 +110,13 @@ public class FindFragment extends BaseFragment {
     };
 
     private void getData(final boolean isClean) {
+        if(AppContansts.systemLoginInfo==null&&AppContansts.systemLoginInfo.getUserId()==null){
+            ToastUtils.show(getContext(),"账号未登录，请退出重新登陆");
+            return;
+        }
         PHPHpSiftListParams params = new PHPHpSiftListParams();
         params.setType(1);
-        params.setUserid(AppContansts.userLoginInfo.getUserId());
+        params.setUserid(AppContansts.systemLoginInfo.getUserId());
         params.setNumber(number);
         params.setPagerNumber(pagerNumber);
         params.setUserType(SystemTypeEnum.funeral.getCode());

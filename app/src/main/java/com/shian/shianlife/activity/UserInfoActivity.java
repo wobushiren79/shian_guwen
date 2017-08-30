@@ -11,6 +11,7 @@ import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.JSONUtil;
 import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.mvp.login.bean.SystemLoginResultBean;
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoResultBean;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
@@ -45,7 +46,10 @@ public class UserInfoActivity extends BaseActivity {
 
     private void initData() {
         int showType = getIntent().getIntExtra(IntentName.INTENT_TYPE, -1);
-        final UserInfoResultBean userInfo = AppContansts.userInfoData;
+        if (AppContansts.systemLoginInfo == null)
+            return;
+        SystemLoginResultBean.UserObject userInfo = AppContansts.systemLoginInfo.getUserObj();
+
         if (showType == ShowModeEnum.show.getCode()) {
             for (EditText item : etList) {
                 item.setEnabled(false);
@@ -57,11 +61,11 @@ public class UserInfoActivity extends BaseActivity {
 
         if (userInfo != null) {
             tvList.get(0).append(userInfo.getName() == null ? "" : userInfo.getName());
-            tvList.get(1).append(userInfo.getMobile() == null ? "" : userInfo.getMobile());
-            tvList.get(2).append(userInfo.getServiceArea() == null ? "" : userInfo.getServiceArea());
-            tvList.get(3).append(userInfo.getJobNo() == null ? "" : userInfo.getJobNo());
+            tvList.get(1).append(userInfo.getPhone() == null ? "" : userInfo.getPhone());
+//            tvList.get(2).append(userInfo.getServiceArea() == null ? "" : userInfo.getServiceArea());
+//            tvList.get(3).append(userInfo.getJobNo() == null ? "" : userInfo.getJobNo());
             etList.get(0).setText(userInfo.getEmail() == null ? "" : userInfo.getEmail());
-            etList.get(1).setText(userInfo.getIntroduce());
+//            etList.get(1).setText(userInfo.getIntroduce());
         }
         editOrder.setOnClickListener(new View.OnClickListener() {
             @Override

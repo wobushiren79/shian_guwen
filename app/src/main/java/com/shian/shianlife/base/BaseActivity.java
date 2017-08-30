@@ -39,6 +39,7 @@ import com.shian.shianlife.activity.NewMessageListActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.FilePathUtils;
 import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.view.drawerlayout.GoodsQueryDrawerLayout;
 import com.shian.shianlife.view.drawerlayout.MainDrawerLayout;
 import com.shian.shianlife.view.drawerlayout.MainDrawerLayoutListener;
 import com.yongchun.library.view.ImageSelectorActivity;
@@ -49,7 +50,9 @@ public class BaseActivity extends FragmentActivity {
     FrameLayout flContent;
 
     protected View v;
+
     protected MainDrawerLayout mainDrawerLayout;
+
     protected ImageView ivHeadTitle;
     protected Context mContext = this;
     private PushReciver mPushReciver;
@@ -104,7 +107,7 @@ public class BaseActivity extends FragmentActivity {
     }
 
     /**
-     * 增加抽屉布局
+     * 增加主界面個人資料抽屉布局
      */
     public void addMainDrawerLayout() {
         mainDrawerLayout = new MainDrawerLayout(this);

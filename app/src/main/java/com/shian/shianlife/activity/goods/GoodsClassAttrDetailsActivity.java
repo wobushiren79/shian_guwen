@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.utils.CheckUtils;
 import com.shian.shianlife.common.utils.StringUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.mvp.goods.bean.GoodsChannelResultBean;
@@ -22,16 +23,13 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class GoodsClassAttrDetailsActivity extends BaseActivity implements IGoodsChannelView, GoodsClassListView.CallBack {
+public class GoodsClassAttrDetailsActivity extends BaseActivity implements  GoodsClassListView.CallBack {
     @InjectView(R.id.tv_title)
     TextView tvTitle;
     @InjectView(R.id.goods_class_list)
     GoodsClassListView goodsClassList;
     @InjectView(R.id.goods_class_attr_list)
     GoodsClassAttrListView goodsClassAttrList;
-
-    private IGoodsChannelPresenter goodsChannelPresenter;
-    private Integer channelId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,35 +46,7 @@ public class GoodsClassAttrDetailsActivity extends BaseActivity implements IGood
     }
 
     private void initData() {
-        goodsChannelPresenter = new GoodsChannelPresenterImpl(this);
-        goodsChannelPresenter.getGoodsChannelData();
-    }
-
-    @Override
-    public Context getContext() {
-        return this;
-    }
-
-    @Override
-    public void showToast(String msg) {
-        ToastUtils.show(this, msg);
-    }
-
-
-    @Override
-    public void getGoodsChannelDataSuccess(List<GoodsChannelResultBean> listData) {
         goodsClassList.getData();
-    }
-
-    @Override
-    public void getGoodsChannelDataFail(String msg) {
-        ToastUtils.show(this, msg);
-    }
-
-    @Override
-    public void setChannelId(Integer channelId) {
-        this.channelId = channelId;
-        goodsClassList.setChannerId(channelId);
     }
 
     private void setClassTitle(String title) {
@@ -86,10 +56,10 @@ public class GoodsClassAttrDetailsActivity extends BaseActivity implements IGood
     @Override
     public void selectItem(View view, int index, GoodsClassResultBean data) {
         if (view == goodsClassList) {
-            if (!StringUtils.isEmpty(data.getName()))
+            if (!CheckUtils.isEmpty(data.getName()))
                 setClassTitle(data.getName());
 
-            if (!StringUtils.isEmpty(data.getId()))
+            if (!CheckUtils.isEmpty(data.getId()))
                 getClassAttrData(data.getId());
         }
     }

@@ -1,11 +1,18 @@
 package com.shian.shianlife.view.listview;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
+import android.view.View;
 
+import com.shian.shianlife.R;
 import com.shian.shianlife.adapter.GoodsClassAttrAdapter;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrResultBean;
@@ -33,6 +40,7 @@ public class GoodsClassAttrListView extends RecyclerView implements IGoodsClassA
 
         goodsClassAttrAdapter = new GoodsClassAttrAdapter(context);
         goodsClassAttrPresenter = new GoodsClassAttrPresenterImpl(this);
+
         this.setAdapter(goodsClassAttrAdapter);
         this.setLayoutManager(new GridLayoutManager(context, 3));
     }
@@ -64,4 +72,5 @@ public class GoodsClassAttrListView extends RecyclerView implements IGoodsClassA
     public Long getGoodsClassId() {
         return classId;
     }
+
 }
