@@ -64,16 +64,14 @@ public class OrderShowListAdapter extends BaseRCAdapter<OrderShowResultBean.Item
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        if (!orderShowItemBean.getName().contains("白事")) {
+                        if(orderShowItemBean.isHasPermission()){
                             Intent intent = new Intent(mContext, orderShowItemBean.getIntentClass());
                             mContext.startActivity(intent);
-                        } else {
+                        }else{
                             Intent intent = new Intent(mContext, WebActivity.class);
-                            intent.putExtra(IntentName.INTENT_URL, AppContansts.Temp_Funeral_BaseUrl);
+                            intent.putExtra(IntentName.INTENT_URL, orderShowItemBean.getUrl());
                             mContext.startActivity(intent);
                         }
-
-
                     }
 
                     @Override

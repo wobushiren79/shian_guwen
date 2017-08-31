@@ -11,5 +11,14 @@ public class GoodsDetailsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_details);
+        initView();
+        initData();
     }
+
+    private void initView() {
+    }
+
+    private void initData() {
+    }
+
 }

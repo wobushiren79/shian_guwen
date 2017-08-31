@@ -31,13 +31,19 @@ public class AppContansts {
     public static final String Goods_BaseUrl = "http://goodsmgr.e-funeral.cn";
     //商品图片地址
     public static final String Goods_PicUrl = Goods_BaseUrl + "/Public/Uploads";
-    //临时用殡仪地址
-    public static final String Temp_Funeral_BaseUrl = Goods_BaseUrl + "/home";
 
 
-    public static final String OSSURL = "http://shianlife123.oss-cn-qingdao.aliyuncs.com/";
 
     public static final String PHP_BaseUrl = "http://app.e-funeral.cn";
+    public static final String PHP_Web_BaseUrl = "http://m.e-funeral.cn";
+    //临时用殡仪地址
+    public static final String Temp_Funeral_BaseUrl = PHP_Web_BaseUrl + "/funeral";
+    //临时用公墓地址
+    public static final String Temp_Cemetery_BaseUrl = PHP_Web_BaseUrl + "/cemetery";
+
+    //阿里云图片地址
+    public static final String OSSURL = "http://shianlife123.oss-cn-qingdao.aliyuncs.com/";
+
     public static final String siftsPHPURL = PHP_BaseUrl + "/home/index/sifts";//精选
     public static final String helpsPHPURL = PHP_BaseUrl + "/home/index/helps";//帮助
     public static final String dynamicsPHPURL = PHP_BaseUrl + "/home/index/dynamics";//动态

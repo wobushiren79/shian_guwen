@@ -23,15 +23,22 @@ public class OrderShowModelImpl implements IOrderShowModel {
         OrderShowResultBean resultBean = new OrderShowResultBean();
         List<OrderShowResultBean.Item> listData = new ArrayList<>();
 
+        OrderShowResultBean.Item funeralItem = getItem(OrderItemShowEnum.funeral);
+        OrderShowResultBean.Item cemeteryItem = getItem(OrderItemShowEnum.cemetery);
+        OrderShowResultBean.Item storeItem = getItem(OrderItemShowEnum.store);
+
+        listData.add(funeralItem);
+        listData.add(cemeteryItem);
         //是否有公墓权限
         if (AppContansts.systemLoginInfo != null && AppContansts.systemLoginInfo.getResourceCodes() != null) {
             for (String roleCode : AppContansts.systemLoginInfo.getResourceCodes()) {
                 if (roleCode.equals(RoleEnum.Funeral_Advisor.getCode())) {
-                    listData.add(getItem(OrderItemShowEnum.funeral));
+//                    funeralItem.setHasPermission(true);
                 } else if (roleCode.equals(RoleEnum.Cemetery_Advisor.getCode())) {
-                    listData.add(getItem(OrderItemShowEnum.cemetery));
+                    cemeteryItem.setHasPermission(true);
                 } else if (roleCode.equals(RoleEnum.Goods_Advisor.getCode())) {
-                    listData.add(getItem(OrderItemShowEnum.store));
+//                    storeItem.setHasPermission(true);
+//                    listData.add(storeItem);
                 }
             }
         }
@@ -45,6 +52,7 @@ public class OrderShowModelImpl implements IOrderShowModel {
         item.setName(itemShowEnum.getName());
         item.setPicId(itemShowEnum.getItemPic());
         item.setIntentClass(itemShowEnum.getIntentClass());
+        item.setUrl(itemShowEnum.getUrl());
         return item;
     }
 }

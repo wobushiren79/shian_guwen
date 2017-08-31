@@ -54,7 +54,6 @@ public class GoodsQueryListView extends BasePtrRecyclerView implements IGoodsQue
         this.setPtrHandler2(ptrHandler2);
     }
 
-
     public void setClassAttId(Long classAttId) {
         this.classAttId = classAttId;
     }
@@ -105,9 +104,9 @@ public class GoodsQueryListView extends BasePtrRecyclerView implements IGoodsQue
      */
     private void hasData() {
         if (adapter.getData().size() == 0) {
-            hasData(false);
+            this.setShowMode(Show_Mode_NoData);
         } else {
-            hasData(true);
+            this.setShowMode(Show_Mode_HasData);
         }
     }
 
@@ -132,4 +131,5 @@ public class GoodsQueryListView extends BasePtrRecyclerView implements IGoodsQue
             goodsQueryListPresenter.getGoodsQueryListData();
         }
     };
+
 }

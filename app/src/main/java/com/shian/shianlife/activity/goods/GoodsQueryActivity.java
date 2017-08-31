@@ -3,6 +3,7 @@ package com.shian.shianlife.activity.goods;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
@@ -21,7 +22,7 @@ import butterknife.InjectView;
 import static com.shian.shianlife.adapter.GoodsQueryListAdapter.Order_Form_Price;
 import static com.shian.shianlife.adapter.GoodsQueryListAdapter.Order_Form_Sale;
 
-public class GoodsQueryActivity extends BaseActivity implements GoodsQueryConditionButton.CallBack, CustomSearchView.CallBack, View.OnClickListener, GoodsQueryDrawerLayout.CallBack {
+public class GoodsQueryActivity extends BaseActivity implements GoodsQueryConditionButton.CallBack, CustomSearchView.CallBack, View.OnClickListener, GoodsQueryDrawerLayout.CallBack{
     @InjectView(R.id.search_view)
     CustomSearchView searchView;
     @InjectView(R.id.query_volume_condition)

@@ -21,12 +21,15 @@ import com.shian.shianlife.mvp.goods.presenter.impl.GoodsChannelPresenterImpl;
 import com.shian.shianlife.mvp.goods.view.IGoodsChannelView;
 import com.shian.shianlife.thisenum.AppRolePermition;
 import com.shian.shianlife.thisenum.BuildOrderEnum;
+import com.shian.shianlife.thisenum.RoleEnum;
 import com.shian.shianlife.view.searchview.CustomSearchView;
 
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+
+import static com.shian.shianlife.thisenum.RoleEnum.Cemetery_Advisor;
 
 /**
  * Created by zm.
@@ -45,7 +48,6 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mLayoutView = inflater.inflate(R.layout.fragment_store, null, false);
         initView();
-        ButterKnife.inject(this, mLayoutView);
         return mLayoutView;
     }
 
@@ -65,23 +67,14 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
         cemeteryIcon.setImageResource(R.drawable.zhy_build_cemetery_icon);
         funeralIcon.setImageResource(R.drawable.zhy_build_funeral_icon);
 
-        cemeteryName.setText("选购公墓");
-        funeralName.setText("选购治丧方案");
+        cemeteryName.setText("圆满公墓");
+        funeralName.setText("圆满白事");
         cemeteryContent.setText("为客户选择墓地|专车接送");
         funeralContent.setText("为客户选择治丧方案|生前契约");
 
         layoutBuildCemetery.setOnClickListener(this);
         layoutBuildFuneral.setOnClickListener(this);
         searchView.setCallBack(this);
-
-        //检测权限
-        if (AppContansts.userCemetery != null) {
-            for (int i = 0; i < AppContansts.userCemetery.getPermitionCodes().size(); i++) {
-                if (AppContansts.userCemetery.getPermitionCodes().get(i).equals(AppRolePermition.ADVISOR.getCode())) {
-                    layoutBuildCemetery.setVisibility(View.VISIBLE);
-                }
-            }
-        }
 
         goodsChannelPresenter = new GoodsChannelPresenterImpl(this);
         goodsChannelPresenter.getGoodsChannelData();
@@ -90,19 +83,38 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.reset(this);
     }
 
     @Override
     public void onClick(View v) {
         if (v == layoutBuildFuneral) {
-//            Intent intent = new Intent(getContext(), BuildOrderEnum.BY.getActivity());
-//            startActivity(intent);
-            Intent intent = new Intent(getContext(), WebActivity.class);
-            intent.putExtra(IntentName.INTENT_URL, AppContansts.Temp_Funeral_BaseUrl);
-            startActivity(intent);
+            buildFuneral();
+
         } else if (v == layoutBuildCemetery) {
+            buildCemetery();
+        }
+    }
+
+    private void buildFuneral() {
+        //            Intent intent = new Intent(getContext(), BuildOrderEnum.BY.getActivity());
+//            startActivity(intent);
+        Intent intent = new Intent(getContext(), WebActivity.class);
+        intent.putExtra(IntentName.INTENT_URL, AppContansts.Temp_Funeral_BaseUrl);
+        startActivity(intent);
+    }
+
+    private void buildCemetery() {
+        //检测权限
+        boolean hasCemetery = false;
+        if (AppContansts.systemLoginInfo != null) {
+            hasCemetery = RoleEnum.checkHasRole(AppContansts.systemLoginInfo.getResourceCodes(), RoleEnum.Cemetery_Advisor);
+        }
+        if (hasCemetery) {
             Intent intent = new Intent(getContext(), BuildOrderEnum.GM.getActivity());
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(getContext(), WebActivity.class);
+            intent.putExtra(IntentName.INTENT_URL, AppContansts.Temp_Cemetery_BaseUrl);
             startActivity(intent);
         }
     }

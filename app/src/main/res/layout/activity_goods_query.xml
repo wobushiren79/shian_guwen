@@ -63,10 +63,16 @@
                 android:layout_height="@dimen/dimen_1dp"
                 android:background="@color/zhy_backgroud_1" />
 
-            <com.shian.shianlife.view.listview.GoodsQueryListView
-                android:id="@+id/goods_query_list"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></com.shian.shianlife.view.listview.GoodsQueryListView>
+                android:layout_height="match_parent">
+
+                <com.shian.shianlife.view.listview.GoodsQueryListView
+                    android:id="@+id/goods_query_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></com.shian.shianlife.view.listview.GoodsQueryListView>
+
+            </RelativeLayout>
         </LinearLayout>
 
         <com.shian.shianlife.view.goods.GoodsShoppingCartButton

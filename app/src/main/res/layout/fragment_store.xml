@@ -17,6 +17,7 @@
             android:layout_height="@dimen/dimen_80dp"
             android:layout_marginBottom="@dimen/dimen_12dp"
             android:layout_marginLeft="@dimen/dimen_16dp"
+            android:visibility="gone"
             android:layout_marginRight="@dimen/dimen_16dp"
             android:layout_marginTop="@dimen/dimen_12dp"></com.shian.shianlife.view.searchview.CustomSearchView>
 
@@ -27,8 +28,7 @@
 
         <include
             android:id="@+id/layout_build_cemetery"
-            layout="@layout/layout_build_order_button"
-            android:visibility="gone"></include>
+            layout="@layout/layout_build_order_button"></include>
 
         <TextView
             android:layout_width="match_parent"
@@ -41,6 +41,7 @@
         <com.shian.shianlife.view.listview.GoodsClassAttrMainListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/dimen_16dp"
             android:background="@color/white"></com.shian.shianlife.view.listview.GoodsClassAttrMainListView>
 

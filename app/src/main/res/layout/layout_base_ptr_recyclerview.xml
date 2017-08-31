@@ -1,48 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/layout_no_data_style_1"></include>
 
     <com.shian.shianlife.view.ptr.CustomPtrFramelayout
         android:id="@+id/ptr_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/ll_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen_300dp"
-                    android:src="@drawable/zhy_no_data_icon" />
-
-                <ImageView
-                    android:layout_marginBottom="@dimen/dimen_150dp"
-                    android:layout_width="@dimen/dimen_300dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/zhy_no_data_text" />
-            </LinearLayout>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-
-
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
     </com.shian.shianlife.view.ptr.CustomPtrFramelayout>
 
 
-</LinearLayout>
+</RelativeLayout>

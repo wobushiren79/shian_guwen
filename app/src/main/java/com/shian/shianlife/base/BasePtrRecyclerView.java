@@ -22,6 +22,9 @@ public class BasePtrRecyclerView extends BaseLayout {
     private CustomPtrFramelayout ptrLayout;
     private LinearLayout llTitle;
 
+    public static final int Show_Mode_NoData = 0;
+    public static final int Show_Mode_HasData = 1;
+
     public BasePtrRecyclerView(Context context) {
         this(context, null);
     }
@@ -63,11 +66,14 @@ public class BasePtrRecyclerView extends BaseLayout {
         ptrLayout.setPtrHandler(ptrHandler);
     }
 
-    public void hasData(boolean hasData) {
-        if (hasData) {
-            llTitle.setVisibility(GONE);
-        } else {
-            llTitle.setVisibility(VISIBLE);
+    public void setShowMode(int showMode) {
+        switch (showMode) {
+            case Show_Mode_NoData:
+                llTitle.setVisibility(VISIBLE);
+                break;
+            case Show_Mode_HasData:
+                llTitle.setVisibility(GONE);
+                break;
         }
     }
 }

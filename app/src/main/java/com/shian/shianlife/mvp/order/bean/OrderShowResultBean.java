@@ -21,6 +21,9 @@ public class OrderShowResultBean {
         private String name;
         private int picId;
         private Class<?> intentClass;
+        private boolean hasPermission = false;
+        private String url;
+
 
         public Class<?> getIntentClass() {
             return intentClass;
@@ -44,6 +47,22 @@ public class OrderShowResultBean {
 
         public void setPicId(int picId) {
             this.picId = picId;
+        }
+
+        public boolean isHasPermission() {
+            return hasPermission;
+        }
+
+        public void setHasPermission(boolean hasPermission) {
+            this.hasPermission = hasPermission;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
         }
     }
 

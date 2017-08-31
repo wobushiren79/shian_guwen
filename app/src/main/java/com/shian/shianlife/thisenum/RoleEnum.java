@@ -1,5 +1,8 @@
 package com.shian.shianlife.thisenum;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by zm.
  */
@@ -38,5 +41,33 @@ public enum RoleEnum {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public static List<String> getRoleNameList(List<String> listCode) {
+        List<String> roleNameList = new ArrayList<>();
+        if (listCode == null)
+            return roleNameList;
+        RoleEnum[] roleEna = RoleEnum.values();
+        for (RoleEnum item : roleEna) {
+            for (String code : listCode) {
+                if (code.equals(item.getCode())) {
+                    roleNameList.add(item.getName());
+                }
+            }
+        }
+        return roleNameList;
+    }
+
+    public static boolean checkHasRole(List<String> listCode, RoleEnum role) {
+        boolean hasRole = false;
+        if (listCode == null)
+            return hasRole;
+        for (String code : listCode) {
+            if (code.equals(role.getCode())) {
+                hasRole = true;
+                break;
+            }
+        }
+        return hasRole;
     }
 }

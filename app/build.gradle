@@ -12,8 +12,8 @@ android {
         applicationId "com.shian.shianlife"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 16
-        versionName "1.93"
+        versionCode 17
+        versionName "1.94"
         multiDexEnabled true
     }
     buildTypes {
