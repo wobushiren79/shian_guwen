@@ -410,4 +410,21 @@ public class Utils {
             v.setTag(Integer.MIN_VALUE, scale);
         }
     }
+
+
+    /**
+     * 使状态栏透明
+     * <p>
+     * 适用于图片作为背景的界面,此时需要图片填充到状态栏
+     *
+     * @param activity 需要设置的activity
+     */
+    public static void setTranslucent(Activity activity) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+    }
 }

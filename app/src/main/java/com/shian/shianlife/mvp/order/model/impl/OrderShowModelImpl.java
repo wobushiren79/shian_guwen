@@ -37,8 +37,8 @@ public class OrderShowModelImpl implements IOrderShowModel {
                 } else if (roleCode.equals(RoleEnum.Cemetery_Advisor.getCode())) {
                     cemeteryItem.setHasPermission(true);
                 } else if (roleCode.equals(RoleEnum.Goods_Advisor.getCode())) {
-//                    storeItem.setHasPermission(true);
-//                    listData.add(storeItem);
+                    storeItem.setHasPermission(true);
+                    listData.add(storeItem);
                 }
             }
         }
