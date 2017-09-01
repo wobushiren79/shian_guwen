@@ -22,7 +22,8 @@ import com.shian.shianlife.common.push.Utils;
 
 public class PushService extends Service {
     Thread thread;
-    boolean isRun=true;
+    boolean isRun = true;
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -31,17 +32,18 @@ public class PushService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        final Context context=this.getApplicationContext();
-       thread = new Thread() {
+        final Context context = this.getApplicationContext();
+        thread = new Thread() {
             @Override
             public void run() {
                 super.run();
                 while (isRun) {
                     try {
                         sleep(10000);
-                        PushManager.startWork(getApplicationContext(),
-                                PushConstants.LOGIN_TYPE_API_KEY,
-                                Utils.getMetaValue(context, "api_key"));
+                        if (!PushManager.isPushEnabled(getApplicationContext()))
+                            PushManager.startWork(getApplicationContext(),
+                                    PushConstants.LOGIN_TYPE_API_KEY,
+                                    Utils.getMetaValue(context, "api_key"));
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -85,7 +87,7 @@ public class PushService extends Service {
     @Override
     public void onDestroy() {
         stopForeground(true);
-        isRun=false;
+        isRun = false;
         super.onDestroy();
     }
 }

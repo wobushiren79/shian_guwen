@@ -12,6 +12,7 @@ import com.shian.shianlife.activity.goods.GoodsDetailsActivity;
 import com.shian.shianlife.adapter.base.BaseRCAdapter;
 import com.shian.shianlife.adapter.base.BaseViewHolder;
 import com.shian.shianlife.common.contanst.AppContansts;
+import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.CheckUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.mvp.goods.bean.GoodsQueryListResultBean;
@@ -40,7 +41,7 @@ public class GoodsQueryListAdapter extends BaseRCAdapter<GoodsQueryListResultBea
     }
 
     @Override
-    public void convert(BaseViewHolder holder, GoodsQueryListResultBean goodsQueryListResultBean, int index) {
+    public void convert(BaseViewHolder holder, final GoodsQueryListResultBean goodsQueryListResultBean, final int index) {
         final LinearLayout llContent = holder.getView(R.id.ll_content);
         ImageView ivIcon = holder.getView(R.id.iv_icon);
         TextView tvName = holder.getView(R.id.tv_name);
@@ -48,7 +49,7 @@ public class GoodsQueryListAdapter extends BaseRCAdapter<GoodsQueryListResultBea
         TextView tvPrice = holder.getView(R.id.tv_price);
         TextView tvSale = holder.getView(R.id.tv_sale);
 
-        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + goodsQueryListResultBean.getTitle_img(),R.drawable.zhy_pic_loading);
+        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + goodsQueryListResultBean.getTitle_img(), R.drawable.zhy_pic_loading);
 
         String name = goodsQueryListResultBean.getName();
         if (!CheckUtils.isEmpty(name))
@@ -71,6 +72,7 @@ public class GoodsQueryListAdapter extends BaseRCAdapter<GoodsQueryListResultBea
             public void onClick(View v) {
                 if (v == llContent) {
                     Intent intent = new Intent(mContext, GoodsDetailsActivity.class);
+                    intent.putExtra(IntentName.INTENT_GOODS_ID, goodsQueryListResultBean.getId());
                     mContext.startActivity(intent);
                 }
             }

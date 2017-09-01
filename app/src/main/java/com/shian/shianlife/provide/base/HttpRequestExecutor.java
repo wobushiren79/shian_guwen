@@ -63,6 +63,8 @@ public class HttpRequestExecutor {
 
 
     private CustomDialog dialog;
+    public static final int Response_Type_List = 0;  //返回参数为list
+    public static final int Response_Type_Obj = 1;   //返回参数为对象
 
     /**
      * get请求
@@ -82,7 +84,8 @@ public class HttpRequestExecutor {
                                final boolean isShowDialog,
                                final String baseUrl,
                                final Map<String, String> header,
-                               final String dataName) {
+                               final String dataName,
+                               final int responseType) {
         if (checkNetWorkAndDialog(context, responseHandler, isShowDialog)) return;
 
         Log.v("tag", baseUrl + "/" + method);
@@ -96,7 +99,7 @@ public class HttpRequestExecutor {
             getBuilder.headers(header);
         getBuilder.params(params.getMapParams());
         RequestCall requestCall = getBuilder.build();
-        startExecute(context, data, responseHandler, dataName, requestCall);
+        startExecute(context, data, responseHandler, dataName, responseType, requestCall);
     }
 
 
@@ -119,7 +122,8 @@ public class HttpRequestExecutor {
                                    final String baseUrl,
                                    final Map<String, String> header,
                                    final String dataName,
-                                   boolean hasConentParams) {
+                                   boolean hasConentParams,
+                                   final int responseType) {
         if (checkNetWorkAndDialog(context, responseHandler, isShowDialog)) return;
 
         Log.v("tag", baseUrl + "/" + method);
@@ -140,7 +144,7 @@ public class HttpRequestExecutor {
         getBuilder.addHeader("client-Type", "wechatapp");
         getBuilder.addHeader("systemType", "2");
         RequestCall requestCall = getBuilder.build();
-        startExecute(context, data, responseHandler, dataName, requestCall);
+        startExecute(context, data, responseHandler, dataName, responseType, requestCall);
     }
 
     /**
@@ -161,7 +165,8 @@ public class HttpRequestExecutor {
                                        final boolean isShowDialog,
                                        final String baseUrl,
                                        final Map<String, String> header,
-                                       final String dataName) {
+                                       final String dataName,
+                                       final int responseType) {
         if (checkNetWorkAndDialog(context, responseHandler, isShowDialog)) return;
 
         Log.v("tag", baseUrl + "/" + method);
@@ -181,7 +186,7 @@ public class HttpRequestExecutor {
         getBuilder.addHeader("client-Type", "wechatapp");
         getBuilder.addHeader("systemType", "2");
         RequestCall requestCall = getBuilder.build();
-        startExecute(context, data, responseHandler, dataName, requestCall);
+        startExecute(context, data, responseHandler, dataName, responseType, requestCall);
 
     }
 
@@ -189,6 +194,7 @@ public class HttpRequestExecutor {
                                      final Class<T> data,
                                      final HttpResponseHandler<E> responseHandler,
                                      final String dataName,
+                                     final int responseType,
                                      RequestCall requestCall) {
         requestCall.execute(new StringCallback() {
             @Override
@@ -211,13 +217,7 @@ public class HttpRequestExecutor {
             @Override
             public void onResponse(String response, int id) {
                 Log.v("tag", response);
-                if (dataName.equals("list")) {
-                    dataToJsonForList(context, response, data, responseHandler);
-                } else if (dataName.equals("content")) {
-                    dataToJsonForContent(context, response, data, responseHandler);
-                } else {
-                    onErrorCallBack(responseHandler, "数据解析异常", context);
-                }
+                dataToJson(context, response, data, responseHandler, dataName, responseType);
                 if (dialog != null)
                     dialog.cancel();
                 dialog = null;
@@ -282,7 +282,7 @@ public class HttpRequestExecutor {
      * @param responseHandler
      * @param <T>
      */
-    private <T, E> void dataToJsonForContent(Context context, String response, final Class<T> data, HttpResponseHandler<E> responseHandler) {
+    private <T, E> void dataToJson(Context context, String response, final Class<T> data, HttpResponseHandler<E> responseHandler, String dataName, int responseType) {
         if (response != null) {
             try {
                 Gson gson = new Gson();
@@ -293,11 +293,19 @@ public class HttpRequestExecutor {
                 double code = (double) map.get("code");
                 int codeInt = (int) code;
                 if (codeInt == 1000) {
-                    T result = GsonTools.getObjectByMapKey("content", map, data.newInstance());
-                    if (result != null) {
+                    if (responseType == Response_Type_List) {
+                        List<T> result = GsonTools.getListByMapKey(dataName, map, data.newInstance());
+                        if (result == null) {
+                            result = new ArrayList<>();
+                        }
                         responseHandler.onSuccess((E) result);
-                    } else {
-                        responseHandler.onSuccess(null);
+                    } else if (responseType == Response_Type_Obj) {
+                        T result = GsonTools.getObjectByMapKey(dataName, map, data.newInstance());
+                        if (result == null) {
+                            responseHandler.onSuccess(null);
+                        } else {
+                            responseHandler.onSuccess((E) result);
+                        }
                     }
                 } else if ("1009".equals(codeInt)) {
                     jumpLogin(context);
@@ -312,65 +320,4 @@ public class HttpRequestExecutor {
             }
         }
     }
-
-    /**
-     * 数据处理
-     *
-     * @param context
-     * @param response
-     * @param data
-     * @param responseHandler
-     * @param <T>
-     */
-    private <T, E> void dataToJsonForList(Context context, String response, final Class<T> data, HttpResponseHandler<E> responseHandler) {
-        if (response != null) {
-            try {
-                Gson gson = new Gson();
-                JsonParser parser = new JsonParser();
-                JsonElement jsonElement = parser.parse(response);
-                Map<String, Object> map = gson.fromJson(jsonElement, Map.class);
-
-                double code = (double) map.get("code");
-                int codeInt = (int) code;
-                if (codeInt == 1000) {
-                    List<T> result = GsonTools.getListByMapKey("list", map, data.newInstance());
-                    if (result == null) {
-                        result = new ArrayList<>();
-                    }
-                    responseHandler.onSuccess((E) result);
-                } else if ("1009".equals(codeInt)) {
-                    jumpLogin(context);
-                } else {
-                    String msg = (String) map.get("message");
-                    CrashReport.putUserData(context, response, msg);
-                    onErrorCallBack(responseHandler, msg, context);
-                }
-
-            } catch (Exception e) {
-                onErrorCallBack(responseHandler, "数据解析异常", context);
-            }
-        }
-    }
-//            try {
-//                JsonNode node = ObjectMapperFactory.getInstance().readTree(new String(response));
-//                String code = node.findValue("code").toString();
-//                String errorMsg = node.findValue("message").toString();
-//                if ("1000".equals(code)) {
-//                    JsonNode jn = node.findValue(dataName);
-//                    if (jn == null)
-//                        responseHandler.onSuccess(null);
-//                    else {
-//                        T result = ObjectMapperFactory.getInstance().readValue(
-//                                jn, data);
-//                        responseHandler.onSuccess(result);
-//                    }
-//                } else if ("1009".equals(code)) {
-//                    jumpLogin(context);
-//                } else {
-//                    CrashReport.putUserData(context, response, errorMsg);
-//                    onErrorCallBack(responseHandler, errorMsg, context);
-//                }
-//            } catch (Exception e) {
-//                onErrorCallBack(responseHandler, "", context);
-//            }
 }

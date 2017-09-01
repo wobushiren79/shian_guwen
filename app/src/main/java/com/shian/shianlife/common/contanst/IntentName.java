@@ -27,5 +27,6 @@ public class IntentName {
     public static String INTENT_CHANNEL_ID = "INTENT_CHANNEL_ID";//channelid
     public static String INTENT_CLASSATTR_ID = "INTENT_CLASSATTR_ID";//classattrid
     public static String INTENT_GOODSNAME = "INTENT_GOODSNAME_ID";//goodsname
+    public static String INTENT_GOODS_ID = "INTENT_GOODS_ID";//goodsID
 
 }

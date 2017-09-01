@@ -9,6 +9,8 @@ import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsDetailsBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsDetailsResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsQueryListBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsQueryListResultBean;
 import com.shian.shianlife.provide.base.BaseManagerImpl;
@@ -42,21 +44,26 @@ public class GoodsManagerImpl extends BaseManagerImpl implements GoodsManager {
 
     @Override
     public void getGoodsChannel(Context context, GoodsChannelBean params, HttpResponseHandler<List<GoodsChannelResultBean>> handler) {
-        requestPostFormToList(context, "Api/Channel/channel", GoodsChannelResultBean.class, params, handler, true);
+        requestPostFormToListForList(context, "Api/Channel/channel", GoodsChannelResultBean.class, params, handler, true);
     }
 
     @Override
     public void getGoodsClass(Context context, GoodsClassBean params, HttpResponseHandler<List<GoodsClassResultBean>> handler) {
-        requestPostFormToList(context, "Api/Goods/goodsclass", GoodsClassResultBean.class, params, handler, true);
+        requestPostFormToListForList(context, "Api/Goods/goodsclass", GoodsClassResultBean.class, params, handler, true);
     }
 
     @Override
     public void getGoodsClassAttr(Context context, GoodsClassAttrBean params, HttpResponseHandler<List<GoodsClassAttrResultBean>> handler) {
-        requestPostFormToList(context, "Api/Goods/classattr", GoodsClassAttrResultBean.class, params, handler, true);
+        requestPostFormToListForList(context, "Api/Goods/classattr", GoodsClassAttrResultBean.class, params, handler, true);
     }
 
     @Override
     public void getGoodsQuery(Context context, GoodsQueryListBean params, HttpResponseHandler<List<GoodsQueryListResultBean>> handler) {
-        requestPostFormToList(context, "Api/goods/goods", GoodsQueryListResultBean.class, params, handler);
+        requestPostFormToListForList(context, "Api/goods/goods", GoodsQueryListResultBean.class, params, handler);
+    }
+
+    @Override
+    public void getGoodsDetails(Context context, GoodsDetailsBean params, HttpResponseHandler<GoodsDetailsResultBean> handler) {
+        requestPostFormToListForObj(context, "Api/goods/details", GoodsDetailsResultBean.class, params, handler, true);
     }
 }

@@ -10,15 +10,6 @@
 
  >
 
-    <!--<ImageView-->
-    <!--android:id="@+id/logo"-->
-    <!--android:layout_width="@dimen/dimen_50dp"-->
-    <!--android:layout_height="@dimen/dimen_50dp"-->
-    <!--android:layout_alignBottom="@+id/tv_head_left"-->
-    <!--android:layout_centerVertical="true"-->
-    <!--android:src="@drawable/logo" />-->
-    <!--android:drawableLeft="@drawable/ic_home_location"-->
-
     <TextView
         android:id="@+id/back"
         android:layout_width="@dimen/dimen_120dp"
