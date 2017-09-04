@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_82dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dimen_16dp"
+            android:layout_weight="1"
+            android:text="请选择 产品型号"
+            android:textColor="@color/zhy_text_color_16"
+            android:textSize="@dimen/dimen_28dp" />
+
+        <TextView
+            android:id="@+id/tv_good_sprice_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/dimen_16dp"
+            android:textColor="@color/zhy_text_color_16"
+            android:textSize="@dimen/dimen_28dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_backgroud_1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_goods_spec"
+            android:layout_width="@dimen/dimen_120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimen_32dp"
+            android:layout_marginTop="@dimen/dimen_16dp"
+            android:text=""
+            android:textColor="@color/zhy_text_color_18"
+            android:textSize="@dimen/dimen_24dp" />
+
+        <com.shian.shianlife.view.taglayout.TagLayout
+            android:id="@+id/tag_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></com.shian.shianlife.view.taglayout.TagLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/dimen_120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/dimen_32dp"
+            android:gravity="center_vertical"
+            android:text="数量"
+            android:textColor="@color/zhy_text_color_18"
+            android:textSize="@dimen/dimen_24dp" />
+
+        <com.shian.shianlife.view.goods.GoodsNumberChangeView
+            android:id="@+id/goods_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></com.shian.shianlife.view.goods.GoodsNumberChangeView>
+    </LinearLayout>
+
+</LinearLayout>

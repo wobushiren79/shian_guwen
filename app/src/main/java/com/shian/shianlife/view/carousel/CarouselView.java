@@ -53,8 +53,6 @@ public class CarouselView extends LinearLayout implements PicRadioGroup.CallBack
     public void setData(List<String> listUrl) {
         if (listUrl == null)
             return;
-        listUrl.add("http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=d886c8e211d5ad6ebef46ca9e9a253ae/dcc451da81cb39dbbc609470da160924ab183077.jpg");
-        listUrl.add("http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=f98d7c40b919ebc4d4757edaea4fa589/b64543a98226cffc9eabfc97b3014a90f603ea16.jpg");
         for (String url : listUrl) {
             ImageView iv = new ImageView(getContext());
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -99,5 +97,10 @@ public class CarouselView extends LinearLayout implements PicRadioGroup.CallBack
 
     public void setRGAlpha(float alpha) {
         mRG.setAlpha(alpha);
+    }
+
+
+    public void setRGVisibility(int visibility) {
+        mRG.setVisibility(visibility);
     }
 }

@@ -43,8 +43,8 @@ public class GoodsDetailsResultBean {
     private String title_img; //分类属性图片
     private Float total;//原价
     private String creat_time;//商品创建时间
-    private int sale_amount; //销售个数
-    private int total_stock; //总库存
+    private Integer sale_amount; //销售个数
+    private Integer total_stock; //总库存
     private String unit;//单位
     private String apply_area_id;
     private String apply_age;//适用年龄
@@ -243,19 +243,19 @@ public class GoodsDetailsResultBean {
         this.id = id;
     }
 
-    public int getSale_amount() {
+    public Integer getSale_amount() {
         return sale_amount;
     }
 
-    public void setSale_amount(int sale_amount) {
+    public void setSale_amount(Integer sale_amount) {
         this.sale_amount = sale_amount;
     }
 
-    public int getTotal_stock() {
+    public Integer getTotal_stock() {
         return total_stock;
     }
 
-    public void setTotal_stock(int total_stock) {
+    public void setTotal_stock(Integer total_stock) {
         this.total_stock = total_stock;
     }
 

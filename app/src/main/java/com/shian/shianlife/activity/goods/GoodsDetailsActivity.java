@@ -1,6 +1,7 @@
 package com.shian.shianlife.activity.goods;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.shian.shianlife.mvp.goods.presenter.IGoodsDetailsPresenter;
 import com.shian.shianlife.mvp.goods.presenter.impl.GoodsDetailsPresenterImpl;
 import com.shian.shianlife.mvp.goods.view.IGoodsDetailsView;
 import com.shian.shianlife.view.carousel.CarouselView;
+import com.shian.shianlife.view.goods.GoodsSpecSelectView;
 
 import java.util.List;
 
@@ -36,6 +38,16 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     AppBarLayout appbar;
     @InjectView(R.id.tv_goods_name)
     TextView tvGoodsName;
+    @InjectView(R.id.tv_price_range)
+    TextView tvPriceRange;
+    @InjectView(R.id.tv_price_original)
+    TextView tvPriceOriginal;
+    @InjectView(R.id.tv_sale_number)
+    TextView tvSaleNumber;
+    @InjectView(R.id.tv_location)
+    TextView tvLocation;
+    @InjectView(R.id.goods_spec_select)
+    GoodsSpecSelectView goodsSpecSelect;
 
     private Long gooodsId;
 
@@ -78,9 +90,10 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         if (offset > maxShow) {
             float alpha = ((offset - maxShow) * 2f) / (float) dp;
             rlHead.setAlpha(Math.abs(alpha));
-            garouseview.setRGAlpha(1 - alpha);
+            garouseview.setRGVisibility(View.GONE);
         } else {
             rlHead.setAlpha(0f);
+            garouseview.setRGVisibility(View.VISIBLE);
         }
     }
 
@@ -117,6 +130,32 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void setGoodsName(String name) {
         tvGoodsName.setText(name);
+    }
+
+    @Override
+    public void setPriceRange(String range) {
+        tvPriceRange.setText(range);
+    }
+
+    @Override
+    public void setPriceOriginal(String original) {
+        tvPriceOriginal.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+        tvPriceOriginal.setText(original);
+    }
+
+    @Override
+    public void setSaleNumber(String number) {
+        tvSaleNumber.setText(number);
+    }
+
+    @Override
+    public void setLocation(String location) {
+        tvLocation.setText(location);
+    }
+
+    @Override
+    public void setGoodsSpecSelectData(List<GoodsDetailsResultBean.SpecpriceBean> data) {
+        goodsSpecSelect.setData(data);
     }
 
 }

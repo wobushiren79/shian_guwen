@@ -65,6 +65,37 @@ public class GoodsDetailsPresenterImpl implements IGoodsDetailsPresenter {
                 if (result.getGoods_slogan() != null)
                     goodsName.append(result.getGoods_slogan());
                 goodsDetailsView.setGoodsName(goodsName.toString());
+                //设置价格范围
+                if (result.getPrice() == null)
+                    goodsDetailsView.setPriceRange("￥：" + "暂无");
+                else
+                    goodsDetailsView.setPriceRange("￥：" + result.getPrice());
+
+                //设置原价
+                if (result.getTotal() != null)
+                    goodsDetailsView.setPriceOriginal("" + result.getTotal());
+
+                //设置销售数量
+                if (result.getSale_amount() != null)
+                    goodsDetailsView.setSaleNumber("已销售：" + result.getSale_amount());
+
+                //适用地区
+                if (result.getApply_area() != null) {
+                    StringBuffer location = new StringBuffer();
+                    for (int i = 0; i < result.getApply_area().size(); i++) {
+                        GoodsDetailsResultBean.ApplyAreaBean item = result.getApply_area().get(i);
+                        if (i != 0)
+                            location.append(",");
+                        location.append(item.getName());
+                    }
+                    goodsDetailsView.setLocation("适用地区：" + location.toString());
+                }
+
+                //设置
+                if (result.getSpecprice() != null)
+                    goodsDetailsView.setGoodsSpecSelectData(result.getSpecprice());
+
+
             }
 
             @Override

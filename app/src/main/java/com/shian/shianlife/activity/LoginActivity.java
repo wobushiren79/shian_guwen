@@ -245,6 +245,7 @@ public class LoginActivity extends BaseActivity implements IUserLoginView {
 
     @Override
     public void loginSystemFail(String message) {
+        lbLogin.setNormal();
         ToastUtils.show(this, message);
     }
 }

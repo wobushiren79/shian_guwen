@@ -29,4 +29,35 @@ public interface IGoodsDetailsView extends BaseMVPView {
      * @param name
      */
     void setGoodsName(String name);
+
+    /**
+     * 设置价格范围
+     * @param range
+     */
+    void setPriceRange(String range);
+
+    /**
+     * 设置原价
+     * @param original
+     */
+    void setPriceOriginal(String original);
+
+    /**
+     * 设置销售数量
+     * @param number
+     */
+    void setSaleNumber(String number);
+
+    /**
+     * 设置适用地区
+     * @param location
+     */
+    void setLocation(String location);
+
+    /**
+     * 设置规格商品数据
+     * @param data
+     */
+    void setGoodsSpecSelectData(List<GoodsDetailsResultBean.SpecpriceBean> data);
 }
+

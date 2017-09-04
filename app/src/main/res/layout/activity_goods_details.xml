@@ -9,7 +9,8 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -40,6 +41,20 @@
             android:orientation="vertical">
 
             <include layout="@layout/layout_good_details_content"></include>
+
+
+            <com.shian.shianlife.view.goods.GoodsSpecSelectView
+                android:id="@+id/goods_spec_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_16dp"
+                android:layout_marginTop="@dimen/dimen_16dp"></com.shian.shianlife.view.goods.GoodsSpecSelectView>
+
+            <com.shian.shianlife.view.goods.GoodsDescribeLayout
+                android:id="@+id/goods_describle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.shian.shianlife.view.goods.GoodsDescribeLayout>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
