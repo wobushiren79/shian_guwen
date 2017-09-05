@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.WebActivity;
 import com.shian.shianlife.activity.goods.GoodsQueryActivity;
+import com.shian.shianlife.activity.goods.GoodsShoppingCartActivity;
 import com.shian.shianlife.base.BaseFragment;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.contanst.IntentName;
@@ -22,6 +23,7 @@ import com.shian.shianlife.mvp.goods.view.IGoodsChannelView;
 import com.shian.shianlife.thisenum.AppRolePermition;
 import com.shian.shianlife.thisenum.BuildOrderEnum;
 import com.shian.shianlife.thisenum.RoleEnum;
+import com.shian.shianlife.view.goods.GoodsShoppingCartButton;
 import com.shian.shianlife.view.searchview.CustomSearchView;
 
 import java.util.List;
@@ -39,6 +41,7 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
     View mLayoutView;
 
     private CustomSearchView searchView;
+    private GoodsShoppingCartButton goodsShoppingCartButton;
     private View layoutBuildCemetery;
     private View layoutBuildFuneral;
 
@@ -55,6 +58,7 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
         layoutBuildCemetery = mLayoutView.findViewById(R.id.layout_build_cemetery);
         layoutBuildFuneral = mLayoutView.findViewById(R.id.layout_build_funeral);
         searchView = (CustomSearchView) mLayoutView.findViewById(R.id.search_view);
+        goodsShoppingCartButton= (GoodsShoppingCartButton) mLayoutView.findViewById(R.id.bt_goods_shopping_cart);
 
         ImageView cemeteryIcon = (ImageView) layoutBuildCemetery.findViewById(R.id.iv_build_icon);
         ImageView funeralIcon = (ImageView) layoutBuildFuneral.findViewById(R.id.iv_build_icon);
@@ -100,6 +104,14 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
 //            startActivity(intent);
         Intent intent = new Intent(getContext(), WebActivity.class);
         intent.putExtra(IntentName.INTENT_URL, AppContansts.Temp_Funeral_BaseUrl);
+        startActivity(intent);
+    }
+
+    /**
+     * 开启购物车
+     */
+    private void openShoppingCart() {
+        Intent intent = new Intent(getContext(), GoodsShoppingCartActivity.class);
         startActivity(intent);
     }
 

@@ -11,7 +11,7 @@ import com.shian.shianlife.provide.result.HrCreatePrePayResult;
 import android.content.Context;
 
 public class PayManagerImpl extends BaseManagerImpl implements PayManager {
-    private static volatile PayManagerImpl manager;
+    private static  PayManagerImpl manager;
 
     private PayManagerImpl() {
         super();

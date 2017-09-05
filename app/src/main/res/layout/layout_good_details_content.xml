@@ -41,7 +41,7 @@
             android:textStyle="bold" />
 
         <ImageView
-
+            android:id="@+id/iv_all_price"
             android:layout_width="@dimen/dimen_36dp"
             android:layout_height="@dimen/dimen_36dp"
             android:layout_gravity="center_vertical"

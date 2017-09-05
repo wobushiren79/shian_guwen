@@ -15,7 +15,7 @@ import com.shian.shianlife.provide.result.HrGetOrderListResult;
 import com.shian.shianlife.provide.result.HrOderId;
 
 public class FuneralOrderManagerImpl extends BaseManagerImpl implements FuneralOrderManager {
-    private static volatile FuneralOrderManagerImpl manager;
+    private static  FuneralOrderManagerImpl manager;
 
     private String[] getOrderListMethod = {"order/list/talk", "order/list/waitService", "order/list/dispatch",
             "order/list/waitAudit", "order/list/waitMoney", "order/list/finish"};

@@ -12,11 +12,11 @@ import okhttp3.Cookie;
 
 public class AppContansts {
     //登陆地址
-//    public static final String Login_BaseUrl = "http://192.168.0.37:8080/ki4so-web";
+//    public static final String Login_BaseUrl = "http://192.168.0.77:8099/ki4so-web";
 //    public static final String Login_BaseUrl = "http://192.168.0.73:8080/ki4so-web";
     public static final String Login_BaseUrl = "https://platform.shianlife.cn";
     //单项地址
-//    public static final String Store_BaseUrl = "http://192.168.0.37:8089/goods";
+//    public static final String Store_BaseUrl = "http://192.168.0.77:8080/goods";
 //    public static final String Store_BaseUrl = "http://192.168.0.73:8089/goods";
     public static final String Store_BaseUrl = "https://goods.shianlife.cn";
     //殡仪地址
@@ -43,6 +43,10 @@ public class AppContansts {
 
     //阿里云图片地址
     public static final String OSSURL = "http://shianlife123.oss-cn-qingdao.aliyuncs.com/";
+
+    //KF5在线聊天地址
+    public static final String KF5_BaseUrl = "https://wenshikai.kf5.com/kchat/18687?from=%E5%9C%A8%E7%BA%BF%E6%94%AF%E6%8C%81";
+
 
     public static final String siftsPHPURL = PHP_BaseUrl + "/home/index/sifts";//精选
     public static final String helpsPHPURL = PHP_BaseUrl + "/home/index/helps";//帮助

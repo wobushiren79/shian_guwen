@@ -1,11 +1,13 @@
 package com.shian.shianlife.view.goods;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.goods.GoodsShoppingCartActivity;
 import com.shian.shianlife.base.BaseLayout;
 
 import butterknife.InjectView;
@@ -39,6 +41,7 @@ public class GoodsShoppingCartButton extends BaseLayout {
 
     @OnClick(R.id.iv_shopping_cart)
     public void onViewClicked() {
-
+        Intent intent = new Intent(getContext(), GoodsShoppingCartActivity.class);
+        getContext().startActivity(intent);
     }
 }

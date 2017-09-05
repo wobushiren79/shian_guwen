@@ -134,13 +134,16 @@ public class HttpRequestExecutor {
             getBuilder.headers(header);
         getBuilder.mediaType(MediaType.parse("application/json; charset=utf-8"));
         //判断请求参数是否需要套上content
-        if (hasConentParams) {
-            Log.e("tag", params.getContentJson());
-            getBuilder.content(params.getContentJson());
-        } else {
-            Log.e("tag", params.getJsonParams());
-            getBuilder.content(params.getJsonParams());
-        }
+        if (params != null)
+            if (hasConentParams) {
+                Log.e("tag", params.getContentJson());
+                getBuilder.content(params.getContentJson());
+            } else {
+                Log.e("tag", params.getJsonParams());
+                getBuilder.content(params.getJsonParams());
+            }
+        else
+            getBuilder.content("");
         getBuilder.addHeader("client-Type", "wechatapp");
         getBuilder.addHeader("systemType", "2");
         RequestCall requestCall = getBuilder.build();

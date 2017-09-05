@@ -17,7 +17,7 @@ import com.shian.shianlife.provide.result.HrGetMainSetmealResult;
 import android.content.Context;
 
 public class ProductManagerImpl extends BaseManagerImpl implements ProductManager {
-	private static volatile ProductManagerImpl manager;
+	private static  ProductManagerImpl manager;
 	
 	private ProductManagerImpl() {
 		super();

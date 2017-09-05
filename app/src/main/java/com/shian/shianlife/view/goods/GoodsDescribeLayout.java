@@ -6,30 +6,44 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.adapter.GoodsDescribeAdapter;
 import com.shian.shianlife.base.BaseLayout;
+import com.shian.shianlife.common.utils.ViewUtils;
+import com.shian.shianlife.thisenum.GoodsDescribeEnum;
+import com.shian.shianlife.view.ScrollViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
 
+import static com.shian.shianlife.thisenum.GoodsDescribeEnum.goods_apply;
+import static com.shian.shianlife.thisenum.GoodsDescribeEnum.goods_details;
+import static com.shian.shianlife.thisenum.GoodsDescribeEnum.goods_security;
+
 /**
  * Created by zm.
  */
 
-public class GoodsDescribeLayout extends BaseLayout {
+public class GoodsDescribeLayout extends BaseLayout implements ViewPager.OnPageChangeListener {
     @InjectView(R.id.tablayout)
     TabLayout tablayout;
     @InjectView(R.id.viewpager)
-    ViewPager viewpager;
+    ScrollViewPager viewpager;
 
-    String[] tabNames;
+    private GoodsDescribeEnum[] describeEna;
     private GoodsDescribeAdapter describeAdapter;
     private List<View> views;
+
+    private GoodsDescribeDetailsLayout detailsLayout;
+    private GoodsDescribeApplyLayout applyLayout;
+    private GoodsDescribeSecurityLayout securityLayout;
+
 
     public GoodsDescribeLayout(Context context) {
         this(context, null);
@@ -41,28 +55,83 @@ public class GoodsDescribeLayout extends BaseLayout {
 
     @Override
     protected void initView() {
-//        tablayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+//        tablayout.setTabMode(TabLayout.MODE_FIXED);
 //        tablayout.setTabGravity(TabLayout.GRAVITY_CENTER);
     }
 
     @Override
     protected void initData() {
         views = new ArrayList<>();
-        tabNames = new String[]{
-                "产品详情", "适用信息", "售后保障"
+        describeEna = new GoodsDescribeEnum[]{
+                goods_details,
+                goods_apply,
+                goods_security
         };
-        for (String name : tabNames) {
-            TextView tv = new TextView(getContext());
-            tv.setText(name);
-            views.add(tv);
+
+        for (GoodsDescribeEnum enu : describeEna) {
+            if (enu == goods_details) {
+                detailsLayout = new GoodsDescribeDetailsLayout(getContext());
+                views.add(detailsLayout);
+            } else if (enu == goods_apply) {
+                applyLayout = new GoodsDescribeApplyLayout(getContext());
+                views.add(applyLayout);
+            } else if (enu == goods_security) {
+                securityLayout = new GoodsDescribeSecurityLayout(getContext());
+                views.add(securityLayout);
+            }
         }
         describeAdapter = new GoodsDescribeAdapter(getContext(), views);
         viewpager.setAdapter(describeAdapter);
+        viewpager.addOnPageChangeListener(this);
+        viewpager.setOffscreenPageLimit(3);
         tablayout.setupWithViewPager(viewpager);
 
-
-        for (int i = 0; i < tabNames.length; i++) {
-            tablayout.getTabAt(i).setText(tabNames[i]);
+        for (int i = 0; i < describeEna.length; i++) {
+            tablayout.getTabAt(i).setText(describeEna[i].getName());
         }
+    }
+
+    public void setDetailsData(String html) {
+        detailsLayout.setWebData(html);
+        try {
+            ViewUtils.setIndicator(tablayout,20,20);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setApplyBury(String applyBury) {
+        applyLayout.setApplyBury(applyBury);
+    }
+
+    public void setApplyPerson(String applyPerson) {
+        applyLayout.setApplyPerson(applyPerson);
+    }
+
+    public void setApplyPhase(String applyPhase) {
+        applyLayout.setApplyPhase(applyPhase);
+    }
+
+    public void setApplyAge(String applyAge) {
+        applyLayout.setApplyAge(applyAge);
+    }
+
+    public void setApplyLocation(String location) {
+        applyLayout.setApplyLocation(location);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        viewpager.requestLayout();
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 }

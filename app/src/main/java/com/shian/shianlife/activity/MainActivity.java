@@ -46,6 +46,9 @@ import com.shian.shianlife.fragment.StoreFragment;
 import com.shian.shianlife.fragment.TheOrderFragment;
 import com.shian.shianlife.fragment.UserCenterFragment;
 import com.shian.shianlife.mapapi.CustomDialog;
+import com.shian.shianlife.mvp.login.presenter.ISubSystemLoginPresenter;
+import com.shian.shianlife.mvp.login.presenter.impl.SubSystemLoginPresenterImpl;
+import com.shian.shianlife.mvp.login.view.ISubSystemLoginView;
 import com.shian.shianlife.mvp.userinfo.presenter.IUserInfoPresenter;
 import com.shian.shianlife.mvp.userinfo.presenter.impl.UserInfoPresenterImpl;
 import com.shian.shianlife.mvp.userinfo.view.IUserInfoView;
@@ -68,7 +71,7 @@ import butterknife.OnClick;
 import me.leolin.shortcutbadger.ShortcutBadger;
 import okhttp3.Request;
 
-public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, IUserInfoView {
+public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, IUserInfoView, ISubSystemLoginView {
     @InjectView(R.id.fl_main)
     View flMain;
     @InjectView(R.id.rb_main_1)
@@ -101,7 +104,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 //    public BDLocationListener myListener = new MyLocationListener();
 
     private IUserInfoPresenter userInfoPresenter;
-
+    private ISubSystemLoginPresenter subSystemLoginPresenter;
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
@@ -200,6 +203,10 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     private void initDate() {
         userInfoPresenter = new UserInfoPresenterImpl(this);
         userInfoPresenter.getUserInfoData();
+
+        //登陆子系统
+        subSystemLoginPresenter = new SubSystemLoginPresenterImpl(this);
+        subSystemLoginPresenter.loginStoreSystem();
     }
 
     private void initView() {

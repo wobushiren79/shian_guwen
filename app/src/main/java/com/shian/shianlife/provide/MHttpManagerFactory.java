@@ -6,6 +6,7 @@ import com.shian.shianlife.provide.imp.FileManager;
 import com.shian.shianlife.provide.imp.FuneralManager;
 import com.shian.shianlife.provide.imp.FuneralOrderManager;
 import com.shian.shianlife.provide.imp.GoodsManager;
+import com.shian.shianlife.provide.imp.GoodsOrderManager;
 import com.shian.shianlife.provide.imp.PHPManager;
 import com.shian.shianlife.provide.imp.ProductManager;
 import com.shian.shianlife.provide.imp.SystemManager;
@@ -15,6 +16,7 @@ import com.shian.shianlife.provide.imp.impl.FileManagerImpl;
 import com.shian.shianlife.provide.imp.impl.FuneralManagerImpl;
 import com.shian.shianlife.provide.imp.impl.FuneralOrderManagerImpl;
 import com.shian.shianlife.provide.imp.impl.GoodsManagerImpl;
+import com.shian.shianlife.provide.imp.impl.GoodsOrderManagerImpl;
 import com.shian.shianlife.provide.imp.impl.PHPManagerImpl;
 import com.shian.shianlife.provide.imp.impl.ProductManagerImpl;
 import com.shian.shianlife.provide.imp.impl.SystemManagerImpl;
@@ -56,6 +58,7 @@ public class MHttpManagerFactory {
         return CarManagerImpl.getInstance();
     }
 
+    //文件管理
     public static FileManager getFileManager() {
         return FileManagerImpl.getInstance();
     }
@@ -73,5 +76,10 @@ public class MHttpManagerFactory {
     //商品管理
     public static GoodsManager getGoodsManager() {
         return GoodsManagerImpl.getInstance();
+    }
+
+    //商品流程
+    public static GoodsOrderManager getGoodsOrderManager() {
+        return GoodsOrderManagerImpl.getInstance();
     }
 }

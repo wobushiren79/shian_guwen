@@ -24,7 +24,7 @@ import java.util.List;
  */
 
 public class GoodsManagerImpl extends BaseManagerImpl implements GoodsManager {
-    private static volatile GoodsManagerImpl manager;
+    private static  GoodsManagerImpl manager;
 
     private GoodsManagerImpl() {
         super();

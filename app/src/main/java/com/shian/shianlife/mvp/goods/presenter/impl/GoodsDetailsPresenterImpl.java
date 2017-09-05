@@ -67,9 +67,9 @@ public class GoodsDetailsPresenterImpl implements IGoodsDetailsPresenter {
                 goodsDetailsView.setGoodsName(goodsName.toString());
                 //设置价格范围
                 if (result.getPrice() == null)
-                    goodsDetailsView.setPriceRange("￥：" + "暂无");
+                    goodsDetailsView.setPriceRange("￥" + "暂无");
                 else
-                    goodsDetailsView.setPriceRange("￥：" + result.getPrice());
+                    goodsDetailsView.setPriceRange("￥" + result.getPrice());
 
                 //设置原价
                 if (result.getTotal() != null)
@@ -95,6 +95,29 @@ public class GoodsDetailsPresenterImpl implements IGoodsDetailsPresenter {
                 if (result.getSpecprice() != null)
                     goodsDetailsView.setGoodsSpecSelectData(result.getSpecprice());
 
+                //设置产品详情
+                if (result.getDescrip_detail() != null)
+                    goodsDetailsView.setGoodsDescribeDetails(result.getDescrip_detail());
+
+                //设置适用信息
+                if (result.getApply_custom() != null)
+                    goodsDetailsView.setGoodsApplyBury(result.getApply_custom());
+                if (result.getApply_stage() != null)
+                    goodsDetailsView.setGoodsApplyPhase(result.getApply_stage());
+                if (result.getApply_age() != null)
+                    goodsDetailsView.setGoodsApplyAge(result.getApply_age());
+                if (result.getApply_user() != null)
+                    goodsDetailsView.setGoodsApplyPerson(result.getApply_user());
+
+                if (result.getApply_area() != null) {
+                    StringBuffer locaion = new StringBuffer();
+                    for (GoodsDetailsResultBean.ApplyAreaBean item : result.getApply_area()) {
+                        locaion.append(" ");
+                        if (item.getName() != null)
+                            locaion.append(item.getName());
+                    }
+                    goodsDetailsView.setGoodsApplyLocation(locaion.toString());
+                }
 
             }
 

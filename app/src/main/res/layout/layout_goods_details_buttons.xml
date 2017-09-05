@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_100dp"
+    android:layout_gravity="bottom"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/tv_service"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/zhy_button_state_ll_white"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+
+            android:src="@drawable/zhy_goods_details_service" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+
+            android:gravity="center"
+            android:text="客服"
+            android:textColor="@color/zhy_text_color_25"
+            android:textSize="@dimen/dimen_24dp" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/zhy_button_state_ll_white">
+
+        <LinearLayout
+            android:id="@+id/tv_shopipingcart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/zhy_button_state_ll_white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/dimen_40dp"
+                android:layout_height="@dimen/dimen_40dp"
+                android:src="@drawable/zhy_goods_details_shopping_cart" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="服务车"
+                android:textColor="@color/zhy_text_color_25"
+                android:textSize="@dimen/dimen_24dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_msg_number"
+            android:layout_width="@dimen/dimen_30dp"
+            android:layout_height="@dimen/dimen_30dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_6dp"
+            android:background="@drawable/zhy_msg_icon"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_14dp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_add_shopingcart"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/zhy_submit_button_style_2"
+        android:gravity="center"
+        android:text="加入服务车"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_buy"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/zhy_submit_button_style_1"
+        android:gravity="center"
+        android:text="直接购买"
+        android:textColor="@color/white" />
+</LinearLayout>

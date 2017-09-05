@@ -1,31 +1,47 @@
 package com.shian.shianlife.activity.goods;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.WebActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.IntentName;
+import com.shian.shianlife.common.utils.CheckUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartNumberResultBean;
 import com.shian.shianlife.mvp.goods.presenter.IGoodsDetailsPresenter;
+import com.shian.shianlife.mvp.goods.presenter.IGoodsShoppingCartNumberPresenter;
 import com.shian.shianlife.mvp.goods.presenter.impl.GoodsDetailsPresenterImpl;
+import com.shian.shianlife.mvp.goods.presenter.impl.GoodsShoppingCartNumberPresenterImpl;
 import com.shian.shianlife.mvp.goods.view.IGoodsDetailsView;
+import com.shian.shianlife.mvp.goods.view.IGoodsShoppingCartNumberView;
 import com.shian.shianlife.view.carousel.CarouselView;
+import com.shian.shianlife.view.dialog.DataShowDialog;
+import com.shian.shianlife.view.goods.GoodsDescribeLayout;
 import com.shian.shianlife.view.goods.GoodsSpecSelectView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
-public class GoodsDetailsActivity extends BaseActivity implements View.OnClickListener, AppBarLayout.OnOffsetChangedListener, IGoodsDetailsView {
+import static com.shian.shianlife.common.contanst.AppContansts.KF5_BaseUrl;
+
+public class GoodsDetailsActivity extends BaseActivity implements View.OnClickListener, AppBarLayout.OnOffsetChangedListener, IGoodsDetailsView, IGoodsShoppingCartNumberView {
     @InjectView(R.id.garouseview)
     CarouselView garouseview;
     @InjectView(R.id.tv_temp_back)
@@ -40,6 +56,9 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     TextView tvGoodsName;
     @InjectView(R.id.tv_price_range)
     TextView tvPriceRange;
+    @InjectView(R.id.iv_all_price)
+    ImageView ivAllPrice;
+
     @InjectView(R.id.tv_price_original)
     TextView tvPriceOriginal;
     @InjectView(R.id.tv_sale_number)
@@ -48,10 +67,25 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     TextView tvLocation;
     @InjectView(R.id.goods_spec_select)
     GoodsSpecSelectView goodsSpecSelect;
+    @InjectView(R.id.goods_describle)
+    GoodsDescribeLayout goodsDescrible;
+
+    @InjectView(R.id.tv_service)
+    LinearLayout tvService;
+    @InjectView(R.id.tv_shopipingcart)
+    LinearLayout tvShopipingcart;
+    @InjectView(R.id.tv_add_shopingcart)
+    TextView tvAddShopingcart;
+    @InjectView(R.id.tv_buy)
+    TextView tvBuy;
+    @InjectView(R.id.tv_msg_number)
+    TextView tvMsgNumber;
 
     private Long gooodsId;
+    private List<GoodsDetailsResultBean.SpecpriceBean> specListData;
 
     private IGoodsDetailsPresenter goodsDetailsPresenter;
+    private IGoodsShoppingCartNumberPresenter goodsShoppingCartNumberPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,22 +99,25 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     private void initView() {
         Utils.setTranslucent(this);
         appbar.addOnOffsetChangedListener(this);
-        tvBack.setOnClickListener(this);
     }
 
     private void initData() {
         gooodsId = getIntent().getLongExtra(IntentName.INTENT_GOODS_ID, -1);
 
         goodsDetailsPresenter = new GoodsDetailsPresenterImpl(this);
+        goodsShoppingCartNumberPresenter = new GoodsShoppingCartNumberPresenterImpl(this);
+
         goodsDetailsPresenter.getGoodsDetails();
+        goodsShoppingCartNumberPresenter.getShoppingCartNumber();
     }
 
     @Override
     public void onClick(View v) {
-        if (v == tvBack) {
-            finish();
+        if (v == ivAllPrice) {
+            showAllPrice();
         }
     }
+
 
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
@@ -155,7 +192,134 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void setGoodsSpecSelectData(List<GoodsDetailsResultBean.SpecpriceBean> data) {
+        this.specListData = data;
         goodsSpecSelect.setData(data);
+        ivAllPrice.setOnClickListener(this);
     }
 
+    @Override
+    public void setGoodsDescribeDetails(String html) {
+        goodsDescrible.setDetailsData(html);
+    }
+
+    @Override
+    public void setGoodsApplyBury(String applyBury) {
+        goodsDescrible.setApplyBury(applyBury);
+    }
+
+    @Override
+    public void setGoodsApplyPerson(String applyPerson) {
+        goodsDescrible.setApplyPerson(applyPerson);
+    }
+
+    @Override
+    public void setGoodsApplyPhase(String applyPhase) {
+        goodsDescrible.setApplyPhase(applyPhase);
+    }
+
+    @Override
+    public void setGoodsApplyAge(String applyAge) {
+        goodsDescrible.setApplyAge(applyAge);
+    }
+
+    @Override
+    public void setGoodsApplyLocation(String location) {
+        goodsDescrible.setApplyLocation(location);
+    }
+
+    @OnClick({R.id.tv_service, R.id.tv_shopipingcart, R.id.tv_add_shopingcart, R.id.tv_buy, R.id.tv_temp_back})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tv_service:
+                openService();
+                break;
+            case R.id.tv_shopipingcart:
+                openShoppingCart();
+                break;
+            case R.id.tv_add_shopingcart:
+                addShoppingCart();
+                break;
+            case R.id.tv_buy:
+                directBuy();
+                break;
+            case R.id.tv_temp_back:
+                finish();
+                break;
+        }
+    }
+
+    /**
+     * 直接购买
+     */
+    private void directBuy() {
+
+    }
+
+    /**
+     * 加入购物车
+     */
+    private void addShoppingCart() {
+
+    }
+
+    /**
+     * 开启购物车
+     */
+    private void openShoppingCart() {
+        Intent intent = new Intent(this, GoodsShoppingCartActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 开启在线客服
+     */
+    private void openService() {
+        Intent intent = new Intent(this, WebActivity.class);
+        intent.putExtra(IntentName.INTENT_URL, KF5_BaseUrl);
+        startActivity(intent);
+    }
+
+    /**
+     * 展示所有圆满价
+     */
+    private void showAllPrice() {
+        List<DataShowDialog.DataShowDialogResultBean> listData = new ArrayList<>();
+        if (specListData != null) {
+            for (GoodsDetailsResultBean.SpecpriceBean item : specListData) {
+                DataShowDialog.DataShowDialogResultBean data = new DataShowDialog.DataShowDialogResultBean(item.getSpec_name(), "￥" + item.getAdviser_price());
+                listData.add(data);
+            }
+            DataShowDialog dataShowDialog = new DataShowDialog(this);
+            dataShowDialog.setTitle("圆满价");
+            dataShowDialog.setData(listData);
+            dataShowDialog.setCancelOnClick(new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            dataShowDialog.show();
+        }
+    }
+
+    @Override
+    public void getShoppingCartNumberSuccess(GoodsShoppingCartNumberResultBean resultBean) {
+
+    }
+
+    @Override
+    public void getShoppingCartNumberFail(String msg) {
+
+    }
+
+    @Override
+    public void setShoppingCartNumber(String number) {
+        if (CheckUtils.isEmpty(number)) {
+            tvMsgNumber.setVisibility(View.GONE);
+        } else {
+            tvMsgNumber.setText(number);
+            tvMsgNumber.setVisibility(View.VISIBLE);
+        }
+
+    }
 }

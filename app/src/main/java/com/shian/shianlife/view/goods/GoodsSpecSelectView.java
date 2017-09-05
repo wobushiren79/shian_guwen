@@ -26,6 +26,7 @@ import java.util.List;
 public class GoodsSpecSelectView extends BaseLayout implements View.OnClickListener, GoodsNumberChangeView.CallBack {
     private TagLayout tagLayout;
     private TextView tvSpecGoodsName;
+    private TextView tvGoodsSpecSelectName;
     private TextView tvSpecGoodsPrice;
     private GoodsNumberChangeView goodsNumberChange;
 
@@ -48,6 +49,7 @@ public class GoodsSpecSelectView extends BaseLayout implements View.OnClickListe
         tagLayout = (TagLayout) findViewById(R.id.tag_layout);
         tvSpecGoodsName = (TextView) findViewById(R.id.tv_goods_spec);
         tvSpecGoodsPrice = (TextView) findViewById(R.id.tv_good_sprice_select);
+        tvGoodsSpecSelectName = (TextView) findViewById(R.id.tv_goods_spec_select_name);
         goodsNumberChange = (GoodsNumberChangeView) findViewById(R.id.goods_number);
         goodsNumberChange.setCallBack(this);
     }
@@ -110,7 +112,8 @@ public class GoodsSpecSelectView extends BaseLayout implements View.OnClickListe
         if (goodsNumber != null && selectPosition != null) {
             GoodsDetailsResultBean.SpecpriceBean data = listData.get(selectPosition);
             float price = goodsNumber * data.getSpec_price();
-            tvSpecGoodsPrice.setText(price + "￥");
+            tvSpecGoodsPrice.setText("￥" + price);
+            tvGoodsSpecSelectName.setText("已选择 " + data.getSpec_name());
         }
     }
 
