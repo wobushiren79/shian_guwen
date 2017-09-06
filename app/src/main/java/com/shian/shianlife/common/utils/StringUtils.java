@@ -1,6 +1,7 @@
 package com.shian.shianlife.common.utils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -61,5 +62,22 @@ public class StringUtils {
         return data;
     }
 
+    public static <T> String listToString(List<T> list, String split) {
+        StringBuffer temp = new StringBuffer();
+        if (list == null)
+            return temp.toString();
+        for (int i = 0; i < list.size(); i++) {
+            try {
+                if (i != 0)
+                    temp.append(split);
+                String item = String.valueOf(list.get(i));
+                temp.append(item);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "";
+            }
+        }
+        return temp.toString();
+    }
 
 }

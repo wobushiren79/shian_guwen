@@ -10,6 +10,8 @@ import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsDetailsListBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsDetailsListResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsQueryListBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsQueryListResultBean;
@@ -65,5 +67,10 @@ public class GoodsManagerImpl extends BaseManagerImpl implements GoodsManager {
     @Override
     public void getGoodsDetails(Context context, GoodsDetailsBean params, HttpResponseHandler<GoodsDetailsResultBean> handler) {
         requestPostFormToListForObj(context, "Api/goods/details", GoodsDetailsResultBean.class, params, handler, true);
+    }
+
+    @Override
+    public void getGoodsDetailsList(Context context, GoodsDetailsListBean params, HttpResponseHandler<List<GoodsDetailsListResultBean>> handler) {
+        requestPostFormToListForList(context, "Api/getgoods/getattrgoods", GoodsDetailsListResultBean.class, params, handler, true);
     }
 }

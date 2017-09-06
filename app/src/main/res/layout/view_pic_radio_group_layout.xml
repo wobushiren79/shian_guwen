@@ -6,6 +6,7 @@
 
     <RadioGroup
         android:id="@+id/rg_content"
+        android:layout_marginBottom="@dimen/dimen_16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

@@ -3,6 +3,8 @@ package com.shian.shianlife.provide.imp.impl;
 import android.content.Context;
 
 import com.shian.shianlife.common.contanst.AppContansts;
+import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartListBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartListResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartNumberBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartNumberResultBean;
 import com.shian.shianlife.provide.base.BaseManagerImpl;
@@ -35,5 +37,10 @@ public class GoodsOrderManagerImpl extends BaseManagerImpl implements GoodsOrder
     @Override
     public void getShoppingCartNumber(Context context, GoodsShoppingCartNumberBean params, HttpResponseHandler<GoodsShoppingCartNumberResultBean> handler) {
         requestPost(context, "api/goods/shopping/getShoppingNumber", GoodsShoppingCartNumberResultBean.class, params, handler);
+    }
+
+    @Override
+    public void getShoppingCartList(Context context, GoodsShoppingCartListBean params, HttpResponseHandler<GoodsShoppingCartListResultBean> handler) {
+        requestPost(context, "api/goods/shopping/list", GoodsShoppingCartListResultBean.class, params, handler);
     }
 }

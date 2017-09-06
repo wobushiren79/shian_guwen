@@ -18,6 +18,7 @@
             android:minHeight="@dimen/dimen_100dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
+
             <com.shian.shianlife.view.carousel.CarouselView
                 android:id="@+id/garouseview"
                 android:layout_width="match_parent"
@@ -25,6 +26,22 @@
 
             <include layout="@layout/layout_good_details_title"></include>
 
+            <ImageView
+                android:id="@+id/iv_pic_back"
+                android:layout_width="@dimen/dimen_80dp"
+                android:layout_height="@dimen/dimen_80dp"
+                android:layout_marginLeft="@dimen/dimen_16dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:src="@drawable/ic_back_default_2" />
+
+            <ImageView
+                android:id="@+id/iv_pic_share"
+                android:layout_width="@dimen/dimen_80dp"
+                android:layout_height="@dimen/dimen_80dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dimen_16dp"
+                android:layout_marginTop="@dimen/dimen_16dp"
+                android:src="@drawable/ic_share" />
         </RelativeLayout>
 
     </android.support.design.widget.AppBarLayout>

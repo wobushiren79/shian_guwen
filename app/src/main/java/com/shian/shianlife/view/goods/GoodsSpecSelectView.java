@@ -93,7 +93,7 @@ public class GoodsSpecSelectView extends BaseLayout implements View.OnClickListe
                 tv.setTextColor(Color.WHITE);
                 tv.setBackgroundResource(R.drawable.zhy_tag_check_style_1);
                 selectPosition = i;
-                setSelectSpecGoodsPrice();
+                goodsNumberChange.setData(1);
             } else {
                 tv.setTextColor(Color.parseColor("#A5A5A5"));
                 tv.setBackgroundResource(R.drawable.zhy_tag_uncheck_style_1);

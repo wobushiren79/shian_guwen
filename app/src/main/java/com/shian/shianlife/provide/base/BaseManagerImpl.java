@@ -49,6 +49,26 @@ public class BaseManagerImpl {
         excutor.requestPost(context, method, cls, params, response, isDialog, baseUrl, null, "content", true, HttpRequestExecutor.Response_Type_Obj);
     }
 
+
+    protected <T> void requestPostForList(Context context,
+                                                   String method,
+                                                   Class<T> cls,
+                                                   BaseHttpParams params,
+                                                   HttpResponseHandler<T> response) {
+        excutor.requestPost(context, method, cls, params, response, false, baseUrl, null, "content", true, HttpRequestExecutor.Response_Type_List);
+    }
+
+
+    protected <T> void requestPostForList(Context context,
+                                                   String method,
+                                                   Class<T> cls,
+                                                   BaseHttpParams params,
+                                                   HttpResponseHandler<T> response,
+                                                   boolean isDialog) {
+        excutor.requestPost(context, method, cls, params, response, isDialog, baseUrl, null, "content", true, HttpRequestExecutor.Response_Type_List);
+    }
+
+
     protected <T> void requestPostFormToListForObj(Context context,
                                                    String method,
                                                    Class<T> cls,

@@ -52,9 +52,15 @@ public class PicRadioGroup extends LinearLayout implements RadioGroup.OnCheckedC
     public void setData(int number) {
         mRBList.clear();
         mRGContent.removeAllViews();
+        int dp16 = getResources().getDimensionPixelOffset(R.dimen.dimen_16dp);
         for (int i = 0; i < number; i++) {
+            RadioGroup.LayoutParams layoutParams = new RadioGroup.LayoutParams(dp16, dp16);
+            layoutParams.leftMargin = dp16 / 2;
+            layoutParams.rightMargin = dp16 / 2;
             RadioButton rb = new RadioButton(getContext());
-
+            rb.setLayoutParams(layoutParams);
+            rb.setBackgroundResource(R.drawable.zhy_radio_button_style_1);
+            rb.setButtonDrawable(getResources().getDrawable(android.R.color.transparent));
             mRGContent.addView(rb);
             mRBList.add(rb);
         }

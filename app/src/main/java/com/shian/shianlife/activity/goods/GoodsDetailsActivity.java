@@ -46,6 +46,11 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     CarouselView garouseview;
     @InjectView(R.id.tv_temp_back)
     TextView tvBack;
+    @InjectView(R.id.iv_pic_back)
+    ImageView ivBack;
+    @InjectView(R.id.iv_pic_share)
+    ImageView ivShare;
+
     @InjectView(R.id.rl_temp_head)
     RelativeLayout rlHead;
     @InjectView(R.id.tv_temp_title)
@@ -227,7 +232,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         goodsDescrible.setApplyLocation(location);
     }
 
-    @OnClick({R.id.tv_service, R.id.tv_shopipingcart, R.id.tv_add_shopingcart, R.id.tv_buy, R.id.tv_temp_back})
+    @OnClick({R.id.tv_service, R.id.tv_shopipingcart, R.id.tv_add_shopingcart, R.id.tv_buy, R.id.tv_temp_back,R.id.iv_pic_back,R.id.iv_pic_share})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_service:
@@ -242,10 +247,26 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
             case R.id.tv_buy:
                 directBuy();
                 break;
+            case R.id.iv_pic_share:
+                shareDetails();
+                break;
             case R.id.tv_temp_back:
+            case R.id.iv_pic_back:
                 finish();
                 break;
         }
+    }
+
+    /**
+     * 分享
+     */
+    private void shareDetails() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Share");
+        intent.putExtra(Intent.EXTRA_TEXT, "");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(Intent.createChooser(intent, getTitle()));
     }
 
     /**
