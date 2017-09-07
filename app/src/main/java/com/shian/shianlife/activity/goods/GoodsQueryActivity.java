@@ -22,7 +22,7 @@ import butterknife.InjectView;
 import static com.shian.shianlife.adapter.GoodsQueryListAdapter.Order_Form_Price;
 import static com.shian.shianlife.adapter.GoodsQueryListAdapter.Order_Form_Sale;
 
-public class GoodsQueryActivity extends BaseActivity implements GoodsQueryConditionButton.CallBack, CustomSearchView.CallBack, View.OnClickListener, GoodsQueryDrawerLayout.CallBack{
+public class GoodsQueryActivity extends BaseActivity implements GoodsQueryConditionButton.CallBack, CustomSearchView.CallBack, View.OnClickListener, GoodsQueryDrawerLayout.CallBack {
     @InjectView(R.id.search_view)
     CustomSearchView searchView;
     @InjectView(R.id.query_volume_condition)
@@ -41,6 +41,7 @@ public class GoodsQueryActivity extends BaseActivity implements GoodsQueryCondit
     @InjectView(R.id.main_drawerlayout)
     DrawerLayout mainDrawerlayout;
 
+    private Long classId;
     private Long classAttrId;
     private String goodsName;
 
@@ -64,13 +65,12 @@ public class GoodsQueryActivity extends BaseActivity implements GoodsQueryCondit
     }
 
     private void initData() {
+        classId = getIntent().getLongExtra(IntentName.INTENT_CLASS_ID, -1);
         classAttrId = getIntent().getLongExtra(IntentName.INTENT_CLASSATTR_ID, -1);
         goodsName = getIntent().getStringExtra(IntentName.INTENT_GOODSNAME);
 
         searchView.setData(goodsName);
-        goodsQueryList.setClassAttId(classAttrId);
-        goodsQueryList.setGoodsName(goodsName);
-        goodsQueryList.startQuery();
+        setQueryData(classId, classAttrId, goodsName);
     }
 
 
@@ -95,9 +95,7 @@ public class GoodsQueryActivity extends BaseActivity implements GoodsQueryCondit
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        goodsQueryList.setClassAttId(-1L);
-        goodsQueryList.setGoodsName(query);
-        goodsQueryList.startQuery();
+        setQueryData(null, -1L, query);
         return true;
     }
 
@@ -122,11 +120,16 @@ public class GoodsQueryActivity extends BaseActivity implements GoodsQueryCondit
     }
 
     @Override
-    public void changeClassAttr(View view, Long classAttrId) {
-        goodsQueryList.setClassAttId(classAttrId);
-        goodsQueryList.setGoodsName("");
-        goodsQueryList.startQuery();
+    public void changeClassAttr(View view, Long classId, Long classAttrId) {
+        setQueryData(classId, classAttrId, "");
         drawerControl();
+    }
+
+    private void setQueryData(Long classId, Long classAttrId, String goodsName) {
+        goodsQueryList.setClassId(classId);
+        goodsQueryList.setClassAttId(classAttrId);
+        goodsQueryList.setGoodsName(goodsName);
+        goodsQueryList.startQuery();
     }
 
 }

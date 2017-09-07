@@ -7,7 +7,7 @@ package com.shian.shianlife.mvp.goods.bean;
 public class GoodsClassAttrResultBean {
     private Long id;
     private String name;//:名字
-    private Integer apec_id;//:分类ID
+    private Long apec_id;//:分类ID
     private String title_img;//:分类属性标题图
 
     public Long getId() {
@@ -26,11 +26,11 @@ public class GoodsClassAttrResultBean {
         this.name = name;
     }
 
-    public Integer getApec_id() {
+    public Long getApec_id() {
         return apec_id;
     }
 
-    public void setApec_id(Integer apec_id) {
+    public void setApec_id(Long apec_id) {
         this.apec_id = apec_id;
     }
 

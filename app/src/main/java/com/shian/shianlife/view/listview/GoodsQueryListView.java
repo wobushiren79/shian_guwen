@@ -27,6 +27,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 
 public class GoodsQueryListView extends BasePtrRecyclerView implements IGoodsQueryListView {
     private Long classAttId;
+    private Long classId;
     private String goodsName;
     private int orderForm;
     private OrderByEnum orderBy;
@@ -54,8 +55,14 @@ public class GoodsQueryListView extends BasePtrRecyclerView implements IGoodsQue
         this.setPtrHandler2(ptrHandler2);
     }
 
+    public void setClassId(Long classId) {
+        this.classId = classId;
+        adapter.setGoodsClassId(classId);
+    }
+
     public void setClassAttId(Long classAttId) {
         this.classAttId = classAttId;
+        adapter.setGoodsClassAttrId(classAttId);
     }
 
     public void setGoodsName(String goodsName) {

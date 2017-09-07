@@ -31,6 +31,9 @@ public class GoodsQueryListAdapter extends BaseRCAdapter<GoodsQueryListResultBea
     public static final int Order_Form_Sale = 0;
     public static final int Order_Form_Price = 1;
 
+    private Long goodsClassId;
+    private Long goodsClassAttrId;
+
     /**
      * 单布局初始化
      *
@@ -38,6 +41,14 @@ public class GoodsQueryListAdapter extends BaseRCAdapter<GoodsQueryListResultBea
      */
     public GoodsQueryListAdapter(Context context) {
         super(context, R.layout.item_goods_query_list_layout);
+    }
+
+    public void setGoodsClassId(Long goodsClassId) {
+        this.goodsClassId = goodsClassId;
+    }
+
+    public void setGoodsClassAttrId(Long goodsClassAttrId) {
+        this.goodsClassAttrId = goodsClassAttrId;
     }
 
     @Override
@@ -73,6 +84,8 @@ public class GoodsQueryListAdapter extends BaseRCAdapter<GoodsQueryListResultBea
                 if (v == llContent) {
                     Intent intent = new Intent(mContext, GoodsDetailsActivity.class);
                     intent.putExtra(IntentName.INTENT_GOODS_ID, goodsQueryListResultBean.getId());
+                    intent.putExtra(IntentName.INTENT_CLASS_ID, goodsClassId);
+                    intent.putExtra(IntentName.INTENT_CLASSATTR_ID, goodsClassAttrId);
                     mContext.startActivity(intent);
                 }
             }

@@ -123,7 +123,11 @@ public class GoodsSpecSelectView extends BaseLayout implements View.OnClickListe
      * @return
      */
     public GoodsDetailsResultBean.SpecpriceBean getData() {
-        return listData.get(selectPosition);
+        if (selectPosition == null) {
+            return null;
+        } else {
+            return listData.get(selectPosition);
+        }
     }
 
     /**

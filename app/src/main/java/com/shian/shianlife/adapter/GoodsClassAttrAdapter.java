@@ -1,5 +1,6 @@
 package com.shian.shianlife.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -45,13 +46,13 @@ public class GoodsClassAttrAdapter extends BaseRCAdapter<GoodsClassAttrResultBea
         else
             tvName.setText("未知");
 
-        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + picUrl,R.drawable.zhy_pic_loading);
+        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + picUrl, R.drawable.zhy_pic_loading);
 
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (v == llContent) {
-                    jumpQuery(goodsClassAttrResultBean.getId());
+                    jumpQuery(goodsClassAttrResultBean.getApec_id(), goodsClassAttrResultBean.getId());
                 }
             }
         };
@@ -60,9 +61,13 @@ public class GoodsClassAttrAdapter extends BaseRCAdapter<GoodsClassAttrResultBea
     }
 
 
-    private void jumpQuery(Long classAttId) {
+    private void jumpQuery(Long classId, Long classAttId) {
         Intent intent = new Intent(mContext, GoodsQueryActivity.class);
+        intent.putExtra(IntentName.INTENT_CLASS_ID, classId);
         intent.putExtra(IntentName.INTENT_CLASSATTR_ID, classAttId);
         mContext.startActivity(intent);
+
+        Activity activity = (Activity) mContext;
+        activity.finish();
     }
 }

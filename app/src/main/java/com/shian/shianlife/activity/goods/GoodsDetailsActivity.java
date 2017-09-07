@@ -16,16 +16,21 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.activity.WebActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.IntentName;
+import com.shian.shianlife.common.utils.AnimUtils;
 import com.shian.shianlife.common.utils.CheckUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartCreateResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartNumberResultBean;
 import com.shian.shianlife.mvp.goods.presenter.IGoodsDetailsPresenter;
+import com.shian.shianlife.mvp.goods.presenter.IGoodsShoppingCartCreatePresenter;
 import com.shian.shianlife.mvp.goods.presenter.IGoodsShoppingCartNumberPresenter;
 import com.shian.shianlife.mvp.goods.presenter.impl.GoodsDetailsPresenterImpl;
+import com.shian.shianlife.mvp.goods.presenter.impl.GoodsShoppingCartCreatePresenterImpl;
 import com.shian.shianlife.mvp.goods.presenter.impl.GoodsShoppingCartNumberPresenterImpl;
 import com.shian.shianlife.mvp.goods.view.IGoodsDetailsView;
+import com.shian.shianlife.mvp.goods.view.IGoodsShoppingCartCreateView;
 import com.shian.shianlife.mvp.goods.view.IGoodsShoppingCartNumberView;
 import com.shian.shianlife.view.carousel.CarouselView;
 import com.shian.shianlife.view.dialog.DataShowDialog;
@@ -41,7 +46,7 @@ import butterknife.OnClick;
 
 import static com.shian.shianlife.common.contanst.AppContansts.KF5_BaseUrl;
 
-public class GoodsDetailsActivity extends BaseActivity implements View.OnClickListener, AppBarLayout.OnOffsetChangedListener, IGoodsDetailsView, IGoodsShoppingCartNumberView {
+public class GoodsDetailsActivity extends BaseActivity implements View.OnClickListener, AppBarLayout.OnOffsetChangedListener, IGoodsDetailsView, IGoodsShoppingCartNumberView, IGoodsShoppingCartCreateView {
     @InjectView(R.id.garouseview)
     CarouselView garouseview;
     @InjectView(R.id.tv_temp_back)
@@ -85,12 +90,20 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     TextView tvBuy;
     @InjectView(R.id.tv_msg_number)
     TextView tvMsgNumber;
+    @InjectView(R.id.tv_msg_number_temp)
+    TextView tvMsgNumberTemp;
 
     private Long gooodsId;
+    private Long gooodsClassId;
+    private Long gooodsClassAttrId;
+    private Boolean isFirstGetShoppingNumber;//是否第一次獲取購物車數量
+
+    private GoodsDetailsResultBean detailsData;
     private List<GoodsDetailsResultBean.SpecpriceBean> specListData;
 
     private IGoodsDetailsPresenter goodsDetailsPresenter;
     private IGoodsShoppingCartNumberPresenter goodsShoppingCartNumberPresenter;
+    private IGoodsShoppingCartCreatePresenter goodsShoppingCartCreatePresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,10 +120,15 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initData() {
+        isFirstGetShoppingNumber = true;
+
         gooodsId = getIntent().getLongExtra(IntentName.INTENT_GOODS_ID, -1);
+        gooodsClassId = getIntent().getLongExtra(IntentName.INTENT_CLASS_ID, -1);
+        gooodsClassAttrId = getIntent().getLongExtra(IntentName.INTENT_CLASSATTR_ID, -1);
 
         goodsDetailsPresenter = new GoodsDetailsPresenterImpl(this);
         goodsShoppingCartNumberPresenter = new GoodsShoppingCartNumberPresenterImpl(this);
+        goodsShoppingCartCreatePresenter = new GoodsShoppingCartCreatePresenterImpl(this);
 
         goodsDetailsPresenter.getGoodsDetails();
         goodsShoppingCartNumberPresenter.getShoppingCartNumber();
@@ -150,8 +168,8 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
-    public void getGoodsDetailsSuccess(GoodsDetailsResultBean listData) {
-
+    public void getGoodsDetailsSuccess(GoodsDetailsResultBean resultBean) {
+        this.detailsData = resultBean;
     }
 
     @Override
@@ -160,8 +178,46 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
+    public void createGoodsShoppingCartSuccess(GoodsShoppingCartCreateResultBean resultBean) {
+        goodsShoppingCartNumberPresenter.getShoppingCartNumber();
+        ToastUtils.show(this, "加入购物车成功");
+    }
+
+    @Override
+    public void createGoodsShoppingCartFail(String msg) {
+        ToastUtils.show(this, msg);
+    }
+
+    @Override
     public Long getGoodsId() {
         return gooodsId;
+    }
+
+    @Override
+    public Integer getSpecNum() {
+        return goodsSpecSelect.getNumber();
+    }
+
+    @Override
+    public Integer getChannelId() {
+        return goodsSpecSelect.getData().getChannel_id();
+    }
+
+    @Override
+    public Long getClassifyAttrId() {
+        return gooodsClassAttrId;
+    }
+
+    @Override
+    public Long getClassifyId() {
+        if (detailsData == null)
+            return null;
+        return detailsData.getGoods_cate_id();
+    }
+
+    @Override
+    public Long getGoodsSpecId() {
+        return goodsSpecSelect.getData().getGoods_spec_id();
     }
 
     @Override
@@ -232,7 +288,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         goodsDescrible.setApplyLocation(location);
     }
 
-    @OnClick({R.id.tv_service, R.id.tv_shopipingcart, R.id.tv_add_shopingcart, R.id.tv_buy, R.id.tv_temp_back,R.id.iv_pic_back,R.id.iv_pic_share})
+    @OnClick({R.id.tv_service, R.id.tv_shopipingcart, R.id.tv_add_shopingcart, R.id.tv_buy, R.id.tv_temp_back, R.id.iv_pic_back, R.id.iv_pic_share})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_service:
@@ -280,7 +336,11 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
      * 加入购物车
      */
     private void addShoppingCart() {
-
+        if (goodsSpecSelect.getData() == null) {
+            ToastUtils.show(this, "还没有选择规格商品");
+            return;
+        }
+        goodsShoppingCartCreatePresenter.createGoodsShoppingCartData();
     }
 
     /**
@@ -289,6 +349,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     private void openShoppingCart() {
         Intent intent = new Intent(this, GoodsShoppingCartActivity.class);
         startActivity(intent);
+        finish();
     }
 
     /**
@@ -337,9 +398,22 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     public void setShoppingCartNumber(String number) {
         if (CheckUtils.isEmpty(number)) {
             tvMsgNumber.setVisibility(View.GONE);
+            tvMsgNumberTemp.setVisibility(View.GONE);
         } else {
             tvMsgNumber.setText(number);
             tvMsgNumber.setVisibility(View.VISIBLE);
+            tvMsgNumberTemp.setVisibility(View.VISIBLE);
+            if (isFirstGetShoppingNumber) {
+                isFirstGetShoppingNumber = false;
+                AnimUtils.setShoppingCartAnim(tvMsgNumber, 200);
+            } else {
+                if (goodsSpecSelect.getNumber() > 99) {
+                    tvMsgNumberTemp.setText("99+");
+                } else {
+                    tvMsgNumberTemp.setText(goodsSpecSelect.getNumber() + "");
+                }
+                AnimUtils.addShoppingCartAnim(tvMsgNumberTemp, 1000);
+            }
         }
 
     }

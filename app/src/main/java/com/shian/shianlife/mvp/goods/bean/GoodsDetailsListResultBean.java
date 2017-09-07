@@ -60,6 +60,16 @@ public class GoodsDetailsListResultBean {
     private Integer collection;//收藏数量
 
     private Integer shoppingCartNumber;//購物車數量
+    private Long shoppingCartId;//购物车ID
+
+
+    public Long getShoppingCartId() {
+        return shoppingCartId;
+    }
+
+    public void setShoppingCartId(Long shoppingCartId) {
+        this.shoppingCartId = shoppingCartId;
+    }
 
     public Integer getShoppingCartNumber() {
         return shoppingCartNumber;

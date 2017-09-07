@@ -24,10 +24,12 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
  * Created by zm.
  */
 
-public class GoodsShoppingCartListView extends BasePtrExpandableListView {
+public class GoodsShoppingCartListView extends BasePtrExpandableListView implements GoodsShoppingCartListAdapter.CallBack {
     private GoodsShoppingCartListAdapter listAdapter;
 
     private List<GoodsDetailsListResultBean> data;
+
+    private CallBack callBack;
 
     public GoodsShoppingCartListView(Context context) {
         super(context, null);
@@ -37,6 +39,7 @@ public class GoodsShoppingCartListView extends BasePtrExpandableListView {
         super(context, attrs);
 
         listAdapter = new GoodsShoppingCartListAdapter(context);
+        listAdapter.setCallBack(this);
         this.setPtrHandler2(handler2);
         this.setAdapter(listAdapter);
 
@@ -55,6 +58,10 @@ public class GoodsShoppingCartListView extends BasePtrExpandableListView {
         for (int i = 0; i < listAdapter.getGroupCount(); i++) {
             expandableListView.expandGroup(i);
         }
+    }
+
+    public void setCallBack(CallBack callBack) {
+        this.callBack = callBack;
     }
 
     PtrDefaultHandler2 handler2 = new PtrDefaultHandler2() {
@@ -99,5 +106,33 @@ public class GoodsShoppingCartListView extends BasePtrExpandableListView {
             mapData.put(groupData, childDataList);
         }
         return mapData;
+    }
+
+    /**
+     * 設置全部點擊
+     *
+     * @param isAllCheck
+     */
+    public void setAllCheck(boolean isAllCheck) {
+        listAdapter.setAllChecked(isAllCheck);
+    }
+
+    @Override
+    public void isAllCheck(boolean isAllCheck) {
+        if (callBack != null)
+            callBack.getIsAllCheck(isAllCheck);
+    }
+
+    @Override
+    public void getSelectGoods(List<GoodsShoppingCartListChildBean> selectGoods) {
+        if (callBack != null)
+            callBack.getSelectGoods(selectGoods);
+    }
+
+
+    public interface CallBack {
+        void getIsAllCheck(boolean isAllCheck);
+
+        void getSelectGoods(List<GoodsShoppingCartListChildBean> selectGoods);
     }
 }

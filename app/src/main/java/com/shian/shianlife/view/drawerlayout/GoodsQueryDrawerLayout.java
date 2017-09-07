@@ -108,14 +108,14 @@ public class GoodsQueryDrawerLayout extends LinearLayout implements IGoodsClassV
     }
 
     @Override
-    public void classAttrChange(Long classAttrId) {
+    public void classAttrChange(Long classId, Long classAttrId) {
         if (callBack != null)
-            callBack.changeClassAttr(this, classAttrId);
+            callBack.changeClassAttr(this, classId, classAttrId);
     }
 
 
     public interface CallBack {
-        void changeClassAttr(View view, Long classAttrId);
+        void changeClassAttr(View view, Long classId, Long classAttrId);
     }
 
 }

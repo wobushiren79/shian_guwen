@@ -5,8 +5,7 @@
     android:background="@color/white"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingLeft="@dimen/dimen_16dp"
-    android:paddingRight="@dimen/dimen_16dp">
+    android:paddingLeft="@dimen/dimen_16dp">
 
     <CheckBox
         android:id="@+id/check"
@@ -21,21 +20,123 @@
         android:id="@+id/iv_icon"
         android:layout_width="@dimen/dimen_194dp"
         android:layout_height="@dimen/dimen_194dp"
-        android:layout_marginLeft="@dimen/dimen_26dp" />
+        android:layout_marginLeft="@dimen/dimen_26dp"
+        android:src="@drawable/zhy_pic_loading" />
 
     <LinearLayout
-        android:padding="@dimen/dimen_16dp"
+        android:visibility="gone"
+        android:id="@+id/ll_mode_edit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dimen_16dp"
+            android:paddingRight="@dimen/dimen_16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/rl_number_sub_edit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/dimen_40dp">
+
+                    <ImageView
+                        android:layout_width="@dimen/dimen_20dp"
+                        android:layout_height="@dimen/dimen_20dp"
+                        android:src="@drawable/zhy_goods_change_remove_2" />
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_goods_number_edit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="@dimen/dimen_26dp"
+                    android:text="1"
+                    android:textColor="@color/zhy_text_color_16"
+                    android:textSize="@dimen/dimen_36dp" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_number_add_edit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/dimen_40dp">
+
+                    <ImageView
+                        android:layout_width="@dimen/dimen_20dp"
+                        android:layout_height="@dimen/dimen_20dp"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/zhy_goods_change_add_2" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_0dp"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/dimen_32dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="规格："
+                    android:textColor="@color/gray_text"
+                    android:textSize="@dimen/dimen_24dp" />
+
+                <TextView
+                    android:id="@+id/tv_goods_spec_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/gray_text"
+                    android:textSize="@dimen/dimen_24dp" />
+            </LinearLayout>
+        </LinearLayout>
 
         <TextView
-            android:text=""
+            android:id="@+id/tv_goods_remove_edit"
+            android:layout_width="@dimen/dimen_104dp"
+            android:layout_height="match_parent"
+            android:background="@color/zhy_text_color_4"
+            android:gravity="center"
+            android:text="刪除"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_30dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_mode_show"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="@dimen/dimen_16dp"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="@dimen/dimen_16dp"
+        android:visibility="gone">
+
+        <TextView
             android:id="@+id/tv_goods_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text=""
             android:textColor="@color/zhy_text_color_16"
             android:textSize="@dimen/dimen_30dp" />
 

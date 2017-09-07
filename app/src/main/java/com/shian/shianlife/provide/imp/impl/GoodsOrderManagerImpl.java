@@ -3,6 +3,12 @@ package com.shian.shianlife.provide.imp.impl;
 import android.content.Context;
 
 import com.shian.shianlife.common.contanst.AppContansts;
+import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartChangeNumberBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartChangeNumberResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartCreateBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartCreateResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartDeleteBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartDeleteResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartListBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartListResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartNumberBean;
@@ -42,5 +48,20 @@ public class GoodsOrderManagerImpl extends BaseManagerImpl implements GoodsOrder
     @Override
     public void getShoppingCartList(Context context, GoodsShoppingCartListBean params, HttpResponseHandler<GoodsShoppingCartListResultBean> handler) {
         requestPost(context, "api/goods/shopping/list", GoodsShoppingCartListResultBean.class, params, handler);
+    }
+
+    @Override
+    public void changeShoppingCartNumber(Context context, GoodsShoppingCartChangeNumberBean params, HttpResponseHandler<GoodsShoppingCartChangeNumberResultBean> handler) {
+        requestPost(context, "api/goods/shopping/updateShopingNum", GoodsShoppingCartChangeNumberResultBean.class, params, handler, true);
+    }
+
+    @Override
+    public void deleteShoppingCart(Context context, GoodsShoppingCartDeleteBean params, HttpResponseHandler<GoodsShoppingCartDeleteResultBean> handler) {
+        requestPost(context, "api/goods/shopping/remove", GoodsShoppingCartDeleteResultBean.class, params, handler, true);
+    }
+
+    @Override
+    public void createShoppingCart(Context context, GoodsShoppingCartCreateBean params, HttpResponseHandler<GoodsShoppingCartCreateResultBean> handler) {
+        requestPost(context, "api/goods/shopping/save", GoodsShoppingCartCreateResultBean.class, params, handler, true);
     }
 }

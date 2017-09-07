@@ -38,7 +38,7 @@ public class GoodsDetailsResultBean {
      */
 
     private Long id;
-    private String goods_cate_id;//分类
+    private Long goods_cate_id;//分类ID
     private String goods_slogan; //一句话介绍
     private String title_img; //分类属性图片
     private Float total;//原价
@@ -64,11 +64,11 @@ public class GoodsDetailsResultBean {
     private List<SpecpriceBean> specprice;   //规格商品
 
 
-    public String getGoods_cate_id() {
+    public Long getGoods_cate_id() {
         return goods_cate_id;
     }
 
-    public void setGoods_cate_id(String goods_cate_id) {
+    public void setGoods_cate_id(Long goods_cate_id) {
         this.goods_cate_id = goods_cate_id;
     }
 
@@ -316,9 +316,9 @@ public class GoodsDetailsResultBean {
         private Float adviser_price;//顾问结算价
         private String spec_alias;  //规格代名词
         private String spec_name;//规格名称 --前
-        private int spec_stock;//规格库存
+        private Integer spec_stock;//规格库存
         private Long goods_spec_id;//规格商品ID
-        private String channel_id;
+        private Integer channel_id;
         private Long goods_id;//商品ID
         private Float ement_price;//商家结算价
 
@@ -330,6 +330,13 @@ public class GoodsDetailsResultBean {
             this.spec_price = spec_price;
         }
 
+        public Float getAdviser_price() {
+            return adviser_price;
+        }
+
+        public void setAdviser_price(Float adviser_price) {
+            this.adviser_price = adviser_price;
+        }
 
         public String getSpec_alias() {
             return spec_alias;
@@ -347,28 +354,11 @@ public class GoodsDetailsResultBean {
             this.spec_name = spec_name;
         }
 
-
-        public String getChannel_id() {
-            return channel_id;
-        }
-
-        public void setChannel_id(String channel_id) {
-            this.channel_id = channel_id;
-        }
-
-        public Float getAdviser_price() {
-            return adviser_price;
-        }
-
-        public void setAdviser_price(Float adviser_price) {
-            this.adviser_price = adviser_price;
-        }
-
-        public int getSpec_stock() {
+        public Integer getSpec_stock() {
             return spec_stock;
         }
 
-        public void setSpec_stock(int spec_stock) {
+        public void setSpec_stock(Integer spec_stock) {
             this.spec_stock = spec_stock;
         }
 
@@ -378,6 +368,14 @@ public class GoodsDetailsResultBean {
 
         public void setGoods_spec_id(Long goods_spec_id) {
             this.goods_spec_id = goods_spec_id;
+        }
+
+        public Integer getChannel_id() {
+            return channel_id;
+        }
+
+        public void setChannel_id(Integer channel_id) {
+            this.channel_id = channel_id;
         }
 
         public Long getGoods_id() {

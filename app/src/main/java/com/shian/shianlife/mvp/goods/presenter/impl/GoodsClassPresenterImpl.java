@@ -42,11 +42,13 @@ public class GoodsClassPresenterImpl implements IGoodsClassPresenter {
             goodsClassView.showToast("数据错误");
             return;
         }
+        if(AppContansts.systemLoginInfo==null){
+            goodsClassView.showToast("还未登录账号");
+            return;
+        }
         GoodsClassBean goodsClassBean = new GoodsClassBean();
         goodsClassBean.setChannel_id(channelId);
-//        goodsClassBean.setUser_id(userId);
-        goodsClassBean.setUser_id(12L);
-
+        goodsClassBean.setUser_id(AppContansts.systemLoginInfo.getUserId());
         goodsClassModel.getGoodsClassData(goodsClassView.getContext(), goodsClassBean, new OnGetDataListener<List<GoodsClassResultBean>>() {
 
             @Override

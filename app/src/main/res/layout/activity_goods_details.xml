@@ -84,4 +84,6 @@
     </android.support.v4.widget.NestedScrollView>
 
     <include layout="@layout/layout_goods_details_buttons"></include>
+
+
 </android.support.design.widget.CoordinatorLayout>

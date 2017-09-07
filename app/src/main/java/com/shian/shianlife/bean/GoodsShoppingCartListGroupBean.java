@@ -6,7 +6,25 @@ package com.shian.shianlife.bean;
 
 public class GoodsShoppingCartListGroupBean {
     private String className;
-    private Boolean isCheck;
+    private boolean isCheck;
+    private boolean isEditMode;
+
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
+
+    public boolean isEditMode() {
+        return isEditMode;
+    }
+
+    public void setEditMode(boolean editMode) {
+        isEditMode = editMode;
+    }
 
     public String getClassName() {
         return className;
@@ -16,11 +34,4 @@ public class GoodsShoppingCartListGroupBean {
         this.className = className;
     }
 
-    public Boolean getCheck() {
-        return isCheck;
-    }
-
-    public void setCheck(Boolean check) {
-        isCheck = check;
-    }
 }

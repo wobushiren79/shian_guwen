@@ -17,7 +17,7 @@ import java.util.Map;
  * Created by zm.
  */
 
-public class GoodsQueryDrawerExpandableListView extends ExpandableListView implements ExpandableListView.OnGroupExpandListener, ExpandableListView.OnChildClickListener{
+public class GoodsQueryDrawerExpandableListView extends ExpandableListView implements ExpandableListView.OnGroupExpandListener, ExpandableListView.OnChildClickListener {
     private GoodsFiltrateAdapter filtrateAdapter;
     private CallBack callBack;
 
@@ -53,11 +53,11 @@ public class GoodsQueryDrawerExpandableListView extends ExpandableListView imple
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
         GoodsClassAttrResultBean data = filtrateAdapter.getChildData(groupPosition, childPosition);
         if (callBack != null)
-            callBack.classAttrChange(data.getId());
+            callBack.classAttrChange(data.getApec_id(), data.getId());
         return true;
     }
 
     public interface CallBack {
-        void classAttrChange(Long classAttrId);
+        void classAttrChange(Long classId, Long classAttrId);
     }
 }
