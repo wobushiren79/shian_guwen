@@ -67,9 +67,9 @@ public class GoodsDetailsPresenterImpl implements IGoodsDetailsPresenter {
                 goodsDetailsView.setGoodsName(goodsName.toString());
                 //设置价格范围
                 if (result.getPrice() == null)
-                    goodsDetailsView.setPriceRange("￥" + "暂无");
+                    goodsDetailsView.setPriceRange("推荐价：" + "暂无");
                 else
-                    goodsDetailsView.setPriceRange("￥" + result.getPrice());
+                    goodsDetailsView.setPriceRange("推荐价：" + result.getPrice());
 
                 //设置原价
                 if (result.getTotal() != null)

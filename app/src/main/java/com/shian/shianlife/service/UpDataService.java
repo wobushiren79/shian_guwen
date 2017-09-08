@@ -29,7 +29,7 @@ public class UpDataService extends Service {
     String downloadName = APPTypeEnum.ADVISER.getName() + ".apk";
 
     boolean isDown = false;
-
+    private String DOWNLOADPATH = "/download/";//下载路径，如果不定义自己的路径，6.0的手机不自动安装
     public UpDataService() {
 
     }
@@ -47,7 +47,7 @@ public class UpDataService extends Service {
      * 初始化下载器
      **/
     private void initDownManager() {
-        delFile("/download/" + downloadName);
+        delFile(DOWNLOADPATH + downloadName);
         isDown = true;
         manager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
         receiver = new DownloadCompleteReceiver();
@@ -63,7 +63,7 @@ public class UpDataService extends Service {
         down.setVisibleInDownloadsUi(true);
         // 设置下载后文件存放的位置
 //        down.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS, "yuanmanrensheng.apk");
-        down.setDestinationInExternalPublicDir("/download/", downloadName);
+        down.setDestinationInExternalPublicDir(DOWNLOADPATH, downloadName);
         // 将下载请求放入队列
         manager.enqueue(down);
         //注册下载广播
@@ -126,23 +126,21 @@ public class UpDataService extends Service {
                         //完成
                         Log.v("this", "下载完成");
                         //自动安装apk
-//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-//                            Uri uriForDownloadedFile = manager.getUriForDownloadedFile(downId);
-//                            installApkNew(uriForDownloadedFile);
+//                        String uriString = c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
+//                        if (!TextUtils.isEmpty(uriString)) {
+//                            targetApkFile = new File(Uri.parse(uriString).getPath());
 //                        }
-                        //6.0以上的更新处理
-//                        if (Build.VERSION.SDK_INT < 23) {
-//                            Uri uriForDownloadedFile = manager.getUriForDownloadedFile(downId);
-//                            installApkNew(uriForDownloadedFile);
-//                        } else {
-                            String uriString = c.getString(c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI));
-                            if (!TextUtils.isEmpty(uriString)) {
-                                targetApkFile = new File(Uri.parse(uriString).getPath());
-                            }
-                            if (targetApkFile != null) {
-                                openFile(targetApkFile, context);
-                            }
+//                        if (targetApkFile != null) {
+//                            openFile(targetApkFile, context);
 //                        }
+                        //获取下载的文件id
+                        if (manager.getUriForDownloadedFile(downId) != null) {
+                            //自动安装apk
+                            installAPK(manager.getUriForDownloadedFile(downId), context);
+                            //installAPK(context);
+                        } else {
+                            Toast.makeText(context, "下载失败", Toast.LENGTH_SHORT).show();
+                        }
                         break;
                     case DownloadManager.STATUS_FAILED:
                         //清除已下载的内容，重新下载
@@ -150,6 +148,8 @@ public class UpDataService extends Service {
                         manager.remove(downId);
                         break;
                 }
+                //停止服务并关闭广播
+                UpDataService.this.stopSelf();
             }
 
 //            if (intent.getAction().equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE)) {
@@ -165,7 +165,24 @@ public class UpDataService extends Service {
             UpDataService.this.stopSelf();
 //            }
         }
-
+        private void installAPK(Uri apk, Context context) {
+            Log.v("this","installAPK");
+            if (Build.VERSION.SDK_INT < 23) {
+                Intent intents = new Intent();
+                intents.setAction("android.intent.action.VIEW");
+                intents.addCategory("android.intent.category.DEFAULT");
+                intents.setType("application/vnd.android.package-archive");
+                intents.setData(apk);
+                intents.setDataAndType(apk, "application/vnd.android.package-archive");
+                intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intents);
+            } else {
+                File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + DOWNLOADPATH + downloadName);
+                if (file.exists()) {
+                    openFile(file, context);
+                }
+            }
+        }
 
         //安装apk
         protected void installApkNew(Uri uri) {

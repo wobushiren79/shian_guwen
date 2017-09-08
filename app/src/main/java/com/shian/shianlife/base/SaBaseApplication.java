@@ -36,6 +36,8 @@ import com.shian.shianlife.provide.base.SSLSocketFactoryCompat;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zhy.http.okhttp.OkHttpUtils;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.X509TrustManager;
 
@@ -108,6 +110,12 @@ public class SaBaseApplication extends Application {
                         }
                     };
             final SSLSocketFactory sslSocketFactory = new SSLSocketFactoryCompat(trustAllCert);
+            builder.hostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
             builder.sslSocketFactory(sslSocketFactory, trustAllCert);
         } catch (Exception e) {
             throw new RuntimeException(e);

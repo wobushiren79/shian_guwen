@@ -13,6 +13,10 @@ import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartListBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartListResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartNumberBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartNumberResultBean;
+import com.shian.shianlife.mvp.goods.bean.StoreOrderDetailsBean;
+import com.shian.shianlife.mvp.goods.bean.StoreOrderDetailsResultBean;
+import com.shian.shianlife.mvp.goods.bean.StoreOrderGetPerformBean;
+import com.shian.shianlife.mvp.goods.bean.StoreOrderGetPerformResultBean;
 import com.shian.shianlife.provide.base.BaseManagerImpl;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.GoodsOrderManager;
@@ -63,5 +67,15 @@ public class GoodsOrderManagerImpl extends BaseManagerImpl implements GoodsOrder
     @Override
     public void createShoppingCart(Context context, GoodsShoppingCartCreateBean params, HttpResponseHandler<GoodsShoppingCartCreateResultBean> handler) {
         requestPost(context, "api/goods/shopping/save", GoodsShoppingCartCreateResultBean.class, params, handler, true);
+    }
+
+    @Override
+    public void getStoreOrderDetails(Context context, StoreOrderDetailsBean params, HttpResponseHandler<StoreOrderDetailsResultBean> handler) {
+        requestPost(context, "api/goods/order/findOrderDetailById", StoreOrderDetailsResultBean.class, params, handler, true);
+    }
+
+    @Override
+    public void getPerformInfo(Context context, StoreOrderGetPerformBean params, HttpResponseHandler<StoreOrderGetPerformResultBean> handler) {
+        requestPost(context, "api/goods/perform/findPerformInfoByPerformId", StoreOrderGetPerformResultBean.class, params, handler, true);
     }
 }

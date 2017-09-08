@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -180,7 +181,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void createGoodsShoppingCartSuccess(GoodsShoppingCartCreateResultBean resultBean) {
         goodsShoppingCartNumberPresenter.getShoppingCartNumber();
-        ToastUtils.show(this, "加入购物车成功");
+//        ToastUtils.show(this, "加入购物车成功");
     }
 
     @Override
@@ -395,16 +396,16 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
-    public void setShoppingCartNumber(String number) {
+    public void setShoppingCartNumber(final String number) {
         if (CheckUtils.isEmpty(number)) {
             tvMsgNumber.setVisibility(View.GONE);
             tvMsgNumberTemp.setVisibility(View.GONE);
         } else {
-            tvMsgNumber.setText(number);
             tvMsgNumber.setVisibility(View.VISIBLE);
             tvMsgNumberTemp.setVisibility(View.VISIBLE);
             if (isFirstGetShoppingNumber) {
                 isFirstGetShoppingNumber = false;
+                tvMsgNumber.setText(number);
                 AnimUtils.setShoppingCartAnim(tvMsgNumber, 200);
             } else {
                 if (goodsSpecSelect.getNumber() > 99) {
@@ -412,7 +413,23 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
                 } else {
                     tvMsgNumberTemp.setText(goodsSpecSelect.getNumber() + "");
                 }
-                AnimUtils.addShoppingCartAnim(tvMsgNumberTemp, 1000);
+                AnimUtils.addShoppingCartAnim(tvMsgNumberTemp, 1000, new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        tvMsgNumber.setText(number);
+                        AnimUtils.setShoppingCartAnim(tvMsgNumber, 200);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
             }
         }
 

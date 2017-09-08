@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/dimen_34dp"
+            android:paddingLeft="@dimen/dimen_16dp"
+            android:paddingRight="@dimen/dimen_16dp"
+            android:paddingTop="@dimen/dimen_34dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_28dp" />
+
+        <Spinner
+            android:id="@+id/sp_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/dimen_28dp" />
+
+        <TextView
+            android:id="@+id/tv_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dimen_34dp"
+            android:paddingLeft="@dimen/dimen_16dp"
+            android:paddingRight="@dimen/dimen_16dp"
+            android:paddingTop="@dimen/dimen_34dp"
+            android:text="请选择"
+            android:textColor="@color/zhy_text_color_18" />
+
+        <ImageView
+            android:layout_width="@dimen/dimen_21dp"
+            android:layout_height="@dimen/dimen_28dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="@dimen/dimen_16dp"
+            android:src="@drawable/ic_order_more" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/zhy_line_3" />
+</LinearLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_36dp"
+        android:layout_marginLeft="@dimen/dimen_32dp"
+        android:layout_marginRight="@dimen/dimen_32dp"
+        android:layout_marginTop="@dimen/dimen_36dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/dimen_32dp"
+            android:layout_height="@dimen/dimen_44dp"
+            android:src="@drawable/zhy_store_order_details_info_user" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dimen_46dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:gravity="center_vertical"
+                    android:id="@+id/tv_customer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/zhy_text_color_20"
+                    android:textSize="@dimen/dimen_28dp" />
+
+                <TextView
+                    android:gravity="center_vertical"
+                    android:id="@+id/tv_customer_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/zhy_text_color_21"
+                    android:textSize="@dimen/dimen_28dp" />
+            </LinearLayout>
+
+            <TextView
+                android:gravity="center_vertical"
+                android:id="@+id/tv_service_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/zhy_text_color_20"
+                android:textSize="@dimen/dimen_24dp" />
+
+            <TextView
+                android:gravity="center_vertical"
+                android:id="@+id/tv_service_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/zhy_text_color_20"
+                android:textSize="@dimen/dimen_24dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_12dp"
+        android:src="@drawable/zhy_store_order_details_info_line" />
+</LinearLayout>

@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 
@@ -21,7 +22,14 @@ public class AnimUtils {
         scaleAnimation.setAnimationListener(animationListener);
         view.startAnimation(scaleAnimation);
     }
-
+    public static void startRotateToSelf(View view, int duration, int fromDegrees, int toDegrees, Animation.AnimationListener animationListener) {
+        RotateAnimation rotateAnimation = new RotateAnimation
+                (fromDegrees, toDegrees, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotateAnimation.setDuration(duration);
+        rotateAnimation.setFillAfter(true);
+        rotateAnimation.setAnimationListener(animationListener);
+        view.startAnimation(rotateAnimation);
+    }
     public static void setShoppingCartAnim(View view, int duration) {
         ScaleAnimation scaleAnimation = new ScaleAnimation
                 (1, 1.5f, 1, 1.5f,
@@ -33,7 +41,7 @@ public class AnimUtils {
         view.startAnimation(scaleAnimation);
     }
 
-    public static void addShoppingCartAnim(View view, int duration) {
+    public static void addShoppingCartAnim(View view, int duration,Animation.AnimationListener animationListener) {
         AnimationSet animationSet = new AnimationSet(true);
 
         TranslateAnimation xAnimation = new TranslateAnimation
@@ -49,6 +57,7 @@ public class AnimUtils {
 
         animationSet.addAnimation(xAnimation);
         animationSet.addAnimation(yAnimation);
+        animationSet.setAnimationListener(animationListener);
         view.startAnimation(animationSet);
     }
 }

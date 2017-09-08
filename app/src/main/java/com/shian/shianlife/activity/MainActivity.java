@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -327,29 +328,33 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 
     }
 
-    private long currentTime;
-    private int count;
 
+    private long firstTime = 0;
     @Override
-    public void onBackPressed() {
-        if (count == 0) {
-            currentTime = System.currentTimeMillis();
-            count = 1;
-            ToastUtils.show(this, "再按一次返回桌面");
-        } else if (count == 1) {
-            if (Math.abs(System.currentTimeMillis() - currentTime) < 2000) {
-                exitApp();
-                count = 0;
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - firstTime > 2000) {
+                //如果两次按键时间间隔大于2秒，则不退出
+                ToastUtils.show(this, "再按一次退出程序");
+                firstTime = secondTime;//更新firstTime
+                return true;
             } else {
-                currentTime = System.currentTimeMillis();
-                count = 1;
-                ToastUtils.show(this, "再按一次返回桌面");
+                //两次按键小于2秒时，退出应用
+//                    System.exit(0);
+                exitApp();
+                Intent home = new Intent(Intent.ACTION_MAIN);
+                home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                home.addCategory(Intent.CATEGORY_HOME);
+                startActivity(home);
+                return true;
             }
         }
+        return super.onKeyUp(keyCode, event);
     }
 
     private void exitApp() {
-        finish();
         MHttpManagerFactory.getFuneralManager().loginout(this,
                 new HttpResponseHandler<Object>() {
 

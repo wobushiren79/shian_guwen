@@ -12,6 +12,10 @@ import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartListBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartListResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartNumberBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartNumberResultBean;
+import com.shian.shianlife.mvp.goods.bean.StoreOrderDetailsBean;
+import com.shian.shianlife.mvp.goods.bean.StoreOrderDetailsResultBean;
+import com.shian.shianlife.mvp.goods.bean.StoreOrderGetPerformBean;
+import com.shian.shianlife.mvp.goods.bean.StoreOrderGetPerformResultBean;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 
 /**
@@ -66,5 +70,23 @@ public interface GoodsOrderManager {
      * @param handler
      */
     void createShoppingCart(Context context, GoodsShoppingCartCreateBean params, HttpResponseHandler<GoodsShoppingCartCreateResultBean> handler);
+
+    /**
+     * 获取单项订单详情
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    void getStoreOrderDetails(Context context, StoreOrderDetailsBean params, HttpResponseHandler<StoreOrderDetailsResultBean> handler);
+
+    /**
+     * 获取执行信息
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    void getPerformInfo(Context context, StoreOrderGetPerformBean params, HttpResponseHandler<StoreOrderGetPerformResultBean> handler);
 
 }

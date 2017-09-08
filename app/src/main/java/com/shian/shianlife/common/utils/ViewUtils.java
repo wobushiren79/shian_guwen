@@ -4,6 +4,8 @@ import android.content.res.Resources;
 import android.support.design.widget.TabLayout;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 
 import java.lang.reflect.Field;
@@ -41,6 +43,19 @@ public class ViewUtils {
             params.rightMargin = right;
             child.setLayoutParams(params);
             child.invalidate();
+        }
+    }
+
+
+    /**
+     * 展开下拉
+     *
+     * @param listView
+     * @param listAdapter
+     */
+    public static void expandGroup(ExpandableListView listView, BaseExpandableListAdapter listAdapter) {
+        for (int i = 0; i < listAdapter.getGroupCount(); i++) {
+            listView.expandGroup(i);
         }
     }
 }

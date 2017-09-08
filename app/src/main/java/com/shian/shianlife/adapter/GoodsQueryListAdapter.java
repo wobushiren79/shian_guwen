@@ -72,7 +72,7 @@ public class GoodsQueryListAdapter extends BaseRCAdapter<GoodsQueryListResultBea
 
         Float price = goodsQueryListResultBean.getPrice();
         if (!CheckUtils.isEmpty(price))
-            tvPrice.setText("￥" + price);
+            tvPrice.setText("推荐价：" + price);
 
         Integer sale = goodsQueryListResultBean.getSale_amount();
         tvSale.setText("销售量：" + sale);
