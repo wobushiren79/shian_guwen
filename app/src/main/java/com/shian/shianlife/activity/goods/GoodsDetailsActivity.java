@@ -330,7 +330,8 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
      * 直接购买
      */
     private void directBuy() {
-
+        Intent intent = new Intent(this, GoodsOrderSettlementActivity.class);
+        startActivity(intent);
     }
 
     /**

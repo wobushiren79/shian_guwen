@@ -13,13 +13,12 @@ import com.shian.shianlife.R;
 import butterknife.ButterKnife;
 
 
-
 /**
  * Created by zm.
  */
 
 public abstract class BaseLayout extends LinearLayout {
-    View view;
+    protected View view;
 
     protected TypedArray typedArray = null;
     protected String titleName;

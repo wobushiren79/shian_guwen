@@ -5,14 +5,70 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+
     <LinearLayout
+        android:id="@+id/ll_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dimen_36dp"
-        android:layout_marginLeft="@dimen/dimen_32dp"
-        android:layout_marginRight="@dimen/dimen_32dp"
-        android:layout_marginTop="@dimen/dimen_36dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/dimen_36dp"
+        android:paddingLeft="@dimen/dimen_32dp"
+        android:paddingRight="@dimen/dimen_16dp"
+        android:paddingTop="@dimen/dimen_36dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/dimen_44dp"
+            android:layout_height="@dimen/dimen_44dp"
+            android:src="@drawable/zhy_store_order_details_info_user_edit" />
+
+        <LinearLayout
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dimen_46dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="填写服务信息"
+                android:textColor="@color/zhy_text_color_16"
+                android:textSize="@dimen/dimen_28dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:gravity="center_vertical"
+                android:text="请根据提示依次填入客户信息"
+                android:textColor="@color/zhy_text_color_18"
+                android:textSize="@dimen/dimen_24dp" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="@dimen/dimen_20dp"
+            android:layout_height="@dimen/dimen_20dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/icon_expandable" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/dimen_36dp"
+        android:paddingLeft="@dimen/dimen_32dp"
+        android:paddingRight="@dimen/dimen_16dp"
+        android:paddingTop="@dimen/dimen_36dp"
+   >
 
         <ImageView
             android:layout_width="@dimen/dimen_32dp"
@@ -20,10 +76,12 @@
             android:src="@drawable/zhy_store_order_details_info_user" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/ll_content"
+            android:layout_width="@dimen/dimen_0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dimen_5dp"
             android:layout_marginTop="@dimen/dimen_5dp"
+            android:layout_weight="1"
             android:orientation="vertical"
             android:paddingLeft="@dimen/dimen_46dp">
 
@@ -33,39 +91,47 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:gravity="center_vertical"
                     android:id="@+id/tv_customer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center_vertical"
                     android:textColor="@color/zhy_text_color_20"
                     android:textSize="@dimen/dimen_28dp" />
 
                 <TextView
-                    android:gravity="center_vertical"
                     android:id="@+id/tv_customer_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:textColor="@color/zhy_text_color_21"
                     android:textSize="@dimen/dimen_28dp" />
             </LinearLayout>
 
             <TextView
-                android:gravity="center_vertical"
                 android:id="@+id/tv_service_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:gravity="center_vertical"
                 android:textColor="@color/zhy_text_color_20"
                 android:textSize="@dimen/dimen_24dp" />
 
             <TextView
-                android:gravity="center_vertical"
                 android:id="@+id/tv_service_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:textColor="@color/zhy_text_color_20"
                 android:textSize="@dimen/dimen_24dp" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="@dimen/dimen_20dp"
+            android:layout_height="@dimen/dimen_20dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/icon_expandable" />
     </LinearLayout>
 
     <ImageView

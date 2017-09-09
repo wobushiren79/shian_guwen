@@ -77,10 +77,10 @@ public class AreasWheel extends LinearLayout {
 		wv_province.setAdapter(provinceWheelAdapter);
 		wv_province.setCyclic(false);
 		wv_province.setVisibleItems(5);
-		wv_province.setCurrentItem(0);
+		wv_province.setCurrentItem(24);
 
 		cityWheelAdapter = new CityWheelAdapter(context,
-				R.array.beijin_province_item);
+				R.array.sichuan_province_item);
 		wv_city.setAdapter(cityWheelAdapter);
 		wv_city.setCyclic(false);
 		wv_city.setVisibleItems(5);
@@ -95,6 +95,7 @@ public class AreasWheel extends LinearLayout {
 			}
 		};
 		wv_province.addChangingListener(provinceChangedListener);
+
 	}
 
 	/**

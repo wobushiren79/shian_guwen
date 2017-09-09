@@ -51,13 +51,13 @@
 
             <TextView
                 android:id="@+id/tv_price"
-                android:layout_width="@dimen/dimen_200dp"
+                android:layout_width="@dimen/dimen_250dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:gravity="bottom"
                 android:text=""
                 android:textColor="@color/zhy_text_color_1"
-                android:textSize="@dimen/dimen_42dp"
+                android:textSize="@dimen/dimen_24dp"
                 android:textStyle="bold" />
 
             <TextView

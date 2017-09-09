@@ -1,5 +1,6 @@
 package com.shian.shianlife.common.utils;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.support.design.widget.TabLayout;
 import android.util.TypedValue;
@@ -7,6 +8,10 @@ import android.view.View;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
+
+import com.shian.shianlife.R;
+import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
+import com.summerxia.dateselector.widget.LocationSelectorDialogBuilder;
 
 import java.lang.reflect.Field;
 
@@ -58,4 +63,25 @@ public class ViewUtils {
             listView.expandGroup(i);
         }
     }
+
+
+    /**
+     * 获取地区选择器
+     */
+    public static void getLocationSelectDialog(Context context, LocationSelectorDialogBuilder.OnSaveLocationLister lister) {
+        LocationSelectorDialogBuilder dialogBuilder = new LocationSelectorDialogBuilder(context, R.style.CustomDialog);
+        dialogBuilder.setOnSaveLocationLister(lister);
+        dialogBuilder.show();
+    }
+
+    /**
+     * 获取地区选择器
+     */
+    public static void getTimeSelectDialog(Context context, DateTimeSelectorDialogBuilder.OnSaveListener listener, boolean isShowHour) {
+        DateTimeSelectorDialogBuilder dialog = DateTimeSelectorDialogBuilder.getInstance(context);
+        dialog.setOnSaveListener(listener);
+        dialog.setShowHour(isShowHour);
+        dialog.show();
+    }
+
 }

@@ -153,21 +153,6 @@ public class StoreOrderDetailsPresenterImpl implements IStoreOrderDetailsPresent
     private Map<String, List<GoodsItemPerform>> getStringListMap(List<GoodsItemPerform> goodsItemPerforms) {
         Map<String, List<GoodsItemPerform>> goodsListData = new HashMap<>();
         try {
-//            Map<Long, String> classList = new HashMap<>();
-//            for (GoodsOrderItem item : goodsOrderItem) {
-//                classList.put(item.getClassifyId(), item.getSpecOrderedAttr());
-//            }
-//            for (Map.Entry<Long, String> entry : classList.entrySet()) {
-//                List<GoodsOrderItem> listItemData = new ArrayList<>();
-//                Long key = entry.getKey();
-//                String value = entry.getValue();
-//                for (GoodsOrderItem item : goodsOrderItem) {
-//                    if (item.getClassifyId() == key) {
-//                        listItemData.add(item);
-//                    }
-//                }
-//                goodsListData.put(value ,listItemData);
-//            }
             List<String> classList = new LinkedList<>();
             for (GoodsItemPerform item : goodsItemPerforms) {
                 classList.add(item.getSpecOrderedAttr());

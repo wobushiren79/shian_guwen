@@ -102,7 +102,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.3.1'
     compile 'in.srain.cube:ptr-load-more:1.0.6'
     compile 'com.android.support:design:23.1.0'
-
+    compile 'com.android.support:multidex:1.0.0'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife:6.0.0'
 }

@@ -10,7 +10,8 @@ import com.summerxia.dateselector.R;
 public class ProvinceWheelAdapter implements WheelAdapter {
 	
 	private List<String> provinces;
-	
+
+
 	public ProvinceWheelAdapter(Context context){
 		provinces = Arrays.asList(context.getResources().getStringArray(R.array.province_item));
 	}

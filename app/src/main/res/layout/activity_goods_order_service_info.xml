@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.shian.shianlife.activity.goods.GoodsOrderServiceInfoActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <com.shian.shianlife.view.goods.StoreEditNormalView
+                android:id="@+id/layout_customer_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                MyViewAttr:titleName="联系人"></com.shian.shianlife.view.goods.StoreEditNormalView>
+
+            <com.shian.shianlife.view.goods.StoreEditNormalView
+                android:id="@+id/layout_customer_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                MyViewAttr:titleName="电话"></com.shian.shianlife.view.goods.StoreEditNormalView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dimen_96dp"
+                    android:layout_marginLeft="@dimen/dimen_32dp"
+                    android:gravity="center_vertical"
+                    android:text="服务方式"
+                    android:textColor="@color/zhy_text_color_16"
+                    android:textSize="@dimen/dimen_28dp" />
+
+                <RadioGroup
+                    android:id="@+id/rg_service_way"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/dimen_16dp"
+                    android:layout_marginLeft="@dimen/dimen_32dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_service_way_1"
+                        android:layout_width="@dimen/dimen_160dp"
+                        android:layout_height="@dimen/dimen_58dp"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:background="@drawable/radio_button_store_select"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="及时服务"
+                        android:textColor="@color/radio_button_store_select"
+                        android:textSize="@dimen/dimen_28dp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_service_way_2"
+                        android:layout_width="@dimen/dimen_160dp"
+                        android:layout_height="@dimen/dimen_58dp"
+                        android:layout_marginLeft="@dimen/dimen_20dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:background="@drawable/radio_button_store_select"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="预约服务"
+                        android:textColor="@color/radio_button_store_select"
+                        android:textSize="@dimen/dimen_28dp" />
+
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginLeft="@dimen/dimen_32dp"
+                    android:background="@color/zhy_line_3" />
+            </LinearLayout>
+
+            <com.shian.shianlife.view.goods.StoreEditNormalView
+                android:id="@+id/layout_service_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                MyViewAttr:titleName="服务区域"></com.shian.shianlife.view.goods.StoreEditNormalView>
+
+
+            <com.shian.shianlife.view.goods.StoreEditNormalView
+                android:id="@+id/layout_service_details_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                MyViewAttr:titleName="详细地址"></com.shian.shianlife.view.goods.StoreEditNormalView>
+
+            <com.shian.shianlife.view.goods.StoreEditNormalView
+                android:id="@+id/layout_service_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                MyViewAttr:titleName="预约时间"></com.shian.shianlife.view.goods.StoreEditNormalView>
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_submit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_100dp"
+        android:background="@drawable/zhy_submit_button_style_1"
+        android:gravity="center"
+        android:text="保存"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_32dp" />
+
+</LinearLayout>

@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/dimen_16dp"
+        android:paddingLeft="@dimen/dimen_32dp"
         android:paddingRight="@dimen/dimen_16dp">
 
         <TextView
@@ -20,15 +20,16 @@
             android:paddingBottom="@dimen/dimen_34dp"
             android:paddingTop="@dimen/dimen_34dp"
             android:text=""
-            android:textColor="@color/black"
+            android:textColor="@color/zhy_text_color_16"
             android:textSize="@dimen/dimen_28dp" />
 
 
         <EditText
             android:id="@+id/et_content"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/dimen_0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_16dp"
+            android:layout_weight="1"
             android:background="@null"
             android:gravity="center_vertical|right"
             android:paddingBottom="@dimen/dimen_34dp"
@@ -36,10 +37,37 @@
             android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/dimen_28dp" />
+
+        <LinearLayout
+            android:id="@+id/ll_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dimen_34dp"
+                android:paddingLeft="@dimen/dimen_16dp"
+                android:paddingRight="@dimen/dimen_16dp"
+                android:paddingTop="@dimen/dimen_34dp"
+                android:text="请选择"
+                android:textColor="@color/zhy_text_color_18" />
+
+            <ImageView
+                android:layout_width="@dimen/dimen_21dp"
+                android:layout_height="@dimen/dimen_28dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/dimen_16dp"
+                android:src="@drawable/ic_order_more" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_1dp"
+        android:layout_marginLeft="@dimen/dimen_32dp"
         android:background="@color/zhy_line_3" />
 </LinearLayout>

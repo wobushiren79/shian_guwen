@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:CustomAttr="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zhy_backgroud_1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_store_order_serviceinfo"></include>
+
+        <com.shian.shianlife.view.goods.StoreExpandableTitleView
+            android:id="@+id/goods_expand_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_24dp"
+            CustomAttr:titleName="商品清单"></com.shian.shianlife.view.goods.StoreExpandableTitleView>
+
+        <com.shian.shianlife.view.ScrollExpandableListView
+            android:id="@+id/goods_expand_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:groupIndicator="@null"
+            android:visibility="gone"></com.shian.shianlife.view.ScrollExpandableListView>
+
+        <com.shian.shianlife.view.goods.StoreExpandableTitleView
+            android:id="@+id/invoice_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            CustomAttr:titleName="发票信息"></com.shian.shianlife.view.goods.StoreExpandableTitleView>
+
+
+        <com.shian.shianlife.view.ScrollRecyclerView
+            android:id="@+id/invoice_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"></com.shian.shianlife.view.ScrollRecyclerView>
+
+        <com.shian.shianlife.view.goods.StoreEditNormalView
+            android:id="@+id/tv_remark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            CustomAttr:showMode="true"
+            CustomAttr:titleName="备注："></com.shian.shianlife.view.goods.StoreEditNormalView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_96dp"
+            android:background="@color/white"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/dimen_16dp"
+                android:gravity="center_vertical"
+                android:text="推荐价"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_money_customer"
+                android:layout_width="@dimen/dimen_200dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/dimen_16dp"
+                android:gravity="center_vertical|right"
+                android:text=""
+                android:textColor="@color/zhy_text_color_4" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_96dp"
+            android:background="@color/white"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/dimen_16dp"
+                android:gravity="center_vertical"
+                android:text="圆满价"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_money_counselor"
+                android:layout_width="@dimen/dimen_200dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/dimen_16dp"
+                android:gravity="center_vertical|right"
+                android:text=""
+                android:textColor="@color/zhy_text_color_4" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+        <TextView
+            android:id="@+id/tv_order_number"
+            style="@style/store_order_details_text_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dimen_28dp"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/tv_order_time"
+            style="@style/store_order_details_text_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_order_pay_time"
+            style="@style/store_order_details_text_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_order_pay_number"
+            style="@style/store_order_details_text_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dimen_28dp" />
+    </LinearLayout>
+
+
+</ScrollView>

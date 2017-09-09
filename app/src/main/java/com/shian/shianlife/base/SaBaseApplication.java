@@ -17,10 +17,13 @@ import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
 
 
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
@@ -46,7 +49,7 @@ import okhttp3.CookieJar;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
-public class SaBaseApplication extends Application {
+public class SaBaseApplication extends MultiDexApplication {
     public static final Boolean LOGFLAG = true;
     public static final String DIR = Environment.getExternalStorageDirectory()
             .getAbsolutePath() + "/Victor/log/";
@@ -54,6 +57,12 @@ public class SaBaseApplication extends Application {
     private Thread.UncaughtExceptionHandler mDefaultHandler;
     private ArrayList<Activity> list = new ArrayList<Activity>();
     public LocationService locationService;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {
@@ -294,6 +303,7 @@ public class SaBaseApplication extends Application {
         Log.i("GlobalApplication", str);
 
     }
+
 
 
 }

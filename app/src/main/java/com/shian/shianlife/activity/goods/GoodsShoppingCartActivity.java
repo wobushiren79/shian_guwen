@@ -1,6 +1,7 @@
 package com.shian.shianlife.activity.goods;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -194,6 +195,12 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsSho
      * 提交數據
      */
     private void submitData() {
+        if (this.selectGoods == null || this.selectGoods.size() <= 0) {
+            ToastUtils.show(this,"还没有选择商品");
+            return;
+        }
+        Intent intent = new Intent(this, GoodsOrderSettlementActivity.class);
+        startActivity(intent);
     }
 
     /**

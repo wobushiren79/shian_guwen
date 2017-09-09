@@ -357,12 +357,12 @@
   </string-array>
   <string-array name="qinghai_province_item">
     <item value="787">西宁</item>
-    <item value="788">玉树藏族自...</item>
-    <item value="789">海西蒙古族...</item>
-    <item value="790">海北藏族自...</item>
-    <item value="791">黄南藏族自...</item>
-    <item value="792">海南藏族自... </item>
-    <item value="793">果洛藏族自...</item>
+    <item value="788">玉树藏族自治区</item>
+    <item value="789">海西蒙古族自治区</item>
+    <item value="790">海北藏族自治区</item>
+    <item value="791">黄南藏族自治区</item>
+    <item value="792">海南藏族自治区 </item>
+    <item value="793">果洛藏族自治区</item>
   </string-array>
   <string-array name="shanxi1_province_item">
     <item value="794">太原</item>
@@ -396,9 +396,9 @@
     <item value="818">泸州</item>
     <item value="819">德阳</item>
     <item value="820">绵阳</item>
-    <item value="821">阿坝藏族羌... </item>
-    <item value="822">甘孜藏族自...</item>
-    <item value="823">凉山彝族自... </item>
+    <item value="821">阿坝藏族羌族自治区</item>
+    <item value="822">甘孜藏族自治区</item>
+    <item value="823">凉山彝族自治区 </item>
     <item value="824">眉山</item>
     <item value="825">广安</item>
     <item value="826">达州</item>
@@ -451,11 +451,11 @@
     <item value="867">伊犁</item>
     <item value="868">乌鲁木齐</item>
     <item value="869">阿勒泰地区</item>
-    <item value="870">昌吉回族自...</item>
-    <item value="871">博尔塔拉蒙...</item>
-    <item value="872">巴音郭楞蒙...</item>
-    <item value="873">克孜勒苏柯...</item>
-    <item value="874">伊犁哈萨克...</item>
+    <item value="870">昌吉回族自治区</item>
+    <item value="871">博尔塔拉蒙自治区</item>
+    <item value="872">巴音郭楞蒙自治区</item>
+    <item value="873">克孜勒苏柯自治区</item>
+    <item value="874">伊犁哈萨克自治区</item>
   </string-array>
   <string-array name="yunnan_province_item">
     <item value="875">昆明</item>
