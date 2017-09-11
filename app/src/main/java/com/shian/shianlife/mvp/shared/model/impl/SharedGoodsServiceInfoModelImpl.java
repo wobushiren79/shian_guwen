@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import com.shian.shianlife.mvp.base.OnGetDataListener;
 import com.shian.shianlife.mvp.shared.BaseSharedModel;
 import com.shian.shianlife.mvp.shared.SharedTag;
-import com.shian.shianlife.mvp.shared.bean.SharedGoodsServiceInfo;
+import com.shian.shianlife.mvp.shared.bean.SharedGoodsServiceInfoBean;
 import com.shian.shianlife.mvp.shared.model.ISharedGoodsServiceInfoModel;
 
 /**
@@ -33,7 +33,7 @@ public class SharedGoodsServiceInfoModelImpl extends BaseSharedModel implements 
             String serviceDetailsLocation = data.getString(ShareKey_ServiceDetailsLocation, "");
             String serviceTime = data.getString(ShareKey_ServiceTime, "");
 
-            SharedGoodsServiceInfo serviceInfo = new SharedGoodsServiceInfo();
+            SharedGoodsServiceInfoBean serviceInfo = new SharedGoodsServiceInfoBean();
             serviceInfo.setCustomerName(customerName);
             serviceInfo.setCustomerPhone(customerPhone);
             serviceInfo.setServiceWay(serviceWay);
@@ -49,15 +49,22 @@ public class SharedGoodsServiceInfoModelImpl extends BaseSharedModel implements 
     }
 
     @Override
-    public void setSharedGoodsServiceInfo(Context context, SharedGoodsServiceInfo params, OnGetDataListener listener) {
+    public void setSharedGoodsServiceInfo(Context context, SharedGoodsServiceInfoBean params, OnGetDataListener listener) {
         try {
+            chearSharedGoodsServiceInfo(context);
             SharedPreferences.Editor editor = getEditShared(context, SharedTag.Tag_Goods_Service_Info);
-            editor.putString(ShareKey_CustomerName, params.getCustomerName());
-            editor.putString(ShareKey_CustomerPhone, params.getCustomerPhone());
-            editor.putInt(ShareKey_ServiceWay, params.getServiceWay());
-            editor.putString(ShareKey_ServiceLocation, params.getServiceLocation());
-            editor.putString(ShareKey_ServiceDetailsLocation, params.getServiceDetailsLocation());
-            editor.putString(ShareKey_ServiceTime, params.getServiceTime());
+            if (params.getCustomerName() != null)
+                editor.putString(ShareKey_CustomerName, params.getCustomerName());
+            if (params.getCustomerPhone() != null)
+                editor.putString(ShareKey_CustomerPhone, params.getCustomerPhone());
+            if (params.getServiceWay() != null)
+                editor.putInt(ShareKey_ServiceWay, params.getServiceWay());
+            if (params.getServiceLocation() != null)
+                editor.putString(ShareKey_ServiceLocation, params.getServiceLocation());
+            if (params.getServiceDetailsLocation() != null)
+                editor.putString(ShareKey_ServiceDetailsLocation, params.getServiceDetailsLocation());
+            if (params.getServiceTime() != null)
+                editor.putString(ShareKey_ServiceTime, params.getServiceTime());
             editor.commit();
             listener.getDataSuccess("保存成功");
         } catch (Exception e) {

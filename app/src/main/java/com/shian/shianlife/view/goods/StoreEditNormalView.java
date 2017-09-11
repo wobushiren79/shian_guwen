@@ -26,6 +26,8 @@ public class StoreEditNormalView extends BaseLayout implements View.OnClickListe
     EditText etContent;
     @InjectView(R.id.ll_check)
     LinearLayout llCheck;
+    @InjectView(R.id.iv_line)
+    TextView ivLine;
 
     public static final int Mode_Edit = 0;
     public static final int Mode_Check = 1;
@@ -39,6 +41,8 @@ public class StoreEditNormalView extends BaseLayout implements View.OnClickListe
     public StoreEditNormalView(Context context, @Nullable AttributeSet attrs) {
         super(context, R.layout.layout_store_edit_normal_view, attrs);
     }
+
+
 
     public void setCallBack(CallBack callBack) {
         this.callBack = callBack;
@@ -67,9 +71,14 @@ public class StoreEditNormalView extends BaseLayout implements View.OnClickListe
         tvTitle.setText(titleName);
         etContent.setText(contentText);
         etContent.setHint(hintText);
-        setEnabled(!showMode);
+        if (visibilityLine)
+            ivLine.setVisibility(GONE);
+        else
+            ivLine.setVisibility(VISIBLE);
+        setIsEnabled(!showMode);
         setMode(Mode_Edit);
     }
+
 
     @Override
     protected void initData() {
@@ -88,12 +97,12 @@ public class StoreEditNormalView extends BaseLayout implements View.OnClickListe
      *
      * @param enabled
      */
-    public void setEnabled(boolean enabled) {
+    public void setIsEnabled(boolean enabled) {
         etContent.setEnabled(enabled);
         if (enabled) {
-            etContent.setGravity(Gravity.CENTER_VERTICAL);
+            etContent.setGravity(Gravity.LEFT);
         } else {
-            etContent.setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+            etContent.setGravity(Gravity.RIGHT);
         }
     }
 

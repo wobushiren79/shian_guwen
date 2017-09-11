@@ -13,13 +13,12 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.activity.goods.GoodsOrderServiceInfoActivity;
 import com.shian.shianlife.base.BaseLayout;
 import com.shian.shianlife.common.utils.ToastUtils;
-import com.shian.shianlife.mvp.shared.bean.SharedGoodsServiceInfo;
+import com.shian.shianlife.mvp.shared.bean.SharedGoodsServiceInfoBean;
 import com.shian.shianlife.mvp.shared.presenter.ISharedGoodsServiceInfoPresenter;
 import com.shian.shianlife.mvp.shared.presenter.impl.SharedGoodsServiceInfoPresenterImpl;
 import com.shian.shianlife.mvp.shared.view.ISharedGoodsServiceInfoView;
 
 import butterknife.InjectView;
-import butterknife.OnClick;
 
 /**
  * Created by zm.
@@ -50,7 +49,7 @@ public class GoodsServiceInfoLayout extends BaseLayout implements View.OnClickLi
     public static final int Mode_Show = 0;
     public static final int Mode_Edit = 1;
 
-    private SharedGoodsServiceInfo serviceInfoData;
+    private SharedGoodsServiceInfoBean serviceInfoData;
 
     private ISharedGoodsServiceInfoPresenter sharedGoodsServiceInfoPresenter;
 
@@ -145,7 +144,7 @@ public class GoodsServiceInfoLayout extends BaseLayout implements View.OnClickLi
     }
 
     @Override
-    public void getSharedGoodsServiceInfoSuccess(SharedGoodsServiceInfo result) {
+    public void getSharedGoodsServiceInfoSuccess(SharedGoodsServiceInfoBean result) {
         serviceInfoData = result;
         setHasData(true);
     }

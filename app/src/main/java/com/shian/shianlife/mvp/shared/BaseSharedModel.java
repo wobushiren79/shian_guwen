@@ -24,5 +24,6 @@ public class BaseSharedModel {
     protected void clearShared(Context context, String Tag) {
         SharedPreferences.Editor editor= getEditShared(context,Tag);
         editor.clear();
+        editor.commit();
     }
 }

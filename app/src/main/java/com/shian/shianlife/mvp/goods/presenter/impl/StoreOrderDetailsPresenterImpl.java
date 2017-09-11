@@ -1,6 +1,7 @@
 package com.shian.shianlife.mvp.goods.presenter.impl;
 
 
+import com.shian.shianlife.common.utils.DataUtils;
 import com.shian.shianlife.mvp.base.OnGetDataListener;
 import com.shian.shianlife.mvp.goods.bean.GoodsFinance;
 import com.shian.shianlife.mvp.goods.bean.GoodsInvoice;
@@ -72,7 +73,7 @@ public class StoreOrderDetailsPresenterImpl implements IStoreOrderDetailsPresent
                     storeOrderDetailsView.setServiceTime(goodsServiceInfo.getBookTime());
                 storeOrderDetailsView.setGoodsItemNumber(goodsItemPerforms.size() + "");
                 //商品信息
-                Map<String, List<GoodsItemPerform>> goodsListData = getStringListMap(goodsItemPerforms);
+                Map<String, List<GoodsItemPerform>> goodsListData = DataUtils.getMapForGoodsItemPerform(goodsItemPerforms);
                 storeOrderDetailsView.setGoodsListData(goodsListData);
                 //是否需要发票
                 if (goodsOrder.getNeedInvoice() == GoodsFinanceDeliveryEnum.notinvoicement.getCode()) {
@@ -150,26 +151,5 @@ public class StoreOrderDetailsPresenterImpl implements IStoreOrderDetailsPresent
     }
 
 
-    private Map<String, List<GoodsItemPerform>> getStringListMap(List<GoodsItemPerform> goodsItemPerforms) {
-        Map<String, List<GoodsItemPerform>> goodsListData = new HashMap<>();
-        try {
-            List<String> classList = new LinkedList<>();
-            for (GoodsItemPerform item : goodsItemPerforms) {
-                classList.add(item.getSpecOrderedAttr());
-            }
-            List<String> newClassList = new ArrayList(new HashSet(classList));
-            for (String className : newClassList) {
-                List<GoodsItemPerform> listItemData = new ArrayList<>();
-                for (GoodsItemPerform item : goodsItemPerforms) {
-                    if (item.getSpecOrderedAttr().equals(className)) {
-                        listItemData.add(item);
-                    }
-                }
-                goodsListData.put(className, listItemData);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return goodsListData;
-    }
+
 }

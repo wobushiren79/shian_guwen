@@ -4,7 +4,7 @@ package com.shian.shianlife.mvp.shared.bean;
  * Created by zm.
  */
 
-public class SharedGoodsServiceInfo {
+public class SharedGoodsServiceInfoBean {
     private String customerName;
     private String customerPhone;
     private Integer serviceWay;

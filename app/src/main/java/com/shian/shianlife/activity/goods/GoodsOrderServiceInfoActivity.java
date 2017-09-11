@@ -12,7 +12,7 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.ViewUtils;
-import com.shian.shianlife.mvp.shared.bean.SharedGoodsServiceInfo;
+import com.shian.shianlife.mvp.shared.bean.SharedGoodsServiceInfoBean;
 import com.shian.shianlife.mvp.shared.presenter.ISharedGoodsServiceInfoPresenter;
 import com.shian.shianlife.mvp.shared.presenter.impl.SharedGoodsServiceInfoPresenterImpl;
 import com.shian.shianlife.mvp.shared.view.ISharedGoodsServiceInfoView;
@@ -21,7 +21,6 @@ import com.shian.shianlife.view.goods.StoreEditNormalView;
 import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 import com.summerxia.dateselector.widget.LocationSelectorDialogBuilder;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
@@ -93,7 +92,7 @@ public class GoodsOrderServiceInfoActivity extends BaseActivity implements IShar
     }
 
     @Override
-    public void getSharedGoodsServiceInfoSuccess(SharedGoodsServiceInfo result) {
+    public void getSharedGoodsServiceInfoSuccess(SharedGoodsServiceInfoBean result) {
     }
 
     @Override

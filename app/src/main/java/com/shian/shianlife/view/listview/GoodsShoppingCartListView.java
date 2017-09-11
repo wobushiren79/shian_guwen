@@ -124,7 +124,7 @@ public class GoodsShoppingCartListView extends BasePtrExpandableListView impleme
     }
 
     @Override
-    public void getSelectGoods(List<GoodsShoppingCartListChildBean> selectGoods) {
+    public void getSelectGoods(ArrayList<GoodsShoppingCartListChildBean> selectGoods) {
         if (callBack != null)
             callBack.getSelectGoods(selectGoods);
     }
@@ -133,6 +133,6 @@ public class GoodsShoppingCartListView extends BasePtrExpandableListView impleme
     public interface CallBack {
         void getIsAllCheck(boolean isAllCheck);
 
-        void getSelectGoods(List<GoodsShoppingCartListChildBean> selectGoods);
+        void getSelectGoods(ArrayList<GoodsShoppingCartListChildBean> selectGoods);
     }
 }

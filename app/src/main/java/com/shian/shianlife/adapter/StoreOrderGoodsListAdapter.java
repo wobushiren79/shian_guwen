@@ -32,8 +32,6 @@ public class StoreOrderGoodsListAdapter extends BaseExpandableAdapter<String, Go
 
     private IStoreOrderGetPerformPresenter storeOrderGetPerformPresenter;
 
-    public boolean isShowPerformInfo = true;
-
     public StoreOrderGoodsListAdapter(Context context) {
         super(context, R.layout.store_order_expendlist_group, R.layout.store_order_expendlist_item);
         storeOrderGetPerformPresenter = new StoreOrderGetPerformPresenterImpl(this);
@@ -43,11 +41,6 @@ public class StoreOrderGoodsListAdapter extends BaseExpandableAdapter<String, Go
     public void setGroupView(String groupData, View convertView, int groupPosition, boolean isExpanded) {
         TextView content = (TextView) convertView.findViewById(R.id.tv_content);
         content.setText(groupData);
-    }
-
-    public void setIsShowPerformInfo(boolean isShowPerformInfo) {
-        this.isShowPerformInfo = isShowPerformInfo;
-        this.notifyDataSetChanged();
     }
 
     @Override
@@ -61,12 +54,12 @@ public class StoreOrderGoodsListAdapter extends BaseExpandableAdapter<String, Go
         TextView tvPerformStatus = (TextView) convertView.findViewById(R.id.tv_perform_status);
 
         tvGoodsName.setText(itemData.getSpecOrderedVolume());
-        tvGoodsSpecification.setText("规格：" + itemData.getSpecName());
+        tvGoodsSpecification.setText(itemData.getSpecAlias() + "：" + itemData.getSpecName());
 
         if (itemData.getEmentPrice() == null)
             tvGoodsCustomerMoney.setText("客户￥：" + "未知");
         else
-            tvGoodsCustomerMoney.setText("客户￥：" + (float) itemData.getEmentPrice() / 100f);
+            tvGoodsCustomerMoney.setText("客户￥：" + (float) itemData.getSpecOrderedPrice() / 100f);
 
         if (itemData.getAdviserPrice() == null)
             tvGoodsCounselorMoney.setText("顾问￥：" + "未知");
@@ -75,15 +68,14 @@ public class StoreOrderGoodsListAdapter extends BaseExpandableAdapter<String, Go
 
 
         tvGoodsNumb.setText("x" + itemData.getSpecOrderedNum());
-        Utils.loadPic(mContext, ivGoodsPic, AppContansts.Goods_PicUrl + itemData.getTitleImg());
+        Utils.loadPic(mContext, ivGoodsPic, AppContansts.Goods_PicUrl + "/" + itemData.getTitleImg());
         if (itemData.getGoodsPerform() != null) {
             final GoodsPerform goodsPerform = itemData.getGoodsPerform();
             tvPerformStatus.setText(GoodsPerformStatusEnum.getValueText(goodsPerform.getPerformStatus()));
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (isShowPerformInfo)
-                        storeOrderGetPerformPresenter.getPerformInfo(goodsPerform.getId());
+                    storeOrderGetPerformPresenter.getPerformInfo(goodsPerform.getId());
                 }
             });
         }

@@ -10,6 +10,7 @@
         <attr name="contentText" format="string" />
         <attr name="hintText" format="string" />
         <attr name="showMode" format="boolean" />
+        <attr name="visibilityLine" format="boolean" />
     </declare-styleable>
 
 

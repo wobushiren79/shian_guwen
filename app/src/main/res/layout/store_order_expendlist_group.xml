@@ -12,5 +12,6 @@
         android:layout_marginLeft="@dimen/dimen_80dp"
         android:layout_marginRight="@dimen/dimen_80dp"
         android:layout_marginTop="@dimen/dimen_27dp"
+        android:textColor="@color/zhy_text_color_16"
         android:textSize="@dimen/dimen_28dp" />
 </LinearLayout>

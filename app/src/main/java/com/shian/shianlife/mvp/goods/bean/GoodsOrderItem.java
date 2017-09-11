@@ -36,7 +36,7 @@ public class GoodsOrderItem extends BaseEntity {
     private Long classifyId;
 
     /**
-     * 规格商品下单单价
+     * 规格商品下单单价(推荐价)
      */
     private Integer specOrderedPrice;
 

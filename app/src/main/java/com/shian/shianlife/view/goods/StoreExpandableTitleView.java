@@ -59,6 +59,16 @@ public class StoreExpandableTitleView extends BaseLayout implements View.OnClick
 
     @Override
     public void onClick(View v) {
+        startExpandable();
+    }
+
+
+    public void setExpandable(boolean isExpandable) {
+        this.isExpandable = !isExpandable;
+        startExpandable();
+    }
+
+    private void startExpandable() {
         if (isExpandable) {
             isExpandable = false;
             AnimUtils.startRotateToSelf(ivExpandable, 200, 90, 0, null);
@@ -72,5 +82,18 @@ public class StoreExpandableTitleView extends BaseLayout implements View.OnClick
 
     public interface CallBack {
         void onClickExpandable(View view, boolean isExpandable);
+    }
+
+    /**
+     * 是否开启有效
+     *
+     * @param isEnabled
+     */
+    public void isOpenSelfClick(boolean isEnabled) {
+        if (isEnabled) {
+            this.setOnClickListener(this);
+        } else {
+            this.setOnClickListener(null);
+        }
     }
 }

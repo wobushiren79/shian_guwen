@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.bean.GoodsShoppingCartListChildBean;
+import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsListResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartListResultBean;
@@ -39,6 +39,8 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsSho
     TextView tvTotalPrice;
     @InjectView(R.id.tv_submit)
     TextView tvSubmit;
+    @InjectView(R.id.tv_check_all)
+    TextView tvCheckAll;
 
     private Integer pageNumber;
     private Integer pageSize;
@@ -48,7 +50,7 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsSho
     private IGoodsShoppingCartListPresenter goodsShoppingCartListPresenter;
     private IGoodsDetailsListPresenter goodsDetailsListPresenter;
 
-    private List<GoodsShoppingCartListChildBean> selectGoods;//選中的商品
+    private ArrayList<GoodsShoppingCartListChildBean> selectGoods;//選中的商品
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,7 +163,7 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsSho
     }
 
     @Override
-    public void getSelectGoods(List<GoodsShoppingCartListChildBean> selectGoods) {
+    public void getSelectGoods(ArrayList<GoodsShoppingCartListChildBean> selectGoods) {
         this.selectGoods = selectGoods;
         float totalPrice = 0;
         for (GoodsShoppingCartListChildBean item : selectGoods) {
@@ -172,10 +174,14 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsSho
         setTotalPrice("￥" + totalPrice);
     }
 
-    @OnClick({R.id.check, R.id.tv_submit})
+    @OnClick({R.id.check, R.id.tv_submit, R.id.tv_check_all})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.check:
+                setCheckStatus();
+                break;
+            case R.id.tv_check_all:
+                check.setChecked(!check.isChecked());
                 setCheckStatus();
                 break;
             case R.id.tv_submit:
@@ -196,10 +202,11 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsSho
      */
     private void submitData() {
         if (this.selectGoods == null || this.selectGoods.size() <= 0) {
-            ToastUtils.show(this,"还没有选择商品");
+            ToastUtils.show(this, "还没有选择商品");
             return;
         }
         Intent intent = new Intent(this, GoodsOrderSettlementActivity.class);
+        intent.putExtra(IntentName.INTENT_LIST_DATA, selectGoods);
         startActivity(intent);
     }
 
@@ -210,5 +217,11 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsSho
      */
     private void setTotalPrice(String price) {
         tvTotalPrice.setText(price);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        goodsShoppingCartListPresenter.getShoppingCartListData();
     }
 }

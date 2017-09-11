@@ -18,10 +18,10 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:paddingBottom="@dimen/dimen_26dp"
-            android:paddingLeft="@dimen/dimen_16dp"
+            android:paddingLeft="@dimen/dimen_32dp"
             android:paddingRight="@dimen/dimen_16dp"
             android:paddingTop="@dimen/dimen_26dp"
-            android:textColor="@color/black"
+            android:textColor="@color/zhy_text_color_16"
             android:textSize="@dimen/dimen_28dp" />
 
         <TextView

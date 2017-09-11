@@ -101,6 +101,7 @@
                 android:id="@+id/layout_service_details_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                MyViewAttr:hintText="请输入具体的社区街道门牌号"
                 MyViewAttr:titleName="详细地址"></com.shian.shianlife.view.goods.StoreEditNormalView>
 
             <com.shian.shianlife.view.goods.StoreEditNormalView
@@ -114,7 +115,7 @@
     <TextView
         android:id="@+id/tv_submit"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_100dp"
+        android:layout_height="@dimen/dimen_96dp"
         android:background="@drawable/zhy_submit_button_style_1"
         android:gravity="center"
         android:text="保存"

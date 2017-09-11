@@ -1,10 +1,12 @@
 package com.shian.shianlife.mvp.goods.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by zm.
  */
 
-public class GoodsDetailsListResultBean {
+public class GoodsDetailsListResultBean implements Serializable{
     /**
      * spec_price : 888.00
      * adviser_price : 508.00

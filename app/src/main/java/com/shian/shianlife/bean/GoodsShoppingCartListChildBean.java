@@ -2,11 +2,13 @@ package com.shian.shianlife.bean;
 
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsListResultBean;
 
+import java.io.Serializable;
+
 /**
  * Created by zm.
  */
 
-public class GoodsShoppingCartListChildBean {
+public class GoodsShoppingCartListChildBean implements Serializable{
     private GoodsDetailsListResultBean resultBean;
 
 

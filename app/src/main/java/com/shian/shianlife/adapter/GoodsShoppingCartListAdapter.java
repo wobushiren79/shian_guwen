@@ -222,7 +222,7 @@ public class GoodsShoppingCartListAdapter extends BaseExpandableAdapter<GoodsSho
         tvGoodsName.setText(name.toString());
 
         if (data.getSpec_name() != null)
-            tvGoodsSpec.setText("规格：" + data.getSpec_name());
+            tvGoodsSpec.setText(data.getSpec_alias() + "：" + data.getSpec_name());
 
         if (data.getSpec_price() != null)
             tvPrice.setText("￥" + data.getSpec_price());
@@ -273,7 +273,7 @@ public class GoodsShoppingCartListAdapter extends BaseExpandableAdapter<GoodsSho
      * 獲取選中商品
      */
     public List<GoodsShoppingCartListChildBean> getSelectGoods() {
-        List<GoodsShoppingCartListChildBean> goodsList = new ArrayList<>();
+        ArrayList<GoodsShoppingCartListChildBean> goodsList = new ArrayList<>();
         for (List<GoodsShoppingCartListChildBean> item : itemData) {
             for (GoodsShoppingCartListChildBean childItem : item) {
                 if (childItem.isCheckGoods()) {
@@ -325,8 +325,8 @@ public class GoodsShoppingCartListAdapter extends BaseExpandableAdapter<GoodsSho
      * 去除空的数据
      */
     private void clearUnnecessaryData() {
-        List<List<GoodsShoppingCartListChildBean>> tempChilds = new ArrayList<>();
-        List<GoodsShoppingCartListGroupBean> tempGroups = new ArrayList<>();
+        ArrayList<List<GoodsShoppingCartListChildBean>> tempChilds = new ArrayList<>();
+        ArrayList<GoodsShoppingCartListGroupBean> tempGroups = new ArrayList<>();
         for (int i = 0; i < itemData.size(); i++) {
             List<GoodsShoppingCartListChildBean> items = itemData.get(i);
             if (items.size() == 0 || items == null) {
@@ -341,6 +341,6 @@ public class GoodsShoppingCartListAdapter extends BaseExpandableAdapter<GoodsSho
     public interface CallBack {
         void isAllCheck(boolean isAllCheck);
 
-        void getSelectGoods(List<GoodsShoppingCartListChildBean> selectGoods);
+        void getSelectGoods(ArrayList<GoodsShoppingCartListChildBean> selectGoods);
     }
 }

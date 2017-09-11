@@ -1,7 +1,7 @@
 package com.shian.shianlife.mvp.shared.view;
 
 import com.shian.shianlife.mvp.base.BaseMVPView;
-import com.shian.shianlife.mvp.shared.bean.SharedGoodsServiceInfo;
+import com.shian.shianlife.mvp.shared.bean.SharedGoodsServiceInfoBean;
 
 /**
  * Created by zm.
@@ -9,7 +9,7 @@ import com.shian.shianlife.mvp.shared.bean.SharedGoodsServiceInfo;
 
 public interface ISharedGoodsServiceInfoView extends BaseMVPView {
 
-    void getSharedGoodsServiceInfoSuccess(SharedGoodsServiceInfo result);
+    void getSharedGoodsServiceInfoSuccess(SharedGoodsServiceInfoBean result);
 
     void getSharedGoodsServiceInfoFail(String msg);
 

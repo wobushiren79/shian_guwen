@@ -30,4 +30,7 @@ public class IntentName {
     public static String INTENT_GOODSNAME = "INTENT_GOODSNAME_ID";//goodsname
     public static String INTENT_GOODS_ID = "INTENT_GOODS_ID";//goodsID
 
+    public static String INTENT_LIST_DATA = "INTENT_LIST_DATA";//列表数据
+    public static String INTENT_DATA = "INTENT_DATA";//数据
+
 }

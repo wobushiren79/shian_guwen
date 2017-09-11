@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:MyViewAttr="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.shian.shianlife.activity.goods.GoodsOrderInvoiceInfoActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/ll_invoice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_rb_no_invoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dimen_32dp"
+                    android:paddingRight="@dimen/dimen_16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="不需要发票"
+                        android:textColor="@color/zhy_text_color_16"
+                        android:textSize="@dimen/dimen_28dp" />
+
+                    <RadioButton
+                        android:id="@+id/check_no_invoice"
+                        android:layout_width="@dimen/dimen_36dp"
+                        android:layout_height="@dimen/dimen_36dp"
+                        android:layout_gravity="center_vertical|"
+                        android:layout_marginBottom="@dimen/dimen_22dp"
+                        android:layout_marginRight="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_22dp"
+                        android:background="@drawable/zhy_check_box_style_1"
+                        android:button="@null" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginLeft="@dimen/dimen_32dp"
+                    android:background="@color/zhy_line_3" />
+
+                <LinearLayout
+                    android:id="@+id/ll_rb_has_invoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dimen_32dp"
+                    android:paddingRight="@dimen/dimen_16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="需要发票"
+                        android:textColor="@color/zhy_text_color_16"
+                        android:textSize="@dimen/dimen_28dp" />
+
+                    <RadioButton
+                        android:id="@+id/check_has_invoice"
+                        android:layout_width="@dimen/dimen_36dp"
+                        android:layout_height="@dimen/dimen_36dp"
+                        android:layout_gravity="center_vertical|"
+                        android:layout_marginBottom="@dimen/dimen_22dp"
+                        android:layout_marginRight="@dimen/dimen_16dp"
+                        android:layout_marginTop="@dimen/dimen_22dp"
+                        android:background="@drawable/zhy_check_box_style_1"
+                        android:button="@null" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginLeft="@dimen/dimen_32dp"
+                    android:background="@color/zhy_line_3" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_invoice_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.shian.shianlife.view.goods.StoreEditNormalView
+                    android:id="@+id/layout_title_invoice_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    MyViewAttr:showMode="true"
+                    MyViewAttr:titleName="发票抬头"></com.shian.shianlife.view.goods.StoreEditNormalView>
+
+                <LinearLayout
+                    android:id="@+id/ll_invoice_self"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dimen_32dp">
+
+                    <RadioButton
+                        android:id="@+id/check_invoice_self"
+                        android:layout_width="@dimen/dimen_36dp"
+                        android:layout_height="@dimen/dimen_36dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/dimen_22dp"
+                        android:layout_marginLeft="@dimen/dimen_32dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:layout_marginTop="@dimen/dimen_22dp"
+                        android:background="@drawable/zhy_check_box_style_1"
+                        android:button="@null" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="个人"
+                        android:textColor="@color/zhy_text_color_16"
+                        android:textSize="@dimen/dimen_28dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginLeft="@dimen/dimen_32dp"
+                    android:background="@color/zhy_line_3" />
+
+                <LinearLayout
+                    android:id="@+id/ll_invoice_company"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/dimen_32dp">
+
+                    <RadioButton
+                        android:id="@+id/check_invoice_company"
+                        android:layout_width="@dimen/dimen_36dp"
+                        android:layout_height="@dimen/dimen_36dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="@dimen/dimen_22dp"
+                        android:layout_marginLeft="@dimen/dimen_32dp"
+                        android:layout_marginRight="@dimen/dimen_20dp"
+                        android:layout_marginTop="@dimen/dimen_22dp"
+                        android:background="@drawable/zhy_check_box_style_1"
+                        android:button="@null" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="单位"
+                        android:textColor="@color/zhy_text_color_16"
+                        android:textSize="@dimen/dimen_28dp" />
+
+                    <EditText
+                        android:id="@+id/et_company_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dimen_16dp"
+                        android:background="@null"
+                        android:hint="请输入全称"
+                        android:textColor="@color/zhy_text_color_16"
+                        android:textSize="@dimen/dimen_28dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_invoice_company_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dimen_88dp">
+
+                    <com.shian.shianlife.view.goods.StoreEditNormalView
+                        android:id="@+id/layout_invoice_company_tax_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        MyViewAttr:hintText="请填入三证合一后企业信用代码或税务登记证上税务登记号"
+                        MyViewAttr:titleName="税号"
+                        MyViewAttr:visibilityLine="true"></com.shian.shianlife.view.goods.StoreEditNormalView>
+
+                    <com.shian.shianlife.view.goods.StoreEditNormalView
+                        android:id="@+id/layout_invoice_company_remark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        MyViewAttr:hintText="若为一般纳税人 请补充填写开户行信息与账号"
+                        MyViewAttr:titleName="备注"
+                        MyViewAttr:visibilityLine="true"></com.shian.shianlife.view.goods.StoreEditNormalView>
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_marginLeft="@dimen/dimen_32dp"
+                    android:background="@color/zhy_line_3" />
+
+                <com.shian.shianlife.view.goods.StoreEditNormalView
+                    android:id="@+id/layout_title_invoice_send"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    MyViewAttr:showMode="true"
+                    MyViewAttr:titleName="发票寄送信息"></com.shian.shianlife.view.goods.StoreEditNormalView>
+
+
+                <com.shian.shianlife.view.goods.StoreEditNormalView
+                    android:id="@+id/layout_send_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_32dp"
+                    MyViewAttr:titleName="收件人姓名"></com.shian.shianlife.view.goods.StoreEditNormalView>
+
+                <com.shian.shianlife.view.goods.StoreEditNormalView
+                    android:id="@+id/layout_send_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_32dp"
+                    MyViewAttr:titleName="收件人电话"></com.shian.shianlife.view.goods.StoreEditNormalView>
+
+                <com.shian.shianlife.view.goods.StoreEditNormalView
+                    android:id="@+id/layout_send_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_32dp"
+                    MyViewAttr:titleName="收件人地址"></com.shian.shianlife.view.goods.StoreEditNormalView>
+
+                <com.shian.shianlife.view.goods.StoreEditNormalView
+                    android:id="@+id/layout_send_details_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_32dp"
+                    MyViewAttr:hintText="请输入具体的社区街道门牌号"
+                    MyViewAttr:titleName="详细地址"></com.shian.shianlife.view.goods.StoreEditNormalView>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/tv_submit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_96dp"
+        android:background="@drawable/zhy_submit_button_style_1"
+        android:gravity="center"
+        android:text="确认"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_32dp" />
+</LinearLayout>

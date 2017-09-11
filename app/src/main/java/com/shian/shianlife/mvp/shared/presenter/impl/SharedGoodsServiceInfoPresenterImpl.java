@@ -1,7 +1,7 @@
 package com.shian.shianlife.mvp.shared.presenter.impl;
 
 import com.shian.shianlife.mvp.base.OnGetDataListener;
-import com.shian.shianlife.mvp.shared.bean.SharedGoodsServiceInfo;
+import com.shian.shianlife.mvp.shared.bean.SharedGoodsServiceInfoBean;
 import com.shian.shianlife.mvp.shared.model.ISharedGoodsServiceInfoModel;
 import com.shian.shianlife.mvp.shared.model.impl.SharedGoodsServiceInfoModelImpl;
 import com.shian.shianlife.mvp.shared.presenter.ISharedGoodsServiceInfoPresenter;
@@ -36,9 +36,9 @@ public class SharedGoodsServiceInfoPresenterImpl implements ISharedGoodsServiceI
             goodsServiceInfoView.showToast("数据错误");
             return;
         }
-        goodsServiceInfoModel.getSharedGoodsServiceInfo(goodsServiceInfoView.getContext(), new OnGetDataListener<SharedGoodsServiceInfo>() {
+        goodsServiceInfoModel.getSharedGoodsServiceInfo(goodsServiceInfoView.getContext(), new OnGetDataListener<SharedGoodsServiceInfoBean>() {
             @Override
-            public void getDataSuccess(SharedGoodsServiceInfo result) {
+            public void getDataSuccess(SharedGoodsServiceInfoBean result) {
                 goodsServiceInfoView.getSharedGoodsServiceInfoSuccess(result);
 
                 goodsServiceInfoView.setServiceInfoCustomerName(result.getCustomerName());
@@ -91,7 +91,7 @@ public class SharedGoodsServiceInfoPresenterImpl implements ISharedGoodsServiceI
                 return;
             }
         }
-        SharedGoodsServiceInfo params = new SharedGoodsServiceInfo();
+        SharedGoodsServiceInfoBean params = new SharedGoodsServiceInfoBean();
         params.setCustomerName(goodsServiceInfoView.getServiceInfoCustomerName());
         params.setCustomerPhone(goodsServiceInfoView.getServiceInfoCustomerPhone());
         params.setServiceWay(goodsServiceInfoView.getServiceInfoServiceWay());
