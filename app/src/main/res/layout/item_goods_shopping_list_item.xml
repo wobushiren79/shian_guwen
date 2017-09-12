@@ -24,12 +24,12 @@
         android:src="@drawable/zhy_pic_loading" />
 
     <LinearLayout
-        android:visibility="gone"
         android:id="@+id/ll_mode_edit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -136,6 +136,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:text=""
             android:textColor="@color/zhy_text_color_16"
             android:textSize="@dimen/dimen_30dp" />

@@ -1,5 +1,6 @@
 package com.shian.shianlife.activity.goods;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +13,23 @@ import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.bean.GoodsShoppingCartListChildBean;
 import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.DataUtils;
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.ViewUtils;
+import com.shian.shianlife.mvp.goods.bean.GoodsInvoice;
 import com.shian.shianlife.mvp.goods.bean.GoodsItemPerform;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrder;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderCreateResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderItem;
+import com.shian.shianlife.mvp.goods.bean.GoodsServiceInfo;
+import com.shian.shianlife.mvp.goods.presenter.IGoodsOrderCreatePresenter;
+import com.shian.shianlife.mvp.goods.presenter.impl.GoodsOrderCreatePresenterImpl;
+import com.shian.shianlife.mvp.goods.view.IGoodsOrderCreateView;
 import com.shian.shianlife.mvp.shared.bean.SharedGoodsInvoiceInfoBean;
+import com.shian.shianlife.mvp.shared.presenter.ISharedGoodsInvoiceInfoClearPresenter;
+import com.shian.shianlife.mvp.shared.presenter.impl.SharedGoodsInvoiceInfoClearPresenterImpl;
+import com.shian.shianlife.mvp.shared.view.ISharedGoodsInvoiceInfoClearView;
 import com.shian.shianlife.thisenum.GoodsFinanceDeliveryEnum;
+import com.shian.shianlife.thisenum.GoodsOrderChannelEnum;
 import com.shian.shianlife.view.ScrollExpandableListView;
 import com.shian.shianlife.view.goods.GoodsServiceInfoLayout;
 import com.shian.shianlife.view.goods.StoreEditNormalView;
@@ -28,7 +42,7 @@ import java.util.Map;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class GoodsOrderSettlementActivity extends BaseActivity implements StoreExpandableTitleView.CallBack, View.OnClickListener {
+public class GoodsOrderSettlementActivity extends BaseActivity implements StoreExpandableTitleView.CallBack, View.OnClickListener, View.OnLongClickListener, IGoodsOrderCreateView, ISharedGoodsInvoiceInfoClearView {
 
     @InjectView(R.id.layout_service_info)
     GoodsServiceInfoLayout layoutServiceInfo;
@@ -58,10 +72,12 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
 
 
     private StoreOrderGoodsListAdapter goodsListAdapter;
-    private List<GoodsShoppingCartListChildBean> selectGoods;//選中的商品
+    private List<GoodsItemPerform> selectGoods;//選中的商品
 
     private SharedGoodsInvoiceInfoBean invoiceInfoData;//发票数据
 
+    private IGoodsOrderCreatePresenter goodsOrderCreatePresenter;
+    private ISharedGoodsInvoiceInfoClearPresenter sharedGoodsInvoiceInfoClearPresenter;
 
     public static final int InvoiceRequestCode = 6666;
 
@@ -79,17 +95,18 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
         layoutServiceInfo.setMode(GoodsServiceInfoLayout.Mode_Edit);
         invoiceTitle.isOpenSelfClick(false);
         invoiceTitle.setOnClickListener(this);
-        llSubmitTotalPrice.setOnClickListener(this);
+        llSubmitTotalPrice.setOnLongClickListener(this);
         tvSubmit.setOnClickListener(this);
         setInvoiceLayout();
     }
 
     private void initData() {
-        selectGoods = (ArrayList<GoodsShoppingCartListChildBean>) getIntent().getSerializableExtra(IntentName.INTENT_LIST_DATA);
-        List<GoodsItemPerform> listGoods = DataUtils.ShoppingCartToGoodsData(selectGoods);
-        Map<String, List<GoodsItemPerform>> mapGoodsData = DataUtils.getMapForGoodsItemPerform(listGoods);
+        selectGoods = (ArrayList<GoodsItemPerform>) getIntent().getSerializableExtra(IntentName.INTENT_LIST_DATA);
+        Map<String, List<GoodsItemPerform>> mapGoodsData = DataUtils.getMapForGoodsItemPerform(selectGoods);
 
-        tvMoneyCustomer.setText(getCustomerTotalPrice());
+        tvMoneyCustomer.setText("￥" + (getCustomerTotalPrice() / 100f));
+        tvSubmitPriceName.setText("推荐价：");
+        tvSubmitPriceNumber.setText("￥" + (getCustomerTotalPrice() / 100f));
 
         goodsExpandTitle.setCallBack(this);
         goodsListAdapter = new StoreOrderGoodsListAdapter(this);
@@ -98,6 +115,9 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
         //默认展开
         goodsExpandTitle.setExpandable(true);
         ViewUtils.expandGroup(goodsExpandListView, goodsListAdapter);
+
+        goodsOrderCreatePresenter = new GoodsOrderCreatePresenterImpl(this);
+        sharedGoodsInvoiceInfoClearPresenter = new SharedGoodsInvoiceInfoClearPresenterImpl(this);
     }
 
     @Override
@@ -125,7 +145,24 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
     public void onClick(View v) {
         if (v == invoiceTitle) {
             editInvoiceInfo();
+        } else if (v == tvSubmit) {
+            createOrder();
         }
+    }
+
+
+    @Override
+    public boolean onLongClick(View v) {
+        if (v == llSubmitTotalPrice) {
+            if (tvSubmitPriceName.getText().toString().contains("推荐价")) {
+                tvSubmitPriceName.setText("顾问价：");
+                tvSubmitPriceNumber.setText("￥" + (getAdviserTotalPrice() / 100f));
+            } else {
+                tvSubmitPriceName.setText("推荐价：");
+                tvSubmitPriceNumber.setText("￥" + (getCustomerTotalPrice() / 100f));
+            }
+        }
+        return true;
     }
 
     /**
@@ -136,15 +173,13 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
         startActivityForResult(intent, InvoiceRequestCode);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == InvoiceRequestCode && resultCode == GoodsOrderInvoiceInfoActivity.InvoiceResultCode) {
-            SharedGoodsInvoiceInfoBean invoiceInfoData = (SharedGoodsInvoiceInfoBean) data.getSerializableExtra(IntentName.INTENT_DATA);
-            this.invoiceInfoData = invoiceInfoData;
-            setInvoiceLayout();
-        }
+    /**
+     * 生成订单
+     */
+    private void createOrder() {
+        goodsOrderCreatePresenter.createGoodsOrder();
     }
+
 
     /**
      * 设置发表信息
@@ -165,22 +200,99 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
     /**
      * 获取总推荐价
      */
-    private String getCustomerTotalPrice() {
+    private float getCustomerTotalPrice() {
         float totalPrice = 0f;
-        for (GoodsShoppingCartListChildBean items : selectGoods) {
-            totalPrice += items.getResultBean().getSpec_price();
+        for (GoodsItemPerform items : selectGoods) {
+            totalPrice += items.getSpecOrderedPrice();
         }
-        return "￥" + totalPrice;
+        return totalPrice;
     }
 
     /**
      * 获取总顾问价
      */
-    private String getAdviserTotalPrice() {
+    private float getAdviserTotalPrice() {
         float totalPrice = 0f;
-        for (GoodsShoppingCartListChildBean items : selectGoods) {
-            totalPrice += items.getResultBean().getAdviser_price();
+        for (GoodsItemPerform items : selectGoods) {
+            totalPrice += items.getAdviserPrice();
         }
-        return "￥" + totalPrice;
+        return totalPrice;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == InvoiceRequestCode && resultCode == GoodsOrderInvoiceInfoActivity.InvoiceResultCode) {
+            SharedGoodsInvoiceInfoBean invoiceInfoData = (SharedGoodsInvoiceInfoBean) data.getSerializableExtra(IntentName.INTENT_DATA);
+            this.invoiceInfoData = invoiceInfoData;
+            setInvoiceLayout();
+        }
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    @Override
+    public void showToast(String msg) {
+        ToastUtils.show(this, msg);
+    }
+
+    @Override
+    public void createGoodsOrderSuccess(GoodsOrderCreateResultBean resultBean) {
+        ToastUtils.show(this, "生成订单成功");
+        layoutServiceInfo.clearDataForShared();
+        sharedGoodsInvoiceInfoClearPresenter.clearData();
+        Intent intent = new Intent(this, GoodsOrderSubmitActivity.class);
+        intent.putExtra(IntentName.INTENT_ORDERID, resultBean.getOrderId());
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void createGoodsOrderFail(String msg) {
+        ToastUtils.show(this, msg);
+    }
+
+    @Override
+    public GoodsOrder getGoodsOrder() {
+        GoodsOrder goodsOrder = new GoodsOrder();
+        goodsOrder.setOrderChannel(GoodsOrderChannelEnum.Adviser_App.getCode());
+        goodsOrder.setOrderComment(layoutRemark.getData());
+        goodsOrder.setTotalPrice((int) (getAdviserTotalPrice() * 100));
+        goodsOrder.setShowTotalPrice((int) (getCustomerTotalPrice() * 100));
+        if (layoutServiceInfo.getData() != null) {
+            goodsOrder.setCustomerName(layoutServiceInfo.getData().getCustomerName());
+            goodsOrder.setCustomerPhone(layoutServiceInfo.getData().getCustomerPhone());
+        }
+        if (invoiceInfoData == null) {
+            goodsOrder.setNeedInvoice(GoodsFinanceDeliveryEnum.notinvoicement.getCode());
+        } else {
+            goodsOrder.setNeedInvoice(GoodsFinanceDeliveryEnum.hasinvoicement.getCode());
+        }
+        return goodsOrder;
+    }
+
+    @Override
+    public GoodsInvoice getGoodsInvoice() {
+        GoodsInvoice goodsInvoice = DataUtils.SharedGoodsInvoiceInfoBeanToGoodsInvoice(invoiceInfoData);
+        return goodsInvoice;
+    }
+
+    @Override
+    public GoodsServiceInfo getGoodsServiceInfo() {
+        GoodsServiceInfo goodsServiceInfo = DataUtils.SharedGoodsServiceInfoBeanToGoodsInvoice(layoutServiceInfo.getData());
+        return goodsServiceInfo;
+    }
+
+    @Override
+    public List<GoodsOrderItem> getGoodsOrderItem() {
+        List<GoodsOrderItem> listData = new ArrayList<>();
+        for (GoodsItemPerform item : selectGoods) {
+            GoodsOrderItem tempIte = item;
+            listData.add(tempIte);
+        }
+        return listData;
     }
 }

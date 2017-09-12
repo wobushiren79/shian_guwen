@@ -8,38 +8,38 @@ import com.shian.shianlife.base.BaseEntity;
  */
 
 public class GoodsOrder extends BaseEntity {
-    private int orderStatus;
-    private int orderChannel;
+    private Integer orderStatus;
+    private Integer orderChannel;
     private String customerName;
     private String customerPhone;
     private Long connectId;
     private String orderNumber;
     private String orderComment;
-    private int needInvoice;
-    private int auditStatus;
-    private int allotAuditor;
+    private Integer needInvoice;
+    private Integer auditStatus;
+    private Integer allotAuditor;
     private Long auditorId;
     private Long customerReceiveId;
     private Long customerDistributeId;
     private Long financeId;
     private Integer totalPrice;
-    private int checkOrder;
+    private Integer checkOrder;
     private Integer showTotalPrice;
-    private int waitAssignNum;
+    private Integer waitAssignNum;
 
-    public int getOrderStatus() {
+    public Integer getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(int orderStatus) {
+    public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
     }
 
-    public int getOrderChannel() {
+    public Integer getOrderChannel() {
         return orderChannel;
     }
 
-    public void setOrderChannel(int orderChannel) {
+    public void setOrderChannel(Integer orderChannel) {
         this.orderChannel = orderChannel;
     }
 
@@ -83,27 +83,27 @@ public class GoodsOrder extends BaseEntity {
         this.orderComment = orderComment;
     }
 
-    public int getNeedInvoice() {
+    public Integer getNeedInvoice() {
         return needInvoice;
     }
 
-    public void setNeedInvoice(int needInvoice) {
+    public void setNeedInvoice(Integer needInvoice) {
         this.needInvoice = needInvoice;
     }
 
-    public int getAuditStatus() {
+    public Integer getAuditStatus() {
         return auditStatus;
     }
 
-    public void setAuditStatus(int auditStatus) {
+    public void setAuditStatus(Integer auditStatus) {
         this.auditStatus = auditStatus;
     }
 
-    public int getAllotAuditor() {
+    public Integer getAllotAuditor() {
         return allotAuditor;
     }
 
-    public void setAllotAuditor(int allotAuditor) {
+    public void setAllotAuditor(Integer allotAuditor) {
         this.allotAuditor = allotAuditor;
     }
 
@@ -147,11 +147,11 @@ public class GoodsOrder extends BaseEntity {
         this.totalPrice = totalPrice;
     }
 
-    public int getCheckOrder() {
+    public Integer getCheckOrder() {
         return checkOrder;
     }
 
-    public void setCheckOrder(int checkOrder) {
+    public void setCheckOrder(Integer checkOrder) {
         this.checkOrder = checkOrder;
     }
 
@@ -163,11 +163,11 @@ public class GoodsOrder extends BaseEntity {
         this.showTotalPrice = showTotalPrice;
     }
 
-    public int getWaitAssignNum() {
+    public Integer getWaitAssignNum() {
         return waitAssignNum;
     }
 
-    public void setWaitAssignNum(int waitAssignNum) {
+    public void setWaitAssignNum(Integer waitAssignNum) {
         this.waitAssignNum = waitAssignNum;
     }
 }

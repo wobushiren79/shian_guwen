@@ -113,6 +113,10 @@ public class GoodsServiceInfoLayout extends BaseLayout implements View.OnClickLi
         sharedGoodsServiceInfoPresenter.getServiceInfoData();
     }
 
+    public void clearDataForShared() {
+        sharedGoodsServiceInfoPresenter.clearData();
+    }
+
     public void setHasData(Boolean hasData) {
         if (hasData) {
             llEdit.setVisibility(GONE);
@@ -122,6 +126,17 @@ public class GoodsServiceInfoLayout extends BaseLayout implements View.OnClickLi
             llShow.setVisibility(GONE);
         }
     }
+
+
+    /**
+     * 获取服务信息
+     *
+     * @return
+     */
+    public SharedGoodsServiceInfoBean getData() {
+        return serviceInfoData;
+    }
+
 
     @Override
     public void onClick(View v) {

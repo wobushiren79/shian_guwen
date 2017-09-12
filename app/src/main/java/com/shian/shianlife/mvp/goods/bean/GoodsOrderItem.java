@@ -94,6 +94,7 @@ public class GoodsOrderItem extends BaseEntity {
      */
     private String  specName;
 
+
     public Long getOrderId() {
         return orderId;
     }

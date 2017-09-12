@@ -52,6 +52,7 @@ public class GoodsShoppingCartListView extends BasePtrExpandableListView impleme
         this.data = data;
         Map<GoodsShoppingCartListGroupBean, List<GoodsShoppingCartListChildBean>> mapData = getMapData(data);
         listAdapter.setData(mapData);
+        listAdapter.setAllChecked(false);
 
 
         //展开所有

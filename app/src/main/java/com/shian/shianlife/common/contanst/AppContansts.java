@@ -15,10 +15,12 @@ public class AppContansts {
 //    public static final String Login_BaseUrl = "http://192.168.0.77:8099/ki4so-web";
 //    public static final String Login_BaseUrl = "http://192.168.0.73:8080/ki4so-web";
     public static final String Login_BaseUrl = "https://platform.shianlife.cn";
+//    public static final String Login_BaseUrl = "http://192.168.0.57:8099/ki4so-web";
     //单项地址
 //    public static final String Store_BaseUrl = "http://192.168.0.77:8080/goods";
 //    public static final String Store_BaseUrl = "http://192.168.0.73:8089/goods";
     public static final String Store_BaseUrl = "https://goods.shianlife.cn";
+//    public static final String Store_BaseUrl = "http://192.168.0.57:8080/goods";
     //殡仪地址
     public static final String Funeral_BaseUrl = "http://115.28.163.211:7088/shianlife-adviser-1.0-SNAPSHOT";
     //公墓地址

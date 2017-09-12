@@ -19,9 +19,11 @@ import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.AnimUtils;
 import com.shian.shianlife.common.utils.CheckUtils;
+import com.shian.shianlife.common.utils.DataUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsItemPerform;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartCreateResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartNumberResultBean;
 import com.shian.shianlife.mvp.goods.presenter.IGoodsDetailsPresenter;
@@ -330,7 +332,13 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
      * 直接购买
      */
     private void directBuy() {
+        if (goodsSpecSelect.getData() == null) {
+            ToastUtils.show(this, "还没有选择规格商品");
+            return;
+        }
         Intent intent = new Intent(this, GoodsOrderSettlementActivity.class);
+        ArrayList<GoodsItemPerform> listData = DataUtils.goodsDetailsToGoodsData(detailsData, goodsSpecSelect.getData(), goodsSpecSelect.getNumber());
+        intent.putExtra(IntentName.INTENT_LIST_DATA, listData);
         startActivity(intent);
     }
 

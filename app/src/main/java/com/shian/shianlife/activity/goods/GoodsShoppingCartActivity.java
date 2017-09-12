@@ -11,8 +11,10 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.bean.GoodsShoppingCartListChildBean;
 import com.shian.shianlife.common.contanst.IntentName;
+import com.shian.shianlife.common.utils.DataUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsListResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsItemPerform;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartListResultBean;
 import com.shian.shianlife.mvp.goods.presenter.IGoodsDetailsListPresenter;
 import com.shian.shianlife.mvp.goods.presenter.IGoodsShoppingCartListPresenter;
@@ -23,6 +25,7 @@ import com.shian.shianlife.mvp.goods.view.IGoodsShoppingCartListView;
 import com.shian.shianlife.view.listview.GoodsShoppingCartListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -206,7 +209,8 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsSho
             return;
         }
         Intent intent = new Intent(this, GoodsOrderSettlementActivity.class);
-        intent.putExtra(IntentName.INTENT_LIST_DATA, selectGoods);
+        ArrayList<GoodsItemPerform> listData = DataUtils.shoppingCartToGoodsData(selectGoods);
+        intent.putExtra(IntentName.INTENT_LIST_DATA, listData);
         startActivity(intent);
     }
 

@@ -2,8 +2,14 @@ package com.shian.shianlife.common.utils;
 
 import com.shian.shianlife.bean.GoodsShoppingCartListChildBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsListResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsDetailsResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsInvoice;
 import com.shian.shianlife.mvp.goods.bean.GoodsItemPerform;
+import com.shian.shianlife.mvp.goods.bean.GoodsServiceInfo;
+import com.shian.shianlife.mvp.shared.bean.SharedGoodsInvoiceInfoBean;
+import com.shian.shianlife.mvp.shared.bean.SharedGoodsServiceInfoBean;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -52,8 +58,8 @@ public class DataUtils {
      * @param listShoppingCart
      * @return
      */
-    public static List<GoodsItemPerform> ShoppingCartToGoodsData(List<GoodsShoppingCartListChildBean> listShoppingCart) {
-        List<GoodsItemPerform> listGoods = new ArrayList<>();
+    public static ArrayList<GoodsItemPerform> shoppingCartToGoodsData(List<GoodsShoppingCartListChildBean> listShoppingCart) {
+        ArrayList<GoodsItemPerform> listGoods = new ArrayList<>();
         if (listShoppingCart == null) {
             return listGoods;
         }
@@ -79,8 +85,111 @@ public class DataUtils {
             goodsData.setTitleImg(shoppingData.getTitle_img());
             //分类名称
             goodsData.setSpecOrderedAttr(shoppingData.getClass_name());
+            //折扣率
+            goodsData.setCurrentDiscount("1");
+
+            goodsData.setClassifyId(shoppingData.getGoods_class_id());
+            goodsData.setClassifyAttrId(shoppingData.getClass_attr_id());
+            goodsData.setGoodsId(shoppingData.getGoods_id());
+            goodsData.setGoodsSpecId(shoppingData.getSpec_id());
+            goodsData.setSpecNumber(shoppingData.getGoods_number());
+            goodsData.setUnit(shoppingData.getUnit());
             listGoods.add(goodsData);
         }
         return listGoods;
+    }
+
+    /**
+     * 将订单详情数据转为流程数据
+     *
+     * @return
+     */
+    public static ArrayList<GoodsItemPerform> goodsDetailsToGoodsData(GoodsDetailsResultBean goodsDetails, GoodsDetailsResultBean.SpecpriceBean goodsSpec, int number) {
+        ArrayList<GoodsItemPerform> listGoods = new ArrayList<>();
+        if (goodsDetails == null || goodsSpec == null) {
+            return listGoods;
+        }
+        GoodsItemPerform goodsData = new GoodsItemPerform();
+        //个数
+        goodsData.setSpecOrderedNum(number);
+        //价钱
+        goodsData.setAdviserPrice((int) (goodsSpec.getAdviser_price() * 100));
+        goodsData.setSpecOrderedPrice((int) (goodsSpec.getSpec_price() * 100));
+        goodsData.setEmentPrice((int) (goodsSpec.getEment_price() * 100));
+        //规格分类
+        goodsData.setSpecAlias(goodsSpec.getSpec_alias());
+        //规格名称
+        goodsData.setSpecName(goodsSpec.getSpec_name());
+        //规格商品名称
+        goodsData.setSpecOrderedVolume(goodsDetails.getName());
+        //展示图片
+        goodsData.setTitleImg(goodsDetails.getTitle_img());
+        //分类名称
+        goodsData.setSpecOrderedAttr(goodsDetails.getGoods_class_name());
+        //折扣率
+        goodsData.setCurrentDiscount("1");
+
+        goodsData.setClassifyId(goodsDetails.getGoods_cate_id());
+        goodsData.setClassifyAttrId(goodsDetails.getSpec_attr_id());
+        goodsData.setGoodsId(goodsSpec.getGoods_id());
+        goodsData.setGoodsSpecId(goodsSpec.getGoods_spec_id());
+        goodsData.setSpecNumber(goodsSpec.getGoods_number());
+        goodsData.setUnit(goodsDetails.getUnit());
+        listGoods.add(goodsData);
+
+        return listGoods;
+    }
+
+    public static GoodsInvoice SharedGoodsInvoiceInfoBeanToGoodsInvoice(SharedGoodsInvoiceInfoBean sharedData) {
+        if (sharedData == null) {
+            return null;
+        }
+        GoodsInvoice goodsInvoice = new GoodsInvoice();
+        if (sharedData.getInvoiceType() != null)
+            goodsInvoice.setTitleType(sharedData.getInvoiceType());
+
+        if (!CheckUtils.isEmpty(sharedData.getCompanyName()))
+            goodsInvoice.setTitle(sharedData.getCompanyName());
+
+        if (!CheckUtils.isEmpty(sharedData.getCompanyTaxNumber()))
+            goodsInvoice.setCompanyTaxId(sharedData.getCompanyTaxNumber());
+
+        if (!CheckUtils.isEmpty(sharedData.getCompanyRemark()))
+            goodsInvoice.setInvoiceRemark(sharedData.getCompanyRemark());
+
+        if (!CheckUtils.isEmpty(sharedData.getReceiverName()))
+            goodsInvoice.setReceiptName(sharedData.getReceiverName());
+
+        if (!CheckUtils.isEmpty(sharedData.getReceiverPhone()))
+            goodsInvoice.setReceiptPhone(sharedData.getReceiverPhone());
+
+        if (!CheckUtils.isEmpty(sharedData.getReceiverLocation())
+                && !CheckUtils.isEmpty(sharedData.getReceiverDetailsLocation()))
+            goodsInvoice.setReceiptLocation(sharedData.getReceiverLocation() + sharedData.getReceiverDetailsLocation());
+
+        return goodsInvoice;
+    }
+
+    public static GoodsServiceInfo SharedGoodsServiceInfoBeanToGoodsInvoice(SharedGoodsServiceInfoBean sharedData) {
+        if (sharedData == null) {
+            return null;
+        }
+        GoodsServiceInfo goodsServiceInfo = new GoodsServiceInfo();
+        if (!CheckUtils.isEmpty(sharedData.getServiceWay()))
+            goodsServiceInfo.setServiceWay(sharedData.getServiceWay());
+
+        if (!CheckUtils.isEmpty(sharedData.getCustomerName()))
+            goodsServiceInfo.setContact(sharedData.getCustomerName());
+
+        if (!CheckUtils.isEmpty(sharedData.getCustomerPhone()))
+            goodsServiceInfo.setContactPhone(sharedData.getCustomerPhone());
+
+        if (!CheckUtils.isEmpty(sharedData.getServiceLocation()) && !CheckUtils.isEmpty(sharedData.getServiceDetailsLocation()))
+            goodsServiceInfo.setServiceLocation(sharedData.getServiceLocation() + sharedData.getServiceDetailsLocation());
+
+        if (!CheckUtils.isEmpty(sharedData.getServiceTime()))
+            goodsServiceInfo.setBookTime(sharedData.getServiceTime());
+
+        return goodsServiceInfo;
     }
 }

@@ -2,6 +2,12 @@ package com.shian.shianlife.provide.imp;
 
 import android.content.Context;
 
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderCreateBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderCreateResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderInfoBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderInfoResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderSubmitBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderSubmitResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartChangeNumberBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartChangeNumberResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartCreateBean;
@@ -89,4 +95,33 @@ public interface GoodsOrderManager {
      */
     void getPerformInfo(Context context, StoreOrderGetPerformBean params, HttpResponseHandler<StoreOrderGetPerformResultBean> handler);
 
+
+    /**
+     * 生成订单
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    void createGoodsOrder(Context context, GoodsOrderCreateBean params, HttpResponseHandler<GoodsOrderCreateResultBean> handler);
+
+
+    /**
+     * 提交订单
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    void submitGoodsOrder(Context context, GoodsOrderSubmitBean params, HttpResponseHandler<GoodsOrderSubmitResultBean> handler);
+
+
+    /**
+     * 获取订单信息
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    void getGoodsOrderInfo(Context context, GoodsOrderInfoBean params, HttpResponseHandler<GoodsOrderInfoResultBean> handler);
 }

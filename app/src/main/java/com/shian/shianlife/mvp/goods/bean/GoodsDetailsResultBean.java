@@ -62,7 +62,18 @@ public class GoodsDetailsResultBean {
     private List<ImgsBean> imgs; //轮播图
     private List<ApplyAreaBean> apply_area;  //适用地区
     private List<SpecpriceBean> specprice;   //规格商品
+    /**
+     * 分类名称
+     */
+    private String goods_class_name;
 
+    public String getGoods_class_name() {
+        return goods_class_name;
+    }
+
+    public void setGoods_class_name(String goods_class_name) {
+        this.goods_class_name = goods_class_name;
+    }
 
     public Long getGoods_cate_id() {
         return goods_cate_id;
@@ -321,6 +332,15 @@ public class GoodsDetailsResultBean {
         private Integer channel_id;
         private Long goods_id;//商品ID
         private Float ement_price;//商家结算价
+        private String goods_number;//商品编号
+
+        public String getGoods_number() {
+            return goods_number;
+        }
+
+        public void setGoods_number(String goods_number) {
+            this.goods_number = goods_number;
+        }
 
         public Float getSpec_price() {
             return spec_price;
