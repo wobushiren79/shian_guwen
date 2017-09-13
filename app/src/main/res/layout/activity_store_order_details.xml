@@ -47,7 +47,13 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             CustomAttr:showMode="true"
-            CustomAttr:titleName="备注："></com.shian.shianlife.view.goods.StoreEditNormalView>
+            CustomAttr:titleName="备注："
+            CustomAttr:visibilityLine="true"></com.shian.shianlife.view.goods.StoreEditNormalView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
 
         <LinearLayout
             android:layout_width="match_parent"

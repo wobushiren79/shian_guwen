@@ -188,7 +188,7 @@ public class DataUtils {
             goodsServiceInfo.setServiceLocation(sharedData.getServiceLocation() + sharedData.getServiceDetailsLocation());
 
         if (!CheckUtils.isEmpty(sharedData.getServiceTime()))
-            goodsServiceInfo.setBookTime(sharedData.getServiceTime());
+            goodsServiceInfo.setBookTime(sharedData.getServiceTime() + ":00");
 
         return goodsServiceInfo;
     }

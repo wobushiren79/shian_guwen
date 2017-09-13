@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_8dp"
+        android:layout_marginLeft="@dimen/dimen_16dp"
+        android:layout_marginRight="@dimen/dimen_16dp"
+        android:layout_marginTop="@dimen/dimen_8dp"
+        android:background="@drawable/zhy_layout_bg_write"
+        android:elevation="@dimen/dimen_8dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dimen_26dp"
+            android:paddingLeft="@dimen/dimen_16dp"
+            android:paddingRight="@dimen/dimen_16dp"
+            android:paddingTop="@dimen/dimen_26dp">
+
+            <TextView
+                android:id="@+id/tv_order_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/zhy_text_color_1" />
+
+            <TextView
+                android:id="@+id/tv_pay_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/zhy_text_color_1" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+        <LinearLayout
+            android:id="@+id/ll_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dimen_28dp"
+            android:paddingLeft="@dimen/dimen_16dp"
+            android:paddingRight="@dimen/dimen_16dp"
+            android:paddingTop="@dimen/dimen_28dp">
+
+            <LinearLayout
+                android:layout_width="@dimen/dimen_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="治丧地址："
+                        android:textColor="@color/zhy_text_color_16"
+                        android:textSize="@dimen/dimen_28dp" />
+
+                    <TextView
+                        android:id="@+id/tv_service_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/zhy_text_color_16"
+                        android:textSize="@dimen/dimen_28dp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_14dp"
+                    android:layout_marginTop="@dimen/dimen_14dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="客户："
+                        android:textColor="@color/zhy_text_color_16"
+                        android:textSize="@dimen/dimen_28dp" />
+
+                    <TextView
+                        android:id="@+id/tv_customer_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/zhy_text_color_16"
+                        android:textSize="@dimen/dimen_28dp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="时间："
+                        android:textColor="@color/zhy_text_color_16"
+                        android:textSize="@dimen/dimen_28dp" />
+
+                    <TextView
+                        android:id="@+id/tv_service_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/zhy_text_color_16"
+                        android:textSize="@dimen/dimen_28dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="@dimen/dimen_20dp"
+                android:layout_height="@dimen/dimen_20dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/icon_expandable" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="@color/zhy_line_3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dimen_16dp"
+            android:paddingRight="@dimen/dimen_16dp">
+
+            <LinearLayout
+                android:id="@+id/ll_customer_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/zhy_button_state_ll_white"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/dimen_18dp"
+                android:paddingTop="@dimen/dimen_18dp">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_44dp"
+                    android:layout_height="@dimen/dimen_44dp"
+                    android:src="@drawable/ic_order_phone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dimen_18dp"
+                    android:text="联系客户"
+                    android:textColor="@color/zhy_text_color_1"
+                    android:textSize="@dimen/dimen_28dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right|center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_order_submit"
+                    style="@style/order_button_level_1"
+                    android:layout_width="@dimen/dimen_132dp"
+                    android:layout_height="@dimen/dimen_50dp"
+                    android:gravity="center"
+                    android:text="提交" />
+
+                <TextView
+                    android:id="@+id/tv_order_pay"
+                    style="@style/order_button_level_1"
+                    android:layout_width="@dimen/dimen_132dp"
+                    android:layout_height="@dimen/dimen_50dp"
+                    android:gravity="center"
+                    android:text="支付" />
+
+                <TextView
+                    android:id="@+id/tv_order_remind"
+                    style="@style/order_button_level_2"
+                    android:layout_width="@dimen/dimen_132dp"
+                    android:layout_height="@dimen/dimen_50dp"
+                    android:gravity="center"
+                    android:text="提醒确认" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

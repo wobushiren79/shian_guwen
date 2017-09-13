@@ -552,7 +552,8 @@
             android:name=".activity.goods.GoodsOrderSubmitActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".activity.goods.GoodsOrderPayActivity"></activity>
     </application>
 
 </manifest>

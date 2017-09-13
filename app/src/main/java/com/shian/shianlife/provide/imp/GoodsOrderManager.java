@@ -6,6 +6,8 @@ import com.shian.shianlife.mvp.goods.bean.GoodsOrderCreateBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderCreateResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderInfoBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderInfoResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderListBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderListResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderSubmitBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderSubmitResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartChangeNumberBean;
@@ -124,4 +126,14 @@ public interface GoodsOrderManager {
      * @param handler
      */
     void getGoodsOrderInfo(Context context, GoodsOrderInfoBean params, HttpResponseHandler<GoodsOrderInfoResultBean> handler);
+
+
+    /**
+     * 获取列表
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    void getGoodsOrderList(Context context, GoodsOrderListBean params, HttpResponseHandler<GoodsOrderListResultBean> handler);
 }

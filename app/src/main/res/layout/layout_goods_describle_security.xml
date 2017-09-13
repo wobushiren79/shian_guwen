@@ -5,8 +5,8 @@
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/iv_content"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_1280dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/zhy_icon_security" />
+        android:scaleType="fitXY"/>
 </LinearLayout>

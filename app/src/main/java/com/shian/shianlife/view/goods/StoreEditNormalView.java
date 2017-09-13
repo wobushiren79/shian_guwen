@@ -75,8 +75,8 @@ public class StoreEditNormalView extends BaseLayout implements View.OnClickListe
             ivLine.setVisibility(GONE);
         else
             ivLine.setVisibility(VISIBLE);
-        setIsEnabled(!showMode);
         setMode(Mode_Edit);
+        setIsEnabled(!showMode);
     }
 
 

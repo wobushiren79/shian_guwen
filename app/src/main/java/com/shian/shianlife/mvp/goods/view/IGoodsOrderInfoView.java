@@ -15,4 +15,35 @@ public interface IGoodsOrderInfoView extends BaseMVPView {
     void getGoodsOrderInfoFail(String msg);
 
     Long getOrderId();
+
+    void setOrderNumber(String orderNumber);
+
+    void setAdviserPrice(Integer price);
+
+    /**
+     * 积分
+     * @param price
+     */
+    void setCoupon(Integer price);
+
+    /**
+     * 运费
+     */
+    void setFreight(Integer price);
+
+
+    /**
+     * 积分
+     */
+    void setIntegral(Integer price);
+
+
+    /**
+     * 实际金额
+     * @param price
+     */
+    void setPayPrice(Integer price);
+
+
+
 }

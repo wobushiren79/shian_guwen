@@ -37,7 +37,23 @@ public class GoodsOrderInfoPresenterImpl implements IGoodsOrderInfoPresenter {
         goodsOrderInfoModel.getGoodsOrderInfo(goodsOrderInfoView.getContext(), params, new OnGetDataListener<GoodsOrderInfoResultBean>() {
             @Override
             public void getDataSuccess(GoodsOrderInfoResultBean result) {
+                Integer adviserPrice = result.getTotalPrice();
+                if (adviserPrice == null)
+                    return;
+                Integer coupon = 0;
+                Integer freight = 0;
+                Integer integral = 0;
+
+                Integer payPrice = adviserPrice - coupon + freight;
                 goodsOrderInfoView.getGoodsOrderInfoSuccess(result);
+                goodsOrderInfoView.setAdviserPrice(adviserPrice);
+                goodsOrderInfoView.setCoupon(coupon);
+                goodsOrderInfoView.setFreight(freight);
+                goodsOrderInfoView.setIntegral(integral);
+                goodsOrderInfoView.setPayPrice(payPrice);
+
+                if (result.getOrderNumber() != null)
+                    goodsOrderInfoView.setOrderNumber(result.getOrderNumber());
             }
 
             @Override

@@ -89,7 +89,6 @@ public class StoreOrderDetailsActivity extends BaseActivity implements IStoreOrd
         expandListView.setAdapter(goodsListAdapter);
         invoiceListView.setAdapter(invoiceDetailsAdapter);
         invoiceListView.setLayoutManager(new LinearLayoutManager(this));
-
     }
 
 

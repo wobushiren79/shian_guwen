@@ -200,8 +200,8 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
     /**
      * 获取总推荐价
      */
-    private float getCustomerTotalPrice() {
-        float totalPrice = 0f;
+    private int getCustomerTotalPrice() {
+        int totalPrice = 0;
         for (GoodsItemPerform items : selectGoods) {
             totalPrice += items.getSpecOrderedPrice();
         }
@@ -211,8 +211,8 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
     /**
      * 获取总顾问价
      */
-    private float getAdviserTotalPrice() {
-        float totalPrice = 0f;
+    private int getAdviserTotalPrice() {
+        int totalPrice = 0;
         for (GoodsItemPerform items : selectGoods) {
             totalPrice += items.getAdviserPrice();
         }
@@ -260,8 +260,8 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
         GoodsOrder goodsOrder = new GoodsOrder();
         goodsOrder.setOrderChannel(GoodsOrderChannelEnum.Adviser_App.getCode());
         goodsOrder.setOrderComment(layoutRemark.getData());
-        goodsOrder.setTotalPrice((int) (getAdviserTotalPrice() * 100));
-        goodsOrder.setShowTotalPrice((int) (getCustomerTotalPrice() * 100));
+        goodsOrder.setTotalPrice(getAdviserTotalPrice());
+        goodsOrder.setShowTotalPrice(getCustomerTotalPrice());
         if (layoutServiceInfo.getData() != null) {
             goodsOrder.setCustomerName(layoutServiceInfo.getData().getCustomerName());
             goodsOrder.setCustomerPhone(layoutServiceInfo.getData().getCustomerPhone());
