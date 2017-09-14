@@ -32,6 +32,8 @@ public class StoreServiceActivity extends BaseActivity {
     private GoodsOrderServicePagerChangeListener pagerChangeListener;
     private List<View> listView;
 
+    public static boolean isNeedRefresh = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,23 @@ public class StoreServiceActivity extends BaseActivity {
         ButterKnife.inject(this);
         initView();
         initData();
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        refreshView();
+    }
+
+    private void refreshView() {
+        if (isNeedRefresh && listView != null) {
+            appbar.setExpanded(true);
+            for (View view : listView) {
+                GoodsOrderServiceLayout item = (GoodsOrderServiceLayout) view;
+                item.refreshData();
+            }
+        }
     }
 
     private void initView() {
@@ -58,11 +77,11 @@ public class StoreServiceActivity extends BaseActivity {
         waitPayLayout.setTitle("待付款");
         listView.add(waitPayLayout);
 
-        GoodsOrderServiceLayout serviceingLayout = new GoodsOrderServiceLayout(this, new Integer[]{1,2}, null);
+        GoodsOrderServiceLayout serviceingLayout = new GoodsOrderServiceLayout(this, new Integer[]{1, 2}, null);
         serviceingLayout.setTitle("服务中");
         listView.add(serviceingLayout);
 
-        GoodsOrderServiceLayout serviceSuccessLayout = new GoodsOrderServiceLayout(this, new Integer[]{3,4}, null);
+        GoodsOrderServiceLayout serviceSuccessLayout = new GoodsOrderServiceLayout(this, new Integer[]{3, 4}, null);
         serviceSuccessLayout.setTitle("已服务");
         listView.add(serviceSuccessLayout);
 

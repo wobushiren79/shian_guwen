@@ -9,6 +9,8 @@ import com.shian.shianlife.mvp.goods.bean.GoodsOrderInfoBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderInfoResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderListBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderListResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderOfflinePayBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderOfflinePayResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderSubmitBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderSubmitResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartChangeNumberBean;
@@ -105,5 +107,10 @@ public class GoodsOrderManagerImpl extends BaseManagerImpl implements GoodsOrder
     @Override
     public void getGoodsOrderList(Context context, GoodsOrderListBean params, HttpResponseHandler<GoodsOrderListResultBean> handler) {
         requestPost(context, "api/goods/order/list", GoodsOrderListResultBean.class, params, handler);
+    }
+
+    @Override
+    public void payOfflineGoodsOrder(Context context, GoodsOrderOfflinePayBean params, HttpResponseHandler<GoodsOrderOfflinePayResultBean> handler) {
+        requestPost(context, "api/goods/order/offlinePayment", GoodsOrderOfflinePayResultBean.class, params, handler, true);
     }
 }

@@ -83,7 +83,7 @@ public class StoreOrderDetailsActivity extends BaseActivity implements IStoreOrd
         goodsExpandTitle.setCallBack(this);
         invoiceTitle.setCallBack(this);
 
-        goodsListAdapter = new StoreOrderGoodsListAdapter(this);
+        goodsListAdapter = new StoreOrderGoodsListAdapter(this, true);
         invoiceDetailsAdapter = new StoreOrderInvoiceDetailsAdapter(this);
 
         expandListView.setAdapter(goodsListAdapter);

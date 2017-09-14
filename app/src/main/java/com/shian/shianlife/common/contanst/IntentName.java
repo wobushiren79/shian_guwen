@@ -33,4 +33,6 @@ public class IntentName {
     public static String INTENT_LIST_DATA = "INTENT_LIST_DATA";//列表数据
     public static String INTENT_DATA = "INTENT_DATA";//数据
 
+    public static String INTENT_ISTURE = "INTENT_ISTURE";//是否
+
 }

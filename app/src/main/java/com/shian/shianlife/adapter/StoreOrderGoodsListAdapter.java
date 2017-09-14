@@ -30,11 +30,13 @@ import java.util.List;
 
 public class StoreOrderGoodsListAdapter extends BaseExpandableAdapter<String, GoodsItemPerform> implements IStoreOrderGetPerformView {
 
+    private boolean isShowMode = false;
     private IStoreOrderGetPerformPresenter storeOrderGetPerformPresenter;
 
-    public StoreOrderGoodsListAdapter(Context context) {
+    public StoreOrderGoodsListAdapter(Context context, boolean isShowMode) {
         super(context, R.layout.store_order_expendlist_group, R.layout.store_order_expendlist_item);
         storeOrderGetPerformPresenter = new StoreOrderGetPerformPresenterImpl(this);
+        this.isShowMode = isShowMode;
     }
 
     @Override
@@ -61,10 +63,12 @@ public class StoreOrderGoodsListAdapter extends BaseExpandableAdapter<String, Go
         else
             tvGoodsCustomerMoney.setText("客户￥：" + (float) itemData.getSpecOrderedPrice() / 100f);
 
-        if (itemData.getAdviserPrice() == null)
-            tvGoodsCounselorMoney.setText("顾问￥：" + "未知");
-        else
-            tvGoodsCounselorMoney.setText("顾问￥：" + (float) itemData.getAdviserPrice() / 100f);
+        if (isShowMode) {
+            if (itemData.getAdviserPrice() == null)
+                tvGoodsCounselorMoney.setText("顾问￥：" + "未知");
+            else
+                tvGoodsCounselorMoney.setText("顾问￥：" + (float) itemData.getAdviserPrice() / 100f);
+        }
 
 
         tvGoodsNumb.setText("x" + itemData.getSpecOrderedNum());

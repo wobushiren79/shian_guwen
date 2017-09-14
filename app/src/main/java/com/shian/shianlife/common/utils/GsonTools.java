@@ -21,7 +21,12 @@ public class GsonTools {
     public static <T> T getObjectByMapKey(String key, Map map, T t) throws Exception {
         if (!CheckUtils.isEmpty(key) && map.containsKey(key)) {
             String jsonObjStr = gson.toJson(map.get(key));
-            return (T) gson.fromJson(jsonObjStr, t.getClass());
+            try {
+                return (T) gson.fromJson(jsonObjStr, t.getClass());
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
         } else {
             return null;
         }

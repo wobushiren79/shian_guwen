@@ -1,25 +1,33 @@
 package com.shian.shianlife.activity.goods;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.order.StoreServiceActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.AnimUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.common.view.TipsDialog;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderInfoResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderOfflinePayResultBean;
 import com.shian.shianlife.mvp.goods.presenter.IGoodsOrderInfoPresenter;
+import com.shian.shianlife.mvp.goods.presenter.IGoodsOrderOfflinePayPresenter;
 import com.shian.shianlife.mvp.goods.presenter.impl.GoodsOrderInfoPresenterImpl;
+import com.shian.shianlife.mvp.goods.presenter.impl.GoodsOrderOfflinePayPresenterImpl;
 import com.shian.shianlife.mvp.goods.view.IGoodsOrderInfoView;
+import com.shian.shianlife.mvp.goods.view.IGoodsOrderOfflinePayView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderInfoView, View.OnClickListener {
+public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderInfoView, View.OnClickListener, IGoodsOrderOfflinePayView {
     @InjectView(R.id.tv_order_number)
     TextView tvOrderNumber;
     @InjectView(R.id.tv_pay_price)
@@ -33,6 +41,9 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
 
     private Long orderId;
     private IGoodsOrderInfoPresenter goodsOrderInfoPresenter;
+    private IGoodsOrderOfflinePayPresenter goodsOrderOfflinePayPresenter;
+
+    private Integer payPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +65,8 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
         orderId = getIntent().getLongExtra(IntentName.INTENT_ORDERID, -1);
         goodsOrderInfoPresenter = new GoodsOrderInfoPresenterImpl(this);
         goodsOrderInfoPresenter.getGoodsOrderInfo();
+
+        goodsOrderOfflinePayPresenter = new GoodsOrderOfflinePayPresenterImpl(this);
     }
 
     @Override
@@ -77,12 +90,31 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
 
     @Override
     public void getGoodsOrderInfoFail(String msg) {
+        ToastUtils.show(this, msg);
+    }
 
+    @Override
+    public void payOfflineSuccess(GoodsOrderOfflinePayResultBean resultBean) {
+        StoreServiceActivity.isNeedRefresh = true;
+        Intent intent = new Intent(this, GoodsOrderPayCallBackActivity.class);
+        intent.putExtra(IntentName.INTENT_ISTURE, true);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void payOfflineFail(String msg) {
+        ToastUtils.show(this, msg);
     }
 
     @Override
     public Long getOrderId() {
         return orderId;
+    }
+
+    @Override
+    public Integer getPayPrice() {
+        return payPrice;
     }
 
     @Override
@@ -112,7 +144,8 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
 
     @Override
     public void setPayPrice(Integer price) {
-        tvPayPrice.setText("￥" + price);
+        payPrice = price;
+        tvPayPrice.setText("￥" + (price / 100f));
     }
 
 
@@ -121,9 +154,28 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
         if (v == tvPayWechat) {
 
         } else if (v == tvPayOffline) {
-
+            payOffline();
         } else if (v == llContent) {
             AnimUtils.showPriceAnimShake(llContent, 500, null);
         }
+    }
+
+    private void payOffline() {
+        TipsDialog dialog = new TipsDialog(this);
+        dialog.setTitle("点击确认后，使用线下支付方式，包括现金刷卡收取等");
+        dialog.setTop("确认线下支付");
+        dialog.setBottomButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                goodsOrderOfflinePayPresenter.payOffline();
+            }
+        });
+        dialog.setTopButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        dialog.show();
     }
 }

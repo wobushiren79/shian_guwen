@@ -119,7 +119,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         //检测更新
         Utils.checkUpData(this, false);
 
-
     }
 
 

@@ -109,7 +109,7 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
         tvSubmitPriceNumber.setText("￥" + (getCustomerTotalPrice() / 100f));
 
         goodsExpandTitle.setCallBack(this);
-        goodsListAdapter = new StoreOrderGoodsListAdapter(this);
+        goodsListAdapter = new StoreOrderGoodsListAdapter(this, false);
         goodsListAdapter.setData(mapGoodsData);
         goodsExpandListView.setAdapter(goodsListAdapter);
         //默认展开
@@ -203,7 +203,7 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
     private int getCustomerTotalPrice() {
         int totalPrice = 0;
         for (GoodsItemPerform items : selectGoods) {
-            totalPrice += items.getSpecOrderedPrice();
+            totalPrice += (items.getSpecOrderedPrice() * items.getSpecOrderedNum());
         }
         return totalPrice;
     }
@@ -214,7 +214,7 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
     private int getAdviserTotalPrice() {
         int totalPrice = 0;
         for (GoodsItemPerform items : selectGoods) {
-            totalPrice += items.getAdviserPrice();
+            totalPrice += (items.getAdviserPrice() * items.getSpecOrderedNum());
         }
         return totalPrice;
     }

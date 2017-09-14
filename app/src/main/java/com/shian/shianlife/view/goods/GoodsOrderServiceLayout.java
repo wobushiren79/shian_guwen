@@ -43,7 +43,6 @@ public class GoodsOrderServiceLayout extends LinearLayout implements IGoodsOrder
     private int pageSize = 10;
     private int pageNumber = 1;
 
-
     private IGoodsOrderListPresenter goodsOrderListPresenter;
     private GoodsOrderListAdapter listAdapter;
 
@@ -56,7 +55,6 @@ public class GoodsOrderServiceLayout extends LinearLayout implements IGoodsOrder
         initData();
 
     }
-
 
     private void initView() {
         rcContent = (RecyclerView) view.findViewById(R.id.rc_content);
@@ -150,4 +148,12 @@ public class GoodsOrderServiceLayout extends LinearLayout implements IGoodsOrder
             goodsOrderListPresenter.getGoodsOrderListData();
         }
     };
+
+
+    /**
+     * 刷新數據
+     */
+    public void refreshData() {
+        ptrLayout.autoRefresh();
+    }
 }

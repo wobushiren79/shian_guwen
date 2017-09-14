@@ -6,6 +6,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.BounceInterpolator;
+import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.view.animation.RotateAnimation;
@@ -103,5 +104,42 @@ public class AnimUtils {
 
         animationSet.addAnimation(rotateAnimation);
         view.startAnimation(animationSet);
+    }
+
+    public static void payPriceAnim(View view, int duration) {
+        ScaleAnimation scaleAnimation = new ScaleAnimation
+                (0, 1f, 0, 1f,
+                        Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        scaleAnimation.setDuration(duration);
+        scaleAnimation.setInterpolator(new BounceInterpolator());
+        view.setAnimation(scaleAnimation);
+    }
+
+    public static void payPriceAnimIcon(View view, int duration) {
+        ScaleAnimation scaleAnimation = new ScaleAnimation
+                (0f, 1f, 0f, 1f,
+                        Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        scaleAnimation.setDuration(duration);
+//        scaleAnimation.setRepeatMode(Animation.REVERSE);
+//        scaleAnimation.setRepeatCount(1);
+        scaleAnimation.setInterpolator(new OvershootInterpolator());
+        view.setAnimation(scaleAnimation);
+    }
+
+    public static void payPriceAnimOther(View view, int duration, float dre) {
+        AnimationSet animationSet = new AnimationSet(true);
+
+        TranslateAnimation translateAnimation = new TranslateAnimation
+                (Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, dre);
+        translateAnimation.setDuration(duration);
+        translateAnimation.setRepeatMode(Animation.REVERSE);
+        translateAnimation.setRepeatCount(Animation.INFINITE);
+
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+        alphaAnimation.setDuration(duration);
+
+        animationSet.addAnimation(translateAnimation);
+        animationSet.addAnimation(alphaAnimation);
+        view.setAnimation(animationSet);
     }
 }

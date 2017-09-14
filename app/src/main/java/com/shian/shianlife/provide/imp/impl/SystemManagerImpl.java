@@ -1,6 +1,7 @@
 package com.shian.shianlife.provide.imp.impl;
 
 import android.content.Context;
+import android.util.Log;
 
 
 import com.shian.shianlife.common.contanst.AppContansts;
@@ -58,6 +59,7 @@ public class SystemManagerImpl extends BaseManagerImpl implements SystemManager 
 
 
     private void loginSubSystem(final Context context, String storeUrl) {
+        Log.v("tag", "storeUrl:" + storeUrl);
         GetBuilder getBuilder = OkHttpUtils.get();
         getBuilder.url(storeUrl);
         getBuilder.addHeader("client-Type", "wechatapp");
@@ -70,7 +72,7 @@ public class SystemManagerImpl extends BaseManagerImpl implements SystemManager 
 
             @Override
             public void onResponse(String response, int id) {
-
+                Log.v("tag", "storeResponse:" + response);
             }
         });
     }

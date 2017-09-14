@@ -188,6 +188,33 @@ public class SaBaseApplication extends MultiDexApplication {
         list.remove(a);
     }
 
+
+    /**
+     * 移除所有除开指定
+     *
+     * @param listClass
+     */
+    public void finshAllExceptActivity(List<Class> listClass) {
+        if (listClass == null)
+            return;
+        List<Activity> tempList = new ArrayList<>();
+        for (Activity item : list) {
+            boolean isContain = false;
+            for (Class cls : listClass) {
+                if (item.getClass() == cls)
+                    isContain = true;
+            }
+            if (!isContain) {
+                tempList.add(item);
+            }
+        }
+        for (Activity activity : tempList) {
+            if (null != activity) {
+                activity.finish();
+            }
+        }
+    }
+
     /**
      * 向activiy列表中添加对象
      */
@@ -303,7 +330,6 @@ public class SaBaseApplication extends MultiDexApplication {
         Log.i("GlobalApplication", str);
 
     }
-
 
 
 }

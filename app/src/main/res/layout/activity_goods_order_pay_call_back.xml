@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clipChildren="false"
+    tools:context="com.shian.shianlife.activity.goods.GoodsOrderPayCallBackActivity">
+
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_100dp"
+        android:gravity="center_horizontal"
+        android:text=""
+        android:textColor="@color/zhy_text_color_16"
+        android:textSize="@dimen/dimen_36dp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom|center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dimen_64dp"
+            android:text="如对价格有异议，请拨打" />
+
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dimen_64dp"
+            android:text="966188"
+            android:textColor="@color/zhy_text_color_1" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:clipChildren="false"
+        android:id="@+id/rl_content"
+        android:layout_width="@dimen/dimen_132dp"
+        android:layout_height="@dimen/dimen_132dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dimen_138dp">
+
+        <ImageView
+            android:id="@+id/iv_pay_bg"
+            android:layout_width="@dimen/dimen_120dp"
+            android:layout_height="@dimen/dimen_120dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/zhy_pay_success_bg" />
+
+        <ImageView
+            android:id="@+id/iv_pay_icon"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/zhy_pay_success_icon" />
+
+        <ImageView
+            android:id="@+id/iv_pay_other_1"
+            android:layout_width="@dimen/dimen_15dp"
+            android:layout_height="@dimen/dimen_15dp"
+            android:src="@drawable/zhy_pay_success_other_icon_2" />
+
+        <ImageView
+            android:id="@+id/iv_pay_other_2"
+            android:layout_width="@dimen/dimen_20dp"
+            android:layout_height="@dimen/dimen_20dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimen_4dp"
+            android:src="@drawable/zhy_pay_success_other_icon_1" />
+
+        <ImageView
+            android:id="@+id/iv_pay_other_3"
+            android:layout_width="@dimen/dimen_18dp"
+            android:layout_height="@dimen/dimen_18dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/zhy_pay_success_other_icon_2" />
+
+        <ImageView
+            android:id="@+id/iv_pay_other_4"
+            android:layout_width="@dimen/dimen_15dp"
+            android:layout_height="@dimen/dimen_15dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dimen_5dp"
+            android:src="@drawable/zhy_pay_success_other_icon_1" />
+
+        <ImageView
+            android:id="@+id/iv_pay_other_5"
+            android:layout_width="@dimen/dimen_10dp"
+            android:layout_height="@dimen/dimen_10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:src="@drawable/zhy_pay_success_other_icon_2" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_submit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_96dp"
+        android:background="@drawable/zhy_submit_button_style_1"
+        android:gravity="center"
+        android:text="返回首页"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_32dp" />
+</LinearLayout>

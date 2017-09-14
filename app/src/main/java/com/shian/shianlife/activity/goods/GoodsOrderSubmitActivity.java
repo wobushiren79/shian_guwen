@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.order.StoreServiceActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -123,6 +124,10 @@ public class GoodsOrderSubmitActivity extends BaseActivity implements IGoodsOrde
     @Override
     public void submitGoodsOrderSuccess(GoodsOrderSubmitResultBean resultBean) {
         ToastUtils.show(this, "提交成功");
+        StoreServiceActivity.isNeedRefresh = true;
+        Intent intent = new Intent(this, GoodsOrderPayActivity.class);
+        intent.putExtra(IntentName.INTENT_ORDERID, orderId);
+        startActivity(intent);
         finish();
     }
 
@@ -134,9 +139,5 @@ public class GoodsOrderSubmitActivity extends BaseActivity implements IGoodsOrde
     @Override
     public void onClick(View v) {
         goodsOrderSubmitPresenter.submitGoodsOrder();
-        Intent intent = new Intent(this, GoodsOrderPayActivity.class);
-        intent.putExtra(IntentName.INTENT_ORDERID, orderId);
-        startActivity(intent);
-        finish();
     }
 }
