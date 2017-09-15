@@ -202,4 +202,8 @@
         <item name="android:textColor">@color/zhy_text_color_1</item>
         <item name="android:textSize">@dimen/dimen_32dp</item>
     </style>
+    <style name="zhy_tablayout_text_style_3">
+        <item name="android:textColor">@color/zhy_text_color_1</item>
+        <item name="android:textSize">@dimen/dimen_28dp</item>
+    </style>
 </resources>

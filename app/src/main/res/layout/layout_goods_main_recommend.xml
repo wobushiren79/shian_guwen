@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.shian.shianlife.view.tablayout.CustomTabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_96dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/white"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/zhy_text_color_1"
+        app:tabIndicatorHeight="0dp"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/zhy_text_color_1"
+        app:tabTextAppearance="@style/zhy_tablayout_text_style_3"
+        app:tabTextColor="@color/zhy_text_color_16"></com.shian.shianlife.view.tablayout.CustomTabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_80dp"
+        android:background="@color/account_blue"></android.support.v4.view.ViewPager>
+</LinearLayout>

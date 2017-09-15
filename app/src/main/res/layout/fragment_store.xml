@@ -49,6 +49,14 @@
                 android:layout_marginTop="@dimen/dimen_16dp"
                 android:background="@color/white"></com.shian.shianlife.view.listview.GoodsClassAttrMainListView>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_18dp" />
+
+            <com.shian.shianlife.view.goods.GoodsMainRecommendLayout
+                android:id="@+id/layout_recommend_goods"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.shian.shianlife.view.goods.GoodsMainRecommendLayout>
 
         </LinearLayout>
     </ScrollView>
@@ -56,10 +64,11 @@
 
     <com.shian.shianlife.view.goods.GoodsShoppingCartButton
         android:id="@+id/bt_goods_shopping_cart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dimen_120dp"
+        android:layout_height="@dimen/dimen_120dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"></com.shian.shianlife.view.goods.GoodsShoppingCartButton>
+        android:layout_alignParentRight="true"
+        android:src="@drawable/zhy_goods_shopping_cart"></com.shian.shianlife.view.goods.GoodsShoppingCartButton>
 
 
 </RelativeLayout>

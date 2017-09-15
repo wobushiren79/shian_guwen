@@ -1,8 +1,10 @@
 package com.shian.shianlife.activity.goods;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -52,6 +54,7 @@ public class GoodsQueryActivity extends BaseActivity implements GoodsQueryCondit
         ButterKnife.inject(this);
         initView();
         initData();
+        initShoppingCart();
     }
 
     private void initView() {
@@ -62,6 +65,8 @@ public class GoodsQueryActivity extends BaseActivity implements GoodsQueryCondit
         tvFiltrate.setOnClickListener(this);
         searchView.setCallBack(this);
         goodsQueryDrawer.setCallBack(this);
+
+
     }
 
     private void initData() {
@@ -73,6 +78,15 @@ public class GoodsQueryActivity extends BaseActivity implements GoodsQueryCondit
         setQueryData(classId, classAttrId, goodsName);
     }
 
+    /**
+     * 初始化购物车按钮
+     */
+    private void initShoppingCart() {
+        //获取屏幕宽高
+        int Width = metrics.widthPixels;
+        int Height = metrics.heightPixels;
+        btGoodsShoppingCart.setWHData(Width, Height - getResources().getDimensionPixelOffset(R.dimen.dimen_160dp));
+    }
 
     @Override
     public void changeMode(View view, int mode) {

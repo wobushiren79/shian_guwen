@@ -13,6 +13,8 @@ import com.shian.shianlife.mvp.goods.bean.GoodsDetailsBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsListBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsListResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsMainRecommendTitleBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsMainRecommendTitleResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsQueryListBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsQueryListResultBean;
 import com.shian.shianlife.provide.base.BaseManagerImpl;
@@ -26,7 +28,7 @@ import java.util.List;
  */
 
 public class GoodsManagerImpl extends BaseManagerImpl implements GoodsManager {
-    private static  GoodsManagerImpl manager;
+    private static GoodsManagerImpl manager;
 
     private GoodsManagerImpl() {
         super();
@@ -72,5 +74,10 @@ public class GoodsManagerImpl extends BaseManagerImpl implements GoodsManager {
     @Override
     public void getGoodsDetailsList(Context context, GoodsDetailsListBean params, HttpResponseHandler<List<GoodsDetailsListResultBean>> handler) {
         requestPostFormToListForList(context, "Api/getgoods/getattrgoods", GoodsDetailsListResultBean.class, params, handler, true);
+    }
+
+    @Override
+    public void getGoodsMainRecommendTitle(Context context, GoodsMainRecommendTitleBean params, HttpResponseHandler<List<GoodsMainRecommendTitleResultBean>> handler) {
+        requestPostFormToListForList(context, "Api/Label/label", GoodsMainRecommendTitleResultBean.class, params, handler);
     }
 }

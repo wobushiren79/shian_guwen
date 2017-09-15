@@ -4,6 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.shian.shianlife.R;
@@ -17,31 +22,95 @@ import butterknife.OnClick;
  * Created by zm.
  */
 
-public class GoodsShoppingCartButton extends BaseLayout {
-    @InjectView(R.id.iv_shopping_cart)
-    ImageView ivShoppingCart;
+public class GoodsShoppingCartButton extends ImageView implements View.OnClickListener {
+
+    private int groupWidth;
+    private int groupHeigh;
+
+    int lastX;
+    int lastY;
 
     public GoodsShoppingCartButton(Context context) {
-        this(context, null);
+        super(context);
     }
 
     public GoodsShoppingCartButton(Context context, @Nullable AttributeSet attrs) {
-        super(context, R.layout.layout_goods_shopping_cart_button, attrs);
+        super(context, attrs);
+        initView();
+        initData();
     }
+
+
+    private void initView() {
+        this.setOnClickListener(this);
+
+    }
+
+    private void initData() {
+        //获取屏幕宽高
+        WindowManager manager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        groupWidth = manager.getDefaultDisplay().getWidth();
+        groupHeigh = manager.getDefaultDisplay().getHeight();
+    }
+
+
+    public void setWHData(final Integer groupWidth, final Integer groupHeigh) {
+        if (groupWidth != null)
+            this.groupWidth = groupWidth;
+        if (groupHeigh != null)
+            this.groupHeigh = groupHeigh;
+
+
+        this.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    case MotionEvent.ACTION_DOWN:
+                        lastX = (int) event.getRawX();
+                        lastY = (int) event.getRawY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        int dx = (int) event.getRawX() - lastX;
+                        int dy = (int) event.getRawY() - lastY;
+
+                        int left = GoodsShoppingCartButton.this.getLeft() + dx;
+                        int top = GoodsShoppingCartButton.this.getTop() + dy;
+                        int right = GoodsShoppingCartButton.this.getRight() + dx;
+                        int bottom = GoodsShoppingCartButton.this.getBottom() + dy;
+                        if (left < 0) {
+                            left = 0;
+                            right = left + GoodsShoppingCartButton.this.getWidth();
+                        }
+                        if (right > groupWidth) {
+                            right = groupWidth;
+                            left = right - GoodsShoppingCartButton.this.getWidth();
+                        }
+                        if (top < 0) {
+                            top = 0;
+                            bottom = top + GoodsShoppingCartButton.this.getHeight();
+                        }
+                        if (bottom > groupHeigh) {
+                            bottom = groupHeigh;
+                            top = bottom - GoodsShoppingCartButton.this.getHeight();
+                        }
+                        GoodsShoppingCartButton.this.layout(left, top, right, bottom);
+                        lastX = (int) event.getRawX();
+                        lastY = (int) event.getRawY();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
 
     @Override
-    protected void initView() {
-
-    }
-
-    @Override
-    protected void initData() {
-
-    }
-
-    @OnClick(R.id.iv_shopping_cart)
-    public void onViewClicked() {
+    public void onClick(View v) {
         Intent intent = new Intent(getContext(), GoodsShoppingCartActivity.class);
         getContext().startActivity(intent);
     }
+
 }

@@ -56,6 +56,7 @@ public class GoodsShoppingCartListAdapter extends BaseExpandableAdapter<GoodsSho
         else
             tvDrive.setVisibility(View.VISIBLE);
 
+        LinearLayout llCheck = (LinearLayout) convertView.findViewById(R.id.ll_check);
         CheckBox check = (CheckBox) convertView.findViewById(R.id.check);
         TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
         TextView tvChange = (TextView) convertView.findViewById(R.id.tv_change);
@@ -81,7 +82,7 @@ public class GoodsShoppingCartListAdapter extends BaseExpandableAdapter<GoodsSho
         else
             check.setChecked(false);
 
-        check.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean isChecked;
@@ -97,8 +98,9 @@ public class GoodsShoppingCartListAdapter extends BaseExpandableAdapter<GoodsSho
                 getSelectGoods();
                 GoodsShoppingCartListAdapter.this.notifyDataSetChanged();
             }
-        });
-
+        };
+        check.setOnClickListener(onClickListener);
+        llCheck.setOnClickListener(onClickListener);
     }
 
     @Override
@@ -128,7 +130,7 @@ public class GoodsShoppingCartListAdapter extends BaseExpandableAdapter<GoodsSho
         else
             check.setChecked(false);
 
-        check.setOnClickListener(new View.OnClickListener() {
+        View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean isChecked;
@@ -151,7 +153,9 @@ public class GoodsShoppingCartListAdapter extends BaseExpandableAdapter<GoodsSho
                 getSelectGoods();
                 GoodsShoppingCartListAdapter.this.notifyDataSetChanged();
             }
-        });
+        };
+        check.setOnClickListener(onClickListener);
+        convertView.setOnClickListener(onClickListener);
     }
 
     /**

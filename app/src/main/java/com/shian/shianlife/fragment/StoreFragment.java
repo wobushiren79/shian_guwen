@@ -1,10 +1,12 @@
 package com.shian.shianlife.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,14 +53,16 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mLayoutView = inflater.inflate(R.layout.fragment_store, null, false);
         initView();
+        initShoppingCart();
         return mLayoutView;
     }
+
 
     private void initView() {
         layoutBuildCemetery = mLayoutView.findViewById(R.id.layout_build_cemetery);
         layoutBuildFuneral = mLayoutView.findViewById(R.id.layout_build_funeral);
         searchView = (CustomSearchView) mLayoutView.findViewById(R.id.search_view);
-        goodsShoppingCartButton= (GoodsShoppingCartButton) mLayoutView.findViewById(R.id.bt_goods_shopping_cart);
+        goodsShoppingCartButton = (GoodsShoppingCartButton) mLayoutView.findViewById(R.id.bt_goods_shopping_cart);
 
         ImageView cemeteryIcon = (ImageView) layoutBuildCemetery.findViewById(R.id.iv_build_icon);
         ImageView funeralIcon = (ImageView) layoutBuildFuneral.findViewById(R.id.iv_build_icon);
@@ -84,6 +88,17 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
         goodsChannelPresenter.getGoodsChannelData();
     }
 
+    /**
+     * 初始化购物车按钮
+     */
+    private void initShoppingCart() {
+        //获取屏幕宽高
+        WindowManager manager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        int Width = manager.getDefaultDisplay().getWidth();
+        int Height = manager.getDefaultDisplay().getHeight();
+        goodsShoppingCartButton.setWHData(Width, Height - getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_256dp));
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -107,13 +122,6 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
         startActivity(intent);
     }
 
-    /**
-     * 开启购物车
-     */
-    private void openShoppingCart() {
-        Intent intent = new Intent(getContext(), GoodsShoppingCartActivity.class);
-        startActivity(intent);
-    }
 
     private void buildCemetery() {
         //检测权限

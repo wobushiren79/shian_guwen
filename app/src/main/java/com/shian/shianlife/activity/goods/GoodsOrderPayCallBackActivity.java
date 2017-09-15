@@ -51,7 +51,7 @@ public class GoodsOrderPayCallBackActivity extends BaseActivity implements View.
     @InjectView(R.id.iv_pay_other_5)
     ImageView ivPayOther5;
 
-    private boolean isSuccessPay;//是否成功支付
+    protected boolean isSuccessPay;//是否成功支付
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,18 +59,17 @@ public class GoodsOrderPayCallBackActivity extends BaseActivity implements View.
         setContentView(R.layout.activity_goods_order_pay_call_back);
         ButterKnife.inject(this);
         initView();
-        initData();
+
     }
 
     private void initView() {
         setTitle("支付");
+        isSuccessPay = getIntent().getBooleanExtra(IntentName.INTENT_ISTURE, false);
         tvSubmit.setOnClickListener(this);
+        Utils.call(tvPhone, AppContansts.Shianlife_Phone);
     }
 
     private void initData() {
-        Utils.call(tvPhone, AppContansts.Shianlife_Phone);
-        isSuccessPay = getIntent().getBooleanExtra(IntentName.INTENT_ISTURE, false);
-
         if (isSuccessPay) {
             tvTitle.setText("您已付款成功");
             ivPayBg.setImageResource(R.drawable.zhy_pay_success_bg);
@@ -90,6 +89,7 @@ public class GoodsOrderPayCallBackActivity extends BaseActivity implements View.
             ivPayOther4.setImageResource(R.drawable.zhy_pay_fail_other_icon_1);
             ivPayOther5.setImageResource(R.drawable.zhy_pay_fail_other_icon_2);
         }
+
         AnimUtils.payPriceAnim(ivPayBg, 2000);
         AnimUtils.payPriceAnimIcon(ivPayIcon, 3000);
         AnimUtils.payPriceAnimOther(ivPayOther1, 2000, -0.7f);
@@ -97,6 +97,11 @@ public class GoodsOrderPayCallBackActivity extends BaseActivity implements View.
         AnimUtils.payPriceAnimOther(ivPayOther3, 3500, -2f);
         AnimUtils.payPriceAnimOther(ivPayOther4, 4000, -0.7f);
         AnimUtils.payPriceAnimOther(ivPayOther5, 5000, -0.7f);
+    }
+
+
+    protected void getDataSuccess() {
+        initData();
     }
 
     @Override

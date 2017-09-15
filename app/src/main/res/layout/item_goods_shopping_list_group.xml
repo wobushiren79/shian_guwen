@@ -18,23 +18,32 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/dimen_16dp"
+
         android:paddingRight="@dimen/dimen_16dp">
 
-        <CheckBox
-            android:id="@+id/check"
-            android:layout_width="@dimen/dimen_36dp"
-            android:layout_height="@dimen/dimen_36dp"
-            android:layout_marginBottom="@dimen/dimen_24dp"
-            android:layout_marginTop="@dimen/dimen_24dp"
-            android:background="@drawable/zhy_check_box_style_1"
-            android:button="@null" />
+        <LinearLayout
+            android:id="@+id/ll_check"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_84dp"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dimen_24dp"
+            android:paddingLeft="@dimen/dimen_16dp"
+            android:paddingRight="@dimen/dimen_24dp"
+            android:paddingTop="@dimen/dimen_24dp">
+
+            <CheckBox
+                android:id="@+id/check"
+                android:layout_width="@dimen/dimen_36dp"
+                android:layout_height="@dimen/dimen_36dp"
+                android:background="@drawable/zhy_check_box_style_1"
+                android:button="@null" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_26dp"
             android:layout_marginRight="@dimen/dimen_26dp"
             android:layout_weight="1"
             android:textColor="@color/zhy_text_color_16"
