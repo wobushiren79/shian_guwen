@@ -96,26 +96,16 @@ public class GoodsQueryListView extends BasePtrRecyclerView implements IGoodsQue
         adapter.setData(listData);
         startOrderBy(orderForm, orderBy);
         setRefreshComplete();
-        hasData();
+        hasData(adapter);
     }
 
     @Override
     public void getGoodsQueryListDataFail(String msg) {
         ToastUtils.show(getContext(), msg);
         setRefreshComplete();
-        hasData();
+        hasData(adapter);
     }
 
-    /**
-     * 设置是否显示无数据
-     */
-    private void hasData() {
-        if (adapter.getData().size() == 0) {
-            this.setShowMode(Show_Mode_NoData);
-        } else {
-            this.setShowMode(Show_Mode_HasData);
-        }
-    }
 
     public void startQuery() {
         setRefresh();

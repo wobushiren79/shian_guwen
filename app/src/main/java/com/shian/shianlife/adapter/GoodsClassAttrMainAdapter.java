@@ -12,6 +12,7 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.activity.goods.GoodsClassAttrDetailsActivity;
 import com.shian.shianlife.adapter.base.BaseRCAdapter;
 import com.shian.shianlife.adapter.base.BaseViewHolder;
+import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrMainResultBean;
 
@@ -32,25 +33,22 @@ public class GoodsClassAttrMainAdapter extends BaseRCAdapter<GoodsClassAttrMainR
     }
 
     @Override
-    public void convert(BaseViewHolder holder, GoodsClassAttrMainResultBean goodsClassAttrMainResultBean, int index) {
+    public void convert(BaseViewHolder holder, final GoodsClassAttrMainResultBean data, int index) {
         LinearLayout llContent = holder.getView(R.id.ll_content);
         ImageView ivIcon = holder.getView(R.id.iv_icon);
         TextView tvName = holder.getView(R.id.tv_name);
 
-        if (goodsClassAttrMainResultBean.getPicUrl() == null) {
-            Utils.loadPic(mContext, ivIcon, goodsClassAttrMainResultBean.getLocationPicId());
-        } else {
-            Utils.loadPic(mContext, ivIcon, goodsClassAttrMainResultBean.getPicUrl());
-        }
+        if (data.getPicId() != null)
+            Utils.loadPic(mContext, ivIcon, data.getPicId());
 
-        String name = goodsClassAttrMainResultBean.getClassAttrName();
-        if (name != null && !name.isEmpty())
-            tvName.setText(name);
+        if (!data.getName().isEmpty())
+            tvName.setText(data.getName());
 
         llContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, GoodsClassAttrDetailsActivity.class);
+                intent.putExtra(IntentName.INTENT_CLASS_ID, data.getId());
                 mContext.startActivity(intent);
             }
         });

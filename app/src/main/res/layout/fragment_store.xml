@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical">
 
 
@@ -14,7 +13,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/base_start_color_default"
             android:orientation="vertical">
 
             <com.shian.shianlife.view.searchview.CustomSearchView
@@ -44,6 +42,7 @@
                 layout="@layout/layout_build_order_button"></include>
 
             <com.shian.shianlife.view.listview.GoodsClassAttrMainListView
+                android:id="@+id/layout_class_attr_goods"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16dp"

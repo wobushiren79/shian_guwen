@@ -25,7 +25,9 @@ import com.shian.shianlife.mvp.goods.view.IGoodsChannelView;
 import com.shian.shianlife.thisenum.AppRolePermition;
 import com.shian.shianlife.thisenum.BuildOrderEnum;
 import com.shian.shianlife.thisenum.RoleEnum;
+import com.shian.shianlife.view.goods.GoodsMainRecommendLayout;
 import com.shian.shianlife.view.goods.GoodsShoppingCartButton;
+import com.shian.shianlife.view.listview.GoodsClassAttrMainListView;
 import com.shian.shianlife.view.searchview.CustomSearchView;
 
 import java.util.List;
@@ -44,6 +46,8 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
 
     private CustomSearchView searchView;
     private GoodsShoppingCartButton goodsShoppingCartButton;
+    private GoodsMainRecommendLayout goodsMainRecommendLayout;
+    private GoodsClassAttrMainListView goodsClassAttrMainListView;
     private View layoutBuildCemetery;
     private View layoutBuildFuneral;
 
@@ -63,6 +67,8 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
         layoutBuildFuneral = mLayoutView.findViewById(R.id.layout_build_funeral);
         searchView = (CustomSearchView) mLayoutView.findViewById(R.id.search_view);
         goodsShoppingCartButton = (GoodsShoppingCartButton) mLayoutView.findViewById(R.id.bt_goods_shopping_cart);
+        goodsMainRecommendLayout = (GoodsMainRecommendLayout) mLayoutView.findViewById(R.id.layout_recommend_goods);
+        goodsClassAttrMainListView = (GoodsClassAttrMainListView) mLayoutView.findViewById(R.id.layout_class_attr_goods);
 
         ImageView cemeteryIcon = (ImageView) layoutBuildCemetery.findViewById(R.id.iv_build_icon);
         ImageView funeralIcon = (ImageView) layoutBuildFuneral.findViewById(R.id.iv_build_icon);
@@ -146,7 +152,8 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
 
     @Override
     public void getGoodsChannelDataSuccess(List<GoodsChannelResultBean> listData) {
-
+        goodsMainRecommendLayout.startFindData();
+        goodsClassAttrMainListView.startFindData();
     }
 
     @Override

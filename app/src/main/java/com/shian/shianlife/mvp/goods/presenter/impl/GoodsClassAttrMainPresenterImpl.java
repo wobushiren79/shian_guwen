@@ -1,5 +1,6 @@
 package com.shian.shianlife.mvp.goods.presenter.impl;
 
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.mvp.base.OnGetDataListener;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrMainBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrMainResultBean;
@@ -25,7 +26,17 @@ public class GoodsClassAttrMainPresenterImpl implements IGoodsClassAttrMainPrese
 
     @Override
     public void getGoodsClassAttrMainData() {
+        if (goodsClassAttrMainView.getContext() == null) {
+            goodsClassAttrMainView.showToast("没有上下文对象");
+            return;
+        }
+        if (AppContansts.goodsChannelId == null) {
+            goodsClassAttrMainView.showToast("没有goodsChannelId");
+            return;
+        }
         GoodsClassAttrMainBean params = new GoodsClassAttrMainBean();
+        params.setChannel_id(AppContansts.goodsChannelId);
+        params.setType("APP");
         goodsClassAttrMainModel.getGoodsClassAttrMainData(goodsClassAttrMainView.getContext(), params, new OnGetDataListener<List<GoodsClassAttrMainResultBean>>() {
             @Override
             public void getDataSuccess(List<GoodsClassAttrMainResultBean> result) {

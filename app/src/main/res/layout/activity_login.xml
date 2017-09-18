@@ -137,7 +137,6 @@
                 android:layout_gravity="center"></com.shian.shianlife.view.customview.LoadingButton>
 
 
-
             <TextView
                 android:id="@+id/btn_login_web"
                 android:layout_width="wrap_content"
@@ -146,7 +145,8 @@
                 android:layout_marginTop="@dimen/dimen_24dp"
                 android:text="手机账号快速登录>"
                 android:textColor="@color/gray_main_rb_bg_f"
-                android:textSize="@dimen/dimen_24dp" />
+                android:textSize="@dimen/dimen_24dp"
+                android:visibility="gone" />
         </LinearLayout>
 
         <ImageView
@@ -154,7 +154,8 @@
             android:layout_height="@dimen/dimen_262dp"
             android:layout_centerHorizontal="true"
             android:src="@drawable/login_log_2" />
+
+
+
     </RelativeLayout>
-
-
 </ScrollView>

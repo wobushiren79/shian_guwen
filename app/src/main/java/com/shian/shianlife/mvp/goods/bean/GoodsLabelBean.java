@@ -6,6 +6,6 @@ import com.shian.shianlife.provide.base.BaseHttpParams;
  * Created by zm.
  */
 
-public class GoodsMainRecommendTitleBean extends BaseHttpParams {
+public class GoodsLabelBean extends BaseHttpParams {
 
 }

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.CheckUtils;
 import com.shian.shianlife.common.utils.StringUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -23,13 +24,15 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class GoodsClassAttrDetailsActivity extends BaseActivity implements  GoodsClassListView.CallBack {
+public class GoodsClassAttrDetailsActivity extends BaseActivity implements GoodsClassListView.CallBack {
     @InjectView(R.id.tv_title)
     TextView tvTitle;
     @InjectView(R.id.goods_class_list)
     GoodsClassListView goodsClassList;
     @InjectView(R.id.goods_class_attr_list)
     GoodsClassAttrListView goodsClassAttrList;
+
+    private Long goodsClassId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,8 @@ public class GoodsClassAttrDetailsActivity extends BaseActivity implements  Good
     }
 
     private void initData() {
+        goodsClassId = getIntent().getLongExtra(IntentName.INTENT_CLASS_ID, -1);
+        goodsClassList.setGoodsClassId(goodsClassId);
         goodsClassList.getData();
     }
 

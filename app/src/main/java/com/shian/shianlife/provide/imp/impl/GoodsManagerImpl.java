@@ -6,6 +6,8 @@ import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.mvp.goods.bean.GoodsChannelBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsChannelResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrMainBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrMainResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassAttrResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsClassResultBean;
@@ -13,8 +15,10 @@ import com.shian.shianlife.mvp.goods.bean.GoodsDetailsBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsListBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsListResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsResultBean;
-import com.shian.shianlife.mvp.goods.bean.GoodsMainRecommendTitleBean;
-import com.shian.shianlife.mvp.goods.bean.GoodsMainRecommendTitleResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsLabelBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsLabelDetailsBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsLabelDetailsResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsLabelResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsQueryListBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsQueryListResultBean;
 import com.shian.shianlife.provide.base.BaseManagerImpl;
@@ -77,7 +81,17 @@ public class GoodsManagerImpl extends BaseManagerImpl implements GoodsManager {
     }
 
     @Override
-    public void getGoodsMainRecommendTitle(Context context, GoodsMainRecommendTitleBean params, HttpResponseHandler<List<GoodsMainRecommendTitleResultBean>> handler) {
-        requestPostFormToListForList(context, "Api/Label/label", GoodsMainRecommendTitleResultBean.class, params, handler);
+    public void getGoodLabel(Context context, GoodsLabelBean params, HttpResponseHandler<List<GoodsLabelResultBean>> handler) {
+        requestPostFormToListForList(context, "Api/Label/label", GoodsLabelResultBean.class, params, handler);
+    }
+
+    @Override
+    public void getGoodLabelDetails(Context context, GoodsLabelDetailsBean params, HttpResponseHandler<List<GoodsLabelDetailsResultBean>> handler) {
+        requestPostFormToListForList(context, "Api/Label/lobelgoods", GoodsLabelDetailsResultBean.class, params, handler);
+    }
+
+    @Override
+    public void getGoodClassAttrMain(Context context, GoodsClassAttrMainBean params, HttpResponseHandler<List<GoodsClassAttrMainResultBean>> handler) {
+        requestPostFormToListForList(context, "Api/Goods/label_goods_class", GoodsClassAttrMainResultBean.class, params, handler);
     }
 }

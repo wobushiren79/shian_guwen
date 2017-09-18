@@ -42,7 +42,7 @@ public class SettingsActivity extends BaseActivity {
     private SharedPreferences share;
     @InjectViews({R.id.rb1, R.id.rb2})
     List<RadioButton> rbList;
-//    @InjectView(R.id.st_switch)
+    //    @InjectView(R.id.st_switch)
 //    SwitchButton switchButton;
     @InjectView(R.id.tv_switch)
     TextView tvSwitch;
@@ -115,7 +115,7 @@ public class SettingsActivity extends BaseActivity {
     void logout(View v) {
         TipsDialog mDialog = new TipsDialog(this);
         mDialog.setTitle("是否退出当前账户");
-        mDialog.setTopButton("是", new DialogInterface.OnClickListener() {
+        mDialog.setBottomButton("是", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -167,7 +167,7 @@ public class SettingsActivity extends BaseActivity {
                 });
             }
         });
-        mDialog.setBottomButton("否", new DialogInterface.OnClickListener() {
+        mDialog.setTopButton("否", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 

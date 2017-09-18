@@ -20,6 +20,7 @@ public class CustomTabLayout extends TabLayout implements TabLayout.OnTabSelecte
 
     private List<View> tablViewList = new ArrayList<>();
     private ViewPager mCustomViewPager;
+    private CallBack callBack;
 
     public CustomTabLayout(Context context) {
         super(context);
@@ -46,12 +47,15 @@ public class CustomTabLayout extends TabLayout implements TabLayout.OnTabSelecte
                 tab.setCustomView(tablViewList.get(i));
             }
         }
-        this.setOnTabSelectedListener(this);
     }
 
 
     public void setSelect(int position) {
-//        this.set(position);
+        this.getTabAt(position).select();
+    }
+
+    public void setCallBack(CallBack callBack) {
+        this.callBack = callBack;
     }
 
     @Override
@@ -71,6 +75,8 @@ public class CustomTabLayout extends TabLayout implements TabLayout.OnTabSelecte
                 e.printStackTrace();
             }
         }
+        if (callBack != null)
+            callBack.onTabSelected(this, tab);
     }
 
     @Override
@@ -80,12 +86,19 @@ public class CustomTabLayout extends TabLayout implements TabLayout.OnTabSelecte
 
     @Override
     public void onTabReselected(Tab tab) {
-
+        onTabSelected(tab);
+        if (callBack != null)
+            callBack.onTabSelected(this, tab);
     }
 
     @Override
     public void setupWithViewPager(@NonNull ViewPager viewPager) {
         super.setupWithViewPager(viewPager);
         this.mCustomViewPager = viewPager;
+        this.setOnTabSelectedListener(this);
+    }
+
+    public interface CallBack {
+        void onTabSelected(View view, Tab tab);
     }
 }

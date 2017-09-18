@@ -4,7 +4,7 @@ package com.shian.shianlife.mvp.goods.bean;
  * Created by zm.
  */
 
-public class GoodsMainRecommendTitleResultBean {
+public class GoodsLabelResultBean {
     private String label_name;
     private Long id;
 

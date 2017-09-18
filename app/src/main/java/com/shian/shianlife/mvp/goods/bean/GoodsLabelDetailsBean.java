@@ -6,16 +6,16 @@ import com.shian.shianlife.provide.base.BaseHttpParams;
  * Created by zm.
  */
 
-public class GoodsClassAttrMainBean extends BaseHttpParams {
-    private String type;
+public class GoodsLabelDetailsBean extends BaseHttpParams {
+    private Long lobel_id;
     private Integer channel_id;
 
-    public String getType() {
-        return type;
+    public Long getLobel_id() {
+        return lobel_id;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setLobel_id(Long lobel_id) {
+        this.lobel_id = lobel_id;
     }
 
     public Integer getChannel_id() {

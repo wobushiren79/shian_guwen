@@ -30,6 +30,8 @@ public class GoodsShoppingCartButton extends ImageView implements View.OnClickLi
     int lastX;
     int lastY;
 
+    private boolean isMove = false;
+
     public GoodsShoppingCartButton(Context context) {
         super(context);
     }
@@ -59,56 +61,101 @@ public class GoodsShoppingCartButton extends ImageView implements View.OnClickLi
             this.groupWidth = groupWidth;
         if (groupHeigh != null)
             this.groupHeigh = groupHeigh;
-
-
-        this.setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
-                switch (action) {
-                    case MotionEvent.ACTION_DOWN:
-                        lastX = (int) event.getRawX();
-                        lastY = (int) event.getRawY();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        int dx = (int) event.getRawX() - lastX;
-                        int dy = (int) event.getRawY() - lastY;
-
-                        int left = GoodsShoppingCartButton.this.getLeft() + dx;
-                        int top = GoodsShoppingCartButton.this.getTop() + dy;
-                        int right = GoodsShoppingCartButton.this.getRight() + dx;
-                        int bottom = GoodsShoppingCartButton.this.getBottom() + dy;
-                        if (left < 0) {
-                            left = 0;
-                            right = left + GoodsShoppingCartButton.this.getWidth();
-                        }
-                        if (right > groupWidth) {
-                            right = groupWidth;
-                            left = right - GoodsShoppingCartButton.this.getWidth();
-                        }
-                        if (top < 0) {
-                            top = 0;
-                            bottom = top + GoodsShoppingCartButton.this.getHeight();
-                        }
-                        if (bottom > groupHeigh) {
-                            bottom = groupHeigh;
-                            top = bottom - GoodsShoppingCartButton.this.getHeight();
-                        }
-                        GoodsShoppingCartButton.this.layout(left, top, right, bottom);
-                        lastX = (int) event.getRawX();
-                        lastY = (int) event.getRawY();
-                        break;
-                    case MotionEvent.ACTION_UP:
-                        break;
-                }
-                return false;
-            }
-        });
+//        this.setOnTouchListener(new OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                int action = event.getAction();
+//                switch (action) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        isMove = false;
+//                        lastX = (int) event.getRawX();
+//                        lastY = (int) event.getRawY();
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//                        isMove = true;
+//                        int dx = (int) event.getRawX() - lastX;
+//                        int dy = (int) event.getRawY() - lastY;
+//
+//                        int left = GoodsShoppingCartButton.this.getLeft() + dx;
+//                        int top = GoodsShoppingCartButton.this.getTop() + dy;
+//                        int right = GoodsShoppingCartButton.this.getRight() + dx;
+//                        int bottom = GoodsShoppingCartButton.this.getBottom() + dy;
+//                        if (left < 0) {
+//                            left = 0;
+//                            right = left + GoodsShoppingCartButton.this.getWidth();
+//                        }
+//                        if (right > groupWidth) {
+//                            right = groupWidth;
+//                            left = right - GoodsShoppingCartButton.this.getWidth();
+//                        }
+//                        if (top < 0) {
+//                            top = 0;
+//                            bottom = top + GoodsShoppingCartButton.this.getHeight();
+//                        }
+//                        if (bottom > groupHeigh) {
+//                            bottom = groupHeigh;
+//                            top = bottom - GoodsShoppingCartButton.this.getHeight();
+//                        }
+//                        GoodsShoppingCartButton.this.layout(left, top, right, bottom);
+//                        lastX = (int) event.getRawX();
+//                        lastY = (int) event.getRawY();
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                isMove = false;
+                lastX = (int) event.getRawX();
+                lastY = (int) event.getRawY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                isMove = true;
+                int dx = (int) event.getRawX() - lastX;
+                int dy = (int) event.getRawY() - lastY;
+
+                int left = GoodsShoppingCartButton.this.getLeft() + dx;
+                int top = GoodsShoppingCartButton.this.getTop() + dy;
+                int right = GoodsShoppingCartButton.this.getRight() + dx;
+                int bottom = GoodsShoppingCartButton.this.getBottom() + dy;
+                if (left < 0) {
+                    left = 0;
+                    right = left + GoodsShoppingCartButton.this.getWidth();
+                }
+                if (right > groupWidth) {
+                    right = groupWidth;
+                    left = right - GoodsShoppingCartButton.this.getWidth();
+                }
+                if (top < 0) {
+                    top = 0;
+                    bottom = top + GoodsShoppingCartButton.this.getHeight();
+                }
+                if (bottom > groupHeigh) {
+                    bottom = groupHeigh;
+                    top = bottom - GoodsShoppingCartButton.this.getHeight();
+                }
+                GoodsShoppingCartButton.this.layout(left, top, right, bottom);
+                lastX = (int) event.getRawX();
+                lastY = (int) event.getRawY();
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
 
     @Override
     public void onClick(View v) {
+        if (isMove)
+            return;
         Intent intent = new Intent(getContext(), GoodsShoppingCartActivity.class);
         getContext().startActivity(intent);
     }

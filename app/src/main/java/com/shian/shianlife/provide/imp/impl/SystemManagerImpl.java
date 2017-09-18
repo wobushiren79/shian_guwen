@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.mapapi.CustomDialog;
 import com.shian.shianlife.mvp.login.bean.SystemLoginBean;
 import com.shian.shianlife.mvp.login.bean.SystemLoginOutBean;
 import com.shian.shianlife.mvp.login.bean.SystemLoginOutResultBean;
@@ -26,6 +28,7 @@ import okhttp3.Call;
 
 public class SystemManagerImpl extends BaseManagerImpl implements SystemManager {
     private static SystemManagerImpl manager;
+    private CustomDialog customDialog;
 
     private SystemManagerImpl() {
         super();
@@ -59,6 +62,10 @@ public class SystemManagerImpl extends BaseManagerImpl implements SystemManager 
 
 
     private void loginSubSystem(final Context context, String storeUrl) {
+        if (customDialog == null || !customDialog.isShowing()) {
+            customDialog = new CustomDialog(context);
+            customDialog.show();
+        }
         Log.v("tag", "storeUrl:" + storeUrl);
         GetBuilder getBuilder = OkHttpUtils.get();
         getBuilder.url(storeUrl);
@@ -68,11 +75,17 @@ public class SystemManagerImpl extends BaseManagerImpl implements SystemManager 
             @Override
             public void onError(Call call, Exception e, int id) {
                 ToastUtils.show(context, e.getMessage());
+                customDialog.cancel();
+                if (customDialog != null)
+                    customDialog.cancel();
+//                Utils.jumpLogin(context);
             }
 
             @Override
             public void onResponse(String response, int id) {
                 Log.v("tag", "storeResponse:" + response);
+                if (customDialog != null)
+                    customDialog.cancel();
             }
         });
     }

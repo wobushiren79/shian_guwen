@@ -4,6 +4,6 @@ package com.shian.shianlife.mvp.goods.presenter;
  * Created by zm.
  */
 
-public interface IGoodsMainRecommendTitlePresenter {
+public interface IGoodsLabelPresenter {
     void getRecommendTitleData();
 }

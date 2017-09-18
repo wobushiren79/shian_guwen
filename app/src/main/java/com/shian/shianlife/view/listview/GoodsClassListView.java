@@ -25,6 +25,7 @@ public class GoodsClassListView extends RecyclerView implements IGoodsClassView,
     private GoodsClassAdapter classAdapter;
     private IGoodsClassPresenter goodsClassPresenter;
     private CallBack callBack;
+    private Long goodsClassId;
 
     public GoodsClassListView(Context context) {
         this(context, null);
@@ -32,13 +33,17 @@ public class GoodsClassListView extends RecyclerView implements IGoodsClassView,
 
     public GoodsClassListView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-
+        goodsClassId = -1L;
         classAdapter = new GoodsClassAdapter(context);
         classAdapter.setCallBack(this);
 
         goodsClassPresenter = new GoodsClassPresenterImpl(this);
         this.setAdapter(classAdapter);
         this.setLayoutManager(new LinearLayoutManager(context));
+    }
+
+    public void setGoodsClassId(Long goodsClassId) {
+        this.goodsClassId = goodsClassId;
     }
 
     public void setCallBack(CallBack callBack) {
@@ -57,7 +62,16 @@ public class GoodsClassListView extends RecyclerView implements IGoodsClassView,
     @Override
     public void getGoodsClassDataSuccess(List<GoodsClassResultBean> listData) {
         classAdapter.setData(listData);
-        classAdapter.setSelectItem(0);
+        boolean isHasData = false;
+        for (int i = 0; i < listData.size(); i++) {
+            GoodsClassResultBean itemData = listData.get(i);
+            if (itemData.getId() != null && goodsClassId == itemData.getId()) {
+                classAdapter.setSelectItem(i);
+                isHasData = true;
+            }
+        }
+        if (!isHasData)
+            classAdapter.setSelectItem(0);
     }
 
     @Override

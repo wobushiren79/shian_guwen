@@ -5,10 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.adapter.base.BaseRCAdapter;
 import com.shian.shianlife.view.ptr.CustomPtrFramelayout;
 
 import in.srain.cube.views.ptr.PtrDefaultHandler2;
@@ -18,9 +20,11 @@ import in.srain.cube.views.ptr.PtrDefaultHandler2;
  */
 
 public class BasePtrRecyclerView extends BaseLayout {
-    private RecyclerView recyclerview;
-    private CustomPtrFramelayout ptrLayout;
-    private LinearLayout llTitle;
+    protected RecyclerView recyclerview;
+    protected CustomPtrFramelayout ptrLayout;
+    protected LinearLayout llTitle;
+    private ImageView tvReminderName;
+    private ImageView ivReminderContent;
 
     public static final int Show_Mode_NoData = 0;
     public static final int Show_Mode_HasData = 1;
@@ -38,6 +42,8 @@ public class BasePtrRecyclerView extends BaseLayout {
         recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
         ptrLayout = (CustomPtrFramelayout) findViewById(R.id.ptr_layout);
         llTitle = (LinearLayout) findViewById(R.id.ll_title);
+        tvReminderName = (ImageView) findViewById(R.id.tv_reminder_name);
+        ivReminderContent = (ImageView) findViewById(R.id.iv_reminder_content);
     }
 
     @Override
@@ -75,5 +81,33 @@ public class BasePtrRecyclerView extends BaseLayout {
                 llTitle.setVisibility(GONE);
                 break;
         }
+    }
+
+
+    /**
+     * 设置是否显示无数据
+     */
+    protected void hasData(BaseRCAdapter adapter) {
+        if (adapter.getData().size() == 0) {
+            this.setShowMode(Show_Mode_NoData);
+        } else {
+            this.setShowMode(Show_Mode_HasData);
+        }
+    }
+
+    /**
+     * 设置提示文字
+     * @param picId
+     */
+    public void setReminderText(int picId) {
+        tvReminderName.setBackgroundResource(picId);
+    }
+
+    /**
+     * 设置提示图片
+     * @param picId
+     */
+    public void setReminderPic(int picId) {
+        ivReminderContent.setImageResource(picId);
     }
 }

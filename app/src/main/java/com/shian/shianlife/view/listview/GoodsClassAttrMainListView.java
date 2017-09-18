@@ -30,11 +30,10 @@ public class GoodsClassAttrMainListView extends ScrollRecyclerView implements IG
 
     public GoodsClassAttrMainListView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        this.setVisibility(GONE);
+
         attrMainAdapter = new GoodsClassAttrMainAdapter(context);
-
         goodsClassAttrMainPresenter = new GoodsClassAttrMainPresenterImpl(this);
-        goodsClassAttrMainPresenter.getGoodsClassAttrMainData();
-
 
         this.setLayoutManager(new GridLayoutManager(context, 4));
         this.setAdapter(attrMainAdapter);
@@ -47,11 +46,19 @@ public class GoodsClassAttrMainListView extends ScrollRecyclerView implements IG
 
     @Override
     public void getGoodsClassAttrMainDataSuccess(List<GoodsClassAttrMainResultBean> data) {
+        this.setVisibility(VISIBLE);
         attrMainAdapter.setData(data);
     }
 
     @Override
     public void getGoodsClassAttrMainDataFail(String msg) {
         ToastUtils.show(getContext(), msg);
+    }
+
+    /**
+     * 开始查询数据
+     */
+    public void startFindData() {
+        goodsClassAttrMainPresenter.getGoodsClassAttrMainData();
     }
 }

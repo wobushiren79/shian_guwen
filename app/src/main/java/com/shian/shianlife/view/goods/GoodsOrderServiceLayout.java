@@ -11,11 +11,15 @@ import android.widget.LinearLayout;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.adapter.GoodsOrderListAdapter;
+import com.shian.shianlife.adapter.GoodsQueryListAdapter;
+import com.shian.shianlife.base.BasePtrRecyclerView;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderListResultBean;
 import com.shian.shianlife.mvp.goods.presenter.IGoodsOrderListPresenter;
 import com.shian.shianlife.mvp.goods.presenter.impl.GoodsOrderListPresenterImpl;
+import com.shian.shianlife.mvp.goods.presenter.impl.GoodsQueryListPresenterImpl;
 import com.shian.shianlife.mvp.goods.view.IGoodsOrderListView;
+import com.shian.shianlife.thisenum.OrderByEnum;
 import com.shian.shianlife.view.ptr.CustomPtrFramelayout;
 
 import java.util.ArrayList;
@@ -30,11 +34,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
  * Created by zm.
  */
 
-public class GoodsOrderServiceLayout extends LinearLayout implements IGoodsOrderListView {
-    View view;
-
-    private RecyclerView rcContent;
-    private CustomPtrFramelayout ptrLayout;
+public class GoodsOrderServiceLayout extends BasePtrRecyclerView implements IGoodsOrderListView {
 
     private String title;
     private Integer payStatus;
@@ -48,34 +48,33 @@ public class GoodsOrderServiceLayout extends LinearLayout implements IGoodsOrder
 
     public GoodsOrderServiceLayout(Context context, Integer[] orderStatus, Integer payStatus) {
         super(context);
-        view = View.inflate(context, R.layout.layout_goods_order_service, this);
+//        view = View.inflate(context, R.layout.layout_goods_order_service, this);
+        setReminderPic(R.drawable.zhy_no_order_text);
         this.orderStatus = orderStatus;
         this.payStatus = payStatus;
-        initView();
-        initData();
+        init();
 
     }
 
-    private void initView() {
-        rcContent = (RecyclerView) view.findViewById(R.id.rc_content);
-        ptrLayout = (CustomPtrFramelayout) view.findViewById(R.id.ptr_layout);
-
+    private void init() {
         listAdapter = new GoodsOrderListAdapter(getContext());
-        rcContent.setAdapter(listAdapter);
-        rcContent.setLayoutManager(new LinearLayoutManager(getContext()));
-        ptrLayout.setPtrHandler(ptrDefaultHandler2);
-    }
-
-    private void initData() {
         goodsOrderListPresenter = new GoodsOrderListPresenterImpl(this);
-                                 /* 延时100秒,自动刷新 */
+
+        this.setAdapter(listAdapter);
+        this.setLayoutManager(new LinearLayoutManager(getContext()));
+        this.setPtrHandler2(ptrDefaultHandler2);
+
+
+        /* 延时100秒,自动刷新 */
         ptrLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
                 ptrLayout.autoRefresh();
             }
         }, 100);
+
     }
+
 
     public void setTitle(String title) {
         this.title = title;
@@ -103,12 +102,14 @@ public class GoodsOrderServiceLayout extends LinearLayout implements IGoodsOrder
                 listAdapter.addData(resultBean.getContent());
             }
         }
+        hasData(listAdapter);
     }
 
     @Override
     public void getGoodsOrderListDataFail(String resultBean) {
         ptrLayout.refreshComplete();
         pageNumber = pageNumber > 0 ? pageNumber : pageNumber--;
+        hasData(listAdapter);
     }
 
     @Override

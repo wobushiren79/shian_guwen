@@ -39,6 +39,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.loopj.android.http.RequestParams;
+import com.shian.shianlife.activity.LoginActivity;
 import com.shian.shianlife.activity.MainActivity;
 import com.shian.shianlife.activity.PgzxActivity;
 import com.shian.shianlife.base.SaBaseApplication;
@@ -427,5 +428,15 @@ public class Utils {
 //            //透明导航栏
 //            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
+    }
+
+    /**
+     * 跳转到登陆
+     * @param context
+     */
+    public static void jumpLogin(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 }

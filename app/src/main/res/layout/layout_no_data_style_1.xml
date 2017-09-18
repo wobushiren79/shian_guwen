@@ -9,11 +9,13 @@
 
 
     <ImageView
+        android:id="@+id/iv_reminder_content"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dimen_300dp"
         android:src="@drawable/zhy_no_data_icon" />
 
     <ImageView
+        android:id="@+id/tv_reminder_name"
         android:layout_width="@dimen/dimen_300dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimen_150dp"

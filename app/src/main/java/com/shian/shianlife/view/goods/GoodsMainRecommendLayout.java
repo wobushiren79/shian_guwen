@@ -6,17 +6,17 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.adapter.GoodsMainRecommendPagerAdapter;
 import com.shian.shianlife.base.BaseLayout;
 import com.shian.shianlife.common.utils.ToastUtils;
-import com.shian.shianlife.mvp.goods.bean.GoodsMainRecommendTitleResultBean;
-import com.shian.shianlife.mvp.goods.presenter.IGoodsMainRecommendTitlePresenter;
-import com.shian.shianlife.mvp.goods.presenter.impl.GoodsMainRecommendTitlePresenterImpl;
-import com.shian.shianlife.mvp.goods.view.IGoodsMainRecommendTitleView;
-import com.shian.shianlife.view.tablayout.BaseTabLayoutItem;
+import com.shian.shianlife.mvp.goods.bean.GoodsLabelResultBean;
+import com.shian.shianlife.mvp.goods.presenter.IGoodsLabelPresenter;
+import com.shian.shianlife.mvp.goods.presenter.impl.GoodsLabelPresenterImpl;
+import com.shian.shianlife.mvp.goods.view.IGoodsLabelView;
 import com.shian.shianlife.view.tablayout.CustomTabLayout;
 import com.shian.shianlife.view.tablayout.NormalTabLayoutItem;
 
@@ -29,8 +29,7 @@ import butterknife.InjectView;
  * Created by zm.
  */
 
-public class GoodsMainRecommendLayout extends BaseLayout implements IGoodsMainRecommendTitleView {
-
+public class GoodsMainRecommendLayout extends BaseLayout implements IGoodsLabelView, GoodsLabelDetailsLayout.CallBack, CustomTabLayout.CallBack {
     @InjectView(R.id.tablayout)
     CustomTabLayout tablayout;
     @InjectView(R.id.viewpager)
@@ -41,7 +40,7 @@ public class GoodsMainRecommendLayout extends BaseLayout implements IGoodsMainRe
     private List<View> titleListView = new ArrayList<>();
 
     private GoodsMainRecommendPagerAdapter pagerAdapter;
-    private IGoodsMainRecommendTitlePresenter goodsMainRecommendTitlePresenter;
+    private IGoodsLabelPresenter goodsMainRecommendTitlePresenter;
 
     public GoodsMainRecommendLayout(Context context) {
         this(context, null);
@@ -53,13 +52,12 @@ public class GoodsMainRecommendLayout extends BaseLayout implements IGoodsMainRe
 
     @Override
     protected void initView() {
-
+        this.setVisibility(GONE);
     }
 
     @Override
     protected void initData() {
-        goodsMainRecommendTitlePresenter = new GoodsMainRecommendTitlePresenterImpl(this);
-        goodsMainRecommendTitlePresenter.getRecommendTitleData();
+        goodsMainRecommendTitlePresenter = new GoodsLabelPresenterImpl(this);
     }
 
     @Override
@@ -68,32 +66,55 @@ public class GoodsMainRecommendLayout extends BaseLayout implements IGoodsMainRe
     }
 
     @Override
-    public void getGoodsMainRecommendTitleSuccess(List<GoodsMainRecommendTitleResultBean> listData) {
-        for (GoodsMainRecommendTitleResultBean itemData : listData) {
+    public void getGoodsMainRecommendTitleSuccess(List<GoodsLabelResultBean> listData) {
+        if (listData == null || listData.size() <= 0)
+            return;
+        this.setVisibility(VISIBLE);
+        for (GoodsLabelResultBean itemData : listData) {
             NormalTabLayoutItem titleView = new NormalTabLayoutItem(getContext());
             titleView.setTitle(itemData.getLabel_name());
             titleListView.add(titleView);
 
-            ViewPager.LayoutParams layout = new ViewPager.LayoutParams();
-            layout.height = 200;
-            TextView t = new TextView(getContext());
-            t.setText(itemData.getLabel_name());
-            t.setLayoutParams(layout);
-            listView.add(t);
+            if (itemData.getId() == null)
+                return;
+            GoodsLabelDetailsLayout contentView = new GoodsLabelDetailsLayout(getContext());
+            contentView.setLabelId(itemData.getId());
+            contentView.setCallBack(this);
+            contentView.startFindData();
+            listView.add(contentView);
         }
         pagerAdapter = new GoodsMainRecommendPagerAdapter(getContext(), listView);
         viewpager.setAdapter(pagerAdapter);
         viewpager.addOnPageChangeListener(pagerAdapter);
 
+        tablayout.setCallBack(this);
         tablayout.setupWithViewPager(viewpager);
         tablayout.setTablViewList(titleListView);
-
-        viewpager.setCurrentItem(0);
         tablayout.setSelect(0);
     }
 
     @Override
     public void getGoodsMainRecommendTitleFail(String msg) {
         ToastUtils.show(getContext(), msg);
+    }
+
+    @Override
+    public void findDataSuccess(View view) {
+        tablayout.setSelect(0);
+    }
+
+    @Override
+    public void onTabSelected(View view, TabLayout.Tab tab) {
+        GoodsLabelDetailsLayout itemView = (GoodsLabelDetailsLayout) listView.get(tab.getPosition());
+        Integer allItemHeight = itemView.getAllItemHeight();
+        LayoutParams layout = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, allItemHeight);
+        viewpager.setLayoutParams(layout);
+    }
+
+    /**
+     * 开始查找数据
+     */
+    public void startFindData() {
+        goodsMainRecommendTitlePresenter.getRecommendTitleData();
     }
 }
