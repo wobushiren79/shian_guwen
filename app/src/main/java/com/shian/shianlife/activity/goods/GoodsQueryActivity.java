@@ -1,11 +1,8 @@
 package com.shian.shianlife.activity.goods;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;

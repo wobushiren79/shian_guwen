@@ -104,6 +104,7 @@ dependencies {
     compile 'com.android.support:design:23.1.0'
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+    compile 'com.baidu.mobstat:mtj-sdk:latest.integration'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife:6.0.0'
 }

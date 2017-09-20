@@ -453,7 +453,6 @@ public class CemeteryBuildView extends BaseOrderView {
 
             @Override
             public void onSuccess(HrGetCemeteryListData result) {
-
                 if (result != null && result.getList() != null && result.getList().size() > 0) {
                     adapter.addListData(result.getList());
                     adapter.notifyDataSetChanged();

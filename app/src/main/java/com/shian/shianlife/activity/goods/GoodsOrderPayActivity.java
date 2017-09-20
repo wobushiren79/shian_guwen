@@ -11,8 +11,10 @@ import android.widget.TextView;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.order.StoreServiceActivity;
 import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.AnimUtils;
+import com.shian.shianlife.common.utils.PayUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.view.TipsDialog;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderInfoResultBean;
@@ -23,11 +25,16 @@ import com.shian.shianlife.mvp.goods.presenter.impl.GoodsOrderInfoPresenterImpl;
 import com.shian.shianlife.mvp.goods.presenter.impl.GoodsOrderOfflinePayPresenterImpl;
 import com.shian.shianlife.mvp.goods.view.IGoodsOrderInfoView;
 import com.shian.shianlife.mvp.goods.view.IGoodsOrderOfflinePayView;
+import com.shian.shianlife.mvp.pay.bean.WeChatPrePayResultBean;
+import com.shian.shianlife.mvp.pay.presenter.IWeChatPrePayPresenter;
+import com.shian.shianlife.mvp.pay.presenter.impl.WeChatPrePayPresenter;
+import com.shian.shianlife.mvp.pay.view.IWeChatPrePayView;
+import com.summerxia.dateselector.utils.DateUtils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderInfoView, View.OnClickListener, IGoodsOrderOfflinePayView {
+public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderInfoView, View.OnClickListener, IGoodsOrderOfflinePayView, IWeChatPrePayView {
     @InjectView(R.id.tv_order_number)
     TextView tvOrderNumber;
     @InjectView(R.id.tv_pay_price)
@@ -42,8 +49,10 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
     private Long orderId;
     private IGoodsOrderInfoPresenter goodsOrderInfoPresenter;
     private IGoodsOrderOfflinePayPresenter goodsOrderOfflinePayPresenter;
+    private IWeChatPrePayPresenter weChatPrePayPresenter;
 
     private Integer payPrice;
+    private boolean isPayWeChat = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +76,7 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
         goodsOrderInfoPresenter.getGoodsOrderInfo();
 
         goodsOrderOfflinePayPresenter = new GoodsOrderOfflinePayPresenterImpl(this);
+        weChatPrePayPresenter = new WeChatPrePayPresenter(this);
     }
 
     @Override
@@ -152,7 +162,7 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
     @Override
     public void onClick(View v) {
         if (v == tvPayWechat) {
-
+            payWechat();
         } else if (v == tvPayOffline) {
             payOffline();
         } else if (v == llContent) {
@@ -160,6 +170,20 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
         }
     }
 
+    /**
+     * 微信支付
+     */
+    private void payWechat() {
+        if (isPayWeChat) {
+            ToastUtils.show(this, "支付中");
+        }
+        isPayWeChat = true;
+        weChatPrePayPresenter.wechatPrePay();
+    }
+
+    /**
+     * 线下支付
+     */
     private void payOffline() {
         TipsDialog dialog = new TipsDialog(this);
         dialog.setTitle("点击确认后，使用线下支付方式，包括现金刷卡收取等");
@@ -177,5 +201,23 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
             }
         });
         dialog.show();
+    }
+
+    @Override
+    public void wechatPrePaySuccess(WeChatPrePayResultBean resultBean) {
+        PayUtils.sendPayReq(this,
+                AppContansts.WeChat_Pay_AppId,
+                "partnerid",
+                "prepayid",
+                AppContansts.WeChat_Pay_Package,
+                PayUtils.getUUIDString(),
+                System.currentTimeMillis(),
+                AppContansts.WeChat_Pay_Sign);
+    }
+
+    @Override
+    public void wechatPrePayFail(String msg) {
+        ToastUtils.show(this, msg);
+        isPayWeChat = false;
     }
 }

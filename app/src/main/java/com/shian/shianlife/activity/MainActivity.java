@@ -18,7 +18,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -28,7 +27,6 @@ import com.kf5sdk.api.CallBack;
 import com.kf5sdk.init.KF5SDKConfig;
 import com.kf5sdk.init.UserInfo;
 import com.shian.shianlife.R;
-import com.shian.shianlife.activity.cemetery.BuildNewOrderActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.base.SaBaseApplication;
 import com.shian.shianlife.common.contanst.AppContansts;
@@ -39,14 +37,9 @@ import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.fragment.FindFragment;
-import com.shian.shianlife.fragment.HomeFragment;
 import com.shian.shianlife.fragment.NewHomeFragment;
-import com.shian.shianlife.fragment.NewUserCenterFragment;
-import com.shian.shianlife.fragment.OrderFragment;
 import com.shian.shianlife.fragment.StoreFragment;
 import com.shian.shianlife.fragment.TheOrderFragment;
-import com.shian.shianlife.fragment.UserCenterFragment;
-import com.shian.shianlife.mapapi.CustomDialog;
 import com.shian.shianlife.mvp.login.presenter.ISubSystemLoginPresenter;
 import com.shian.shianlife.mvp.login.presenter.impl.SubSystemLoginPresenterImpl;
 import com.shian.shianlife.mvp.login.view.ISubSystemLoginView;
@@ -59,8 +52,6 @@ import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.result.HrCommentResult;
 import com.shian.shianlife.provide.result.HrGetMsgNumberForUntreated;
 import com.shian.shianlife.service.PushService;
-import com.shian.shianlife.service.UpDataService;
-import com.viewpagerindicator.TabPageIndicator;
 
 import org.support.v4.annotation.NonNull;
 
@@ -68,7 +59,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.InjectView;
-import butterknife.OnClick;
 import me.leolin.shortcutbadger.ShortcutBadger;
 import okhttp3.Request;
 
@@ -118,7 +108,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         startPushService();
         //检测更新
         Utils.checkUpData(this, false);
-
     }
 
 

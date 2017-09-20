@@ -61,6 +61,7 @@ public class CemeteryServiceActivity extends BaseActivity {
         if (AppContansts.userCemetery != null) {
             for (int i = 0; i < AppContansts.userCemetery.getPermitionCodes().size(); i++) {
                 if (AppContansts.userCemetery.getPermitionCodes().get(i).equals(AppRolePermition.ADVISOR.getCode())) {
+                    arrTitles.add(CemeteryBuildListTypeEnum.confirm_build.getName());
                     arrTitles.add(CemeteryBuildListTypeEnum.wait_look.getName());
                     arrTitles.add(CemeteryBuildListTypeEnum.look_ing.getName());
                     arrTitles.add(CemeteryBuildListTypeEnum.has_order.getName());

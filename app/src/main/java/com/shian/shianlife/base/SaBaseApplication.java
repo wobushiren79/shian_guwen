@@ -168,14 +168,14 @@ public class SaBaseApplication extends MultiDexApplication {
 
         private String getBaseUrl(String url) {
             String temp = "";
-            if (!url.contains("https")) {
+            if (url.contains("https") || url.contains("http://prd")) {
+                int hostLocation = url.indexOf("/", 8);
+                temp = url.substring(0, hostLocation);
+            } else {
                 int hostLocation = url.indexOf("/", 8);
                 int urlLocation = url.indexOf("/", hostLocation + 1);
                 if (urlLocation != -1)
                     temp = url.substring(0, urlLocation);
-            } else {
-                int hostLocation = url.indexOf("/", 8);
-                temp = url.substring(0, hostLocation);
             }
             return temp;
         }

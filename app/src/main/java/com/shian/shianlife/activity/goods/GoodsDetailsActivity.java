@@ -4,9 +4,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,6 +26,7 @@ import com.shian.shianlife.common.utils.CheckUtils;
 import com.shian.shianlife.common.utils.DataUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
+import com.shian.shianlife.common.utils.ViewUtils;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsItemPerform;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartCreateResultBean;
@@ -61,6 +66,9 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
 
     @InjectView(R.id.rl_temp_head)
     RelativeLayout rlHead;
+    @InjectView(R.id.rl_title)
+    RelativeLayout rlTitle;
+
     @InjectView(R.id.tv_temp_title)
     TextView tvTitle;
     @InjectView(R.id.appbar)
@@ -119,7 +127,20 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
 
     private void initView() {
         Utils.setTranslucent(this);
+        setTitleLayout();
         appbar.addOnOffsetChangedListener(this);
+    }
+
+    /**
+     * 設置头布局
+     */
+    private void setTitleLayout() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            CoordinatorLayout.LayoutParams layoutParams = new CoordinatorLayout.LayoutParams
+                    (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.topMargin = ViewUtils.getStatusBarHeight(this)+ getResources().getDimensionPixelOffset(R.dimen.dimen_10dp);
+            rlTitle.setLayoutParams(layoutParams);
+        }
     }
 
     private void initData() {
@@ -144,19 +165,21 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
-
     @Override
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
         int dp = getResources().getDimensionPixelOffset(R.dimen.dimen_650dp);
         int maxShow = dp / 2;
         int offset = Math.abs(verticalOffset);
+        float alpha = ((offset - maxShow) * 2f) / (float) dp;
         if (offset > maxShow) {
-            float alpha = ((offset - maxShow) * 2f) / (float) dp;
             rlHead.setAlpha(Math.abs(alpha));
+            rlTitle.setAlpha(1 - Math.abs(alpha));
             garouseview.setRGVisibility(View.GONE);
         } else {
             rlHead.setAlpha(0f);
+            rlTitle.setAlpha(1 - alpha);
             garouseview.setRGVisibility(View.VISIBLE);
+
         }
     }
 

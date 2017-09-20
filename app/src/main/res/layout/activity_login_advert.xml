@@ -42,8 +42,7 @@
     <RelativeLayout
         android:id="@+id/ll_advert"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-  >
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/iv_advert"
@@ -55,11 +54,15 @@
             android:id="@+id/bt_jump"
             android:layout_width="@dimen/dimen_130dp"
             android:layout_height="@dimen/dimen_45dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dimen_20dp"
-            android:layout_marginTop="@dimen/dimen_20dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="9dp"
+            android:layout_marginRight="9dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/zhy_button_state_3"
             android:text="跳转"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen_28dp" />
     </RelativeLayout>
 </RelativeLayout>

@@ -82,29 +82,29 @@
                     android:layout_weight="1"
                     android:background="@null"
                     android:hint="请输入验证码"
-                    android:inputType="number"
+                    android:inputType="numberPassword"
                     android:lines="1"
-                    android:password="true"
                     android:textColorHint="@color/zhy_text_color_2"
                     android:textSize="@dimen/dimen_24dp" />
 
-                <Button
+                <TextView
                     android:id="@+id/bt_phonecode"
-                    android:layout_marginRight="@dimen/dimen_6dp"
-                    android:textColor="@color/zhy_text_color_1"
-                    android:text="获取验证码"
-                    android:gravity="center"
-                    android:layout_gravity="center"
                     android:layout_width="@dimen/dimen_165dp"
                     android:layout_height="@dimen/dimen_50dp"
-                    android:background="@drawable/zhy_button_state_2" />
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/dimen_6dp"
+                    android:background="@drawable/zhy_button_state_2"
+                    android:gravity="center"
+                    android:text="获取验证码"
+                    android:textSize="@dimen/dimen_28dp"
+                    android:textColor="@color/zhy_text_color_1" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="@dimen/dimen_514dp"
                 android:layout_height="@dimen/dimen_1dp"
-                android:layout_marginBottom="@dimen/dimen_60dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/dimen_60dp"
                 android:background="@color/zhy_line_4" />
 
 
@@ -113,41 +113,6 @@
                 android:layout_width="@dimen/dimen_500dp"
                 android:layout_height="@dimen/dimen_80dp"
                 android:layout_gravity="center"></com.shian.shianlife.view.customview.LoadingButton>
-
-            <RadioGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dimen_60dp"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/rb_state1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="@dimen/dimen_20dp"
-                    android:button="@null"
-                    android:checked="true"
-                    android:drawableLeft="@drawable/zhy_login_rb_1"
-                    android:drawablePadding="@dimen/dimen_10dp"
-                    android:text="殡仪"
-                    android:textColor="@color/zhy_text_color_2"
-                    android:textSize="@dimen/dimen_24dp" />
-
-                <RadioButton
-                    android:id="@+id/rb_state2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/dimen_20dp"
-                    android:button="@null"
-                    android:drawableLeft="@drawable/zhy_login_rb_1"
-                    android:drawablePadding="@dimen/dimen_10dp"
-                    android:text="公墓"
-                    android:textColor="@color/zhy_text_color_2"
-                    android:textSize="@dimen/dimen_24dp" />
-            </RadioGroup>
 
 
         </LinearLayout>

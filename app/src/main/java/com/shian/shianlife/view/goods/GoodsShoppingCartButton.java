@@ -27,8 +27,11 @@ public class GoodsShoppingCartButton extends ImageView implements View.OnClickLi
     private int groupWidth;
     private int groupHeigh;
 
-    int lastX;
-    int lastY;
+    private int lastX;
+    private int lastY;
+
+    private float itemX;
+    private float itemY;
 
     private boolean isMove = false;
 
@@ -116,9 +119,10 @@ public class GoodsShoppingCartButton extends ImageView implements View.OnClickLi
                 isMove = false;
                 lastX = (int) event.getRawX();
                 lastY = (int) event.getRawY();
+                itemX = GoodsShoppingCartButton.this.getX();
+                itemY = GoodsShoppingCartButton.this.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                isMove = true;
                 int dx = (int) event.getRawX() - lastX;
                 int dy = (int) event.getRawY() - lastY;
 
@@ -147,6 +151,14 @@ public class GoodsShoppingCartButton extends ImageView implements View.OnClickLi
                 lastY = (int) event.getRawY();
                 break;
             case MotionEvent.ACTION_UP:
+                float moveX = GoodsShoppingCartButton.this.getX() - itemX;
+                float moveY = GoodsShoppingCartButton.this.getY() - itemY;
+                int dp30 = getResources().getDimensionPixelOffset(R.dimen.dimen_30dp);
+                if (Math.abs(moveX) < dp30 && Math.abs(moveY) < dp30) {
+                    isMove = false;
+                } else {
+                    isMove = true;
+                }
                 break;
         }
         return super.onTouchEvent(event);

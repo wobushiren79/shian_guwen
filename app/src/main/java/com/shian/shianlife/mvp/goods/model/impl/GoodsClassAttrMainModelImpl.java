@@ -50,7 +50,7 @@ public class GoodsClassAttrMainModelImpl implements IGoodsClassAttrMainModel {
                     } else if (itemResult.getName().contains("纪念品")) {
                         itemResult.setPicId(R.drawable.zhy_goods_class_attr_diamond_icon);
                     } else {
-                        itemResult.setPicId(R.drawable.zhy_goods_class_attr_all_icon);
+                        itemResult.setPicId(R.drawable.zhy_goods_class_attr_other_icon);
                     }
                 }
                 result.add(allData);

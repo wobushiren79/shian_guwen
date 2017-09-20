@@ -5,7 +5,7 @@ package com.shian.shianlife.thisenum;
  */
 public enum CemeteryBuildListTypeEnum {
     all(-1, "全部", "marketing/bespeak/build/list"),
-    confirm_build(0, "确认中", "marketing/bespeak/build/list/confirm"),
+    confirm_build(0, "待确认", "marketing/bespeak/build/list/confirm"),
     wait_look(1, "待看墓", "marketing/bespeak/build/list/wait"),
     look_ing(2, "看墓中", "marketing/bespeak/build/list/look"),
     has_order(3, "已定墓", "marketing/bespeak/build/list/has"),

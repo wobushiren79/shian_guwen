@@ -100,10 +100,15 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
 
 
     public void getData() {
+        if (AppContansts.userLoginInfo == null) {
+            ToastUtils.show(this, "没有赋予权限");
+            finish();
+            return;
+        }
         HpCemeteryStructureParams params = new HpCemeteryStructureParams();
         params.setItemId(-1);
         params.setItemType(0);
-        params.setToken(AppContansts.userLoginInfo.getToken());
+//        params.setToken(AppContansts.userLoginInfo.getToken());
         MHttpManagerFactory.getCemeteryManager().getCemeteryStructure(BuildNewOrderActivity.this, params, new HttpResponseHandler<HrGetCemeteryStructure>() {
 
             @Override

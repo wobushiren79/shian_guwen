@@ -49,7 +49,7 @@ public class GoodsOrderServiceLayout extends BasePtrRecyclerView implements IGoo
     public GoodsOrderServiceLayout(Context context, Integer[] orderStatus, Integer payStatus) {
         super(context);
 //        view = View.inflate(context, R.layout.layout_goods_order_service, this);
-        setReminderPic(R.drawable.zhy_no_order_text);
+        setReminderText(R.drawable.zhy_no_order_text);
         this.orderStatus = orderStatus;
         this.payStatus = payStatus;
         init();

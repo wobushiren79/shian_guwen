@@ -87,16 +87,16 @@ public class SplashActivity extends BaseActivity implements OnPushListener, IUse
         finish();
     }
 
-    private void login(String userName, String passWord, String channelId) {
+    private void loginFuneral() {
         AppContansts.userCemetery = null;
         AppContansts.userLoginInfo = null;
 
         //登录状态为普通状态
         HpLoginParams params = new HpLoginParams();
-        params.setPassword(passWord);
         params.setUsername(userName);
+        params.setPassword(userPassWord);
         params.setSystemType("2");
-        params.setChannelId(channelId);
+        params.setChannelId(AppContansts.pushChannelId);
         MHttpManagerFactory.getFuneralManager().login(this, params,
                 new HttpResponseHandler<HrLoginResult>() {
 
@@ -108,16 +108,12 @@ public class SplashActivity extends BaseActivity implements OnPushListener, IUse
                     @Override
                     public void onSuccess(HrLoginResult result) {
                         AppContansts.userLoginInfo = result;
-                        if (result.getToken() != null && !result.getToken().equals("")) {
-                            loginCemetery(result);
-                        } else {
-                            sleepActivity(LoginAdvertActivity.MAIN);
-                        }
+                        loginCemetery();
                     }
 
                     @Override
                     public void onError(String message) {
-                        sleepActivity(LoginAdvertActivity.MAIN);
+                        loginCemetery();
                     }
                 });
 
@@ -125,15 +121,12 @@ public class SplashActivity extends BaseActivity implements OnPushListener, IUse
 
     /**
      * 登陆公墓
-     *
-     * @param result
      */
-    private void loginCemetery(final HrLoginResult result) {
-        HpLoginParams paramsCemetery = new HpLoginParams();
-        paramsCemetery.setToken(result.getToken());
-        MHttpManagerFactory.getCemeteryManager().loginCemetery(SplashActivity.this, paramsCemetery, new HttpResponseHandler<HrLoginResult>() {
-
-
+    private void loginCemetery() {
+        HpLoginParams params = new HpLoginParams();
+        params.setUsername(userName);
+        params.setPassword(userPassWord);
+        MHttpManagerFactory.getCemeteryManager().loginCemetery(SplashActivity.this, params, new HttpResponseHandler<HrLoginResult>() {
             @Override
             public void onStart(Request request, int id) {
 
@@ -249,7 +242,7 @@ public class SplashActivity extends BaseActivity implements OnPushListener, IUse
 
     @Override
     public void loginSystemSuccess(SystemLoginResultBean result) {
-        login(userName, userPassWord, AppContansts.pushChannelId);
+        loginFuneral();
     }
 
     @Override

@@ -100,7 +100,7 @@ public class BasePtrRecyclerView extends BaseLayout {
      * @param picId
      */
     public void setReminderText(int picId) {
-        tvReminderName.setBackgroundResource(picId);
+        tvReminderName.setImageResource(picId);
     }
 
     /**

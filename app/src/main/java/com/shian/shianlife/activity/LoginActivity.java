@@ -4,39 +4,39 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-
-import butterknife.InjectView;
-import butterknife.OnClick;
-import okhttp3.Request;
+import android.widget.TextView;
 
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
-import com.shian.shianlife.common.utils.JSONUtil;
+import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils;
-import com.shian.shianlife.common.utils.SharePerfrenceUtils.ShareLogin;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.mvp.login.bean.SystemLoginResultBean;
 import com.shian.shianlife.mvp.login.presenter.IUserLoginPresenter;
 import com.shian.shianlife.mvp.login.presenter.impl.UserLoginPresenterImpl;
 import com.shian.shianlife.mvp.login.view.IUserLoginView;
-import com.shian.shianlife.mvp.userinfo.view.IUserInfoView;
 import com.shian.shianlife.provide.MHttpManagerFactory;
-import com.shian.shianlife.provide.base.HttpRequestExecutor;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpLoginParams;
 import com.shian.shianlife.provide.result.HrLoginResult;
 import com.shian.shianlife.view.customview.LoadingButton;
 
-public class LoginActivity extends BaseActivity implements IUserLoginView {
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
+import okhttp3.Request;
+
+public class LoginActivity extends BaseActivity implements IUserLoginView, View.OnClickListener {
     @InjectView(R.id.et_login_username)
     EditText etUserName;
     @InjectView(R.id.et_login_password)
@@ -51,6 +51,11 @@ public class LoginActivity extends BaseActivity implements IUserLoginView {
     @InjectView(R.id.rl_content)
     RelativeLayout rlContent;
 
+    @InjectView(R.id.tv_forget_password)
+    TextView tvForgetPassword;
+    @InjectView(R.id.tv_no_password)
+    TextView tvNoPassword;
+
 
     private IUserLoginPresenter userLoginPresenter;
 
@@ -58,12 +63,16 @@ public class LoginActivity extends BaseActivity implements IUserLoginView {
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_login);
+        ButterKnife.inject(this);
         initData();
         startAnim();
 
     }
 
     private void initData() {
+        tvNoPassword.setOnClickListener(this);
+        tvForgetPassword.setOnClickListener(this);
+
         userLoginPresenter = new UserLoginPresenterImpl(this, null);
         userLoginPresenter.getLoginConfig();
     }
@@ -88,10 +97,14 @@ public class LoginActivity extends BaseActivity implements IUserLoginView {
     }
 
 
-    private void login(final String username, final String password) {
+    private void loginFuneral() {
         AppContansts.userCemetery = null;
         AppContansts.userLoginInfo = null;
-        if (!isCanLogin(username, password)) {
+
+        String userName = etUserName.getText().toString();
+        String passWord = etUserPassword.getText().toString();
+
+        if (!isCanLogin(userName, passWord)) {
             return;
         }
         if (TextUtils.isEmpty(SharePerfrenceUtils.getShareChannelId(this))) {
@@ -101,8 +114,8 @@ public class LoginActivity extends BaseActivity implements IUserLoginView {
 
         //登录状态为普通类型
         final HpLoginParams params = new HpLoginParams();
-        params.setPassword(etUserPassword.getText().toString());
-        params.setUsername(etUserName.getText().toString());
+        params.setUsername(userName);
+        params.setPassword(passWord);
         params.setSystemType("2");
         params.setChannelId(SharePerfrenceUtils.getShareChannelId(this));
         MHttpManagerFactory.getFuneralManager().login(this, params, new HttpResponseHandler<HrLoginResult>() {
@@ -116,17 +129,13 @@ public class LoginActivity extends BaseActivity implements IUserLoginView {
             public void onSuccess(final HrLoginResult result) {
                 AppContansts.userLoginInfo = result;
                 //判断是否要进行公墓登陆
-                if (result.getToken() != null && !result.getToken().equals("")) {
-                    loginCemetery(result);
-                } else {
-                    loginSuccess();
-                }
+                loginCemetery();
             }
 
 
             @Override
             public void onError(String message) {
-                loginSuccess();
+                loginCemetery();
             }
         });
 
@@ -135,13 +144,12 @@ public class LoginActivity extends BaseActivity implements IUserLoginView {
 
     /**
      * 登陆公墓
-     *
-     * @param result
      */
-    private void loginCemetery(final HrLoginResult result) {
-        HpLoginParams paramsCemetery = new HpLoginParams();
-        paramsCemetery.setToken(result.getToken());
-        MHttpManagerFactory.getCemeteryManager().loginCemetery(LoginActivity.this, paramsCemetery, new HttpResponseHandler<HrLoginResult>() {
+    private void loginCemetery() {
+        HpLoginParams params = new HpLoginParams();
+        params.setPassword(etUserPassword.getText().toString());
+        params.setUsername(etUserName.getText().toString());
+        MHttpManagerFactory.getCemeteryManager().loginCemetery(LoginActivity.this, params, new HttpResponseHandler<HrLoginResult>() {
 
 
             @Override
@@ -153,7 +161,6 @@ public class LoginActivity extends BaseActivity implements IUserLoginView {
             public void onSuccess(HrLoginResult resultCemetery) {
                 AppContansts.userCemetery = resultCemetery;
                 loginSuccess();
-
             }
 
             @Override
@@ -165,7 +172,6 @@ public class LoginActivity extends BaseActivity implements IUserLoginView {
 
     /**
      * 登陆成功跳转
-     *
      */
     private void loginSuccess() {
         lbLogin.setComplete();
@@ -185,9 +191,6 @@ public class LoginActivity extends BaseActivity implements IUserLoginView {
 
     @OnClick(R.id.btn_login_web)
     void loginWeb(View v) {
-//        Intent in = new Intent(this, WebActivity.class);
-//        in.putExtra("url", "http://m.e-funeral.cn");
-//        startActivity(in);
         Intent in = new Intent(this, LoginPhoneActivity.class);
         startActivity(in);
     }
@@ -240,12 +243,43 @@ public class LoginActivity extends BaseActivity implements IUserLoginView {
     @Override
     public void loginSystemSuccess(SystemLoginResultBean result) {
         userLoginPresenter.saveLoginConfig();
-        login(etUserName.getText().toString(), etUserPassword.getText().toString());
+        loginFuneral();
     }
 
     @Override
     public void loginSystemFail(String message) {
         lbLogin.setNormal();
         ToastUtils.show(this, message);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == tvForgetPassword) {
+            forgetPassWord();
+        } else if (v == tvNoPassword) {
+            noPassWord();
+        }
+    }
+
+    /**
+     * 忘记密码
+     */
+    private void forgetPassWord() {
+        Intent intent = new Intent(this, LoginPhoneActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 没有密码
+     */
+    private void noPassWord() {
+        Intent intent = new Intent(this, PicShowActivity.class);
+        ArrayList<String> listData = new ArrayList<>();
+        listData.add(AppContansts.Cooperation_Pic_1);
+        listData.add(AppContansts.Cooperation_Pic_2);
+        listData.add(AppContansts.Cooperation_Pic_3);
+        intent.putExtra(IntentName.INTENT_LIST_DATA, listData);
+        intent.putExtra(IntentName.INTENT_DATA, "招商");
+        startActivity(intent);
     }
 }

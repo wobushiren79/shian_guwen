@@ -18,7 +18,7 @@ public class AppContansts {
 
     //单项地址
     public static final String Store_BaseUrl = "https://goods.shianlife.cn";
-    //    public static final String Store_BaseUrl = "http://prd-goods.xicp.cn";
+//        public static final String Store_BaseUrl = "http://prd-goods.xicp.cn";
 //    public static final String Store_BaseUrl = "http://192.168.0.57:8080/goods";
     //殡仪地址
     public static final String Funeral_BaseUrl = "http://115.28.163.211:7088/shianlife-adviser-1.0-SNAPSHOT";
@@ -88,5 +88,13 @@ public class AppContansts {
     public static final String Shianlife_Phone = "966188";
 
     //微信支付ID
-    public static final String WeChat_Pay_AppId = "";
+    public static final String WeChat_Pay_AppId = "123";
+    public static final String WeChat_Pay_Sign = "9f937fc5b1ba104e33cc3e422bce346b";
+    public static final String WeChat_Pay_Package = "Sign=WXPay";
+
+    //招商图片
+    public static final String Cooperation_Pic_1 = "http://ovjs2f1iz.bkt.clouddn.com/index1.png";
+    public static final String Cooperation_Pic_2 = "http://ovjs2f1iz.bkt.clouddn.com/index2.png";
+    public static final String Cooperation_Pic_3 = "http://ovjs2f1iz.bkt.clouddn.com/index3.png";
+
 }
