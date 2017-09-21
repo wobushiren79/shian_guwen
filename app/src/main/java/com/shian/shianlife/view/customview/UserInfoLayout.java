@@ -3,7 +3,6 @@ package com.shian.shianlife.view.customview;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
@@ -12,17 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
-import com.shian.shianlife.activity.UserInfoIntegralActivity;
-import com.shian.shianlife.activity.UserInfoMoneyActivity;
-import com.shian.shianlife.common.contanst.AppContansts;
-import com.shian.shianlife.common.utils.PicassoUD;
+import com.shian.shianlife.activity.userinfo.UserInfoIntegralActivity;
+import com.shian.shianlife.activity.userinfo.UserInfoMoneyActivity;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.mvp.userinfo.presenter.IUserInfoPresenter;
 import com.shian.shianlife.mvp.userinfo.presenter.impl.UserInfoPresenterImpl;
 import com.shian.shianlife.mvp.userinfo.view.IUserInfoView;
-import com.shian.shianlife.provide.MHttpManagerFactory;
-import com.shian.shianlife.provide.base.HttpResponseHandler;
-import com.shian.shianlife.provide.result.HrUserInfo;
 
 /**
  * Created by Administrator

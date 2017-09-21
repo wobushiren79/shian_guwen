@@ -226,6 +226,7 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsSho
     @Override
     protected void onRestart() {
         super.onRestart();
+
         goodsShoppingCartListPresenter.getShoppingCartListData();
     }
 }

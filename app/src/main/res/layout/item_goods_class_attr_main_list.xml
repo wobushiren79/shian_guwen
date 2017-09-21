@@ -12,8 +12,7 @@
         android:id="@+id/iv_icon"
         android:layout_width="@dimen/dimen_100dp"
         android:layout_height="@dimen/dimen_100dp"
-        android:layout_marginTop="@dimen/dimen_30dp"
-        android:src="@drawable/zhy_goods_class_attr_all_icon" />
+        android:layout_marginTop="@dimen/dimen_30dp" />
 
     <TextView
         android:id="@+id/tv_name"

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
+import com.baidu.mobstat.StatService;
 import com.loopj.android.http.RequestParams;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shian.shianlife.R;
@@ -54,6 +55,13 @@ public class SplashActivity extends BaseActivity implements OnPushListener, IUse
         super.onCreate(arg0);
         setContentView(R.layout.activity_splash);
         initPush();
+
+        //开启百度统计
+        try {
+            StatService.start(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

@@ -104,9 +104,9 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     @InjectView(R.id.tv_msg_number_temp)
     TextView tvMsgNumberTemp;
 
-    private Long gooodsId;
-    private Long gooodsClassId;
-    private Long gooodsClassAttrId;
+    private Long goodsId;
+    private Long goodsClassId;
+    private Long goodsClassAttrId;
     private Boolean isFirstGetShoppingNumber;//是否第一次獲取購物車數量
 
     private GoodsDetailsResultBean detailsData;
@@ -138,7 +138,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             CoordinatorLayout.LayoutParams layoutParams = new CoordinatorLayout.LayoutParams
                     (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.topMargin = ViewUtils.getStatusBarHeight(this)+ getResources().getDimensionPixelOffset(R.dimen.dimen_10dp);
+            layoutParams.topMargin = ViewUtils.getStatusBarHeight(this) + getResources().getDimensionPixelOffset(R.dimen.dimen_10dp);
             rlTitle.setLayoutParams(layoutParams);
         }
     }
@@ -146,9 +146,9 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     private void initData() {
         isFirstGetShoppingNumber = true;
 
-        gooodsId = getIntent().getLongExtra(IntentName.INTENT_GOODS_ID, -1);
-        gooodsClassId = getIntent().getLongExtra(IntentName.INTENT_CLASS_ID, -1);
-        gooodsClassAttrId = getIntent().getLongExtra(IntentName.INTENT_CLASSATTR_ID, -1);
+        goodsId = getIntent().getLongExtra(IntentName.INTENT_GOODS_ID, -1);
+        goodsClassId = getIntent().getLongExtra(IntentName.INTENT_CLASS_ID, -1);
+        goodsClassAttrId = getIntent().getLongExtra(IntentName.INTENT_CLASSATTR_ID, -1);
 
         goodsDetailsPresenter = new GoodsDetailsPresenterImpl(this);
         goodsShoppingCartNumberPresenter = new GoodsShoppingCartNumberPresenterImpl(this);
@@ -173,13 +173,12 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         float alpha = ((offset - maxShow) * 2f) / (float) dp;
         if (offset > maxShow) {
             rlHead.setAlpha(Math.abs(alpha));
-            rlTitle.setAlpha(1 - Math.abs(alpha));
+            rlTitle.setVisibility(View.GONE);
             garouseview.setRGVisibility(View.GONE);
         } else {
             rlHead.setAlpha(0f);
-            rlTitle.setAlpha(1 - alpha);
+            rlTitle.setVisibility(View.VISIBLE);
             garouseview.setRGVisibility(View.VISIBLE);
-
         }
     }
 
@@ -216,7 +215,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public Long getGoodsId() {
-        return gooodsId;
+        return goodsId;
     }
 
     @Override
@@ -231,7 +230,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public Long getClassifyAttrId() {
-        return gooodsClassAttrId;
+        return goodsClassAttrId;
     }
 
     @Override
@@ -312,6 +311,16 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void setGoodsApplyLocation(String location) {
         goodsDescrible.setApplyLocation(location);
+    }
+
+    @Override
+    public void setGoodsClassId(Long classId) {
+        goodsClassId = classId;
+    }
+
+    @Override
+    public void setGoodsClassAttrId(Long classAttrId) {
+        goodsClassAttrId = classAttrId;
     }
 
     @OnClick({R.id.tv_service, R.id.tv_shopipingcart, R.id.tv_add_shopingcart, R.id.tv_buy, R.id.tv_temp_back, R.id.iv_pic_back, R.id.iv_pic_share})

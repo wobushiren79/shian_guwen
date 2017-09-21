@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/zhy_backgroud_1"
-    tools:context="com.shian.shianlife.activity.userinfo.DetailsActivity">
+    tools:context="com.shian.shianlife.activity.userinfo.UserInfoIntegralDetailsActivity">
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/pull_listview"

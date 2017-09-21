@@ -68,6 +68,7 @@ public class GoodsShoppingCartListAdapter extends BaseExpandableAdapter<GoodsSho
             tvChange.setText("完成");
         else
             tvChange.setText("编辑");
+
         tvChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

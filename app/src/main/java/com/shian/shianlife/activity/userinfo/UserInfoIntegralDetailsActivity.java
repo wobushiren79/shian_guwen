@@ -1,6 +1,5 @@
 package com.shian.shianlife.activity.userinfo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +11,14 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 
-public class DetailsActivity extends BaseActivity {
+public class UserInfoIntegralDetailsActivity extends BaseActivity {
 
     PullToRefreshListView mPullListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
+        setContentView(R.layout.activity_userinfo_integral_details);
 
         setTitle("积分明细");
         initView();
@@ -52,7 +51,7 @@ public class DetailsActivity extends BaseActivity {
             ViewHolder holder;
             if (convertView == null) {
                 holder = new ViewHolder();
-                convertView = View.inflate(DetailsActivity.this, R.layout.view_details_items, null);
+                convertView = View.inflate(UserInfoIntegralDetailsActivity.this, R.layout.view_details_items, null);
                 holder.tvTime = (TextView) convertView.findViewById(R.id.tv_time);
                 holder.tvPoint = (TextView) convertView.findViewById(R.id.tv_point);
                 holder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title);

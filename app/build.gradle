@@ -52,6 +52,7 @@ android {
 }
 
 dependencies {
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
     //通知图标数量
     //上拉抽屉

@@ -2,11 +2,13 @@ package com.shian.shianlife.adapter;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.ImagePreviewActivity;
 import com.shian.shianlife.adapter.base.BaseExpandableAdapter;
 import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -59,20 +61,29 @@ public class StoreOrderGoodsListAdapter extends BaseExpandableAdapter<String, Go
         tvGoodsSpecification.setText(itemData.getSpecAlias() + "：" + itemData.getSpecName());
 
         if (itemData.getEmentPrice() == null)
-            tvGoodsCustomerMoney.setText("客户￥：" + "未知");
+            tvGoodsCustomerMoney.setText("客户￥" + "未知");
         else
-            tvGoodsCustomerMoney.setText("客户￥：" + (float) itemData.getSpecOrderedPrice() / 100f);
+            tvGoodsCustomerMoney.setText("客户￥" + (float) itemData.getSpecOrderedPrice() / 100f);
 
         if (isShowMode) {
             if (itemData.getAdviserPrice() == null)
-                tvGoodsCounselorMoney.setText("顾问￥：" + "未知");
+                tvGoodsCounselorMoney.setText("顾问￥" + "未知");
             else
-                tvGoodsCounselorMoney.setText("顾问￥：" + (float) itemData.getAdviserPrice() / 100f);
+                tvGoodsCounselorMoney.setText("顾问￥" + (float) itemData.getAdviserPrice() / 100f);
         }
 
 
         tvGoodsNumb.setText("x" + itemData.getSpecOrderedNum());
+        //图片设置
         Utils.loadPic(mContext, ivGoodsPic, AppContansts.Goods_PicUrl + "/" + itemData.getTitleImg());
+        ivGoodsPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(getContext(), ImagePreviewActivity.class);
+                in.putExtra("url",AppContansts.Goods_PicUrl + "/" + itemData.getTitleImg());
+                getContext().startActivity(in);
+            }
+        });
         if (itemData.getGoodsPerform() != null) {
             final GoodsPerform goodsPerform = itemData.getGoodsPerform();
             tvPerformStatus.setText(GoodsPerformStatusEnum.getValueText(goodsPerform.getPerformStatus()));
@@ -121,5 +132,6 @@ public class StoreOrderGoodsListAdapter extends BaseExpandableAdapter<String, Go
     public void getPerformInfoFail(String msg) {
         ToastUtils.show(mContext, msg);
     }
+
 
 }

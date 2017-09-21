@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -42,7 +43,9 @@ import java.util.Map;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class GoodsOrderSettlementActivity extends BaseActivity implements StoreExpandableTitleView.CallBack, View.OnClickListener, View.OnLongClickListener, IGoodsOrderCreateView, ISharedGoodsInvoiceInfoClearView {
+public class GoodsOrderSettlementActivity extends BaseActivity implements
+        StoreExpandableTitleView.CallBack, View.OnClickListener, View.OnLongClickListener,
+        IGoodsOrderCreateView, ISharedGoodsInvoiceInfoClearView, ExpandableListView.OnGroupClickListener {
 
     @InjectView(R.id.layout_service_info)
     GoodsServiceInfoLayout layoutServiceInfo;
@@ -85,7 +88,6 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_order_settlement);
-        ButterKnife.inject(this);
         initView();
         initData();
     }
@@ -112,12 +114,15 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
         goodsListAdapter = new StoreOrderGoodsListAdapter(this, false);
         goodsListAdapter.setData(mapGoodsData);
         goodsExpandListView.setAdapter(goodsListAdapter);
+        goodsExpandListView.setOnGroupClickListener(this);
         //默认展开
         goodsExpandTitle.setExpandable(true);
         ViewUtils.expandGroup(goodsExpandListView, goodsListAdapter);
 
         goodsOrderCreatePresenter = new GoodsOrderCreatePresenterImpl(this);
         sharedGoodsInvoiceInfoClearPresenter = new SharedGoodsInvoiceInfoClearPresenterImpl(this);
+
+        setTotalNumber();
     }
 
     @Override
@@ -180,6 +185,19 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
         goodsOrderCreatePresenter.createGoodsOrder();
     }
 
+    /**
+     * 设置总数
+     */
+    private void setTotalNumber() {
+        int number = 0;
+        if (selectGoods == null)
+            return;
+        for (GoodsItemPerform itemData : selectGoods) {
+            if (itemData.getSpecOrderedNum() != null)
+                number += itemData.getSpecOrderedNum();
+        }
+        goodsExpandTitle.setData("总计：" + number);
+    }
 
     /**
      * 设置发表信息
@@ -294,5 +312,10 @@ public class GoodsOrderSettlementActivity extends BaseActivity implements StoreE
             listData.add(tempIte);
         }
         return listData;
+    }
+
+    @Override
+    public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+        return true;
     }
 }

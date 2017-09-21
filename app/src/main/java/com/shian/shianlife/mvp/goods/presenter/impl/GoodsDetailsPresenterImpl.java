@@ -119,6 +119,13 @@ public class GoodsDetailsPresenterImpl implements IGoodsDetailsPresenter {
                     goodsDetailsView.setGoodsApplyLocation(locaion.toString());
                 }
 
+                //设置分类及分类属性ID
+                if (result.getGoods_cate_id() != null)
+                    goodsDetailsView.setGoodsClassId(result.getGoods_cate_id());
+
+                if (result.getSpec_attr_id() != null)
+                    goodsDetailsView.setGoodsClassAttrId(result.getSpec_attr_id());
+
             }
 
             @Override

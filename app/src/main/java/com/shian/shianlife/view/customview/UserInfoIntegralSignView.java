@@ -10,15 +10,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoSignResultBean;
+import com.shian.shianlife.mvp.userinfo.presenter.IUserInfoSignPresenter;
+import com.shian.shianlife.mvp.userinfo.presenter.impl.UserInfoSignPresenterImpl;
+import com.shian.shianlife.mvp.userinfo.view.IUserInfoSignView;
 
 /**
  * Created by Administrator on 2017/3/7.
  */
 
-public class UserInfoIntegralSignView extends LinearLayout {
+public class UserInfoIntegralSignView extends LinearLayout implements IUserInfoSignView {
     View view;
     ImageView mIVSign;
     TextView mTVSign;
+
+    private IUserInfoSignPresenter userInfoSignPresenter;
 
     public UserInfoIntegralSignView(Context context) {
         this(context, null);
@@ -29,13 +36,19 @@ public class UserInfoIntegralSignView extends LinearLayout {
         view = View.inflate(context, R.layout.view_userinfo_integral_sign, this);
 
         initView();
+        initData();
     }
+
 
     private void initView() {
         mIVSign = (ImageView) view.findViewById(R.id.iv_sign);
         mTVSign = (TextView) view.findViewById(R.id.tv_sign);
 
         view.setOnClickListener(onClickListener);
+    }
+
+    private void initData() {
+        userInfoSignPresenter = new UserInfoSignPresenterImpl(this);
     }
 
     OnClickListener onClickListener = new OnClickListener() {
@@ -51,6 +64,17 @@ public class UserInfoIntegralSignView extends LinearLayout {
      * 签到
      */
     private void sign() {
+        userInfoSignPresenter.userInfoSign();
+
+    }
+
+    @Override
+    public void showToast(String msg) {
+        ToastUtils.show(getContext(), msg);
+    }
+
+    @Override
+    public void userInfoSignSuccess(UserInfoSignResultBean resultBean) {
         mIVSign.setImageResource(R.drawable.zhy_userinfo_integral_unsign);
         ScaleAnimation animation = new ScaleAnimation(Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, Animation.RELATIVE_TO_SELF);
         animation.setRepeatMode(Animation.REVERSE);
@@ -73,5 +97,10 @@ public class UserInfoIntegralSignView extends LinearLayout {
             }
         });
         mTVSign.startAnimation(animation);
+    }
+
+    @Override
+    public void userInfoSignFail(String msg) {
+        ToastUtils.show(getContext(), msg);
     }
 }

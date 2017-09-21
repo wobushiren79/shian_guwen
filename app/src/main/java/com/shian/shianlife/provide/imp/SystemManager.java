@@ -6,6 +6,10 @@ import com.shian.shianlife.mvp.login.bean.SystemLoginBean;
 import com.shian.shianlife.mvp.login.bean.SystemLoginOutBean;
 import com.shian.shianlife.mvp.login.bean.SystemLoginOutResultBean;
 import com.shian.shianlife.mvp.login.bean.SystemLoginResultBean;
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoIntegralBean;
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoIntegralResultBean;
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoSignBean;
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoSignResultBean;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 
 
@@ -40,4 +44,22 @@ public interface SystemManager {
      * @param loginKey
      */
     void loginStoreSystem(Context context, String loginKey);
+
+    /**
+     * 用户签到
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    void userInfoSign(Context context, UserInfoSignBean params, HttpResponseHandler<UserInfoSignResultBean> handler);
+
+    /**
+     * 获取签到积分
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    void getUserInfoIntegral(Context context, UserInfoIntegralBean params, HttpResponseHandler<UserInfoIntegralResultBean> handler);
 }

@@ -49,7 +49,7 @@
 
     <ImageView
         android:id="@+id/tv_head_right"
-        android:layout_width="40dp"
+        android:layout_width="@dimen/dimen_70dp"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
@@ -62,7 +62,6 @@
         android:layout_height="@dimen/dimen_20dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="5dp"
         android:layout_marginTop="@dimen/dimen_20dp"
         android:background="@drawable/ic_new_message" />
 

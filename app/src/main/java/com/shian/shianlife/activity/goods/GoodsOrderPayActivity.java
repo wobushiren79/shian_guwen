@@ -58,7 +58,6 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_order_pay);
-        ButterKnife.inject(this);
         initView();
         initData();
     }
@@ -73,10 +72,10 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
     private void initData() {
         orderId = getIntent().getLongExtra(IntentName.INTENT_ORDERID, -1);
         goodsOrderInfoPresenter = new GoodsOrderInfoPresenterImpl(this);
-        goodsOrderInfoPresenter.getGoodsOrderInfo();
-
         goodsOrderOfflinePayPresenter = new GoodsOrderOfflinePayPresenterImpl(this);
         weChatPrePayPresenter = new WeChatPrePayPresenter(this);
+
+        goodsOrderInfoPresenter.getGoodsOrderInfo();
     }
 
     @Override

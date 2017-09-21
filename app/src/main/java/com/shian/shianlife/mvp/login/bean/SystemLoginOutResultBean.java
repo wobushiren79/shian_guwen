@@ -5,4 +5,5 @@ package com.shian.shianlife.mvp.login.bean;
  */
 
 public class SystemLoginOutResultBean {
+
 }

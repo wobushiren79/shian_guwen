@@ -432,15 +432,15 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
-            android:name=".activity.UserInfoMoneyActivity"
+            android:name=".activity.userinfo.UserInfoMoneyActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.UserInfoIntegralActivity"
+            android:name=".activity.userinfo.UserInfoIntegralActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.userinfo.DetailsActivity"
+            android:name=".activity.userinfo.UserInfoIntegralDetailsActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity
@@ -576,6 +576,12 @@
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+
+        <!-- 您从百度网站获取的APP KEY，根据实际您的APP申请的APP_KEY进行修改 -->
+        <meta-data
+            android:name="BaiduMobAd_STAT_ID"
+            android:value="fb0a7cd3a0" />
+
     </application>
 
 </manifest>

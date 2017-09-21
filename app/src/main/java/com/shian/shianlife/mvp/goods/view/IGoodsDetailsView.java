@@ -99,11 +99,22 @@ public interface IGoodsDetailsView extends BaseMVPView {
      */
     void setGoodsApplyAge(String applyAge);
 
-
     /**
      * 设置适用地区
      * @param location
      */
     void setGoodsApplyLocation(String location);
+
+    /**
+     * 设置分类ID
+     * @param classId
+     */
+    void setGoodsClassId(Long classId);
+
+    /**
+     * 设置分类属性ID
+     * @param classAttrId
+     */
+    void setGoodsClassAttrId(Long classAttrId);
 }
 

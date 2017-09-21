@@ -1,4 +1,4 @@
-package com.shian.shianlife.activity;
+package com.shian.shianlife.activity.userinfo;
 
 import android.os.Bundle;
 import android.widget.Button;

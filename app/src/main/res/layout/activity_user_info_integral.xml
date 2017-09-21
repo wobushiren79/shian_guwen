@@ -1,123 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.handmark.pulltorefresh.library.PullToRefreshScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_user_info_integral"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/zhy_backgroud_1"
-    tools:context="com.shian.shianlife.activity.UserInfoIntegralActivity">
+    tools:context="com.shian.shianlife.activity.userinfo.UserInfoIntegralActivity">
 
-    <LinearLayout
+
+    <com.shian.shianlife.view.ptr.CustomPtrFramelayout
+        android:id="@+id/ptr_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/rl_point"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_462dp"
-            android:background="@drawable/zhy_userinfo_integral_title_back">
-
-
-            <ImageView
-                android:id="@+id/iv_integral_back"
-                android:layout_width="@dimen/dimen_316dp"
-                android:layout_height="@dimen/dimen_316dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/zhy_userinfo_integral_back" />
-
-            <TextView
-                android:id="@+id/tv_mypoint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="0"
-                android:textColor="@color/white"
-                android:textSize="@dimen/dimen_95dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_pointtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/tv_mypoint"
-                android:layout_centerHorizontal="true"
-                android:text="我的积分"
-                android:textColor="@color/white"
-                android:textSize="@dimen/dimen_24dp" />
-
-            <com.shian.shianlife.view.customview.UserInfoIntegralSignView
-                android:visibility="gone"
-                android:id="@+id/signview"
-                android:layout_marginBottom="@dimen/dimen_24dp"
-                android:layout_marginLeft="@dimen/dimen_232dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/iv_integral_back"
-                android:layout_alignLeft="@+id/iv_integral_back"></com.shian.shianlife.view.customview.UserInfoIntegralSignView>
-        </RelativeLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_110dp"
-            android:background="@color/white"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="@dimen/dimen_48dp"
-                android:layout_height="@dimen/dimen_48dp"
-                android:layout_marginLeft="@dimen/dimen_36dp"
-                android:src="@drawable/zhy_userinfo_integral_mall" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_16dp"
-                android:layout_weight="1"
-
-                android:text="积分商城"
-                android:textSize="@dimen/dimen_32dp" />
-
-            <ImageView
-                android:layout_width="@dimen/dimen_15dp"
-                android:layout_height="@dimen/dimen_33dp"
-                android:layout_marginRight="@dimen/dimen_32dp"
-                android:src="@drawable/zhy_userinfo_in" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_1dp"
-            android:background="@color/zhy_line_3" />
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/ll_details"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_110dp"
-            android:background="@color/white"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="@dimen/dimen_48dp"
-                android:layout_height="@dimen/dimen_48dp"
-                android:layout_marginLeft="@dimen/dimen_36dp"
-                android:src="@drawable/zhy_userinfo_integral_detail" />
+            <RelativeLayout
+                android:id="@+id/rl_point"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_462dp"
+                android:background="@drawable/zhy_userinfo_integral_title_back">
+
+
+                <ImageView
+                    android:id="@+id/iv_integral_back"
+                    android:layout_width="@dimen/dimen_316dp"
+                    android:layout_height="@dimen/dimen_316dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/zhy_userinfo_integral_back" />
+
+                <TextView
+                    android:id="@+id/tv_mypoint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen_95dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_pointtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/tv_mypoint"
+                    android:layout_centerHorizontal="true"
+                    android:text="我的积分"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen_24dp" />
+
+                <com.shian.shianlife.view.customview.UserInfoIntegralSignView
+                    android:id="@+id/signview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/iv_integral_back"
+                    android:layout_alignLeft="@+id/iv_integral_back"
+                    android:layout_marginBottom="@dimen/dimen_24dp"
+                    android:layout_marginLeft="@dimen/dimen_232dp"
+                    android:visibility="gone"></com.shian.shianlife.view.customview.UserInfoIntegralSignView>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_110dp"
+                android:background="@drawable/zhy_button_state_ll_white"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_48dp"
+                    android:layout_height="@dimen/dimen_48dp"
+                    android:layout_marginLeft="@dimen/dimen_36dp"
+                    android:src="@drawable/zhy_userinfo_integral_mall" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_16dp"
+                    android:layout_weight="1"
+
+                    android:text="积分商城"
+                    android:textSize="@dimen/dimen_32dp" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_15dp"
+                    android:layout_height="@dimen/dimen_33dp"
+                    android:layout_marginRight="@dimen/dimen_32dp"
+                    android:src="@drawable/zhy_userinfo_in" />
+            </LinearLayout>
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_16dp"
-                android:layout_weight="1"
-                android:text="积分明细"
-                android:textSize="@dimen/dimen_32dp" />
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:background="@color/zhy_line_3" />
 
-            <ImageView
-                android:layout_width="@dimen/dimen_15dp"
-                android:layout_height="@dimen/dimen_33dp"
-                android:layout_marginRight="@dimen/dimen_32dp"
-                android:src="@drawable/zhy_userinfo_in" />
+            <LinearLayout
+                android:id="@+id/ll_details"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_110dp"
+                android:background="@drawable/zhy_button_state_ll_white"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_48dp"
+                    android:layout_height="@dimen/dimen_48dp"
+                    android:layout_marginLeft="@dimen/dimen_36dp"
+                    android:src="@drawable/zhy_userinfo_integral_detail" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_16dp"
+                    android:layout_weight="1"
+                    android:text="积分明细"
+                    android:textSize="@dimen/dimen_32dp" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_15dp"
+                    android:layout_height="@dimen/dimen_33dp"
+                    android:layout_marginRight="@dimen/dimen_32dp"
+                    android:src="@drawable/zhy_userinfo_in" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </com.shian.shianlife.view.ptr.CustomPtrFramelayout>
 
-</com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+
+</RelativeLayout>

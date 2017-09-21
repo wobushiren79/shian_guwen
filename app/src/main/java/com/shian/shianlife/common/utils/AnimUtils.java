@@ -1,5 +1,6 @@
 package com.shian.shianlife.common.utils;
 
+import android.animation.ValueAnimator;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -12,6 +13,8 @@ import android.view.animation.OvershootInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 /**
@@ -141,5 +144,61 @@ public class AnimUtils {
         animationSet.addAnimation(translateAnimation);
         animationSet.addAnimation(alphaAnimation);
         view.setAnimation(animationSet);
+    }
+
+    /**
+     * 积分背景动画
+     *
+     * @param view
+     */
+    public static void integralBackAnim(View view) {
+        AnimationSet animationSet = new AnimationSet(true);
+        RotateAnimation rotateAnimation = new RotateAnimation(0, 100, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotateAnimation.setDuration(6000);
+        rotateAnimation.setInterpolator(new LinearInterpolator());
+
+        ScaleAnimation scaleAnimation = new ScaleAnimation(0, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        scaleAnimation.setDuration(2000);
+        scaleAnimation.setInterpolator(new OvershootInterpolator());
+
+        animationSet.addAnimation(rotateAnimation);
+        animationSet.addAnimation(scaleAnimation);
+        view.startAnimation(animationSet);
+    }
+
+    /**
+     * 积分字体动画
+     *
+     * @param view
+     * @param animationListener
+     */
+    public static void intagralTextAnim(TextView view, Animation.AnimationListener animationListener) {
+        ScaleAnimation textScaleAnimation = new ScaleAnimation(0, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        textScaleAnimation.setDuration(2000);
+        textScaleAnimation.setInterpolator(new OvershootInterpolator());
+        textScaleAnimation.setAnimationListener(animationListener);
+        view.startAnimation(textScaleAnimation);
+
+    }
+
+    /**
+     * 积分数字动画
+     *
+     * @param view
+     * @param startPoint
+     * @param endPoint
+     */
+    public static void intagralPointAnim(final TextView view, int startPoint, int endPoint) {
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(startPoint, endPoint);
+        valueAnimator.setDuration(1000);
+        valueAnimator.setInterpolator(new LinearInterpolator());
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                view.setText(animation.getAnimatedValue() + "");
+            }
+        });
+        valueAnimator.setTarget(view);
+        valueAnimator.start();
     }
 }

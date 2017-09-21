@@ -12,6 +12,10 @@ import com.shian.shianlife.mvp.login.bean.SystemLoginBean;
 import com.shian.shianlife.mvp.login.bean.SystemLoginOutBean;
 import com.shian.shianlife.mvp.login.bean.SystemLoginOutResultBean;
 import com.shian.shianlife.mvp.login.bean.SystemLoginResultBean;
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoIntegralBean;
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoIntegralResultBean;
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoSignBean;
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoSignResultBean;
 import com.shian.shianlife.provide.base.BaseManagerImpl;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.SystemManager;
@@ -58,6 +62,16 @@ public class SystemManagerImpl extends BaseManagerImpl implements SystemManager 
     public void loginStoreSystem(final Context context, String loginKey) {
         String storeUrl = AppContansts.Login_Store_Url + "?" + loginKey;
         loginSubSystem(context, storeUrl);
+    }
+
+    @Override
+    public void userInfoSign(Context context, UserInfoSignBean params, HttpResponseHandler<UserInfoSignResultBean> handler) {
+        requestPost(context, "api/credit/checkin", UserInfoSignResultBean.class, params, handler, true);
+    }
+
+    @Override
+    public void getUserInfoIntegral(Context context, UserInfoIntegralBean params, HttpResponseHandler<UserInfoIntegralResultBean> handler) {
+        requestPost(context, "api/credit/getCredit", UserInfoIntegralResultBean.class, params, handler, true);
     }
 
 

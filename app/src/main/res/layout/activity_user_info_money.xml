@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/zhy_backgroud_1"
     android:orientation="vertical"
-    tools:context="com.shian.shianlife.activity.UserInfoMoneyActivity">
+    tools:context="com.shian.shianlife.activity.userinfo.UserInfoMoneyActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

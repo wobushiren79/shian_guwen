@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 
@@ -32,7 +33,7 @@ import java.util.Map;
 import butterknife.InjectView;
 import butterknife.InjectView;
 
-public class StoreOrderDetailsActivity extends BaseActivity implements IStoreOrderDetailsView, StoreExpandableTitleView.CallBack {
+public class StoreOrderDetailsActivity extends BaseActivity implements IStoreOrderDetailsView, StoreExpandableTitleView.CallBack, ExpandableListView.OnGroupClickListener {
 
     @InjectView(R.id.tv_customer_name)
     TextView tvCustomerName;
@@ -86,7 +87,9 @@ public class StoreOrderDetailsActivity extends BaseActivity implements IStoreOrd
         goodsListAdapter = new StoreOrderGoodsListAdapter(this, true);
         invoiceDetailsAdapter = new StoreOrderInvoiceDetailsAdapter(this);
 
+
         expandListView.setAdapter(goodsListAdapter);
+        expandListView.setOnGroupClickListener(this);
         invoiceListView.setAdapter(invoiceDetailsAdapter);
         invoiceListView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -216,4 +219,8 @@ public class StoreOrderDetailsActivity extends BaseActivity implements IStoreOrd
     }
 
 
+    @Override
+    public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+        return true;
+    }
 }
