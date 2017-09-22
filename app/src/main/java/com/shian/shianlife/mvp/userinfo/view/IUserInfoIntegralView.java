@@ -13,4 +13,6 @@ public interface IUserInfoIntegralView extends BaseMVPView {
 
     void getUserInfoIntegralFail(String msg);
 
+    void setUserInfoIntegral(Integer integral);
+
 }

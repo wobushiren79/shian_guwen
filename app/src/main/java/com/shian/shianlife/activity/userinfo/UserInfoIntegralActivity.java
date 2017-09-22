@@ -34,7 +34,7 @@ import butterknife.InjectView;
 import in.srain.cube.views.ptr.PtrDefaultHandler2;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class UserInfoIntegralActivity extends BaseActivity implements IUserInfoIntegralView {
+public class UserInfoIntegralActivity extends BaseActivity implements IUserInfoIntegralView, UserInfoIntegralSignView.CallBack {
 
     @InjectView(R.id.iv_integral_back)
     ImageView ivIntegralBack;
@@ -60,7 +60,14 @@ public class UserInfoIntegralActivity extends BaseActivity implements IUserInfoI
 
         initView();
         initData();
-        startAnim();
+
+    }
+
+    private void initView() {
+        setTitle("积分");
+        llDetails.setOnClickListener(onClickListener);
+        ptrLayout.setPtrHandler(ptrDefaultHandler2);
+        signView.setCallBack(this);
     }
 
     private void initData() {
@@ -71,7 +78,7 @@ public class UserInfoIntegralActivity extends BaseActivity implements IUserInfoI
     /**
      * 动画效果
      */
-    private void startAnim() {
+    private void startAnim(int startPoint, int endPoint) {
         AnimUtils.integralBackAnim(ivIntegralBack);
         AnimUtils.intagralTextAnim(tvPointtitle, null);
         AnimUtils.intagralTextAnim(tvMypoint, new Animation.AnimationListener() {
@@ -94,14 +101,9 @@ public class UserInfoIntegralActivity extends BaseActivity implements IUserInfoI
 
             }
         });
-        AnimUtils.intagralPointAnim(tvMypoint, 0, 1000);
+        AnimUtils.intagralPointAnim(tvMypoint, startPoint, endPoint);
     }
 
-    private void initView() {
-        setTitle("积分");
-        llDetails.setOnClickListener(onClickListener);
-        ptrLayout.setPtrHandler(ptrDefaultHandler2);
-    }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -121,9 +123,22 @@ public class UserInfoIntegralActivity extends BaseActivity implements IUserInfoI
 
         @Override
         public void onRefreshBegin(PtrFrameLayout frame) {
-            ptrLayout.refreshComplete();
+            setViewStatus(View.GONE);
+            signView.setVisibility(View.GONE);
+            userInfoIntegralPresenter.getUserInfoIntegral();
         }
     };
+
+    /**
+     * 设置控件状态
+     *
+     * @param gone
+     */
+    private void setViewStatus(int gone) {
+        ivIntegralBack.setVisibility(gone);
+        tvMypoint.setVisibility(gone);
+        tvPointtitle.setVisibility(gone);
+    }
 
     @Override
     public Context getContext() {
@@ -137,11 +152,31 @@ public class UserInfoIntegralActivity extends BaseActivity implements IUserInfoI
 
     @Override
     public void getUserInfoIntegralSuccess(UserInfoIntegralResultBean resultBean) {
+        setViewStatus(View.VISIBLE);
+        ptrLayout.refreshComplete();
+        if (resultBean.getCanCheckin() != null) {
+            if (resultBean.getCanCheckin())
+                signView.setSignStatus(false);
+            else
+                signView.setSignStatus(true);
+        }
+
 
     }
 
     @Override
     public void getUserInfoIntegralFail(String msg) {
+        ptrLayout.refreshComplete();
         ToastUtils.show(this, msg);
+    }
+
+    @Override
+    public void setUserInfoIntegral(Integer integral) {
+        startAnim(0, integral);
+    }
+
+    @Override
+    public void signSuccess(View view) {
+        ptrLayout.autoRefresh();
     }
 }

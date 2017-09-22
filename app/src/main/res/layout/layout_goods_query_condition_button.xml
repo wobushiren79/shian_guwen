@@ -14,12 +14,12 @@
         android:textSize="@dimen/dimen_34dp" />
 
     <ImageView
-        android:visibility="invisible"
         android:id="@+id/iv_expandable"
         android:layout_width="@dimen/dimen_20dp"
         android:layout_height="@dimen/dimen_20dp"
         android:layout_marginLeft="@dimen/dimen_5dp"
         android:rotation="90"
         android:scaleType="fitCenter"
-        android:src="@drawable/icon_expandable" />
+        android:src="@drawable/icon_expandable"
+        android:visibility="gone" />
 </LinearLayout>

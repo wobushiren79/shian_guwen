@@ -61,13 +61,6 @@
     </ScrollView>
 
 
-    <com.shian.shianlife.view.goods.GoodsShoppingCartButton
-        android:id="@+id/bt_goods_shopping_cart"
-        android:layout_width="@dimen/dimen_120dp"
-        android:layout_height="@dimen/dimen_120dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/zhy_goods_shopping_cart"></com.shian.shianlife.view.goods.GoodsShoppingCartButton>
 
 
 </RelativeLayout>

@@ -201,4 +201,19 @@ public class AnimUtils {
         valueAnimator.setTarget(view);
         valueAnimator.start();
     }
+
+    /**
+     * 签名动画
+     *
+     * @param view
+     * @param animationListener
+     */
+    public static void userinfoSignAnim(View view, Animation.AnimationListener animationListener) {
+        ScaleAnimation animation = new ScaleAnimation(Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, Animation.RELATIVE_TO_SELF);
+        animation.setRepeatMode(Animation.REVERSE);
+        animation.setRepeatCount(1);
+        animation.setDuration(200);
+        animation.setAnimationListener(animationListener);
+        view.startAnimation(animation);
+    }
 }

@@ -45,7 +45,7 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
     View mLayoutView;
 
     private CustomSearchView searchView;
-    private GoodsShoppingCartButton goodsShoppingCartButton;
+
     private GoodsMainRecommendLayout goodsMainRecommendLayout;
     private GoodsClassAttrMainListView goodsClassAttrMainListView;
     private View layoutBuildCemetery;
@@ -57,7 +57,6 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mLayoutView = inflater.inflate(R.layout.fragment_store, null, false);
         initView();
-        initShoppingCart();
         return mLayoutView;
     }
 
@@ -66,7 +65,7 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
         layoutBuildCemetery = mLayoutView.findViewById(R.id.layout_build_cemetery);
         layoutBuildFuneral = mLayoutView.findViewById(R.id.layout_build_funeral);
         searchView = (CustomSearchView) mLayoutView.findViewById(R.id.search_view);
-        goodsShoppingCartButton = (GoodsShoppingCartButton) mLayoutView.findViewById(R.id.bt_goods_shopping_cart);
+
         goodsMainRecommendLayout = (GoodsMainRecommendLayout) mLayoutView.findViewById(R.id.layout_recommend_goods);
         goodsClassAttrMainListView = (GoodsClassAttrMainListView) mLayoutView.findViewById(R.id.layout_class_attr_goods);
 
@@ -94,16 +93,7 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
         goodsChannelPresenter.getGoodsChannelData();
     }
 
-    /**
-     * 初始化购物车按钮
-     */
-    private void initShoppingCart() {
-        //获取屏幕宽高
-        WindowManager manager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-        int Width = manager.getDefaultDisplay().getWidth();
-        int Height = manager.getDefaultDisplay().getHeight();
-        goodsShoppingCartButton.setWHData(Width, Height - getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_256dp));
-    }
+
 
     @Override
     public void onDestroyView() {

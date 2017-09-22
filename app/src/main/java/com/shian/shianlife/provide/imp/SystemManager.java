@@ -6,6 +6,8 @@ import com.shian.shianlife.mvp.login.bean.SystemLoginBean;
 import com.shian.shianlife.mvp.login.bean.SystemLoginOutBean;
 import com.shian.shianlife.mvp.login.bean.SystemLoginOutResultBean;
 import com.shian.shianlife.mvp.login.bean.SystemLoginResultBean;
+import com.shian.shianlife.mvp.userinfo.bean.ChangePassWordSMSBean;
+import com.shian.shianlife.mvp.userinfo.bean.ChangePassWordSMSResultBean;
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoIntegralBean;
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoIntegralResultBean;
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoSignBean;
@@ -62,4 +64,12 @@ public interface SystemManager {
      * @param handler
      */
     void getUserInfoIntegral(Context context, UserInfoIntegralBean params, HttpResponseHandler<UserInfoIntegralResultBean> handler);
+
+    /**
+     * 通过短信修改密码
+     * @param context
+     * @param params
+     * @param handler
+     */
+    void changePassWordSMS(Context context, ChangePassWordSMSBean params,HttpResponseHandler<ChangePassWordSMSResultBean> handler);
 }

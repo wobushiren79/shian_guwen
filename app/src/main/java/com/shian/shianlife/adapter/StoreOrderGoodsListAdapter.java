@@ -60,7 +60,7 @@ public class StoreOrderGoodsListAdapter extends BaseExpandableAdapter<String, Go
         tvGoodsName.setText(itemData.getSpecOrderedVolume());
         tvGoodsSpecification.setText(itemData.getSpecAlias() + "：" + itemData.getSpecName());
 
-        if (itemData.getEmentPrice() == null)
+        if (itemData.getSpecOrderedPrice() == null)
             tvGoodsCustomerMoney.setText("客户￥" + "未知");
         else
             tvGoodsCustomerMoney.setText("客户￥" + (float) itemData.getSpecOrderedPrice() / 100f);

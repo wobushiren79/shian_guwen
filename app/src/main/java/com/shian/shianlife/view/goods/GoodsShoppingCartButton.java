@@ -12,8 +12,12 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.WebActivity;
 import com.shian.shianlife.activity.goods.GoodsShoppingCartActivity;
 import com.shian.shianlife.base.BaseLayout;
+import com.shian.shianlife.common.contanst.AppContansts;
+import com.shian.shianlife.common.contanst.IntentName;
+import com.shian.shianlife.thisenum.RoleEnum;
 
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -168,8 +172,19 @@ public class GoodsShoppingCartButton extends ImageView implements View.OnClickLi
     public void onClick(View v) {
         if (isMove)
             return;
-        Intent intent = new Intent(getContext(), GoodsShoppingCartActivity.class);
-        getContext().startActivity(intent);
+        if (AppContansts.systemLoginInfo == null || AppContansts.systemLoginInfo.getResourceCodes() == null)
+            return;
+        boolean hasGoodAdviser = RoleEnum.checkHasRole(AppContansts.systemLoginInfo.getResourceCodes(), RoleEnum.Goods_Advisor);
+
+        if (hasGoodAdviser) {
+            Intent intent = new Intent(getContext(), GoodsShoppingCartActivity.class);
+            getContext().startActivity(intent);
+        } else {
+            Intent intent = new Intent(getContext(), WebActivity.class);
+            intent.putExtra(IntentName.INTENT_URL, AppContansts.Goods_BaseUrl);
+            getContext().startActivity(intent);
+        }
+
     }
 
 }

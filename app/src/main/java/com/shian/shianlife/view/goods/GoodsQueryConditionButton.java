@@ -85,7 +85,7 @@ public class GoodsQueryConditionButton extends BaseLayout implements View.OnClic
             ivExpandable.setVisibility(VISIBLE);
         } else {
             tvName.setTextColor(getResources().getColor(R.color.zhy_text_color_22));
-            ivExpandable.setVisibility(INVISIBLE);
+            ivExpandable.setVisibility(GONE);
         }
 
     }

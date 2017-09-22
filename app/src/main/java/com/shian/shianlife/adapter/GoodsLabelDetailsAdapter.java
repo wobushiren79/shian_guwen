@@ -56,7 +56,7 @@ public class GoodsLabelDetailsAdapter extends BaseRCAdapter<GoodsLabelDetailsRes
 
         //顾问价设置
         if (data.getAdviser_price() != null)
-            tvAdviserPrice.setText("￥" + data.getAdviser_price());
+            tvAdviserPrice.setText("" + data.getAdviser_price());
 
         tvSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

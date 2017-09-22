@@ -33,6 +33,8 @@ public class UserInfoIntegralPresenterImpl implements IUserInfoIntegralPresenter
             @Override
             public void getDataSuccess(UserInfoIntegralResultBean result) {
                 userInfoIntegralView.getUserInfoIntegralSuccess(result);
+                if (result.getUsableCredit() != null)
+                    userInfoIntegralView.setUserInfoIntegral(result.getUsableCredit());
             }
 
             @Override

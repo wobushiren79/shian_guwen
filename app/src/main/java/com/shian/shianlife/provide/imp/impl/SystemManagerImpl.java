@@ -12,6 +12,8 @@ import com.shian.shianlife.mvp.login.bean.SystemLoginBean;
 import com.shian.shianlife.mvp.login.bean.SystemLoginOutBean;
 import com.shian.shianlife.mvp.login.bean.SystemLoginOutResultBean;
 import com.shian.shianlife.mvp.login.bean.SystemLoginResultBean;
+import com.shian.shianlife.mvp.userinfo.bean.ChangePassWordSMSBean;
+import com.shian.shianlife.mvp.userinfo.bean.ChangePassWordSMSResultBean;
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoIntegralBean;
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoIntegralResultBean;
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoSignBean;
@@ -71,7 +73,12 @@ public class SystemManagerImpl extends BaseManagerImpl implements SystemManager 
 
     @Override
     public void getUserInfoIntegral(Context context, UserInfoIntegralBean params, HttpResponseHandler<UserInfoIntegralResultBean> handler) {
-        requestPost(context, "api/credit/getCredit", UserInfoIntegralResultBean.class, params, handler, true);
+        requestPost(context, "api/credit/getCredit", UserInfoIntegralResultBean.class, params, handler);
+    }
+
+    @Override
+    public void changePassWordSMS(Context context, ChangePassWordSMSBean params, HttpResponseHandler<ChangePassWordSMSResultBean> handler) {
+        requestPost(context, "api/usersInfo/forgetKeys", ChangePassWordSMSResultBean.class, params, handler, true);
     }
 
 

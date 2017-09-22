@@ -29,7 +29,8 @@
                     android:layout_width="@dimen/dimen_316dp"
                     android:layout_height="@dimen/dimen_316dp"
                     android:layout_centerInParent="true"
-                    android:src="@drawable/zhy_userinfo_integral_back" />
+                    android:src="@drawable/zhy_userinfo_integral_back"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tv_mypoint"
@@ -39,7 +40,8 @@
                     android:text="0"
                     android:textColor="@color/white"
                     android:textSize="@dimen/dimen_95dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tv_pointtitle"
@@ -49,7 +51,8 @@
                     android:layout_centerHorizontal="true"
                     android:text="我的积分"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/dimen_24dp" />
+                    android:textSize="@dimen/dimen_24dp"
+                    android:visibility="gone" />
 
                 <com.shian.shianlife.view.customview.UserInfoIntegralSignView
                     android:id="@+id/signview"

@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 public class UserInfoIntegralResultBean {
 
 
-    private Long usableCredit;//用户积分
+    private Integer usableCredit;//用户积分
     private Boolean canCheckin;//是否能签到
     private Integer keeps;//联系签到次数
 
@@ -21,11 +21,11 @@ public class UserInfoIntegralResultBean {
     private int sysUserId;
     private int cashedCredit;
 
-    public Long getUsableCredit() {
+    public Integer getUsableCredit() {
         return usableCredit;
     }
 
-    public void setUsableCredit(Long usableCredit) {
+    public void setUsableCredit(Integer usableCredit) {
         this.usableCredit = usableCredit;
     }
 

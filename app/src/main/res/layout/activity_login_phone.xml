@@ -41,7 +41,7 @@
                     android:src="@drawable/login_phone" />
 
                 <EditText
-                    android:id="@+id/et_login_username"
+                    android:id="@+id/et_login_phone"
                     android:layout_width="@dimen/dimen_514dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -74,7 +74,7 @@
                     android:src="@drawable/login_password" />
 
                 <EditText
-                    android:id="@+id/et_login_password"
+                    android:id="@+id/et_login_smscode"
                     android:layout_width="@dimen/dimen_0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -88,31 +88,79 @@
                     android:textSize="@dimen/dimen_24dp" />
 
                 <TextView
-                    android:id="@+id/bt_phonecode"
-                    android:layout_width="@dimen/dimen_165dp"
+                    android:id="@+id/tv_phone_code"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/dimen_50dp"
                     android:layout_gravity="center"
                     android:layout_marginRight="@dimen/dimen_6dp"
                     android:background="@drawable/zhy_button_state_2"
                     android:gravity="center"
+                    android:paddingLeft="@dimen/dimen_6dp"
+                    android:paddingRight="@dimen/dimen_6dp"
                     android:text="获取验证码"
-                    android:textSize="@dimen/dimen_28dp"
-                    android:textColor="@color/zhy_text_color_1" />
+                    android:textColor="@color/zhy_text_color_1"
+                    android:textSize="@dimen/dimen_28dp" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="@dimen/dimen_514dp"
                 android:layout_height="@dimen/dimen_1dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/dimen_60dp"
                 android:background="@color/zhy_line_4" />
 
+            <LinearLayout
+                android:id="@+id/ll_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <com.shian.shianlife.view.customview.LoadingButton
-                android:id="@+id/btn_login"
-                android:layout_width="@dimen/dimen_500dp"
-                android:layout_height="@dimen/dimen_80dp"
-                android:layout_gravity="center"></com.shian.shianlife.view.customview.LoadingButton>
+                <LinearLayout
+                    android:layout_width="@dimen/dimen_514dp"
+                    android:layout_height="@dimen/dimen_55dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dimen_20dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/dimen_40dp"
+                        android:layout_height="@dimen/dimen_40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dimen_6dp"
+                        android:src="@drawable/login_password" />
+
+                    <EditText
+                        android:id="@+id/et_login_password"
+                        android:layout_width="@dimen/dimen_0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/dimen_5dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="请输入新密碼"
+                        android:lines="1"
+                        android:textColorHint="@color/zhy_text_color_2"
+                        android:textSize="@dimen/dimen_24dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="@dimen/dimen_514dp"
+                    android:layout_height="@dimen/dimen_1dp"
+                    android:layout_gravity="center"
+                    android:background="@color/zhy_line_4" />
+
+                <TextView
+                    android:id="@+id/tv_submit"
+                    android:layout_width="@dimen/dimen_500dp"
+                    android:layout_height="@dimen/dimen_80dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/dimen_32dp"
+                    android:background="@drawable/zhy_button_state_5"
+                    android:gravity="center"
+                    android:text="提交"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen_32dp" />
+
+            </LinearLayout>
 
 
         </LinearLayout>

@@ -14,15 +14,19 @@ import com.shian.shianlife.R;
 import com.shian.shianlife.activity.userinfo.UserInfoIntegralActivity;
 import com.shian.shianlife.activity.userinfo.UserInfoMoneyActivity;
 import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoIntegralResultBean;
+import com.shian.shianlife.mvp.userinfo.presenter.IUserInfoIntegralPresenter;
 import com.shian.shianlife.mvp.userinfo.presenter.IUserInfoPresenter;
+import com.shian.shianlife.mvp.userinfo.presenter.impl.UserInfoIntegralPresenterImpl;
 import com.shian.shianlife.mvp.userinfo.presenter.impl.UserInfoPresenterImpl;
+import com.shian.shianlife.mvp.userinfo.view.IUserInfoIntegralView;
 import com.shian.shianlife.mvp.userinfo.view.IUserInfoView;
 
 /**
  * Created by Administrator
  */
 
-public class UserInfoLayout extends LinearLayout implements IUserInfoView {
+public class UserInfoLayout extends LinearLayout implements IUserInfoView, IUserInfoIntegralView {
     View view;
     TextView mTVName;
     TextView mTVStatus;
@@ -47,6 +51,7 @@ public class UserInfoLayout extends LinearLayout implements IUserInfoView {
     LinearLayout llOrderNum;
 
     private IUserInfoPresenter userInfoPresenter;
+    private IUserInfoIntegralPresenter userInfoIntegralPresenter;
 
     public UserInfoLayout(Context context) {
         this(context, null);
@@ -90,7 +95,9 @@ public class UserInfoLayout extends LinearLayout implements IUserInfoView {
         llOrderNum.setOnClickListener(onClickListener);
 
         userInfoPresenter = new UserInfoPresenterImpl(this);
+        userInfoIntegralPresenter = new UserInfoIntegralPresenterImpl(this);
         userInfoPresenter.getUserInfoData();
+        userInfoIntegralPresenter.getUserInfoIntegral();
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -192,5 +199,24 @@ public class UserInfoLayout extends LinearLayout implements IUserInfoView {
     @Override
     public void ChangeOrderNum(String num) {
         setOrderNum(num);
+    }
+
+    @Override
+    public void showToast(String msg) {
+        ToastUtils.show(getContext(), msg);
+    }
+
+    @Override
+    public void getUserInfoIntegralSuccess(UserInfoIntegralResultBean resultBean) {
+    }
+
+    @Override
+    public void getUserInfoIntegralFail(String msg) {
+
+    }
+
+    @Override
+    public void setUserInfoIntegral(Integer integral) {
+        tvIntegral.setText(integral + "");
     }
 }

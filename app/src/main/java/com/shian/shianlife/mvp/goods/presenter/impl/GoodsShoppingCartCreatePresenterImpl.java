@@ -1,5 +1,6 @@
 package com.shian.shianlife.mvp.goods.presenter.impl;
 
+import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.mvp.base.OnGetDataListener;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartCreateBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartCreateResultBean;
@@ -7,6 +8,7 @@ import com.shian.shianlife.mvp.goods.model.IGoodsShoppingCartCreateModel;
 import com.shian.shianlife.mvp.goods.model.impl.GoodsShoppingCartCreateModelImpl;
 import com.shian.shianlife.mvp.goods.presenter.IGoodsShoppingCartCreatePresenter;
 import com.shian.shianlife.mvp.goods.view.IGoodsShoppingCartCreateView;
+import com.shian.shianlife.thisenum.RoleEnum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,15 @@ public class GoodsShoppingCartCreatePresenterImpl implements IGoodsShoppingCartC
 
     @Override
     public void createGoodsShoppingCartData() {
+        if (AppContansts.systemLoginInfo == null || AppContansts.systemLoginInfo.getResourceCodes() == null) {
+            goodsShoppingCartCreateView.showToast("请重新登陆");
+            return;
+        }
+        boolean hasGoodsAdvisor = RoleEnum.checkHasRole(AppContansts.systemLoginInfo.getResourceCodes(), RoleEnum.Goods_Advisor);
+        if (!hasGoodsAdvisor) {
+            goodsShoppingCartCreateView.showToast("您还没有相应权限，请先入驻平台");
+            return;
+        }
         if (goodsShoppingCartCreateView.getContext() == null) {
             goodsShoppingCartCreateView.showToast("数据错误");
             return;

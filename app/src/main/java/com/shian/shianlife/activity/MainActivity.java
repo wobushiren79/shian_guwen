@@ -16,6 +16,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
@@ -52,6 +53,7 @@ import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.result.HrCommentResult;
 import com.shian.shianlife.provide.result.HrGetMsgNumberForUntreated;
 import com.shian.shianlife.service.PushService;
+import com.shian.shianlife.view.goods.GoodsShoppingCartButton;
 
 import org.support.v4.annotation.NonNull;
 
@@ -75,7 +77,8 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     RadioButton rbMain4;
     @InjectView(R.id.tv_msgnum)
     TextView tvMsgNumber;
-
+    @InjectView(R.id.bt_goods_shopping_cart)
+    GoodsShoppingCartButton goodsShoppingCartButton;
 
     private FragmentManager mFragmentManager;
     private FragmentTransaction transcation;
@@ -96,6 +99,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 
     private IUserInfoPresenter userInfoPresenter;
     private ISubSystemLoginPresenter subSystemLoginPresenter;
+
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
@@ -199,6 +203,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     }
 
     private void initView() {
+        initShoppingCart();
         mFragmentManager = getSupportFragmentManager();
         addMainDrawerLayout();
         setTitle("title");
@@ -235,6 +240,17 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 }
             });
         initRB();
+    }
+
+    /**
+     * 初始化购物车按钮
+     */
+    private void initShoppingCart() {
+        //获取屏幕宽高
+        WindowManager manager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+        int Width = manager.getDefaultDisplay().getWidth();
+        int Height = manager.getDefaultDisplay().getHeight();
+        goodsShoppingCartButton.setWHData(Width, Height - getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_256dp));
     }
 
     /**
@@ -318,6 +334,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 
 
     private long firstTime = 0;
+
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         // TODO Auto-generated method stub

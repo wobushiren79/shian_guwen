@@ -76,6 +76,7 @@
                     android:textColor="@color/zhy_text_color_16" />
 
                 <TextView
+                    android:textStyle="bold"
                     android:id="@+id/tv_money_customer"
                     android:layout_width="@dimen/dimen_200dp"
                     android:layout_height="match_parent"
