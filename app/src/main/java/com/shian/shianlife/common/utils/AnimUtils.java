@@ -172,7 +172,7 @@ public class AnimUtils {
      * @param view
      * @param animationListener
      */
-    public static void intagralTextAnim(TextView view, Animation.AnimationListener animationListener) {
+    public static void intagralTextAnim(View view, Animation.AnimationListener animationListener) {
         ScaleAnimation textScaleAnimation = new ScaleAnimation(0, Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         textScaleAnimation.setDuration(2000);
         textScaleAnimation.setInterpolator(new OvershootInterpolator());

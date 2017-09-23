@@ -23,6 +23,32 @@
                 android:layout_height="@dimen/dimen_462dp"
                 android:background="@drawable/zhy_userinfo_integral_title_back">
 
+                <LinearLayout
+                    android:id="@+id/ll_continuous_sign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="已连续签到"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dimen_32dp" />
+
+                    <TextView
+                        android:id="@+id/tv_continuous_day"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0天"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dimen_32dp" />
+                </LinearLayout>
+
 
                 <ImageView
                     android:id="@+id/iv_integral_back"
@@ -66,6 +92,7 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/ll_point"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_110dp"
                 android:background="@drawable/zhy_button_state_ll_white"
@@ -119,6 +146,40 @@
                     android:layout_marginLeft="@dimen/dimen_16dp"
                     android:layout_weight="1"
                     android:text="积分明细"
+                    android:textSize="@dimen/dimen_32dp" />
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_15dp"
+                    android:layout_height="@dimen/dimen_33dp"
+                    android:layout_marginRight="@dimen/dimen_32dp"
+                    android:src="@drawable/zhy_userinfo_in" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:background="@color/zhy_line_3" />
+
+            <LinearLayout
+                android:id="@+id/ll_rule"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_110dp"
+                android:background="@drawable/zhy_button_state_ll_white"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dimen_48dp"
+                    android:layout_height="@dimen/dimen_48dp"
+                    android:layout_marginLeft="@dimen/dimen_36dp"
+                    android:src="@drawable/zhy_userinfo_rule_detail" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_16dp"
+                    android:layout_weight="1"
+                    android:text="签到规则"
                     android:textSize="@dimen/dimen_32dp" />
 
                 <ImageView

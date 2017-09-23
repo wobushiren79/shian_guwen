@@ -104,11 +104,11 @@ public class GoodsLabelDetailsLayout extends BaseLayout implements IGoodsLabelDe
      * @return
      */
     public Integer getAllItemHeight() {
-        int dp208 = getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_208dp);
+        int dp209 = getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_209dp);
         if (detailsAdapter.getData() == null)
             return 0;
         else
-            return dp208 * detailsAdapter.getData().size();
+            return dp209 * detailsAdapter.getData().size();
     }
 
     public interface CallBack {

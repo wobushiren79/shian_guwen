@@ -19,6 +19,7 @@ import com.shian.shianlife.common.view.order.WaitMoneyView;
 import com.shian.shianlife.common.view.order.WaitServiceView;
 import com.shian.shianlife.thisenum.AppRolePermition;
 import com.shian.shianlife.thisenum.CemeteryBuildListTypeEnum;
+import com.shian.shianlife.thisenum.RoleEnum;
 import com.viewpagerindicator.TabPageIndicator;
 
 import java.util.ArrayList;
@@ -58,15 +59,25 @@ public class CemeteryServiceActivity extends BaseActivity {
     private void initStates() {
         arrTitles.clear();
         //检测权限
-        if (AppContansts.userCemetery != null) {
-            for (int i = 0; i < AppContansts.userCemetery.getPermitionCodes().size(); i++) {
-                if (AppContansts.userCemetery.getPermitionCodes().get(i).equals(AppRolePermition.ADVISOR.getCode())) {
-                    arrTitles.add(CemeteryBuildListTypeEnum.confirm_build.getName());
-                    arrTitles.add(CemeteryBuildListTypeEnum.wait_look.getName());
-                    arrTitles.add(CemeteryBuildListTypeEnum.look_ing.getName());
-                    arrTitles.add(CemeteryBuildListTypeEnum.has_order.getName());
-                    arrTitles.add(CemeteryBuildListTypeEnum.no_order.getName());
-                }
+//        if (AppContansts.userCemetery != null) {
+//            for (int i = 0; i < AppContansts.userCemetery.getPermitionCodes().size(); i++) {
+//                if (AppContansts.userCemetery.getPermitionCodes().get(i).equals(AppRolePermition.ADVISOR.getCode())) {
+//                    arrTitles.add(CemeteryBuildListTypeEnum.confirm_build.getName());
+//                    arrTitles.add(CemeteryBuildListTypeEnum.wait_look.getName());
+//                    arrTitles.add(CemeteryBuildListTypeEnum.look_ing.getName());
+//                    arrTitles.add(CemeteryBuildListTypeEnum.has_order.getName());
+//                    arrTitles.add(CemeteryBuildListTypeEnum.no_order.getName());
+//                }
+//            }
+//        }
+        if (AppContansts.systemLoginInfo != null) {
+            boolean hasRole = RoleEnum.checkHasRole(AppContansts.systemLoginInfo.getResourceCodes(), RoleEnum.Cemetery_Advisor);
+            if (hasRole) {
+                arrTitles.add(CemeteryBuildListTypeEnum.confirm_build.getName());
+                arrTitles.add(CemeteryBuildListTypeEnum.wait_look.getName());
+                arrTitles.add(CemeteryBuildListTypeEnum.look_ing.getName());
+                arrTitles.add(CemeteryBuildListTypeEnum.has_order.getName());
+                arrTitles.add(CemeteryBuildListTypeEnum.no_order.getName());
             }
         }
     }

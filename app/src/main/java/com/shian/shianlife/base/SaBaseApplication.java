@@ -131,8 +131,8 @@ public class SaBaseApplication extends MultiDexApplication {
         }
 
 //        CookieJarImpl cookieJar = new CookieJarImpl(new PersistentCookieStore(getApplicationContext()));
-        OkHttpClient okHttpClient = builder.connectTimeout(10000L, TimeUnit.MILLISECONDS)
-                .readTimeout(10000L, TimeUnit.MILLISECONDS)
+        OkHttpClient okHttpClient = builder.connectTimeout(60000L, TimeUnit.MILLISECONDS)
+                .readTimeout(60000L, TimeUnit.MILLISECONDS)
                 //其他配置
                 .followRedirects(true)
                 .followSslRedirects(true)

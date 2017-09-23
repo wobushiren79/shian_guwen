@@ -219,4 +219,9 @@ public class UserInfoLayout extends LinearLayout implements IUserInfoView, IUser
     public void setUserInfoIntegral(Integer integral) {
         tvIntegral.setText(integral + "");
     }
+
+    @Override
+    public void setUserInfoContinuousDay(Integer day) {
+
+    }
 }

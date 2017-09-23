@@ -15,6 +15,8 @@ import com.shian.shianlife.mvp.login.bean.SystemLoginResultBean;
 import com.shian.shianlife.mvp.userinfo.bean.ChangePassWordSMSBean;
 import com.shian.shianlife.mvp.userinfo.bean.ChangePassWordSMSResultBean;
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoIntegralBean;
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoIntegralListBean;
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoIntegralListResultBean;
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoIntegralResultBean;
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoSignBean;
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoSignResultBean;
@@ -74,6 +76,11 @@ public class SystemManagerImpl extends BaseManagerImpl implements SystemManager 
     @Override
     public void getUserInfoIntegral(Context context, UserInfoIntegralBean params, HttpResponseHandler<UserInfoIntegralResultBean> handler) {
         requestPost(context, "api/credit/getCredit", UserInfoIntegralResultBean.class, params, handler);
+    }
+
+    @Override
+    public void getUserInfoListIntegral(Context context, UserInfoIntegralListBean params, HttpResponseHandler<UserInfoIntegralListResultBean> handler) {
+        requestPost(context, "api/credit/queryUserCreditLogsForPage", UserInfoIntegralListResultBean.class, params, handler);
     }
 
     @Override

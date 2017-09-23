@@ -35,6 +35,8 @@ public class UserInfoIntegralPresenterImpl implements IUserInfoIntegralPresenter
                 userInfoIntegralView.getUserInfoIntegralSuccess(result);
                 if (result.getUsableCredit() != null)
                     userInfoIntegralView.setUserInfoIntegral(result.getUsableCredit());
+                if (result.getKeeps() != null)
+                    userInfoIntegralView.setUserInfoContinuousDay(result.getKeeps());
             }
 
             @Override

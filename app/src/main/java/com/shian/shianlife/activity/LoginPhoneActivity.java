@@ -21,7 +21,6 @@ import com.shian.shianlife.mvp.userinfo.view.IChangePassWordSMSView;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 public class LoginPhoneActivity extends BaseActivity implements IChangePassWordSMSView, View.OnClickListener {
@@ -158,7 +157,6 @@ public class LoginPhoneActivity extends BaseActivity implements IChangePassWordS
     private void startThread() {
         if (timerIntent != null)
             timerIntent.cancel();
-
         timerIntent = new Timer();
         timerIntent.schedule(new TimerTask() {
             int time = 180;
