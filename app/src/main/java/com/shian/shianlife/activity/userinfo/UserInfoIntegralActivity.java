@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.MainActivity;
 import com.shian.shianlife.activity.WebActivity;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.IntentName;
@@ -164,14 +165,6 @@ public class UserInfoIntegralActivity extends BaseActivity implements IUserInfoI
     public void getUserInfoIntegralSuccess(UserInfoIntegralResultBean resultBean) {
         setViewStatus(View.VISIBLE);
         ptrLayout.refreshComplete();
-        if (resultBean.getCanCheckin() != null) {
-            if (resultBean.getCanCheckin())
-                signView.setSignStatus(false);
-            else
-                signView.setSignStatus(true);
-        }
-
-
     }
 
     @Override
@@ -192,8 +185,17 @@ public class UserInfoIntegralActivity extends BaseActivity implements IUserInfoI
     }
 
     @Override
+    public void setUserInfoCanSign(boolean isSign) {
+        if (isSign)
+            signView.setSignStatus(false);
+        else
+            signView.setSignStatus(true);
+    }
+
+    @Override
     public void signSuccess(View view) {
         ptrLayout.autoRefresh();
+        MainActivity.isRefreshUserInfo = true;
     }
 
     @Override

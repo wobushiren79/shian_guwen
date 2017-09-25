@@ -53,12 +53,20 @@ public abstract class BaseExpandableAdapter<T, E> extends BaseExpandableListAdap
         this.notifyDataSetChanged();
     }
 
-    public E getChildData(int groupPosition, int childPosition) {
+
+    public E getChildItemData(int groupPosition, int childPosition) {
         return itemData.get(groupPosition).get(childPosition);
     }
+    public List<List<E>> getChildData(){
+        return itemData;
+    }
 
-    public T getGroupData(int groupPosition) {
+    public T getGroupItemData(int groupPosition) {
         return groupData.get(groupPosition);
+    }
+
+    public List<T> getGroupData() {
+        return groupData;
     }
 
     @Override

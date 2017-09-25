@@ -39,8 +39,14 @@ import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.fragment.CemeteryFragment;
 import com.shian.shianlife.fragment.FindFragment;
 import com.shian.shianlife.fragment.NewHomeFragment;
+import com.shian.shianlife.fragment.NoPermissionsFragment;
+import com.shian.shianlife.fragment.ShoppingCartFragment;
 import com.shian.shianlife.fragment.StoreFragment;
 import com.shian.shianlife.fragment.TheOrderFragment;
+import com.shian.shianlife.mvp.goods.bean.GoodsChannelResultBean;
+import com.shian.shianlife.mvp.goods.presenter.IGoodsChannelPresenter;
+import com.shian.shianlife.mvp.goods.presenter.impl.GoodsChannelPresenterImpl;
+import com.shian.shianlife.mvp.goods.view.IGoodsChannelView;
 import com.shian.shianlife.mvp.login.presenter.ISubSystemLoginPresenter;
 import com.shian.shianlife.mvp.login.presenter.impl.SubSystemLoginPresenterImpl;
 import com.shian.shianlife.mvp.login.view.ISubSystemLoginView;
@@ -53,6 +59,7 @@ import com.shian.shianlife.provide.params.HpConsultIdParams;
 import com.shian.shianlife.provide.result.HrCommentResult;
 import com.shian.shianlife.provide.result.HrGetMsgNumberForUntreated;
 import com.shian.shianlife.service.PushService;
+import com.shian.shianlife.thisenum.RoleEnum;
 import com.shian.shianlife.view.goods.GoodsShoppingCartButton;
 
 import org.support.v4.annotation.NonNull;
@@ -64,7 +71,7 @@ import butterknife.InjectView;
 import me.leolin.shortcutbadger.ShortcutBadger;
 import okhttp3.Request;
 
-public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, IUserInfoView, ISubSystemLoginView {
+public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, IUserInfoView, ISubSystemLoginView,IGoodsChannelView {
     @InjectView(R.id.fl_main)
     View flMain;
     @InjectView(R.id.rb_main_1)
@@ -77,20 +84,21 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     RadioButton rbMain4;
     @InjectView(R.id.tv_msgnum)
     TextView tvMsgNumber;
-    @InjectView(R.id.bt_goods_shopping_cart)
-    GoodsShoppingCartButton goodsShoppingCartButton;
+
 
     private FragmentManager mFragmentManager;
     private FragmentTransaction transcation;
     //    private HomeFragment homeFragment;
     private NewHomeFragment homeFragment;
-    private FindFragment findFragment;
+    //    private FindFragment findFragment;
     private StoreFragment storeFragment;
     //    private OrderFragment orderFragment;
     private TheOrderFragment theOrderFragment;
     //    private UserCenterFragment userFragment;
 //    private NewUserCenterFragment userFragment;
     private CemeteryFragment cemeteryFragment;//新增公墓服务界面
+    private ShoppingCartFragment shoppingCartFragment;
+    private NoPermissionsFragment noPermissionsFragment;
 
     List<RadioButton> listRB = new ArrayList<>();
     //定位初始化
@@ -99,6 +107,10 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 
     private IUserInfoPresenter userInfoPresenter;
     private ISubSystemLoginPresenter subSystemLoginPresenter;
+    private IGoodsChannelPresenter goodsChannelPresenter;
+
+    public static boolean isRefreshUserInfo = false;
+    public static boolean isRefreshShoppingCart = false;
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -121,16 +133,23 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     }
 
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (isRefreshUserInfo) {
+            homeFragment.startFindUserInfoData();
+        }
+        if (isRefreshShoppingCart) {
+            shoppingCartFragment.startFindData();
+        }
+    }
+
     @TargetApi(23)
     private void initPermission() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1002);
-            } else {
-
             }
-        } else {
-
         }
     }
 
@@ -200,10 +219,13 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         //登陆子系统
         subSystemLoginPresenter = new SubSystemLoginPresenterImpl(this);
         subSystemLoginPresenter.loginStoreSystem();
+
+        //获取商品渠道ID
+        goodsChannelPresenter = new GoodsChannelPresenterImpl(this);
+        goodsChannelPresenter.getGoodsChannelData();
     }
 
     private void initView() {
-        initShoppingCart();
         mFragmentManager = getSupportFragmentManager();
         addMainDrawerLayout();
         setTitle("title");
@@ -243,17 +265,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     }
 
     /**
-     * 初始化购物车按钮
-     */
-    private void initShoppingCart() {
-        //获取屏幕宽高
-        WindowManager manager = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-        int Width = manager.getDefaultDisplay().getWidth();
-        int Height = manager.getDefaultDisplay().getHeight();
-        goodsShoppingCartButton.setWHData(Width, Height - getContext().getResources().getDimensionPixelOffset(R.dimen.dimen_256dp));
-    }
-
-    /**
      * 设置rb的大小
      */
     private void initRB() {
@@ -287,30 +298,27 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 transcation.replace(R.id.fl_main, storeFragment);
                 break;
             case R.id.rb_main_3:
-//                if (loginType == 0) {
-//                    //普通账号
-//                    if (orderFragment == null) {
-//                        orderFragment = new OrderFragment();
-//                        orderFragment.setCallBack(this);
-//                    }
-//                    transcation.replace(R.id.fl_main, orderFragment);
-//                } else if (loginType == 1) {
-//                    //公墓账号
-//                    if (cemeteryFragment == null) {
-//                        cemeteryFragment = new CemeteryFragment();
-//                    }
-//                    transcation.replace(R.id.fl_main, cemeteryFragment);
-//                }
                 if (theOrderFragment == null) {
                     theOrderFragment = new TheOrderFragment();
                 }
                 transcation.replace(R.id.fl_main, theOrderFragment);
                 break;
             case R.id.rb_main_4:
-                if (findFragment == null) {
-                    findFragment = new FindFragment();
+                boolean hasRole = false;
+                if (AppContansts.systemLoginInfo != null)
+                    hasRole = RoleEnum.checkHasRole(AppContansts.systemLoginInfo.getResourceCodes(), RoleEnum.Goods_Advisor);
+                if (hasRole) {
+                    if (shoppingCartFragment == null) {
+                        shoppingCartFragment = new ShoppingCartFragment();
+                    }
+                    transcation.replace(R.id.fl_main, shoppingCartFragment);
+                } else {
+                    if (noPermissionsFragment == null) {
+                        noPermissionsFragment = new NoPermissionsFragment();
+                    }
+                    transcation.replace(R.id.fl_main, noPermissionsFragment);
                 }
-                transcation.replace(R.id.fl_main, findFragment);
+
                 break;
 
             default:
@@ -606,4 +614,25 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     public void ChangeOrderNum(String num) {
 
     }
+
+    @Override
+    public void showToast(String msg) {
+        ToastUtils.show(getContext(), msg);
+    }
+
+    @Override
+    public void getGoodsChannelDataSuccess(List<GoodsChannelResultBean> listData) {
+
+    }
+
+    @Override
+    public void getGoodsChannelDataFail(String msg) {
+        ToastUtils.show(getContext(), msg);
+    }
+
+    @Override
+    public void setChannelId(Integer channelId) {
+        AppContansts.goodsChannelId = channelId;
+    }
+
 }

@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.baidu.mapapi.search.core.RouteNode;
 import com.shian.shianlife.R;
 import com.shian.shianlife.activity.AllAppActivity;
+import com.shian.shianlife.activity.FindActivity;
 import com.shian.shianlife.activity.WebActivity;
 import com.shian.shianlife.activity.map.NewMapLineActivity;
 import com.shian.shianlife.common.contanst.AppContansts;
@@ -82,7 +83,7 @@ public class MainAPPItems extends LinearLayout {
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         if (url.equals("")) {
-                            ToastUtils.show(getContext(),"敬请期待！");
+                            ToastUtils.show(getContext(), "敬请期待！");
                         } else if (url.contains("all")) {
                             Intent intent = new Intent(getContext(), AllAppActivity.class);
                             getContext().startActivity(intent);
@@ -98,6 +99,8 @@ public class MainAPPItems extends LinearLayout {
                             openCalendar();
                         } else if (url.contains("calculator")) {
                             openJS();
+                        } else if (url.contains("find")) {
+                            openFind();
                         }
                     }
 
@@ -111,6 +114,14 @@ public class MainAPPItems extends LinearLayout {
             }
         }
     };
+
+    /**
+     * 打開發現
+     */
+    private void openFind() {
+        Intent intent = new Intent(getContext(), FindActivity.class);
+        getContext().startActivity(intent);
+    }
 
 
     /**
@@ -154,8 +165,8 @@ public class MainAPPItems extends LinearLayout {
 //        }
 //        i.setComponent(cn);
 //        getContext().startActivity(i);
-        Intent intent=new Intent(getContext(),WebActivity.class);
-        intent.putExtra("url","http://m.laohuangli.net");
+        Intent intent = new Intent(getContext(), WebActivity.class);
+        intent.putExtra("url", "http://m.laohuangli.net");
         getContext().startActivity(intent);
     }
 
@@ -218,8 +229,8 @@ public class MainAPPItems extends LinearLayout {
 //        } else {
 //            ToastUtils.showLongTime(getContext(), "请先下载百度地图或高德地图");
 //        }
-        Intent intent=new Intent(getContext(),WebActivity.class);
-        intent.putExtra("url","http://m.amap.com/");
+        Intent intent = new Intent(getContext(), WebActivity.class);
+        intent.putExtra("url", "http://m.amap.com/");
         getContext().startActivity(intent);
 
     }

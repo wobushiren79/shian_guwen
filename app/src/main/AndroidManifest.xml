@@ -46,7 +46,6 @@
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
     <!-- 计算器 -->
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
-
     <uses-permission android:name="android.permission.BLUETOOTH" />
 
     <permission
@@ -582,6 +581,7 @@
             android:name="BaiduMobAd_STAT_ID"
             android:value="fb0a7cd3a0" />
 
+        <activity android:name=".activity.FindActivity"></activity>
     </application>
 
 </manifest>

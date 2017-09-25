@@ -1,6 +1,4 @@
 package com.shian.shianlife.activity.userinfo;
-
-import android.content.Context;
 import android.os.Bundle;
 
 import com.shian.shianlife.R;

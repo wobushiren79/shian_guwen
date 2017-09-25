@@ -41,7 +41,7 @@ import static com.shian.shianlife.thisenum.RoleEnum.Cemetery_Advisor;
  * Created by zm.
  */
 
-public class StoreFragment extends BaseFragment implements View.OnClickListener, IGoodsChannelView, CustomSearchView.CallBack {
+public class StoreFragment extends BaseFragment implements View.OnClickListener,CustomSearchView.CallBack {
     View mLayoutView;
 
     private CustomSearchView searchView;
@@ -51,7 +51,7 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
     private View layoutBuildCemetery;
     private View layoutBuildFuneral;
 
-    private IGoodsChannelPresenter goodsChannelPresenter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -89,8 +89,9 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
         layoutBuildFuneral.setOnClickListener(this);
         searchView.setCallBack(this);
 
-        goodsChannelPresenter = new GoodsChannelPresenterImpl(this);
-        goodsChannelPresenter.getGoodsChannelData();
+
+        goodsMainRecommendLayout.startFindData();
+        goodsClassAttrMainListView.startFindData();
     }
 
 
@@ -135,26 +136,6 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
         }
     }
 
-    @Override
-    public void showToast(String msg) {
-        ToastUtils.show(getContext(), msg);
-    }
-
-    @Override
-    public void getGoodsChannelDataSuccess(List<GoodsChannelResultBean> listData) {
-        goodsMainRecommendLayout.startFindData();
-        goodsClassAttrMainListView.startFindData();
-    }
-
-    @Override
-    public void getGoodsChannelDataFail(String msg) {
-        ToastUtils.show(getContext(), msg);
-    }
-
-    @Override
-    public void setChannelId(Integer channelId) {
-        AppContansts.goodsChannelId = channelId;
-    }
 
     @Override
     public boolean onQueryTextSubmit(String query) {

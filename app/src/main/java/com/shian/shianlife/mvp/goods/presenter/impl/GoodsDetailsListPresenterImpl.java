@@ -27,7 +27,6 @@ public class GoodsDetailsListPresenterImpl implements IGoodsDetailsListPresenter
     @Override
     public void getGoodsDetailsList() {
         if (goodsDetailsListView.getContext() == null) {
-            goodsDetailsListView.showToast("数据错误");
             return;
         }
         GoodsDetailsListBean params = new GoodsDetailsListBean();

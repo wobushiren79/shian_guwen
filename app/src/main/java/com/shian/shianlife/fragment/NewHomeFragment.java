@@ -24,7 +24,7 @@ import com.shian.shianlife.view.customview.UserInfoLayout;
  * Created by Administrator
  */
 
-public class NewHomeFragment extends BaseFragment  {
+public class NewHomeFragment extends BaseFragment {
     View view;
 
     UserInfoLayout mUserInfoLayout;//用户资料布局
@@ -56,6 +56,12 @@ public class NewHomeFragment extends BaseFragment  {
         mMainDynamicLayout.setCallBack(mainDynamicCallBack);
     }
 
+    /**
+     * 开始
+     */
+    public void startFindUserInfoData() {
+        mUserInfoLayout.startFindData();
+    }
 
     /**
      * 广告加载完毕与取消动画

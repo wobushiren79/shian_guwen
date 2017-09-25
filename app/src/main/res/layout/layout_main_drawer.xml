@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/ll_sign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

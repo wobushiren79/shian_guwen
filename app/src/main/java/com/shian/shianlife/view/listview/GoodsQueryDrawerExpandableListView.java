@@ -51,7 +51,7 @@ public class GoodsQueryDrawerExpandableListView extends ExpandableListView imple
 
     @Override
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-        GoodsClassAttrResultBean data = filtrateAdapter.getChildData(groupPosition, childPosition);
+        GoodsClassAttrResultBean data = filtrateAdapter.getChildItemData(groupPosition, childPosition);
         if (callBack != null)
             callBack.classAttrChange(data.getApec_id(), data.getId());
         return true;

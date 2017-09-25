@@ -16,4 +16,6 @@ public interface IUserInfoIntegralView extends BaseMVPView {
     void setUserInfoIntegral(Integer integral);
 
     void setUserInfoContinuousDay(Integer day);
+
+    void setUserInfoCanSign(boolean isSign);
 }

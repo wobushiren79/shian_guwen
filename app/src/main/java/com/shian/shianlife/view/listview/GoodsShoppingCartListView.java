@@ -9,7 +9,12 @@ import com.shian.shianlife.adapter.GoodsShoppingCartListAdapter;
 import com.shian.shianlife.base.BasePtrExpandableListView;
 import com.shian.shianlife.bean.GoodsShoppingCartListChildBean;
 import com.shian.shianlife.bean.GoodsShoppingCartListGroupBean;
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsListResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartListResultBean;
+import com.shian.shianlife.mvp.goods.presenter.IGoodsShoppingCartListPresenter;
+import com.shian.shianlife.mvp.goods.presenter.impl.GoodsShoppingCartListPresenterImpl;
+import com.shian.shianlife.mvp.goods.view.IGoodsShoppingCartListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,9 +29,14 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
  * Created by zm.
  */
 
-public class GoodsShoppingCartListView extends BasePtrExpandableListView implements GoodsShoppingCartListAdapter.CallBack {
-    private GoodsShoppingCartListAdapter listAdapter;
+public class GoodsShoppingCartListView extends BasePtrExpandableListView implements GoodsShoppingCartListAdapter.CallBack, IGoodsShoppingCartListView {
 
+    private Integer pageNumber;
+    private Integer pageSize;
+
+
+    private GoodsShoppingCartListAdapter listAdapter;
+    private IGoodsShoppingCartListPresenter goodsShoppingCartListPresenter;
     private List<GoodsDetailsListResultBean> data;
 
     private CallBack callBack;
@@ -46,9 +56,20 @@ public class GoodsShoppingCartListView extends BasePtrExpandableListView impleme
         expandableListView.setDivider(context.getResources().getDrawable(R.color.zhy_backgroud_1));
         expandableListView.setDividerHeight(context.getResources().getDimensionPixelOffset(R.dimen.dimen_2dp));
         expandableListView.setChildDivider(context.getResources().getDrawable(R.color.zhy_backgroud_1));
+
+        pageNumber = 0;
+        pageSize = Integer.MAX_VALUE;
+
+        goodsShoppingCartListPresenter = new GoodsShoppingCartListPresenterImpl(this);
+        startFindData();
+    }
+
+    public void startFindData() {
+        goodsShoppingCartListPresenter.getShoppingCartListData();
     }
 
     public void setData(List<GoodsDetailsListResultBean> data) {
+
         this.data = data;
         Map<GoodsShoppingCartListGroupBean, List<GoodsShoppingCartListChildBean>> mapData = getMapData(data);
         listAdapter.setData(mapData);
@@ -59,6 +80,7 @@ public class GoodsShoppingCartListView extends BasePtrExpandableListView impleme
         for (int i = 0; i < listAdapter.getGroupCount(); i++) {
             expandableListView.expandGroup(i);
         }
+        hasData(listAdapter);
     }
 
     public void setCallBack(CallBack callBack) {
@@ -73,7 +95,7 @@ public class GoodsShoppingCartListView extends BasePtrExpandableListView impleme
 
         @Override
         public void onRefreshBegin(PtrFrameLayout frame) {
-            GoodsShoppingCartListView.this.setRefreshComplete();
+            goodsShoppingCartListPresenter.getShoppingCartListData();
         }
     };
 
@@ -131,9 +153,39 @@ public class GoodsShoppingCartListView extends BasePtrExpandableListView impleme
     }
 
 
+    @Override
+    public void getShoppingCartListDataSuccess(GoodsShoppingCartListResultBean resultBean) {
+        GoodsShoppingCartListView.this.setRefreshComplete();
+        if (callBack != null)
+            callBack.findDataSuccess(resultBean);
+    }
+
+    @Override
+    public void getShoppingCartListDataFail(String msg) {
+        GoodsShoppingCartListView.this.setRefreshComplete();
+        ToastUtils.show(getContext(), msg);
+    }
+
+    @Override
+    public Integer getShoppingCartPageSize() {
+        return pageSize;
+    }
+
+    @Override
+    public Integer getShoppingCartPageNumber() {
+        return pageNumber;
+    }
+
+    @Override
+    public void showToast(String msg) {
+        ToastUtils.show(getContext(), msg);
+    }
+
     public interface CallBack {
         void getIsAllCheck(boolean isAllCheck);
 
         void getSelectGoods(ArrayList<GoodsShoppingCartListChildBean> selectGoods);
+
+        void findDataSuccess(GoodsShoppingCartListResultBean resultBean);
     }
 }

@@ -36,6 +36,7 @@ public class AllAppActivity extends BaseActivity {
             APPEnum.COMMUNICATION
     };
     APPEnum[] otherData = {
+            APPEnum.FIND,
             APPEnum.INTEGRALMALL
     };
 

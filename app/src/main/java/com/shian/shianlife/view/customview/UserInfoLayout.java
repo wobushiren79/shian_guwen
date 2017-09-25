@@ -15,18 +15,22 @@ import com.shian.shianlife.activity.userinfo.UserInfoIntegralActivity;
 import com.shian.shianlife.activity.userinfo.UserInfoMoneyActivity;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.mvp.userinfo.bean.UserInfoIntegralResultBean;
+import com.shian.shianlife.mvp.userinfo.bean.UserInfoSignResultBean;
 import com.shian.shianlife.mvp.userinfo.presenter.IUserInfoIntegralPresenter;
 import com.shian.shianlife.mvp.userinfo.presenter.IUserInfoPresenter;
+import com.shian.shianlife.mvp.userinfo.presenter.IUserInfoSignPresenter;
 import com.shian.shianlife.mvp.userinfo.presenter.impl.UserInfoIntegralPresenterImpl;
 import com.shian.shianlife.mvp.userinfo.presenter.impl.UserInfoPresenterImpl;
+import com.shian.shianlife.mvp.userinfo.presenter.impl.UserInfoSignPresenterImpl;
 import com.shian.shianlife.mvp.userinfo.view.IUserInfoIntegralView;
+import com.shian.shianlife.mvp.userinfo.view.IUserInfoSignView;
 import com.shian.shianlife.mvp.userinfo.view.IUserInfoView;
 
 /**
  * Created by Administrator
  */
 
-public class UserInfoLayout extends LinearLayout implements IUserInfoView, IUserInfoIntegralView {
+public class UserInfoLayout extends LinearLayout implements IUserInfoView, IUserInfoIntegralView, IUserInfoSignView {
     View view;
     TextView mTVName;
     TextView mTVStatus;
@@ -52,6 +56,9 @@ public class UserInfoLayout extends LinearLayout implements IUserInfoView, IUser
 
     private IUserInfoPresenter userInfoPresenter;
     private IUserInfoIntegralPresenter userInfoIntegralPresenter;
+    private IUserInfoSignPresenter userInfoSignPresenter;
+
+    private boolean canSign = false;
 
     public UserInfoLayout(Context context) {
         this(context, null);
@@ -96,6 +103,14 @@ public class UserInfoLayout extends LinearLayout implements IUserInfoView, IUser
 
         userInfoPresenter = new UserInfoPresenterImpl(this);
         userInfoIntegralPresenter = new UserInfoIntegralPresenterImpl(this);
+        userInfoSignPresenter = new UserInfoSignPresenterImpl(this);
+        startFindData();
+    }
+
+    /**
+     * 开始查询数据
+     */
+    public void startFindData() {
         userInfoPresenter.getUserInfoData();
         userInfoIntegralPresenter.getUserInfoIntegral();
     }
@@ -140,11 +155,11 @@ public class UserInfoLayout extends LinearLayout implements IUserInfoView, IUser
      * 签名
      */
     private void sign() {
-        mIVSignIcon.setImageResource(R.drawable.zhy_main_sign_check);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mIVSignIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.zhy_text_color_5)));
+        if (canSign) {
+            userInfoSignPresenter.userInfoSign();
+        } else {
+            ToastUtils.show(getContext(), "今日已签到");
         }
-        mTVSignName.setTextColor(getResources().getColor(R.color.zhy_text_color_5));
     }
 
     /**
@@ -223,5 +238,39 @@ public class UserInfoLayout extends LinearLayout implements IUserInfoView, IUser
     @Override
     public void setUserInfoContinuousDay(Integer day) {
 
+    }
+
+    @Override
+    public void setUserInfoCanSign(boolean canSign) {
+        setCanSign(canSign);
+    }
+
+    @Override
+    public void userInfoSignSuccess(UserInfoSignResultBean resultBean) {
+        startFindData();
+        ToastUtils.show(getContext(),"签到成功");
+    }
+
+    @Override
+    public void userInfoSignFail(String msg) {
+        ToastUtils.show(getContext(),msg);
+    }
+
+    /**
+     * 设置是否能签到
+     *
+     * @param canSign
+     */
+    public void setCanSign(boolean canSign) {
+        this.canSign = canSign;
+        if (canSign) {
+            mIVSignIcon.setImageResource(R.drawable.zhy_main_sign_white);
+            mTVSignName.setTextColor(getResources().getColor(R.color.white));
+            mTVSignName.setText("未签到");
+        } else {
+            mIVSignIcon.setImageResource(R.drawable.zhy_main_sign_check);
+            mTVSignName.setTextColor(getResources().getColor(R.color.zhy_text_color_27));
+            mTVSignName.setText("已签到");
+        }
     }
 }

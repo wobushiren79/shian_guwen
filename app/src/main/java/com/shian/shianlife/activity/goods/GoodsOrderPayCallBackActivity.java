@@ -65,6 +65,9 @@ public class GoodsOrderPayCallBackActivity extends BaseActivity implements View.
     private void initView() {
         setTitle("支付");
         isSuccessPay = getIntent().getBooleanExtra(IntentName.INTENT_ISTURE, false);
+        if(isSuccessPay){
+            getDataSuccess();
+        }
         tvSubmit.setOnClickListener(this);
         Utils.call(tvPhone, AppContansts.Shianlife_Phone);
     }

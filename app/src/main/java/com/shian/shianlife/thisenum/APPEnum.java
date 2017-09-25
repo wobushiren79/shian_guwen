@@ -19,7 +19,8 @@ public enum APPEnum {
     COMMUNICATION("通讯宝", R.drawable.zhy_myapp_phone, AppContansts.phonePHPURL),//通讯宝
     DIDI("滴滴打车", R.drawable.zhy_myapp_didi, "http://webapp.diditaxi.com.cn"),//
     INTEGRALMALL("积分商城", R.drawable.zhy_myapp_integralmall, ""), //积分商城
-    VRCEMETERY("VR看墓", R.drawable.zhy_myapp_vrcemetery, "http://x.eqxiu.com/s/c47nsoiO"); //VR看墓
+    VRCEMETERY("VR看墓", R.drawable.zhy_myapp_vrcemetery, "http://x.eqxiu.com/s/c47nsoiO"),//VR看墓
+    FIND("活动", R.drawable.zhy_myapp_find, "find"); //发现or积分活动
 
     private String name;
     private int picId;

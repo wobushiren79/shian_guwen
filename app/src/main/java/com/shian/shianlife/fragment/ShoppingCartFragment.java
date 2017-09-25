@@ -1,14 +1,17 @@
-package com.shian.shianlife.activity.goods;
+package com.shian.shianlife.fragment;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
-import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.activity.goods.GoodsOrderSettlementActivity;
+import com.shian.shianlife.base.BaseFragment;
 import com.shian.shianlife.bean.GoodsShoppingCartListChildBean;
 import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.DataUtils;
@@ -25,45 +28,50 @@ import com.shian.shianlife.mvp.goods.view.IGoodsShoppingCartListView;
 import com.shian.shianlife.view.listview.GoodsShoppingCartListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsDetailsListView, GoodsShoppingCartListView.CallBack {
+/**
+ * Created by zm.
+ */
+
+public class ShoppingCartFragment extends BaseFragment implements IGoodsDetailsListView, GoodsShoppingCartListView.CallBack {
+    private View view;
 
     @InjectView(R.id.listview)
     GoodsShoppingCartListView shoppingCartListView;
     @InjectView(R.id.check)
     CheckBox check;
+    @InjectView(R.id.tv_check_all)
+    TextView tvCheckAll;
     @InjectView(R.id.tv_total_price)
     TextView tvTotalPrice;
     @InjectView(R.id.tv_submit)
     TextView tvSubmit;
-    @InjectView(R.id.tv_check_all)
-    TextView tvCheckAll;
+
 
     private List<GoodsShoppingCartListResultBean.Content> goodsShoppingCartIds;
+
     private IGoodsDetailsListPresenter goodsDetailsListPresenter;
     private ArrayList<GoodsShoppingCartListChildBean> selectGoods;//選中的商品
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_goods_shopping_cart);
-        ButterKnife.inject(this);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_shoppingcart, null, false);
+        ButterKnife.inject(this, view);
         initView();
         initData();
+        return view;
     }
 
     private void initView() {
-        setTitle("服务车");
+
     }
 
     private void initData() {
-
         goodsShoppingCartIds = new ArrayList<>();
         shoppingCartListView.setCallBack(this);
 
@@ -71,14 +79,22 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsDet
     }
 
     @Override
-    public Context getContext() {
-        return this;
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
-    public void showToast(String msg) {
-        ToastUtils.show(this, msg);
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.reset(this);
     }
+
+
+    @Override
+    public void showToast(String msg) {
+        ToastUtils.show(getContext(), msg);
+    }
+
 
 
     @Override
@@ -96,7 +112,7 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsDet
 
     @Override
     public void getGoodsDetailsListDataFail(String msg) {
-        ToastUtils.show(this, msg);
+        ToastUtils.show(getContext(), msg);
     }
 
     @Override
@@ -181,10 +197,10 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsDet
      */
     private void submitData() {
         if (this.selectGoods == null || this.selectGoods.size() <= 0) {
-            ToastUtils.show(this, "还没有选择商品");
+            ToastUtils.show(getContext(), "还没有选择商品");
             return;
         }
-        Intent intent = new Intent(this, GoodsOrderSettlementActivity.class);
+        Intent intent = new Intent(getContext(), GoodsOrderSettlementActivity.class);
         ArrayList<GoodsItemPerform> listData = DataUtils.shoppingCartToGoodsData(selectGoods);
         intent.putExtra(IntentName.INTENT_LIST_DATA, listData);
         startActivity(intent);
@@ -199,9 +215,11 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsDet
         tvTotalPrice.setText(price);
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
+
+    /**
+     * 开始查询数据
+     */
+    public void startFindData() {
         shoppingCartListView.startFindData();
     }
 }

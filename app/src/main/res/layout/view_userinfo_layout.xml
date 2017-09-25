@@ -86,8 +86,7 @@
                     android:layout_width="@dimen/dimen_46dp"
                     android:layout_height="@dimen/dimen_40dp"
                     android:layout_marginRight="@dimen/dimen_8dp"
-                    android:src="@drawable/zhy_main_sign_uncheck"
-                    android:tint="@color/white" />
+                    android:src="@drawable/zhy_main_sign_white" />
 
                 <TextView
                     android:id="@+id/tv_sign_name"

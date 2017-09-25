@@ -30,9 +30,9 @@ public class MainAPP extends LinearLayout {
     APPEnum[] appNameList = {
             APPEnum.ZSPROJECT,
             APPEnum.CEMETERY,
-            APPEnum.VRCEMETERY,
+            APPEnum.FIND,
             APPEnum.NAVIGATION,
-            APPEnum.CALENDAR,
+            APPEnum.VRCEMETERY,
             APPEnum.ALL
     };
 
