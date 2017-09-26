@@ -34,7 +34,10 @@ public class IntegralListAdapter extends BaseRCAdapter<UserInfoIntegralListResul
         if (data.getTrans_type() != null)
             tvTitle.setText(data.getTrans_type());
         if (data.getCredit_amount() != null)
-            tvPoint.setText("+" + data.getCredit_amount());
+            if (data.getCredit_amount() >= 0)
+                tvPoint.setText("+" + data.getCredit_amount());
+            else
+                tvPoint.setText("-" + Math.abs(data.getCredit_amount()));
     }
 
 }

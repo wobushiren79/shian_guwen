@@ -14,6 +14,7 @@ import com.shian.shianlife.provide.MHttpManagerFactory;
 public class WeChatPrePayModelImpl implements IWeChatPrePayModel {
     @Override
     public void wechatPrePay(Context context, WeChatPrePayBean params, OnGetDataListener listener) {
+//        MHttpManagerFactory.getWeChatManager().loginDuiBa();
         listener.getDataSuccess(null);
     }
 }

@@ -91,7 +91,8 @@
             android:gravity="center"
             android:text="微信支付"
             android:textColor="@color/white"
-            android:textSize="@dimen/dimen_32dp" />
+            android:textSize="@dimen/dimen_32dp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_pay_offline"

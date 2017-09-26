@@ -154,6 +154,7 @@
             android:paddingLeft="@dimen/dimen_72dp">
 
             <ImageView
+                android:id="@+id/imageView"
                 style="@style/zhy_drawer_item_icon"
                 android:layout_width="@dimen/dimen_32dp"
                 android:layout_height="@dimen/dimen_32dp"
@@ -201,7 +202,7 @@
                 style="@style/zhy_drawer_item_icon"
                 android:layout_width="@dimen/dimen_32dp"
                 android:layout_height="@dimen/dimen_32dp"
-                android:src="@drawable/zhy_user_center_version" />
+                android:src="@drawable/zhy_user_center_userinfo" />
 
             <TextView
                 android:id="@+id/tv_userinfo"

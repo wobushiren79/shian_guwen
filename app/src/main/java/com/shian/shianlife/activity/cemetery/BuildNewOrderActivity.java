@@ -100,11 +100,11 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
 
 
     public void getData() {
-        if (AppContansts.userLoginInfo == null) {
-            ToastUtils.show(this, "没有赋予权限");
-            finish();
-            return;
-        }
+//        if (AppContansts.userLoginInfo == null) {
+//            ToastUtils.show(this, "没有赋予权限");
+//            finish();
+//            return;
+//        }
         HpCemeteryStructureParams params = new HpCemeteryStructureParams();
         params.setItemId(-1);
         params.setItemType(0);
@@ -179,7 +179,9 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         String dataTraffic = mTraffic.getData();
         String dataPersonNum = mPersonNum.getData();
         String dataUserLocation = mUserLocation.getData();
-        long cemeteryId = ctemeryNameList.get(mCemeteryName.getSelectPosition()).getId();
+        long cemeteryId = -1;
+        if (mCemeteryName.getSelectPosition() != -1)
+            cemeteryId = ctemeryNameList.get(mCemeteryName.getSelectPosition()).getId();
         if (dataName.isEmpty()) {
             ToastUtils.show(BuildNewOrderActivity.this, "客户姓名不能为空");
             return;

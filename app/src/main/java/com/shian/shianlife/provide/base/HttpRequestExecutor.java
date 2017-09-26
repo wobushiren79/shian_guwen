@@ -26,6 +26,7 @@ import com.shian.shianlife.common.utils.FilePathUtils;
 import com.shian.shianlife.common.utils.GsonTools;
 import com.shian.shianlife.common.utils.ObjectMapperFactory;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils;
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.mapapi.CustomDialog;
 import com.tencent.bugly.crashreport.CrashReport;
@@ -263,7 +264,8 @@ public class HttpRequestExecutor {
 //            if (showToast(context, error)) {
             response.onError(error);
             if (error.contains("405") || error.contains("503")) {
-                jumpLogin(context);
+//                jumpLogin(context);
+                ToastUtils.show(context, "没有使用该功能权限");
             }
 //            }
         }
@@ -292,6 +294,13 @@ public class HttpRequestExecutor {
                 JsonParser parser = new JsonParser();
                 JsonElement jsonElement = parser.parse(response);
                 Map<String, Object> map = gson.fromJson(jsonElement, Map.class);
+
+                //会话失效判断
+                if (map.get("code") == null) {
+                    onErrorCallBack(responseHandler, "会话失效，请重新登陆", context);
+                    jumpLogin(context);
+                    return;
+                }
 
                 double code = (double) map.get("code");
                 int codeInt = (int) code;
