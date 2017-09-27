@@ -18,6 +18,7 @@ import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.mvp.login.bean.SystemLoginResultBean;
 import com.shian.shianlife.mvp.login.presenter.IUserLoginPresenter;
 import com.shian.shianlife.mvp.login.presenter.impl.UserLoginPresenterImpl;
@@ -66,7 +67,8 @@ public class LoginActivity extends BaseActivity implements IUserLoginView, View.
         ButterKnife.inject(this);
         initData();
         startAnim();
-
+        //检测更新
+        Utils.checkUpData(this, false);
     }
 
     private void initData() {

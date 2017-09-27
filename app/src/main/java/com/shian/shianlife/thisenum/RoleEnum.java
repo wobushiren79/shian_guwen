@@ -16,6 +16,8 @@ public enum RoleEnum {
     Funeral_Advisor("funeral.advisor", "殡仪顾问"),
     Cemetery_Advisor("cemetery.advisor", "公墓-顾问"),
     Cemetery_Talker("cemetery.talker", "公墓-洽谈"),
+    Cemetery_Reception("cemetery.reception", "公墓-前台"),
+    cemetery_Service("cemetery.service", "公墓-平台客服"),
     Cemetery_Burier_Stone("cemetery.burier.stone", "公墓-安葬工-立碑"),
     Cemetery_Burier_Bury("cemetery.burier.bury", "公墓-安葬工-安葬");
 
