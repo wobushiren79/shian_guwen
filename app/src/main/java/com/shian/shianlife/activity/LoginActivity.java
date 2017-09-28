@@ -64,7 +64,6 @@ public class LoginActivity extends BaseActivity implements IUserLoginView, View.
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_login);
-        ButterKnife.inject(this);
         initData();
         startAnim();
         //检测更新

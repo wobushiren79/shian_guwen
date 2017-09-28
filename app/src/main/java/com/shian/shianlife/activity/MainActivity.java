@@ -71,7 +71,7 @@ import butterknife.InjectView;
 import me.leolin.shortcutbadger.ShortcutBadger;
 import okhttp3.Request;
 
-public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, IUserInfoView, ISubSystemLoginView,IGoodsChannelView {
+public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, IUserInfoView, ISubSystemLoginView, IGoodsChannelView {
     @InjectView(R.id.fl_main)
     View flMain;
     @InjectView(R.id.rb_main_1)
@@ -138,9 +138,11 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         super.onRestart();
         if (isRefreshUserInfo) {
             homeFragment.startFindUserInfoData();
+            isRefreshUserInfo = false;
         }
         if (isRefreshShoppingCart) {
             shoppingCartFragment.startFindData();
+            isRefreshShoppingCart = false;
         }
     }
 

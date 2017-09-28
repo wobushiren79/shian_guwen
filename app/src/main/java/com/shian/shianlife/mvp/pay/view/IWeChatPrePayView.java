@@ -11,4 +11,6 @@ public interface IWeChatPrePayView extends BaseMVPView {
     void wechatPrePaySuccess(WeChatPrePayResultBean resultBean);
 
     void wechatPrePayFail(String msg);
+
+    Float wechatGetPayTotal();
 }

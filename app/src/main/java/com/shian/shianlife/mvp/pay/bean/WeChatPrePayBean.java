@@ -7,15 +7,15 @@ import com.shian.shianlife.provide.base.BaseHttpParams;
  */
 
 public class WeChatPrePayBean extends BaseHttpParams {
-    private Integer total_fee;
+    private Float total_fee;
     private String appid;
     private String mch_id;
 
-    public Integer getTotal_fee() {
+    public Float getTotal_fee() {
         return total_fee;
     }
 
-    public void setTotal_fee(Integer total_fee) {
+    public void setTotal_fee(Float total_fee) {
         this.total_fee = total_fee;
     }
 

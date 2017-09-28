@@ -8,6 +8,7 @@ import com.shian.shianlife.provide.imp.FuneralOrderManager;
 import com.shian.shianlife.provide.imp.GoodsManager;
 import com.shian.shianlife.provide.imp.GoodsOrderManager;
 import com.shian.shianlife.provide.imp.PHPManager;
+import com.shian.shianlife.provide.imp.PayManager;
 import com.shian.shianlife.provide.imp.ProductManager;
 import com.shian.shianlife.provide.imp.SystemManager;
 import com.shian.shianlife.provide.imp.WeChatManager;
@@ -19,6 +20,7 @@ import com.shian.shianlife.provide.imp.impl.FuneralOrderManagerImpl;
 import com.shian.shianlife.provide.imp.impl.GoodsManagerImpl;
 import com.shian.shianlife.provide.imp.impl.GoodsOrderManagerImpl;
 import com.shian.shianlife.provide.imp.impl.PHPManagerImpl;
+import com.shian.shianlife.provide.imp.impl.PayManagerImpl;
 import com.shian.shianlife.provide.imp.impl.ProductManagerImpl;
 import com.shian.shianlife.provide.imp.impl.SystemManagerImpl;
 import com.shian.shianlife.provide.imp.impl.WeChatManagerImpl;
@@ -88,5 +90,11 @@ public class MHttpManagerFactory {
     //积分管理
     public static WeChatManager getWeChatManager() {
         return WeChatManagerImpl.getInstance();
+    }
+
+
+    //支付管理
+    public static PayManager getPayManager() {
+        return PayManagerImpl.getInstance();
     }
 }

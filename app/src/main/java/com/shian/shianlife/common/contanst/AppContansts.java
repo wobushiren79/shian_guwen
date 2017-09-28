@@ -39,6 +39,7 @@ public class AppContansts {
     public static final String PHP_BaseUrl = "http://app.e-funeral.cn";
     public static final String PHP_Web_BaseUrl = "http://m.e-funeral.cn";
     public static final String PHP_WeChat_BaseUrl = "http://wechat.e-funeral.cn";
+
     //临时用殡仪地址
     public static final String Temp_Funeral_BaseUrl = PHP_Web_BaseUrl + "/funeral";
     //临时用公墓地址

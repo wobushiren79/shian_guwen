@@ -206,17 +206,22 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
     public void wechatPrePaySuccess(WeChatPrePayResultBean resultBean) {
         PayUtils.sendPayReq(this,
                 AppContansts.WeChat_Pay_AppId,
-                "partnerid",
-                "prepayid",
+                resultBean.getMch_id(),
+                resultBean.getPrepayId(),
                 AppContansts.WeChat_Pay_Package,
                 PayUtils.getUUIDString(),
-                System.currentTimeMillis(),
-                AppContansts.WeChat_Pay_Sign);
+                resultBean.getTimeStamp(),
+                resultBean.getPaySign());
     }
 
     @Override
     public void wechatPrePayFail(String msg) {
         ToastUtils.show(this, msg);
         isPayWeChat = false;
+    }
+
+    @Override
+    public Float wechatGetPayTotal() {
+        return (payPrice / 100f);
     }
 }
