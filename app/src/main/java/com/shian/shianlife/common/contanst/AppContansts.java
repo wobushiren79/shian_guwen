@@ -13,13 +13,12 @@ import okhttp3.Cookie;
 public class AppContansts {
     //登陆地址
     public static final String Login_BaseUrl = "https://platform.shianlife.cn";
-//    public static final String Login_BaseUrl = "http://prd-platform.xicp.cn";
+    //    public static final String Login_BaseUrl = "http://prd-platform.xicp.cn";
 //        public static final String Login_BaseUrl = "http://192.168.0.57:8099/ki4so-web";
 //        public static final String Login_BaseUrl = "http://192.168.0.33:8199/platform";
-
     //单项地址
     public static final String Store_BaseUrl = "https://goods.shianlife.cn";
-//        public static final String Store_BaseUrl = "http://prd-goods.xicp.cn";
+    //        public static final String Store_BaseUrl = "http://prd-goods.xicp.cn";
 //        public static final String Store_BaseUrl = "http://192.168.0.57:8080/goods";
 //        public static final String Store_BaseUrl = "http://192.168.0.33:8089/goods";
     //殡仪地址
@@ -31,7 +30,8 @@ public class AppContansts {
 //    public static final String Cemetery_BaseUrl = "http://192.168.0.33:8098/advisor";
 
     //商品地址
-    public static final String Goods_BaseUrl = "http://goodsmgr.e-funeral.cn";
+//    public static final String Goods_BaseUrl = "http://goodsmgr.e-funeral.cn";
+    public static final String Goods_BaseUrl = "http://192.168.0.89/shian_goods";
     //商品图片地址
     public static final String Goods_PicUrl = Goods_BaseUrl + "/Public/Uploads";
 
@@ -95,6 +95,7 @@ public class AppContansts {
 
     //微信支付ID
     public static final String WeChat_Pay_AppId = "wx5ab2d177a39c8249";
+    public static final String WeChat_Pay_AppSercert = "3d151cce475e9ef98a75f2831c9e0b9e";
     public static final String WeChat_Pay_Sign = "9f937fc5b1ba104e33cc3e422bce346b";
     public static final String WeChat_Pay_Package = "Sign=WXPay";
 

@@ -56,20 +56,20 @@
             android:layout_width="@dimen/dimen_120dp"
             android:layout_height="@dimen/dimen_120dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/zhy_pay_success_bg" />
+            android:src="@drawable/zhy_pay_fail_bg" />
 
         <ImageView
             android:id="@+id/iv_pay_icon"
             android:layout_width="@dimen/dimen_40dp"
             android:layout_height="@dimen/dimen_40dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/zhy_pay_success_icon" />
+            android:src="@drawable/zhy_pay_fail_icon" />
 
         <ImageView
             android:id="@+id/iv_pay_other_1"
             android:layout_width="@dimen/dimen_15dp"
             android:layout_height="@dimen/dimen_15dp"
-            android:src="@drawable/zhy_pay_success_other_icon_2" />
+            android:src="@drawable/zhy_pay_fail_other_icon_2" />
 
         <ImageView
             android:id="@+id/iv_pay_other_2"
@@ -77,7 +77,7 @@
             android:layout_height="@dimen/dimen_20dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dimen_4dp"
-            android:src="@drawable/zhy_pay_success_other_icon_1" />
+            android:src="@drawable/zhy_pay_fail_other_icon_1" />
 
         <ImageView
             android:id="@+id/iv_pay_other_3"
@@ -85,7 +85,7 @@
             android:layout_height="@dimen/dimen_18dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/zhy_pay_success_other_icon_2" />
+            android:src="@drawable/zhy_pay_fail_other_icon_2" />
 
         <ImageView
             android:id="@+id/iv_pay_other_4"
@@ -93,7 +93,7 @@
             android:layout_height="@dimen/dimen_15dp"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/dimen_5dp"
-            android:src="@drawable/zhy_pay_success_other_icon_1" />
+            android:src="@drawable/zhy_pay_fail_other_icon_1" />
 
         <ImageView
             android:id="@+id/iv_pay_other_5"
@@ -101,7 +101,7 @@
             android:layout_height="@dimen/dimen_10dp"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/dimen_20dp"
-            android:src="@drawable/zhy_pay_success_other_icon_2" />
+            android:src="@drawable/zhy_pay_fail_other_icon_2" />
     </RelativeLayout>
 
 

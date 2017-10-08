@@ -9,7 +9,42 @@ import com.shian.shianlife.provide.base.BaseHttpParams;
 public class GoodsQueryListBean extends BaseHttpParams {
     private Long id;
     private Integer channel_id;
+    private Integer pageNumber;
+    private Integer pageSize;
+    private String order;
     private String goods_name;
+
+    public String getGoods_name() {
+        return goods_name;
+    }
+
+    public void setGoods_name(String goods_name) {
+        this.goods_name = goods_name;
+    }
+
+    public Integer getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(Integer pageNumber) {
+        this.pageNumber = pageNumber;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public String getOrder() {
+        return order;
+    }
+
+    public void setOrder(String order) {
+        this.order = order;
+    }
 
     public Long getId() {
         return id;
@@ -27,11 +62,5 @@ public class GoodsQueryListBean extends BaseHttpParams {
         this.channel_id = channel_id;
     }
 
-    public String getGoods_name() {
-        return goods_name;
-    }
 
-    public void setGoods_name(String goods_name) {
-        this.goods_name = goods_name;
-    }
 }

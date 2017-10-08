@@ -18,6 +18,8 @@ public interface IGoodsDetailsView extends BaseMVPView {
 
     Long getGoodsId();
 
+    Integer getIsPackage();
+
     /**
      * 设置轮播图
      *
@@ -77,42 +79,49 @@ public interface IGoodsDetailsView extends BaseMVPView {
 
     /**
      * 设置适用安葬礼仪
+     *
      * @param applyBury
      */
     void setGoodsApplyBury(String applyBury);
 
     /**
      * 设置适用人群
+     *
      * @param applyPerson
      */
     void setGoodsApplyPerson(String applyPerson);
 
     /**
      * 设置适用阶段
+     *
      * @param applyPhase
      */
     void setGoodsApplyPhase(String applyPhase);
 
     /**
      * 设置适用年龄
+     *
      * @param applyAge
      */
     void setGoodsApplyAge(String applyAge);
 
     /**
      * 设置适用地区
+     *
      * @param location
      */
     void setGoodsApplyLocation(String location);
 
     /**
      * 设置分类ID
+     *
      * @param classId
      */
     void setGoodsClassId(Long classId);
 
     /**
      * 设置分类属性ID
+     *
      * @param classAttrId
      */
     void setGoodsClassAttrId(Long classAttrId);

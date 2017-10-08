@@ -23,6 +23,15 @@ public class GoodsQueryListResultBean {
     private String name;
     private String goods_slogan;
     private Float price;
+    private Integer is_package;
+
+    public Integer getIs_package() {
+        return is_package;
+    }
+
+    public void setIs_package(Integer is_package) {
+        this.is_package = is_package;
+    }
 
     public String getTitle_img() {
         return title_img;

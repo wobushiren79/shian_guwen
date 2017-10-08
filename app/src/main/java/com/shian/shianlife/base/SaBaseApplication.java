@@ -188,6 +188,13 @@ public class SaBaseApplication extends MultiDexApplication {
         list.remove(a);
     }
 
+    public void destroyActivity(Class a) {
+        for (Activity item : list) {
+            if (item.getClass() == a) {
+                item.finish();
+            }
+        }
+    }
 
     /**
      * 移除所有除开指定

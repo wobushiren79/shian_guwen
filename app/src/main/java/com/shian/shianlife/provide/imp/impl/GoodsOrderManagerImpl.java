@@ -27,6 +27,8 @@ import com.shian.shianlife.mvp.goods.bean.StoreOrderDetailsBean;
 import com.shian.shianlife.mvp.goods.bean.StoreOrderDetailsResultBean;
 import com.shian.shianlife.mvp.goods.bean.StoreOrderGetPerformBean;
 import com.shian.shianlife.mvp.goods.bean.StoreOrderGetPerformResultBean;
+import com.shian.shianlife.mvp.pay.bean.BindGoodsOrderBean;
+import com.shian.shianlife.mvp.pay.bean.BindGoodsOrderResultBean;
 import com.shian.shianlife.provide.base.BaseManagerImpl;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.GoodsOrderManager;
@@ -112,5 +114,10 @@ public class GoodsOrderManagerImpl extends BaseManagerImpl implements GoodsOrder
     @Override
     public void payOfflineGoodsOrder(Context context, GoodsOrderOfflinePayBean params, HttpResponseHandler<GoodsOrderOfflinePayResultBean> handler) {
         requestPost(context, "api/goods/order/offlinePayment", GoodsOrderOfflinePayResultBean.class, params, handler, true);
+    }
+
+    @Override
+    public void bindGoodsOrder(Context context, BindGoodsOrderBean params, HttpResponseHandler<BindGoodsOrderResultBean> handler) {
+        requestPost(context, "api/goods/order/updateOutTradeNo", BindGoodsOrderResultBean.class, params, handler, true);
     }
 }

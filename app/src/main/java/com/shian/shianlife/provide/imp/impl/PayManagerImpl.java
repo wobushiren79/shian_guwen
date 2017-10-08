@@ -17,7 +17,7 @@ public class PayManagerImpl extends BaseManagerImpl implements PayManager {
 
     private PayManagerImpl() {
         super();
-        baseUrl = "http://192.168.0.89/shian_goods";
+        baseUrl = AppContansts.Goods_BaseUrl;
     }
 
     public static PayManagerImpl getInstance() {

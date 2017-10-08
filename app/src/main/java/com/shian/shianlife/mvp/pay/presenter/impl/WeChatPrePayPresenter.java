@@ -28,6 +28,10 @@ public class WeChatPrePayPresenter implements IWeChatPrePayPresenter {
             weChatPrePayView.showToast("数据错误");
             return;
         }
+        if(weChatPrePayView.wechatGetPayTotal()==null||weChatPrePayView.wechatGetPayTotal()<=0){
+            weChatPrePayView.showToast("价格有误");
+            return;
+        }
         WeChatPrePayBean params = new WeChatPrePayBean();
         params.setAppid(AppContansts.WeChat_Pay_AppId);
         params.setTotal_fee(weChatPrePayView.wechatGetPayTotal());
@@ -39,9 +43,9 @@ public class WeChatPrePayPresenter implements IWeChatPrePayPresenter {
                     return;
                 }
                 if (result.getResult().getReturn_code().equals("SUCCESS")) {
-                    String paypreId = result.getPrepayId();
-                    paypreId.replace("prepay_id=", "");
-                    result.setPrepayId(paypreId);
+                    String paypreId = result.getPrepayid();
+                    String tempPaypreId = paypreId.replace("prepay_id=", "");
+                    result.setPrepayid(tempPaypreId);
                     weChatPrePayView.wechatPrePaySuccess(result);
                 } else {
                     weChatPrePayView.wechatPrePayFail(result.getResult().getReturn_msg());

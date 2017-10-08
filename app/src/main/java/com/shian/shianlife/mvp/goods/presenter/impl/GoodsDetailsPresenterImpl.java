@@ -39,9 +39,17 @@ public class GoodsDetailsPresenterImpl implements IGoodsDetailsPresenter {
             goodsDetailsView.showToast("数据错误");
             return;
         }
+
         GoodsDetailsBean params = new GoodsDetailsBean();
         params.setChannel_id(AppContansts.goodsChannelId);
-        params.setGoods_id(goodsDetailsView.getGoodsId());
+        if (goodsDetailsView.getIsPackage() == null
+                || goodsDetailsView.getIsPackage() == -1
+                || goodsDetailsView.getIsPackage() == 0)
+            params.setGoods_id(goodsDetailsView.getGoodsId());
+        else
+            params.setPackage_id(goodsDetailsView.getGoodsId());
+
+
         goodsDetailsModel.getGoodsDetails(goodsDetailsView.getContext(), params, new OnGetDataListener<GoodsDetailsResultBean>() {
             @Override
             public void getDataSuccess(GoodsDetailsResultBean result) {

@@ -26,6 +26,8 @@ import com.shian.shianlife.mvp.goods.bean.StoreOrderDetailsBean;
 import com.shian.shianlife.mvp.goods.bean.StoreOrderDetailsResultBean;
 import com.shian.shianlife.mvp.goods.bean.StoreOrderGetPerformBean;
 import com.shian.shianlife.mvp.goods.bean.StoreOrderGetPerformResultBean;
+import com.shian.shianlife.mvp.pay.bean.BindGoodsOrderBean;
+import com.shian.shianlife.mvp.pay.bean.BindGoodsOrderResultBean;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 
 /**
@@ -147,4 +149,15 @@ public interface GoodsOrderManager {
      * @param handler
      */
     void payOfflineGoodsOrder(Context context, GoodsOrderOfflinePayBean params, HttpResponseHandler<GoodsOrderOfflinePayResultBean> handler);
+
+
+
+    /**
+     * 绑定商品订单
+     *
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void bindGoodsOrder(Context context, BindGoodsOrderBean params, HttpResponseHandler<BindGoodsOrderResultBean> handler);
 }

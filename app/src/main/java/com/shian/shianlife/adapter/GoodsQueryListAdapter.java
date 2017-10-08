@@ -55,12 +55,20 @@ public class GoodsQueryListAdapter extends BaseRCAdapter<GoodsQueryListResultBea
     public void convert(BaseViewHolder holder, final GoodsQueryListResultBean goodsQueryListResultBean, final int index) {
         final LinearLayout llContent = holder.getView(R.id.ll_content);
         ImageView ivIcon = holder.getView(R.id.iv_icon);
+        ImageView ivPackage = holder.getView(R.id.iv_package);
         TextView tvName = holder.getView(R.id.tv_name);
         TextView tvDetails = holder.getView(R.id.tv_details);
         TextView tvPrice = holder.getView(R.id.tv_price);
         TextView tvSale = holder.getView(R.id.tv_sale);
 
         Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + goodsQueryListResultBean.getTitle_img(), R.drawable.zhy_pic_loading);
+
+        Integer isPackage = goodsQueryListResultBean.getIs_package();
+        if (isPackage == 0)
+            ivPackage.setVisibility(View.GONE);
+        else
+            ivPackage.setVisibility(View.VISIBLE);
+
 
         String name = goodsQueryListResultBean.getName();
         if (!CheckUtils.isEmpty(name))
@@ -86,6 +94,7 @@ public class GoodsQueryListAdapter extends BaseRCAdapter<GoodsQueryListResultBea
                     intent.putExtra(IntentName.INTENT_GOODS_ID, goodsQueryListResultBean.getId());
                     intent.putExtra(IntentName.INTENT_CLASS_ID, goodsClassId);
                     intent.putExtra(IntentName.INTENT_CLASSATTR_ID, goodsClassAttrId);
+                    intent.putExtra(IntentName.INTENT_ISTURE, goodsQueryListResultBean.getIs_package());
                     mContext.startActivity(intent);
                 }
             }

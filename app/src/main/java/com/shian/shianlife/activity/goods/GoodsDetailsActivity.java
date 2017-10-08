@@ -107,6 +107,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     private Long goodsId;
     private Long goodsClassId;
     private Long goodsClassAttrId;
+    private Integer isPackage;
     private Boolean isFirstGetShoppingNumber;//是否第一次獲取購物車數量
 
     private GoodsDetailsResultBean detailsData;
@@ -149,7 +150,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         goodsId = getIntent().getLongExtra(IntentName.INTENT_GOODS_ID, -1);
         goodsClassId = getIntent().getLongExtra(IntentName.INTENT_CLASS_ID, -1);
         goodsClassAttrId = getIntent().getLongExtra(IntentName.INTENT_CLASSATTR_ID, -1);
-
+        isPackage = getIntent().getIntExtra(IntentName.INTENT_ISTURE, -1);
         goodsDetailsPresenter = new GoodsDetailsPresenterImpl(this);
         goodsShoppingCartNumberPresenter = new GoodsShoppingCartNumberPresenterImpl(this);
         goodsShoppingCartCreatePresenter = new GoodsShoppingCartCreatePresenterImpl(this);
@@ -216,6 +217,11 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     @Override
     public Long getGoodsId() {
         return goodsId;
+    }
+
+    @Override
+    public Integer getIsPackage() {
+        return isPackage;
     }
 
     @Override
@@ -410,7 +416,8 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
         List<DataShowDialog.DataShowDialogResultBean> listData = new ArrayList<>();
         if (specListData != null) {
             for (GoodsDetailsResultBean.SpecpriceBean item : specListData) {
-                DataShowDialog.DataShowDialogResultBean data = new DataShowDialog.DataShowDialogResultBean(item.getSpec_name(), "￥" + item.getAdviser_price());
+                DataShowDialog.DataShowDialogResultBean data = new DataShowDialog.DataShowDialogResultBean
+                        (item.getSpec_name(), "￥" + item.getAdviser_price());
                 listData.add(data);
             }
             DataShowDialog dataShowDialog = new DataShowDialog(this);

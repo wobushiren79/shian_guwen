@@ -333,6 +333,15 @@ public class GoodsDetailsResultBean {
         private Long goods_id;//商品ID
         private Float ement_price;//商家结算价
         private String goods_number;//商品编号
+        private List<SpecGoods> spec_goods;
+
+        public List<SpecGoods> getSpec_goods() {
+            return spec_goods;
+        }
+
+        public void setSpec_goods(List<SpecGoods> spec_goods) {
+            this.spec_goods = spec_goods;
+        }
 
         public String getGoods_number() {
             return goods_number;
@@ -414,4 +423,201 @@ public class GoodsDetailsResultBean {
             this.ement_price = ement_price;
         }
     }
+
+   public static class SpecGoods{
+
+       /**
+        * goods_spec_number : 1
+        * goods_spec_id : 1
+        * goods_id : 1
+        * spec_alias : 材质等级
+        * spec_name : 优质
+        * goods_number : SP12345678
+        * goods_class_id : 1
+        * class_attr_id : 1
+        * goods_cate_id : 1
+        * goods_slogan : 20年汉白玉一次成型铸造
+        * title_img : Goods/2017-07-25/5977132923295.png
+        * total : 980.00
+        * sale_amount : 1501
+        * unit : 个
+        * keywords : 汉白玉,骨灰盒
+        * comment : ...........................
+        * spec_attr_id : 1
+        * collection : 1500
+        * name : 五龙捧圣
+        */
+
+       private Long goods_spec_number;
+       private Long goods_spec_id;
+       private Long goods_id;
+       private String spec_alias;
+       private String spec_name;
+       private String goods_number;
+       private Long goods_class_id;
+       private Long class_attr_id;
+       private Long goods_cate_id;
+       private String goods_slogan;
+       private String title_img;
+       private Float total;
+       private Long sale_amount;
+       private String unit;
+       private String keywords;
+       private String comment;
+       private Long spec_attr_id;
+       private Long collection;
+       private String name;
+
+       public Long getGoods_spec_number() {
+           return goods_spec_number;
+       }
+
+       public void setGoods_spec_number(Long goods_spec_number) {
+           this.goods_spec_number = goods_spec_number;
+       }
+
+       public Long getGoods_spec_id() {
+           return goods_spec_id;
+       }
+
+       public void setGoods_spec_id(Long goods_spec_id) {
+           this.goods_spec_id = goods_spec_id;
+       }
+
+       public Long getGoods_id() {
+           return goods_id;
+       }
+
+       public void setGoods_id(Long goods_id) {
+           this.goods_id = goods_id;
+       }
+
+       public String getSpec_alias() {
+           return spec_alias;
+       }
+
+       public void setSpec_alias(String spec_alias) {
+           this.spec_alias = spec_alias;
+       }
+
+       public String getSpec_name() {
+           return spec_name;
+       }
+
+       public void setSpec_name(String spec_name) {
+           this.spec_name = spec_name;
+       }
+
+       public String getGoods_number() {
+           return goods_number;
+       }
+
+       public void setGoods_number(String goods_number) {
+           this.goods_number = goods_number;
+       }
+
+       public Long getGoods_class_id() {
+           return goods_class_id;
+       }
+
+       public void setGoods_class_id(Long goods_class_id) {
+           this.goods_class_id = goods_class_id;
+       }
+
+       public Long getClass_attr_id() {
+           return class_attr_id;
+       }
+
+       public void setClass_attr_id(Long class_attr_id) {
+           this.class_attr_id = class_attr_id;
+       }
+
+       public Long getGoods_cate_id() {
+           return goods_cate_id;
+       }
+
+       public void setGoods_cate_id(Long goods_cate_id) {
+           this.goods_cate_id = goods_cate_id;
+       }
+
+       public String getGoods_slogan() {
+           return goods_slogan;
+       }
+
+       public void setGoods_slogan(String goods_slogan) {
+           this.goods_slogan = goods_slogan;
+       }
+
+       public String getTitle_img() {
+           return title_img;
+       }
+
+       public void setTitle_img(String title_img) {
+           this.title_img = title_img;
+       }
+
+       public Float getTotal() {
+           return total;
+       }
+
+       public void setTotal(Float total) {
+           this.total = total;
+       }
+
+       public Long getSale_amount() {
+           return sale_amount;
+       }
+
+       public void setSale_amount(Long sale_amount) {
+           this.sale_amount = sale_amount;
+       }
+
+       public String getUnit() {
+           return unit;
+       }
+
+       public void setUnit(String unit) {
+           this.unit = unit;
+       }
+
+       public String getKeywords() {
+           return keywords;
+       }
+
+       public void setKeywords(String keywords) {
+           this.keywords = keywords;
+       }
+
+       public String getComment() {
+           return comment;
+       }
+
+       public void setComment(String comment) {
+           this.comment = comment;
+       }
+
+       public Long getSpec_attr_id() {
+           return spec_attr_id;
+       }
+
+       public void setSpec_attr_id(Long spec_attr_id) {
+           this.spec_attr_id = spec_attr_id;
+       }
+
+       public Long getCollection() {
+           return collection;
+       }
+
+       public void setCollection(Long collection) {
+           this.collection = collection;
+       }
+
+       public String getName() {
+           return name;
+       }
+
+       public void setName(String name) {
+           this.name = name;
+       }
+   }
 }

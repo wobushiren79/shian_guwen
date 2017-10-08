@@ -558,7 +558,14 @@
             android:name=".activity.goods.GoodsOrderPayActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="wx5ab2d177a39c8249" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".activity.goods.GoodsOrderPayCallBackActivity"
             android:configChanges="orientation|screenSize"
@@ -568,20 +575,47 @@
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="wx5ab2d177a39c8249" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="wx5ab2d177a39c8249" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".activity.PicShowActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
+
+        </activity>
 
         <!-- 您从百度网站获取的APP KEY，根据实际您的APP申请的APP_KEY进行修改 -->
         <meta-data
             android:name="BaiduMobAd_STAT_ID"
             android:value="fb0a7cd3a0" />
 
-        <activity android:name=".activity.FindActivity"></activity>
+        <activity
+            android:name=".activity.FindActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

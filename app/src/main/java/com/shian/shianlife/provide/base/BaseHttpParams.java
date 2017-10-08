@@ -96,8 +96,10 @@ public class BaseHttpParams {
         for (Field field : fields) {
             field.setAccessible(true);
             Object obj = field.get(this);
-            String value = String.valueOf(obj);
-            postFormBuilder.addParams(field.getName(), value);
+            if (obj != null) {
+                String value = String.valueOf(obj);
+                postFormBuilder.addParams(field.getName(), value);
+            }
         }
     }
 

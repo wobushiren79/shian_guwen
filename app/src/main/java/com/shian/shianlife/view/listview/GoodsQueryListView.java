@@ -29,11 +29,15 @@ public class GoodsQueryListView extends BasePtrRecyclerView implements IGoodsQue
     private Long classAttId;
     private Long classId;
     private String goodsName;
-    private int orderForm;
-    private OrderByEnum orderBy;
+
 
     private IGoodsQueryListPresenter goodsQueryListPresenter;
     private GoodsQueryListAdapter adapter;
+
+
+    private Integer pageNumber;
+    private Integer pageSize;
+    private String rankOrder;
 
     public GoodsQueryListView(Context context) {
         this(context, null);
@@ -45,8 +49,8 @@ public class GoodsQueryListView extends BasePtrRecyclerView implements IGoodsQue
     }
 
     private void init() {
-        orderForm = GoodsQueryListAdapter.Order_Form_Sale;
-        orderBy = OrderByEnum.DESC;
+        pageNumber = 1;
+        pageSize = 10;
 
         goodsQueryListPresenter = new GoodsQueryListPresenterImpl(this);
         adapter = new GoodsQueryListAdapter(getContext());
@@ -87,15 +91,42 @@ public class GoodsQueryListView extends BasePtrRecyclerView implements IGoodsQue
     }
 
     @Override
+    public Integer getPageNumber() {
+        return pageNumber;
+    }
+
+    @Override
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    @Override
+    public String getRankOrder() {
+        return rankOrder;
+    }
+
+    @Override
     public String getGoodsName() {
         return goodsName;
     }
 
+
     @Override
     public void getGoodsQueryListDataSuccess(List<GoodsQueryListResultBean> listData) {
-        adapter.setData(listData);
-        startOrderBy(orderForm, orderBy);
         setRefreshComplete();
+        if (listData == null || listData.size() == 0) {
+            if (pageNumber == 1)
+                adapter.setData(listData);
+            else {
+                pageNumber--;
+                pageNumber = pageNumber < 1 ? 1 : pageNumber;
+            }
+        } else {
+            if (pageNumber == 1)
+                adapter.setData(listData);
+            else
+                adapter.addData(listData);
+        }
         hasData(adapter);
     }
 
@@ -103,6 +134,8 @@ public class GoodsQueryListView extends BasePtrRecyclerView implements IGoodsQue
     public void getGoodsQueryListDataFail(String msg) {
         ToastUtils.show(getContext(), msg);
         setRefreshComplete();
+        pageNumber = pageNumber > 1 ? pageNumber : pageNumber--;
+        ToastUtils.show(getContext(), msg);
         hasData(adapter);
     }
 
@@ -111,20 +144,22 @@ public class GoodsQueryListView extends BasePtrRecyclerView implements IGoodsQue
         setRefresh();
     }
 
-    public void startOrderBy(int orderForm, OrderByEnum orderBy) {
-        this.orderForm = orderForm;
-        this.orderBy = orderBy;
-        adapter.orderBy(orderBy, orderForm);
+    public void startOrderBy(String rankOrder) {
+        this.rankOrder = rankOrder;
+        startQuery();
+//        adapter.orderBy(orderBy, orderForm);
     }
 
     PtrDefaultHandler2 ptrHandler2 = new PtrDefaultHandler2() {
         @Override
         public void onLoadMoreBegin(PtrFrameLayout frame) {
+            pageNumber++;
             goodsQueryListPresenter.getGoodsQueryListData();
         }
 
         @Override
         public void onRefreshBegin(PtrFrameLayout frame) {
+            pageNumber = 1;
             goodsQueryListPresenter.getGoodsQueryListData();
         }
     };

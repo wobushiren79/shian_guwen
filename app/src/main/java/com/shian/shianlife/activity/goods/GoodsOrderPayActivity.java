@@ -25,16 +25,24 @@ import com.shian.shianlife.mvp.goods.presenter.impl.GoodsOrderInfoPresenterImpl;
 import com.shian.shianlife.mvp.goods.presenter.impl.GoodsOrderOfflinePayPresenterImpl;
 import com.shian.shianlife.mvp.goods.view.IGoodsOrderInfoView;
 import com.shian.shianlife.mvp.goods.view.IGoodsOrderOfflinePayView;
+import com.shian.shianlife.mvp.pay.bean.BindGoodsOrderResultBean;
 import com.shian.shianlife.mvp.pay.bean.WeChatPrePayResultBean;
+import com.shian.shianlife.mvp.pay.presenter.IBindGoodsOrderPresenter;
 import com.shian.shianlife.mvp.pay.presenter.IWeChatPrePayPresenter;
+import com.shian.shianlife.mvp.pay.presenter.impl.BindGoodsOrderPresenter;
 import com.shian.shianlife.mvp.pay.presenter.impl.WeChatPrePayPresenter;
+import com.shian.shianlife.mvp.pay.view.IBindGoodsOrderView;
 import com.shian.shianlife.mvp.pay.view.IWeChatPrePayView;
 import com.summerxia.dateselector.utils.DateUtils;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderInfoView, View.OnClickListener, IGoodsOrderOfflinePayView, IWeChatPrePayView {
+public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderInfoView, View.OnClickListener,
+        IGoodsOrderOfflinePayView, IWeChatPrePayView, IBindGoodsOrderView {
+
     @InjectView(R.id.tv_order_number)
     TextView tvOrderNumber;
     @InjectView(R.id.tv_pay_price)
@@ -50,9 +58,12 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
     private IGoodsOrderInfoPresenter goodsOrderInfoPresenter;
     private IGoodsOrderOfflinePayPresenter goodsOrderOfflinePayPresenter;
     private IWeChatPrePayPresenter weChatPrePayPresenter;
+    private IBindGoodsOrderPresenter bindGoodsOrderPresenter;
 
     private Integer payPrice;
-    private boolean isPayWeChat = false;
+    public static boolean isPaying;
+
+    private WeChatPrePayResultBean weChatPrePayResultBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +77,16 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
     private void initView() {
         setTitle("支付");
         llContent.setVisibility(View.GONE);
-
     }
 
     private void initData() {
+        isPaying = false;
+
         orderId = getIntent().getLongExtra(IntentName.INTENT_ORDERID, -1);
         goodsOrderInfoPresenter = new GoodsOrderInfoPresenterImpl(this);
         goodsOrderOfflinePayPresenter = new GoodsOrderOfflinePayPresenterImpl(this);
         weChatPrePayPresenter = new WeChatPrePayPresenter(this);
+        bindGoodsOrderPresenter = new BindGoodsOrderPresenter(this);
 
         goodsOrderInfoPresenter.getGoodsOrderInfo();
     }
@@ -117,8 +130,36 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
     }
 
     @Override
+    public void bindGoodsOrderSuccess(BindGoodsOrderResultBean resultBean) {
+        PayUtils.sendPayReq(this,
+                AppContansts.WeChat_Pay_AppId,
+                this.weChatPrePayResultBean.getPartnerid(),
+                this.weChatPrePayResultBean.getPrepayid(),
+                AppContansts.WeChat_Pay_Package,
+//                PayUtils.getUUIDString(),
+                this.weChatPrePayResultBean.getNoncestr(),
+                this.weChatPrePayResultBean.getTimestamp(),
+                this.weChatPrePayResultBean.getPaySign(),
+                this.weChatPrePayResultBean.getKey());
+    }
+
+    @Override
+    public void bindGoodsOrderFail(String msg) {
+        ToastUtils.show(this, msg);
+        isPaying = false;
+    }
+
+    @Override
     public Long getOrderId() {
         return orderId;
+    }
+
+    @Override
+    public String getOutTradeNo() {
+        if (weChatPrePayResultBean != null)
+            return weChatPrePayResultBean.getOut_trade_no();
+        else
+            return null;
     }
 
     @Override
@@ -173,11 +214,10 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
      * 微信支付
      */
     private void payWechat() {
-        if (isPayWeChat) {
-            ToastUtils.show(this, "支付中");
+        if (!isPaying) {
+            isPaying = true;
+            weChatPrePayPresenter.wechatPrePay();
         }
-        isPayWeChat = true;
-        weChatPrePayPresenter.wechatPrePay();
     }
 
     /**
@@ -204,24 +244,18 @@ public class GoodsOrderPayActivity extends BaseActivity implements IGoodsOrderIn
 
     @Override
     public void wechatPrePaySuccess(WeChatPrePayResultBean resultBean) {
-        PayUtils.sendPayReq(this,
-                AppContansts.WeChat_Pay_AppId,
-                resultBean.getMch_id(),
-                resultBean.getPrepayId(),
-                AppContansts.WeChat_Pay_Package,
-                PayUtils.getUUIDString(),
-                resultBean.getTimeStamp(),
-                resultBean.getPaySign());
+        this.weChatPrePayResultBean = resultBean;
+        this.bindGoodsOrderPresenter.bindGoodsOrder();
     }
 
     @Override
     public void wechatPrePayFail(String msg) {
         ToastUtils.show(this, msg);
-        isPayWeChat = false;
+        isPaying = false;
     }
 
     @Override
-    public Float wechatGetPayTotal() {
-        return (payPrice / 100f);
+    public Integer wechatGetPayTotal() {
+        return payPrice;
     }
 }

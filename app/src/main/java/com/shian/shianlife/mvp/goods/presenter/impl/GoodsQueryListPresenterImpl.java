@@ -31,23 +31,29 @@ public class GoodsQueryListPresenterImpl implements IGoodsQueryListPresenter {
             return;
         }
         if (goodsQueryListView.getClassAttrId() == null) {
-            goodsQueryListView.showToast("数据错误");
+            goodsQueryListView.showToast("缺少ClassAttrId");
             return;
         }
         if (CheckUtils.isEmpty(goodsQueryListView.getChannelId())) {
-            goodsQueryListView.showToast("数据错误");
+            goodsQueryListView.showToast("缺少ChannelId");
             return;
         }
-
+        if (goodsQueryListView.getPageNumber() == null) {
+            goodsQueryListView.showToast("缺少查询页数");
+            return;
+        }
+        if (goodsQueryListView.getPageSize() == null) {
+            goodsQueryListView.showToast("缺少查询数量");
+            return;
+        }
         GoodsQueryListBean params = new GoodsQueryListBean();
         params.setId(goodsQueryListView.getClassAttrId());
         params.setChannel_id(goodsQueryListView.getChannelId());
-
-        if (goodsQueryListView.getGoodsName() == null)
-            params.setGoods_name("");
-        else
+        params.setPageNumber(goodsQueryListView.getPageNumber());
+        params.setPageSize(goodsQueryListView.getPageSize());
+        params.setOrder(goodsQueryListView.getRankOrder());
+        if (goodsQueryListView.getGoodsName() == null || goodsQueryListView.getGoodsName().isEmpty())
             params.setGoods_name(goodsQueryListView.getGoodsName());
-
         goodsQueryListModel.getGoodsQueryData(goodsQueryListView.getContext(), params, new OnGetDataListener<List<GoodsQueryListResultBean>>() {
 
             @Override

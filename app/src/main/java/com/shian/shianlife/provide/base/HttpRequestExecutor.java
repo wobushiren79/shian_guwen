@@ -174,6 +174,7 @@ public class HttpRequestExecutor {
         if (checkNetWorkAndDialog(context, responseHandler, isShowDialog)) return;
 
         Log.v("tag", baseUrl + "/" + method);
+        Log.v("tag", "Params:" + params.getJsonParams());
 
         PostFormBuilder getBuilder = OkHttpUtils.post();
         getBuilder.url(baseUrl + "/" + method);

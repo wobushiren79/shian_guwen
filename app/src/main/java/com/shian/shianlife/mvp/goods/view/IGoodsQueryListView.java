@@ -15,6 +15,17 @@ public interface IGoodsQueryListView extends BaseMVPView {
 
     Integer getChannelId();
 
+    Integer getPageNumber();
+
+    Integer getPageSize();
+
+    /**
+     * 获取排序规则
+     *
+     * @return
+     */
+    String getRankOrder();
+
     String getGoodsName();
 
     void getGoodsQueryListDataSuccess(List<GoodsQueryListResultBean> listData);

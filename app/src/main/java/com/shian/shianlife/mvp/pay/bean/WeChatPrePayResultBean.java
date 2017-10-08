@@ -18,16 +18,77 @@ public class WeChatPrePayResultBean {
      * paySign : 8D79B840FC2682E57FB5652637680954
      */
 
-    private Long timeStamp;
-    private String appId;
-    private String nonceStr;
+    private Long timestamp;
+    private String appid;
+    private String noncestr;
     @SerializedName("package")
-    private String prepayId;
     private String signType;
+    private String prepayid;
+    private String partnerid;
+
     private String paySign;
     private Result result;//返回
     private String out_trade_no;//订单编号
     private String mch_id;//商户号
+    private String key;//密鑰KEY
+    private String sign;//统一下单的签名
+
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getAppid() {
+        return appid;
+    }
+
+    public void setAppid(String appid) {
+        this.appid = appid;
+    }
+
+    public String getNoncestr() {
+        return noncestr;
+    }
+
+    public void setNoncestr(String noncestr) {
+        this.noncestr = noncestr;
+    }
+
+    public String getSignType() {
+        return signType;
+    }
+
+    public void setSignType(String signType) {
+        this.signType = signType;
+    }
+
+    public String getPrepayid() {
+        return prepayid;
+    }
+
+    public void setPrepayid(String prepayid) {
+        this.prepayid = prepayid;
+    }
+
+    public String getPartnerid() {
+        return partnerid;
+    }
+
+    public void setPartnerid(String partnerid) {
+        this.partnerid = partnerid;
+    }
+
+    public String getPaySign() {
+        return paySign;
+    }
+
+    public void setPaySign(String paySign) {
+        this.paySign = paySign;
+    }
 
     public Result getResult() {
         return result;
@@ -53,54 +114,21 @@ public class WeChatPrePayResultBean {
         this.mch_id = mch_id;
     }
 
-    public Long getTimeStamp() {
-        return timeStamp;
+    public String getKey() {
+        return key;
     }
 
-    public void setTimeStamp(Long timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    public String getAppId() {
-        return appId;
+    public String getSign() {
+        return sign;
     }
 
-    public void setAppId(String appId) {
-        this.appId = appId;
+    public void setSign(String sign) {
+        this.sign = sign;
     }
-
-    public String getNonceStr() {
-        return nonceStr;
-    }
-
-    public void setNonceStr(String nonceStr) {
-        this.nonceStr = nonceStr;
-    }
-
-    public String getPrepayId() {
-        return prepayId;
-    }
-
-    public void setPrepayId(String prepayId) {
-        this.prepayId = prepayId;
-    }
-
-    public String getSignType() {
-        return signType;
-    }
-
-    public void setSignType(String signType) {
-        this.signType = signType;
-    }
-
-    public String getPaySign() {
-        return paySign;
-    }
-
-    public void setPaySign(String paySign) {
-        this.paySign = paySign;
-    }
-
 
     public static class Result {
 
@@ -108,9 +136,17 @@ public class WeChatPrePayResultBean {
          * return_code : FAIL
          * return_msg : 商户号该产品权限未开通，请前往商户平台>产品中心检查后重试
          */
-
+        private String sign;
         private String return_code;
         private String return_msg;
+
+        public String getSign() {
+            return sign;
+        }
+
+        public void setSign(String sign) {
+            this.sign = sign;
+        }
 
         public String getReturn_code() {
             return return_code;

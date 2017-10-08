@@ -21,6 +21,8 @@ import com.shian.shianlife.mvp.goods.bean.GoodsLabelDetailsResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsLabelResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsQueryListBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsQueryListResultBean;
+import com.shian.shianlife.mvp.pay.bean.BindGoodsOrderBean;
+import com.shian.shianlife.mvp.pay.bean.BindGoodsOrderResultBean;
 import com.shian.shianlife.provide.base.BaseManagerImpl;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.GoodsManager;
@@ -94,4 +96,6 @@ public class GoodsManagerImpl extends BaseManagerImpl implements GoodsManager {
     public void getGoodClassAttrMain(Context context, GoodsClassAttrMainBean params, HttpResponseHandler<List<GoodsClassAttrMainResultBean>> handler) {
         requestPostFormToListForList(context, "Api/Goods/label_goods_class", GoodsClassAttrMainResultBean.class, params, handler);
     }
+
+
 }

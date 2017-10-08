@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
 import com.shian.shianlife.common.contanst.IntentName;
+import com.shian.shianlife.thisenum.GoodsRankEnum;
 import com.shian.shianlife.thisenum.OrderByEnum;
 import com.shian.shianlife.view.drawerlayout.GoodsQueryDrawerLayout;
 import com.shian.shianlife.view.goods.GoodsQueryConditionButton;
@@ -91,16 +92,16 @@ public class GoodsQueryActivity extends BaseActivity implements GoodsQueryCondit
             queryVolumeCondition.setCheckStatus(true);
             queryPriceCondition.setCheckStatus(false);
             if (mode == GoodsQueryConditionButton.Mode_DESC)
-                goodsQueryList.startOrderBy(Order_Form_Sale, OrderByEnum.DESC);
+                goodsQueryList.startOrderBy(GoodsRankEnum.Sale_Amount_Desc.getCode());
             else
-                goodsQueryList.startOrderBy(Order_Form_Sale, OrderByEnum.ASC);
+                goodsQueryList.startOrderBy(GoodsRankEnum.Sale_Amount_Asc.getCode());
         } else if (view == queryPriceCondition) {
             queryVolumeCondition.setCheckStatus(false);
             queryPriceCondition.setCheckStatus(true);
             if (mode == GoodsQueryConditionButton.Mode_DESC)
-                goodsQueryList.startOrderBy(Order_Form_Price, OrderByEnum.DESC);
+                goodsQueryList.startOrderBy(GoodsRankEnum.Total_Desc.getCode());
             else
-                goodsQueryList.startOrderBy(Order_Form_Price, OrderByEnum.ASC);
+                goodsQueryList.startOrderBy(GoodsRankEnum.Total_Asc.getCode());
         }
     }
 

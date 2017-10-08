@@ -9,6 +9,15 @@ import com.shian.shianlife.provide.base.BaseHttpParams;
 public class GoodsDetailsBean extends BaseHttpParams {
     private Long goods_id;
     private int channel_id;
+    private Long package_id;
+
+    public Long getPackage_id() {
+        return package_id;
+    }
+
+    public void setPackage_id(Long package_id) {
+        this.package_id = package_id;
+    }
 
     public Long getGoods_id() {
         return goods_id;
