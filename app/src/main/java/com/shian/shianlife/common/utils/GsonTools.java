@@ -19,7 +19,7 @@ public class GsonTools {
     }
 
     public static <T> T getObjectByMapKey(String key, Map map, T t) throws Exception {
-        if (!CheckUtils.isEmpty(key) && map.containsKey(key)) {
+        if (map.containsKey(key)) {
             String jsonObjStr = gson.toJson(map.get(key));
             try {
                 return (T) gson.fromJson(jsonObjStr, t.getClass());
@@ -28,7 +28,7 @@ public class GsonTools {
                 return null;
             }
         } else {
-            return null;
+            throw new Exception("key值无效");
         }
     }
 

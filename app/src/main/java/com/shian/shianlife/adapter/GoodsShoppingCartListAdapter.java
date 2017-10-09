@@ -108,7 +108,7 @@ public class GoodsShoppingCartListAdapter extends BaseExpandableAdapter<GoodsSho
     public void setItemView(final GoodsShoppingCartListChildBean itemAllData, View convertView, final int groupPosition, final int childPosition) {
         CheckBox check = (CheckBox) convertView.findViewById(R.id.check);
         ImageView ivIcon = (ImageView) convertView.findViewById(R.id.iv_icon);
-
+        ImageView ivPackage = (ImageView) convertView.findViewById(R.id.iv_package);
         LinearLayout llModeEdit = (LinearLayout) convertView.findViewById(R.id.ll_mode_edit);
         LinearLayout llModeShow = (LinearLayout) convertView.findViewById(R.id.ll_mode_show);
 
@@ -123,6 +123,25 @@ public class GoodsShoppingCartListAdapter extends BaseExpandableAdapter<GoodsSho
             llModeShow.setVisibility(View.VISIBLE);
             llModeEdit.setVisibility(View.GONE);
             setShowMode(convertView, itemAllData);
+        }
+
+        View.OnClickListener goodsDetailsClick = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.show(getContext(), "tag");
+            }
+        };
+
+
+        if (data.getIs_package() != null && data.getIs_package() == 1) {
+            ivPackage.setVisibility(View.VISIBLE);
+            llModeShow.setOnClickListener(goodsDetailsClick);
+        } else if (data.getIs_package() != null && data.getIs_package() == 0) {
+            ivPackage.setVisibility(View.GONE);
+            llModeShow.setOnClickListener(null);
+        } else {
+            ivPackage.setVisibility(View.GONE);
+            llModeShow.setOnClickListener(null);
         }
 
         //设置checkbox点击事件
@@ -217,8 +236,18 @@ public class GoodsShoppingCartListAdapter extends BaseExpandableAdapter<GoodsSho
         TextView tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
         TextView tvNumber = (TextView) convertView.findViewById(R.id.tv_number);
 
-        String goodsName = data.getGoods_name();
-        String goodsSlogan = data.getGoods_slogan();
+        String goodsName = null;
+        if (data.getGoods_name() != null)
+            goodsName = data.getGoods_name();
+        if (data.getPackage_name() != null)
+            goodsName = data.getPackage_name();
+
+        String goodsSlogan = null;
+        if (data.getGoods_slogan() != null)
+            goodsSlogan = data.getGoods_slogan();
+        if (data.getPackage_slogan() != null)
+            goodsSlogan = data.getPackage_slogan();
+
         StringBuffer name = new StringBuffer();
         if (goodsName != null)
             name.append(goodsName);

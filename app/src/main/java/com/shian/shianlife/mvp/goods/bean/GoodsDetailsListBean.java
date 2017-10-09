@@ -10,6 +10,24 @@ public class GoodsDetailsListBean extends BaseHttpParams {
     private String channelId;
     private String goodsId;
     private String goodsSpecId;
+    private String packageId;
+    private String packageSpecId;
+
+    public String getPackageId() {
+        return packageId;
+    }
+
+    public void setPackageId(String packageId) {
+        this.packageId = packageId;
+    }
+
+    public String getPackageSpecId() {
+        return packageSpecId;
+    }
+
+    public void setPackageSpecId(String packageSpecId) {
+        this.packageSpecId = packageSpecId;
+    }
 
     public String getChannelId() {
         return channelId;

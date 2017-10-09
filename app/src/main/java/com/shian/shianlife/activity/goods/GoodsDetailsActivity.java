@@ -206,7 +206,6 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void createGoodsShoppingCartSuccess(GoodsShoppingCartCreateResultBean resultBean) {
         goodsShoppingCartNumberPresenter.getShoppingCartNumber();
-//        ToastUtils.show(this, "加入购物车成功");
     }
 
     @Override
@@ -241,14 +240,17 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public Long getClassifyId() {
-        if (detailsData == null)
-            return null;
-        return detailsData.getGoods_cate_id();
+        return goodsClassId;
     }
 
     @Override
     public Long getGoodsSpecId() {
         return goodsSpecSelect.getData().getGoods_spec_id();
+    }
+
+    @Override
+    public Long getPackageSpecId() {
+        return goodsSpecSelect.getData().getPackage_spec_id();
     }
 
     @Override
@@ -321,6 +323,11 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void setGoodsClassId(Long classId) {
+        goodsClassId = classId;
+    }
+
+    @Override
+    public void setPackageClassId(Long classId) {
         goodsClassId = classId;
     }
 

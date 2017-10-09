@@ -16,12 +16,27 @@
         android:background="@drawable/zhy_check_box_style_1"
         android:button="@null" />
 
-    <ImageView
-        android:id="@+id/iv_icon"
+    <RelativeLayout
         android:layout_width="@dimen/dimen_194dp"
         android:layout_height="@dimen/dimen_194dp"
-        android:layout_marginLeft="@dimen/dimen_26dp"
-        android:src="@drawable/zhy_pic_loading" />
+        android:layout_marginLeft="@dimen/dimen_26dp">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="@dimen/dimen_194dp"
+            android:layout_height="@dimen/dimen_194dp"
+            android:src="@drawable/zhy_pic_loading" />
+
+        <ImageView
+            android:id="@+id/iv_package"
+            android:layout_width="@dimen/dimen_80dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dimen_8dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:src="@drawable/zhy_goods_icon_ispackage"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/ll_mode_edit"
@@ -126,6 +141,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginRight="@dimen/dimen_16dp"
+        android:background="@drawable/zhy_button_state_ll_white"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:padding="@dimen/dimen_16dp"

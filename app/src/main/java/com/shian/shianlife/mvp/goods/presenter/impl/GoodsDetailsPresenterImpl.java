@@ -72,6 +72,8 @@ public class GoodsDetailsPresenterImpl implements IGoodsDetailsPresenter {
                 //設置商品描述
                 if (result.getGoods_slogan() != null)
                     goodsName.append(result.getGoods_slogan());
+                if (result.getPackage_slogan() != null)
+                    goodsName.append(result.getPackage_slogan());
                 goodsDetailsView.setGoodsName(goodsName.toString());
                 //设置价格范围
                 if (result.getPrice() == null)
@@ -130,7 +132,8 @@ public class GoodsDetailsPresenterImpl implements IGoodsDetailsPresenter {
                 //设置分类及分类属性ID
                 if (result.getGoods_cate_id() != null)
                     goodsDetailsView.setGoodsClassId(result.getGoods_cate_id());
-
+                if (result.getPackage_cate_id() != null)
+                    goodsDetailsView.setPackageClassId(result.getPackage_cate_id());
                 if (result.getSpec_attr_id() != null)
                     goodsDetailsView.setGoodsClassAttrId(result.getSpec_attr_id());
 

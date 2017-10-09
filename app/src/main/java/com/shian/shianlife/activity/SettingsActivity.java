@@ -5,10 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
-import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -19,13 +16,11 @@ import butterknife.OnClick;
 import okhttp3.Request;
 
 import com.baidu.android.pushservice.BasicPushNotificationBuilder;
-import com.baidu.android.pushservice.CustomPushNotificationBuilder;
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
-import com.shian.shianlife.common.contanst.AppContansts;
 import com.shian.shianlife.common.push.Utils;
 import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -33,10 +28,8 @@ import com.shian.shianlife.common.view.TipsDialog;
 import com.shian.shianlife.provide.MHttpManagerFactory;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.params.HpConsultIdParams;
-import com.suke.widget.SwitchButton;
 
 import java.util.List;
-import java.util.TooManyListenersException;
 
 public class SettingsActivity extends BaseActivity {
     private SharedPreferences share;
@@ -119,6 +112,7 @@ public class SettingsActivity extends BaseActivity {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
                 MHttpManagerFactory.getFuneralManager().loginout(getBaseContext(), new HttpResponseHandler<Object>() {
 
                     @Override
@@ -128,15 +122,9 @@ public class SettingsActivity extends BaseActivity {
 
                     @Override
                     public void onSuccess(Object result) {
-                        SharePerfrenceUtils.setShareAutoLogin(
-                                getBaseContext(), false);
                         PushManager.startWork(getApplicationContext(),
                                 PushConstants.LOGIN_TYPE_API_KEY,
                                 Utils.getMetaValue(SettingsActivity.this, "api_key"));
-                        Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
-                        intent.putExtra("Settings", 0);
-                        setResult(1010, intent);
-                        finish();
                         // TODO Auto-generated method stub
 
                     }
@@ -165,6 +153,8 @@ public class SettingsActivity extends BaseActivity {
 
                     }
                 });
+                SharePerfrenceUtils.setShareAutoLogin(getApplicationContext(), false);
+                com.shian.shianlife.common.utils.Utils.jumpLogin(SettingsActivity.this);
             }
         });
         mDialog.setTopButton("否", new DialogInterface.OnClickListener() {

@@ -1,12 +1,13 @@
 package com.shian.shianlife.mvp.goods.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by zm.
  */
 
-public class GoodsDetailsListResultBean implements Serializable{
+public class GoodsDetailsListResultBean implements Serializable {
     /**
      * spec_price : 888.00
      * adviser_price : 508.00
@@ -61,9 +62,74 @@ public class GoodsDetailsListResultBean implements Serializable{
     private String keywords;//关键词
     private Integer collection;//收藏数量
 
+    List<GoodsDetailsResultBean.SpecGoods> goods;
+    private String package_number;
+    private Long package_class_id;
+    private Long package_id;
+    private String package_name;
+    private Integer is_package;
+    private String package_slogan;
+
+
     private Integer shoppingCartNumber;//購物車數量
     private Long shoppingCartId;//购物车ID
 
+
+    public List<GoodsDetailsResultBean.SpecGoods> getGoods() {
+        return goods;
+    }
+
+    public void setGoods(List<GoodsDetailsResultBean.SpecGoods> goods) {
+        this.goods = goods;
+    }
+
+    public String getPackage_number() {
+        return package_number;
+    }
+
+    public void setPackage_number(String package_number) {
+        this.package_number = package_number;
+    }
+
+    public Long getPackage_class_id() {
+        return package_class_id;
+    }
+
+    public void setPackage_class_id(Long package_class_id) {
+        this.package_class_id = package_class_id;
+    }
+
+    public Long getPackage_id() {
+        return package_id;
+    }
+
+    public void setPackage_id(Long package_id) {
+        this.package_id = package_id;
+    }
+
+    public String getPackage_name() {
+        return package_name;
+    }
+
+    public void setPackage_name(String package_name) {
+        this.package_name = package_name;
+    }
+
+    public Integer getIs_package() {
+        return is_package;
+    }
+
+    public void setIs_package(Integer is_package) {
+        this.is_package = is_package;
+    }
+
+    public String getPackage_slogan() {
+        return package_slogan;
+    }
+
+    public void setPackage_slogan(String package_slogan) {
+        this.package_slogan = package_slogan;
+    }
 
     public Long getShoppingCartId() {
         return shoppingCartId;

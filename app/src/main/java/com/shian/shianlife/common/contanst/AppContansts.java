@@ -12,14 +12,14 @@ import okhttp3.Cookie;
 
 public class AppContansts {
     //登陆地址
-    public static final String Login_BaseUrl = "https://platform.shianlife.cn";
+//    public static final String Login_BaseUrl = "https://platform.shianlife.cn";
     //    public static final String Login_BaseUrl = "http://prd-platform.xicp.cn";
-//        public static final String Login_BaseUrl = "http://192.168.0.57:8099/ki4so-web";
+        public static final String Login_BaseUrl = "http://192.168.0.57:8099/ki4so-web";
 //        public static final String Login_BaseUrl = "http://192.168.0.33:8199/platform";
     //单项地址
-    public static final String Store_BaseUrl = "https://goods.shianlife.cn";
+//    public static final String Store_BaseUrl = "https://goods.shianlife.cn";
     //        public static final String Store_BaseUrl = "http://prd-goods.xicp.cn";
-//        public static final String Store_BaseUrl = "http://192.168.0.57:8080/goods";
+        public static final String Store_BaseUrl = "http://192.168.0.57:8080/goods";
 //        public static final String Store_BaseUrl = "http://192.168.0.33:8089/goods";
     //殡仪地址
     public static final String Funeral_BaseUrl = "http://115.28.163.211:7088/shianlife-adviser-1.0-SNAPSHOT";

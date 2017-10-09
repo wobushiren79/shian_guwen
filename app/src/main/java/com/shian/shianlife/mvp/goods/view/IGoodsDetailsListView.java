@@ -17,8 +17,12 @@ public interface IGoodsDetailsListView extends BaseMVPView {
 
     List<Long> getGoodsIds();
 
+    List<Long> getPackageIds();
+
     List<Integer> getChannelIds();
 
     List<Long> getGoodsSpecIds();
+
+    List<Long> getPackageSpecIds();
 
 }

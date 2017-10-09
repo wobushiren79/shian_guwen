@@ -37,7 +37,10 @@ public class GoodsDetailsListPresenterImpl implements IGoodsDetailsListPresenter
         params.setChannelId(channelIds);
         String goodsSpecIds = StringUtils.listToString(goodsDetailsListView.getGoodsSpecIds(), ",");
         params.setGoodsSpecId(goodsSpecIds);
-
+        String packageIds = StringUtils.listToString(goodsDetailsListView.getPackageIds(), ",");
+        params.setPackageId(packageIds);
+        String packageSpecIds = StringUtils.listToString(goodsDetailsListView.getPackageSpecIds(), ",");
+        params.setPackageSpecId(packageSpecIds);
 
         goodsDetailsListModel.getGoodsDetailsList(goodsDetailsListView.getContext(), params, new OnGetDataListener<List<GoodsDetailsListResultBean>>() {
 

@@ -3,6 +3,8 @@ package com.shian.shianlife.mvp.goods.bean;
 
 import com.shian.shianlife.base.BaseEntity;
 
+import java.util.List;
+
 /**
  * 类名称：GoodsOrderItems 实体
  * 创建人： CQ
@@ -24,6 +26,7 @@ public class GoodsOrderItem extends BaseEntity {
      * 规格商品ID
      */
     private Long goodsSpecId;
+
 
     /**
      * 分类属性ID
@@ -94,6 +97,44 @@ public class GoodsOrderItem extends BaseEntity {
      */
     private String  specName;
 
+    /**
+     * 套餐ID
+     */
+    private Long packageId;
+
+    /**
+     * 套餐规格ID
+     */
+    private Long packageSpecId;
+
+    /**
+     * 套餐商品
+     */
+    private List<GoodsOrderItem> goodsOrderItems;
+
+    public Long getPackageId() {
+        return packageId;
+    }
+
+    public void setPackageId(Long packageId) {
+        this.packageId = packageId;
+    }
+
+    public Long getPackageSpecId() {
+        return packageSpecId;
+    }
+
+    public void setPackageSpecId(Long packageSpecId) {
+        this.packageSpecId = packageSpecId;
+    }
+
+    public List<GoodsOrderItem> getGoodsOrderItems() {
+        return goodsOrderItems;
+    }
+
+    public void setGoodsOrderItems(List<GoodsOrderItem> goodsOrderItems) {
+        this.goodsOrderItems = goodsOrderItems;
+    }
 
     public Long getOrderId() {
         return orderId;

@@ -42,4 +42,5 @@ public interface IGoodsOrderCreateView extends BaseMVPView {
      * @return
      */
     List<GoodsOrderItem> getGoodsOrderItem();
+
 }

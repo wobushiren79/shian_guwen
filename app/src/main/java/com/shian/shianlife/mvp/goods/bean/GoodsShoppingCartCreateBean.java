@@ -50,6 +50,16 @@ public class GoodsShoppingCartCreateBean extends BaseHttpParams {
          */
         private Integer channelId;
 
+        private Integer isPackage;
+
+        public Integer getIsPackage() {
+            return isPackage;
+        }
+
+        public void setIsPackage(Integer isPackage) {
+            this.isPackage = isPackage;
+        }
+
         public Long getGoodsId() {
             return goodsId;
         }

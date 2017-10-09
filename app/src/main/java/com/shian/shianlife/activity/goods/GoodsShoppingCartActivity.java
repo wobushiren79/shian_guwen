@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsDetailsListView, GoodsShoppingCartListView.CallBack {
+public class GoodsShoppingCartActivity extends BaseActivity implements GoodsShoppingCartListView.CallBack {
 
     @InjectView(R.id.listview)
     GoodsShoppingCartListView shoppingCartListView;
@@ -45,8 +45,6 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsDet
     @InjectView(R.id.tv_check_all)
     TextView tvCheckAll;
 
-    private List<GoodsShoppingCartListResultBean.Content> goodsShoppingCartIds;
-    private IGoodsDetailsListPresenter goodsDetailsListPresenter;
     private ArrayList<GoodsShoppingCartListChildBean> selectGoods;//選中的商品
 
     @Override
@@ -63,70 +61,7 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsDet
     }
 
     private void initData() {
-
-        goodsShoppingCartIds = new ArrayList<>();
         shoppingCartListView.setCallBack(this);
-
-        goodsDetailsListPresenter = new GoodsDetailsListPresenterImpl(this);
-    }
-
-    @Override
-    public Context getContext() {
-        return this;
-    }
-
-    @Override
-    public void showToast(String msg) {
-        ToastUtils.show(this, msg);
-    }
-
-
-    @Override
-    public void getGoodsDetailsListDataSuccess(List<GoodsDetailsListResultBean> resultBeen) {
-        for (GoodsDetailsListResultBean item : resultBeen) {
-            for (GoodsShoppingCartListResultBean.Content ids : goodsShoppingCartIds) {
-                if (item.getSpec_id() == ids.getGoodsSpecId()) {
-                    item.setShoppingCartNumber(ids.getSpecNum());
-                    item.setShoppingCartId(ids.getId());
-                }
-            }
-        }
-        shoppingCartListView.setData(resultBeen);
-    }
-
-    @Override
-    public void getGoodsDetailsListDataFail(String msg) {
-        ToastUtils.show(this, msg);
-    }
-
-    @Override
-    public List<Long> getGoodsIds() {
-        List<Long> ids = new ArrayList<>();
-        for (GoodsShoppingCartListResultBean.Content item : goodsShoppingCartIds) {
-            if (item.getGoodsId() != null)
-                ids.add(item.getGoodsId());
-        }
-        return ids;
-    }
-
-    @Override
-    public List<Integer> getChannelIds() {
-        List<Integer> ids = new ArrayList<>();
-        for (GoodsShoppingCartListResultBean.Content item : goodsShoppingCartIds) {
-            if (item.getChannelId() != null)
-                ids.add(item.getChannelId());
-        }
-        return ids;
-    }
-
-    @Override
-    public List<Long> getGoodsSpecIds() {
-        List<Long> ids = new ArrayList<>();
-        for (GoodsShoppingCartListResultBean.Content item : goodsShoppingCartIds) {
-            if (item.getGoodsSpecId() != null)
-                ids.add(item.getGoodsSpecId());
-        }
-        return ids;
     }
 
 
@@ -145,12 +80,6 @@ public class GoodsShoppingCartActivity extends BaseActivity implements IGoodsDet
             }
         }
         setTotalPrice("￥" + totalPrice);
-    }
-
-    @Override
-    public void findDataSuccess(GoodsShoppingCartListResultBean resultBean) {
-        goodsShoppingCartIds = resultBean.getContent();
-        goodsDetailsListPresenter.getGoodsDetailsList();
     }
 
     @OnClick({R.id.check, R.id.tv_submit, R.id.tv_check_all})

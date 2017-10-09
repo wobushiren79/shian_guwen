@@ -113,11 +113,17 @@ public interface IGoodsDetailsView extends BaseMVPView {
     void setGoodsApplyLocation(String location);
 
     /**
-     * 设置分类ID
+     * 设置商品分类ID
      *
      * @param classId
      */
     void setGoodsClassId(Long classId);
+
+    /**
+     * 设置套餐分类ID
+     * @param classId
+     */
+    void setPackageClassId(Long classId);
 
     /**
      * 设置分类属性ID

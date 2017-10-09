@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.shian.shianlife.R;
 import com.shian.shianlife.adapter.StoreOrderGoodsListAdapter;
 import com.shian.shianlife.base.BaseActivity;
-import com.shian.shianlife.bean.GoodsShoppingCartListChildBean;
 import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.DataUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
@@ -40,7 +39,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 public class GoodsOrderSettlementActivity extends BaseActivity implements

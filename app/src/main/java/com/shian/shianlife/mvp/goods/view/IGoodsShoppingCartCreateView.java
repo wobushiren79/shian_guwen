@@ -22,8 +22,11 @@ public interface IGoodsShoppingCartCreateView extends BaseMVPView {
 
     Long getClassifyId();
 
-
     Long getGoodsSpecId();
+
+    Long getPackageSpecId();
+
+    Integer getIsPackage();
 
 
 }

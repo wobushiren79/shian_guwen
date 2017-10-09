@@ -12,8 +12,11 @@ import com.shian.shianlife.bean.GoodsShoppingCartListGroupBean;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsListResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartListResultBean;
+import com.shian.shianlife.mvp.goods.presenter.IGoodsDetailsListPresenter;
 import com.shian.shianlife.mvp.goods.presenter.IGoodsShoppingCartListPresenter;
+import com.shian.shianlife.mvp.goods.presenter.impl.GoodsDetailsListPresenterImpl;
 import com.shian.shianlife.mvp.goods.presenter.impl.GoodsShoppingCartListPresenterImpl;
+import com.shian.shianlife.mvp.goods.view.IGoodsDetailsListView;
 import com.shian.shianlife.mvp.goods.view.IGoodsShoppingCartListView;
 
 import java.util.ArrayList;
@@ -29,7 +32,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
  * Created by zm.
  */
 
-public class GoodsShoppingCartListView extends BasePtrExpandableListView implements GoodsShoppingCartListAdapter.CallBack, IGoodsShoppingCartListView {
+public class GoodsShoppingCartListView extends BasePtrExpandableListView implements GoodsShoppingCartListAdapter.CallBack, IGoodsShoppingCartListView, IGoodsDetailsListView {
 
     private Integer pageNumber;
     private Integer pageSize;
@@ -37,8 +40,10 @@ public class GoodsShoppingCartListView extends BasePtrExpandableListView impleme
 
     private GoodsShoppingCartListAdapter listAdapter;
     private IGoodsShoppingCartListPresenter goodsShoppingCartListPresenter;
-    private List<GoodsDetailsListResultBean> data;
+    private IGoodsDetailsListPresenter goodsDetailsListPresenter;
 
+    private List<GoodsDetailsListResultBean> data;
+    private List<GoodsShoppingCartListResultBean.Content> goodsShoppingCartIds;
     private CallBack callBack;
 
     public GoodsShoppingCartListView(Context context) {
@@ -61,6 +66,9 @@ public class GoodsShoppingCartListView extends BasePtrExpandableListView impleme
         pageSize = Integer.MAX_VALUE;
 
         goodsShoppingCartListPresenter = new GoodsShoppingCartListPresenterImpl(this);
+        goodsDetailsListPresenter = new GoodsDetailsListPresenterImpl(this);
+
+        goodsShoppingCartIds = new ArrayList<>();
         startFindData();
     }
 
@@ -69,12 +77,10 @@ public class GoodsShoppingCartListView extends BasePtrExpandableListView impleme
     }
 
     public void setData(List<GoodsDetailsListResultBean> data) {
-
         this.data = data;
         Map<GoodsShoppingCartListGroupBean, List<GoodsShoppingCartListChildBean>> mapData = getMapData(data);
         listAdapter.setData(mapData);
         listAdapter.setAllChecked(false);
-
 
         //展开所有
         for (int i = 0; i < listAdapter.getGroupCount(); i++) {
@@ -156,8 +162,9 @@ public class GoodsShoppingCartListView extends BasePtrExpandableListView impleme
     @Override
     public void getShoppingCartListDataSuccess(GoodsShoppingCartListResultBean resultBean) {
         GoodsShoppingCartListView.this.setRefreshComplete();
-        if (callBack != null)
-            callBack.findDataSuccess(resultBean);
+
+        goodsShoppingCartIds = resultBean.getContent();
+        goodsDetailsListPresenter.getGoodsDetailsList();
     }
 
     @Override
@@ -181,11 +188,77 @@ public class GoodsShoppingCartListView extends BasePtrExpandableListView impleme
         ToastUtils.show(getContext(), msg);
     }
 
+    @Override
+    public void getGoodsDetailsListDataSuccess(List<GoodsDetailsListResultBean> resultBeen) {
+        for (GoodsDetailsListResultBean item : resultBeen) {
+            for (GoodsShoppingCartListResultBean.Content ids : goodsShoppingCartIds) {
+                if (item.getSpec_id() == ids.getGoodsSpecId()) {
+                    item.setShoppingCartNumber(ids.getSpecNum());
+                    item.setShoppingCartId(ids.getId());
+                }
+            }
+        }
+        this.setData(resultBeen);
+    }
+
+    @Override
+    public void getGoodsDetailsListDataFail(String msg) {
+        ToastUtils.show(getContext(), msg);
+    }
+
+    @Override
+    public List<Long> getGoodsIds() {
+        List<Long> ids = new ArrayList<>();
+        for (GoodsShoppingCartListResultBean.Content item : goodsShoppingCartIds) {
+            if (item.getGoodsId() != null && item.getIsPackage() != null && item.getIsPackage() == 0)
+                ids.add(item.getGoodsId());
+        }
+        return ids;
+    }
+
+    @Override
+    public List<Long> getPackageIds() {
+        List<Long> ids = new ArrayList<>();
+        for (GoodsShoppingCartListResultBean.Content item : goodsShoppingCartIds) {
+            if (item.getGoodsId() != null && item.getIsPackage() != null && item.getIsPackage() == 1)
+                ids.add(item.getGoodsId());
+        }
+        return ids;
+    }
+
+    @Override
+    public List<Integer> getChannelIds() {
+        List<Integer> ids = new ArrayList<>();
+        for (GoodsShoppingCartListResultBean.Content item : goodsShoppingCartIds) {
+            if (item.getChannelId() != null)
+                ids.add(item.getChannelId());
+        }
+        return ids;
+    }
+
+    @Override
+    public List<Long> getGoodsSpecIds() {
+        List<Long> ids = new ArrayList<>();
+        for (GoodsShoppingCartListResultBean.Content item : goodsShoppingCartIds) {
+            if (item.getGoodsSpecId() != null && item.getIsPackage() != null && item.getIsPackage() == 0)
+                ids.add(item.getGoodsSpecId());
+        }
+        return ids;
+    }
+
+    @Override
+    public List<Long> getPackageSpecIds() {
+        List<Long> ids = new ArrayList<>();
+        for (GoodsShoppingCartListResultBean.Content item : goodsShoppingCartIds) {
+            if (item.getGoodsSpecId() != null && item.getIsPackage() != null && item.getIsPackage() == 1)
+                ids.add(item.getGoodsSpecId());
+        }
+        return ids;
+    }
+
     public interface CallBack {
         void getIsAllCheck(boolean isAllCheck);
 
         void getSelectGoods(ArrayList<GoodsShoppingCartListChildBean> selectGoods);
-
-        void findDataSuccess(GoodsShoppingCartListResultBean resultBean);
     }
 }

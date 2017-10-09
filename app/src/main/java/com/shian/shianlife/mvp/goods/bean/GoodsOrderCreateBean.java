@@ -13,6 +13,7 @@ public class GoodsOrderCreateBean extends BaseHttpParams {
     private GoodsInvoice goodsInvoice;
     private GoodsServiceInfo goodsServiceInfo;
     private List<GoodsOrderItem> goodsOrderItems;
+    private List<GoodsOrderItem> goodsPackages;
 
     public GoodsOrder getGoodsOrder() {
         return goodsOrder;
@@ -38,11 +39,19 @@ public class GoodsOrderCreateBean extends BaseHttpParams {
         this.goodsServiceInfo = goodsServiceInfo;
     }
 
-    public List<GoodsOrderItem> getGoodsOrderItem() {
+    public List<GoodsOrderItem> getGoodsOrderItems() {
         return goodsOrderItems;
     }
 
-    public void setGoodsOrderItem(List<GoodsOrderItem> goodsOrderItems) {
+    public void setGoodsOrderItems(List<GoodsOrderItem> goodsOrderItems) {
         this.goodsOrderItems = goodsOrderItems;
+    }
+
+    public List<GoodsOrderItem> getGoodsPackages() {
+        return goodsPackages;
+    }
+
+    public void setGoodsPackages(List<GoodsOrderItem> goodsPackages) {
+        this.goodsPackages = goodsPackages;
     }
 }

@@ -3,10 +3,14 @@ package com.shian.shianlife.mvp.goods.presenter.impl;
 import com.shian.shianlife.mvp.base.OnGetDataListener;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderCreateBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderCreateResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderItem;
 import com.shian.shianlife.mvp.goods.model.IGoodsOrderCreateModel;
 import com.shian.shianlife.mvp.goods.model.impl.GoodsOrderCreateModelImpl;
 import com.shian.shianlife.mvp.goods.presenter.IGoodsOrderCreatePresenter;
 import com.shian.shianlife.mvp.goods.view.IGoodsOrderCreateView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by zm.
@@ -27,7 +31,7 @@ public class GoodsOrderCreatePresenterImpl implements IGoodsOrderCreatePresenter
             goodsOrderCreateView.showToast("数据错误");
             return;
         }
-        if(goodsOrderCreateView.getGoodsServiceInfo()==null){
+        if (goodsOrderCreateView.getGoodsServiceInfo() == null) {
             goodsOrderCreateView.showToast("还没有填写服务信息");
             return;
         }
@@ -35,7 +39,18 @@ public class GoodsOrderCreatePresenterImpl implements IGoodsOrderCreatePresenter
         params.setGoodsOrder(goodsOrderCreateView.getGoodsOrder());
         params.setGoodsInvoice(goodsOrderCreateView.getGoodsInvoice());
         params.setGoodsServiceInfo(goodsOrderCreateView.getGoodsServiceInfo());
-        params.setGoodsOrderItem(goodsOrderCreateView.getGoodsOrderItem());
+
+        List<GoodsOrderItem> goodsList = new ArrayList<>();
+        List<GoodsOrderItem> packageList = new ArrayList<>();
+        for (GoodsOrderItem item : goodsOrderCreateView.getGoodsOrderItem()) {
+            if (item.getGoodsOrderItems() == null) {
+                goodsList.add(item);
+            } else {
+                packageList.add(item);
+            }
+        }
+        params.setGoodsOrderItems(goodsList);
+        params.setGoodsPackages(packageList);
         goodsOrderCreateModel.createGoodsOrder(goodsOrderCreateView.getContext(), params, new OnGetDataListener<GoodsOrderCreateResultBean>() {
 
             @Override

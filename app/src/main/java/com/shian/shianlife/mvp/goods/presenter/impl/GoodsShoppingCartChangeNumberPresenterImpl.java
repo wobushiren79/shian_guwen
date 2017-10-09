@@ -37,7 +37,7 @@ public class GoodsShoppingCartChangeNumberPresenterImpl implements IGoodsShoppin
             return;
         }
         GoodsShoppingCartChangeNumberBean params = new GoodsShoppingCartChangeNumberBean();
-        params.setSpecNum(data.getShoppingCartNumber());
+        params.setSpecNum(changeNumber);
         params.setId(data.getShoppingCartId());
         goodsShoppingCartChangeNumberModel.changeGoodsShoppingCartNumber(goodsShoppingCartChangeNumberView.getContext(), params, new OnGetDataListener<GoodsShoppingCartChangeNumberResultBean>() {
 

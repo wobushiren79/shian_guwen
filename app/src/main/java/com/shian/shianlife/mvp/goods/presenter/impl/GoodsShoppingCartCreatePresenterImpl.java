@@ -41,7 +41,7 @@ public class GoodsShoppingCartCreatePresenterImpl implements IGoodsShoppingCartC
             goodsShoppingCartCreateView.showToast("数据错误");
             return;
         }
-        if (goodsShoppingCartCreateView.getGoodsId() == null || goodsShoppingCartCreateView.getGoodsId() == -1) {
+        if ((goodsShoppingCartCreateView.getGoodsId() == null || goodsShoppingCartCreateView.getGoodsId() == -1)) {
             goodsShoppingCartCreateView.showToast("商品ID为空");
             return;
         }
@@ -57,12 +57,19 @@ public class GoodsShoppingCartCreatePresenterImpl implements IGoodsShoppingCartC
             goodsShoppingCartCreateView.showToast("商品分类ID为空");
             return;
         }
-        if (goodsShoppingCartCreateView.getGoodsSpecId() == null) {
-            goodsShoppingCartCreateView.showToast("商品规格ID为空");
+        if (goodsShoppingCartCreateView.getGoodsSpecId() == null && goodsShoppingCartCreateView.getPackageSpecId() == null) {
+            goodsShoppingCartCreateView.showToast("商品或套餐规格ID为空");
             return;
         }
         if (goodsShoppingCartCreateView.getSpecNum() == null || goodsShoppingCartCreateView.getSpecNum() <= 0) {
             goodsShoppingCartCreateView.showToast("商品数量为空");
+            return;
+        }
+        if (goodsShoppingCartCreateView.getIsPackage() == null
+                || (goodsShoppingCartCreateView.getIsPackage() != 1
+                && goodsShoppingCartCreateView.getIsPackage() != 0)) {
+
+            goodsShoppingCartCreateView.showToast("商品类型错误");
             return;
         }
         List<GoodsShoppingCartCreateBean.Content> list = new ArrayList<>();
@@ -72,7 +79,11 @@ public class GoodsShoppingCartCreatePresenterImpl implements IGoodsShoppingCartC
         data.setChannelId(goodsShoppingCartCreateView.getChannelId());
         data.setClassifyAttrId(goodsShoppingCartCreateView.getClassifyAttrId());
         data.setClassifyId(goodsShoppingCartCreateView.getClassifyId());
-        data.setGoodsSpecId(goodsShoppingCartCreateView.getGoodsSpecId());
+        data.setIsPackage(goodsShoppingCartCreateView.getIsPackage());
+        Long specId = goodsShoppingCartCreateView.getIsPackage() == 0
+                ? goodsShoppingCartCreateView.getGoodsSpecId() : goodsShoppingCartCreateView.getPackageSpecId();
+        data.setGoodsSpecId(specId);
+
         list.add(data);
 
         GoodsShoppingCartCreateBean params = new GoodsShoppingCartCreateBean();

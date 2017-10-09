@@ -39,7 +39,9 @@ public class GoodsDetailsResultBean {
 
     private Long id;
     private Long goods_cate_id;//分类ID
+    private Long package_cate_id;//套餐ID
     private String goods_slogan; //一句话介绍
+    private String package_slogan;//套餐介绍
     private String title_img; //分类属性图片
     private Float total;//原价
     private String creat_time;//商品创建时间
@@ -66,6 +68,45 @@ public class GoodsDetailsResultBean {
      * 分类名称
      */
     private String goods_class_name;
+    private String package_class_name;
+
+    /**
+     * 是否是套餐
+     */
+    private Integer is_package;
+
+
+    public Integer getIs_package() {
+        return is_package;
+    }
+
+    public void setIs_package(Integer is_package) {
+        this.is_package = is_package;
+    }
+
+    public Long getPackage_cate_id() {
+        return package_cate_id;
+    }
+
+    public void setPackage_cate_id(Long package_cate_id) {
+        this.package_cate_id = package_cate_id;
+    }
+
+    public String getPackage_slogan() {
+        return package_slogan;
+    }
+
+    public void setPackage_slogan(String package_slogan) {
+        this.package_slogan = package_slogan;
+    }
+
+    public String getPackage_class_name() {
+        return package_class_name;
+    }
+
+    public void setPackage_class_name(String package_class_name) {
+        this.package_class_name = package_class_name;
+    }
 
     public String getGoods_class_name() {
         return goods_class_name;
@@ -329,11 +370,21 @@ public class GoodsDetailsResultBean {
         private String spec_name;//规格名称 --前
         private Integer spec_stock;//规格库存
         private Long goods_spec_id;//规格商品ID
+        private Long package_spec_id;//套餐规格ID
         private Integer channel_id;
         private Long goods_id;//商品ID
         private Float ement_price;//商家结算价
         private String goods_number;//商品编号
         private List<SpecGoods> spec_goods;
+
+
+        public Long getPackage_spec_id() {
+            return package_spec_id;
+        }
+
+        public void setPackage_spec_id(Long package_spec_id) {
+            this.package_spec_id = package_spec_id;
+        }
 
         public List<SpecGoods> getSpec_goods() {
             return spec_goods;
@@ -448,7 +499,7 @@ public class GoodsDetailsResultBean {
         * name : 五龙捧圣
         */
 
-       private Long goods_spec_number;
+       private Integer goods_spec_number;
        private Long goods_spec_id;
        private Long goods_id;
        private String spec_alias;
@@ -468,11 +519,11 @@ public class GoodsDetailsResultBean {
        private Long collection;
        private String name;
 
-       public Long getGoods_spec_number() {
+       public Integer getGoods_spec_number() {
            return goods_spec_number;
        }
 
-       public void setGoods_spec_number(Long goods_spec_number) {
+       public void setGoods_spec_number(Integer goods_spec_number) {
            this.goods_spec_number = goods_spec_number;
        }
 

@@ -5,6 +5,7 @@ import com.shian.shianlife.mvp.goods.bean.GoodsDetailsListResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsInvoice;
 import com.shian.shianlife.mvp.goods.bean.GoodsItemPerform;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderItem;
 import com.shian.shianlife.mvp.goods.bean.GoodsServiceInfo;
 import com.shian.shianlife.mvp.shared.bean.SharedGoodsInvoiceInfoBean;
 import com.shian.shianlife.mvp.shared.bean.SharedGoodsServiceInfoBean;
@@ -88,15 +89,47 @@ public class DataUtils {
             //折扣率
             goodsData.setCurrentDiscount("1");
 
-            goodsData.setClassifyId(shoppingData.getGoods_class_id());
             goodsData.setClassifyAttrId(shoppingData.getClass_attr_id());
-            goodsData.setGoodsId(shoppingData.getGoods_id());
-            goodsData.setGoodsSpecId(shoppingData.getSpec_id());
+
             goodsData.setSpecNumber(shoppingData.getGoods_number());
             goodsData.setUnit(shoppingData.getUnit());
+
+            if (shoppingData.getIs_package() != null && shoppingData.getIs_package() == 0) {
+                goodsData.setGoodsId(shoppingData.getGoods_id());
+                goodsData.setGoodsSpecId(shoppingData.getSpec_id());
+                goodsData.setClassifyId(shoppingData.getGoods_class_id());
+            } else if (shoppingData.getIs_package() != null && shoppingData.getIs_package() == 1) {
+                goodsData.setPackageId(shoppingData.getPackage_id());
+                goodsData.setPackageSpecId(shoppingData.getSpec_id());
+                goodsData.setClassifyId(shoppingData.getPackage_class_id());
+                goodsData.setGoodsOrderItems(packageGoodsToGoodsData(shoppingData.getGoods()));
+            }
+
             listGoods.add(goodsData);
         }
         return listGoods;
+    }
+
+    public static List<GoodsOrderItem> packageGoodsToGoodsData(List<GoodsDetailsResultBean.SpecGoods> packageGoods) {
+        List<GoodsOrderItem> goodsData = new ArrayList<>();
+        for (GoodsDetailsResultBean.SpecGoods item : packageGoods) {
+            //价钱
+            GoodsOrderItem goodsOrderItem = new GoodsItemPerform();
+            goodsOrderItem.setGoodsId(item.getGoods_id());
+            goodsOrderItem.setGoodsSpecId(item.getGoods_spec_id());
+            goodsOrderItem.setSpecName(item.getSpec_name());
+            goodsOrderItem.setSpecNumber(item.getGoods_number());
+            goodsOrderItem.setCurrentDiscount("1");
+            goodsOrderItem.setSpecAlias(item.getSpec_alias());
+            goodsOrderItem.setSpecOrderedAttr(item.getSpec_name());
+            goodsOrderItem.setSpecOrderedNum(item.getGoods_spec_number());
+            goodsOrderItem.setSpecOrderedVolume(item.getName());
+            goodsOrderItem.setSpecTotal((int) (item.getTotal() * 100));
+            goodsOrderItem.setTitleImg(item.getTitle_img());
+            goodsOrderItem.setUnit(item.getUnit());
+            goodsData.add(goodsOrderItem);
+        }
+        return goodsData;
     }
 
     /**

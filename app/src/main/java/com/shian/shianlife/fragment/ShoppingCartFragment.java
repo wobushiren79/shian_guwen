@@ -27,6 +27,8 @@ import com.shian.shianlife.mvp.goods.view.IGoodsDetailsListView;
 import com.shian.shianlife.mvp.goods.view.IGoodsShoppingCartListView;
 import com.shian.shianlife.view.listview.GoodsShoppingCartListView;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +36,13 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import static java.math.BigDecimal.ROUND_HALF_UP;
+
 /**
  * Created by zm.
  */
 
-public class ShoppingCartFragment extends BaseFragment implements IGoodsDetailsListView, GoodsShoppingCartListView.CallBack {
+public class ShoppingCartFragment extends BaseFragment implements GoodsShoppingCartListView.CallBack {
     private View view;
 
     @InjectView(R.id.listview)
@@ -53,9 +57,6 @@ public class ShoppingCartFragment extends BaseFragment implements IGoodsDetailsL
     TextView tvSubmit;
 
 
-    private List<GoodsShoppingCartListResultBean.Content> goodsShoppingCartIds;
-
-    private IGoodsDetailsListPresenter goodsDetailsListPresenter;
     private ArrayList<GoodsShoppingCartListChildBean> selectGoods;//選中的商品
 
     @Override
@@ -72,10 +73,7 @@ public class ShoppingCartFragment extends BaseFragment implements IGoodsDetailsL
     }
 
     private void initData() {
-        goodsShoppingCartIds = new ArrayList<>();
         shoppingCartListView.setCallBack(this);
-
-        goodsDetailsListPresenter = new GoodsDetailsListPresenterImpl(this);
     }
 
     @Override
@@ -91,62 +89,6 @@ public class ShoppingCartFragment extends BaseFragment implements IGoodsDetailsL
 
 
     @Override
-    public void showToast(String msg) {
-        ToastUtils.show(getContext(), msg);
-    }
-
-
-
-    @Override
-    public void getGoodsDetailsListDataSuccess(List<GoodsDetailsListResultBean> resultBeen) {
-        for (GoodsDetailsListResultBean item : resultBeen) {
-            for (GoodsShoppingCartListResultBean.Content ids : goodsShoppingCartIds) {
-                if (item.getSpec_id() == ids.getGoodsSpecId()) {
-                    item.setShoppingCartNumber(ids.getSpecNum());
-                    item.setShoppingCartId(ids.getId());
-                }
-            }
-        }
-        shoppingCartListView.setData(resultBeen);
-    }
-
-    @Override
-    public void getGoodsDetailsListDataFail(String msg) {
-        ToastUtils.show(getContext(), msg);
-    }
-
-    @Override
-    public List<Long> getGoodsIds() {
-        List<Long> ids = new ArrayList<>();
-        for (GoodsShoppingCartListResultBean.Content item : goodsShoppingCartIds) {
-            if (item.getGoodsId() != null)
-                ids.add(item.getGoodsId());
-        }
-        return ids;
-    }
-
-    @Override
-    public List<Integer> getChannelIds() {
-        List<Integer> ids = new ArrayList<>();
-        for (GoodsShoppingCartListResultBean.Content item : goodsShoppingCartIds) {
-            if (item.getChannelId() != null)
-                ids.add(item.getChannelId());
-        }
-        return ids;
-    }
-
-    @Override
-    public List<Long> getGoodsSpecIds() {
-        List<Long> ids = new ArrayList<>();
-        for (GoodsShoppingCartListResultBean.Content item : goodsShoppingCartIds) {
-            if (item.getGoodsSpecId() != null)
-                ids.add(item.getGoodsSpecId());
-        }
-        return ids;
-    }
-
-
-    @Override
     public void getIsAllCheck(boolean isAllCheck) {
         check.setChecked(isAllCheck);
     }
@@ -154,20 +96,17 @@ public class ShoppingCartFragment extends BaseFragment implements IGoodsDetailsL
     @Override
     public void getSelectGoods(ArrayList<GoodsShoppingCartListChildBean> selectGoods) {
         this.selectGoods = selectGoods;
-        float totalPrice = 0;
+        float totalPrice = 0f;
         for (GoodsShoppingCartListChildBean item : selectGoods) {
             if (item.getResultBean() != null && item.getResultBean().getSpec_price() != null) {
-                totalPrice += (item.getResultBean().getSpec_price() * item.getResultBean().getShoppingCartNumber());
+                BigDecimal old = new BigDecimal(totalPrice);
+                BigDecimal add = new BigDecimal(item.getResultBean().getSpec_price() * item.getResultBean().getShoppingCartNumber());
+                totalPrice = old.add(add).setScale(2, RoundingMode.HALF_UP).floatValue();
             }
         }
         setTotalPrice("￥" + totalPrice);
     }
 
-    @Override
-    public void findDataSuccess(GoodsShoppingCartListResultBean resultBean) {
-        goodsShoppingCartIds = resultBean.getContent();
-        goodsDetailsListPresenter.getGoodsDetailsList();
-    }
 
     @OnClick({R.id.check, R.id.tv_submit, R.id.tv_check_all})
     public void onViewClicked(View view) {
