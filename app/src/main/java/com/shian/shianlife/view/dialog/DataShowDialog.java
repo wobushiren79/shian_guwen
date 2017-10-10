@@ -37,7 +37,6 @@ public class DataShowDialog extends Dialog {
     private OnClickListener cancelClickListener;
     private DataShowDialogListAdapter listAdapter;
     private List<DataShowDialogResultBean> listData;
-    private DisplayMetrics outMetrics;
 
     public DataShowDialog(@NonNull Context context) {
         super(context, R.style.tipsDialogStyle);

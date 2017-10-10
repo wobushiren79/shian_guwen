@@ -1,6 +1,7 @@
 package com.shian.shianlife.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -9,13 +10,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.shian.shianlife.R;
+import com.shian.shianlife.activity.goods.GoodsDetailsListActivity;
 import com.shian.shianlife.adapter.base.BaseExpandableAdapter;
 import com.shian.shianlife.bean.GoodsShoppingCartListChildBean;
 import com.shian.shianlife.bean.GoodsShoppingCartListGroupBean;
 import com.shian.shianlife.common.contanst.AppContansts;
+import com.shian.shianlife.common.contanst.IntentName;
+import com.shian.shianlife.common.utils.DataUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.mvp.goods.bean.GoodsDetailsListResultBean;
+import com.shian.shianlife.mvp.goods.bean.GoodsItemPerform;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderItem;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartChangeNumberResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsShoppingCartDeleteResultBean;
 import com.shian.shianlife.mvp.goods.presenter.IGoodsShoppingCartChangeNumberPresenter;
@@ -25,6 +31,7 @@ import com.shian.shianlife.mvp.goods.presenter.impl.GoodsShoppingCartDeletePrese
 import com.shian.shianlife.mvp.goods.view.IGoodsShoppingCartChangeNumberView;
 import com.shian.shianlife.mvp.goods.view.IGoodsShoppingCartDeleteView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,7 +135,10 @@ public class GoodsShoppingCartListAdapter extends BaseExpandableAdapter<GoodsSho
         View.OnClickListener goodsDetailsClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.show(getContext(), "tag");
+                Intent intent = new Intent(getContext(), GoodsDetailsListActivity.class);
+                List<GoodsOrderItem> listData= DataUtils.packageGoodsToGoodsData(itemAllData.getResultBean().getGoods());
+                intent.putExtra(IntentName.INTENT_LIST_DATA, (Serializable) listData);
+                getContext().startActivity(intent);
             }
         };
 

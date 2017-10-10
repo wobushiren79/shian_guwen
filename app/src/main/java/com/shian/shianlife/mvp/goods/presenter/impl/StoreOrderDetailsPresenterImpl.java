@@ -8,6 +8,7 @@ import com.shian.shianlife.mvp.goods.bean.GoodsInvoice;
 import com.shian.shianlife.mvp.goods.bean.GoodsInvoiceDetailsItem;
 import com.shian.shianlife.mvp.goods.bean.GoodsItemPerform;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrder;
+import com.shian.shianlife.mvp.goods.bean.GoodsOrderItem;
 import com.shian.shianlife.mvp.goods.bean.GoodsServiceInfo;
 import com.shian.shianlife.mvp.goods.bean.StoreOrderDetailsBean;
 import com.shian.shianlife.mvp.goods.bean.StoreOrderDetailsResultBean;
@@ -55,10 +56,16 @@ public class StoreOrderDetailsPresenterImpl implements IStoreOrderDetailsPresent
                 GoodsServiceInfo goodsServiceInfo = result.getGoodsServiceInfo();
                 GoodsOrder goodsOrder = result.getGoodsOrder();
                 GoodsInvoice goodsInvoice = result.getGoodsInvoice();
+
                 List<GoodsItemPerform> goodsItemPerforms = result.getGoodsItemPerforms();
-                if (goodsServiceInfo == null
-                        || goodsOrder == null
-                        || goodsItemPerforms == null) {
+                List<GoodsItemPerform> goodsPackage = result.getGoodsPackages();
+                List<GoodsItemPerform> allData = new ArrayList<>();
+                if (goodsItemPerforms != null)
+                    allData.addAll(goodsItemPerforms);
+                if (goodsPackage != null)
+                    allData.addAll(goodsPackage);
+
+                if (goodsServiceInfo == null || goodsOrder == null) {
                     storeOrderDetailsView.showToast("数据错误");
                     return;
                 }
@@ -71,9 +78,12 @@ public class StoreOrderDetailsPresenterImpl implements IStoreOrderDetailsPresent
                     storeOrderDetailsView.setServiceLocation(goodsServiceInfo.getServiceLocation());
                 if (goodsServiceInfo.getBookTime() != null)
                     storeOrderDetailsView.setServiceTime(goodsServiceInfo.getBookTime());
-                storeOrderDetailsView.setGoodsItemNumber(goodsItemPerforms.size() + "");
+
+                //数据数量
+                storeOrderDetailsView.setGoodsItemNumber(allData.size() + "");
                 //商品信息
-                Map<String, List<GoodsItemPerform>> goodsListData = DataUtils.getMapForGoodsItemPerform(goodsItemPerforms);
+
+                Map<String, List<GoodsItemPerform>> goodsListData = DataUtils.getMapForGoodsItemPerform(allData);
                 storeOrderDetailsView.setGoodsListData(goodsListData);
                 //是否需要发票
                 if (goodsOrder.getNeedInvoice() == GoodsFinanceDeliveryEnum.notinvoicement.getCode()) {
@@ -149,7 +159,6 @@ public class StoreOrderDetailsPresenterImpl implements IStoreOrderDetailsPresent
             }
         });
     }
-
 
 
 }

@@ -80,8 +80,6 @@ public class DataUtils {
             goodsData.setSpecAlias(shoppingData.getSpec_alias());
             //规格名称
             goodsData.setSpecName(shoppingData.getSpec_name());
-            //规格商品名称
-            goodsData.setSpecOrderedVolume(shoppingData.getGoods_name());
             //展示图片
             goodsData.setTitleImg(shoppingData.getTitle_img());
             //分类名称
@@ -91,14 +89,20 @@ public class DataUtils {
 
             goodsData.setClassifyAttrId(shoppingData.getClass_attr_id());
 
-            goodsData.setSpecNumber(shoppingData.getGoods_number());
+
             goodsData.setUnit(shoppingData.getUnit());
 
             if (shoppingData.getIs_package() != null && shoppingData.getIs_package() == 0) {
+                //规格商品名称
+                goodsData.setSpecOrderedVolume(shoppingData.getGoods_name());
+                goodsData.setSpecNumber(shoppingData.getGoods_number());
                 goodsData.setGoodsId(shoppingData.getGoods_id());
                 goodsData.setGoodsSpecId(shoppingData.getSpec_id());
                 goodsData.setClassifyId(shoppingData.getGoods_class_id());
             } else if (shoppingData.getIs_package() != null && shoppingData.getIs_package() == 1) {
+                //规格商品名称
+                goodsData.setSpecOrderedVolume(shoppingData.getPackage_name());
+                goodsData.setSpecNumber(shoppingData.getPackage_number());
                 goodsData.setPackageId(shoppingData.getPackage_id());
                 goodsData.setPackageSpecId(shoppingData.getSpec_id());
                 goodsData.setClassifyId(shoppingData.getPackage_class_id());
@@ -137,7 +141,7 @@ public class DataUtils {
      *
      * @return
      */
-    public static ArrayList<GoodsItemPerform> goodsDetailsToGoodsData(GoodsDetailsResultBean goodsDetails, GoodsDetailsResultBean.SpecpriceBean goodsSpec, int number) {
+    public static ArrayList<GoodsItemPerform> goodsDetailsToGoodsData(GoodsDetailsResultBean goodsDetails,GoodsDetailsResultBean.SpecpriceBean goodsSpec, int number) {
         ArrayList<GoodsItemPerform> listGoods = new ArrayList<>();
         if (goodsDetails == null || goodsSpec == null) {
             return listGoods;
@@ -157,17 +161,29 @@ public class DataUtils {
         goodsData.setSpecOrderedVolume(goodsDetails.getName());
         //展示图片
         goodsData.setTitleImg(goodsDetails.getTitle_img());
-        //分类名称
-        goodsData.setSpecOrderedAttr(goodsDetails.getGoods_class_name());
         //折扣率
         goodsData.setCurrentDiscount("1");
 
-        goodsData.setClassifyId(goodsDetails.getGoods_cate_id());
         goodsData.setClassifyAttrId(goodsDetails.getSpec_attr_id());
-        goodsData.setGoodsId(goodsSpec.getGoods_id());
-        goodsData.setGoodsSpecId(goodsSpec.getGoods_spec_id());
-        goodsData.setSpecNumber(goodsSpec.getGoods_number());
+
         goodsData.setUnit(goodsDetails.getUnit());
+
+        if (goodsDetails.getIs_package() != null && goodsDetails.getIs_package() == 0) {
+            goodsData.setSpecOrderedAttr(goodsDetails.getGoods_class_name());
+            goodsData.setClassifyId(goodsDetails.getGoods_cate_id());
+            goodsData.setGoodsId(goodsSpec.getGoods_id());
+            goodsData.setGoodsSpecId(goodsSpec.getGoods_spec_id());
+            goodsData.setSpecNumber(goodsSpec.getGoods_number());
+
+        } else if (goodsDetails.getIs_package() != null && goodsDetails.getIs_package() == 1) {
+            goodsData.setSpecOrderedAttr(goodsDetails.getPackage_class_name());
+            goodsData.setClassifyId(goodsDetails.getPackage_cate_id());
+            goodsData.setPackageId(goodsSpec.getPackage_id());
+            goodsData.setPackageSpecId(goodsSpec.getPackage_spec_id());
+            goodsData.setSpecNumber(goodsSpec.getPackage_number());
+            goodsData.setGoodsOrderItems(packageGoodsToGoodsData(goodsSpec.getSpec_goods()));
+        }
+
         listGoods.add(goodsData);
 
         return listGoods;

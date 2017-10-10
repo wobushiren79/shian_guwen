@@ -24,6 +24,8 @@ import com.shian.shianlife.mvp.goods.view.IGoodsDetailsListView;
 import com.shian.shianlife.mvp.goods.view.IGoodsShoppingCartListView;
 import com.shian.shianlife.view.listview.GoodsShoppingCartListView;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -73,10 +75,12 @@ public class GoodsShoppingCartActivity extends BaseActivity implements GoodsShop
     @Override
     public void getSelectGoods(ArrayList<GoodsShoppingCartListChildBean> selectGoods) {
         this.selectGoods = selectGoods;
-        float totalPrice = 0;
+        float totalPrice = 0f;
         for (GoodsShoppingCartListChildBean item : selectGoods) {
             if (item.getResultBean() != null && item.getResultBean().getSpec_price() != null) {
-                totalPrice += (item.getResultBean().getSpec_price() * item.getResultBean().getShoppingCartNumber());
+                BigDecimal old = new BigDecimal(totalPrice);
+                BigDecimal add = new BigDecimal(item.getResultBean().getSpec_price() * item.getResultBean().getShoppingCartNumber());
+                totalPrice = old.add(add).setScale(2, RoundingMode.HALF_UP).floatValue();
             }
         }
         setTotalPrice("￥" + totalPrice);

@@ -9,8 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.shian.shianlife.MaintActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <com.shian.shianlife.view.goods.GoodsSpecSelectDialogView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></com.shian.shianlife.view.goods.GoodsSpecSelectDialogView>
 </RelativeLayout>

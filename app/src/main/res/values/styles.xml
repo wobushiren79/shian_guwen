@@ -76,6 +76,17 @@
 
     </style>
 
+    <style name="GoodsSelectDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
     <style name="CustomDialogBottom" parent="android:style/Theme.Dialog">
         <!--背景颜色及透明程度-->
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -202,8 +213,14 @@
         <item name="android:textColor">@color/zhy_text_color_1</item>
         <item name="android:textSize">@dimen/dimen_32dp</item>
     </style>
+
     <style name="zhy_tablayout_text_style_3">
         <item name="android:textColor">@color/zhy_text_color_1</item>
         <item name="android:textSize">@dimen/dimen_28dp</item>
+    </style>
+
+    <style name="goodsSelectDialogWindowAnim">
+        <item name="android:windowEnterAnimation">@anim/dialog_goods_select_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/dialog_goods_select_exit_anim</item>
     </style>
 </resources>

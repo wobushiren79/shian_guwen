@@ -16,6 +16,7 @@ import com.shian.shianlife.common.contanst.IntentName;
 import com.shian.shianlife.common.utils.AnimUtils;
 import com.shian.shianlife.common.utils.PayUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
+import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.common.view.TipsDialog;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderInfoResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsOrderOfflinePayResultBean;

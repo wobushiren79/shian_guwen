@@ -29,6 +29,19 @@ public class StoreOrderDetailsResultBean {
     //商品及执行单
     private List<GoodsItemPerform> goodsItemPerforms;
 
+
+    //套餐信息
+    private List<GoodsItemPerform> goodsPackages;
+
+
+    public List<GoodsItemPerform> getGoodsPackages() {
+        return goodsPackages;
+    }
+
+    public void setGoodsPackages(List<GoodsItemPerform> goodsPackages) {
+        this.goodsPackages = goodsPackages;
+    }
+
     public List<GoodsItemPerform> getGoodsItemPerforms() {
         return goodsItemPerforms;
     }

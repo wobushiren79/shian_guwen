@@ -55,6 +55,13 @@
                 android:layout_marginBottom="@dimen/dimen_16dp"
                 android:layout_marginTop="@dimen/dimen_16dp"></com.shian.shianlife.view.goods.GoodsSpecSelectView>
 
+            <com.shian.shianlife.view.goods.GoodsSpecSelectDialogView
+                android:id="@+id/goods_spec_select_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_16dp"
+                android:layout_marginTop="@dimen/dimen_16dp"></com.shian.shianlife.view.goods.GoodsSpecSelectDialogView>
+
             <com.shian.shianlife.view.goods.GoodsDescribeLayout
                 android:id="@+id/goods_describle"
                 android:layout_width="match_parent"

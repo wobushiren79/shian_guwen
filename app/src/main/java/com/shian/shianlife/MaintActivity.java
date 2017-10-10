@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class MaintActivity extends AppCompatActivity {
+import com.shian.shianlife.base.BaseActivity;
+
+public class MaintActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

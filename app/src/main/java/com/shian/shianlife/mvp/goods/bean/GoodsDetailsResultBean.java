@@ -1,5 +1,6 @@
 package com.shian.shianlife.mvp.goods.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -371,12 +372,31 @@ public class GoodsDetailsResultBean {
         private Integer spec_stock;//规格库存
         private Long goods_spec_id;//规格商品ID
         private Long package_spec_id;//套餐规格ID
+
         private Integer channel_id;
         private Long goods_id;//商品ID
+        private Long package_id;//套餐ID
         private Float ement_price;//商家结算价
         private String goods_number;//商品编号
+        private String package_number;//套餐编号
         private List<SpecGoods> spec_goods;
 
+
+        public Long getPackage_id() {
+            return package_id;
+        }
+
+        public void setPackage_id(Long package_id) {
+            this.package_id = package_id;
+        }
+
+        public String getPackage_number() {
+            return package_number;
+        }
+
+        public void setPackage_number(String package_number) {
+            this.package_number = package_number;
+        }
 
         public Long getPackage_spec_id() {
             return package_spec_id;
@@ -475,7 +495,7 @@ public class GoodsDetailsResultBean {
         }
     }
 
-   public static class SpecGoods{
+   public static class SpecGoods implements Serializable{
 
        /**
         * goods_spec_number : 1

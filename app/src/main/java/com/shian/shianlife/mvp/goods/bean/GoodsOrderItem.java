@@ -71,7 +71,7 @@ public class GoodsOrderItem extends BaseEntity {
     /**
      * 商品分类名称
      */
-    private String  specOrderedAttr;
+    private String specOrderedAttr;
     /**
      * 规格商品编号
      */
@@ -95,7 +95,7 @@ public class GoodsOrderItem extends BaseEntity {
     /**
      * 规格名称
      */
-    private String  specName;
+    private String specName;
 
     /**
      * 套餐ID
@@ -111,6 +111,8 @@ public class GoodsOrderItem extends BaseEntity {
      * 套餐商品
      */
     private List<GoodsOrderItem> goodsOrderItems;
+
+
 
     public Long getPackageId() {
         return packageId;
