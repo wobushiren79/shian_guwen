@@ -65,6 +65,10 @@ public class GoodsDetailsPresenterImpl implements IGoodsDetailsPresenter {
                     goodsDetailsView.setCarouselPic(picUrl);
                 }
 
+                //设置套餐图片图片
+                if (result.getTitle_img() != null)
+                    goodsDetailsView.setDefPic(result.getTitle_img());
+
                 StringBuffer goodsName = new StringBuffer();
                 //設置商品名稱
                 if (result.getName() != null)

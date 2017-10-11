@@ -80,6 +80,10 @@ public class Utils {
         Glide.with(context).load(imgId).crossFade().into(imageView);
     }
 
+    public static void loadPic(Context context, ImageView imageView, int imgId, RequestListener<Integer, GlideDrawable> listener) {
+        Glide.with(context).load(imgId).crossFade().listener(listener).into(imageView);
+    }
+
     public static void loadPic(Context context, ImageView imageView, String imgPath, int placeholderId) {
         Glide.with(context).load(imgPath).crossFade().placeholder(placeholderId).into(imageView);
     }
@@ -432,6 +436,7 @@ public class Utils {
 
     /**
      * 跳转到登陆
+     *
      * @param context
      */
     public static void jumpLogin(Context context) {

@@ -47,7 +47,7 @@ public class GoodsNumberChangeView extends BaseLayout implements TextWatcher {
 
     @Override
     protected void initData() {
-
+        number = 0;
     }
 
     public void setData(Integer number) {
@@ -99,6 +99,10 @@ public class GoodsNumberChangeView extends BaseLayout implements TextWatcher {
                 callBack.numberChange(this, number);
         }
 
+    }
+
+    public Integer getNumber() {
+        return number;
     }
 
     @Override

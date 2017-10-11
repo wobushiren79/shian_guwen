@@ -43,7 +43,7 @@ import com.shian.shianlife.mvp.goods.view.IGoodsShoppingCartNumberView;
 import com.shian.shianlife.view.carousel.CarouselView;
 import com.shian.shianlife.view.dialog.DataShowDialog;
 import com.shian.shianlife.view.goods.GoodsDescribeLayout;
-import com.shian.shianlife.view.goods.GoodsSpecSelectView;
+import com.shian.shianlife.view.goods.GoodsSpecSelectDialogView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,8 +86,10 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     TextView tvSaleNumber;
     @InjectView(R.id.tv_location)
     TextView tvLocation;
-    @InjectView(R.id.goods_spec_select)
-    GoodsSpecSelectView goodsSpecSelect;
+    //    @InjectView(R.id.goods_spec_select)
+//    GoodsSpecSelectView goodsSpecSelect;
+    @InjectView(R.id.goods_spec_select_dialog)
+    GoodsSpecSelectDialogView goodsSpecSelectDialogView;
     @InjectView(R.id.goods_describle)
     GoodsDescribeLayout goodsDescrible;
 
@@ -225,12 +227,12 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public Integer getSpecNum() {
-        return goodsSpecSelect.getNumber();
+        return goodsSpecSelectDialogView.getSelectNumber();
     }
 
     @Override
     public Integer getChannelId() {
-        return goodsSpecSelect.getData().getChannel_id();
+        return goodsSpecSelectDialogView.getSelectData().getChannel_id();
     }
 
     @Override
@@ -245,17 +247,22 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public Long getGoodsSpecId() {
-        return goodsSpecSelect.getData().getGoods_spec_id();
+        return goodsSpecSelectDialogView.getSelectData().getGoods_spec_id();
     }
 
     @Override
     public Long getPackageSpecId() {
-        return goodsSpecSelect.getData().getPackage_spec_id();
+        return goodsSpecSelectDialogView.getSelectData().getPackage_spec_id();
     }
 
     @Override
     public void setCarouselPic(List<String> picList) {
         garouseview.setData(picList);
+    }
+
+    @Override
+    public void setDefPic(String picUrl) {
+        goodsSpecSelectDialogView.setDefPic(picUrl);
     }
 
     @Override
@@ -287,7 +294,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void setGoodsSpecSelectData(List<GoodsDetailsResultBean.SpecpriceBean> data) {
         this.specListData = data;
-        goodsSpecSelect.setData(data);
+        goodsSpecSelectDialogView.setData(data);
         ivAllPrice.setOnClickListener(this);
     }
 
@@ -377,12 +384,12 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
      * 直接购买
      */
     private void directBuy() {
-        if (goodsSpecSelect.getData() == null) {
+        if (goodsSpecSelectDialogView.getSelectData() == null) {
             ToastUtils.show(this, "还没有选择规格商品");
             return;
         }
         Intent intent = new Intent(this, GoodsOrderSettlementActivity.class);
-        ArrayList<GoodsItemPerform> listData = DataUtils.goodsDetailsToGoodsData(detailsData, goodsSpecSelect.getData(), goodsSpecSelect.getNumber());
+        ArrayList<GoodsItemPerform> listData = DataUtils.goodsDetailsToGoodsData(detailsData, goodsSpecSelectDialogView.getSelectData(), goodsSpecSelectDialogView.getSelectNumber());
         intent.putExtra(IntentName.INTENT_LIST_DATA, listData);
         startActivity(intent);
     }
@@ -391,7 +398,7 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
      * 加入购物车
      */
     private void addShoppingCart() {
-        if (goodsSpecSelect.getData() == null) {
+        if (goodsSpecSelectDialogView.getSelectData() == null) {
             ToastUtils.show(this, "还没有选择规格商品");
             return;
         }
@@ -463,10 +470,10 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
                 tvMsgNumber.setText(number);
                 AnimUtils.setShoppingCartAnim(tvMsgNumber, 200);
             } else {
-                if (goodsSpecSelect.getNumber() > 99) {
+                if (goodsSpecSelectDialogView.getSelectNumber() > 99) {
                     tvMsgNumberTemp.setText("99+");
                 } else {
-                    tvMsgNumberTemp.setText(goodsSpecSelect.getNumber() + "");
+                    tvMsgNumberTemp.setText(goodsSpecSelectDialogView.getSelectNumber() + "");
                 }
                 AnimUtils.addShoppingCartAnim(tvMsgNumberTemp, 1000, new Animation.AnimationListener() {
                     @Override

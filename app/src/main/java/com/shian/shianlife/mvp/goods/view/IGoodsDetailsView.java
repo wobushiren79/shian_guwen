@@ -28,6 +28,12 @@ public interface IGoodsDetailsView extends BaseMVPView {
     void setCarouselPic(List<String> picList);
 
     /**
+     * 设置套餐图片
+     * @param picUrl
+     */
+    void setDefPic(String picUrl);
+
+    /**
      * 设置商品名称
      *
      * @param name

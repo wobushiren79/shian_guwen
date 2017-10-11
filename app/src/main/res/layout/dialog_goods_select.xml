@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:scrollbars="none">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,22 +11,109 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_200dp">
+            android:layout_height="@dimen/dimen_286dp">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_100dp"
+                android:layout_height="@dimen/dimen_232dp"
                 android:layout_alignParentBottom="true"
-                android:background="@color/white"></LinearLayout>
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/dimen_272dp"
+                android:paddingRight="@dimen/dimen_32dp"
+                android:paddingTop="@dimen/dimen_50dp">
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_16dp"
+                    android:text="请选择规格商品或套餐"
+                    android:textColor="@color/zhy_text_color_4"
+                    android:textSize="@dimen/dimen_28dp" />
+
+                <TextView
+                    android:id="@+id/tv_inventory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/zhy_text_color_16"
+                    android:textSize="@dimen/dimen_28dp" />
+            </LinearLayout>
 
             <com.shian.shianlife.view.piccorner.RoundCornerImageView
                 android:id="@+id/iv_goods_spec"
                 android:layout_width="@dimen/dimen_200dp"
                 android:layout_height="@dimen/dimen_200dp"
+                android:layout_marginLeft="@dimen/dimen_32dp"
                 android:elevation="@dimen/dimen_10dp"
-                android:src="@color/red" />
+                android:src="@drawable/zhy_pic_loading" />
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dimen_30dp"
+                android:paddingLeft="@dimen/dimen_32dp"
+                android:paddingRight="@dimen/dimen_32dp">
+
+                <TextView
+                    android:id="@+id/tv_tag_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="规格"
+                    android:textColor="@color/zhy_text_color_16"
+                    android:textSize="@dimen/dimen_28dp" />
+
+                <com.shian.shianlife.view.taglayout.TagLayout
+                    android:id="@+id/tag_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_0dp" />
+                </com.shian.shianlife.view.taglayout.TagLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:layout_marginLeft="@dimen/dimen_32dp"
+                android:background="@color/zhy_line_3" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/dimen_104dp"
+                android:paddingLeft="@dimen/dimen_32dp"
+                android:paddingRight="@dimen/dimen_32dp"
+                android:paddingTop="@dimen/dimen_12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="数量"
+                    android:textColor="@color/zhy_text_color_16"
+                    android:textSize="@dimen/dimen_28dp" />
+
+                <com.shian.shianlife.view.goods.GoodsNumberChangeView
+                    android:id="@+id/view_number_change"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></com.shian.shianlife.view.goods.GoodsNumberChangeView>
+            </LinearLayout>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_submit"

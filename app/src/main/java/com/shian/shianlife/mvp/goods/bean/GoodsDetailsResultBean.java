@@ -379,8 +379,16 @@ public class GoodsDetailsResultBean {
         private Float ement_price;//商家结算价
         private String goods_number;//商品编号
         private String package_number;//套餐编号
+        private String title_img;//套餐
         private List<SpecGoods> spec_goods;
 
+        public String getTitle_img() {
+            return title_img;
+        }
+
+        public void setTitle_img(String title_img) {
+            this.title_img = title_img;
+        }
 
         public Long getPackage_id() {
             return package_id;

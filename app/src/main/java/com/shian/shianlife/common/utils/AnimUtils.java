@@ -115,7 +115,7 @@ public class AnimUtils {
                         Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         scaleAnimation.setDuration(duration);
         scaleAnimation.setInterpolator(new BounceInterpolator());
-        view.setAnimation(scaleAnimation);
+        view.startAnimation(scaleAnimation);
     }
 
     public static void payPriceAnimIcon(View view, int duration) {
@@ -126,7 +126,7 @@ public class AnimUtils {
 //        scaleAnimation.setRepeatMode(Animation.REVERSE);
 //        scaleAnimation.setRepeatCount(1);
         scaleAnimation.setInterpolator(new OvershootInterpolator());
-        view.setAnimation(scaleAnimation);
+        view.startAnimation(scaleAnimation);
     }
 
     public static void payPriceAnimOther(View view, int duration, float dre) {
@@ -143,7 +143,7 @@ public class AnimUtils {
 
         animationSet.addAnimation(translateAnimation);
         animationSet.addAnimation(alphaAnimation);
-        view.setAnimation(animationSet);
+        view.startAnimation(animationSet);
     }
 
     /**
