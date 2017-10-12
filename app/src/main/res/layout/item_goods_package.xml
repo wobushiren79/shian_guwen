@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/iv_add"
+        android:layout_width="@dimen/dimen_30dp"
+        android:layout_height="@dimen/dimen_30dp"
+        android:layout_marginLeft="@dimen/dimen_36dp"
+        android:layout_marginRight="@dimen/dimen_36dp"
+        android:layout_marginTop="@dimen/dimen_28dp"
+        android:src="@drawable/zhy_goods_package_add" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+
+        <com.shian.shianlife.view.piccorner.RoundCornerImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="@dimen/dimen_92dp"
+            android:layout_height="@dimen/dimen_92dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/zhy_pic_loading" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dimen_12dp"
+            android:gravity="center_horizontal"
+            android:text="放"
+            android:textColor="@color/zhy_text_color_16"
+            android:textSize="@dimen/dimen_24dp" />
+    </LinearLayout>
+</LinearLayout>

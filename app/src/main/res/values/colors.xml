@@ -83,6 +83,7 @@
     <color name="zhy_backgroud_2">#e4e9e8</color>
     <color name="zhy_backgroud_3">#8b8b8b</color>
     <color name="zhy_backgroud_4">#269080</color>
+    <color name="zhy_backgroud_6">#F5FBFA</color>
     <!-- Dialog Color -->
     <color name="version_msg_color">#ff6699ff</color>
     <color name="message_color">#ffccccff</color>

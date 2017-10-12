@@ -121,13 +121,15 @@ public class DataUtils {
             GoodsOrderItem goodsOrderItem = new GoodsItemPerform();
             goodsOrderItem.setGoodsId(item.getGoods_id());
             goodsOrderItem.setGoodsSpecId(item.getGoods_spec_id());
+            goodsOrderItem.setClassifyId(item.getGoods_class_id());
+            goodsOrderItem.setClassifyAttrId(item.getClass_attr_id());
             goodsOrderItem.setSpecName(item.getSpec_name());
             goodsOrderItem.setSpecNumber(item.getGoods_number());
             goodsOrderItem.setCurrentDiscount("1");
             goodsOrderItem.setSpecAlias(item.getSpec_alias());
             goodsOrderItem.setSpecOrderedAttr(item.getSpec_name());
             goodsOrderItem.setSpecOrderedNum(item.getGoods_spec_number());
-            goodsOrderItem.setSpecOrderedVolume(item.getName());
+            goodsOrderItem.setSpecOrderedVolume(item.getSpec_name());
             goodsOrderItem.setSpecTotal((int) (item.getTotal() * 100));
             goodsOrderItem.setTitleImg(item.getTitle_img());
             goodsOrderItem.setUnit(item.getUnit());

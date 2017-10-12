@@ -34,6 +34,12 @@ public interface IGoodsDetailsView extends BaseMVPView {
     void setDefPic(String picUrl);
 
     /**
+     * 设置单位
+     * @param unit
+     */
+    void setUnit(String unit);
+
+    /**
      * 设置商品名称
      *
      * @param name

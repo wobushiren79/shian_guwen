@@ -13,13 +13,11 @@
         android:paddingBottom="@dimen/dimen_20dp"
         android:paddingLeft="@dimen/dimen_25dp"
         android:paddingRight="@dimen/dimen_25dp"
+        android:background="@drawable/zhy_goods_number_change_bg_left"
         android:paddingTop="@dimen/dimen_20dp"
         android:src="@drawable/zhy_goods_change_remove" />
 
-    <TextView
-        android:layout_width="@dimen/dimen_1dp"
-        android:layout_height="match_parent"
-        android:background="@color/gray_text" />
+
 
     <EditText
         android:id="@+id/et_number"
@@ -39,10 +37,7 @@
         android:textSize="@dimen/dimen_28dp"
         android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="@dimen/dimen_1dp"
-        android:layout_height="match_parent"
-        android:background="@color/gray_text" />
+
 
 
     <ImageView

@@ -90,7 +90,8 @@ public class ShoppingCartFragment extends BaseFragment implements GoodsShoppingC
 
     @Override
     public void getIsAllCheck(boolean isAllCheck) {
-        check.setChecked(isAllCheck);
+        if (check != null)
+            check.setChecked(isAllCheck);
     }
 
     @Override
@@ -151,7 +152,8 @@ public class ShoppingCartFragment extends BaseFragment implements GoodsShoppingC
      * @param price
      */
     private void setTotalPrice(String price) {
-        tvTotalPrice.setText(price);
+        if (tvTotalPrice != null)
+            tvTotalPrice.setText(price);
     }
 
 

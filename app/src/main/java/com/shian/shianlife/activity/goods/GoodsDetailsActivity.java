@@ -266,6 +266,11 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
     }
 
     @Override
+    public void setUnit(String unit) {
+        goodsSpecSelectDialogView.setUnit(unit);
+    }
+
+    @Override
     public void setGoodsName(String name) {
         tvGoodsName.setText(name);
     }
@@ -384,25 +389,38 @@ public class GoodsDetailsActivity extends BaseActivity implements View.OnClickLi
      * 直接购买
      */
     private void directBuy() {
-        if (goodsSpecSelectDialogView.getSelectData() == null) {
-            ToastUtils.show(this, "还没有选择规格商品");
-            return;
-        }
-        Intent intent = new Intent(this, GoodsOrderSettlementActivity.class);
-        ArrayList<GoodsItemPerform> listData = DataUtils.goodsDetailsToGoodsData(detailsData, goodsSpecSelectDialogView.getSelectData(), goodsSpecSelectDialogView.getSelectNumber());
-        intent.putExtra(IntentName.INTENT_LIST_DATA, listData);
-        startActivity(intent);
+        goodsSpecSelectDialogView.showDialog();
+        goodsSpecSelectDialogView.setCallBack(new GoodsSpecSelectDialogView.CallBack() {
+            @Override
+            public void successSelect() {
+                if (goodsSpecSelectDialogView.getSelectData() == null) {
+                    ToastUtils.show(GoodsDetailsActivity.this, "还没有选择规格商品");
+                    return;
+                }
+                Intent intent = new Intent(GoodsDetailsActivity.this, GoodsOrderSettlementActivity.class);
+                ArrayList<GoodsItemPerform> listData = DataUtils.goodsDetailsToGoodsData
+                        (detailsData, goodsSpecSelectDialogView.getSelectData(), goodsSpecSelectDialogView.getSelectNumber());
+                intent.putExtra(IntentName.INTENT_LIST_DATA, listData);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
      * 加入购物车
      */
     private void addShoppingCart() {
-        if (goodsSpecSelectDialogView.getSelectData() == null) {
-            ToastUtils.show(this, "还没有选择规格商品");
-            return;
-        }
-        goodsShoppingCartCreatePresenter.createGoodsShoppingCartData();
+        goodsSpecSelectDialogView.showDialog();
+        goodsSpecSelectDialogView.setCallBack(new GoodsSpecSelectDialogView.CallBack() {
+            @Override
+            public void successSelect() {
+                if (goodsSpecSelectDialogView.getSelectData() == null) {
+                    ToastUtils.show(GoodsDetailsActivity.this, "还没有选择规格商品");
+                    return;
+                }
+                goodsShoppingCartCreatePresenter.createGoodsShoppingCartData();
+            }
+        });
     }
 
     /**
