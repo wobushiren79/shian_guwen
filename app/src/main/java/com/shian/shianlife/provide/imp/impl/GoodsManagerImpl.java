@@ -21,8 +21,6 @@ import com.shian.shianlife.mvp.goods.bean.GoodsLabelDetailsResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsLabelResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsQueryListBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsQueryListResultBean;
-import com.shian.shianlife.mvp.pay.bean.BindGoodsOrderBean;
-import com.shian.shianlife.mvp.pay.bean.BindGoodsOrderResultBean;
 import com.shian.shianlife.provide.base.BaseManagerImpl;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 import com.shian.shianlife.provide.imp.GoodsManager;
@@ -70,6 +68,11 @@ public class GoodsManagerImpl extends BaseManagerImpl implements GoodsManager {
     @Override
     public void getGoodsQuery(Context context, GoodsQueryListBean params, HttpResponseHandler<List<GoodsQueryListResultBean>> handler) {
         requestPostFormToListForList(context, "Api/goods/goods", GoodsQueryListResultBean.class, params, handler);
+    }
+
+    @Override
+    public void getGoodsTextQuery(Context context, GoodsQueryListBean params, HttpResponseHandler<List<GoodsQueryListResultBean>> handler) {
+        requestPostFormToListForList(context, "Api/search/search", GoodsQueryListResultBean.class, params, handler);
     }
 
     @Override

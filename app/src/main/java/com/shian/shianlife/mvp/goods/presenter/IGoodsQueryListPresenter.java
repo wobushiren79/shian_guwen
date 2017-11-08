@@ -6,4 +6,6 @@ package com.shian.shianlife.mvp.goods.presenter;
 
 public interface IGoodsQueryListPresenter {
     void getGoodsQueryListData();
+
+    void getGoodsQueryTextListData();
 }

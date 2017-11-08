@@ -68,4 +68,36 @@ public class GoodsQueryListPresenterImpl implements IGoodsQueryListPresenter {
 
         });
     }
+
+    @Override
+    public void getGoodsQueryTextListData() {
+        if (goodsQueryListView.getContext() == null) {
+            goodsQueryListView.showToast("数据错误");
+            return;
+        }
+        if (goodsQueryListView.getGoodsName() == null || goodsQueryListView.getGoodsName().isEmpty()) {
+            goodsQueryListView.showToast("请输入查询商品名称");
+            return;
+        }
+        GoodsQueryListBean params = new GoodsQueryListBean();
+        params.setId(goodsQueryListView.getClassAttrId());
+        params.setChannel_id(goodsQueryListView.getChannelId());
+        params.setPageNumber(goodsQueryListView.getPageNumber());
+        params.setPageSize(goodsQueryListView.getPageSize());
+        params.setOrder(goodsQueryListView.getRankOrder());
+        params.setSearch(goodsQueryListView.getGoodsName());
+        goodsQueryListModel.getGoodsQueryTextData(goodsQueryListView.getContext(), params, new OnGetDataListener<List<GoodsQueryListResultBean>>() {
+
+            @Override
+            public void getDataSuccess(List<GoodsQueryListResultBean> result) {
+                goodsQueryListView.getGoodsQueryListDataSuccess(result);
+            }
+
+            @Override
+            public void getDataFail(String msg) {
+                goodsQueryListView.getGoodsQueryListDataFail(msg);
+            }
+
+        });
+    }
 }

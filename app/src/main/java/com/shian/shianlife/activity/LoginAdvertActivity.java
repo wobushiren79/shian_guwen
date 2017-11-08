@@ -57,7 +57,7 @@ public class LoginAdvertActivity extends BaseActivity implements View.OnClickLis
         btJump = (Button) findViewById(R.id.bt_jump);
         rlContent = (RelativeLayout) findViewById(R.id.ll_advert);
         btJump.setOnClickListener(this);
-        ivContent.setOnClickListener(this);
+
     }
 
     private void initData() {
@@ -84,8 +84,8 @@ public class LoginAdvertActivity extends BaseActivity implements View.OnClickLis
                     rlContent.setVisibility(View.VISIBLE);
                     advertData = result.getItems().get(0);
                     ImageLoader.getInstance().displayImage(AppContansts.PHP_BaseUrl + result.getItems().get(0).getBanner(), ivContent);
+                    ivContent.setOnClickListener(LoginAdvertActivity.this);
                     startThread();
-
                 } else {
                     checkAndJump();
                 }

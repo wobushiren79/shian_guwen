@@ -20,8 +20,6 @@ import com.shian.shianlife.mvp.goods.bean.GoodsLabelDetailsResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsLabelResultBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsQueryListBean;
 import com.shian.shianlife.mvp.goods.bean.GoodsQueryListResultBean;
-import com.shian.shianlife.mvp.pay.bean.BindGoodsOrderBean;
-import com.shian.shianlife.mvp.pay.bean.BindGoodsOrderResultBean;
 import com.shian.shianlife.provide.base.HttpResponseHandler;
 
 import java.util.List;
@@ -68,6 +66,15 @@ public interface GoodsManager {
      * @param handler
      */
     public void getGoodsQuery(Context context, GoodsQueryListBean params, HttpResponseHandler<List<GoodsQueryListResultBean>> handler);
+
+
+    /**
+     * 获取商品查询数据列表(全局查询)
+     * @param context
+     * @param params
+     * @param handler
+     */
+    public void getGoodsTextQuery(Context context, GoodsQueryListBean params, HttpResponseHandler<List<GoodsQueryListResultBean>> handler);
 
     /**
      * 获取商品详情

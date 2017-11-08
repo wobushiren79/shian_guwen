@@ -39,6 +39,8 @@ public class GoodsPackageListAdapter extends BaseRCAdapter<GoodsDetailsResultBea
         ImageView ivAdd = holder.getView(R.id.iv_add);
         RoundCornerImageView ivIcon = holder.getView(R.id.iv_icon);
         TextView tvName = holder.getView(R.id.tv_name);
+        TextView tvNumber = holder.getView(R.id.tv_number);
+        TextView tvSpecName = holder.getView(R.id.tv_spec_name);
         if (index == 0) {
             ivAdd.setVisibility(View.GONE);
         } else {
@@ -46,13 +48,12 @@ public class GoodsPackageListAdapter extends BaseRCAdapter<GoodsDetailsResultBea
         }
 
         //设置名字
-        StringBuffer name = new StringBuffer();
         if (specGoods.getName() != null)
-            name.append(specGoods.getName());
+            tvName.setText(specGoods.getName());
         if (specGoods.getSpec_name() != null)
-            name.append(specGoods.getSpec_name());
-        tvName.setText(name.toString());
-
+            tvSpecName.setText(specGoods.getSpec_name());
+        if (specGoods.getGoods_spec_number() != null)
+            tvNumber.setText("x" + specGoods.getGoods_spec_number());
         //设置图片
         Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + specGoods.getTitle_img());
 

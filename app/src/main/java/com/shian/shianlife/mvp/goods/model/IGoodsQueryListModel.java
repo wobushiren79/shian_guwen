@@ -13,4 +13,5 @@ public interface IGoodsQueryListModel {
 
     void getGoodsQueryData(Context context, GoodsQueryListBean params, OnGetDataListener listener);
 
+    void getGoodsQueryTextData(Context context, GoodsQueryListBean params, OnGetDataListener listener);
 }

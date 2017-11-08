@@ -19,7 +19,6 @@
             android:layout_height="@dimen/dimen_88dp"
             android:layout_gravity="center_horizontal"
             app:layout_scrollFlags="scroll|enterAlways"
-
             app:tabIndicatorColor="@color/white"
             app:tabGravity="fill"
             app:tabMaxWidth="0dp"

@@ -6,7 +6,7 @@ def releaseTime() {
 }
 //设置发布的名称
 def getAppName() {
-    return "圆满人生"
+    return "GuWen"
 }
 
 android {
@@ -20,8 +20,8 @@ android {
         applicationId "com.shian.shianlife"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 18
-        versionName "2.0"
+        versionCode 19
+        versionName "2.1"
         multiDexEnabled true
     }
     buildTypes {

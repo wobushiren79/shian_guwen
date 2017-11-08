@@ -16,6 +16,7 @@ import android.util.Log;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
+import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.thisenum.APPTypeEnum;
 
 import java.io.File;
@@ -30,6 +31,7 @@ public class UpDataService extends Service {
 
     boolean isDown = false;
     private String DOWNLOADPATH = "/download/";//下载路径，如果不定义自己的路径，6.0的手机不自动安装
+
     public UpDataService() {
 
     }
@@ -47,27 +49,32 @@ public class UpDataService extends Service {
      * 初始化下载器
      **/
     private void initDownManager() {
-        delFile(DOWNLOADPATH + downloadName);
-        isDown = true;
-        manager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-        receiver = new DownloadCompleteReceiver();
-        //设置下载地址
-        DownloadManager.Request down = new DownloadManager.Request(Uri.parse(downloadURL));
-        // 设置允许使用的网络类型，这里是移动网络和wifi都可以
-        down.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE | DownloadManager.Request.NETWORK_WIFI);
-        // 下载时，通知栏显示途中
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            down.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
-        }
-        // 显示下载界面
-        down.setVisibleInDownloadsUi(true);
-        // 设置下载后文件存放的位置
+        try {
+            delFile(DOWNLOADPATH + downloadName);
+            isDown = true;
+            manager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
+            receiver = new DownloadCompleteReceiver();
+            //设置下载地址
+            DownloadManager.Request down = new DownloadManager.Request(Uri.parse(downloadURL));
+            // 设置允许使用的网络类型，这里是移动网络和wifi都可以
+            down.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE | DownloadManager.Request.NETWORK_WIFI);
+            // 下载时，通知栏显示途中
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                down.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
+            }
+            // 显示下载界面
+            down.setVisibleInDownloadsUi(true);
+            // 设置下载后文件存放的位置
 //        down.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS, "yuanmanrensheng.apk");
-        down.setDestinationInExternalPublicDir(DOWNLOADPATH, downloadName);
-        // 将下载请求放入队列
-        manager.enqueue(down);
-        //注册下载广播
-        registerReceiver(receiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+            down.setDestinationInExternalPublicDir(DOWNLOADPATH, downloadName);
+            // 将下载请求放入队列
+            manager.enqueue(down);
+            //注册下载广播
+            registerReceiver(receiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+        } catch (SecurityException e) {
+            ToastUtils.show(getApplicationContext(), "更新没有文件操作权限,请打开权限后重试");
+        }
+
     }
 
     @Override
@@ -165,8 +172,9 @@ public class UpDataService extends Service {
             UpDataService.this.stopSelf();
 //            }
         }
+
         private void installAPK(Uri apk, Context context) {
-            Log.v("this","installAPK");
+            Log.v("this", "installAPK");
             if (Build.VERSION.SDK_INT < 23) {
                 Intent intents = new Intent();
                 intents.setAction("android.intent.action.VIEW");

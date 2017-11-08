@@ -154,13 +154,19 @@ public class GoodsQueryListView extends BasePtrRecyclerView implements IGoodsQue
         @Override
         public void onLoadMoreBegin(PtrFrameLayout frame) {
             pageNumber++;
-            goodsQueryListPresenter.getGoodsQueryListData();
+            if (goodsName == null || goodsName.equals(""))
+                goodsQueryListPresenter.getGoodsQueryListData();
+            else
+                goodsQueryListPresenter.getGoodsQueryTextListData();
         }
 
         @Override
         public void onRefreshBegin(PtrFrameLayout frame) {
             pageNumber = 1;
-            goodsQueryListPresenter.getGoodsQueryListData();
+            if (goodsName == null || goodsName.equals(""))
+                goodsQueryListPresenter.getGoodsQueryListData();
+            else
+                goodsQueryListPresenter.getGoodsQueryTextListData();
         }
     };
 

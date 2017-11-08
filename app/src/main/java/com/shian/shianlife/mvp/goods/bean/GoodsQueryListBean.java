@@ -13,6 +13,16 @@ public class GoodsQueryListBean extends BaseHttpParams {
     private Integer pageSize;
     private String order;
     private String goods_name;
+    private String search;
+
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
 
     public String getGoods_name() {
         return goods_name;

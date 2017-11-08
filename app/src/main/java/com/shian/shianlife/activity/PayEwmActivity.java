@@ -17,6 +17,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.shian.shianlife.R;
 import com.shian.shianlife.base.BaseActivity;
+import com.shian.shianlife.common.utils.ToastUtils;
 
 public class PayEwmActivity extends BaseActivity {
 	@InjectView(R.id.iv_ewm)
@@ -61,6 +62,8 @@ public class PayEwmActivity extends BaseActivity {
 	}
 
 	private Bitmap generateQRCode(String content) {
+		if(content==null)
+			ToastUtils.show(this,"没有二维码编码");
 		try {
 			QRCodeWriter writer = new QRCodeWriter();
 			BitMatrix matrix = writer.encode(content, BarcodeFormat.QR_CODE,

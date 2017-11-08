@@ -38,4 +38,23 @@ public class GoodsQueryListModelImpl implements IGoodsQueryListModel {
         });
     }
 
+    @Override
+    public void getGoodsQueryTextData(Context context, GoodsQueryListBean params, final OnGetDataListener listener) {
+        MHttpManagerFactory.getGoodsManager().getGoodsTextQuery(context, params, new HttpResponseHandler<List<GoodsQueryListResultBean>>() {
+            @Override
+            public void onStart(Request request, int id) {
+
+            }
+
+            @Override
+            public void onSuccess(List<GoodsQueryListResultBean> result) {
+                listener.getDataSuccess(result);
+            }
+
+            @Override
+            public void onError(String message) {
+                listener.getDataFail(message);
+            }
+        });
+    }
 }
