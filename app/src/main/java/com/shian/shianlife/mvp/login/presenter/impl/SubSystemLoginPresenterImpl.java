@@ -25,4 +25,9 @@ public class SubSystemLoginPresenterImpl implements ISubSystemLoginPresenter {
     public void loginStoreSystem() {
         subSystemLoginModel.subSystemStoreLogin(subSystemLoginView.getContext(), AppContansts.System_Ki4so_Client_Ec);
     }
+
+    @Override
+    public void loginCemeterySystem() {
+        subSystemLoginModel.subSystemCemeteryLogin(subSystemLoginView.getContext(), AppContansts.System_Ki4so_Client_Ec);
+    }
 }

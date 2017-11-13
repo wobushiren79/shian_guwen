@@ -50,6 +50,14 @@ public interface SystemManager {
     void loginStoreSystem(Context context, String loginKey);
 
     /**
+     * 公墓系统登陆
+     *
+     * @param context
+     * @param loginKey
+     */
+    void loginCemeterySystem(Context context, String loginKey);
+
+    /**
      * 用户签到
      *
      * @param context
