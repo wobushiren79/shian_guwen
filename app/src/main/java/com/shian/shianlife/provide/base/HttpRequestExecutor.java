@@ -29,6 +29,10 @@ import com.shian.shianlife.common.utils.SharePerfrenceUtils;
 import com.shian.shianlife.common.utils.ToastUtils;
 import com.shian.shianlife.common.utils.Utils;
 import com.shian.shianlife.mapapi.CustomDialog;
+import com.shian.shianlife.mvp.login.bean.SystemLoginResultBean;
+import com.shian.shianlife.mvp.login.presenter.IUserLoginPresenter;
+import com.shian.shianlife.mvp.login.presenter.impl.UserLoginPresenterImpl;
+import com.shian.shianlife.mvp.login.view.IUserLoginView;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.GetBuilder;
@@ -60,9 +64,10 @@ import okhttp3.Request;
  * @author Paul
  */
 @SuppressWarnings("deprecation")
-public class HttpRequestExecutor {
+public class HttpRequestExecutor implements IUserLoginView {
 
-
+    private Context context;
+    private IUserLoginPresenter userLoginPresenter;
     private CustomDialog dialog;
     public static final int Response_Type_List = 0;  //返回参数为list
     public static final int Response_Type_Obj = 1;   //返回参数为对象
@@ -87,6 +92,7 @@ public class HttpRequestExecutor {
                                final Map<String, String> header,
                                final String dataName,
                                final int responseType) {
+        this.context = context;
         if (checkNetWorkAndDialog(context, responseHandler, isShowDialog)) return;
 
         Log.v("tag", baseUrl + "/" + method);
@@ -125,6 +131,7 @@ public class HttpRequestExecutor {
                                    final String dataName,
                                    boolean hasConentParams,
                                    final int responseType) {
+        this.context = context;
         if (checkNetWorkAndDialog(context, responseHandler, isShowDialog)) return;
 
         Log.v("tag", baseUrl + "/" + method);
@@ -171,6 +178,7 @@ public class HttpRequestExecutor {
                                        final Map<String, String> header,
                                        final String dataName,
                                        final int responseType) {
+        this.context = context;
         if (checkNetWorkAndDialog(context, responseHandler, isShowDialog)) return;
 
         Log.v("tag", baseUrl + "/" + method);
@@ -298,8 +306,10 @@ public class HttpRequestExecutor {
 
                 //会话失效判断
                 if (map.get("code") == null) {
-                    onErrorCallBack(responseHandler, "会话失效，请重新登陆", context);
-                    jumpLogin(context);
+                    //onErrorCallBack(responseHandler, "会话失效，请重新登陆", context);
+//  jumpLogin(context);
+                    userLoginPresenter = new UserLoginPresenterImpl(HttpRequestExecutor.this, null);
+                    userLoginPresenter.getLoginConfig();
                     return;
                 }
 
@@ -320,8 +330,10 @@ public class HttpRequestExecutor {
                             responseHandler.onSuccess((E) result);
                         }
                     }
-                } else if ("1009".equals(codeInt)) {
-                    jumpLogin(context);
+                } else if ("1009".equals(codeInt) || "9999".equals(code)) {
+                    //                    jumpLogin(context);
+                    userLoginPresenter = new UserLoginPresenterImpl(HttpRequestExecutor.this, null);
+                    userLoginPresenter.getLoginConfig();
                 } else {
                     String msg = (String) map.get("message");
                     CrashReport.putUserData(context, response, msg);
@@ -332,5 +344,68 @@ public class HttpRequestExecutor {
                 onErrorCallBack(responseHandler, "数据解析异常", context);
             }
         }
+    }
+
+
+    //---------会话失效之后的自动登陆----------------------
+    private String userName;
+    private String passWord;
+    private boolean isAutoLogin;
+    private boolean isKeepAccount;
+
+    @Override
+    public String getUserName() {
+        return userName;
+    }
+
+    @Override
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    @Override
+    public String getPassWord() {
+        return passWord;
+    }
+
+    @Override
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
+
+    @Override
+    public boolean getIsAutoLogin() {
+        return isAutoLogin;
+    }
+
+    @Override
+    public void setIsAutoLogin(boolean isAutoLogin) {
+        this.isAutoLogin = isAutoLogin;
+    }
+
+    @Override
+    public boolean getIsKeepAccount() {
+        return isKeepAccount;
+    }
+
+    @Override
+    public void setIsKeepAccount(boolean isKeepAccount) {
+        this.isKeepAccount = isKeepAccount;
+        userLoginPresenter.loginSystem();
+    }
+
+    @Override
+    public Context getContext() {
+        return context;
+    }
+
+    @Override
+    public void loginSystemSuccess(SystemLoginResultBean result) {
+        ToastUtils.show(context, "已重新登陆，请再次操作");
+    }
+
+    @Override
+    public void loginSystemFail(String message) {
+        jumpLogin(context);
     }
 }

@@ -148,7 +148,7 @@ public class SaBaseApplication extends MultiDexApplication {
             String tempUrl = getBaseUrl(url.toString());
             AppContansts.cookieStore.put(tempUrl, cookies);
             //新增添加子系统KEY
-            if (tempUrl.contains(AppContansts.Login_BaseUrl) && cookies.size() >= 2) {
+            if (AppContansts.Login_BaseUrl.contains(tempUrl) && cookies.size() >= 2) {
                 String setCookies = cookies.get(1).toString();
                 String[] cookiesList = setCookies.split(";");
                 for (String cookie : cookiesList) {
@@ -168,15 +168,15 @@ public class SaBaseApplication extends MultiDexApplication {
 
         private String getBaseUrl(String url) {
             String temp = "";
-            if (url.contains("https") || url.contains("http://prd")) {
-                int hostLocation = url.indexOf("/", 8);
-                temp = url.substring(0, hostLocation);
-            } else {
-                int hostLocation = url.indexOf("/", 8);
-                int urlLocation = url.indexOf("/", hostLocation + 1);
-                if (urlLocation != -1)
-                    temp = url.substring(0, urlLocation);
-            }
+//            if (url.contains("https") || url.contains("http://prd")) {
+            int hostLocation = url.indexOf("/", 8);
+            temp = url.substring(0, hostLocation);
+//            } else {
+//                int hostLocation = url.indexOf("/", 8);
+//                int urlLocation = url.indexOf("/", hostLocation + 1);
+//                if (urlLocation != -1)
+//                    temp = url.substring(0, urlLocation);
+//            }
             return temp;
         }
     }

@@ -13,27 +13,31 @@ import okhttp3.Cookie;
 public class AppContansts {
     //登陆地址
 //    public static final String Login_BaseUrl = "https://platform.shianlife.cn";
-//        public static final String Login_BaseUrl = "http://prd-platform.xicp.cn";
-//        public static final String Login_BaseUrl = "http://192.168.0.50:8199/platform";
-        public static final String Login_BaseUrl = "http://192.168.0.59:8099/ki4so-web";
-    //单项地址
-    public static final String Store_BaseUrl = "https://goods.shianlife.cn";
-//            public static final String Store_BaseUrl = "http://prd-goods.xicp.cn";
-//        public static final String Store_BaseUrl = "http://192.168.0.57:8080/goods";
-//        public static final String Store_BaseUrl = "http://192.168.0.59:8080/goods";
+    //        public static final String Login_BaseUrl = "http://prd-platform.xicp.cn";
+        public static final String Login_BaseUrl = "http://192.168.0.50:8199/platform";
+//    public static final String Login_BaseUrl = "http://192.168.0.57:8080/ki4so-web";
+    //    单项地址
+//    public static final String Store_BaseUrl = "https://goods.shianlife.cn";
+    //            public static final String Store_BaseUrl = "http://prd-goods.xicp.cn";
+        public static final String Store_BaseUrl = "http://192.168.0.57:8089/goods";
+//    public static final String Store_BaseUrl = "http://192.168.0.59:8080/goods";
     //殡仪地址
     public static final String Funeral_BaseUrl = "http://115.28.163.211:7088/shianlife-adviser-1.0-SNAPSHOT";
+    //分单地址
+    public static final String OrderCenter_BaseUrl = "https://order.shianlife.cn";
     //公墓地址
+//    public static final String Cemetery_BaseUrl = "http://120.76.246.249:8000";
 //    public static final String Cemetery_BaseUrl = "http://192.168.0.200:8000/shianlife-advisor-cemetery-1.0-SNAPSHOT";
 //    public static final String Cemetery_BaseUrl = "http://115.28.163.211:7088/shianlife-advisor-cemetery-1.0-SNAPSHOT";
-//    public static final String Cemetery_BaseUrl = "http://192.168.0.50:8098/advisor";
-    public static final String Cemetery_BaseUrl = "http://192.168.0.33:8098/advisor";
+    public static final String Cemetery_BaseUrl = "http://192.168.0.50:8098/advisor";
+//    public static final String Cemetery_BaseUrl = "http://192.168.0.59:8081/app";
+//    public static final String Cemetery_BaseUrl = "http://192.168.0.200:8120";
 
     //商品地址
     public static final String Goods_BaseUrl = "http://goodsmgr.e-funeral.cn";
-//    public static final String Goods_BaseUrl = "http://192.168.0.64/shian_goods";
+    //    public static final String Goods_BaseUrl = "http://192.168.0.64/shian_goods";
     //商品图片地址
-    public static final String Goods_PicUrl = Goods_BaseUrl + "/Public/Uploads";
+//    public static final String Goods_PicUrl = Goods_BaseUrl + "/Public/Uploads";
 
     public static final String PHP_BaseUrl = "http://app.e-funeral.cn";
     public static final String PHP_Web_BaseUrl = "http://m.e-funeral.cn";
@@ -73,7 +77,6 @@ public class AppContansts {
     public static int MsgNumberTotal;
 
     public static HrLoginResult userLoginInfo = null;
-    public static HrLoginResult userCemetery = null;
 //
 
     //商品渠道ID
@@ -86,6 +89,8 @@ public class AppContansts {
     public static String System_Ki4so_Client_Ec;
     //子系统-单项  登陆地址
     public static final String Login_Store_Url = Store_BaseUrl + "/login_sys_api";
+    //子系统-分单  登陆地址
+    public static final String Login_OrderCenter_Url = OrderCenter_BaseUrl + "/login_subsystem_api";
     //子系统-公墓  登陆地址
     public static final String Login_Cemetery_Url = Cemetery_BaseUrl + "/login_subsystem_api";
 

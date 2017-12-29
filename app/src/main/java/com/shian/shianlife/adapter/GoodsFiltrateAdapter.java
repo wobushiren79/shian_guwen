@@ -51,7 +51,8 @@ public class GoodsFiltrateAdapter extends BaseExpandableAdapter<GoodsClassResult
         TextView tvName = (TextView) convertView.findViewById(R.id.tv_name);
         ImageView ivIcon = (ImageView) convertView.findViewById(R.id.iv_icon);
         tvName.setText(itemData.getName());
-        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + itemData.getTitle_img(),R.drawable.zhy_pic_loading);
+//        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + itemData.getTitle_img(),R.drawable.zhy_pic_loading);
+        Utils.loadPic(mContext, ivIcon,  itemData.getTitle_img(),R.drawable.zhy_pic_loading);
     }
 
     @Override

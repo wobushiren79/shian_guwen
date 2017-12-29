@@ -86,7 +86,8 @@ public class GoodsSelectDialog extends Dialog implements View.OnClickListener {
 
     public void setPic(String picUrl) {
         this.picUrl = picUrl;
-        Utils.loadPic(getContext(), ivGoodsSpec, AppContansts.Goods_PicUrl + "/" + picUrl);
+//        Utils.loadPic(getContext(), ivGoodsSpec, AppContansts.Goods_PicUrl + "/" + picUrl);
+        Utils.loadPic(getContext(), ivGoodsSpec,  picUrl);
     }
 
 
@@ -172,7 +173,8 @@ public class GoodsSelectDialog extends Dialog implements View.OnClickListener {
             submit();
         } else if (v == ivGoodsSpec) {
             Intent intent = new Intent(getContext(), ImagePreviewActivity.class);
-            intent.putExtra(IntentName.INTENT_URL, AppContansts.Goods_PicUrl + "/" + picUrl);
+//            intent.putExtra(IntentName.INTENT_URL, AppContansts.Goods_PicUrl + "/" + picUrl);
+            intent.putExtra(IntentName.INTENT_URL,  picUrl);
             getContext().startActivity(intent);
         } else {
             for (int i = 0; i < listItem.size(); i++) {

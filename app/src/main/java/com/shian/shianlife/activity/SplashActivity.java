@@ -96,7 +96,6 @@ public class SplashActivity extends BaseActivity implements OnPushListener, IUse
     }
 
     private void loginFuneral() {
-        AppContansts.userCemetery = null;
         AppContansts.userLoginInfo = null;
 
         //登录状态为普通状态
@@ -116,42 +115,17 @@ public class SplashActivity extends BaseActivity implements OnPushListener, IUse
                     @Override
                     public void onSuccess(HrLoginResult result) {
                         AppContansts.userLoginInfo = result;
-                        loginCemetery();
+                        sleepActivity(LoginAdvertActivity.MAIN);
                     }
 
                     @Override
                     public void onError(String message) {
-                        loginCemetery();
+                        sleepActivity(LoginAdvertActivity.MAIN);
                     }
                 });
 
     }
 
-    /**
-     * 登陆公墓
-     */
-    private void loginCemetery() {
-        HpLoginParams params = new HpLoginParams();
-        params.setUsername(userName);
-        params.setPassword(userPassWord);
-        MHttpManagerFactory.getCemeteryManager().loginCemetery(SplashActivity.this, params, new HttpResponseHandler<HrLoginResult>() {
-            @Override
-            public void onStart(Request request, int id) {
-
-            }
-
-            @Override
-            public void onSuccess(HrLoginResult resultCemetery) {
-                AppContansts.userCemetery = resultCemetery;
-                sleepActivity(LoginAdvertActivity.MAIN);
-            }
-
-            @Override
-            public void onError(String message) {
-                sleepActivity(LoginAdvertActivity.MAIN);
-            }
-        });
-    }
 
 
     private void initPush() {

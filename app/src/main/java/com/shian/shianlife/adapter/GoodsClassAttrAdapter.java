@@ -46,8 +46,8 @@ public class GoodsClassAttrAdapter extends BaseRCAdapter<GoodsClassAttrResultBea
         else
             tvName.setText("未知");
 
-        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + picUrl, R.drawable.zhy_pic_loading);
-
+//        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + picUrl, R.drawable.zhy_pic_loading);
+        Utils.loadPic(mContext, ivIcon,  picUrl, R.drawable.zhy_pic_loading);
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -55,13 +55,15 @@ public class GoodsPackageListAdapter extends BaseRCAdapter<GoodsDetailsResultBea
         if (specGoods.getGoods_spec_number() != null)
             tvNumber.setText("x" + specGoods.getGoods_spec_number());
         //设置图片
-        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + specGoods.getTitle_img());
+//        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + specGoods.getTitle_img());
+        Utils.loadPic(mContext, ivIcon,specGoods.getTitle_img());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ImagePreviewActivity.class);
-                intent.putExtra(IntentName.INTENT_URL, AppContansts.Goods_PicUrl + "/" + specGoods.getTitle_img());
+//                intent.putExtra(IntentName.INTENT_URL, AppContansts.Goods_PicUrl + "/" + specGoods.getTitle_img());
+                intent.putExtra(IntentName.INTENT_URL, specGoods.getTitle_img());
                 mContext.startActivity(intent);
             }
         });

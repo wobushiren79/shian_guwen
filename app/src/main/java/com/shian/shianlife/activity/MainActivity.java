@@ -71,7 +71,7 @@ import butterknife.InjectView;
 import me.leolin.shortcutbadger.ShortcutBadger;
 import okhttp3.Request;
 
-public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, IUserInfoView, ISubSystemLoginView, IGoodsChannelView {
+public class MainActivity extends BaseActivity implements ActivityCompat.OnRequestPermissionsResultCallback, IUserInfoView,  IGoodsChannelView {
     @InjectView(R.id.fl_main)
     View flMain;
     @InjectView(R.id.rb_main_1)
@@ -106,7 +106,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 //    public BDLocationListener myListener = new MyLocationListener();
 
     private IUserInfoPresenter userInfoPresenter;
-    private ISubSystemLoginPresenter subSystemLoginPresenter;
     private IGoodsChannelPresenter goodsChannelPresenter;
 
     public static boolean isRefreshUserInfo = false;
@@ -218,10 +217,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
         userInfoPresenter = new UserInfoPresenterImpl(this);
         userInfoPresenter.getUserInfoData();
 
-        //登陆子系统
-        subSystemLoginPresenter = new SubSystemLoginPresenterImpl(this);
-        subSystemLoginPresenter.loginStoreSystem();
-
         //获取商品渠道ID
         goodsChannelPresenter = new GoodsChannelPresenterImpl(this);
         goodsChannelPresenter.getGoodsChannelData();
@@ -254,7 +249,6 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                     }
 
                     getMsgNumber();
-
                 }
 
 

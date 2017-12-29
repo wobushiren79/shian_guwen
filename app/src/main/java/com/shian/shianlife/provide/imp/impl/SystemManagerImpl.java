@@ -63,15 +63,21 @@ public class SystemManagerImpl extends BaseManagerImpl implements SystemManager 
     }
 
     @Override
-    public void loginStoreSystem(final Context context, String loginKey) {
+    public void loginStoreSystem(final Context context, String loginKey, HttpResponseHandler handler) {
         String storeUrl = AppContansts.Login_Store_Url + "?" + loginKey;
-        loginSubSystem(context, storeUrl);
+        loginSubSystem(context, storeUrl, handler);
     }
 
     @Override
-    public void loginCemeterySystem(Context context, String loginKey) {
+    public void loginOrderCenterSystem(Context context, String loginKey, HttpResponseHandler handler) {
+        String storeUrl = AppContansts.Login_OrderCenter_Url + "?" + loginKey;
+        loginSubSystem(context, storeUrl, handler);
+    }
+
+    @Override
+    public void loginCemeterySystem(Context context, String loginKey, HttpResponseHandler handler) {
         String cemeteryUrl = AppContansts.Login_Cemetery_Url + "?" + loginKey;
-        loginSubSystem(context, cemeteryUrl);
+        loginSubSystem(context, cemeteryUrl, handler);
     }
 
     @Override
@@ -95,14 +101,14 @@ public class SystemManagerImpl extends BaseManagerImpl implements SystemManager 
     }
 
 
-    private void loginSubSystem(final Context context, String storeUrl) {
+    private void loginSubSystem(final Context context, String loginUrl, final HttpResponseHandler handler) {
         if (customDialog == null || !customDialog.isShowing()) {
             customDialog = new CustomDialog(context);
             customDialog.show();
         }
-        Log.v("tag", "storeUrl:" + storeUrl);
+        Log.v("tag", "loginUrl:" + loginUrl);
         GetBuilder getBuilder = OkHttpUtils.get();
-        getBuilder.url(storeUrl);
+        getBuilder.url(loginUrl);
         getBuilder.addHeader("client-Type", "wechatapp");
         RequestCall requestCall = getBuilder.build();
         requestCall.execute(new StringCallback() {
@@ -112,7 +118,7 @@ public class SystemManagerImpl extends BaseManagerImpl implements SystemManager 
                 customDialog.cancel();
                 if (customDialog != null)
                     customDialog.cancel();
-//                Utils.jumpLogin(context);
+                handler.onError(e.getMessage());
             }
 
             @Override
@@ -120,6 +126,7 @@ public class SystemManagerImpl extends BaseManagerImpl implements SystemManager 
                 Log.v("tag", "storeResponse:" + response);
                 if (customDialog != null)
                     customDialog.cancel();
+                handler.onSuccess(response);
             }
         });
     }

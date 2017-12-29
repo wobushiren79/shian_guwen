@@ -125,13 +125,13 @@ public class OrderFragment extends BaseFragment {
     private void initStates() {
         arrTitles.clear();
         //检测权限
-        if (AppContansts.userCemetery != null) {
-            for (int i = 0; i < AppContansts.userCemetery.getPermitionCodes().size(); i++) {
-                if(AppContansts.userCemetery.getPermitionCodes().get(i).equals(AppRolePermition.ADVISOR.getCode())){
-                    arrTitles.add("公墓单");
-                }
-            }
-        }
+//        if (AppContansts.userCemetery != null) {
+//            for (int i = 0; i < AppContansts.userCemetery.getPermitionCodes().size(); i++) {
+//                if(AppContansts.userCemetery.getPermitionCodes().get(i).equals(AppRolePermition.ADVISOR.getCode())){
+//                    arrTitles.add("公墓单");
+//                }
+//            }
+//        }
         for (Integer role : AppContansts.userLoginInfo.getRoleIds()) {
             switch (role) {
                 case 1:
@@ -223,7 +223,7 @@ public class OrderFragment extends BaseFragment {
                 OverServiceView view = new OverServiceView(getActivity(), n);
                 views.add(view);
             } else if (n.equals("公墓单")) {
-                CemeteryBuildView view = new CemeteryBuildView(getActivity(),0);
+                CemeteryBuildView view = new CemeteryBuildView(getActivity(), 0);
                 views.add(view);
             }
         }

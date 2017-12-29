@@ -226,7 +226,7 @@ public class BuildNewOrderActivity extends BaseActivity implements CetemeryTextS
         params.setPersonNum(dataPersonNum);
         params.setCustomerLocation(dataUserLocation);
         params.setPlanCemeteryId(cemeteryId);
-        params.setToken(AppContansts.userLoginInfo.getToken());
+//        params.setToken(AppContansts.userLoginInfo.getToken());
         params.setRemarks(mRemark.getData());
         MHttpManagerFactory.getCemeteryManager().saveCemeteryBuildData(BuildNewOrderActivity.this, params, new HttpResponseHandler<Object>() {
 

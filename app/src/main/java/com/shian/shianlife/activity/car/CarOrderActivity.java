@@ -60,9 +60,9 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
             mUsePerson.setData(data.getCustomerName());
             mUsePersonPhone.setData(data.getCustomerMobile());
         }
-        if (AppContansts.userCemetery.getUserData() != null) {
-            mSubmitPerson.setData(AppContansts.userCemetery.getUserData().getName());
-            mSubmitPersonPhone.setData(AppContansts.userCemetery.getUserData().getMobile());
+        if (AppContansts.systemLoginInfo != null && AppContansts.systemLoginInfo.getUserObj() != null) {
+            mSubmitPerson.setData(AppContansts.systemLoginInfo.getUserObj().getName());
+            mSubmitPersonPhone.setData(AppContansts.systemLoginInfo.getUserObj().getPhone());
         }
     }
 
@@ -102,6 +102,11 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
      * 提交
      */
     private void submit() {
+        if (AppContansts.systemLoginInfo == null || AppContansts.systemLoginInfo.getUserId() == null) {
+            ToastUtils.show(this, "账号信息错误，请重新登陆");
+            Utils.jumpLogin(this);
+            return;
+        }
         if (data == null) {
             ToastUtils.show(this, "数据错误请重新登陆");
             return;
@@ -154,7 +159,7 @@ public class CarOrderActivity extends BaseActivity implements View.OnClickListen
         HpCarBuildOrder params = new HpCarBuildOrder();
         params.setBusiType(CarBusiTypeEnum.cemetery_bespeakid.getText());
         params.setBusiId(data.getBespeakId());
-        params.setProposerId(AppContansts.userCemetery.getUserId());
+        params.setProposerId(AppContansts.systemLoginInfo.getUserId());
         params.setProposerName(mSubmitPerson.getData());
         params.setProposerMobile(mSubmitPersonPhone.getData());
         params.setConnecterName(mUsePerson.getData());

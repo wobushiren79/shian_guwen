@@ -61,7 +61,8 @@ public class GoodsQueryListAdapter extends BaseRCAdapter<GoodsQueryListResultBea
         TextView tvPrice = holder.getView(R.id.tv_price);
         TextView tvSale = holder.getView(R.id.tv_sale);
 
-        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + goodsQueryListResultBean.getTitle_img(), R.drawable.zhy_pic_loading);
+//        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + goodsQueryListResultBean.getTitle_img(), R.drawable.zhy_pic_loading);
+        Utils.loadPic(mContext, ivIcon,  goodsQueryListResultBean.getTitle_img(), R.drawable.zhy_pic_loading);
 
         Integer isPackage = goodsQueryListResultBean.getIs_package();
         if (isPackage == 0)

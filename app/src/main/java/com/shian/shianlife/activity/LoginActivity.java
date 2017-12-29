@@ -99,7 +99,6 @@ public class LoginActivity extends BaseActivity implements IUserLoginView, View.
 
 
     private void loginFuneral() {
-        AppContansts.userCemetery = null;
         AppContansts.userLoginInfo = null;
 
         String userName = etUserName.getText().toString();
@@ -129,47 +128,19 @@ public class LoginActivity extends BaseActivity implements IUserLoginView, View.
             @Override
             public void onSuccess(final HrLoginResult result) {
                 AppContansts.userLoginInfo = result;
-                //判断是否要进行公墓登陆
-                loginCemetery();
-            }
-
-
-            @Override
-            public void onError(String message) {
-                loginCemetery();
-            }
-        });
-
-
-    }
-
-    /**
-     * 登陆公墓
-     */
-    private void loginCemetery() {
-        HpLoginParams params = new HpLoginParams();
-        params.setPassword(etUserPassword.getText().toString());
-        params.setUsername(etUserName.getText().toString());
-        MHttpManagerFactory.getCemeteryManager().loginCemetery(LoginActivity.this, params, new HttpResponseHandler<HrLoginResult>() {
-
-
-            @Override
-            public void onStart(Request request, int id) {
-
-            }
-
-            @Override
-            public void onSuccess(HrLoginResult resultCemetery) {
-                AppContansts.userCemetery = resultCemetery;
                 loginSuccess();
             }
+
 
             @Override
             public void onError(String message) {
                 loginSuccess();
             }
         });
+
+
     }
+
 
     /**
      * 登陆成功跳转

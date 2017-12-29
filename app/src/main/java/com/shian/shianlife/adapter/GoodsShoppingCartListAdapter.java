@@ -121,7 +121,8 @@ public class GoodsShoppingCartListAdapter extends BaseExpandableAdapter<GoodsSho
 
         final GoodsDetailsListResultBean data = itemAllData.getResultBean();
         //设置图片
-        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + data.getTitle_img(), R.drawable.zhy_pic_loading);
+//        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + data.getTitle_img(), R.drawable.zhy_pic_loading);
+        Utils.loadPic(mContext, ivIcon,  data.getTitle_img(), R.drawable.zhy_pic_loading);
         if (groupData.get(groupPosition).isEditMode()) {
             llModeShow.setVisibility(View.GONE);
             llModeEdit.setVisibility(View.VISIBLE);

@@ -40,7 +40,8 @@ public class GoodsLabelDetailsAdapter extends BaseRCAdapter<GoodsLabelDetailsRes
         TextView tvAdviserPrice = holder.getView(R.id.tv_adviser_price);
         TextView tvSubmit = holder.getView(R.id.tv_submit);
 
-        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + data.getTitle_img(), R.drawable.zhy_pic_loading);
+//        Utils.loadPic(mContext, ivIcon, AppContansts.Goods_PicUrl + "/" + data.getTitle_img(), R.drawable.zhy_pic_loading);
+        Utils.loadPic(mContext, ivIcon,  data.getTitle_img(), R.drawable.zhy_pic_loading);
 
         //用户名设置
         StringBuffer goodsName = new StringBuffer();

@@ -60,7 +60,8 @@ public class GoodsDetailsPresenterImpl implements IGoodsDetailsPresenter {
                 if (carouselPic != null) {
                     List<String> picUrl = new ArrayList<>();
                     for (GoodsDetailsResultBean.ImgsBean item : carouselPic) {
-                        picUrl.add(AppContansts.Goods_PicUrl + "/" + item.getPic_add());
+//                        picUrl.add(AppContansts.Goods_PicUrl + "/" + item.getPic_add());
+                        picUrl.add( item.getPic_add());
                     }
                     goodsDetailsView.setCarouselPic(picUrl);
                 }
