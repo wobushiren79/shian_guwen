@@ -230,14 +230,14 @@ public class TQZBDataActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onProgress(long total, long current, boolean isUploading) {
-                        pbVIew.setVisibility(View.VISIBLE);
-                        pbVIew.setProgress((int) (current / total * 100));
+                    public void onError(String message) {
+
                     }
 
                     @Override
-                    public void onError(String message) {
-
+                    public void onProgress(long total, float progress) {
+                        pbVIew.setVisibility(View.VISIBLE);
+                        pbVIew.setProgress((int) (progress * 100));
                     }
                 });
     }
@@ -261,13 +261,12 @@ public class TQZBDataActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onProgress(long total, long current, boolean isUploading) {
-                        // ib.setText((int) (((float) (current / total)) * 100)
-                        // + "%");
+                    public void onError(String message) {
+
                     }
 
                     @Override
-                    public void onError(String message) {
+                    public void onProgress(long total, float progress) {
 
                     }
                 });

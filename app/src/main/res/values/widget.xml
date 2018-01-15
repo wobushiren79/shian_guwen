@@ -152,4 +152,10 @@
         <item name="android:textColor">@color/zhy_text_color_1</item>
         <item name="android:background">@drawable/zhy_button_state_2</item>
     </style>
+
+    <style name="AppUpdateProgressStyle">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/appupdate_progressbar_horizontal</item><!-- progress_horizontal -->
+        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+    </style>
 </resources>

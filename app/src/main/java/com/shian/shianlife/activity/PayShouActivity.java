@@ -262,16 +262,14 @@ public class PayShouActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onProgress(long total, long current,
-                                           boolean isUploading) {
-                        // TODO Auto-generated method stub
-
-                    }
-
-                    @Override
                     public void onError(String message) {
                         // TODO Auto-generated method stub
                         Toast.makeText(getBaseContext(), "upload" + message, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onProgress(long total, float progress) {
+
                     }
                 });
     }

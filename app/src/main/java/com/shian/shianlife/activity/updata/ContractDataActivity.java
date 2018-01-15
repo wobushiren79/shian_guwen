@@ -352,11 +352,6 @@ public class ContractDataActivity extends BaseActivity {
 
                     }
 
-                    @Override
-                    public void onProgress(long total, long current,
-                                           boolean isUploading) {
-
-                    }
 
                     @Override
                     public void onError(String message) {
@@ -364,6 +359,11 @@ public class ContractDataActivity extends BaseActivity {
                             customDialog.cancel();
                         }
                         ToastUtils.show(ContractDataActivity.this, "上传签名图片失败");
+                    }
+
+                    @Override
+                    public void onProgress(long total, float progress) {
+
                     }
                 });
     }

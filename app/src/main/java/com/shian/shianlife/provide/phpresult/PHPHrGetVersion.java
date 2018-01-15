@@ -43,7 +43,7 @@ public class PHPHrGetVersion {
         private String appId;
         private String versionName;
         private String versionNum;
-        private String isImportant;
+        private Integer isImportant;
         private String updataTime;
         private String updataTitle;
         private String updataContent;
@@ -87,11 +87,11 @@ public class PHPHrGetVersion {
             this.versionNum = versionNum;
         }
 
-        public String getIsImportant() {
+        public Integer getIsImportant() {
             return isImportant;
         }
 
-        public void setIsImportant(String isImportant) {
+        public void setIsImportant(Integer isImportant) {
             this.isImportant = isImportant;
         }
 

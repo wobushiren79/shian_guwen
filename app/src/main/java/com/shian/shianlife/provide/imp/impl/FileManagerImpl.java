@@ -6,6 +6,7 @@ import org.codehaus.jackson.JsonNode;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.util.Log;
 
 import com.lidroid.xutils.HttpUtils;
@@ -19,6 +20,11 @@ import com.shian.shianlife.common.utils.ObjectMapperFactory;
 import com.shian.shianlife.provide.base.FileHttpResponseHandler;
 import com.shian.shianlife.provide.imp.FileManager;
 import com.shian.shianlife.provide.result.HrUploadFile;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.FileCallBack;
+import com.zhy.http.okhttp.request.RequestCall;
+
+import okhttp3.Call;
 
 public class FileManagerImpl implements FileManager {
     private static FileManager manager;
@@ -59,7 +65,7 @@ public class FileManagerImpl implements FileManager {
             @Override
             public void onLoading(long total, long current, boolean isUploading) {
                 if (response != null) {
-                    response.onProgress(total, current, isUploading);
+                    response.onProgress(total, current);
                 }
             }
 
@@ -103,5 +109,30 @@ public class FileManagerImpl implements FileManager {
             }
         });
     }
+    @Override
+    public RequestCall downloadFile(Context context, String downloadUrl, String fileName, final FileHttpResponseHandler<File> responseHandler) {
+        RequestCall call = OkHttpUtils
+                .get()
+                .url(downloadUrl)
+                .addHeader("Accept-Encoding", "identity")
+                .build();
+        call.execute(new FileCallBack(Environment.getExternalStorageDirectory().getAbsolutePath(), fileName) {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                responseHandler.onError(call.toString());
+            }
 
+            @Override
+            public void onResponse(File response, int id) {
+                responseHandler.onSuccess(response);
+            }
+
+            @Override
+            public void inProgress(float progress, long total, int id) {
+                responseHandler.onProgress(total, progress);
+            }
+
+        });
+        return call;
+    }
 }

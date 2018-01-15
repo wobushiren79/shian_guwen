@@ -122,18 +122,20 @@ public class StoreFragment extends BaseFragment implements View.OnClickListener,
 
     private void buildCemetery() {
         //检测权限
-        boolean hasCemetery = false;
-        if (AppContansts.systemLoginInfo != null) {
-            hasCemetery = RoleEnum.checkHasRole(AppContansts.systemLoginInfo.getResourceCodes(), RoleEnum.Cemetery_Advisor);
-        }
-        if (hasCemetery) {
-            Intent intent = new Intent(getContext(), BuildOrderEnum.GM.getActivity());
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(getContext(), WebActivity.class);
-            intent.putExtra(IntentName.INTENT_URL, AppContansts.Temp_Cemetery_BaseUrl);
-            startActivity(intent);
-        }
+        ToastUtils.show(getContext(),"暂不提供此功能");
+        return;
+//        boolean hasCemetery = false;
+//        if (AppContansts.systemLoginInfo != null) {
+//            hasCemetery = RoleEnum.checkHasRole(AppContansts.systemLoginInfo.getResourceCodes(), RoleEnum.Cemetery_Advisor);
+//        }
+//        if (hasCemetery) {
+//            Intent intent = new Intent(getContext(), BuildOrderEnum.GM.getActivity());
+//            startActivity(intent);
+//        } else {
+//            Intent intent = new Intent(getContext(), WebActivity.class);
+//            intent.putExtra(IntentName.INTENT_URL, AppContansts.Temp_Cemetery_BaseUrl);
+//            startActivity(intent);
+//        }
     }
 
 

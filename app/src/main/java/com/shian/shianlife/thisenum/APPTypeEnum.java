@@ -7,8 +7,8 @@ package com.shian.shianlife.thisenum;
 public enum APPTypeEnum {
     ADVISER(1, "殡仪"),
     EXECUTOR(2, "顾问"),
-    CEMETERY(3, "公墓");
-
+    CEMETERY(3, "公墓"),
+    PLATFORM(4, "平台");
     private int code;
     private String name;
 

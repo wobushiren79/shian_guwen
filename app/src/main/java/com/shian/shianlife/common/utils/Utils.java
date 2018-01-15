@@ -58,6 +58,7 @@ import com.shian.shianlife.provide.result.HrGetSKUDetails;
 import com.shian.shianlife.service.UpDataService;
 import com.shian.shianlife.thisenum.APPTypeEnum;
 import com.shian.shianlife.thisenum.UpDataImportantEnum;
+import com.shian.shianlife.view.dialog.AppUpdateDialog;
 import com.summerxia.dateselector.widget.DateTimeSelectorDialogBuilder;
 import com.viewpagerindicator.TabPageIndicator;
 
@@ -302,27 +303,38 @@ public class Utils {
                     float versionOld = Utils.getVersionCode(context);
                     float versionNew = Float.valueOf(result.getItems().get(0).getVersionNum());
                     if (versionNew > versionOld) {
-                        TipsDialog dialog = new TipsDialog(context);
-                        dialog.setTop("新版本：" + result.getItems().get(0).getUpdataTitle());
-                        dialog.setTitle("" + result.getItems().get(0).getUpdataContent());
-                        dialog.setBottomButton("更新", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(context, UpDataService.class);
-                                intent.putExtra("updataUrl", AppContansts.PHP_BaseUrl + result.getItems().get(0).getAppDownLoadUrl());
-                                context.startService(intent);
-                                dialog.cancel();
-                            }
-                        });
-                        if (Integer.valueOf(result.getItems().get(0).getIsImportant()) == UpDataImportantEnum.IMPORTANT.getCode()) {
-                            dialog.setCancelable(false);
+//                        TipsDialog dialog = new TipsDialog(context);
+//                        dialog.setTop("新版本：" + result.getItems().get(0).getUpdataTitle());
+//                        dialog.setTitle("" + result.getItems().get(0).getUpdataContent());
+//                        dialog.setBottomButton("更新", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Intent intent = new Intent(context, UpDataService.class);
+//                                intent.putExtra("updataUrl", AppContansts.PHP_BaseUrl + result.getItems().get(0).getAppDownLoadUrl());
+//                                context.startService(intent);
+//                                dialog.cancel();
+//                            }
+//                        });
+//                        if (Integer.valueOf(result.getItems().get(0).getIsImportant()) == UpDataImportantEnum.IMPORTANT.getCode()) {
+//                            dialog.setCancelable(false);
+//                        } else {
+//                            dialog.setTopButton("取消", new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    dialog.cancel();
+//                                }
+//                            });
+//                        }
+//                        dialog.show();
+
+
+                        AppUpdateDialog dialog = new AppUpdateDialog(context, AppContansts.PHP_BaseUrl + result.getItems().get(0).getAppDownLoadUrl(), APPTypeEnum.PLATFORM.getName());
+                        dialog.setTitleTest(result.getItems().get(0).getUpdataTitle());
+                        dialog.setContentTest("" + result.getItems().get(0).getUpdataContent());
+                        if (result.getItems().get(0).getIsImportant() == 1) {
+                            dialog.setMustBeUpdate(true);
                         } else {
-                            dialog.setTopButton("取消", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            });
+                            dialog.setMustBeUpdate(false);
                         }
                         dialog.show();
                     } else {

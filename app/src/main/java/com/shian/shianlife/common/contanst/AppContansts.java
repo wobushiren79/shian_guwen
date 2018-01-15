@@ -12,24 +12,24 @@ import okhttp3.Cookie;
 
 public class AppContansts {
     //登陆地址
-//    public static final String Login_BaseUrl = "https://platform.shianlife.cn";
+    public static final String Login_BaseUrl = "https://platform.shianlife.cn";
     //        public static final String Login_BaseUrl = "http://prd-platform.xicp.cn";
-        public static final String Login_BaseUrl = "http://192.168.0.50:8199/platform";
+//        public static final String Login_BaseUrl = "http://192.168.0.50:8199/platform";
 //    public static final String Login_BaseUrl = "http://192.168.0.57:8080/ki4so-web";
     //    单项地址
-//    public static final String Store_BaseUrl = "https://goods.shianlife.cn";
+    public static final String Store_BaseUrl = "https://goods.shianlife.cn";
     //            public static final String Store_BaseUrl = "http://prd-goods.xicp.cn";
-        public static final String Store_BaseUrl = "http://192.168.0.57:8089/goods";
+//        public static final String Store_BaseUrl = "http://192.168.0.57:8089/goods";
 //    public static final String Store_BaseUrl = "http://192.168.0.59:8080/goods";
     //殡仪地址
     public static final String Funeral_BaseUrl = "http://115.28.163.211:7088/shianlife-adviser-1.0-SNAPSHOT";
     //分单地址
     public static final String OrderCenter_BaseUrl = "https://order.shianlife.cn";
     //公墓地址
-//    public static final String Cemetery_BaseUrl = "http://120.76.246.249:8000";
+    public static final String Cemetery_BaseUrl = "http://120.76.246.249:8000";
 //    public static final String Cemetery_BaseUrl = "http://192.168.0.200:8000/shianlife-advisor-cemetery-1.0-SNAPSHOT";
 //    public static final String Cemetery_BaseUrl = "http://115.28.163.211:7088/shianlife-advisor-cemetery-1.0-SNAPSHOT";
-    public static final String Cemetery_BaseUrl = "http://192.168.0.50:8098/advisor";
+//    public static final String Cemetery_BaseUrl = "http://192.168.0.50:8098/advisor";
 //    public static final String Cemetery_BaseUrl = "http://192.168.0.59:8081/app";
 //    public static final String Cemetery_BaseUrl = "http://192.168.0.200:8120";
 

@@ -8,6 +8,5 @@ public interface FileHttpResponseHandler<T>
 
     public void onError(String message);
 
-    public void onProgress(long total, long current,
-			boolean isUploading);
+    public void onProgress(long total, float progress);
 }

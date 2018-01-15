@@ -77,7 +77,9 @@ public class GoodsShoppingCartActivity extends BaseActivity implements GoodsShop
         this.selectGoods = selectGoods;
         float totalPrice = 0f;
         for (GoodsShoppingCartListChildBean item : selectGoods) {
-            if (item.getResultBean() != null && item.getResultBean().getSpec_price() != null) {
+            if (item.getResultBean() != null
+                    && item.getResultBean().getSpec_price() != null
+                    && item.getResultBean().getShoppingCartNumber() != null) {
                 BigDecimal old = new BigDecimal(totalPrice);
                 BigDecimal add = new BigDecimal(item.getResultBean().getSpec_price() * item.getResultBean().getShoppingCartNumber());
                 totalPrice = old.add(add).setScale(2, RoundingMode.HALF_UP).floatValue();
