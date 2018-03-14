@@ -98,7 +98,7 @@ public class FindActivity extends BaseActivity {
 
     private void getData(final boolean isClean) {
         if (AppContansts.systemLoginInfo == null && AppContansts.systemLoginInfo.getUserId() == null) {
-            ToastUtils.show(this, "账号未登录，请退出重新登陆");
+            ToastUtils.show(this, "账号未登录，请退出重新登录");
             return;
         }
         PHPHpSiftListParams params = new PHPHpSiftListParams();

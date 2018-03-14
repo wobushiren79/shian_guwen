@@ -72,7 +72,7 @@ public class MHttpManagerFactory {
         return PHPManagerImpl.getInstance();
     }
 
-    //登陆
+    //登录
     public static SystemManager getSystemManager() {
         return SystemManagerImpl.getInstance();
     }

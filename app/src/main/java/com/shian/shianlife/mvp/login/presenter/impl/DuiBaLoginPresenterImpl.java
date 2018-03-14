@@ -29,7 +29,7 @@ public class DuiBaLoginPresenterImpl implements IDuiBaLoginPresenter {
             return;
         }
         if (AppContansts.systemLoginInfo == null || AppContansts.systemLoginInfo.getUserId() == null) {
-            duiBaLoginView.showToast("用户ID为空，请重新登陆");
+            duiBaLoginView.showToast("用户ID为空，请重新登录");
             return;
         }
         if (duiBaLoginView.getIntegral() == null || duiBaLoginView.getIntegral() == 0) {

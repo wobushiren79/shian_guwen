@@ -32,7 +32,7 @@ public class GoodsClassPresenterImpl implements IGoodsClassPresenter {
             return;
         }
 //        if (AppContansts.systemLoginInfo == null || AppContansts.systemLoginInfo.getUserId() == null) {
-//            goodsClassView.showToast("未登录账号，请退出重新登陆");
+//            goodsClassView.showToast("未登录账号，请退出重新登录");
 //            return;
 //        }
         //        Long userId = AppContansts.systemLoginInfo.getUserId();

@@ -29,7 +29,7 @@ public class GoodsShoppingCartCreatePresenterImpl implements IGoodsShoppingCartC
     @Override
     public void createGoodsShoppingCartData() {
         if (AppContansts.systemLoginInfo == null || AppContansts.systemLoginInfo.getResourceCodes() == null) {
-            goodsShoppingCartCreateView.showToast("请重新登陆");
+            goodsShoppingCartCreateView.showToast("请重新登录");
             return;
         }
         boolean hasGoodsAdvisor = RoleEnum.checkHasRole(AppContansts.systemLoginInfo.getResourceCodes(), RoleEnum.Goods_Advisor);

@@ -17,7 +17,7 @@ import com.shian.shianlife.mvp.login.bean.UserLoginConfig;
 public interface IUserLoginModel {
 
     /**
-     * 登陆平台
+     * 登录平台
      *
      * @param context
      * @param params
@@ -26,7 +26,7 @@ public interface IUserLoginModel {
     void loginSystem(Context context, SystemLoginBean params, OnGetDataListener<SystemLoginResultBean> listener);
 
     /**
-     * 退出登陆平台
+     * 退出登录平台
      *
      * @param context
      * @param params
@@ -35,7 +35,7 @@ public interface IUserLoginModel {
     void loginOutSystem(Context context, SystemLoginOutBean params, OnGetDataListener<SystemLoginOutResultBean> listener);
 
     /**
-     * 保存登陆设置
+     * 保存登录设置
      *
      * @param context
      * @param loginConfig
@@ -43,7 +43,7 @@ public interface IUserLoginModel {
     void saveLoginConfig(Context context, UserLoginConfig loginConfig);
 
     /**
-     * 获取登陆设置
+     * 获取登录设置
      *
      * @param context
      * @return

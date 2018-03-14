@@ -447,7 +447,7 @@ public class Utils {
     }
 
     /**
-     * 跳转到登陆
+     * 跳转到登录
      *
      * @param context
      */

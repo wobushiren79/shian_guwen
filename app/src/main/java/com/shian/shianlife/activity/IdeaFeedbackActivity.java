@@ -93,7 +93,7 @@ public class IdeaFeedbackActivity extends BaseActivity {
         }
         if (AppContansts.systemLoginInfo == null ||
                 AppContansts.systemLoginInfo.getUserObj() == null) {
-            ToastUtils.show(IdeaFeedbackActivity.this, "账号错误 请重新登陆");
+            ToastUtils.show(IdeaFeedbackActivity.this, "账号错误 请重新登录");
             return;
         }
         PHPHpOpinionParams params = new PHPHpOpinionParams();

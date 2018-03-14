@@ -182,7 +182,7 @@ public class NewUserCenterFragment extends BaseFragment {
      */
     private void idea() {
         if (mHrUserInfo == null) {
-            ToastUtils.show(getContext(), "数据异常，请重新登陆");
+            ToastUtils.show(getContext(), "数据异常，请重新登录");
         } else {
             Intent intent = new Intent(getContext(), IdeaFeedbackActivity.class);
             intent.putExtra("UserInfo", new String[]{mHrUserInfo.getName(), mHrUserInfo.getMobile()});

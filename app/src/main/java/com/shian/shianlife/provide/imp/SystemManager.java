@@ -33,7 +33,7 @@ public interface SystemManager {
     void loginSystem(Context context, SystemLoginBean params, HttpResponseHandler<SystemLoginResultBean> handler);
 
     /**
-     * 退出登陆
+     * 退出登录
      *
      * @param context
      * @param params
@@ -42,7 +42,7 @@ public interface SystemManager {
     void loginOutSystem(Context context, SystemLoginOutBean params, HttpResponseHandler<SystemLoginOutResultBean> handler);
 
     /**
-     * 单项系统登陆
+     * 单项系统登录
      *
      * @param context
      * @param loginKey
@@ -50,7 +50,7 @@ public interface SystemManager {
     void loginStoreSystem(Context context, String loginKey, HttpResponseHandler handler);
 
     /**
-     * 分单系统登陆
+     * 分单系统登录
      *
      * @param context
      * @param loginKey
@@ -58,7 +58,7 @@ public interface SystemManager {
     void loginOrderCenterSystem(Context context, String loginKey, HttpResponseHandler handler);
 
     /**
-     * 公墓系统登陆
+     * 公墓系统登录
      * @param context
      * @param loginKey
      */

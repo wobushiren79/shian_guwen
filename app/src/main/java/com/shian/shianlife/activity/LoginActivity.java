@@ -143,7 +143,7 @@ public class LoginActivity extends BaseActivity implements IUserLoginView, View.
 
 
     /**
-     * 登陆成功跳转
+     * 登录成功跳转
      */
     private void loginSuccess() {
         lbLogin.setComplete();
@@ -215,7 +215,8 @@ public class LoginActivity extends BaseActivity implements IUserLoginView, View.
     @Override
     public void loginSystemSuccess(SystemLoginResultBean result) {
         userLoginPresenter.saveLoginConfig();
-        loginFuneral();
+//        loginFuneral();
+        loginSuccess();
     }
 
     @Override

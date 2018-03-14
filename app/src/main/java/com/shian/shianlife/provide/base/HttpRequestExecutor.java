@@ -306,7 +306,7 @@ public class HttpRequestExecutor implements IUserLoginView {
 
                 //会话失效判断
                 if (map.get("code") == null) {
-                    //onErrorCallBack(responseHandler, "会话失效，请重新登陆", context);
+                    //onErrorCallBack(responseHandler, "会话失效，请重新登录", context);
 //  jumpLogin(context);
                     userLoginPresenter = new UserLoginPresenterImpl(HttpRequestExecutor.this, null);
                     userLoginPresenter.getLoginConfig();
@@ -330,7 +330,7 @@ public class HttpRequestExecutor implements IUserLoginView {
                             responseHandler.onSuccess((E) result);
                         }
                     }
-                } else if ("1009".equals(codeInt) || "9999".equals(code)) {
+                } else if (codeInt==1009|| codeInt==9999) {
                     //                    jumpLogin(context);
                     userLoginPresenter = new UserLoginPresenterImpl(HttpRequestExecutor.this, null);
                     userLoginPresenter.getLoginConfig();
@@ -347,7 +347,7 @@ public class HttpRequestExecutor implements IUserLoginView {
     }
 
 
-    //---------会话失效之后的自动登陆----------------------
+    //---------会话失效之后的自动登录----------------------
     private String userName;
     private String passWord;
     private boolean isAutoLogin;
@@ -401,7 +401,7 @@ public class HttpRequestExecutor implements IUserLoginView {
 
     @Override
     public void loginSystemSuccess(SystemLoginResultBean result) {
-        ToastUtils.show(context, "已重新登陆，请再次操作");
+        ToastUtils.show(context, "已重新登录，请再次操作");
     }
 
     @Override

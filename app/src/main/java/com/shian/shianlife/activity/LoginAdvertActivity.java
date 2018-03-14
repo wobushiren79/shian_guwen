@@ -30,7 +30,7 @@ public class LoginAdvertActivity extends BaseActivity implements View.OnClickLis
     Button btJump;
     RelativeLayout rlContent;
     public final static int LOGIN = 0;//結束之後需登陸
-    public final static int MAIN = 1;//结束之后无需登陆
+    public final static int MAIN = 1;//结束之后无需登录
     private int type = -1;
     private boolean isForceOver = false;//是否强制结束
     private int advertSleepTime = 5000;//廣告暫停時間

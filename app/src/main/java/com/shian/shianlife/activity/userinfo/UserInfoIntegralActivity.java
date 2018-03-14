@@ -211,7 +211,7 @@ public class UserInfoIntegralActivity extends BaseActivity implements IUserInfoI
     }
 
     /**
-     * 登陆对吧
+     * 登录对吧
      */
     private void showInegralStore() {
         duiBaLoginPresenter.loginDuiBa();

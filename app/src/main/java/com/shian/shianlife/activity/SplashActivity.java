@@ -224,7 +224,8 @@ public class SplashActivity extends BaseActivity implements OnPushListener, IUse
 
     @Override
     public void loginSystemSuccess(SystemLoginResultBean result) {
-        loginFuneral();
+        sleepActivity(LoginAdvertActivity.MAIN);
+//        loginFuneral();
     }
 
     @Override

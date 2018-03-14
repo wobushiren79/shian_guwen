@@ -111,7 +111,7 @@ public class FindFragment extends BaseFragment {
 
     private void getData(final boolean isClean) {
         if(AppContansts.systemLoginInfo==null&&AppContansts.systemLoginInfo.getUserId()==null){
-            ToastUtils.show(getContext(),"账号未登录，请退出重新登陆");
+            ToastUtils.show(getContext(),"账号未登录，请退出重新登录");
             return;
         }
         PHPHpSiftListParams params = new PHPHpSiftListParams();

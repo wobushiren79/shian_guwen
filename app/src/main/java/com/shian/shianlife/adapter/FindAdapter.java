@@ -142,7 +142,7 @@ public class FindAdapter extends BaseAdapter {
      */
     private void setData(int type, int siftID) {
         if (AppContansts.systemLoginInfo == null && AppContansts.systemLoginInfo.getUserId() == null) {
-            ToastUtils.show(context, "账号未登录，请退出重新登陆");
+            ToastUtils.show(context, "账号未登录，请退出重新登录");
             return;
         }
         PHPHpSiftDataParams params = new PHPHpSiftDataParams();

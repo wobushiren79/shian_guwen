@@ -195,7 +195,7 @@ public class WebActivity extends BaseActivity {
      */
     private void setData(int type, int siftID) {
         if (AppContansts.systemLoginInfo == null && AppContansts.systemLoginInfo.getUserId() == null) {
-            ToastUtils.show(this, "账号未登录，请退出重新登陆");
+            ToastUtils.show(this, "账号未登录，请退出重新登录");
             return;
         }
         mIVCollection.setImageResource(R.drawable.zhy_find_collection_2);

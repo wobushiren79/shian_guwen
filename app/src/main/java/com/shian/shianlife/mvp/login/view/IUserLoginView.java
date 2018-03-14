@@ -11,42 +11,42 @@ import com.shian.shianlife.mvp.login.bean.SystemLoginResultBean;
 
 public interface IUserLoginView {
     /**
-     * 获取登陆姓名
+     * 获取登录姓名
      *
      * @return
      */
     String getUserName();
 
     /**
-     * 设置登陆姓名
+     * 设置登录姓名
      *
      * @param userName
      */
     void setUserName(String userName);
 
     /**
-     * 获取登陆密码
+     * 获取登录密码
      *
      * @return
      */
     String getPassWord();
 
     /**
-     * 设置登陆密码
+     * 设置登录密码
      *
      * @param passWord
      */
     void setPassWord(String passWord);
 
     /**
-     * 获取是否自动登陆
+     * 获取是否自动登录
      *
      * @return
      */
     boolean getIsAutoLogin();
 
     /**
-     * 设置是否登陆
+     * 设置是否登录
      *
      * @param isAutoLogin
      */
@@ -75,14 +75,14 @@ public interface IUserLoginView {
     Context getContext();
 
     /**
-     * 登陆成功
+     * 登录成功
      *
      * @param result
      */
     void loginSystemSuccess(SystemLoginResultBean result);
 
     /**
-     * 登陆失败
+     * 登录失败
      *
      * @param message
      */

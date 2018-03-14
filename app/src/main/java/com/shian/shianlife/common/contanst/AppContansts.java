@@ -11,7 +11,7 @@ import java.util.List;
 import okhttp3.Cookie;
 
 public class AppContansts {
-    //登陆地址
+    //登录地址
     public static final String Login_BaseUrl = "https://platform.shianlife.cn";
     //        public static final String Login_BaseUrl = "http://prd-platform.xicp.cn";
 //        public static final String Login_BaseUrl = "http://192.168.0.50:8199/platform";
@@ -85,13 +85,13 @@ public class AppContansts {
     public static String pushChannelId;
     //平台用户数据
     public static SystemLoginResultBean systemLoginInfo;
-    //登陆系统KEY
+    //登录系统KEY
     public static String System_Ki4so_Client_Ec;
-    //子系统-单项  登陆地址
+    //子系统-单项  登录地址
     public static final String Login_Store_Url = Store_BaseUrl + "/login_sys_api";
-    //子系统-分单  登陆地址
+    //子系统-分单  登录地址
     public static final String Login_OrderCenter_Url = OrderCenter_BaseUrl + "/login_subsystem_api";
-    //子系统-公墓  登陆地址
+    //子系统-公墓  登录地址
     public static final String Login_Cemetery_Url = Cemetery_BaseUrl + "/login_subsystem_api";
 
     //cookie保存

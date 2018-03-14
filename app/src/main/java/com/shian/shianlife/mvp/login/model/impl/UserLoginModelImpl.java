@@ -48,13 +48,12 @@ public class UserLoginModelImpl implements IUserLoginModel, ISubSystemLoginView 
 
             @Override
             public void onSuccess(SystemLoginResultBean result) {
-                //登陆子系统
+                //登录子系统
                 UserLoginModelImpl.this.result = result;
                 subSystemLoginPresenter = new SubSystemLoginPresenterImpl(UserLoginModelImpl.this);
                 subSystemLoginPresenter.loginStoreSystem();
                 subSystemLoginPresenter.loginOrderCenterSystem();
                 subSystemLoginPresenter.loginCemeterySystem();
-                listener.getDataSuccess(result);
             }
 
             @Override
