@@ -1,6 +1,5 @@
 package com.shian.shianlife.provide.base;
 
-import java.util.List;
 
 import okhttp3.Request;
 
