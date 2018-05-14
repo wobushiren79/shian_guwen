@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main$Generated" generated="true"><source path="D:\Android\Project\new_shian\cptr\res"/><source path="D:\Android\Project\new_shian\cptr\build\generated\res\rs\release"/><source path="D:\Android\Project\new_shian\cptr\build\generated\res\resValues\release"/></dataSet><dataSet config="release$Generated" generated="true"><source path="D:\Android\Project\new_shian\cptr\build-types\release\res"/></dataSet><dataSet config="main" generated-set="main$Generated"><source path="D:\Android\Project\new_shian\cptr\res"><file name="cptr_ptr_rotate_arrow" path="D:\Android\Project\new_shian\cptr\res\drawable-xhdpi\cptr_ptr_rotate_arrow.png" qualifiers="xhdpi-v4" type="drawable"/><file name="cptr_cube_ptr_classic_default_header" path="D:\Android\Project\new_shian\cptr\res\layout\cptr_cube_ptr_classic_default_header.xml" qualifiers="" type="layout"/><file name="cptr_loadmore_default_footer" path="D:\Android\Project\new_shian\cptr\res\layout\cptr_loadmore_default_footer.xml" qualifiers="" type="layout"/><file path="D:\Android\Project\new_shian\cptr\res\values\attrs.xml" qualifiers=""><declare-styleable name="CptrPtrClassicHeader">
+        <attr format="integer" name="cptr_ptr_rotate_ani_time"/>
+    </declare-styleable><declare-styleable name="CptrPtrFrameLayout">
+        
+        <attr format="reference" name="cptr_ptr_header"/>
+        <attr format="reference" name="cptr_ptr_content"/>
+
+        
+        <attr format="float" name="cptr_ptr_resistance"/>
+
+        
+        <attr format="float" name="cptr_ptr_ratio_of_header_height_to_refresh"/>
+
+        <attr format="integer" name="cptr_ptr_duration_to_close"/>
+        <attr format="integer" name="cptr_ptr_duration_to_close_header"/>
+
+        
+        <attr format="boolean" name="cptr_ptr_pull_to_fresh"/>
+
+        
+        <attr format="boolean" name="cptr_ptr_keep_header_when_refresh"/>
+    </declare-styleable></file><file path="D:\Android\Project\new_shian\cptr\res\values\strings.xml" qualifiers=""><string name="cptr_cube_ptr_seconds_ago"> 秒之前</string><string name="cptr_app_name">CommonPullToRefreshView</string><string name="cptr_cube_ptr_pull_down_to_refresh">下拉刷新</string><string name="cptr_cube_ptr_minutes_ago"> 分钟之前</string><string name="cptr_cube_ptr_release_to_refresh">释放刷新</string><string name="cptr_cube_ptr_hours_ago"> 小时之前</string><string name="cptr_cube_ptr_last_update">上次更新: </string><string name="cptr_cube_ptr_refreshing">加载中...</string><string name="cptr_cube_ptr_refresh_complete">更新完成.</string><string name="cptr_cube_ptr_pull_down">下拉</string></file></source><source path="D:\Android\Project\new_shian\cptr\build\generated\res\rs\release"/><source path="D:\Android\Project\new_shian\cptr\build\generated\res\resValues\release"/></dataSet><dataSet config="release" generated-set="release$Generated"><source path="D:\Android\Project\new_shian\cptr\build-types\release\res"/></dataSet><mergedItems><configuration qualifiers=""><declare-styleable name="CptrPtrFrameLayout"><attr format="reference" name="cptr_ptr_header"/><attr format="reference" name="cptr_ptr_content"/><attr format="float" name="cptr_ptr_resistance"/><attr format="float" name="cptr_ptr_ratio_of_header_height_to_refresh"/><attr format="integer" name="cptr_ptr_duration_to_close"/><attr format="integer" name="cptr_ptr_duration_to_close_header"/><attr format="boolean" name="cptr_ptr_pull_to_fresh"/><attr format="boolean" name="cptr_ptr_keep_header_when_refresh"/></declare-styleable><declare-styleable name="CptrPtrClassicHeader"><attr format="integer" name="cptr_ptr_rotate_ani_time"/></declare-styleable></configuration></mergedItems></merger>
